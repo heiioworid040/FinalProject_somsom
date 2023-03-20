@@ -61,7 +61,22 @@
                 </div>
             </div>
         </div>
-
+				
+		<div class="content">
+			<div class="animated fadeIn">
+				<div class="row">
+					<div class="col-lg">
+						<div class="card">
+							<div class="card-body">
+							<!--	(검색창 위치) -->
+							<!-- 이 이상 긁는건 너무 템플릿에만의존적인 것 같아 나머지 기능은 직접 개발합시다 파이팅! -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!-- .content -->
+		
         <div class="content">
 			<div class="animated fadeIn">
 				<div class="row">
