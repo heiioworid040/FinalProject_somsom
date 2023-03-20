@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>infoWi</title>
+<title>infoInstruction</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -96,7 +97,6 @@
 											<th scope="col">지시상태</th>
 											<th scope="col">지시수량</th>
 											<th scope="col">수주번호</th>
-											<th scope="col">일련번호</th>
 											<th scope="col">업체명</th>
 											<th scope="col">생산량</th>
 											<th scope="col">양품</th>
@@ -104,54 +104,23 @@
 										</tr>
 									</thead>
 									<tbody>
+										<c:forEach var="wiDTO" items="${wiList }">
 										<tr>
-											<th scope="row">1</th>
-											<td>Mark</td>
-											<td>Otto</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
+											<th scope="row">${wiDTO.inst_cd }</th>
+											<td>${wiDTO.line_cd }</td>
+											<td>${lineDTO.line_nm }</td>
+											<td>${productDTO.prod_cd }</td>
+											<td>${productDTO.prod_nm }</td>
+											<td>${productDTO.prod_unit }</td>
+											<td>${wiDTO.inst_st }</td>
+											<td>${wiDTO.inst_count }</td>
+											<td>${orderDTO.ord_num }</td>
+											<td>업체명</td>
+											<td>${wiDTO.inst_fcount }</td>
+											<td>0</td>
+											<td>0</td>
 										</tr>
-										<tr>
-											<th scope="row">2</th>
-											<td>Jacob</td>
-											<td>Thornton</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-										</tr>
-										<tr>
-											<th scope="row">3</th>
-											<td>Larry</td>
-											<td>the Bird</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-										</tr>
+										</c:forEach>
 									</tbody>
 								</table>
 
