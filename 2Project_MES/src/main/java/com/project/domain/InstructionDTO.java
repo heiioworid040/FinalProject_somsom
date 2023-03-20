@@ -2,10 +2,8 @@ package com.project.domain;
 
 import com.google.protobuf.Timestamp;
 
-public class WiDTO {
+public class InstructionDTO {
 	private String inst_cd;
-	private String line_cd;
-	private int ord_num;
 	private String inst_st;
 	private Timestamp inst_date;
 	private int inst_count;
@@ -17,18 +15,6 @@ public class WiDTO {
 	}
 	public void setInst_cd(String inst_cd) {
 		this.inst_cd = inst_cd;
-	}
-	public String getLine_cd() {
-		return line_cd;
-	}
-	public void setLine_cd(String line_cd) {
-		this.line_cd = line_cd;
-	}
-	public int getOrd_num() {
-		return ord_num;
-	}
-	public void setOrd_num(int ord_num) {
-		this.ord_num = ord_num;
 	}
 	public String getInst_st() {
 		return inst_st;
