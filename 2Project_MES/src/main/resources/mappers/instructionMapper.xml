@@ -5,15 +5,22 @@
 <!-- src/main/resources -->
 <!-- mybatis-config.xml 파일 만들기 -->
 <!--  파일이름 대신 namespace 이름을 불러서 사용 -->
-<mapper namespace="com.project.mappers.wiMapper">
+<mapper namespace="com.project.mappers.instructionMapper">
 	
-    <select id="getWiList" resultType="com.project.domain.WiDTO">
-    select * from instruction
-    order by line_cd desc
+    <select id="getInstList" resultType="com.project.domain.InstructionDTO">
+    select i.inst_cd, i.line_cd, l.line_nm, o.prod_cd, p.prod_nm, p.prod_unit, i.inst_count, i.ord_num,  i.inst_fcount
+	from instruction i 
+	join line l
+	on i.line_cd = l.line_cd
+	join orders o
+	on i.ord_num=o.ord_num
+	join product p
+	on p.prod_cd=o.prod_cd
+	order by inst_cd desc
     limit #{startRow}, #{pageSize}
     </select>
 
-    <select id="getWiCount" resultType="java.lang.Integer">
+    <select id="getInstCount" resultType="java.lang.Integer">
     select count(*) from instruction
     </select>
 

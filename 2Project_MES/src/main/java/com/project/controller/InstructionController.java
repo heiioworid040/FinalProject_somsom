@@ -11,21 +11,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.project.domain.PageDTO;
-import com.project.domain.WiDTO;
-import com.project.service.WiService;
+import com.project.domain.InstructionDTO;
+import com.project.service.InstructionService;
 
 @Controller
-public class WiController {
-	private WiService wiService;
+public class InstructionController {
+	private InstructionService instService;
 	
 	@Inject
-	public void setWiService(WiService wiService) {
-		this.wiService = wiService;
+	public void setInstService(InstructionService instService) {
+		this.instService = instService;
 	}
 
-	@RequestMapping(value = "/wi/infoWi", method = RequestMethod.GET)
-	public String getInfoWi(HttpServletRequest request, Model model) {
-		System.out.println("testController getInfoWi()");
+	@RequestMapping(value = "/instruction/infoInst", method = RequestMethod.GET)
+	public String getInfoInst(HttpServletRequest request, Model model) {
+		System.out.println("testController getInfoInst()");
 		int pageSize=10;
 		
 		String pageNum=request.getParameter("pageNum");
@@ -39,9 +39,9 @@ public class WiController {
 		pageDTO.setPageNum(pageNum);
 		pageDTO.setCurrentPage(currentPage);
 		
-		List<WiDTO> wiList=wiService.getWiList(pageDTO);
+		List<InstructionDTO> instList=instService.getInstList(pageDTO);
 		
-		int count = wiService.getWiCount();
+		int count = instService.getInstCount();
 		int pageBlock=10;
 		int startPage=(currentPage-1)/pageBlock*pageBlock+1;
 		int endPage=startPage+pageBlock-1;
@@ -55,9 +55,9 @@ public class WiController {
 		pageDTO.setEndPage(endPage);
 		pageDTO.setPageCount(pageCount);
 		
-		model.addAttribute("wiList", wiList);
+		model.addAttribute("instList", instList);
 		
-		return "wi/infoWi";
+		return "instruction/infoInstruction";
 	}
 	
 }
