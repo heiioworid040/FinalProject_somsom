@@ -43,7 +43,7 @@
                     <div class="col-sm-4">
                         <div class="page-header float-left">
                             <div class="page-title">
-                                <h1>Dashboard</h1>
+                                <h1>생산관리</h1>
                             </div>
                         </div>
                     </div>
@@ -51,9 +51,8 @@
                         <div class="page-header float-right">
                             <div class="page-title">
                                 <ol class="breadcrumb text-right">
-                                    <li><a href="#">Dashboard</a></li>
-                                    <li><a href="#">Table</a></li>
-                                    <li class="active">Basic table</li>
+                                    <li><a href="#">생산관리</a></li>
+                                    <li class="active">작업지시</li>
                                 </ol>
                             </div>
                         </div>
@@ -61,17 +60,31 @@
                 </div>
             </div>
         </div>
-
+		
+		<div class="content">
+			<div class="animated fadeIn">
+				<div class="row">
+					<div class="col-lg">
+						<div class="card">
+							<div class="card-body">
+								검색창
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!-- .content -->
+		
         <div class="content">
 			<div class="animated fadeIn">
 				<div class="row">
 					<div class="col-lg">
 						<div class="card">
 							<div class="card-header">
-								<strong class="card-title">Table Head</strong>
+								<strong class="card-title">작업지시</strong>
 							</div>
 							<div class="card-body">
-								<table class="table">
+								<table id="bootstrap-data-table" class="table table-striped table-bordered">
 									<thead class="thead-dark">
 										<tr>
 											<th scope="col">#</th>
