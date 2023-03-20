@@ -7,6 +7,16 @@
 <!--  파일이름 대신 namespace 이름을 불러서 사용 -->
 <mapper namespace="com.project.mappers.wiMapper">
 	
+    <select id="getWiList" resultType="com.project.domain.WiDTO">
+    select * from instruction
+    order by line_cd desc
+    limit #{startRow}, #{pageSize}
+    </select>
+
+    <select id="getWiCount" resultType="java.lang.Integer">
+    select count(*) from instruction
+    </select>
+
 <!-- id-"이름" spl구문 하나하나 이름
 	 ? 대신에 MemberDTO 멤버변수명 #{id}	-->
 <!-- 	<insert id="insertTest"> -->
