@@ -2,14 +2,15 @@ package com.project.controller;
 
 
 
+import java.util.List;
+
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
+
 
 import org.springframework.stereotype.Controller;
-
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 
 import com.project.domain.ProductDTO;
 import com.project.service.ProductService;
@@ -26,12 +27,26 @@ public class ProductController {
 	private ProductService productService;
 	
 	@RequestMapping(value = "/product/productForm", method = RequestMethod.GET)
-	public String info() {
-
+	public String list(Model model) {
 		
-		
+		List<ProductDTO> productList = productService.getProductList();
+		model.addAttribute("productList",productList);
 		return "product/productForm";
 	}
-	
+
+	@RequestMapping(value = "/product/insertPro", method = RequestMethod.POST)
+	public String insertPro(ProductDTO productDTO) {
+		// HttpServletRequest request
+		// 사용자가 입력한 내용 => request에 저장 => request 가져오기
+		// post방식 한글 깨지고 request.setCharacterEncoding("UTF-8")
+		// web.xml에서 한글설정을 한번만하고 모든 곳에서 한글처리가 됨
+		System.out.println("ProductController insertPro()");
+		
+		// 메서드 호출
+		productService.insertProduct(productDTO);
+		
+		
+		return "redirect:/product/productForm";
+	}
 	
 }
