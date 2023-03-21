@@ -5,9 +5,11 @@ import java.sql.Timestamp;
 public class OrderDTO extends ProductDTO {
 	private String ord_cd;
 	private String emp_cd;
+	private String emp_nm;
 	private Timestamp ord_date;
 	private Timestamp ord_d_date;
 	private int ord_count;
+	private int ship_count;
 	
 	// set get
 	public String getOrd_cd() {
@@ -21,6 +23,12 @@ public class OrderDTO extends ProductDTO {
 	}
 	public void setEmp_cd(String emp_cd) {
 		this.emp_cd = emp_cd;
+	}
+	public String getEmp_nm() {
+		return emp_nm;
+	}
+	public void setEmp_nm(String emp_nm) {
+		this.emp_nm = emp_nm;
 	}
 	public Timestamp getOrd_date() {
 		return ord_date;
@@ -40,6 +48,10 @@ public class OrderDTO extends ProductDTO {
 	public void setOrd_count(int ord_count) {
 		this.ord_count = ord_count;
 	}
-	
-	
+	public int getShip_count() {
+		return ship_count;
+	}
+	public void setShip_count(int ship_count) {
+		this.ship_count = ship_count;
+	}
 }
