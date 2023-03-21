@@ -5,7 +5,7 @@ public class EmployeeDTO {
 	private String emp_nm;
 	private int emp_pass;
 	private String emp_dept;
-	private String emp_positoin;
+	private String emp_position;
 	private String emp_email;
 	private String emp_tel;
 	
@@ -33,11 +33,12 @@ public class EmployeeDTO {
 	public void setEmp_dept(String emp_dept) {
 		this.emp_dept = emp_dept;
 	}
-	public String getEmp_positoin() {
-		return emp_positoin;
+
+	public String getEmp_position() {
+		return emp_position;
 	}
-	public void setEmp_positoin(String emp_positoin) {
-		this.emp_positoin = emp_positoin;
+	public void setEmp_position(String emp_position) {
+		this.emp_position = emp_position;
 	}
 	public String getEmp_email() {
 		return emp_email;
