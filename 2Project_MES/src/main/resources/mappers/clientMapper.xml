@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.mappers.clientMapper">
+
+	<select id="getClientInfo"
+		resultType="com.project.domain.ClientDTO">
+		select * from client
+		limit #{startRow} , #{pageSize}
+	</select>
+
+	<select id="getClientCount" resultType="java.lang.Integer">
+		select count(*) from
+		client
+	</select>
+
+	<delete id="deleteClient">
+		delete from client
+		where cli_cd = #{cli_cd}
+	</delete>
+
+</mapper>
