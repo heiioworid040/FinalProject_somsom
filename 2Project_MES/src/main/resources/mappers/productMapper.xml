@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<!-- src/main/resources -->
+<!-- mybatis-config.xml 파일 만들기 -->
+<!--  파일이름 대신 namespace 이름을 불러서 사용 -->
+<mapper namespace="com.project.mappers.productMapper">
+	
+<!-- id-"이름" spl구문 하나하나 이름
+	 ? 대신에 MemberDTO 멤버변수명 #{id}	-->
+
+    <select id="getProductList" resultType="com.project.domain.ProductDTO">
+    	select * from product
+    	order by prod_nm 
+    </select>
+    
+    	 <insert id="insertProduct">
+    	insert into product(prod_cd,prod_nm,prod_mat,prod_unit,prod_text,prod_size,prod_inprice,prod_outprice,prod_count,prod_note) 
+    	values(#{prod_cd},#{prod_nm},#{prod_mat},#{prod_unit},#{prod_text},#{prod_size},#{prod_inprice},#{prod_outprice},
+    	#{prod_count},#{prod_note})
+    	</insert>
+
+
+
+
+<!--     <select id="" resultType=""> -->
+<!--     </select> -->
+
+<!-- 	<update id=""> -->
+<!-- 	</update> -->
+
+<!-- 	<delete id=""> -->
+<!-- 	</delete> -->
+			
+</mapper>
