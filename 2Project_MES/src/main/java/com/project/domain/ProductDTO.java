@@ -1,6 +1,6 @@
 package com.project.domain;
 
-public class ProductDTO {
+public class ProductDTO extends ClientDTO{
 	private String prod_cd; //상품코드
 	private String prod_nm; //상품이름
 	private String prod_mat; //자재유형
