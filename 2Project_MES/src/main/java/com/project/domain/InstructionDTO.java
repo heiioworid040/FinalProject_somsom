@@ -1,15 +1,16 @@
 package com.project.domain;
 
-import com.google.protobuf.Timestamp;
+import java.sql.Timestamp;
 
-public class InstructionDTO extends OrderDTO {
+public class InstructionDTO extends LineDTO{
+
 	private String inst_cd;
 	private String inst_st;
 	private Timestamp inst_date;
 	private int inst_count;
 	private int inst_fcount;
 	
-	// getset
+	// get set
 	public String getInst_cd() {
 		return inst_cd;
 	}
@@ -40,6 +41,5 @@ public class InstructionDTO extends OrderDTO {
 	public void setInst_fcount(int inst_fcount) {
 		this.inst_fcount = inst_fcount;
 	}
-	
 	
 }// WiDTO
