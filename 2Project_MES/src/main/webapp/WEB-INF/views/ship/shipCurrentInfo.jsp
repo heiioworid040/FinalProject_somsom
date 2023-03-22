@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>clientInfo</title>
+<title>shipCurrentInfo</title>
 <meta name="description" content="Ela Admin - HTML5 Admin Template">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -58,53 +58,6 @@
 	}
 </script>
 
-<!-- 추가 버튼 함수  -->
-<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
-<script>
-// 	$(document)
-// 			.ready(
-// 					function() {
-// 						$("#add-row")
-// 								.click(
-// 										function() {
-// 											var newRow = '<tr><th></th>'
-// 													+ '<td><input type="text" style="width: 100px; name="prod_cd"></td>'
-// 													+ '<td><input type="text" style="width: 90px; name="prod_nm"></td>'
-// 													+ '<td><input type="text" style="width: 50px; name="prod_mat"></td>'
-// 													+ '<td><input type="text" style="width: 100px; name="prod_unit"></td>'
-// 													+ '<td><input type="text" style="width: 60px; name="prod_text"></td>'
-// 													+ '<td><input type="text" style="width: 80px; name="prod_size"></td>'
-// 													+ '<td><input type="text" style="width: 60px; name="prod_inprice"></td>'
-// 													+ '<td><input type="text" style="width: 60px; name="prod_outprice"></td>'
-// 													+ '<td><input type="text" style="width: 130px; name="prod_count"></td>'
-// 													+ '<td><input type="text" style="width: 110px; name="prod_note"></td>'
-// 													+ '<td><input type="text" style="width: 110px; name="prod_note"></td>'
-// 													+ '<td><input type="text" style="width: 120px; name="prod_note"></td>'
-// 													+ '<td><input type="text" style="width: 110px; name="prod_note"></td>'
-// 													+ '<td><input type="text" style="width: 180px; name="prod_note"></td>'
-// 													+ '<td><button class-"submit-Btn">전송</button></td></tr>';
-// 											$('#bootstrap-data-table').append(
-// 													newRow);
-// 										});
-// 					});
-
-	// 전송버튼	
-	// $(document).ready(function() {
-	//   $("#MyForm").submit(function(event) {
-	//     event.preventDefault(); // 기본 동작 방지
-	//     var formData = $(this).serialize(); // 폼 데이터 가져오기
-	//     $.ajax({
-	//       url: "./servlet-context", // 데이터를 전송할 서버 URL
-	//       type: "POST",
-	//       data: formData,
-	//       success: function(result) {
-	//       	alert('전송 되었습니다'); // 전송 결과 로그 출력
-	//       }
-	//     });
-	//   });
-	// });
-</script>
-
 </head>
 <body>
 	<!-- Left Panel1 -->
@@ -123,7 +76,7 @@
 					<div class="col-sm-4">
 						<div class="page-header float-left">
 							<div class="page-title">
-								<h1>기준정보 관리</h1>
+								<h1>영업관리</h1>
 							</div>
 						</div>
 					</div>
@@ -131,8 +84,8 @@
 						<div class="page-header float-right">
 							<div class="page-title">
 								<ol class="breadcrumb text-right">
-									<li><a href="#">기준정보 관리</a></li>
-									<li class="active">거래처</li>
+									<li><a href="#">영업관리</a></li>
+									<li class="active">출하현황</li>
 								</ol>
 							</div>
 						</div>
@@ -160,15 +113,14 @@
 					<div class="col-lg">
 						<div class="card">
 							<div class="card-header">
-								<strong class="card-title">거래처</strong>
+								<strong class="card-title">출하현황</strong>
 							</div>
 							<div class="card-body">
 							
 								<!-- 체크박스로 선택해 글 여러개 삭제가능  -->
-								<form action="${pageContext.request.contextPath}/client/delete"
-									method="post">
-									<input type="submit" value="삭제">
-<!-- 									<button id="add-row">추가</button> -->
+<%-- 								<form action="${pageContext.request.contextPath}/client/delete" --%>
+<!-- 									method="post"> -->
+<!-- 									<input type="submit" value="삭제"> -->
 
 									<table id="bootstrap-data-table"
 										class="table table-striped table-bordered">
@@ -176,67 +128,55 @@
 											<tr>
 												<th scope="col"><input id="allCheck" type="checkbox"
 													onclick="allChk(this);" /></th>
-												<th scope="col">거래처코드</th>
+												<th scope="col">출하번호</th>
+												<th scope="col">출하일자</th>
 												<th scope="col">거래처명</th>
-												<th scope="col">거래처구분</th>
-												<th scope="col">사업자번호</th>
-												<th scope="col">업태</th>
-												<th scope="col">종목</th>
-												<th scope="col">대표자</th>
-												<th scope="col">담당자</th>
-												<th scope="col">주소</th>
-												<th scope="col">상세주소</th>
-												<th scope="col">전화번호</th>
-												<th scope="col">휴대폰번호</th>
-												<th scope="col">팩스번호</th>
-												<th scope="col">이메일</th>
-												<th scope="col">비고</th>
+												<th scope="col">상품코드</th>
+												<th scope="col">상품이름</th>
+												<th scope="col">단위</th>
+												<th scope="col">수주번호</th>
+												<th scope="col">수주량</th>
+												<th scope="col">출하량</th>
 											</tr>
 										</thead>
 										<tbody>
-											<c:forEach var="clientDTO" items="${clientInfo }">
+											<c:forEach var="shipDTO" items="${shipCurrentInfo }">
 												<tr>
 													<th scope="row"><input type="checkbox" name="chk"
-														value="${clientDTO.cli_cd }"></th>
-													<td>${clientDTO.cli_cd }</td>
-													<td>${clientDTO.cli_nm }</td>
-													<td>${clientDTO.cli_type }</td>
-													<td>${clientDTO.cli_num }</td>
-													<td>${clientDTO.cli_business }</td>
-													<td>${clientDTO.cli_prod }</td>
-													<td>${clientDTO.cli_boss }</td>
-													<td>${clientDTO.cli_emp }</td>
-													<td>${clientDTO.cli_addr }</td>
-													<td>${clientDTO.cli_addr2 }</td>
-													<td>${clientDTO.cli_tel }</td>
-													<td>${clientDTO.cli_emp_tel }</td>
-													<td>${clientDTO.cli_fax }</td>
-													<td>${clientDTO.cli_email }</td>
-													<td>${clientDTO.cli_note }</td>
+														value="${shipDTO.ship_cd }"></th>
+													<td>${shipDTO.ship_cd }</td>
+													<td>${shipDTO.ship_date }</td>
+													<td>${shipDTO.cli_nm }</td>
+													<td>${shipDTO.prod_cd }</td>
+													<td>${shipDTO.prod_nm }</td>
+													<td>${shipDTO.prod_unit }</td>
+													<td>${shipDTO.ord_cd }</td>
+													<td>${shipDTO.ord_count }</td>
+													<td>${shipDTO.ship_count }</td>
 												</tr>
 											</c:forEach>
 										</tbody>
 									</table>
-								</form>
+<!-- 								</form> -->
 								
 
 								<!-- 페이징 처리 -->
 								<div class="pageNum">
 									<c:if test="${pageDTO.startPage > pageDTO.pageBlock }">
 										<a
-											href="${pageContext.request.contextPath}/client/clientInfo?pageNum=${pageDTO.startPage - pageDTO.pageBlock }">[10페이지
+											href="${pageContext.request.contextPath}/ship/shipCurrentInfo?pageNum=${pageDTO.startPage - pageDTO.pageBlock }">[10페이지
 											이전]</a>
 									</c:if>
 
 									<c:forEach var="i" begin="${pageDTO.startPage }"
 										end="${pageDTO.endPage }" step="1">
 										<a
-											href="${pageContext.request.contextPath}/client/clientInfo?pageNum=${i}">${i}</a>
+											href="${pageContext.request.contextPath}/ship/shipCurrentInfo?pageNum=${i}">${i}</a>
 									</c:forEach>
 
 									<c:if test="${pageDTO.endPage < pageDTO.pageCount }">
 										<a
-											href="${pageContext.request.contextPath}/client/clientInfo?pageNum=${pageDTO.startPage + pageDTO.pageBlock }">[10페이지
+											href="${pageContext.request.contextPath}/ship/shipCurrentInfo?pageNum=${pageDTO.startPage + pageDTO.pageBlock }">[10페이지
 											다음]</a>
 									</c:if>
 								</div>

@@ -1,12 +1,14 @@
 package com.project.domain;
 
+import java.sql.Timestamp;
+
 public class ShipDTO extends OrderDTO {
 	private String ship_cd;
 	private int ship_ifcount;
 	private int ship_count;
 	private int ship_over;
 	private int ship_inven;
-	private int ship_date;
+	private Timestamp ship_date;
 	
 	public String getShip_cd() {
 		return ship_cd;
@@ -38,10 +40,12 @@ public class ShipDTO extends OrderDTO {
 	public void setShip_inven(int ship_inven) {
 		this.ship_inven = ship_inven;
 	}
-	public int getShip_date() {
+	public Timestamp getShip_date() {
 		return ship_date;
 	}
-	public void setShip_date(int ship_date) {
+	public void setShip_date(Timestamp ship_date) {
 		this.ship_date = ship_date;
 	}
+	
+	
 }
