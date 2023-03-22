@@ -10,8 +10,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.project.domain.ClientDTO;
+import com.project.domain.EmployeeDTO;
 import com.project.domain.OrderDTO;
 import com.project.domain.PageDTO;
+import com.project.service.ClientService;
+import com.project.service.EmployeeService;
 import com.project.service.OrderService;
 
 @Controller
@@ -19,7 +23,45 @@ public class OrderController {
 	
 		@Inject
 		private OrderService orderService;
-	
+		
+		@Inject
+		private EmployeeService employeeService;
+
+		@Inject
+		private ClientService clientService;
+		
+		@RequestMapping(value = "/order/orderInsert", method = RequestMethod.GET)
+		public String insert(HttpServletRequest request, Model model) {
+			int pageSize=10;
+			String pageNum=request.getParameter("pageNum");
+			if(pageNum==null) {
+				pageNum="1";
+			}
+			int currentPage=Integer.valueOf(pageNum);
+			
+			PageDTO pageDTO=new PageDTO();
+			pageDTO.setPageSize(pageSize);
+			pageDTO.setPageNum(pageNum);
+			pageDTO.setCurrentPage(currentPage);
+			
+			List<OrderDTO> orderInsertList=orderService.getOrderInsertList(pageDTO);
+			
+//			int count=orderService.getOrderCount();
+//			int pageBlock=10;
+//			int startPage=(currentPage-1)/pageBlock*pageBlock+1;
+//			int endPage=startPage+pageBlock-1;
+//			int pageCount=count/pageSize+(count%pageSize==0?0:1);
+//			if(endPage>pageCount) {
+//				endPage=pageCount;
+//			}
+			
+			String btn_can=(String)request.getParameter("btn_can");
+			
+			model.addAttribute("btn_can",btn_can);
+			model.addAttribute("orderInsertList", orderInsertList);
+			return "/order/orderInsert";
+		}
+		
 		@RequestMapping(value = "/order/orderInfo", method = RequestMethod.GET)
 		public String info(HttpServletRequest request, Model model) {
 			int pageSize=10;
@@ -33,9 +75,62 @@ public class OrderController {
 			pageDTO.setPageSize(pageSize);
 			pageDTO.setPageNum(pageNum);
 			pageDTO.setCurrentPage(currentPage);
-			List<OrderDTO> orderList=orderService.getOrderList(pageDTO);
 			
-			int count=orderService.getOrderCount();
+			String cli_cd=request.getParameter("cli_cd");
+			List<OrderDTO> orderList=null;
+			
+			//cli_cd=&emp_cd=&ord_date=&ord_date_end=&ord_d_date=&ord_d_date_end=&prod_cd=
+			if(cli_cd!=null) {
+				orderList=orderService.getOrderList(pageDTO, cli_cd);
+			}
+			else {
+				orderList=orderService.getOrderList(pageDTO);
+			}
+			
+//			int count=orderService.getOrderCount();
+//			int pageBlock=10;
+//			int startPage=(currentPage-1)/pageBlock*pageBlock+1;
+//			int endPage=startPage+pageBlock-1;
+//			int pageCount=count/pageSize+(count%pageSize==0?0:1);
+//			if(endPage>pageCount) {
+//				endPage=pageCount;
+//			}
+			
+			model.addAttribute("orderList", orderList);
+			return "/order/orderInfo";
+		}
+		
+		@RequestMapping(value = "/order/orderPop", method = RequestMethod.GET)
+		public String pop(HttpServletRequest request, Model model) {
+			int pageSize=10;
+			String pageNum=request.getParameter("pageNum");
+			if(pageNum==null) {
+				pageNum="1";
+			}
+			int currentPage=Integer.valueOf(pageNum);
+			
+			PageDTO pageDTO=new PageDTO();
+			pageDTO.setPageSize(pageSize);
+			pageDTO.setPageNum(pageNum);
+			pageDTO.setCurrentPage(currentPage);
+			
+			String click_cli=(String)request.getParameter("click_cli");
+			String click_emp=(String)request.getParameter("click_emp");
+			String result=null;
+			
+			System.out.println(click_cli);
+			System.out.println(click_emp);
+			if(click_cli!=null) {
+				result="cli";
+				List<ClientDTO> orderPop=clientService.getClientInfo(pageDTO);
+				model.addAttribute("orderPop", orderPop);
+			}else if(click_emp!=null) {
+				result="emp";
+				List<EmployeeDTO> orderPop=employeeService.getEmployeeList(pageDTO);
+				model.addAttribute("orderPop", orderPop);
+			}
+			
+			int count=employeeService.getEmployeeCount();
 			int pageBlock=10;
 			int startPage=(currentPage-1)/pageBlock*pageBlock+1;
 			int endPage=startPage+pageBlock-1;
@@ -44,14 +139,8 @@ public class OrderController {
 				endPage=pageCount;
 			}
 			
-			model.addAttribute("orderList", orderList);
-			return "/order/orderInfo";
+			model.addAttribute("Pop", result);
+			return "order/orderPop";
 		}
 		
-//		@RequestMapping(value = "/orders/ordersInsert", method = RequestMethod.GET)
-//		public String insert(Orders orders) {
-		
-//			return "/orders/ordersInsert";
-//		}
-
 }

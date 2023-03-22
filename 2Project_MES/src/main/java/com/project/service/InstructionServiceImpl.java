@@ -14,7 +14,7 @@ import com.project.domain.InstructionDTO;
 public class InstructionServiceImpl implements InstructionService{
 	
 	@Inject
-	private InstructionDAO instDAO;
+	private InstructionDAO instDAO; 
 
 	@Override
 	public List<InstructionDTO> getInstList(PageDTO pageDTO) {

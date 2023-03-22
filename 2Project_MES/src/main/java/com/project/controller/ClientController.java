@@ -67,13 +67,9 @@ public class ClientController {
 	public String delete(HttpServletRequest request) {
 		System.out.println("ClientController delete()");
 
-		try {
-			String[] cli_cd = request.getParameterValues("chk");
-			for (int i = 0; i < cli_cd.length; i++) {
-				clientService.deleteClient(cli_cd[i]);
-			}
-		} catch (NullPointerException e) {
-			e.printStackTrace();
+		String[] cli_cd = request.getParameterValues("chk");
+		for (int i = 0; i < cli_cd.length; i++) {
+			clientService.deleteClient(cli_cd[i]);
 		}
 
 		// 주소변경 하면서 이동
