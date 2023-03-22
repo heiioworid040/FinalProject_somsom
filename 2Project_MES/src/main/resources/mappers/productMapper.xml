@@ -9,19 +9,44 @@
 	
 <!-- id-"이름" spl구문 하나하나 이름
 	 ? 대신에 MemberDTO 멤버변수명 #{id}	-->
-
-    <select id="getProductList" resultType="com.project.domain.ProductDTO">
-    	select * from product
-    	order by prod_nm 
-    </select>
     
     	 <insert id="insertProduct">
-    	insert into product(prod_cd,prod_nm,prod_mat,prod_unit,prod_text,prod_size,prod_inprice,prod_outprice,prod_count,prod_note) 
-    	values(#{prod_cd},#{prod_nm},#{prod_mat},#{prod_unit},#{prod_text},#{prod_size},#{prod_inprice},#{prod_outprice},
+    	insert into product(prod_number,prod_cd,prod_nm,prod_mat,prod_unit,prod_text,prod_size,prod_inprice,prod_outprice,prod_count,prod_note) 
+    	values(#{prod_number},#{prod_cd},#{prod_nm},#{prod_mat},#{prod_unit},#{prod_text},#{prod_size},#{prod_inprice},#{prod_outprice},
     	#{prod_count},#{prod_note})
     	</insert>
 
 
+    
+    <select id="getMaxnum" resultType="java.lang.Integer">
+    	select max(prod_number) from product
+    </select>
+    
+    <select id="getProductList" resultType="com.project.domain.ProductDTO">
+    	select * from product
+    	order by prod_number desc
+    	limit #{startRow}, #{pageSize}
+    </select>
+    
+    
+      <select id="getProductCount" resultType="java.lang.Integer">
+    	select count(*) from product
+    </select>
+    
+     <select id="getProduct" resultType="com.project.domain.ProductDTO">
+    	select * from product where prod_number = #{prod_number}
+    </select>
+    
+    <update id="updateProduct">
+    	update product set prod_nm =#{prod_nm}, prod_mat = #{prod_mat}
+    	where prod_number = #{prod_number}
+    </update>
+    <!-- daolmpl 이름이랑 같아야한다. -->
+    <delete id="deleteProduct">
+    delete from product
+    where prod_number = #{prod_number}
+    </delete>
+     
 
 
 <!--     <select id="" resultType=""> -->

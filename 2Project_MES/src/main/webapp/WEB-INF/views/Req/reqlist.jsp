@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>        
 <!DOCTYPE html>
 <html>
 <head>
@@ -61,56 +62,41 @@
                 </div>
             </div>
         </div>
-				
-		<div class="content">
-			<div class="animated fadeIn">
-				<div class="row">
-					<div class="col-lg">
-						<div class="card">
-							<div class="card-body">
-							<!--	(검색창 위치) -->
-							<!-- 이 이상 긁는건 너무 템플릿에만의존적인 것 같아 나머지 기능은 직접 개발합시다 파이팅! -->
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div><!-- .content -->
-		
-        <div class="content">
+	
+ <div class="content">
 			<div class="animated fadeIn">
 				<div class="row">
 					<div class="col-lg">
 						<div class="card">
 							<div class="card-header">
-								<strong class="card-title">Table Head</strong>
+								<strong class="card-title">품목별 현황</strong><button id="add-row">추가</button>
 							</div>
 							<div class="card-body">
-								<table class="table">
-									<thead class="thead-dark">
-										<tr>
-											<th scope="col">#</th>
-											<th scope="col">사용자 ID</th>
-											<th scope="col">사용자명</th>
-											<th scope="col">비밀번호</th>
-											<th scope="col">부서</th>
-											<th scope="col">직책</th>
-											<th scope="col">E-MAIL</th>
-											<th scope="col">전화번호</th>
+								<table class="table" id="table2">
+									<thead class="thead-dark">	
+										<tr>														
+											<th scope="col" >기본키</th>
+											<th scope="col" >품목</th>
+											<th scope="col" >소요량</th>
+											<th scope="col" >등록자</th>
+											<th scope="col">등록일</th>
+											<th scope="col">수정자</th>
+											<th scope="col">변경일</th>
+											<th scope="col">버튼 종류</th>
 										</tr>
 									</thead>
 									<tbody>
+										<c:forEach var="productDTO" items="${productList}"> 
 										<tr>
-											<th scope="row">1</th>
-											<td>Mark</td>
-											<td>Otto</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-											
-										</tr>
+											<td>${reqDTO.req_num}</td>
+											<td>${productDTO.prod_cd}</td>
+											<td>${reqDTO.req_req}</td>
+											<td>${reqDTO.req_add_emp}</td>
+											<td><fmt:formatDate pattern="yyyy-MM-dd" value="${reqDTO.req_add_date}"/></td>
+											<td>${reqDTO.req_edit_emp}</td>
+											<td><fmt:formatDate pattern="yyyy-MM-dd" value="${reqDTO.req_edit_date}"/></td>
+											<td><button class="delete-Btn">삭제</button></td>
+										</tr></c:forEach>
 									</tbody>
 								</table>
 

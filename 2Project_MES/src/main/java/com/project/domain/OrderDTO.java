@@ -2,32 +2,33 @@ package com.project.domain;
 
 import java.sql.Timestamp;
 
-public class OrderDTO {
-	private int ord_num;
-	private String prod_cd;
+public class OrderDTO extends ProductDTO {
+	private String ord_cd;
 	private String emp_cd;
-	private Timestamp ord_date; 
+	private String emp_nm;
+	private Timestamp ord_date;
 	private Timestamp ord_d_date;
 	private int ord_count;
+	private int ship_count;
 	
 	// set get
-	public int getOrd_num() {
-		return ord_num;
+	public String getOrd_cd() {
+		return ord_cd;
 	}
-	public void setOrd_num(int ord_num) {
-		this.ord_num = ord_num;
-	}
-	public String getProd_cd() {
-		return prod_cd;
-	}
-	public void setProd_cd(String prod_cd) {
-		this.prod_cd = prod_cd;
+	public void setOrd_cd(String ord_cd) {
+		this.ord_cd = ord_cd;
 	}
 	public String getEmp_cd() {
 		return emp_cd;
 	}
 	public void setEmp_cd(String emp_cd) {
 		this.emp_cd = emp_cd;
+	}
+	public String getEmp_nm() {
+		return emp_nm;
+	}
+	public void setEmp_nm(String emp_nm) {
+		this.emp_nm = emp_nm;
 	}
 	public Timestamp getOrd_date() {
 		return ord_date;
@@ -47,6 +48,10 @@ public class OrderDTO {
 	public void setOrd_count(int ord_count) {
 		this.ord_count = ord_count;
 	}
-	
-	
+	public int getShip_count() {
+		return ship_count;
+	}
+	public void setShip_count(int ship_count) {
+		this.ship_count = ship_count;
+	}
 }
