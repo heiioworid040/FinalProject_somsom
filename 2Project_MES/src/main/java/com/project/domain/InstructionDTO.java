@@ -2,7 +2,7 @@ package com.project.domain;
 
 import com.google.protobuf.Timestamp;
 
-public class InstructionDTO {
+public class InstructionDTO extends OrderDTO {
 	private String inst_cd;
 	private String inst_st;
 	private Timestamp inst_date;
