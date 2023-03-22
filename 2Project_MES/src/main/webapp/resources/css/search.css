@@ -8,7 +8,7 @@
 	border-style: none;
 	background-color: #212529;
 	color: #ffffff;
-	font-size: 18px;
+	font-size: 16px;
 }
 .search {
 	float: right;
@@ -23,6 +23,13 @@
 	float: left;
 	width: 500px;
 }
+.search-result-div {
+	height: 35px;
+}
+.search-result {
+	color: #212529;
+	text-align: left;
+}
 
 /* btn */
 .btn-div {
@@ -32,5 +39,5 @@
 	border-style: none;
 	background-color: #212529;
 	color: #ffffff;
-	font-size: 18px;
+	font-size: 16px;
 }
