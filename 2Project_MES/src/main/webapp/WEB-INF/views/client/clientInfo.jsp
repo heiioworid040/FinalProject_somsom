@@ -29,10 +29,11 @@
 	href="${pageContext.request.contextPath}/resources/css/cs-skin-elastic.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/style.css">
-
 <link
 	href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800'
 	rel='stylesheet' type='text/css'>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/client.css">
 
 <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
@@ -55,6 +56,53 @@
 			}
 		}
 	}
+</script>
+
+<!-- 추가 버튼 함수  -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+	$(document)
+			.ready(
+					function() {
+						$("#add-row")
+								.click(
+										function() {
+											var newRow = '<tr><th></th>'
+													+ '<td><input type="text" style="width: 100px; name="prod_cd"></td>'
+													+ '<td><input type="text" style="width: 90px; name="prod_nm"></td>'
+													+ '<td><input type="text" style="width: 50px; name="prod_mat"></td>'
+													+ '<td><input type="text" style="width: 100px; name="prod_unit"></td>'
+													+ '<td><input type="text" style="width: 60px; name="prod_text"></td>'
+													+ '<td><input type="text" style="width: 80px; name="prod_size"></td>'
+													+ '<td><input type="text" style="width: 60px; name="prod_inprice"></td>'
+													+ '<td><input type="text" style="width: 60px; name="prod_outprice"></td>'
+													+ '<td><input type="text" style="width: 130px; name="prod_count"></td>'
+													+ '<td><input type="text" style="width: 110px; name="prod_note"></td>'
+													+ '<td><input type="text" style="width: 110px; name="prod_note"></td>'
+													+ '<td><input type="text" style="width: 120px; name="prod_note"></td>'
+													+ '<td><input type="text" style="width: 110px; name="prod_note"></td>'
+													+ '<td><input type="text" style="width: 180px; name="prod_note"></td>'
+													+ '<td><button class-"submit-Btn">전송</button></td></tr>';
+											$('#bootstrap-data-table').append(
+													newRow);
+										});
+					});
+
+	// 전송버튼	
+	// $(document).ready(function() {
+	//   $("#MyForm").submit(function(event) {
+	//     event.preventDefault(); // 기본 동작 방지
+	//     var formData = $(this).serialize(); // 폼 데이터 가져오기
+	//     $.ajax({
+	//       url: "./servlet-context", // 데이터를 전송할 서버 URL
+	//       type: "POST",
+	//       data: formData,
+	//       success: function(result) {
+	//       	alert('전송 되었습니다'); // 전송 결과 로그 출력
+	//       }
+	//     });
+	//   });
+	// });
 </script>
 
 </head>
@@ -115,9 +163,10 @@
 								<strong class="card-title">거래처</strong>
 							</div>
 							<div class="card-body">
-
+							
 								<!-- 체크박스로 선택해 글 여러개 삭제가능  -->
-								<form action="${pageContext.request.contextPath}/client/delete" method="post">
+								<form action="${pageContext.request.contextPath}/client/delete"
+									method="post">
 									<input type="submit" value="삭제">
 
 									<table id="bootstrap-data-table"
@@ -168,25 +217,28 @@
 										</tbody>
 									</table>
 								</form>
+								<button id="add-row">추가</button>
 
 								<!-- 페이징 처리 -->
-								<c:if test="${pageDTO.startPage > pageDTO.pageBlock }">
-									<a
-										href="${pageContext.request.contextPath}/client/clientInfo?pageNum=${pageDTO.startPage - pageDTO.pageBlock }">[10페이지
-										이전]</a>
-								</c:if>
+								<div class="pageNum">
+									<c:if test="${pageDTO.startPage > pageDTO.pageBlock }">
+										<a
+											href="${pageContext.request.contextPath}/client/clientInfo?pageNum=${pageDTO.startPage - pageDTO.pageBlock }">[10페이지
+											이전]</a>
+									</c:if>
 
-								<c:forEach var="i" begin="${pageDTO.startPage }"
-									end="${pageDTO.endPage }" step="1">
-									<a
-										href="${pageContext.request.contextPath}/client/clientInfo?pageNum=${i}">${i}</a>
-								</c:forEach>
+									<c:forEach var="i" begin="${pageDTO.startPage }"
+										end="${pageDTO.endPage }" step="1">
+										<a
+											href="${pageContext.request.contextPath}/client/clientInfo?pageNum=${i}">${i}</a>
+									</c:forEach>
 
-								<c:if test="${pageDTO.endPage < pageDTO.pageCount }">
-									<a
-										href="${pageContext.request.contextPath}/client/clientInfo?pageNum=${pageDTO.startPage + pageDTO.pageBlock }">[10페이지
-										다음]</a>
-								</c:if>
+									<c:if test="${pageDTO.endPage < pageDTO.pageCount }">
+										<a
+											href="${pageContext.request.contextPath}/client/clientInfo?pageNum=${pageDTO.startPage + pageDTO.pageBlock }">[10페이지
+											다음]</a>
+									</c:if>
+								</div>
 							</div>
 						</div>
 					</div>
