@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>      
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,9 +28,6 @@
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
 </head>
-
-
-
 <body>
 	<!-- Left Panel1 -->
 	<jsp:include page="../inc/leftPanel.jsp" />
@@ -47,7 +45,7 @@
                     <div class="col-sm-4">
                         <div class="page-header float-left">
                             <div class="page-title">
- 
+                                <h1>Dashboard</h1>
                             </div>
                         </div>
                     </div>
@@ -65,106 +63,91 @@
                 </div>
             </div>
         </div>
-    <div class="content">
+				
+		<div class="content">
 			<div class="animated fadeIn">
 				<div class="row">
 					<div class="col-lg">
 						<div class="card">
-							<div class="card-header">
-								<strong class="card-title">품목별 현황</strong>
-							</div>
 							<div class="card-body">
-								<table class="table" id="table2">
-									<thead class="thead-dark">	
-										<tr>
-											<th scope="col">#</th>
-											<th scope="col" >품번</th>
-											<th scope="col" >품명</th>
-											<th scope="col">자재유형</th>
-											<th scope="col">재고단위</th>
-											<th scope="col">재질</th>
-											<th scope="col">규격</th>
-											<th scope="col">매입단가</th>
-											<th scope="col">매출단가</th>
-											<th scope="col">현재고</th>
-											<th scope="col">비고</th>
-											<th scope="col">버튼 종류</th>
-										</tr>
-									</thead>
-									<tbody>
-									<form action="${pageContext.request.contextPath}/product/insertPro" method="post">
-										<c:forEach var="productDTO" items="${productList }"> 
-										<tr>
-											<th scope="row">1</th>
-											<td>${productDTO.prod_cd}</td>
-											<td>${productDTO.prod_nm}</td>
-											<td>${productDTO.prod_mat}</td>
-											<td>${productDTO.prod_unit}</td>
-											<td>${productDTO.prod_text}</td>
-											<td>${productDTO.prod_size}</td>
-											<td>${productDTO.prod_inprice}</td>
-											<td>${productDTO.prod_outprice}</td>
-											<td>${productDTO.prod_count}</td>
-											<td>${productDTO.prod_note}</td>
-											<td><button class="delete-Btn">삭제</button></td>
-										</tr>
-										</c:forEach>
-										</form>
-									</tbody>
-								</table>
-								<div id="table-container"></div>
-								<button id="add-row">추가</button>
+							<!--	(검색창 위치) -->
+							<!-- 이 이상 긁는건 너무 템플릿에만의존적인 것 같아 나머지 기능은 직접 개발합시다 파이팅! -->
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div><!-- .content -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>			
-<script>
-//행추가
-$(document).ready(function() { 
-	  $("#add-row").click(function() { // add-row 눌렸을때 다음 펑션을 실행.
-		  var newRow = '<tr><th><input type="text" name=""></th>'
-		  +'<td><input type="text" name="prod_cd"></td>'
-		  + '<td><input type="text" style="width: 50px; name="prod_nm"></td>'  
-		  + '<td><input type="text" style="width: 50px; name="prod_mat"></td>'
-		  +'<td><input type="text" style="width: 50px; name="prod_unit"></td>'
-		  +'<td><input type="text" style="width: 50px; name="prod_text"></td>'
-		  +'<td><input type="text" style="width: 50px; name="prod_size"></td>'
-		  +'<td><input type="text" style="width: 50px; name="prod_inprice"></td>'
-		  +'<td><input type="text" style="width: 50px; name="prod_outprice"></td>'
-		  +'<td><input type="text" style="width: 50px; name="prod_count"></td>'
-		  +'<td><input type="text" style="width: 50px; name="prod_note"></td>'
-		  +'<td><button class="delete-Btn">삭제</button><button class-"submit-Btn">전송</button></td></tr>';
-		    $('#table2').append(newRow);
-	  });
-	});
-	
-// 전송버튼	
-// $(document).ready(function() {
-//   $("#MyForm").submit(function(event) {
-//     event.preventDefault(); // 기본 동작 방지
-//     var formData = $(this).serialize(); // 폼 데이터 가져오기
-//     $.ajax({
-//       url: "./servlet-context", // 데이터를 전송할 서버 URL
-//       type: "POST",
-//       data: formData,
-//       success: function(result) {
-//       	alert('전송 되었습니다'); // 전송 결과 로그 출력
-//       }
-//     });
-//   });
-// });
+		
+        <div class="content">
+		<input type="button" value="추가"
+								onclick="location.href='${pageContext.request.contextPath}/employee/insertEmployee'">
+			<div class="animated fadeIn">
+				<div class="row">
+					<div class="col-lg">
+						<div class="card">
+							<div class="card-header">
+								<strong class="card-title">Table Head</strong>  
+							</div>
+							<div class="card-body">
+								
+								<table class="table">
+									<thead class="thead-dark">
+										<tr>
+											<th scope="col">#</th>
+											<th scope="col">사용자 ID</th>
+											<th scope="col">사용자명</th>
+											<th scope="col">비밀번호</th>
+											<th scope="col">부서</th>
+											<th scope="col">직책</th>
+											<th scope="col">E-MAIL</th>
+											<th scope="col">전화번호</th>
+											<th scope="col">선택</th>
+											
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach var="employeeDTO" items="${employeeList }">
+										<tr>
+											<th scope="row">1</th>
+											<td>${employeeDTO.emp_cd}</td>
+											<td>${employeeDTO.emp_nm}</td>
+											<td>${employeeDTO.emp_pass}</td>
+											<td>${employeeDTO.emp_dept}</td>
+											<td>${employeeDTO.emp_position}</td>
+											<td>${employeeDTO.emp_email}</td>
+											<td>${employeeDTO.emp_tel}</td>
+											<td><input type="checkBox" name="ch"></td>																					
+										</tr>
+										</c:forEach>
+										
+										
+										
+									</tbody>
+								</table>
+<c:if test="${pageDTO.startPage > pageDTO.pageBlock }">
+<a href="${pageContext.request.contextPath}/employee/employeeList?pageNum=${pageDTO.startPage - pageDTO.pageBlock }">◁◁</a>
+</c:if>
 
-// 테이블 행 삭제 
-$('table').on('click', '.delete-Btn', function() {
-    $(this).closest('tr').remove();
-});
-</script>		
+<c:forEach var="i" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1">
+<a href="${pageContext.request.contextPath}/employee/employeeList?pageNum=${i}">${i}</a> 
+</c:forEach>
 
+<c:if test="${pageDTO.endPage < pageDTO.pageCount }">
+<a href="${pageContext.request.contextPath}/employee/employeeList?pageNum=${pageDTO.startPage + pageDTO.pageBlock }">▷▷</a>
+</c:if>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!-- .content -->
 
-
+		<div class="clearfix"></div>
+		<!-- 푸터 넣는 곳 -->
+		<jsp:include page="../inc/footer.jsp" />
+		<!-- 푸터 넣는 곳 -->
+	</div>
 	<!-- /#right-panel -->
 
 	<!-- Right Panel -->
@@ -175,7 +158,6 @@ $('table').on('click', '.delete-Btn', function() {
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
-
-
+	
 </body>
 </html>

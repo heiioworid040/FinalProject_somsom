@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>        
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,7 +44,7 @@
                     <div class="col-sm-4">
                         <div class="page-header float-left">
                             <div class="page-title">
-                                <h1>Dashboard</h1>
+                                <h1>Table</h1>
                             </div>
                         </div>
                     </div>
@@ -51,9 +52,9 @@
                         <div class="page-header float-right">
                             <div class="page-title">
                                 <ol class="breadcrumb text-right">
-                                    <li><a href="#">Dashboard</a></li>
-                                    <li><a href="#">Table</a></li>
-                                    <li class="active">Basic table</li>
+                                    <li><a href="${pageContext.request.contextPath}/product/productlist">조회</a></li>
+                                     <li><a href="${pageContext.request.contextPath}/product/productwrite">추가</a></li>
+                                    <li class="active">메인</li>
                                 </ol>
                             </div>
                         </div>
@@ -61,59 +62,67 @@
                 </div>
             </div>
         </div>
-				
-		<div class="content">
-			<div class="animated fadeIn">
-				<div class="row">
-					<div class="col-lg">
-						<div class="card">
-							<div class="card-body">
-							<!--	(검색창 위치) -->
-							<!-- 이 이상 긁는건 너무 템플릿에만의존적인 것 같아 나머지 기능은 직접 개발합시다 파이팅! -->
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div><!-- .content -->
-		
-        <div class="content">
+	
+ <div class="content">
 			<div class="animated fadeIn">
 				<div class="row">
 					<div class="col-lg">
 						<div class="card">
 							<div class="card-header">
-								<strong class="card-title">Table Head</strong>
+								<strong class="card-title">행 추가</strong>
 							</div>
 							<div class="card-body">
-								<table class="table">
-									<thead class="thead-dark">
-										<tr>
-											<th scope="col">#</th>
-											<th scope="col">사용자 ID</th>
-											<th scope="col">사용자명</th>
-											<th scope="col">비밀번호</th>
-											<th scope="col">부서</th>
-											<th scope="col">직책</th>
-											<th scope="col">E-MAIL</th>
-											<th scope="col">전화번호</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<th scope="row">1</th>
-											<td>Mark</td>
-											<td>Otto</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-											
-										</tr>
-									</tbody>
-								</table>
-
+								<h1>생성</h1>
+							<form action="${pageContext.request.contextPath}/product/productwritePro" method="post">
+							<table border="1">
+							<tr><td>품번</td>
+							    <td><input type="text" name="prod_cd"></td></tr>
+							<tr><td>품명</td>
+							    <td><select name="prod_nm">
+							    	<option value="">품명</option>
+							    	<option value="인형">인형</option>
+							    	<option value="바늘" selected="selected">바늘</option>
+							    	<option value="기타">기타</option>
+							</select></td></tr>   
+							<tr><td>자재유형</td>
+							    <td><select name="prod_mat">
+							    	<option value="">자재유형</option>
+							    	<option value="인형">인형</option>
+							    	<option value="바늘" selected="selected">바늘</option>
+							    	<option value="기타">기타</option>
+							    	</select></td></tr>
+							<tr><td>재고단위</td>
+							    <td><select name="prod_unit">
+							    	<option value="">단위</option>
+							    	<option value="EA">EA</option>
+							    	<option value="OP" selected="selected">OP</option>
+							    	<option value="기타">기타</option>
+							    	</select></td></tr>
+							<tr><td>재질</td>
+							    <td><select name="prod_text">
+							    	<option value="">재질</option>
+							    	<option value="천">천</option>
+							    	<option value="유리" selected="selected">유리</option>
+							    	<option value="기타">기타</option>
+							    	</select></td></tr>
+							<tr><td>규격</td>
+							    <td><select name="prod_size">
+							    	<option value="">규격</option>
+							    	<option value="10*10">10*10</option>
+							    	<option value="20*20" selected="selected">20*20</option>
+							    	<option value="기타">기타</option>
+							    	</select></td></tr>    	
+							 <tr><td>매입단가</td>
+							  <td><input type="text" name="prod_inprice" ></td></tr>
+							   <tr><td>매입단가</td>
+							  <td><input type="text" name="prod_outprice" ></td></tr>
+							   <tr><td>현재고</td>
+							  <td><input type="text" name="prod_count" ></td></tr>
+							   <tr><td>비고</td>
+							  <td><input type="text" name="prod_note"></td></tr>  	    				    	
+							<tr><td colspan="2"><input type="submit" value="데이터전송"></td></tr>    
+							</table>
+						</form>
 							</div>
 						</div>
 					</div>
