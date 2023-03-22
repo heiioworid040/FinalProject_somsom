@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -78,14 +80,17 @@
 		</div><!-- .content -->
 		
         <div class="content">
+		<input type="button" value="추가"
+								onclick="location.href='${pageContext.request.contextPath}/employee/insertEmployee'">
 			<div class="animated fadeIn">
 				<div class="row">
 					<div class="col-lg">
 						<div class="card">
 							<div class="card-header">
-								<strong class="card-title">Table Head</strong>
+								<strong class="card-title">Table Head</strong>  
 							</div>
 							<div class="card-body">
+								
 								<table class="table">
 									<thead class="thead-dark">
 										<tr>
@@ -97,23 +102,40 @@
 											<th scope="col">직책</th>
 											<th scope="col">E-MAIL</th>
 											<th scope="col">전화번호</th>
+											<th scope="col">선택</th>
+											
 										</tr>
 									</thead>
 									<tbody>
+										<c:forEach var="employeeDTO" items="${employeeList }">
 										<tr>
 											<th scope="row">1</th>
-											<td>Mark</td>
-											<td>Otto</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-											
+											<td>${employeeDTO.emp_cd}</td>
+											<td>${employeeDTO.emp_nm}</td>
+											<td>${employeeDTO.emp_pass}</td>
+											<td>${employeeDTO.emp_dept}</td>
+											<td>${employeeDTO.emp_position}</td>
+											<td>${employeeDTO.emp_email}</td>
+											<td>${employeeDTO.emp_tel}</td>
+											<td><input type="checkBox" name="ch"></td>																					
 										</tr>
+										</c:forEach>
+										
+										
+										
 									</tbody>
 								</table>
+<c:if test="${pageDTO.startPage > pageDTO.pageBlock }">
+<a href="${pageContext.request.contextPath}/employee/employeeList?pageNum=${pageDTO.startPage - pageDTO.pageBlock }">◁◁</a>
+</c:if>
 
+<c:forEach var="i" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1">
+<a href="${pageContext.request.contextPath}/employee/employeeList?pageNum=${i}">${i}</a> 
+</c:forEach>
+
+<c:if test="${pageDTO.endPage < pageDTO.pageCount }">
+<a href="${pageContext.request.contextPath}/employee/employeeList?pageNum=${pageDTO.startPage + pageDTO.pageBlock }">▷▷</a>
+</c:if>
 							</div>
 						</div>
 					</div>
@@ -136,7 +158,6 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
-
-
+	
 </body>
 </html>

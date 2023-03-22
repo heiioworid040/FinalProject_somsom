@@ -9,5 +9,18 @@
         where emp_cd = #{emp_cd} and emp_pass = #{emp_pass}
     </select>
 
+	<select id="getEmployeeList" resultType="com.project.domain.EmployeeDTO">
+		select * from employee
+		limit #{startRow} , #{pageSize}
+	</select>
+	
+	<select id="getEmployeeCount" resultType="java.lang.Integer">
+		select count(*) from employee
+	</select>
+
+	<insert id="insertEmployee">
+		insert into employee(emp_cd, emp_nm, emp_pass, emp_dept, emp_position, emp_email, emp_tel)
+		values(#{emp_cd}, #{emp_nm}, #{emp_pass}, #{emp_dept}, #{emp_position}, #{emp_email}, #{emp_tel})
+	</insert>
 	
 </mapper>
