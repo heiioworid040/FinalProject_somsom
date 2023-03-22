@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>      
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>        
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,9 +27,6 @@
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
 </head>
-
-
-
 <body>
 	<!-- Left Panel1 -->
 	<jsp:include page="../inc/leftPanel.jsp" />
@@ -47,7 +44,7 @@
                     <div class="col-sm-4">
                         <div class="page-header float-left">
                             <div class="page-title">
- 
+                                <h1>Dashboard</h1>
                             </div>
                         </div>
                     </div>
@@ -65,106 +62,56 @@
                 </div>
             </div>
         </div>
-    <div class="content">
+	
+ <div class="content">
 			<div class="animated fadeIn">
 				<div class="row">
 					<div class="col-lg">
 						<div class="card">
 							<div class="card-header">
-								<strong class="card-title">품목별 현황</strong>
+								<strong class="card-title">품목별 현황</strong><button id="add-row">추가</button>
 							</div>
 							<div class="card-body">
 								<table class="table" id="table2">
 									<thead class="thead-dark">	
-										<tr>
-											<th scope="col">#</th>
-											<th scope="col" >품번</th>
-											<th scope="col" >품명</th>
-											<th scope="col">자재유형</th>
-											<th scope="col">재고단위</th>
-											<th scope="col">재질</th>
-											<th scope="col">규격</th>
-											<th scope="col">매입단가</th>
-											<th scope="col">매출단가</th>
-											<th scope="col">현재고</th>
-											<th scope="col">비고</th>
+										<tr>														
+											<th scope="col" >기본키</th>
+											<th scope="col" >품목</th>
+											<th scope="col" >소요량</th>
+											<th scope="col" >등록자</th>
+											<th scope="col">등록일</th>
+											<th scope="col">수정자</th>
+											<th scope="col">변경일</th>
 											<th scope="col">버튼 종류</th>
 										</tr>
 									</thead>
 									<tbody>
-									<form action="${pageContext.request.contextPath}/product/insertPro" method="post">
-										<c:forEach var="productDTO" items="${productList }"> 
+										<c:forEach var="productDTO" items="${productList}"> 
 										<tr>
-											<th scope="row">1</th>
+											<td>${reqDTO.req_num}</td>
 											<td>${productDTO.prod_cd}</td>
-											<td>${productDTO.prod_nm}</td>
-											<td>${productDTO.prod_mat}</td>
-											<td>${productDTO.prod_unit}</td>
-											<td>${productDTO.prod_text}</td>
-											<td>${productDTO.prod_size}</td>
-											<td>${productDTO.prod_inprice}</td>
-											<td>${productDTO.prod_outprice}</td>
-											<td>${productDTO.prod_count}</td>
-											<td>${productDTO.prod_note}</td>
+											<td>${reqDTO.req_req}</td>
+											<td>${reqDTO.req_add_emp}</td>
+											<td><fmt:formatDate pattern="yyyy-MM-dd" value="${reqDTO.req_add_date}"/></td>
+											<td>${reqDTO.req_edit_emp}</td>
+											<td><fmt:formatDate pattern="yyyy-MM-dd" value="${reqDTO.req_edit_date}"/></td>
 											<td><button class="delete-Btn">삭제</button></td>
-										</tr>
-										</c:forEach>
-										</form>
+										</tr></c:forEach>
 									</tbody>
 								</table>
-								<div id="table-container"></div>
-								<button id="add-row">추가</button>
+
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div><!-- .content -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>			
-<script>
-//행추가
-$(document).ready(function() { 
-	  $("#add-row").click(function() { // add-row 눌렸을때 다음 펑션을 실행.
-		  var newRow = '<tr><th><input type="text" name=""></th>'
-		  +'<td><input type="text" name="prod_cd"></td>'
-		  + '<td><input type="text" style="width: 50px; name="prod_nm"></td>'  
-		  + '<td><input type="text" style="width: 50px; name="prod_mat"></td>'
-		  +'<td><input type="text" style="width: 50px; name="prod_unit"></td>'
-		  +'<td><input type="text" style="width: 50px; name="prod_text"></td>'
-		  +'<td><input type="text" style="width: 50px; name="prod_size"></td>'
-		  +'<td><input type="text" style="width: 50px; name="prod_inprice"></td>'
-		  +'<td><input type="text" style="width: 50px; name="prod_outprice"></td>'
-		  +'<td><input type="text" style="width: 50px; name="prod_count"></td>'
-		  +'<td><input type="text" style="width: 50px; name="prod_note"></td>'
-		  +'<td><button class="delete-Btn">삭제</button><button class-"submit-Btn">전송</button></td></tr>';
-		    $('#table2').append(newRow);
-	  });
-	});
-	
-// 전송버튼	
-// $(document).ready(function() {
-//   $("#MyForm").submit(function(event) {
-//     event.preventDefault(); // 기본 동작 방지
-//     var formData = $(this).serialize(); // 폼 데이터 가져오기
-//     $.ajax({
-//       url: "./servlet-context", // 데이터를 전송할 서버 URL
-//       type: "POST",
-//       data: formData,
-//       success: function(result) {
-//       	alert('전송 되었습니다'); // 전송 결과 로그 출력
-//       }
-//     });
-//   });
-// });
 
-// 테이블 행 삭제 
-$('table').on('click', '.delete-Btn', function() {
-    $(this).closest('tr').remove();
-});
-</script>		
-
-
-
+		<div class="clearfix"></div>
+		<!-- 푸터 넣는 곳 -->
+		<jsp:include page="../inc/footer.jsp" />
+		<!-- 푸터 넣는 곳 -->
+	</div>
 	<!-- /#right-panel -->
 
 	<!-- Right Panel -->
