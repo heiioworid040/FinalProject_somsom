@@ -35,6 +35,13 @@ public class ShipDAOImpl implements ShipDAO {
 
 		return sqlSession.selectOne(namespace + ".shipCurrentCount");
 	}
-	
-	
+
+	@Override
+	public void currDelete(String ship_cd) {
+		System.out.println("ShipDAOImpl currDelete()");
+
+		sqlSession.delete(namespace + ".currDelete", ship_cd);
+
+	}
+
 }

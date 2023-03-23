@@ -21,5 +21,10 @@
 		select count(*) from
 		ship
 	</select>
+	
+	<delete id="currDelete">
+    	delete from ship
+    	where ship_cd = #{ship_cd}
+    </delete>
 
 </mapper>
