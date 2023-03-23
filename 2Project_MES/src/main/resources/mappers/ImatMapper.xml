@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<select id="getImat" resultType="com.itwillbs.domain.ImatDTO">
+<mapper namespace="com.project.mappers.ImatDTO">
+<select id="getImat" resultType="com.project.domain.ImatDTO">
         select * 
         from members 
         where id = #{id} and pass = #{pass}
     </select>
+</mapper>
     
