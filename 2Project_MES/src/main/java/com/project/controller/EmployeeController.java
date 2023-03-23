@@ -124,12 +124,7 @@ public class EmployeeController {
 		return "employee/insertEmployee";
 	}
 	
-//	@RequestMapping(value = "/employee/insertEmployee", method = RequestMethod.GET)
-//	public String insert() {
-//
-//		return "employee/insertEmployee";
-//	}
-	
+
 	@RequestMapping(value = "/employee/insertPro", method = RequestMethod.POST)
 	public String insertPro(EmployeeDTO employeeDTO) {
 
@@ -138,6 +133,50 @@ public class EmployeeController {
 //		주소줄 변경하면서 이동
 		return "redirect:/employee/employeeList";
 	}
+	
+	@RequestMapping(value = "/employee/deletePro", method = RequestMethod.GET)
+	public String deletetPro(HttpServletRequest request) {
+		System.out.println("EmployeeController deletePro");
+		String[] emp_cd = request.getParameterValues("ck");
+		System.out.println("emp_cd="+emp_cd);
+			for(int i=0;i<emp_cd.length;i++) {		
+			System.out.println(emp_cd);
+			employeeService.deleteEmployee(emp_cd[i]);
+			
+			}
+//		주소줄 변경하면서 이동
+		return "redirect:/employee/employeeList";
+	}
+
+	
+	@RequestMapping(value = "/employee/updateList", method = RequestMethod.GET)
+	public String updateList(Model model) {
+
+		List<EmployeeDTO> updateList=employeeService.getUpdateList();
+		model.addAttribute("updateList",updateList);
+		
+		return "employee/updateEmployee";
+	}
+	
+	@RequestMapping(value = "/employee/updatePro", method = RequestMethod.POST)
+	public String updatePro(HttpServletRequest request) {
+		System.out.println("EmployeeController updatePro");
+		
+		String[] emp_cd = request.getParameterValues("ck");
+		System.out.println("emp_cd="+emp_cd);
+			
+		for(int i=0;i<emp_cd.length;i++) {		
+			System.out.println(emp_cd);
+			employeeService.updateEmployee(emp_cd[i]);			
+			}
+		
+//		주소줄 변경하면서 이동
+		return "redirect:/employee/employeeList";
+	}
+	
+	
+	
+	
 	
 	
 	

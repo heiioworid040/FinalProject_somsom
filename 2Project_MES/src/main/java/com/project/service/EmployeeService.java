@@ -15,4 +15,11 @@ public interface EmployeeService {
 
 	public void insertEmployee(EmployeeDTO employeeDTO);
 
+	public void deleteEmployee(String emp_cd);
+
+	public List<EmployeeDTO> getUpdateList();
+
+	public void updateEmployee(String emp_cd);
+
+
 }
