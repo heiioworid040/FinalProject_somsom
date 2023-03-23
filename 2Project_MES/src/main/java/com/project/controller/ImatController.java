@@ -7,9 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.project.domain.ImatDTO;
-import com.project.domain.WiDTO;
 import com.project.service.ImatService;
-import com.project.service.WiService;
 
 @Controller
 public class ImatController {
