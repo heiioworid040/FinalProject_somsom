@@ -46,5 +46,20 @@ public class EmployeeDAOImpl implements EmployeeDAO{
 		
 		sqlSession.insert(namespace+".insertEmployee", employeeDTO);
 	}
+
+	@Override
+	public void deleteEmployee(String emp_cd) {
+		System.out.println("EmployeeDAOImpl deleteEmployee()");
+		sqlSession.delete(namespace+".deleteEmployee", emp_cd);
+		
+	}
+
+	@Override
+	public List<EmployeeDTO> getUpdateList() {
+		System.out.println("EmployeeDAOImpl getUpdateList()");
+		
+		return sqlSession.selectList(namespace+".getUpdateList");
+	}
+	
 	
 }
