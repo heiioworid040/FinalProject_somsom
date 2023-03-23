@@ -1,7 +1,6 @@
 package com.project.domain;
 
-public class ProductDTO {
-	
+public class ProductDTO extends ClientDTO{
 	private String prod_cd; //상품코드
 	private String prod_nm; //상품이름
 	private String prod_mat; //자재유형
@@ -9,9 +8,10 @@ public class ProductDTO {
 	private String prod_text; //재질
 	private String prod_size; //규격
 	private int prod_inprice; //매입단가
-	private int outprice; //매출단가
-	private int count; //현재 개수
+	private int prod_outprice; //매출단가
+	private int prod_count; //현재 개수
 	private String prod_note; //비고(이유)
+	private int prod_number;
 	
 	public String getProd_cd() {
 		return prod_cd;
@@ -55,23 +55,30 @@ public class ProductDTO {
 	public void setProd_inprice(int prod_inprice) {
 		this.prod_inprice = prod_inprice;
 	}
-	public int getOutprice() {
-		return outprice;
-	}
-	public void setOutprice(int outprice) {
-		this.outprice = outprice;
-	}
-	public int getCount() {
-		return count;
-	}
-	public void setCount(int count) {
-		this.count = count;
-	}
+
 	public String getProd_note() {
 		return prod_note;
 	}
 	public void setProd_note(String prod_note) {
 		this.prod_note = prod_note;
+	}
+	public int getProd_count() {
+		return prod_count;
+	}
+	public int getProd_number() {
+		return prod_number;
+	}
+	public void setProd_number(int prod_number) {
+		this.prod_number = prod_number;
+	}
+	public void setProd_count(int prod_count) {
+		this.prod_count = prod_count;
+	}
+	public int getProd_outprice() {
+		return prod_outprice;
+	}
+	public void setProd_outprice(int prod_outprice) {
+		this.prod_outprice = prod_outprice;
 	}
 	
 	

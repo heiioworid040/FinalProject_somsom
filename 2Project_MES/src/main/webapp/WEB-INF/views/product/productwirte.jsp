@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>        
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,9 +27,6 @@
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
 </head>
-
-
-
 <body>
 	<!-- Left Panel1 -->
 	<jsp:include page="../inc/leftPanel.jsp" />
@@ -46,7 +44,7 @@
                     <div class="col-sm-4">
                         <div class="page-header float-left">
                             <div class="page-title">
-                                <h1>Dashboard</h1>
+                                <h1>Table</h1>
                             </div>
                         </div>
                     </div>
@@ -54,9 +52,9 @@
                         <div class="page-header float-right">
                             <div class="page-title">
                                 <ol class="breadcrumb text-right">
-                                    <li><a href="#">Dashboard</a></li>
-                                    <li><a href="#">Table</a></li>
-                                    <li class="active">Basic table</li>
+                                    <li><a href="${pageContext.request.contextPath}/product/productlist">조회</a></li>
+                                     <li><a href="${pageContext.request.contextPath}/product/productwrite">추가</a></li>
+                                    <li class="active">메인</li>
                                 </ol>
                             </div>
                         </div>
@@ -64,107 +62,79 @@
                 </div>
             </div>
         </div>
-    <div class="content">
+	
+ <div class="content">
 			<div class="animated fadeIn">
 				<div class="row">
 					<div class="col-lg">
 						<div class="card">
 							<div class="card-header">
-								<strong class="card-title">Table Head</strong>
+								<strong class="card-title">행 추가</strong>
 							</div>
 							<div class="card-body">
-								<table class="table">
-									<thead class="thead-dark">
-										<tr>
-											<th scope="col">#</th>
-											<th scope="col">품번</th>
-											<th scope="col">품명</th>
-											<th scope="col">자재유형</th>
-											<th scope="col">재고단위</th>
-											<th scope="col">재질</th>
-											<th scope="col">규격</th>
-											<th scope="col">매입단가</th>
-											<th scope="col">매출단가</th>
-											<th scope="col">현재고</th>
-											<th scope="col">비고</th>
-											<th scope="col">종류</th>
-
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<th scope="row">1</th>
-											<td>Mark</td>
-											<td>Otto</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td><button class="delete-row">삭제</button></td>
-
-										</tr>
-										<tr>
-											<th scope="row">2</th>
-											<td>Jacob</td>
-											<td>Thornton</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-											 <td><button class="delete-row">삭제</button></td>
-										</tr>
-										<tr>
-											<th scope="row">3</th>
-											<td>Larry</td>
-											<td>the Bird</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-											 <td><button class="delete-row">삭제</button></td>
-										</tr>
-									</tbody>
-								</table>
-								<button id="add-row">행 추가</button>
+								<h1>생성</h1>
+							<form action="${pageContext.request.contextPath}/product/productwritePro" method="post">
+							<table border="1">
+							<tr><td>품번</td>
+							    <td><input type="text" name="prod_cd"></td></tr>
+							<tr><td>품명</td>
+							    <td><select name="prod_nm">
+							    	<option value="">품명</option>
+							    	<option value="인형">인형</option>
+							    	<option value="바늘" selected="selected">바늘</option>
+							    	<option value="기타">기타</option>
+							</select></td></tr>   
+							<tr><td>자재유형</td>
+							    <td><select name="prod_mat">
+							    	<option value="">자재유형</option>
+							    	<option value="인형">인형</option>
+							    	<option value="바늘" selected="selected">바늘</option>
+							    	<option value="기타">기타</option>
+							    	</select></td></tr>
+							<tr><td>재고단위</td>
+							    <td><select name="prod_unit">
+							    	<option value="">단위</option>
+							    	<option value="EA">EA</option>
+							    	<option value="OP" selected="selected">OP</option>
+							    	<option value="기타">기타</option>
+							    	</select></td></tr>
+							<tr><td>재질</td>
+							    <td><select name="prod_text">
+							    	<option value="">재질</option>
+							    	<option value="천">천</option>
+							    	<option value="유리" selected="selected">유리</option>
+							    	<option value="기타">기타</option>
+							    	</select></td></tr>
+							<tr><td>규격</td>
+							    <td><select name="prod_size">
+							    	<option value="">규격</option>
+							    	<option value="10*10">10*10</option>
+							    	<option value="20*20" selected="selected">20*20</option>
+							    	<option value="기타">기타</option>
+							    	</select></td></tr>    	
+							 <tr><td>매입단가</td>
+							  <td><input type="text" name="prod_inprice" ></td></tr>
+							   <tr><td>매입단가</td>
+							  <td><input type="text" name="prod_outprice" ></td></tr>
+							   <tr><td>현재고</td>
+							  <td><input type="text" name="prod_count" ></td></tr>
+							   <tr><td>비고</td>
+							  <td><input type="text" name="prod_note"></td></tr>  	    				    	
+							<tr><td colspan="2"><input type="submit" value="데이터전송"></td></tr>    
+							</table>
+						</form>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div><!-- .content -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>		
-<script>
-$(document).ready(function() {
-  $("#add-row").click(function() {
-    var newRow = $("<tr>");
-    var nameCol = $("<td>").text("3");
-    var ageCol = $("<td>").text("Larry");
-    newRow.append(nameCol, ageCol);
-    $("table tbody").append(newRow);
-  });
-});
-</script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-$(document).ready(function() {
-  $(".delete-row").click(function() {
-    $(this).closest("tr").remove();
-  });
-});
-</script>		
 
+		<div class="clearfix"></div>
+		<!-- 푸터 넣는 곳 -->
+		<jsp:include page="../inc/footer.jsp" />
+		<!-- 푸터 넣는 곳 -->
+	</div>
 	<!-- /#right-panel -->
 
 	<!-- Right Panel -->
