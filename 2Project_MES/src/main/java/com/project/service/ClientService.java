@@ -9,6 +9,12 @@ public interface ClientService {
 	public List<ClientDTO> getClientInfo(PageDTO pageDTO);
 
 	public int getClientCount();
-	
+
 	public void deleteClient(String cli_cd);
+
+	public void insertClient(ClientDTO clientDTO);
+
+	public ClientDTO getClient(String cli_cd);
+
+	public void updateClient(ClientDTO clientDTO);
 }
