@@ -49,4 +49,27 @@ public class EmployeeServiceImpl implements EmployeeService {
 		
 	}
 
+	@Override
+	public void deleteEmployee(String emp_cd) {
+		System.out.println("EmployeeServiceImpl deleteEmployee()");
+		employeeDAO.deleteEmployee(emp_cd);
+		
+	}
+
+	@Override
+	public List<EmployeeDTO> getUpdateList() {
+		System.out.println("EmployeeServiceImpl getUpdateList()" );		
+		return employeeDAO.getUpdateList();
+	}
+
+	@Override
+	public void updateEmployee(String emp_cd) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+
+
 }

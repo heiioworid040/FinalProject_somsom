@@ -4,6 +4,8 @@
 
 
 <mapper namespace="com.project.mappers.employeeMapper">
+
+
     <select id="userCheck" resultType="com.project.domain.EmployeeDTO">
         select * from employee
         where emp_cd = #{emp_cd} and emp_pass = #{emp_pass}
@@ -22,5 +24,22 @@
 		insert into employee(emp_cd, emp_nm, emp_pass, emp_dept, emp_position, emp_email, emp_tel)
 		values(#{emp_cd}, #{emp_nm}, #{emp_pass}, #{emp_dept}, #{emp_position}, #{emp_email}, #{emp_tel})
 	</insert>
+	
+	<delete id="deleteEmployee">
+		delete from employee
+		where emp_cd=#{emp_cd}
+	</delete>
+	
+	<select id="getUpdateList">
+		select * from employee
+		where emp_cd = #{emp_cd}
+	</select>
+	
+	<update id="updateEmployee">
+		update employee set emp_nm = #{emp_nm}, emp_position = #{emp_position} emp_email = #{emp_email}, emp_tel = #{emp_tel} 
+		where emp_cd = #{emp_cd}
+	</update>
+	
+	
 	
 </mapper>

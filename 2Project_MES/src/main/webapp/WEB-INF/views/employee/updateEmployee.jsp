@@ -26,35 +26,8 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
+
 </head>
-<script>
-
-function fun1() {
-	   let check = false;
-	   with(document.ckDelete) {
-	      if(ck.length==undefined) {
-	         if(ck.checked) { check = true; }
-	      } else {
-	         for(let i=0;i<ck.length;i++) {
-	            if(ck[i].checked) { check = true; } }
-	      } if(!check) {
-	      alert("삭제할 사용자를 선택하세요");
-	         return;
-	      } else {
-	         if(confirm("삭제처리 하시겠습니까?")) { submit(); }
-	      } } }
-
-
-
-
-function fun2() {
-	   if($("input:checked[id='ckAll']").prop("checked")) {
-	    $("input[type=checkbox]").prop("checked", true); 
-	   }else {
-	    $("input[type=checkbox]").prop("checked", false); 
-	   }
-	}
-</script>
 <body>
 	<!-- Left Panel1 -->
 	<jsp:include page="../inc/leftPanel.jsp" />
@@ -107,15 +80,8 @@ function fun2() {
 		</div><!-- .content -->
 		
         <div class="content">
-		<input type="button" value="추가"
-								onclick="location.href='${pageContext.request.contextPath}/employee/insertEmployee'">
-		<input type="button" value="수정"
-								onclick="location.href='${pageContext.request.contextPath}/employee/updateEmployee?emp_cd=${employeeDTO.emp_cd}'">						
-		<input type="button" name="ckDelete" value="삭제" onclick="fun1()" >
-<!-- 		<input type="button" name="ckDelete" value="삭제"  -->
-<%-- 								onclick="location.href='${pageContext.request.contextPath}/employee/deletePro?emp_cd=${employeeDTO.emp_cd}'" > --%>
-													
-			<div class="animated fadeIn">
+		<input type="button" value="저장"
+								onclick="location.href='${pageContext.request.contextPath}/employee/updatePro'">						
 			<div class="animated fadeIn">
 				<div class="row">
 					<div class="col-lg">
@@ -124,7 +90,7 @@ function fun2() {
 								<strong class="card-title">Table Head</strong>  
 							</div>
 							<div class="card-body">
-								<form name="ckDelete" action="${pageContext.request.contextPath}/employee/deletePro" metohd="post">
+								
 								<table class="table">
 									<thead class="thead-dark">
 										<tr>
@@ -136,23 +102,22 @@ function fun2() {
 											<th scope="col">직책</th>
 											<th scope="col">E-MAIL</th>
 											<th scope="col">전화번호</th>
-											<th scope="col"><input type="checkbox" id="ckAll" name="ckAll" onclick="fun2()"></th>
-
+											<th scope="col">선택</th>
 											
 										</tr>
 									</thead>
 									<tbody>
-										<c:forEach var="employeeDTO" items="${employeeList }">
+										<c:forEach var="employeeDTO" items="${updateList }">
 										<tr>
 											<th scope="row">1</th>
-											<td>${employeeDTO.emp_cd}</td>
-											<td>${employeeDTO.emp_nm}</td>
-											<td>${employeeDTO.emp_pass}</td>
-<%-- 											<td>${employeeDTO.emp_dept}</td> --%>
-											<td>${employeeDTO.emp_position}</td>
-											<td>${employeeDTO.emp_email}</td>
-											<td>${employeeDTO.emp_tel}</td>
-											<td><input type="checkBox" name="ck" id="ck" value="${employeeDTO.emp_cd}"/></td>																					
+											<td><input type="text" name=emp_id value="${employeeDTO.emp_cd}" readonly></td>
+											<td><input type="text" name=emp_id value="${employeeDTO.emp_nm}"></td>
+											<td><input type="text" name=emp_id value="${employeeDTO.emp_pass}"></td>
+<%-- 											<td><input type="text" name=emp_id value="${employeeDTO.emp_dept}"></td> --%>
+											<td><input type="text" name=emp_id value="${employeeDTO.emp_position}"></td>
+											<td><input type="text" name=emp_id value="${employeeDTO.emp_email}"></td>
+											<td><input type="text" name=emp_id value="${employeeDTO.emp_tel}"></td>
+											<td><input type="checkBox" name="ch" data-emp_cd="${employeeDTO.emp_cd}"></td>																					
 										</tr>
 										</c:forEach>
 										
@@ -160,25 +125,13 @@ function fun2() {
 										
 									</tbody>
 								</table>
-								</form>
-<c:if test="${pageDTO.startPage > pageDTO.pageBlock }">
-<a href="${pageContext.request.contextPath}/employee/employeeList?pageNum=${pageDTO.startPage - pageDTO.pageBlock }">◁◁</a>
-</c:if>
 
-<c:forEach var="i" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1">
-<a href="${pageContext.request.contextPath}/employee/employeeList?pageNum=${i}">${i}</a> 
-</c:forEach>
-
-<c:if test="${pageDTO.endPage < pageDTO.pageCount }">
-<a href="${pageContext.request.contextPath}/employee/employeeList?pageNum=${pageDTO.startPage + pageDTO.pageBlock }">▷▷</a>
-</c:if>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		</form><!-- .content -->
+		</div><!-- .content -->
 
 		<div class="clearfix"></div>
 		<!-- 푸터 넣는 곳 -->
@@ -195,21 +148,6 @@ function fun2() {
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
-		
-
-
-
-
-
-
-
-
-
-
-
-
 	
 </body>
 </html>
-
-
