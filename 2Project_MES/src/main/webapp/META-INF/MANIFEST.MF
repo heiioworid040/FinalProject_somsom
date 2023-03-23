@@ -1,9 +1,5 @@
 Manifest-Version: 1.0
-<<<<<<< HEAD
 Built-By: simyr
-=======
-Built-By: ITWILL
->>>>>>> branch '심예린' of https://github.com/RayMuan/2ndProject_3.git
 Build-Jdk: 11.0.15
 Created-By: Maven Integration for Eclipse
 

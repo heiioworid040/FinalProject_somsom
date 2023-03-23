@@ -1,6 +1,6 @@
 package com.project.domain;
 
-public class LineDTO {
+public class LineDTO extends OrderDTO{
 	private String line_cd;
 	private String line_nm;
 	private String line_process;
@@ -8,8 +8,6 @@ public class LineDTO {
 	private int line_num;
 	private String line_st;
 	private String line_note;
-	
-	// set get
 	public String getLine_cd() {
 		return line_cd;
 	}
@@ -52,4 +50,6 @@ public class LineDTO {
 	public void setLine_note(String line_note) {
 		this.line_note = line_note;
 	}
+	
+	
 }
