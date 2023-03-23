@@ -141,7 +141,7 @@
 												<td scope="row">
                                             		<div class="input-group">
                                             			<input type="text" id="input2-group2" name="input2-group2" placeholder="라인 코드" class="form-control bg-white" disabled>
-                                            			<div class="input-group-btn"><input type="button" class="btn btn-primary" value="검색"></div>
+                                            			<div class="input-group-btn"><input type="button" class="btn btn-primary" value="검색" onclick="location.href='${pageContext.request.contextPath}/line/linePop'"></div>
                                         			</div>
                                             	</td>
 												<td>
