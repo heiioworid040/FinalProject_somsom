@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>infoWi</title>
+<title>imatbeList</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -71,8 +72,9 @@
 								<strong class="card-title">Table Head</strong>
 							</div>
 							<div class="card-body">
-								<table class="table">
+								<table class="table" >
 									<thead class="thead-dark">
+									
 										<tr>
 											<th scope="col">#</th>
 											<th scope="col">상품코드</th>
@@ -82,50 +84,48 @@
 											<th scope="col">품목명</th>
 											<th scope="col">납기일자</th>
 											<th scope="col">입고예정수량</th>
-											<th scope="col">결과여부</th>
-											<th scope="col">일련번호</th>
+											<th scope="col">거래처코드</th>
+											<th scope="col">거래처명</th>
+											<th scope="col">비고</th>
 										</tr>
 									</thead>
 									<tbody>
+									<c:forEach var="ImatDTO" items="${ImatbeList}">
 										<tr>
 											<th scope="row">1</th>
-											<td>Mark</td>
-											<td>Otto</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
+											<td>${ImatDTO.imat_cd}</td>
+											<td>${ImatDTO.imat_date}</td>
+											<td>${ImatDTO.prod_cd}</td>
+											<td>${ImatDTO.imat_stg}</td>
+											<td>${ImatDTO.prod_unit}</td>
+											<td>${ImatDTO.imat_stg}</td>
+											<td>${ImatDTO.imat_count}</td>
+											<td>${ImatDTO.cli_cd}</td>
+											<td>${ImatDTO.cli_nm}</td>
+											<td>${ImatDTO.imat_note}</td>
 										</tr>
-										<tr>
-											<th scope="row">2</th>
-											<td>Jacob</td>
-											<td>Thornton</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-										</tr>
-										<tr>
-											<th scope="row">3</th>
-											<td>Larry</td>
-											<td>the Bird</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-											<td>예시</td>
-										</tr>
+									</c:forEach>
+									
+								
 									</tbody>
+									
+									
 								</table>
+<%-- 								<c:if test="${pageDTO.startPage > pageDTO.pageBlock }"> --%>
+<!-- 										<a -->
+<%-- 											href="${pageContext.request.contextPath}/imat/imatbeList?pageNum=${pageDTO.startPage - pageDTO.pageBlock }">[이전페이지]</a> --%>
+<%-- 									</c:if> --%>
 
+<%-- 									<c:forEach var="i" begin="${pageDTO.startPage }" --%>
+<%-- 										end="${pageDTO.endPage }" step="1"> --%>
+<!-- 										<a -->
+<%-- 											href="${pageContext.request.contextPath}/imat/imatbeList?pageNum=${i}">${i}</a> --%>
+<%-- 									</c:forEach> --%>
+
+<%-- 									<c:if test="${pageDTO.endPage < pageDTO.pageCount }"> --%>
+<!-- 										<a -->
+<%-- 											href="${pageContext.request.contextPath}/imat/imatbeList?pageNum=${pageDTO.startPage + pageDTO.pageBlock }">[다음페이지]</a> --%>
+<%-- 									</c:if> --%>
 							</div>
 						</div>
 					</div>

@@ -6,11 +6,23 @@
 <!-- mybatis-config.xml 파일 만들기 -->
 <!--  파일이름 대신 namespace 이름을 불러서 사용 -->
 <mapper namespace="com.project.mappers.ImatMapper">
-   
+	
     <select id="getImat" resultType="com.project.domain.ImatDTO">
     select * 
     from in_material
     </select>
 
-
+	<select id="getImatbeList" resultType="com.project.domain.ImatDTO">
+       select i.imat_cd, date_format(i.imat_date, '%y-%m-%d') as imat_date, p.prod_cd, p.prod_nm,p.prod_unit, i.imat_stg, i.imat_count, c.cli_cd, c.cli_nm, i.imat_note
+		from product p join in_material i
+		on i.prod_cd=p.prod_cd
+		join client c
+		on c.cli_cd=p.cli_cd
+		limit #{startRow}, #{pageSize}
+<!--         where id = #{id} and pass = #{pass} -->
+    </select>
+    
+    <select id="getImatCount" resultType="java.lang.Integer">
+    select count(*) from in_material
+    </select>
 </mapper>
