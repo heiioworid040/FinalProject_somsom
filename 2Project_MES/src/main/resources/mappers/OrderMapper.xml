@@ -4,15 +4,15 @@
 <mapper namespace="com.project.mappers.OrderMapper">
 	
 	<select id="getOrderInsertList" resultType="com.project.domain.OrderDTO">
-		select c.cli_cd, c.cli_nm, ord_date, o.ord_d_date, e.emp_cd, e.emp_nm
-		from orders o join product p on o.prod_cd=p.prod_cd join client c on p.cli_cd=c.cli_cd join employee e on o.emp_cd=e.emp_cd
+		select o.cli_cd, c.cli_nm, ord_date, ord_d_date, e.emp_cd, e.emp_nm
+		from orders o join client c on o.cli_cd=c.cli_cd join employee e on o.emp_cd=e.emp_cd
 		order by ord_cd
 <!-- 		limit #{startRow}, #{pageSize} -->
 	</select>
 
 	<select id="getOrderList" resultType="com.project.domain.OrderDTO">
-		select o.ord_cd, c.cli_nm, ord_date, e.emp_nm, p.prod_cd, p.prod_nm, p.prod_unit, o.ord_d_date, o.ord_count, s.ship_count
-		from orders o join product p on o.prod_cd=p.prod_cd join client c on p.cli_cd=c.cli_cd join employee e on o.emp_cd=e.emp_cd left join ship s on o.ord_cd=s.ord_cd
+		select o.ord_cd, c.cli_nm, ord_date, e.emp_nm, p.prod_cd, p.prod_nm, p.prod_unit, ord_d_date, ord_count, ship_count
+		from orders o join product p on o.prod_cd=p.prod_cd join client c on o.cli_cd=c.cli_cd join employee e on o.emp_cd=e.emp_cd left join ship s on o.ord_cd=s.ord_cd
 		order by ord_cd limit #{startRow}, #{pageSize}
 	</select>
 	

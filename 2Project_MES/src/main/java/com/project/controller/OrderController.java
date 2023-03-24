@@ -114,42 +114,6 @@ public class OrderController {
 			return "/order/orderInfo";
 		}
 		
-		@RequestMapping(value = "/order/orderPop", method = RequestMethod.GET)
-		public String pop(HttpServletRequest request, Model model) {
-			int pageSize=10;
-			String pageNum=request.getParameter("pageNum");
-			if(pageNum==null) {
-				pageNum="1";
-			}
-			int currentPage=Integer.valueOf(pageNum);
-			
-			PageDTO pageDTO=new PageDTO();
-			pageDTO.setPageSize(pageSize);
-			pageDTO.setPageNum(pageNum);
-			pageDTO.setCurrentPage(currentPage);
-			
-//			String click_cli=(String)request.getParameter("cli_Pop");
-//			String click_emp=(String)request.getParameter("emp_Pop");
-			List<ProductDTO> orderPop=productService.getProductList(pageDTO);
-			
-//			System.out.println(click_cli);
-//			System.out.println(click_emp);
-//			System.out.println(click_prod);
-			
-			int count=productService.getProductCount();
-			int pageBlock=10;
-			int startPage=(currentPage-1)/pageBlock*pageBlock+1;
-			int endPage=startPage+pageBlock-1;
-			int pageCount=count/pageSize+(count%pageSize==0?0:1);
-			if(endPage>pageCount) {
-				endPage=pageCount;
-			}
-			
-			model.addAttribute("orderPop", orderPop);
-//			model.addAttribute("Pop", result);
-			return "order/orderPop_test";
-		}
-		
 		@RequestMapping(value = "/order/prodPop", method = RequestMethod.GET)
 		public String Prodpop(HttpServletRequest request, Model model) {
 			int pageSize=10;
@@ -175,7 +139,14 @@ public class OrderController {
 				endPage=pageCount;
 			}
 			
+			pageDTO.setCount(count);
+			pageDTO.setPageBlock(pageBlock);
+			pageDTO.setStartPage(startPage);
+			pageDTO.setEndPage(endPage);
+			pageDTO.setPageCount(pageCount);
+			
 			model.addAttribute("prodPop", prodPop);
+			model.addAttribute("pageDTO", pageDTO);
 			return "order/prodPop";
 		}
 		
@@ -204,7 +175,14 @@ public class OrderController {
 				endPage=pageCount;
 			}
 			
+			pageDTO.setCount(count);
+			pageDTO.setPageBlock(pageBlock);
+			pageDTO.setStartPage(startPage);
+			pageDTO.setEndPage(endPage);
+			pageDTO.setPageCount(pageCount);
+			
 			model.addAttribute("cliPop", cliPop);
+			model.addAttribute("pageDTO", pageDTO);
 			return "order/cliPop";
 		}
 		
@@ -233,7 +211,14 @@ public class OrderController {
 				endPage=pageCount;
 			}
 			
+			pageDTO.setCount(count);
+			pageDTO.setPageBlock(pageBlock);
+			pageDTO.setStartPage(startPage);
+			pageDTO.setEndPage(endPage);
+			pageDTO.setPageCount(pageCount);
+			
 			model.addAttribute("empPop", empPop);
+			model.addAttribute("pageDTO", pageDTO);
 			return "order/empPop";
 		}
 }
