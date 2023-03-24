@@ -54,12 +54,23 @@ public class EmployeeDAOImpl implements EmployeeDAO{
 		
 	}
 
+	
 	@Override
-	public List<EmployeeDTO> getUpdateList() {
-		System.out.println("EmployeeDAOImpl getUpdateList()");
-		
-		return sqlSession.selectList(namespace+".getUpdateList");
+	public EmployeeDTO getEmployee(String emp_cd) {
+		System.out.println("EmployeeDAOImpl getEmployee()");
+		System.out.println(emp_cd);
+		return sqlSession.selectOne(namespace+".getEmployee", emp_cd);
 	}
+
+	@Override
+	public void updateEmployee(EmployeeDTO employeeDTO) {
+		System.out.println("EmployeeDAOImpl updateEmployee()");
+		sqlSession.update(namespace+".updateEmployee", employeeDTO);
+		
+	}
+
+
+
 	
 	
 }

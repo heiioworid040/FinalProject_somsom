@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-    
 <!DOCTYPE html>
 <html>
 <head>
@@ -80,43 +78,50 @@
 		</div><!-- .content -->
 		
         <div class="content">
-		<form name="update" action="${pageContext.request.contextPath}/employee/updatePro" method="post">
-		<input type="submit" value="저장">					
-		<input type="button" value="취소"
-								onclick="historyBack()">						
 			<div class="animated fadeIn">
 				<div class="row">
 					<div class="col-lg">
 						<div class="card">
 							<div class="card-header">
-								<strong class="card-title">Table Head</strong>  
+								<strong class="card-title">Table Head</strong>
 							</div>
 							<div class="card-body">
 								<table class="table">
 									<thead class="thead-dark">
 										<tr>
-											<th scope="col">사용자 ID</th>
-											<th scope="col">사용자명</th>
-											<th scope="col">비밀번호</th>
-											<th scope="col">직책</th>
-											<th scope="col">E-MAIL</th>
-											<th scope="col">전화번호</th>
+											<th scope="col">그룹코드</th>
+											<th scope="col">그룹명</th>
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach var="codeDTO" items="${codeGrpList }">
+										<tr>
+											<td>예시</td>
+											<td>예시</td>
+											<td>예시</td>
+										</tr>	
+										</c:forEach>									
+									</tbody>
+								</table>
+								
+								<table class="table">
+									<thead class="thead-dark">
+										<tr>
 											
+											<th scope="col">코드</th>
+											<th scope="col">코드명</th>
+											<th scope="col">정렬순서</th>
+											<th scope="col">비고</th>
+
 										</tr>
 									</thead>
 									<tbody>
 										<tr>
-											<td><input type="text" name=emp_cd value="${employeeDTO.emp_cd }" readonly></td>
-											<td><input type="text" name=emp_nm value="${employeeDTO.emp_nm }"></td>
-											<td><input type="text" name=emp_pass value="${employeeDTO.emp_pass }"></td>
-											<td><input type="text" name=emp_position value="${employeeDTO.emp_position }"></td>
-											<td><input type="text" name=emp_email value="${employeeDTO.emp_email }"></td>
-											<td><input type="text" name=emp_tel value="${employeeDTO.emp_tel }"></td>
-										</tr>
-
-										
-										
-										
+											<td>예시</td>
+											<td>예시</td>
+											<td>예시</td>
+											<td>예시</td>
+										</tr>										
 									</tbody>
 								</table>
 							</div>
@@ -124,7 +129,6 @@
 					</div>
 				</div>
 			</div>
-							</form>
 		</div><!-- .content -->
 
 		<div class="clearfix"></div>
@@ -142,6 +146,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
-	
+
+
 </body>
 </html>

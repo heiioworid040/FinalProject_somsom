@@ -27,7 +27,23 @@
 
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 </head>
-<script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.js"></script>
+<script type="text/javascript">
+
+$(function(){
+    //전체선택 체크박스 클릭
+	$("#ckAll").click(function(){
+		//만약 전체 선택 체크박스가 체크된상태일경우
+		if($("#ckAll").prop("checked")) {
+			//해당화면에 전체 checkbox들을 체크해준다
+			$("input[type=checkbox]").prop("checked",true);
+		// 전체선택 체크박스가 해제된 경우
+		} else {
+			//해당화면에 모든 checkbox들의 체크를해제시킨다.
+			$("input[type=checkbox]").prop("checked",false);
+		}
+	})
+})
 
 function fun1() {
 	   let check = false;
@@ -43,17 +59,7 @@ function fun1() {
 	      } else {
 	         if(confirm("삭제처리 하시겠습니까?")) { submit(); }
 	      } } }
-
-
-
-
-function fun2() {
-	   if($("input:checked[id='ckAll']").prop("checked")) {
-	    $("input[type=checkbox]").prop("checked", true); 
-	   }else {
-	    $("input[type=checkbox]").prop("checked", false); 
-	   }
-	}
+	      
 </script>
 <body>
 	<!-- Left Panel1 -->
@@ -109,11 +115,8 @@ function fun2() {
         <div class="content">
 		<input type="button" value="추가"
 								onclick="location.href='${pageContext.request.contextPath}/employee/insertEmployee'">
-		<input type="button" value="수정"
-								onclick="location.href='${pageContext.request.contextPath}/employee/updateEmployee?emp_cd=${employeeDTO.emp_cd}'">						
+			
 		<input type="button" name="ckDelete" value="삭제" onclick="fun1()" >
-<!-- 		<input type="button" name="ckDelete" value="삭제"  -->
-<%-- 								onclick="location.href='${pageContext.request.contextPath}/employee/deletePro?emp_cd=${employeeDTO.emp_cd}'" > --%>
 													
 			<div class="animated fadeIn">
 			<div class="animated fadeIn">
@@ -124,11 +127,11 @@ function fun2() {
 								<strong class="card-title">Table Head</strong>  
 							</div>
 							<div class="card-body">
-								<form name="ckDelete" action="${pageContext.request.contextPath}/employee/deletePro" metohd="post">
+								<form name="ckDelete" action="${pageContext.request.contextPath}/employee/deletePro" method="post">
 								<table class="table">
 									<thead class="thead-dark">
 										<tr>
-											<th scope="col">#</th>
+											<th scope="col"><input type="checkbox" id="ckAll" name="ckAll"></th>
 											<th scope="col">사용자 ID</th>
 											<th scope="col">사용자명</th>
 											<th scope="col">비밀번호</th>
@@ -136,7 +139,7 @@ function fun2() {
 											<th scope="col">직책</th>
 											<th scope="col">E-MAIL</th>
 											<th scope="col">전화번호</th>
-											<th scope="col"><input type="checkbox" id="ckAll" name="ckAll" onclick="fun2()"></th>
+											<th scope="col">수정</th>										
 
 											
 										</tr>
@@ -144,7 +147,7 @@ function fun2() {
 									<tbody>
 										<c:forEach var="employeeDTO" items="${employeeList }">
 										<tr>
-											<th scope="row">1</th>
+											<td><input type="checkBox" name="ck" id="ck" value="${employeeDTO.emp_cd}"/></td>																					
 											<td>${employeeDTO.emp_cd}</td>
 											<td>${employeeDTO.emp_nm}</td>
 											<td>${employeeDTO.emp_pass}</td>
@@ -152,7 +155,10 @@ function fun2() {
 											<td>${employeeDTO.emp_position}</td>
 											<td>${employeeDTO.emp_email}</td>
 											<td>${employeeDTO.emp_tel}</td>
-											<td><input type="checkBox" name="ck" id="ck" value="${employeeDTO.emp_cd}"/></td>																					
+<!-- 											<td><input type="button" value="수정" onclick="fun2()"></td>		 -->
+<%-- 											<td><a href="javascript:void(window.open('${pageContext.request.contextPath}/employee/updateEmployee?emp_cd=${employeeDTO.emp_cd}', '수정', 'width=500, height=400,left=500, top=200' ))"> --%>
+<!-- 												<input type="button" class="requestBtn" value=수정 style="margin-bottom: 40px;"></a></td> -->
+											<td><input type="button" value="수정" onclick="location.href='${pageContext.request.contextPath}/employee/updateEmployee?emp_cd=${employeeDTO.emp_cd}'"></td>		
 										</tr>
 										</c:forEach>
 										
