@@ -26,24 +26,25 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
-<script>
-$(document).ready(function(){
-	$("#lineModalBtn").click(function(){
+<script type="text/javascript">
+// $(document).ready(function(){
+// 	$("#lineModalBtn").click(function(){
 		
-		$("#lineModalBtn").html('');
-		
-		$.ajax({
-			url:"${pageContext.request.contextPath}/line/lineModalJson",
-			dataType:'json',
-			success:function(arr){
-				$.each(arr, function(index,item){
-					$("lineTableBody").append('<tr><th scope="row">'+라인코드+'</th><td>'+라인명+'</td><td>'+공정코드+'</td><td>'+공정명+'</td></tr>');
-				});
-			}
-		});
-	});
-});
-
+// 		$.ajax({
+// 			type: "get"
+// 			url:"/line/lineInfo",
+// 			dataType:"JSON",
+// 			success:function(data){
+// 				$.each(arr, function(index,item){
+// 					$("lineTableBody").append('<tr><th scope="row">'+라인번호+'</th><td>'+라인명+'</td><td>'+공정+'</td><td>'+작업장+'</td><td>'+정렬순서+'</td><td>'+설비상태+'</td><td>'+비고+'</td></tr>');
+// 				});
+// 			},
+// 			error: function(xhr,status,error) {
+// 	            console.log(error);
+// 	        }
+// 		});
+// 	});
+// });
 </script>
 </head>
 <body>
