@@ -6,6 +6,7 @@ public class OrderDTO extends ProductDTO {
 	private String ord_cd;
 	private String emp_cd;
 	private String emp_nm;
+	private String cil_cd;
 	private Timestamp ord_date;
 	private Timestamp ord_d_date;
 	private int ord_count;
@@ -29,6 +30,12 @@ public class OrderDTO extends ProductDTO {
 	}
 	public void setEmp_nm(String emp_nm) {
 		this.emp_nm = emp_nm;
+	}
+	public String getCil_cd() {
+		return cil_cd;
+	}
+	public void setCil_cd(String cil_cd) {
+		this.cil_cd = cil_cd;
 	}
 	public Timestamp getOrd_date() {
 		return ord_date;
