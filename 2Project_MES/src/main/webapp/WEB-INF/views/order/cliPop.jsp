@@ -117,7 +117,7 @@
 		</c:if>
 
 		<c:forEach var="i" begin="${pageDTO.startPage}" end="${pageDTO.endPage}" step="1">
-			<a href="${pageContext.request.contextPath}/order/cliPop?pageNum=${i+1}">${i+1}</a>
+			<a href="${pageContext.request.contextPath}/order/cliPop?pageNum=${i}">${i}</a>
 		</c:forEach>
 
 		<c:if test="${pageDTO.endPage<pageDTO.pageCount}">
