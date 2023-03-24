@@ -17,7 +17,10 @@ public interface EmployeeDAO {
 
 	public void deleteEmployee(String emp_cd);
 
-	public List<EmployeeDTO> getUpdateList();
-	
+	public EmployeeDTO getEmployee(String emp_cd);
+
+	public void updateEmployee(EmployeeDTO employeeDTO);
+
+
 
 }

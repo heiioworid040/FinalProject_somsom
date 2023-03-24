@@ -27,16 +27,16 @@
 	
 	<delete id="deleteEmployee">
 		delete from employee
-		where emp_cd=#{emp_cd}
+		where emp_cd = #{emp_cd}
 	</delete>
 	
-	<select id="getUpdateList">
+	<select id="getEmployee" resultType="com.project.domain.EmployeeDTO">
 		select * from employee
 		where emp_cd = #{emp_cd}
 	</select>
 	
-	<update id="updateEmployee">
-		update employee set emp_nm = #{emp_nm}, emp_position = #{emp_position} emp_email = #{emp_email}, emp_tel = #{emp_tel} 
+	<update id="updateEmployee" >
+		update employee set emp_nm = #{emp_nm}, emp_position = #{emp_position}, emp_email = #{emp_email}, emp_tel = #{emp_tel} 
 		where emp_cd = #{emp_cd}
 	</update>
 	
