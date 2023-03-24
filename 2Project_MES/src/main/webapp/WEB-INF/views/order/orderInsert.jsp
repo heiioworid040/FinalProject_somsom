@@ -25,16 +25,14 @@
 <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 </head>
 <script>
-	function fun1(pop) {
-		alert(pop);
-		window.document.pop = "넘길값";
-		window.open('${pageContext.request.contextPath }/order/orderPop','cliPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=900,height=510,top=90,left=200')
+	function fun1() {
+		window.open('${pageContext.request.contextPath }/order/cliPop','cliPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=900,height=510,top=90,left=200')
 	}
-// 	function fun2() {
-// 		window.open('${pageContext.request.contextPath }/order/orderPop','prodPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=600,height=510,top=90,left=200')
-// 	}
+	function fun2() {
+		window.open('${pageContext.request.contextPath }/order/empPop','empPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=600,height=510,top=90,left=200')
+	}
 	function fun3() {
-		window.open('${pageContext.request.contextPath }/order/orderPop','prodPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=600,height=510,top=90,left=200')
+		window.open('${pageContext.request.contextPath }/order/prodPop','prodPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=600,height=510,top=90,left=200')
 	}
 </script>
 <body>
@@ -168,11 +166,11 @@
 								<table class="table">
 									<thead class="thead-dark">
 										<tr>
-											<th scope="col">수주업체코드</th><td><input type="text"><button type="button" id="pop" value="cli" onclick="fun1('cli')">돋보기</button></td>
+											<th scope="col">수주업체코드</th><td><input type="text" id="cli_cd" readonly><input type="text" id="cli_nm" readonly><button type="button" id="pop" value="cli" onclick="fun1('cli')">돋보기</button></td>
 											<th scope="col">수주일자</th><td><input type="date"></td>
 										</tr>
 										<tr>
-											<th scope="col">담당자</th><td><input type="text"><button type="button" id="pop" value="emp" onclick="fun2()">돋보기</button></td>
+											<th scope="col">담당자</th><td><input type="text" id="emp_cd" readonly><input type="text" id="emp_nm" readonly><button type="button" id="pop" value="emp" onclick="fun2()">돋보기</button></td>
 											<th scope="col">납품예정일</th><td><input type="date"></td>
 										</tr>
 									</thead>
