@@ -11,8 +11,8 @@ import com.project.domain.PageDTO;
 import com.project.domain.ShipDTO;
 
 @Service
-public class ShipServiceImpl implements ShipService{
-	
+public class ShipServiceImpl implements ShipService {
+
 	@Inject
 	private ShipDAO shipDAO;
 
@@ -34,6 +34,14 @@ public class ShipServiceImpl implements ShipService{
 		System.out.println("ShipServiceImpl shipCurrentCount()");
 
 		return shipDAO.shipCurrentCount();
+	}
+
+	@Override
+	public void currDelete(String ship_cd) {
+		System.out.println("BoardServiceImpl currDelete()");
+
+		shipDAO.currDelete(ship_cd);
+
 	}
 
 }

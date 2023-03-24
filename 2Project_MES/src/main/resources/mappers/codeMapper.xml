@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+
+<mapper namespace="com.project.mappers.codeMapper">
+
+<select id="getEmployeeList" resultType="com.project.domain.EmployeeDTO">
+		select distinct(code_grp_nm), code_grp
+		from code
+		limit #{startRow} , #{pageSize}
+	</select>
+
+<select id="getEmployeeCount" resultType="java.lang.Integer">
+		select count(*) from employee
+	</select>
+
+</mapper>

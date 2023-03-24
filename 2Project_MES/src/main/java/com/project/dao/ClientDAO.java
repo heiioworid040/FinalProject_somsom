@@ -11,4 +11,10 @@ public interface ClientDAO {
 	public int getClientCount();
 	
 	public void deleteClient(String cli_cd);
+	
+	public void insertClient(ClientDTO clientDTO);
+	
+	public ClientDTO getClient(String cli_cd);
+
+	public void updateClient(ClientDTO clientDTO);
 }

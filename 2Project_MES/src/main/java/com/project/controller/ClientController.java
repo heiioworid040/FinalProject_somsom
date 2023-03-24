@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -61,6 +62,41 @@ public class ClientController {
 		model.addAttribute("pageDTO", pageDTO);
 		// 주소변경 없이 이동
 		return "client/clientInfo";
+	}
+
+	@RequestMapping(value = "/client/insert", method = RequestMethod.GET)
+	public String insert() {
+		return "client/clientInsert";
+	}
+
+	@RequestMapping(value = "/client/insertPro", method = RequestMethod.POST)
+	public String insertPro(ClientDTO clientDTO) {
+		System.out.println("ClientController insertPro()");
+
+		clientService.insertClient(clientDTO);
+
+//		주소줄 변경하면서 이동
+		return "redirect:/client/clientInfo";
+	}
+
+	@RequestMapping(value = "/client/update", method = RequestMethod.GET)
+	public String update(HttpServletRequest request, Model model) {
+		String cli_cd = request.getParameter("cli_cd");
+
+		ClientDTO clientDTO = clientService.getClient(cli_cd);
+
+		model.addAttribute("clientDTO", clientDTO);
+
+		return "client/clientUpdate";
+	}
+	
+	@RequestMapping(value = "/client/updatePro", method = RequestMethod.POST)
+	public String updatePro(ClientDTO clientDTO) {
+		
+		clientService.updateClient(clientDTO);
+		
+		// 주소변경 하면서 이동
+		return "redirect:/client/clientInfo";
 	}
 
 	@RequestMapping(value = "/client/delete", method = RequestMethod.POST)

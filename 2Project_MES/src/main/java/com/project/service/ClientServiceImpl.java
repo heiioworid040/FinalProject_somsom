@@ -43,4 +43,27 @@ public class ClientServiceImpl implements ClientService {
 		clientDAO.deleteClient(cli_cd);
 	}
 
+	@Override
+	public void insertClient(ClientDTO clientDTO) {
+		System.out.println("ClientServiceImpl insertMember()");
+
+		clientDAO.insertClient(clientDTO);
+
+	}
+
+	@Override
+	public ClientDTO getClient(String cli_cd) {
+		System.out.println("ClientServiceImpl getClient()");
+
+		return clientDAO.getClient(cli_cd);
+	}
+
+	@Override
+	public void updateClient(ClientDTO clientDTO) {
+		System.out.println("ClientServiceImpl updateClient()");
+
+		clientDAO.updateClient(clientDTO);
+
+	}
+
 }

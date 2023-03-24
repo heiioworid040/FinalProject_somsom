@@ -80,8 +80,10 @@
 		</div><!-- .content -->
 		
         <div class="content">
-		<input type="button" value="저장"
-								onclick="location.href='${pageContext.request.contextPath}/employee/updatePro'">						
+		<form name="update" action="${pageContext.request.contextPath}/employee/updatePro" method="post">
+		<input type="submit" value="저장">					
+		<input type="button" value="취소"
+								onclick="historyBack()">						
 			<div class="animated fadeIn">
 				<div class="row">
 					<div class="col-lg">
@@ -90,47 +92,39 @@
 								<strong class="card-title">Table Head</strong>  
 							</div>
 							<div class="card-body">
-								
 								<table class="table">
 									<thead class="thead-dark">
 										<tr>
-											<th scope="col">#</th>
 											<th scope="col">사용자 ID</th>
 											<th scope="col">사용자명</th>
 											<th scope="col">비밀번호</th>
-<!-- 											<th scope="col">부서</th> -->
 											<th scope="col">직책</th>
 											<th scope="col">E-MAIL</th>
 											<th scope="col">전화번호</th>
-											<th scope="col">선택</th>
 											
 										</tr>
 									</thead>
 									<tbody>
-										<c:forEach var="employeeDTO" items="${updateList }">
 										<tr>
-											<th scope="row">1</th>
-											<td><input type="text" name=emp_id value="${employeeDTO.emp_cd}" readonly></td>
-											<td><input type="text" name=emp_id value="${employeeDTO.emp_nm}"></td>
-											<td><input type="text" name=emp_id value="${employeeDTO.emp_pass}"></td>
-<%-- 											<td><input type="text" name=emp_id value="${employeeDTO.emp_dept}"></td> --%>
-											<td><input type="text" name=emp_id value="${employeeDTO.emp_position}"></td>
-											<td><input type="text" name=emp_id value="${employeeDTO.emp_email}"></td>
-											<td><input type="text" name=emp_id value="${employeeDTO.emp_tel}"></td>
-											<td><input type="checkBox" name="ch" data-emp_cd="${employeeDTO.emp_cd}"></td>																					
+											<td><input type="text" name=emp_cd value="${employeeDTO.emp_cd }" readonly></td>
+											<td><input type="text" name=emp_nm value="${employeeDTO.emp_nm }"></td>
+											<td><input type="text" name=emp_pass value="${employeeDTO.emp_pass }"></td>
+											<td><input type="text" name=emp_position value="${employeeDTO.emp_position }"></td>
+											<td><input type="text" name=emp_email value="${employeeDTO.emp_email }"></td>
+											<td><input type="text" name=emp_tel value="${employeeDTO.emp_tel }"></td>
 										</tr>
-										</c:forEach>
+
 										
 										
 										
 									</tbody>
 								</table>
-
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+							</form>
 		</div><!-- .content -->
 
 		<div class="clearfix"></div>
