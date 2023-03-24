@@ -37,24 +37,40 @@
         <!-- Header--> 
 		<jsp:include page="../inc/top.jsp" />
         <!-- Header-->
-        
+				
+				
         <div class="breadcrumbs">
             <div class="breadcrumbs-inner">
                 <div class="row m-0">
                     <div class="col-sm-4">
+<%
+request.setCharacterEncoding("UTF-8");
+String search =request.getParameter("search");
+if(search==null){
+	%>           
                         <div class="page-header float-left">
                             <div class="page-title">
-                                <h1>Table</h1>
+                                <h1>품목 리스트</h1>
                             </div>
-                        </div>
+                        </div>  
                     </div>
+<%}else{ %>
+                         <div class="page-header float-left">
+                            <div class="page-title">
+                                <h1>검색결과</h1>
+                            </div>
+                        </div>  
+                    </div>
+	<%
+}
+%> 	                    
                     <div class="col-sm-8">
                         <div class="page-header float-right">
                             <div class="page-title">
                                 <ol class="breadcrumb text-right">
                                     <li><a href="${pageContext.request.contextPath}/product/productlist">조회</a></li>
                                     <li><a href="${pageContext.request.contextPath}/product/productwrite">추가</a></li>
-                                    <li class="active">메인</li>
+                                    <li><a href="${pageContext.request.contextPath}/home.jsp">메인</a></li>                                 
                                 </ol>
                             </div>
                         </div>
@@ -62,7 +78,9 @@
                 </div>
             </div>
         </div>
-	
+<%
+if(search==null){
+	%>                
  <div class="content">
 			<div class="animated fadeIn">
 				<div class="row">
@@ -71,11 +89,27 @@
 							<div class="card-header">
 								<strong class="card-title">품목별 현황</strong><br>
 							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+<%}else{ %>
+ <div class="content">
+			<div class="animated fadeIn">
+				<div class="row">
+					<div class="col-lg">
+						<div class="card">
+							<div class="card-header">
+								<strong class="card-title">품목별 검색결과</strong><br>
+							</div>
+	<%
+}
+%> 															
 							<div class="card-body">
 								<table class="table" id="table2" border="1">
 									<thead class="thead-dark">	
 										<tr>
-											<th scope="col">#</th>
+											<th scope="col" >#</th>
 											<th scope="col" >품번</th>
 											<th scope="col" >거래코드</th>
 											<th scope="col" >품명</th>
@@ -95,7 +129,7 @@
 										<tr>
 											<td>${productDTO.prod_number}</td>
 											<td><a href="${pageContext.request.contextPath}/product/productcontext?prod_number=${productDTO.prod_number}">${productDTO.prod_cd}</a></td>
-											<td>${clientDTO.cli_cd}</td>
+											<td>${productDTO.cli_cd}</td>
 											<td>${productDTO.prod_nm}</td>
 											<td>${productDTO.prod_mat}</td>
 											<td>${productDTO.prod_unit}</td>
@@ -105,38 +139,45 @@
 											<td>${productDTO.prod_outprice}</td>
 											<td>${productDTO.prod_count}</td>
 											<td>${productDTO.prod_note}</td>
-											<td><button onclick="location.href='${pageContext.request.contextPath}/product/productdeletePro?prod_number=${productDTO.prod_number}'">삭제</button></td>
+											<td><button onclick="location.href='${pageContext.request.contextPath}/product/productdeletePro?prod_number=${productDTO.prod_number}'">삭제</button>
+												<button onclick="location.href='${pageContext.request.contextPath}/product/productupdate?prod_number=${productDTO.prod_number}'">수정</button></td>
 										</tr></c:forEach>
 									</tbody>
 								</table>
-
-
-<!-- 페이징처리 -->
-
-<c:if test="${pageDTO.startPage > pageDTO.pageBlock }">
-<a href="${pageContext.request.contextPath}/board/list?pageNum=${pageDTO.startPage - pageDTO.pageBlock}">[10페이지 이전]</a>
-</c:if>
-
-
-<!-- i는 변수 i  begin은 시작 페이지 for문  -->
-<c:forEach var="i" begin="${pageDTO.startPage}" end="${pageDTO.endPage}" step="1"> 
-<a href="${pageContext.request.contextPath}/board/list?pageNum=${i}">${i}</a>
-</c:forEach>    
-
-
-<c:if test="${pageDTO.endPage < pageDTO.pageCount }">
-<a href="${pageContext.request.contextPath}/board/list?pageNum=${pageDTO.startPage + pageDTO.pageBlock}">[10페이지 다음]</a>
-</c:if>
+								<!-- 검색어 -->								
+								<div id="table_search">
+								<form action="${pageContext.request.contextPath}/product/productlist" method="GET">
+								<input type="text" name="search" class="input_box" placeholder="품번별 검색기능">
+								<input type="submit" value="search" class="btn">
+								</form>
+								</div>								
+								<!-- 검색끝 -->								
+							<!-- 페이징 처리 -->
+								<div class="pageNum">
+								<c:if test="${pageDTO.startPage > pageDTO.pageBlock }">
+								<a href="${pageContext.request.contextPath}/product/productlist?pageNum=${pageDTO.startPage - pageDTO.pageBlock}&search=${pageDTO.search}">Prev</a>
+								</c:if>
+								
+								<c:forEach var="i" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1">
+								<a href="${pageContext.request.contextPath}/product/productlist?pageNum=${i}">${i}</a>
+								</c:forEach>
+								
+								<c:if test="${pageDTO.endPage < pageDTO.pageCount }">
+								<a href="${pageContext.request.contextPath}/product/productlist?pageNum=${pageDTO.startPage + pageDTO.pageBlock}&search=${pageDTO.search}">Next</a>
+								</c:if>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div><!-- .content -->
+		</div>
+		
+		<!-- .content -->
 
 		<div class="clearfix"></div>
 		<!-- 푸터 넣는 곳 -->
-		<jsp:include page="../inc/footer.jsp" />
+<%-- 		<jsp:include page="../inc/footer.jsp" /> --%>
 		<!-- 푸터 넣는 곳 -->
 	</div>
 	<!-- /#right-panel -->

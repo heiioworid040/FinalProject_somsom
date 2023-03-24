@@ -88,51 +88,29 @@
 								<strong class="card-title">Table Head</strong>
 							</div>
 							<div class="card-body">
-								<form name="codeList" action="${pageContext.request.contextPath}/code/codeList2?code_grp=${codeDTO.code_grp}" method="GET">
+								<form name="codeList" action="${pageContext.request.contextPath}/code/codeList?code_grp=${codeDTO.code_grp}" method="GET">
 								<table class="table">
 									<thead class="thead-dark">
 										<tr>
-											<th scope="col">그룹코드</th>
-											<th scope="col">그룹명</th>
-											<th scope="col">상세보기</th>
-											
-										</tr>
-									</thead>
-									<tbody>
-										<c:forEach var="codeDTO" items="${codeGrpList }">
-										<tr>
-											<td>${codeDTO.code_grp}</td>
-											<td>${codeDTO.code_grp_nm}</td>
-<%-- 											<td><input type="submit" value="상세보기" onclick="location.href='${pageContext.request.contextPath}/code/codeList?code_grp=${codeDTO.code_grp}'"></td>	 --%>
-											<td><input type="button" value="상세보기" onclick="location.href='${pageContext.request.contextPath}/code/codeList2?code_grp=${codeDTO.code_grp}'"></td>	
-										</tr>	
-										</c:forEach>
-									</tbody>
-								</table>
-								</form>
-								<table class="table">
-									<thead class="thead-dark">
-										
-										<tr>
-											
 											<th scope="col">코드</th>
 											<th scope="col">코드명</th>
 											<th scope="col">정렬순서</th>
 											<th scope="col">비고</th>
-
+											
 										</tr>
 									</thead>
 									<tbody>
 									<c:forEach var="codeDTO2" items="${codeList }">
 										<tr>
-											<td>${codeDTO2.code_cd}</td>
-											<td>${codeDTO2.code_nm}</td>
-											<td>${codeDTO2.code_num}</td>
-											<td>${codeDTO2.code_note}</td>
+											<td>${codeDTO.code_cd}</td>
+											<td>${codeDTO.code_nm}</td>
+											<td>${codeDTO.code_num}</td>
+											<td>${codeDTO.code_note}</td>
 										</tr>										
 									</c:forEach>
 									</tbody>
 								</table>
+								</form>
 							</div>
 						</div>
 					</div>

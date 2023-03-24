@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
 <div class="modal fade" id="lineModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg" role="document">
     	<div class="modal-content">
@@ -34,7 +35,7 @@
 					</div>
 				</div>
 			</form>
-		</div>
+			</div>
 	    <div class="modal-footer">
     		<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         	<button type="button" class="btn btn-primary">Send message</button>

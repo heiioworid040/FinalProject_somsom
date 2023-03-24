@@ -133,7 +133,7 @@ public class EmployeeController {
 		return "redirect:/employee/employeeList";
 	}
 	
-	@RequestMapping(value = "/employee/deletePro", method = RequestMethod.GET)
+	@RequestMapping(value = "/employee/deletePro", method = RequestMethod.POST)
 	public String deletetPro(HttpServletRequest request) {
 		
 		System.out.println("EmployeeController deletePro");

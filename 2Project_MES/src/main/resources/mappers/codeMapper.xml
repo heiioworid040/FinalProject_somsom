@@ -2,17 +2,33 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 
-
 <mapper namespace="com.project.mappers.codeMapper">
 
-<select id="getEmployeeList" resultType="com.project.domain.EmployeeDTO">
-		select distinct(code_grp_nm), code_grp
-		from code
+	<select id="getCodeGrpList" resultType="com.project.domain.CodeDTO">
+		select distinct(code_grp_nm), code_grp from code
 		limit #{startRow} , #{pageSize}
 	</select>
 
-<select id="getEmployeeCount" resultType="java.lang.Integer">
-		select count(*) from employee
+	<select id="getCodeGrpCount" resultType="java.lang.Integer">
+		select count(*) from code
 	</select>
+
+	<select id="getCodeList2" resultType="com.project.domain.CodeDTO">
+		select code_cd, code_nm, code_num, code_note from code
+		where code_grp = #{code_grp}	
+	</select>
+
+	<select id="getCodeList" resultType="com.project.domain.CodeDTO">
+		select code_cd, code_nm, code_num, code_note from code
+		limit #{startRow}, #{pageSize}		
+	</select>
+	
+	<select id="getCodeCount" resultType="java.lang.Integer">
+		select count(*) from code
+		where code_grp = #{code_grp}
+	</select>
+
+
+
 
 </mapper>
