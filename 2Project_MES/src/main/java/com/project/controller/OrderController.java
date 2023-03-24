@@ -1,5 +1,6 @@
 package com.project.controller;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -51,29 +52,59 @@ public class OrderController {
 			
 			List<OrderDTO> orderInsertList=orderService.getOrderInsertList(pageDTO);
 			
-//			int count=orderService.getOrderCount();
-//			int pageBlock=10;
-//			int startPage=(currentPage-1)/pageBlock*pageBlock+1;
-//			int endPage=startPage+pageBlock-1;
-//			int pageCount=count/pageSize+(count%pageSize==0?0:1);
-//			if(endPage>pageCount) {
-//				endPage=pageCount;
-//			}
+			int count=orderService.getOrderCount();
+			int pageBlock=10;
+			int startPage=(currentPage-1)/pageBlock*pageBlock+1;
+			int endPage=startPage+pageBlock-1;
+			int pageCount=count/pageSize+(count%pageSize==0?0:1);
+			if(endPage>pageCount) {
+				endPage=pageCount;
+			}
 			
-			String btn_can=(String)request.getParameter("btn_can");
-			String click_cli=(String)request.getParameter("cliPop");
-			String click_emp=(String)request.getParameter("empPop");
-			System.out.println(btn_can);
+			pageDTO.setCount(count);
+			pageDTO.setPageBlock(pageBlock);
+			pageDTO.setStartPage(startPage);
+			pageDTO.setEndPage(endPage);
+			pageDTO.setPageCount(pageCount);
+			
+//			String btn_can=(String)request.getParameter("btn_can");
+//			String click_cli=(String)request.getParameter("cliPop");
+//			String click_emp=(String)request.getParameter("empPop");
+//			System.out.println(btn_can);
 //			String result=btn_can;
 //			String click_prod=(String)request.getParameter("btn_can");
 //			System.out.println(click_cli);
 //			System.out.println(click_emp);
 //			System.out.println(click_prod);
 			
-			model.addAttribute("btn_can",btn_can);
+//			model.addAttribute("btn_can",btn_can);
 //			model.addAttribute("Pop", result);
+			model.addAttribute("pageDTO", pageDTO);
 			model.addAttribute("orderInsertList", orderInsertList);
-			return "/order/orderInsert";
+			return "order/orderInsert";
+		}
+		
+		@RequestMapping(value = "/order/orderInsertPro", method = RequestMethod.POST)
+		public String insertPro(HttpServletRequest request, Model model) {
+			String cli_cd=(String)request.getParameter("cli_cd");
+			String emp_cd=(String)request.getParameter("emp_cd");
+			String prod_cd=(String)request.getParameter("prod_cd");
+			int ord_count=Integer.parseInt(request.getParameter("ord_count"));
+			Timestamp ord_date=Timestamp.valueOf((String)request.getParameter("ord_date")+" 23:59:59");
+			Timestamp ord_d_date=Timestamp.valueOf((String)request.getParameter("ord_d_date")+" 23:59:59");
+			
+			OrderDTO orderDTO=new OrderDTO();
+			orderDTO.setCli_cd(cli_cd);
+			orderDTO.setEmp_cd(emp_cd);
+			orderDTO.setProd_cd(prod_cd);
+			orderDTO.setOrd_count(ord_count);
+			orderDTO.setOrd_date(ord_date);
+			orderDTO.setOrd_d_date(ord_d_date);
+			orderDTO.setOrd_cd("들어가려무나"); //ord_cd 자동입력 수정하기 + 입력 후 새로고침
+			orderService.insertPro(orderDTO);
+			
+			model.addAttribute("orderDTO", orderDTO);
+			return "redirect:/order/orderInsert";
 		}
 		
 		@RequestMapping(value = "/order/orderInfo", method = RequestMethod.GET)
@@ -111,7 +142,7 @@ public class OrderController {
 //			}
 			
 			model.addAttribute("orderList", orderList);
-			return "/order/orderInfo";
+			return "order/orderInfo";
 		}
 		
 		@RequestMapping(value = "/order/prodPop", method = RequestMethod.GET)

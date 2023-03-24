@@ -7,8 +7,12 @@
 		select o.cli_cd, c.cli_nm, ord_date, ord_d_date, e.emp_cd, e.emp_nm
 		from orders o join client c on o.cli_cd=c.cli_cd join employee e on o.emp_cd=e.emp_cd
 		order by ord_cd
-<!-- 		limit #{startRow}, #{pageSize} -->
+		limit #{startRow}, #{pageSize}
 	</select>
+	
+	<insert id="insertPro">
+		insert into orders values (#{ord_cd}, #{prod_cd}, #{emp_cd}, #{cli_cd}, #{ord_date}, #{ord_d_date}, #{ord_count})
+	</insert>
 
 	<select id="getOrderList" resultType="com.project.domain.OrderDTO">
 		select o.ord_cd, c.cli_nm, ord_date, e.emp_nm, p.prod_cd, p.prod_nm, p.prod_unit, ord_d_date, ord_count, ship_count

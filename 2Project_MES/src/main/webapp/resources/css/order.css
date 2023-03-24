@@ -17,7 +17,7 @@ body {
 #cli_nm, #emp_nm {
 	width: 120px;
 }
-#prod_cd, #prod_nm, #prod_unit, #prod_count, #prod_note {
+#prod_cd, #prod_nm, #prod_unit, #ord_count, #prod_note {
 	width: 100px;
 	border-style: none;
 }
