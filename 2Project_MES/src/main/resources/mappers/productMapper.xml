@@ -24,13 +24,20 @@
     
     <select id="getProductList" resultType="com.project.domain.ProductDTO">
     	select * from product
+    	<if test="search != null">
+        where prod_cd like CONCAT('%',#{search},'%')
+        </if> 
     	order by prod_number desc
+  
     	limit #{startRow}, #{pageSize}
     </select>
     
     
       <select id="getProductCount" resultType="java.lang.Integer">
     	select count(*) from product
+    	<if test="search != null">
+        	where prod_cd like CONCAT('%',#{search},'%')
+        </if> 
     </select>
     
      <select id="getProduct" resultType="com.project.domain.ProductDTO">

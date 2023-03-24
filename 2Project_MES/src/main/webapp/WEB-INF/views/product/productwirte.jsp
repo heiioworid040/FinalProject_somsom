@@ -27,6 +27,25 @@
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
 </head>
+<script>
+$(document).ready(function(){
+	$("#lineModalBtn").click(function(){
+		
+		$("#lineModalBtn").html('');
+		
+		$.ajax({
+			url:"${pageContext.request.contextPath}/product/productpop",
+			dataType:'json',
+			success:function(arr){
+				$.each(arr, function(index,item){
+					$("lineTableBody").append('<tr><th scope="row">'+라인코드+'</th><td>'+라인명+'</td><td>'+공정코드+'</td><td>'+공정명+'</td></tr>');
+				});
+			}
+		});
+	});
+});
+
+</script>
 <body>
 	<!-- Left Panel1 -->
 	<jsp:include page="../inc/leftPanel.jsp" />
@@ -79,11 +98,20 @@
 							    <td><input type="text" name="prod_cd"></td></tr>
 							<tr><td>품명</td>
 							    <td><select name="prod_nm">
-							    	<option value="">품명</option>
+							    	<option value="품명" selected="selected">품명</option>
 							    	<option value="인형">인형</option>
-							    	<option value="바늘" selected="selected">바늘</option>
+							    	<option value="바늘">바늘</option>
 							    	<option value="기타">기타</option>
-							</select></td></tr>   
+							</select></td></tr>
+							<tr><td>거래처코드</td>
+							   <td scope="row">
+                                     <div class="input-group">
+                                         <input type="text" id="input2-group2" name="input2-group2" placeholder="거래처코드" class="form-control bg-white" disabled>
+                                           	<div class="input-group-btn">
+                                            	<button type="button" class="btn btn-primary" id="lineModalBtn" data-toggle="modal" data-target="#lineModal" data-what="hello">버튼</button>
+                                            		</div>
+                                        		</div>
+                                          </td></tr>
 							<tr><td>자재유형</td>
 							    <td><select name="prod_mat">
 							    	<option value="">자재유형</option>
@@ -93,23 +121,23 @@
 							    	</select></td></tr>
 							<tr><td>재고단위</td>
 							    <td><select name="prod_unit">
-							    	<option value="">단위</option>
+							    	<option value="단위" selected="selected">단위</option>
 							    	<option value="EA">EA</option>
-							    	<option value="OP" selected="selected">OP</option>
+							    	<option value="OP" >OP</option>
 							    	<option value="기타">기타</option>
 							    	</select></td></tr>
 							<tr><td>재질</td>
 							    <td><select name="prod_text">
-							    	<option value="">재질</option>
+							    	<option value="재질" selected="selected">재질</option>
 							    	<option value="천">천</option>
-							    	<option value="유리" selected="selected">유리</option>
+							    	<option value="유리">유리</option>
 							    	<option value="기타">기타</option>
 							    	</select></td></tr>
 							<tr><td>규격</td>
 							    <td><select name="prod_size">
-							    	<option value="">규격</option>
+							    	<option value="규격" selected="selected">규격</option>
 							    	<option value="10*10">10*10</option>
-							    	<option value="20*20" selected="selected">20*20</option>
+							    	<option value="20*20">20*20</option>
 							    	<option value="기타">기타</option>
 							    	</select></td></tr>    	
 							 <tr><td>매입단가</td>

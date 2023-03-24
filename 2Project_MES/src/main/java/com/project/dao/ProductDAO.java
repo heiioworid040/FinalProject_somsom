@@ -12,7 +12,7 @@ public interface ProductDAO {
 	
 	public Integer getMaxnum();
 	
-	public int getProductCount();
+	public int getProductCount(PageDTO pageDTO);
 	
 	public ProductDTO getProduct(int prod_number);
 	

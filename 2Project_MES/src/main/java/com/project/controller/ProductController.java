@@ -49,6 +49,10 @@ public class ProductController {
 	public String list(HttpServletRequest request, Model model) {
 		//조건 : writeForm의 id값이랑 DTO 값이랑 같아야 값을 받아온다
 		System.out.println("product list");
+		
+		//검색어
+		String search = request.getParameter("search");
+		
 		// 환 화면에 보여줄 글 개수 설정
 		int pageSize=10; // 10개씩 자르겠다.
 		
@@ -66,11 +70,13 @@ public class ProductController {
 		pageDTO.setPageSize(pageSize);
 		pageDTO.setPageNum(pageNum);
 		pageDTO.setCurrentPage(currentPage);
+		//검색어 담기
+		pageDTO.setSearch(search);
 		
 		List<ProductDTO> productList = productService.getProductList(pageDTO);
 		
 		//페이징
-		int count = productService.getProductCount();
+		int count = productService.getProductCount(pageDTO);
 		int pageBlock=10;
 		int startPage=(currentPage-1)/pageBlock*pageBlock+1;
 		int endPage=startPage+pageBlock-1;
@@ -140,7 +146,5 @@ public class ProductController {
 		
 		return "redirect:/product/productlist";
 	}
-	
-	
-	
+		
 }
