@@ -43,7 +43,7 @@ public class ProductDAOlmpl implements ProductDAO{
 	}
 	
 	@Override
-	public int getProductCount() {
+	public int getProductCount(PageDTO pageDTO) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(namespace+".getProductCount");
 	}
@@ -57,6 +57,19 @@ public class ProductDAOlmpl implements ProductDAO{
 	@Override
 	public void updateProduct(ProductDTO productDTO) {
 		// TODO Auto-generated method stub
+		System.out.println("cd : "+productDTO.getProd_cd());
+		System.out.println("count : "+productDTO.getProd_count());
+		System.out.println("inprice : "+productDTO.getProd_inprice());
+		System.out.println("mat : "+productDTO.getProd_mat());
+		System.out.println("nm : "+productDTO.getProd_nm());
+		System.out.println("note : "+productDTO.getProd_note());
+		System.out.println("number : "+productDTO.getProd_number());
+		System.out.println("outprice : "+productDTO.getProd_outprice());
+		System.out.println("size : "+productDTO.getProd_size());
+		
+		
+		
+		
 		sqlSession.update(namespace+".updateProduct",productDTO);
 	}
 

@@ -19,6 +19,8 @@ public interface ProductService {
 	
 	public void deleteProduct(int prod_number);
 	
-	public int getProductCount();
+	public int getProductCount(PageDTO pageDTO);
+	
+	
 
 }

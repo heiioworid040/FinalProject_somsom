@@ -85,8 +85,10 @@
 							<tr><td>현재고</td><td>>${productDTO.prod_count}</td></tr>
 							<tr><td>비고</td><td>>${productDTO.prod_note}</td></tr>
 							<tr><td colspan="2"></td></tr></table>
+							<input type="button" value="글수정" onclick="location.href='${pageContext.request.contextPath}/product/productupdate?prod_number=${productDTO.prod_number }'">
 							</div>
 						</div>
+						
 					</div>
 				</div>
 			</div>
