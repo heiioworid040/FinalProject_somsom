@@ -19,7 +19,7 @@ public interface ProductDAO {
 	public void updateProduct(ProductDTO productDTO);
 	
 	public void deleteProduct(int prod_number);
-
+	
 
 	
 	

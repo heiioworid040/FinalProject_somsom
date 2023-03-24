@@ -87,8 +87,8 @@
 							<tr><td>자재유형</td>
 							    <td><select name="prod_mat">
 							    	<option value="">자재유형</option>
-							    	<option value="인형">인형</option>
-							    	<option value="바늘" selected="selected">바늘</option>
+							    	<option value="완제품">완제품</option>
+							    	<option value="부자재">부자재</option>
 							    	<option value="기타">기타</option>
 							    	</select></td></tr>
 							<tr><td>재고단위</td>
@@ -114,7 +114,7 @@
 							    	</select></td></tr>    	
 							 <tr><td>매입단가</td>
 							  <td><input type="text" name="prod_inprice" ></td></tr>
-							   <tr><td>매입단가</td>
+							   <tr><td>매출단가</td>
 							  <td><input type="text" name="prod_outprice" ></td></tr>
 							   <tr><td>현재고</td>
 							  <td><input type="text" name="prod_count" ></td></tr>

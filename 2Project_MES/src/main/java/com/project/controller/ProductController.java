@@ -97,13 +97,13 @@ public class ProductController {
 		
 		ProductDTO productDTO = productService.getProduct(prod_number);
 		model.addAttribute("productDTO",productDTO);
-		
+	
 		return "product/productcontext";
 	}
 	
 	
 	//수정
-	@RequestMapping(value = "/product/update", method = RequestMethod.GET)
+	@RequestMapping(value = "/product/productupdate", method = RequestMethod.GET)
 	public String update(HttpServletRequest request,Model model) {
 		// 주소변경 없이 이동
 		int prod_number= Integer.parseInt(request.getParameter("prod_number"));
@@ -111,20 +111,23 @@ public class ProductController {
 		ProductDTO productDTO = productService.getProduct(prod_number);
 		//request 대신에 스프링 제공 Model 담아서 이동
 		model.addAttribute("productDTO",productDTO);
+
+		System.out.println(productDTO.getProd_cd());
+		return "product/productupdate";
 		
-		return "product/updateForm";
 	}
 	
-	@RequestMapping(value = "/product/updatePro", method = RequestMethod.POST)
+	@RequestMapping(value = "/product/productupdatePro", method = RequestMethod.POST)
 	public String updatePro(ProductDTO productDTO) {
-		// 주소변경 없이 이동
-		
+		System.out.println("productDTO.getProd_outprice : "+productDTO.getProd_outprice());
+		System.out.println("productDTO.getProd_mat : "+productDTO.getProd_mat());
+		System.out.println("productDTO.getProd_number : "+productDTO.getProd_number());
 		productService.updateProduct(productDTO);
 		
 		//request 대신에 스프링 제공 Model 담아서 이동
 		
 		
-		return "redirect:/product/list";
+		return "redirect:/product/productlist";
 	}
 	
 	//삭제

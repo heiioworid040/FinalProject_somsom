@@ -37,14 +37,28 @@
         <!-- Header--> 
 		<jsp:include page="../inc/top.jsp" />
         <!-- Header-->
-        
+						<!-- 검색	 -->
+							<div>
+								<form name="search-form" autocomplete="off">
+									<select name="type">
+										<option selected value="">검색 내용 선택</option>
+										<option value="prod_cd">품번</option>
+										<option value="prod_nm">품명</option>
+									</select>
+									<input type="text" name="keyword" value=""></input>
+									<input type="button" onclick="getSearchList()" value="검색">
+								</form>	
+							</div>
+						<!--검색끝 -->
+				
+				
         <div class="breadcrumbs">
             <div class="breadcrumbs-inner">
                 <div class="row m-0">
                     <div class="col-sm-4">
                         <div class="page-header float-left">
                             <div class="page-title">
-                                <h1>Table</h1>
+                                <h1>품목 리스트</h1>
                             </div>
                         </div>
                     </div>
@@ -54,7 +68,7 @@
                                 <ol class="breadcrumb text-right">
                                     <li><a href="${pageContext.request.contextPath}/product/productlist">조회</a></li>
                                     <li><a href="${pageContext.request.contextPath}/product/productwrite">추가</a></li>
-                                    <li class="active">메인</li>
+                                    <li class="active">검색</li>                                 
                                 </ol>
                             </div>
                         </div>
@@ -62,7 +76,6 @@
                 </div>
             </div>
         </div>
-	
  <div class="content">
 			<div class="animated fadeIn">
 				<div class="row">
@@ -75,7 +88,7 @@
 								<table class="table" id="table2" border="1">
 									<thead class="thead-dark">	
 										<tr>
-											<th scope="col">#</th>
+											<th scope="col" >#</th>
 											<th scope="col" >품번</th>
 											<th scope="col" >거래코드</th>
 											<th scope="col" >품명</th>
@@ -95,7 +108,7 @@
 										<tr>
 											<td>${productDTO.prod_number}</td>
 											<td><a href="${pageContext.request.contextPath}/product/productcontext?prod_number=${productDTO.prod_number}">${productDTO.prod_cd}</a></td>
-											<td>${clientDTO.cli_cd}</td>
+											<td>${productDTO.cli_cd}</td>
 											<td>${productDTO.prod_nm}</td>
 											<td>${productDTO.prod_mat}</td>
 											<td>${productDTO.prod_unit}</td>
@@ -105,28 +118,29 @@
 											<td>${productDTO.prod_outprice}</td>
 											<td>${productDTO.prod_count}</td>
 											<td>${productDTO.prod_note}</td>
-											<td><button onclick="location.href='${pageContext.request.contextPath}/product/productdeletePro?prod_number=${productDTO.prod_number}'">삭제</button></td>
+											<td><button onclick="location.href='${pageContext.request.contextPath}/product/productdeletePro?prod_number=${productDTO.prod_number}'">삭제</button>
+												<button onclick="location.href='${pageContext.request.contextPath}/product/productupdate?prod_number=${productDTO.prod_number}'">수정</button></td>
 										</tr></c:forEach>
 									</tbody>
 								</table>
 
-
 <!-- 페이징처리 -->
 
 <c:if test="${pageDTO.startPage > pageDTO.pageBlock }">
-<a href="${pageContext.request.contextPath}/board/list?pageNum=${pageDTO.startPage - pageDTO.pageBlock}">[10페이지 이전]</a>
+<a href="${pageContext.request.contextPath}/product/productlist?pageNum=${pageDTO.startPage - pageDTO.pageBlock}">[10페이지 이전]</a>
 </c:if>
 
 
 <!-- i는 변수 i  begin은 시작 페이지 for문  -->
 <c:forEach var="i" begin="${pageDTO.startPage}" end="${pageDTO.endPage}" step="1"> 
-<a href="${pageContext.request.contextPath}/board/list?pageNum=${i}">${i}</a>
+<a href="${pageContext.request.contextPath}/product/productlist?pageNum=${i}">${i}</a>
 </c:forEach>    
 
 
 <c:if test="${pageDTO.endPage < pageDTO.pageCount }">
-<a href="${pageContext.request.contextPath}/board/list?pageNum=${pageDTO.startPage + pageDTO.pageBlock}">[10페이지 다음]</a>
+<a href="${pageContext.request.contextPath}/product/productlist?pageNum=${pageDTO.startPage + pageDTO.pageBlock}">[10페이지 다음]</a>
 </c:if>
+
 							</div>
 						</div>
 					</div>

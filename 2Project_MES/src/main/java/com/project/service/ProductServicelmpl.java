@@ -80,7 +80,7 @@ public class ProductServicelmpl implements ProductService{
 	
 	@Override
 	public void updateProduct(ProductDTO productDTO) {
-		System.out.println("board updatePro");
+		System.out.println("ProductDTO updatePro");
 		
 		productDAO.updateProduct(productDTO);
 		

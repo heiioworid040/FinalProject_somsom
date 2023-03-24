@@ -38,7 +38,16 @@
     </select>
     
     <update id="updateProduct">
-    	update product set prod_nm =#{prod_nm}, prod_mat = #{prod_mat}
+    	update product set
+    	prod_cd = #{prod_cd}, 
+    	prod_nm = #{prod_nm},
+    	prod_mat = #{prod_mat},
+    	prod_unit = #{prod_unit},
+    	prod_text = #{prod_text},
+    	prod_size = #{prod_size},
+    	prod_inprice = #{prod_inprice},
+    	prod_outprice = #{prod_outprice},
+    	prod_note = #{prod_note}
     	where prod_number = #{prod_number}
     </update>
     <!-- daolmpl 이름이랑 같아야한다. -->
@@ -47,7 +56,14 @@
     where prod_number = #{prod_number}
     </delete>
      
-
+	<select id="getService" resultType="com.project.domain.ProductDTO">
+	select * 
+    from product 
+    where title like '%service%'
+    order by prod_number desc 
+    limit 10, 10;
+	
+	</select>
 
 <!--     <select id="" resultType=""> -->
 <!--     </select> -->
