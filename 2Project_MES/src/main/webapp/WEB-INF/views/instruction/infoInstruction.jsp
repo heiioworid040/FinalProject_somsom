@@ -26,6 +26,25 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
+<script>
+$(document).ready(function(){
+	$("#lineModalBtn").click(function(){
+		
+		$("#lineModalBtn").html('');
+		
+		$.ajax({
+			url:"${pageContext.request.contextPath}/line/lineModalJson",
+			dataType:'json',
+			success:function(arr){
+				$.each(arr, function(index,item){
+					$("lineTableBody").append('<tr><th scope="row">'+라인코드+'</th><td>'+라인명+'</td><td>'+공정코드+'</td><td>'+공정명+'</td></tr>');
+				});
+			}
+		});
+	});
+});
+
+</script>
 </head>
 <body>
 	<!-- Left Panel1 -->
@@ -69,7 +88,7 @@
 							<div class="card-body card-block">
 								<form action="#" method="post" class="form-inline">
                                 	<div class="form-group col-6 mb-1">
-                                    	<label for="exampleInputName2" class="pr-1  form-control-label">라인</label>
+                                    	<label for="exampleInputName2" class="pr-1 form-control-label">라인</label>
                                     	<div class="p-0 col">
                                             <select name="select" id="select" class="form-control">
                                                 <option value="0">전체</option>
@@ -115,7 +134,7 @@
 			</div>
 		</div>
 		
-		<!-- 	검색창 -->
+		<!-- 	편집창 -->
 		<div class="content pt-0">
 			<div class="animated fadeIn">
 				<div class="row">
@@ -142,8 +161,8 @@
                                             		<div class="input-group">
                                             			<input type="text" id="input2-group2" name="input2-group2" placeholder="라인 코드" class="form-control bg-white" disabled>
                                             			<div class="input-group-btn">
-                                            			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-what="hello">버튼</button>
- </div>
+                                            				<button type="button" class="btn btn-primary" id="lineModalBtn" data-toggle="modal" data-target="#lineModal" data-what="hello">버튼</button>
+                                            			</div>
                                         			</div>
                                             	</td>
 												<td>
@@ -188,7 +207,7 @@
 			</div>
 		</div>
 		
-<!-- 		검색창 -->
+<!-- 리스트 -->
         <div class="content pt-0">
 			<div class="animated fadeIn">
 				<div class="row">
@@ -240,7 +259,7 @@
 				</div>
 			</div>
 		</div><!-- .content -->
-
+		<jsp:include page="../line/linePop.jsp" />
 		<div class="clearfix"></div>
 		<!-- 푸터 넣는 곳 -->
 		<jsp:include page="../inc/footer.jsp" />
