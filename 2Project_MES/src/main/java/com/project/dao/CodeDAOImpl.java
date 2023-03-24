@@ -19,6 +19,21 @@ public class CodeDAOImpl implements CodeDAO {
 	private static final String namespace="com.project.mappers.codeMapper";
 	
 	@Override
+	public List<CodeDTO> getCodeGrpList(PageDTO pageDTO) {
+		System.out.println("CodeDAOImpl getCodeGrpList()");
+		pageDTO.setStartRow(pageDTO.getStartRow()-1);
+
+		return sqlSession.selectList(namespace+".getCodeGrpList", pageDTO);
+	}
+
+	@Override
+	public int getCodeGrpCount() {
+		System.out.println("CodeDAOImpl getCodeGrpCount()");
+
+		return sqlSession.selectOne(namespace+".getCodeGrpCount");
+	}
+
+	@Override
 	public List<CodeDTO> getCodeList(PageDTO pageDTO) {
 		System.out.println("CodeDAOImpl getCodeList()");
 		pageDTO.setStartRow(pageDTO.getStartRow()-1);
@@ -29,8 +44,15 @@ public class CodeDAOImpl implements CodeDAO {
 	@Override
 	public int getCodeCount() {
 		System.out.println("CodeDAOImpl getCodeCount()");
-
+		
 		return sqlSession.selectOne(namespace+".getCodeCount");
+
+	}
+
+	@Override
+	public List<CodeDTO> getCodeList2(String code_grp) {
+		System.out.println("CodeDAOImpl getCodeList2()");
+		return sqlSession.selectList(namespace+".getCodeList2");
 	}
 
 }

@@ -11,6 +11,12 @@ public interface CodeService {
 
 	public int getCodeGrpCount();
 
+	public List<CodeDTO> getCodeList(PageDTO pageDTO);
+
+	public int getCodeCount();
+
+	public List<CodeDTO> getCodeList2(String code_grp);
+
 
 	}
 
