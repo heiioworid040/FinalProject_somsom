@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 
 public class ShipDTO extends OrderDTO {
 	private String ship_cd;
+	private String ord_cd;
 	private int ship_ifcount;
 	private int ship_count;
 	private int ship_over;
@@ -15,6 +16,12 @@ public class ShipDTO extends OrderDTO {
 	}
 	public void setShip_cd(String ship_cd) {
 		this.ship_cd = ship_cd;
+	}
+	public String getOrd_cd() {
+		return ord_cd;
+	}
+	public void setOrd_cd(String ord_cd) {
+		this.ord_cd = ord_cd;
 	}
 	public int getShip_ifcount() {
 		return ship_ifcount;
@@ -46,6 +53,5 @@ public class ShipDTO extends OrderDTO {
 	public void setShip_date(Timestamp ship_date) {
 		this.ship_date = ship_date;
 	}
-	
 	
 }

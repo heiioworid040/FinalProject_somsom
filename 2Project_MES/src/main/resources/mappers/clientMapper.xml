@@ -16,12 +16,10 @@
 
 	<insert id="insertClient">
 		insert into client(cli_cd, cli_nm, cli_type, cli_num,
-		cli_business, cli_prod, cli_boss, cli_emp, cli_addr, cli_addr2,
-		cli_tel, cli_emp_tel, cli_fax, cli_email, cli_note)
+		cli_business, cli_prod, cli_boss, cli_emp, cli_addr)
 		values(#{cli_cd},
 		#{cli_nm}, #{cli_type}, #{cli_num}, #{cli_business},
-		#{cli_prod}, #{cli_boss}, #{cli_emp}, #{cli_addr}, #{cli_addr2},
-		#{cli_tel}, #{cli_emp_tel}, #{cli_fax}, #{cli_email}, #{cli_note})
+		#{cli_prod}, #{cli_boss}, #{cli_emp}, #{cli_addr})
 	</insert>
 
 	<select id="getClient" resultType="com.project.domain.ClientDTO">
