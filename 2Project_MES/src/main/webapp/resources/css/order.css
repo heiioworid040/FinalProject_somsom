@@ -1,0 +1,20 @@
+@charset "UTF-8";
+.content-div2 {
+	width: 100%;
+}
+.content-div {
+	float: left;
+	width: 47%;
+	padding: 1.875em;
+	margin: 0px 15px auto;
+}
+body {
+	font-size: 13px;
+}
+#prod_cd, #prod_nm, #prod_unit, #prod_count, #prod_note {
+	width: 100px;
+	border-style: none;
+}
+.btn_can {
+	
+}
