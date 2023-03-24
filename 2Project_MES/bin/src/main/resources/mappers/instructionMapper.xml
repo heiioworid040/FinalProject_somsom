@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<!-- src/main/resources -->
+<!-- mybatis-config.xml 파일 만들기 -->
+<!--  파일이름 대신 namespace 이름을 불러서 사용 -->
+<mapper namespace="com.project.mappers.instructionMapper">
+	
+    <select id="getInstList" resultType="com.project.domain.InstructionDTO">
+    select i.inst_cd, i.line_cd, l.line_nm, o.prod_cd, p.prod_nm, p.prod_unit, i.inst_st, i.inst_date, i.inst_count, i.ord_cd,  c.cli_nm, i.inst_fcount
+	from instruction i 
+	join line l
+	on i.line_cd = l.line_cd
+	join orders o
+	on i.ord_cd=o.ord_cd
+	join product p
+	on p.prod_cd=o.prod_cd
+    join client c
+	on p.cli_cd=c.cli_cd
+	order by inst_cd desc
+    limit #{startRow}, #{pageSize}
+    </select>
+
+    <select id="getInstCount" resultType="java.lang.Integer">
+    select count(*) from instruction
+    </select>
+
+<!-- id-"이름" spl구문 하나하나 이름
+	 ? 대신에 MemberDTO 멤버변수명 #{id}	-->
+<!-- 	<insert id="insertTest"> -->
+<!-- 		insert into test1(num,name) -->
+<!-- 		values(#{num},#{name}) -->
+<!-- 	</insert> -->
+    
+<!--     <select id="" resultType=""> -->
+<!--     </select> -->
+
+<!-- 	<update id=""> -->
+<!-- 	</update> -->
+
+<!-- 	<delete id=""> -->
+<!-- 	</delete> -->
+			
+</mapper>

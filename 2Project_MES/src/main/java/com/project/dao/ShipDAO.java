@@ -9,4 +9,6 @@ public interface ShipDAO {
 	public List<ShipDTO> shipCurrentInfo(PageDTO pageDTO);
 
 	public int shipCurrentCount();
+
+	public void currDelete(String ship_cd);
 }

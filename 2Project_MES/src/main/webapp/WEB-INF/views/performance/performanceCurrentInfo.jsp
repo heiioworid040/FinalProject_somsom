@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -95,29 +96,30 @@
 								<strong class="card-title">생산실적</strong>
 							</div>
 							<div class="card-body">
-													
+									
+												
 									<table id="bootstrap-data-table"
 										class="table table-striped table-bordered">
 										<thead class="thead-dark">
 											<tr>
 												<th scope="col">실적일자</th>
 												<th scope="col">라인명</th>
-												<th scope="col">상품코드</th>
-												<th scope="col">상품이름</th>
+												<th scope="col">품번</th>
+												<th scope="col">품명</th>
 												<th scope="col">단위</th>
 												<th scope="col">양품</th>
 												<th scope="col">불량</th>
 												<th scope="col">불량사유</th>
 												<th scope="col">비고</th>
-												<th scope="col">작업지시번호</th>
+												<th scope="col">지시번호</th>
 												<th scope="col">수주번호</th>
-												<th scope="col">거래처명</th>
+												<th scope="col">업체</th>
 											</tr>
 										</thead>
 										<tbody>
 											<c:forEach var="performanceDTO" items="${performanceCurrentInfo }">
 												<tr>
-													<td>${performanceDTO.perf_date }</td>
+													<td><fmt:formatDate value="${performanceDTO.perf_date}" pattern="yyyy.MM.dd"/></td>
 													<td>${performanceDTO.line_nm }</td>
 													<td>${performanceDTO.prod_cd }</td>
 													<td>${performanceDTO.prod_nm }</td>
@@ -129,6 +131,32 @@
 													<td>${performanceDTO.inst_cd }</td>
 													<td>${performanceDTO.ord_cd }</td>
 													<td>${performanceDTO.cli_nm }</td>
+												</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+									
+									<br><br><br>
+									
+									
+									
+									<table id="bootstrap-data-table"
+										class="table table-striped table-bordered">
+										<thead class="thead-dark">
+											<tr>
+												<th scope="col">품번</th>
+												<th scope="col">품명</th>
+												<th scope="col">단위</th>
+												<th scope="col">투입량</th>
+											</tr>
+										</thead>
+										<tbody>
+											<c:forEach var="performanceDTO" items="${performanceCurrentInfo }">
+												<tr>
+													<td>${performanceDTO.prod_cd }</td>
+													<td>${performanceDTO.prod_nm }</td>
+													<td>${performanceDTO.prod_unit }</td>
+													<td></td>
 												</tr>
 											</c:forEach>
 										</tbody>
