@@ -103,15 +103,15 @@
 		
 	<div style="text-align : center;">
 		<c:if test="${pageDTO.startPage>pageDTO.pageBlock}">
-			<a href="${pageContext.request.contextPath}/order/cliPop?pageNum=${pageDTO.startPage-pageDTO.pageBlock}">◀</a>
+			<a href="${pageContext.request.contextPath}/order/empPop?pageNum=${pageDTO.startPage-pageDTO.pageBlock}">◀</a>
 		</c:if>
 
 		<c:forEach var="i" begin="${pageDTO.startPage}" end="${pageDTO.endPage}" step="1">
-			<a href="${pageContext.request.contextPath}/order/cliPop?pageNum=${i+1}">${i+1}</a>
+			<a href="${pageContext.request.contextPath}/order/empPop?pageNum=${i}">${i}</a>
 		</c:forEach>
 
 		<c:if test="${pageDTO.endPage<pageDTO.pageCount}">
-			<a href="${pageContext.request.contextPath}/order/cliPop?pageNum=${pageDTO.startPage+pageDTO.pageBlock}">▶</a>
+			<a href="${pageContext.request.contextPath}/order/empPop?pageNum=${pageDTO.startPage+pageDTO.pageBlock}">▶</a>
 		</c:if>
 	</div>
 </body>

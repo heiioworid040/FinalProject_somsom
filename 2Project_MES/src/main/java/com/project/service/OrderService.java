@@ -27,6 +27,10 @@ public class OrderService {
 		return orderDAO.getOrderInsertList(pageDTO);
 	}
 	
+	public void insertPro(OrderDTO orderDTO) {
+		orderDAO.insertPro(orderDTO);
+	}
+	
 	//수주현황
 	public List<OrderDTO> getOrderList(PageDTO pageDTO) {
 		int startRow=(pageDTO.getCurrentPage()-1)*pageDTO.getPageSize()+1;

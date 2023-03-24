@@ -22,6 +22,10 @@ public class OrderDAO {
 		return sqlSession.selectList(namespace+".getOrderInsertList", pageDTO);
 	}
 
+	public void insertPro(OrderDTO orderDTO) {
+		sqlSession.insert(namespace+".insertPro", orderDTO);
+	}
+
 	public List<OrderDTO> getOrderList(PageDTO pageDTO) {
 		pageDTO.setStartRow(pageDTO.getStartRow()-1);
 		return sqlSession.selectList(namespace+".getOrderList", pageDTO);
@@ -40,4 +44,5 @@ public class OrderDAO {
 		pageDTO.setStartRow(pageDTO.getStartRow()-1);
 		return sqlSession.selectList(namespace+".getOrderPop", pageDTO);
 	}
+
 }

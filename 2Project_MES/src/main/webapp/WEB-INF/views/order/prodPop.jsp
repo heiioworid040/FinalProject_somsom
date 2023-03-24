@@ -25,11 +25,10 @@
 <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 </head>
 <script>
-	function fun1(prod_cd,prod_nm,prod_unit,prod_count,prod_note) {
+	function fun1(prod_cd,prod_nm,prod_unit,prod_note) {
 		opener.document.getElementById("prod_cd").value=prod_cd;
 		opener.document.getElementById("prod_nm").value=prod_nm;
 		opener.document.getElementById("prod_unit").value=prod_unit;
-		opener.document.getElementById("prod_count").value=prod_count;
 		opener.document.getElementById("prod_note").value=prod_note;
 		document.orderPop.submit();
 		self.close();
@@ -97,7 +96,7 @@
 									</thead>
 									<tbody>
 										<c:forEach var="orderDTO" items="${prodPop }">
-												<tr onclick="fun1('${orderDTO.prod_cd }','${orderDTO.prod_nm }','${orderDTO.prod_unit }','${orderDTO.prod_count }','${orderDTO.prod_note }')">
+												<tr onclick="fun1('${orderDTO.prod_cd }','${orderDTO.prod_nm }','${orderDTO.prod_unit }','${orderDTO.prod_note }')">
 													<td>${orderDTO.prod_cd }</td>
 													<td>${orderDTO.prod_nm }</td>
 													<td>${orderDTO.prod_mat }</td>
@@ -123,7 +122,7 @@
 		</c:if>
 
 		<c:forEach var="i" begin="${pageDTO.startPage}" end="${pageDTO.endPage}" step="1">
-			<a href="${pageContext.request.contextPath}/order/prodPop?pageNum=${i+1}">${i+1}</a>
+			<a href="${pageContext.request.contextPath}/order/prodPop?pageNum=${i}">${i}</a>
 		</c:forEach>
 
 		<c:if test="${pageDTO.endPage<pageDTO.pageCount}">
