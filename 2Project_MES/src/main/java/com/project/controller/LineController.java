@@ -16,16 +16,16 @@ import com.project.domain.LineDTO;
 import com.project.domain.PageDTO;
 import com.project.service.LineService;
 
-@Controller
-public class LineController {
-	private LineService lineService;
+//@Controller
+//public class LineController {
+//	private LineService lineService;
 	
-	@Inject
-	public void setLineService(LineService lineService) {
-		this.lineService = lineService;
-	}
+//	@Inject
+//	public void setLineService(LineService lineService) {
+//		this.lineService = lineService;
+//	}
 
-	@RequestMapping(value = "/line/linePop", method = RequestMethod.GET)
+//	@RequestMapping(value = "/line/linePop", method = RequestMethod.GET)
 //	public ModelAndView getLineModal() {
 //		System.out.println("lineController getLineModalJson()");
 //		int pageSize=5;
@@ -60,4 +60,4 @@ public class LineController {
 //		model.addAttribute("lineList", lineList);
 //		return "line/linePop";
 //	}
-}
+//}

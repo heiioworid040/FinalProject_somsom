@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>  
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -95,18 +95,47 @@
 			</div>
 		</div>
 
+		<!-- 	검색창 -->
 		<div class="content">
 			<div class="animated fadeIn">
 				<div class="row">
 					<div class="col-lg">
-						<div class="card">
-							<div class="card-body">검색창</div>
+						<div class="card m-0">
+							<div class="card-body card-block">
+								<form
+									action="${pageContext.request.contextPath }/ship/shipCurrentInfo"
+									method="get" class="form-inline">
+									<div class="form-group col-6 mb-1">
+										<label class="pr-1  form-control-label">출하일자</label>&nbsp;&nbsp; <input
+											type="date" id="" class="form-control">&nbsp;~&nbsp;
+										<input type="date" id="" class="form-control">
+									</div>
+									<div class="form-group col-6 mb-1">
+										<label class="pr-1  form-control-label">품번</label>&nbsp;&nbsp; <input
+											type="text" id="" class="form-control ">
+											<div class="input-group">
+                                        	<div class="input-group-addon"><i class="ti-search"></i></div>
+                                    	</div>
+									</div>
+									<div class="form-group col-6 mt-1">
+										<label class="pr-1  form-control-label">수주업체</label>&nbsp;&nbsp;
+										<input
+											type="text" id="" class="form-control ">
+											<div class="input-group">
+                                        	<div class="input-group-addon"><i class="ti-search"></i></div>
+                                    	</div>
+									</div>
+							</div>
 						</div>
+						<input type="submit" class="btn btn-secondary float-right"
+							value="조회">
 					</div>
 				</div>
 			</div>
+
 		</div>
-		<!-- .content -->
+		</form>
+		<!-- 	검색창 -->
 
 		<div class="content">
 			<div class="animated fadeIn">
@@ -117,52 +146,53 @@
 								<strong class="card-title">출하현황</strong>
 							</div>
 							<div class="card-body">
-							
-								<!-- 체크박스로 선택해 글 여러개 삭제가능  -->
-<%-- 								<form action="${pageContext.request.contextPath}/client/delete" --%>
-<!-- 									method="post"> -->
-<!-- 									<input type="submit" value="삭제"> -->
 
-									<table id="bootstrap-data-table"
-										class="table table-striped table-bordered">
-										<thead class="thead-dark">
+								<!-- 체크박스로 선택해 글 여러개 삭제가능  -->
+								<%-- 								<form action="${pageContext.request.contextPath}/client/delete" --%>
+								<!-- 									method="post"> -->
+								<!-- 									<input type="submit" value="삭제"> -->
+
+								<table id="bootstrap-data-table"
+									class="table table-striped table-bordered">
+									<thead class="thead-dark">
+										<tr>
+											<th scope="col"><input id="allCheck" type="checkbox"
+												onclick="allChk(this);" /></th>
+											<th scope="col">출하번호</th>
+											<th scope="col">출하일자</th>
+											<th scope="col">거래처명</th>
+											<th scope="col">상품코드</th>
+											<th scope="col">상품이름</th>
+											<th scope="col">단위</th>
+											<th scope="col">수주번호</th>
+											<th scope="col">수주량</th>
+											<th scope="col">출하량</th>
+											<th scope="col"></th>
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach var="shipDTO" items="${shipCurrentInfo }">
 											<tr>
-												<th scope="col"><input id="allCheck" type="checkbox"
-													onclick="allChk(this);" /></th>
-												<th scope="col">출하번호</th>
-												<th scope="col">출하일자</th>
-												<th scope="col">거래처명</th>
-												<th scope="col">상품코드</th>
-												<th scope="col">상품이름</th>
-												<th scope="col">단위</th>
-												<th scope="col">수주번호</th>
-												<th scope="col">수주량</th>
-												<th scope="col">출하량</th>
-												<th scope="col">버튼</th>
+												<th scope="row"><input type="checkbox" name="chk"
+													value="${shipDTO.ship_cd }"></th>
+												<td>${shipDTO.ship_cd }</td>
+												<td><fmt:formatDate value="${shipDTO.ship_date}"
+														pattern="yyyy.MM.dd" /></td>
+												<td>${shipDTO.cli_nm }</td>
+												<td>${shipDTO.prod_cd }</td>
+												<td>${shipDTO.prod_nm }</td>
+												<td>${shipDTO.prod_unit }</td>
+												<td>${shipDTO.ord_cd }</td>
+												<td>${shipDTO.ord_count }</td>
+												<td>${shipDTO.ship_count }</td>
+												<td><input type="button" class="btn btn-secondary" value="삭제"
+													onclick="location.href='${pageContext.request.contextPath}/ship/currDelete?ship_cd=${shipDTO.ship_cd}'"></td>
 											</tr>
-										</thead>
-										<tbody>
-											<c:forEach var="shipDTO" items="${shipCurrentInfo }">
-												<tr>
-													<th scope="row"><input type="checkbox" name="chk"
-														value="${shipDTO.ship_cd }"></th>
-													<td>${shipDTO.ship_cd }</td>
-													<td><fmt:formatDate value="${shipDTO.ship_date}" pattern="yyyy.MM.dd"/></td>
-													<td>${shipDTO.cli_nm }</td>
-													<td>${shipDTO.prod_cd }</td>
-													<td>${shipDTO.prod_nm }</td>
-													<td>${shipDTO.prod_unit }</td>
-													<td>${shipDTO.ord_cd }</td>
-													<td>${shipDTO.ord_count }</td>
-													<td>${shipDTO.ship_count }</td>
-													<td><input type="button" value="삭제"
-														onclick="location.href='${pageContext.request.contextPath}/ship/currDelete?ship_cd=${shipDTO.ship_cd}'"></td>
-												</tr>
-											</c:forEach>
-										</tbody>
-									</table>
-<!-- 								</form> -->
-								
+										</c:forEach>
+									</tbody>
+								</table>
+								<!-- 								</form> -->
+
 
 								<!-- 페이징 처리 -->
 								<div class="pageNum">

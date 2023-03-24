@@ -140,19 +140,46 @@
 				</div>
 			</div>
 		</div>
-
+		<!-- 	검색창 -->
 		<div class="content">
 			<div class="animated fadeIn">
 				<div class="row">
 					<div class="col-lg">
-						<div class="card">
-							<div class="card-body">검색창</div>
+						<div class="card m-0">
+							<div class="card-body card-block">
+								<form
+									action="${pageContext.request.contextPath }/client/clientInfo"
+									method="get" class="form-inline">
+									<div class="form-group col-6 mb-1">
+										<label class="pr-1 form-control-label">거래처코드</label>&nbsp;&nbsp;<input
+											type="text" id="" class="form-control ">
+									</div>
+									<div class="form-group col-6 mb-1">
+										<label class="pr-1  form-control-label">거래처명</label>&nbsp;&nbsp;<input
+											type="text" id="" class="form-control ">
+									</div>
+									<div class="form-group col-6 mt-1">
+										<label class="pr-1  form-control-label">거래처구분</label>&nbsp;&nbsp;
+										<div class="p-0 col">
+											<select name="select" id="select" class="form-control">
+												<option value="0">전체</option>
+												<option value="1">협력사</option>
+												<option value="2">고객사</option>
+												<option value="3">자사</option>
+											</select>
+										</div>
+									</div>
+							</div>
 						</div>
+						<input type="submit" class="btn btn-secondary float-right"
+							value="조회">
 					</div>
 				</div>
 			</div>
+
 		</div>
-		<!-- .content -->
+		</form>
+		<!-- 	검색창 -->
 
 		<div class="content">
 			<div class="animated fadeIn">
@@ -167,11 +194,9 @@
 								<!-- 체크박스로 선택해 글 여러개 삭제가능  -->
 								<form action="${pageContext.request.contextPath}/client/delete"
 									method="post">
-									<input type="submit" value="삭제"> 
-									<input type="button"
+									<input type="submit" class="btn btn-secondary" value="삭제"> <input type="button" class="btn btn-secondary" 
 										value="추가"
 										onclick="location.href='${pageContext.request.contextPath}/client/insert'">
-									<!-- 									<button id="add-row">추가</button> -->
 
 									<table id="bootstrap-data-table"
 										class="table table-striped table-bordered">
@@ -211,13 +236,13 @@
 													<td>${clientDTO.cli_boss }</td>
 													<td>${clientDTO.cli_emp }</td>
 													<td>${clientDTO.cli_addr }</td>
-<%-- 													<td>${clientDTO.cli_addr2 }</td> --%>
-<%-- 													<td>${clientDTO.cli_tel }</td> --%>
-<%-- 													<td>${clientDTO.cli_emp_tel }</td> --%>
-<%-- 													<td>${clientDTO.cli_fax }</td> --%>
-<%-- 													<td>${clientDTO.cli_email }</td> --%>
-<%-- 													<td>${clientDTO.cli_note }</td> --%>
-													<td><input type="button" value="수정"
+													<%-- <td>${clientDTO.cli_addr2 }</td> --%>
+													<%-- <td>${clientDTO.cli_tel }</td> --%>
+													<%-- <td>${clientDTO.cli_emp_tel }</td> --%>
+													<%-- <td>${clientDTO.cli_fax }</td> --%>
+													<%-- <td>${clientDTO.cli_email }</td> --%>
+													<%-- <td>${clientDTO.cli_note }</td> --%>
+													<td><input type="button" class="btn btn-secondary" value="수정"
 														onclick="location.href='${pageContext.request.contextPath}/client/update?cli_cd=${clientDTO.cli_cd}'"></td>
 												</tr>
 											</c:forEach>
