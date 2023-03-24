@@ -39,8 +39,30 @@ public class ClientDAOImpl implements ClientDAO {
 	@Override
 	public void deleteClient(String cli_cd) {
 		System.out.println("ClientDAOImpl deleteClient()");
-		
-		sqlSession.delete(namespace+".deleteClient", cli_cd);
+
+		sqlSession.delete(namespace + ".deleteClient", cli_cd);
+	}
+
+	@Override
+	public void insertClient(ClientDTO clientDTO) {
+		System.out.println("ClientDAOImpl insertClient()");
+
+		sqlSession.insert(namespace + ".insertClient", clientDTO);
+	}
+
+	@Override
+	public ClientDTO getClient(String cli_cd) {
+		System.out.println("ClientDAOImpl getClient()");
+
+		return sqlSession.selectOne(namespace + ".getClient", cli_cd);
+	}
+
+	@Override
+	public void updateClient(ClientDTO clientDTO) {
+		System.out.println("ClientDAOImpl updateClient()");
+
+		sqlSession.update(namespace + ".updateClient", clientDTO);
+
 	}
 
 }
