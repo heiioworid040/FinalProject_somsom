@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+.search-btn-div {
+	height: 35px;
+}
+.search-btn {
+	float: right;
+	border-style: none;
+	background-color: #212529;
+	color: #ffffff;
+	font-size: 18px;
+}
+.search {
+	float: right;
+	margin: 5px auto;
+	font-weight: bold;
+}
+.search-450 {
+	float: left;
+	width: 450px;
+}
+.search-500 {
+	float: left;
+	width: 500px;
+}
+
+/* btn */
+.btn-div {
+	float: right;
+}
+.btn-test {
+	border-style: none;
+	background-color: #212529;
+	color: #ffffff;
+	font-size: 18px;
+}

@@ -1,5 +1,6 @@
 package com.project.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -61,5 +62,15 @@ public class ShipController {
 		model.addAttribute("pageDTO", pageDTO);
 		// 주소변경 없이 이동
 		return "ship/shipCurrentInfo";
+	}
+
+	@RequestMapping(value = "/ship/currDelete", method = RequestMethod.GET)
+	public String delete(HttpServletRequest request) {
+		String ship_cd = request.getParameter("ship_cd");
+
+		shipService.currDelete(ship_cd);
+
+		// 주소변경 하면서 이동
+		return "redirect:/ship/shipCurrentInfo";
 	}
 }

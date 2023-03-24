@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -137,6 +138,7 @@
 												<th scope="col">수주번호</th>
 												<th scope="col">수주량</th>
 												<th scope="col">출하량</th>
+												<th scope="col">버튼</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -145,7 +147,7 @@
 													<th scope="row"><input type="checkbox" name="chk"
 														value="${shipDTO.ship_cd }"></th>
 													<td>${shipDTO.ship_cd }</td>
-													<td>${shipDTO.ship_date }</td>
+													<td><fmt:formatDate value="${shipDTO.ship_date}" pattern="yyyy.MM.dd"/></td>
 													<td>${shipDTO.cli_nm }</td>
 													<td>${shipDTO.prod_cd }</td>
 													<td>${shipDTO.prod_nm }</td>
@@ -153,6 +155,8 @@
 													<td>${shipDTO.ord_cd }</td>
 													<td>${shipDTO.ord_count }</td>
 													<td>${shipDTO.ship_count }</td>
+													<td><input type="button" value="삭제"
+														onclick="location.href='${pageContext.request.contextPath}/ship/currDelete?ship_cd=${shipDTO.ship_cd}'"></td>
 												</tr>
 											</c:forEach>
 										</tbody>

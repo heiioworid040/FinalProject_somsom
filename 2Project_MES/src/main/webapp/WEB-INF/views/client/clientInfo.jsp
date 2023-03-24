@@ -61,32 +61,32 @@
 <!-- 추가 버튼 함수  -->
 <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
 <script>
-// 	$(document)
-// 			.ready(
-// 					function() {
-// 						$("#add-row")
-// 								.click(
-// 										function() {
-// 											var newRow = '<tr><th></th>'
-// 													+ '<td><input type="text" style="width: 100px; name="prod_cd"></td>'
-// 													+ '<td><input type="text" style="width: 90px; name="prod_nm"></td>'
-// 													+ '<td><input type="text" style="width: 50px; name="prod_mat"></td>'
-// 													+ '<td><input type="text" style="width: 100px; name="prod_unit"></td>'
-// 													+ '<td><input type="text" style="width: 60px; name="prod_text"></td>'
-// 													+ '<td><input type="text" style="width: 80px; name="prod_size"></td>'
-// 													+ '<td><input type="text" style="width: 60px; name="prod_inprice"></td>'
-// 													+ '<td><input type="text" style="width: 60px; name="prod_outprice"></td>'
-// 													+ '<td><input type="text" style="width: 130px; name="prod_count"></td>'
-// 													+ '<td><input type="text" style="width: 110px; name="prod_note"></td>'
-// 													+ '<td><input type="text" style="width: 110px; name="prod_note"></td>'
-// 													+ '<td><input type="text" style="width: 120px; name="prod_note"></td>'
-// 													+ '<td><input type="text" style="width: 110px; name="prod_note"></td>'
-// 													+ '<td><input type="text" style="width: 180px; name="prod_note"></td>'
-// 													+ '<td><button class-"submit-Btn">전송</button></td></tr>';
-// 											$('#bootstrap-data-table').append(
-// 													newRow);
-// 										});
-// 					});
+	// 	$(document)
+	// 			.ready(
+	// 					function() {
+	// 						$("#add-row")
+	// 								.click(
+	// 										function() {
+	// 											var newRow = '<tr><th></th>'
+	// 													+ '<td><input type="text" style="width: 100px; name="prod_cd"></td>'
+	// 													+ '<td><input type="text" style="width: 90px; name="prod_nm"></td>'
+	// 													+ '<td><input type="text" style="width: 50px; name="prod_mat"></td>'
+	// 													+ '<td><input type="text" style="width: 100px; name="prod_unit"></td>'
+	// 													+ '<td><input type="text" style="width: 60px; name="prod_text"></td>'
+	// 													+ '<td><input type="text" style="width: 80px; name="prod_size"></td>'
+	// 													+ '<td><input type="text" style="width: 60px; name="prod_inprice"></td>'
+	// 													+ '<td><input type="text" style="width: 60px; name="prod_outprice"></td>'
+	// 													+ '<td><input type="text" style="width: 130px; name="prod_count"></td>'
+	// 													+ '<td><input type="text" style="width: 110px; name="prod_note"></td>'
+	// 													+ '<td><input type="text" style="width: 110px; name="prod_note"></td>'
+	// 													+ '<td><input type="text" style="width: 120px; name="prod_note"></td>'
+	// 													+ '<td><input type="text" style="width: 110px; name="prod_note"></td>'
+	// 													+ '<td><input type="text" style="width: 180px; name="prod_note"></td>'
+	// 													+ '<td><button class-"submit-Btn">전송</button></td></tr>';
+	// 											$('#bootstrap-data-table').append(
+	// 													newRow);
+	// 										});
+	// 					});
 
 	// 전송버튼	
 	// $(document).ready(function() {
@@ -163,12 +163,15 @@
 								<strong class="card-title">거래처</strong>
 							</div>
 							<div class="card-body">
-							
+
 								<!-- 체크박스로 선택해 글 여러개 삭제가능  -->
 								<form action="${pageContext.request.contextPath}/client/delete"
 									method="post">
-									<input type="submit" value="삭제">
-<!-- 									<button id="add-row">추가</button> -->
+									<input type="submit" value="삭제"> 
+									<input type="button"
+										value="추가"
+										onclick="location.href='${pageContext.request.contextPath}/client/insert'">
+									<!-- 									<button id="add-row">추가</button> -->
 
 									<table id="bootstrap-data-table"
 										class="table table-striped table-bordered">
@@ -178,19 +181,20 @@
 													onclick="allChk(this);" /></th>
 												<th scope="col">거래처코드</th>
 												<th scope="col">거래처명</th>
-												<th scope="col">거래처구분</th>
+												<th scope="col">구분</th>
 												<th scope="col">사업자번호</th>
 												<th scope="col">업태</th>
 												<th scope="col">종목</th>
 												<th scope="col">대표자</th>
 												<th scope="col">담당자</th>
 												<th scope="col">주소</th>
-												<th scope="col">상세주소</th>
-												<th scope="col">전화번호</th>
-												<th scope="col">휴대폰번호</th>
-												<th scope="col">팩스번호</th>
-												<th scope="col">이메일</th>
-												<th scope="col">비고</th>
+<!-- 												<th scope="col">상세주소</th> -->
+<!-- 												<th scope="col">전화번호</th> -->
+<!-- 												<th scope="col">휴대폰번호</th> -->
+<!-- 												<th scope="col">팩스번호</th> -->
+<!-- 												<th scope="col">이메일</th> -->
+<!-- 												<th scope="col">비고</th> -->
+												<th scope="col"></th>
 											</tr>
 										</thead>
 										<tbody>
@@ -207,18 +211,20 @@
 													<td>${clientDTO.cli_boss }</td>
 													<td>${clientDTO.cli_emp }</td>
 													<td>${clientDTO.cli_addr }</td>
-													<td>${clientDTO.cli_addr2 }</td>
-													<td>${clientDTO.cli_tel }</td>
-													<td>${clientDTO.cli_emp_tel }</td>
-													<td>${clientDTO.cli_fax }</td>
-													<td>${clientDTO.cli_email }</td>
-													<td>${clientDTO.cli_note }</td>
+<%-- 													<td>${clientDTO.cli_addr2 }</td> --%>
+<%-- 													<td>${clientDTO.cli_tel }</td> --%>
+<%-- 													<td>${clientDTO.cli_emp_tel }</td> --%>
+<%-- 													<td>${clientDTO.cli_fax }</td> --%>
+<%-- 													<td>${clientDTO.cli_email }</td> --%>
+<%-- 													<td>${clientDTO.cli_note }</td> --%>
+													<td><input type="button" value="수정"
+														onclick="location.href='${pageContext.request.contextPath}/client/update?cli_cd=${clientDTO.cli_cd}'"></td>
 												</tr>
 											</c:forEach>
 										</tbody>
 									</table>
 								</form>
-								
+
 
 								<!-- 페이징 처리 -->
 								<div class="pageNum">
