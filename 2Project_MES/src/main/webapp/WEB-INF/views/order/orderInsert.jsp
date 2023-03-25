@@ -34,6 +34,10 @@
 	function fun3() {
 		window.open('${pageContext.request.contextPath }/order/prodPop','prodPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=600,height=510,top=90,left=200')
 	}
+// 	function fun4(ord_cd) {
+// 		alert(ord_cd);
+// 		document.orderInsert2.submit();
+// 	}
 </script>
 <body>
 	<!-- Left Panel1 -->
@@ -102,6 +106,7 @@
 		</form>
 		<!-- .content -->
 		
+<%-- 		<form action="${pageContext.request.contextPath}/order/orderInsert" name="orderInsert2" method="get"> --%>
 		<div class="content-div">
 			<div class="search-result-div">
 				<span class="search-result">총 n건</span>
@@ -127,7 +132,9 @@
 									</thead>
 									<tbody>
 										<c:forEach var="orderDTO" items="${orderInsertList }">
-											<tr>
+<!-- 											<tr> -->
+											<tr onclick="location.href='${pageContext.request.contextPath }/order/orderInsert?ord_cd=${orderDTO.ord_cd }'">
+<%-- 												<td><input type="submit" name="ord_cd" value="${orderDTO.ord_cd}"></td> --%>
 												<td>${orderDTO.cli_cd }</td>
 												<td>${orderDTO.cli_nm }</td>
 												<td>${orderDTO.ord_date }</td>
@@ -144,6 +151,7 @@
 				</div>
 			</div>
 		</div>
+<!-- 		</form> -->
 		<!-- .content -->
 		
 		<form action="${pageContext.request.contextPath }/order/orderInsertPro" method="POST">
@@ -166,12 +174,12 @@
 								<table class="table">
 									<thead class="thead-dark">
 										<tr>
-											<th scope="col">수주업체코드</th><td><input type="text" id="cli_cd" name="cli_cd" readonly><input type="text" id="cli_nm" readonly><button type="button" id="pop" value="cli" onclick="fun1('cli')">돋보기</button></td>
-											<th scope="col">수주일자</th><td><input type="date" name="ord_date"></td>
+											<th scope="col">수주업체코드</th><td><input type="text" id="cli_cd" name="cli_cd" value="${orderDTO.cli_cd }" readonly><input type="text" id="cli_nm" value="${orderDTO.cli_nm }" readonly><button type="button" id="pop" value="cli" onclick="fun1('cli')">돋보기</button></td>
+											<th scope="col">수주일자</th><td><input type="date" name="ord_date" value="${ord_date }"></td>
 										</tr>
 										<tr>
-											<th scope="col">담당자</th><td><input type="text" id="emp_cd" name="emp_cd" readonly><input type="text" id="emp_nm" readonly><button type="button" id="pop" value="emp" onclick="fun2()">돋보기</button></td>
-											<th scope="col">납품예정일</th><td><input type="date" name="ord_d_date"></td>
+											<th scope="col">담당자</th><td><input type="text" id="emp_cd" name="emp_cd" value="${orderDTO.emp_cd }" readonly><input type="text" id="emp_nm" value="${orderDTO.emp_nm }" readonly><button type="button" id="pop" value="emp" onclick="fun2()">돋보기</button></td>
+											<th scope="col">납품예정일</th><td><input type="date" name="ord_d_date" value="${ord_d_date }"></td>
 										</tr>
 									</thead>
 								</table>

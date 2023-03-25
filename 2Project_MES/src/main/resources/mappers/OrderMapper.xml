@@ -4,11 +4,22 @@
 <mapper namespace="com.project.mappers.OrderMapper">
 	
 	<select id="getOrderInsertList" resultType="com.project.domain.OrderDTO">
-		select o.cli_cd, c.cli_nm, ord_date, ord_d_date, e.emp_cd, e.emp_nm
+		select ord_cd, o.cli_cd, c.cli_nm, ord_date, ord_d_date, e.emp_cd, e.emp_nm
 		from orders o join client c on o.cli_cd=c.cli_cd join employee e on o.emp_cd=e.emp_cd
 		order by ord_cd
 		limit #{startRow}, #{pageSize}
 	</select>
+	
+	<select id="getOrderInsert" resultType="com.project.domain.OrderDTO">
+		select o.cli_cd, c.cli_nm, ord_date, ord_d_date, ord_count, e.emp_cd, e.emp_nm, p.prod_cd, p.prod_nm, p.prod_unit, p.prod_note
+		from orders o join client c on o.cli_cd=c.cli_cd join employee e on o.emp_cd=e.emp_cd join product p on o.prod_cd=p.prod_cd
+		where ord_cd=#{ord_cd}
+	</select>
+	
+	<select id="getMaxNum" resultType="java.lang.Integer">
+		select max(cast(substring(ord_cd,9,3) as unsigned)) from orders where ord_date=#{ord_date}
+	</select>
+<!-- 	첫글자 추가 후 9=> 10으로 바꾸기 -->
 	
 	<insert id="insertPro">
 		insert into orders values (#{ord_cd}, #{prod_cd}, #{emp_cd}, #{cli_cd}, #{ord_date}, #{ord_d_date}, #{ord_count})

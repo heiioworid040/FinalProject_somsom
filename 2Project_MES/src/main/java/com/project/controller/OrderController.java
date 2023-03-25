@@ -67,6 +67,16 @@ public class OrderController {
 			pageDTO.setEndPage(endPage);
 			pageDTO.setPageCount(pageCount);
 			
+			String ord_cd=(String)request.getParameter("ord_cd");
+			if(ord_cd!=null) {
+				OrderDTO orderDTO=orderService.getOrderInsert(ord_cd);
+				String ord_date=(String.valueOf(String.valueOf(orderDTO.getOrd_date())).substring(0,10));
+				String ord_d_date=(String.valueOf(String.valueOf(orderDTO.getOrd_d_date())).substring(0,10));
+				model.addAttribute("ord_date", ord_date);
+				model.addAttribute("ord_d_date", ord_d_date);
+				model.addAttribute("orderDTO", orderDTO);
+			}
+			
 //			String btn_can=(String)request.getParameter("btn_can");
 //			String click_cli=(String)request.getParameter("cliPop");
 //			String click_emp=(String)request.getParameter("empPop");
@@ -100,7 +110,6 @@ public class OrderController {
 			orderDTO.setOrd_count(ord_count);
 			orderDTO.setOrd_date(ord_date);
 			orderDTO.setOrd_d_date(ord_d_date);
-			orderDTO.setOrd_cd("들어가려무나"); //ord_cd 자동입력 수정하기 + 입력 후 새로고침
 			orderService.insertPro(orderDTO);
 			
 			model.addAttribute("orderDTO", orderDTO);
@@ -145,111 +154,111 @@ public class OrderController {
 			return "order/orderInfo";
 		}
 		
-//		@RequestMapping(value = "/order/prodPop", method = RequestMethod.GET)
-//		public String Prodpop(HttpServletRequest request, Model model) {
-//			int pageSize=10;
-//			String pageNum=request.getParameter("pageNum");
-//			if(pageNum==null) {
-//				pageNum="1";
-//			}
-//			int currentPage=Integer.valueOf(pageNum);
-//			
-//			PageDTO pageDTO=new PageDTO();
-//			pageDTO.setPageSize(pageSize);
-//			pageDTO.setPageNum(pageNum);
-//			pageDTO.setCurrentPage(currentPage);
-//			
-//			List<ProductDTO> prodPop=productService.getProductList(pageDTO);
-//			
-//			int count=productService.getProductCount();
-//			int pageBlock=10;
-//			int startPage=(currentPage-1)/pageBlock*pageBlock+1;
-//			int endPage=startPage+pageBlock-1;
-//			int pageCount=count/pageSize+(count%pageSize==0?0:1);
-//			if(endPage>pageCount) {
-//				endPage=pageCount;
-//			}
-//			
-//			pageDTO.setCount(count);
-//			pageDTO.setPageBlock(pageBlock);
-//			pageDTO.setStartPage(startPage);
-//			pageDTO.setEndPage(endPage);
-//			pageDTO.setPageCount(pageCount);
-//			
-//			model.addAttribute("prodPop", prodPop);
-//			model.addAttribute("pageDTO", pageDTO);
-//			return "order/prodPop";
-//		}
-//		
-//		@RequestMapping(value = "/order/cliPop", method = RequestMethod.GET)
-//		public String clipop(HttpServletRequest request, Model model) {
-//			int pageSize=10;
-//			String pageNum=request.getParameter("pageNum");
-//			if(pageNum==null) {
-//				pageNum="1";
-//			}
-//			int currentPage=Integer.valueOf(pageNum);
-//			
-//			PageDTO pageDTO=new PageDTO();
-//			pageDTO.setPageSize(pageSize);
-//			pageDTO.setPageNum(pageNum);
-//			pageDTO.setCurrentPage(currentPage);
-//			
-//			List<ClientDTO> cliPop=clientService.getClientInfo(pageDTO);
-//			
-//			int count=clientService.getClientCount();
-//			int pageBlock=10;
-//			int startPage=(currentPage-1)/pageBlock*pageBlock+1;
-//			int endPage=startPage+pageBlock-1;
-//			int pageCount=count/pageSize+(count%pageSize==0?0:1);
-//			if(endPage>pageCount) {
-//				endPage=pageCount;
-//			}
-//			
-//			pageDTO.setCount(count);
-//			pageDTO.setPageBlock(pageBlock);
-//			pageDTO.setStartPage(startPage);
-//			pageDTO.setEndPage(endPage);
-//			pageDTO.setPageCount(pageCount);
-//			
-//			model.addAttribute("cliPop", cliPop);
-//			model.addAttribute("pageDTO", pageDTO);
-//			return "order/cliPop";
-//		}
-//		
-//		@RequestMapping(value = "/order/empPop", method = RequestMethod.GET)
-//		public String emppop(HttpServletRequest request, Model model) {
-//			int pageSize=10;
-//			String pageNum=request.getParameter("pageNum");
-//			if(pageNum==null) {
-//				pageNum="1";
-//			}
-//			int currentPage=Integer.valueOf(pageNum);
-//			
-//			PageDTO pageDTO=new PageDTO();
-//			pageDTO.setPageSize(pageSize);
-//			pageDTO.setPageNum(pageNum);
-//			pageDTO.setCurrentPage(currentPage);
-//			
-//			List<EmployeeDTO> empPop=employeeService.getEmployeeList(pageDTO);
-//			
-//			int count=employeeService.getEmployeeCount();
-//			int pageBlock=10;
-//			int startPage=(currentPage-1)/pageBlock*pageBlock+1;
-//			int endPage=startPage+pageBlock-1;
-//			int pageCount=count/pageSize+(count%pageSize==0?0:1);
-//			if(endPage>pageCount) {
-//				endPage=pageCount;
-//			}
-//			
-//			pageDTO.setCount(count);
-//			pageDTO.setPageBlock(pageBlock);
-//			pageDTO.setStartPage(startPage);
-//			pageDTO.setEndPage(endPage);
-//			pageDTO.setPageCount(pageCount);
-//			
-//			model.addAttribute("empPop", empPop);
-//			model.addAttribute("pageDTO", pageDTO);
-//			return "order/empPop";
-//		}
+		@RequestMapping(value = "/order/prodPop", method = RequestMethod.GET)
+		public String Prodpop(HttpServletRequest request, Model model) {
+			int pageSize=10;
+			String pageNum=request.getParameter("pageNum");
+			if(pageNum==null) {
+				pageNum="1";
+			}
+			int currentPage=Integer.valueOf(pageNum);
+			
+			PageDTO pageDTO=new PageDTO();
+			pageDTO.setPageSize(pageSize);
+			pageDTO.setPageNum(pageNum);
+			pageDTO.setCurrentPage(currentPage);
+			
+			List<ProductDTO> prodPop=productService.getProductList(pageDTO);
+			
+			int count=productService.getProductCount(pageDTO);
+			int pageBlock=10;
+			int startPage=(currentPage-1)/pageBlock*pageBlock+1;
+			int endPage=startPage+pageBlock-1;
+			int pageCount=count/pageSize+(count%pageSize==0?0:1);
+			if(endPage>pageCount) {
+				endPage=pageCount;
+			}
+			
+			pageDTO.setCount(count);
+			pageDTO.setPageBlock(pageBlock);
+			pageDTO.setStartPage(startPage);
+			pageDTO.setEndPage(endPage);
+			pageDTO.setPageCount(pageCount);
+			
+			model.addAttribute("prodPop", prodPop);
+			model.addAttribute("pageDTO", pageDTO);
+			return "order/prodPop";
+		}
+		
+		@RequestMapping(value = "/order/cliPop", method = RequestMethod.GET)
+		public String clipop(HttpServletRequest request, Model model) {
+			int pageSize=10;
+			String pageNum=request.getParameter("pageNum");
+			if(pageNum==null) {
+				pageNum="1";
+			}
+			int currentPage=Integer.valueOf(pageNum);
+			
+			PageDTO pageDTO=new PageDTO();
+			pageDTO.setPageSize(pageSize);
+			pageDTO.setPageNum(pageNum);
+			pageDTO.setCurrentPage(currentPage);
+			
+			List<ClientDTO> cliPop=clientService.getClientInfo(pageDTO);
+			
+			int count=clientService.getClientCount();
+			int pageBlock=10;
+			int startPage=(currentPage-1)/pageBlock*pageBlock+1;
+			int endPage=startPage+pageBlock-1;
+			int pageCount=count/pageSize+(count%pageSize==0?0:1);
+			if(endPage>pageCount) {
+				endPage=pageCount;
+			}
+			
+			pageDTO.setCount(count);
+			pageDTO.setPageBlock(pageBlock);
+			pageDTO.setStartPage(startPage);
+			pageDTO.setEndPage(endPage);
+			pageDTO.setPageCount(pageCount);
+			
+			model.addAttribute("cliPop", cliPop);
+			model.addAttribute("pageDTO", pageDTO);
+			return "order/cliPop";
+		}
+		
+		@RequestMapping(value = "/order/empPop", method = RequestMethod.GET)
+		public String emppop(HttpServletRequest request, Model model) {
+			int pageSize=10;
+			String pageNum=request.getParameter("pageNum");
+			if(pageNum==null) {
+				pageNum="1";
+			}
+			int currentPage=Integer.valueOf(pageNum);
+			
+			PageDTO pageDTO=new PageDTO();
+			pageDTO.setPageSize(pageSize);
+			pageDTO.setPageNum(pageNum);
+			pageDTO.setCurrentPage(currentPage);
+			
+			List<EmployeeDTO> empPop=employeeService.getEmployeeList(pageDTO);
+			
+			int count=employeeService.getEmployeeCount();
+			int pageBlock=10;
+			int startPage=(currentPage-1)/pageBlock*pageBlock+1;
+			int endPage=startPage+pageBlock-1;
+			int pageCount=count/pageSize+(count%pageSize==0?0:1);
+			if(endPage>pageCount) {
+				endPage=pageCount;
+			}
+			
+			pageDTO.setCount(count);
+			pageDTO.setPageBlock(pageBlock);
+			pageDTO.setStartPage(startPage);
+			pageDTO.setEndPage(endPage);
+			pageDTO.setPageCount(pageCount);
+			
+			model.addAttribute("empPop", empPop);
+			model.addAttribute("pageDTO", pageDTO);
+			return "order/empPop";
+		}
 }

@@ -26,8 +26,28 @@ public class OrderService {
 
 		return orderDAO.getOrderInsertList(pageDTO);
 	}
+
+	//수주관리(수주상세)
+	public OrderDTO getOrderInsert(String ord_cd) {
+		return orderDAO.getOrderInsert(ord_cd);
+	}
 	
+	//수주 추가
 	public void insertPro(OrderDTO orderDTO) {
+		String num;
+		if(orderDAO.getMaxNum(orderDTO)==null) {
+			num="001";
+		}else {
+			if((orderDAO.getMaxNum(orderDTO))<9) {
+				num="00"+(orderDAO.getMaxNum(orderDTO)+1);
+			}else if((orderDAO.getMaxNum(orderDTO))<99) {
+				num="0"+(orderDAO.getMaxNum(orderDTO)+1);
+			}else {
+				num=""+(orderDAO.getMaxNum(orderDTO)+1);
+			}
+		}
+		orderDTO.setOrd_cd((String.valueOf(orderDTO.getOrd_date()).substring(0,10)).replace("-", "")+num);
+		
 		orderDAO.insertPro(orderDTO);
 	}
 	
