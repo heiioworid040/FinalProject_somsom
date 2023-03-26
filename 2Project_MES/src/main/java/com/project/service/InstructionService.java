@@ -9,5 +9,9 @@ public interface InstructionService {
 	public List<InstructionDTO> getInstList(PageDTO pageDTO);
 
 	public int getInstCount();
+
+	public void insertInst(InstructionDTO instructionDTO);
+
+	public int maxInst();
 	
 }

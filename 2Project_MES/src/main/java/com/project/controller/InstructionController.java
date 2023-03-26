@@ -1,9 +1,11 @@
 package com.project.controller;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -70,4 +72,17 @@ public class InstructionController {
 		return "instruction/infoInstruction";
 	}
 	
+	@RequestMapping(value = "/instruction/instinsert", method = RequestMethod.POST)
+	public String instInsertPro(HttpServletRequest request, HttpServletResponse response, InstructionDTO instructionDTO) {
+		int maxInst=instService.maxInst();
+		Timestamp date=new Timestamp(System.currentTimeMillis());
+		
+		instructionDTO.setInst_cd("Wi"+maxInst);
+		instructionDTO.setInst_st("대기");
+		instructionDTO.setInst_date(date);
+		instructionDTO.setInst_count(Integer.parseInt(request.getParameter("inst_count")));
+		instService.insertInst(instructionDTO);
+		
+		return "redirect:/instruction/infoInst";
+	}
 }

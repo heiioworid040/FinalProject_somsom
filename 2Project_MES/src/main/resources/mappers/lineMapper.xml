@@ -8,9 +8,22 @@
 <mapper namespace="com.project.mappers.lineMapper">
 	
     <select id="getSearchLine" resultType="com.project.domain.LineDTO">
-    select DISTINCT line_cd, line_nm
-    from line
+    SELECT DISTINCT line_cd, line_nm
+    FROM line
+    ORDER BY line_cd
     </select>
+
+    <select id="getLineList" resultType="com.project.domain.LineDTO">
+    SELECT * 
+	FROM line
+	ORDER BY line_cd
+	</select>
+
+    <select id="getLineCount" resultType="java.lang.Integer">
+    SELECT COUNT(*) 
+	FROM line
+	</select>
+	
 <!-- id-"이름" spl구문 하나하나 이름
 	 ? 대신에 MemberDTO 멤버변수명 #{id}	-->
 <!-- 	<insert id="insertTest"> -->

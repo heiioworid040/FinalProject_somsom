@@ -23,7 +23,20 @@ public class LineDAOImpl implements LineDAO {
 		
 		return sqlSession.selectList(namespace+".getSearchLine");
 	}
-	
+
+	@Override
+	public List<LineDTO> getInstList(PageDTO pageDTO) {
+		System.out.println("LineDAOImpl getLineList()");
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".getLineList");
+	}
+
+	@Override
+	public int getLineCount() {
+		System.out.println("LineDAOImpl getLineCount()");
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".getLineCount");
+	}
 	
 	
 }
