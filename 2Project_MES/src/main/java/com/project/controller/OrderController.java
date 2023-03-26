@@ -1,6 +1,7 @@
 package com.project.controller;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -36,6 +37,55 @@ public class OrderController {
 		@Inject
 		private ProductService productService;
 		
+		@RequestMapping(value = "/order/searchPop", method = RequestMethod.GET)
+		public String searchpop(HttpServletRequest request, Model model) {
+			int pageSize=10;
+			String pageNum=request.getParameter("pageNum");
+			if(pageNum==null) {
+				pageNum="1";
+			}
+			int currentPage=Integer.valueOf(pageNum);
+			
+			PageDTO pageDTO=new PageDTO();
+			pageDTO.setPageSize(pageSize);
+			pageDTO.setPageNum(pageNum);
+			pageDTO.setCurrentPage(currentPage);
+			String pop=(String)request.getParameter("pop");
+
+			int count=0;
+			System.out.println(pop);
+			if(pop.equals("cli")) {
+				List<ClientDTO> searchPop=clientService.getClientInfo(pageDTO);
+				model.addAttribute("searchPop", searchPop);
+				count=clientService.getClientCount();
+			}else if(pop.equals("emp")) {
+				List<EmployeeDTO> searchPop=employeeService.getEmployeeList(pageDTO);
+				model.addAttribute("searchPop", searchPop);
+				count=employeeService.getEmployeeCount();
+			}else {
+				List<ProductDTO> searchPop=productService.getProductList(pageDTO);
+				model.addAttribute("searchPop", searchPop);
+				count=productService.getProductCount(pageDTO);
+			}
+			int pageBlock=10;
+			int startPage=(currentPage-1)/pageBlock*pageBlock+1;
+			int endPage=startPage+pageBlock-1;
+			int pageCount=count/pageSize+(count%pageSize==0?0:1);
+			if(endPage>pageCount) {
+				endPage=pageCount;
+			}
+			
+			pageDTO.setCount(count);
+			pageDTO.setPageBlock(pageBlock);
+			pageDTO.setStartPage(startPage);
+			pageDTO.setEndPage(endPage);
+			pageDTO.setPageCount(pageCount);
+			
+			model.addAttribute("pop", pop);
+			model.addAttribute("pageDTO", pageDTO);
+			return "order/searchPop";
+		}
+		
 		@RequestMapping(value = "/order/orderInsert", method = RequestMethod.GET)
 		public String insert(HttpServletRequest request, Model model) {
 			int pageSize=10;
@@ -67,11 +117,15 @@ public class OrderController {
 			pageDTO.setEndPage(endPage);
 			pageDTO.setPageCount(pageCount);
 			
+			SimpleDateFormat dfm=new SimpleDateFormat("yyyy-MM-dd");
+			
 			String ord_cd=(String)request.getParameter("ord_cd");
 			if(ord_cd!=null) {
 				OrderDTO orderDTO=orderService.getOrderInsert(ord_cd);
-				String ord_date=(String.valueOf(String.valueOf(orderDTO.getOrd_date())).substring(0,10));
-				String ord_d_date=(String.valueOf(String.valueOf(orderDTO.getOrd_d_date())).substring(0,10));
+				String ord_date=dfm.format(orderDTO.getOrd_date());
+				String ord_d_date=dfm.format(orderDTO.getOrd_d_date());
+//				String ord_date=String.valueOf(orderDTO.getOrd_date()).substring(0,10);
+//				String ord_d_date=String.valueOf(orderDTO.getOrd_d_date()).substring(0,10);
 				model.addAttribute("ord_date", ord_date);
 				model.addAttribute("ord_d_date", ord_d_date);
 				model.addAttribute("orderDTO", orderDTO);
