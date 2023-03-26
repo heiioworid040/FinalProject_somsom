@@ -106,24 +106,27 @@
 									action="${pageContext.request.contextPath }/ship/shipCurrentInfo"
 									method="get" class="form-inline">
 									<div class="form-group col-6 mb-1">
-										<label class="pr-1  form-control-label">출하일자</label>&nbsp;&nbsp; <input
-											type="date" id="" class="form-control">&nbsp;~&nbsp;
+										<label class="pr-1  form-control-label">출하일자</label>&nbsp;&nbsp;
+										<input type="date" id="" class="form-control">&nbsp;~&nbsp;
 										<input type="date" id="" class="form-control">
 									</div>
 									<div class="form-group col-6 mb-1">
-										<label class="pr-1  form-control-label">품번</label>&nbsp;&nbsp; <input
-											type="text" id="" class="form-control ">
-											<div class="input-group">
-                                        	<div class="input-group-addon"><i class="ti-search"></i></div>
-                                    	</div>
+										<label class="pr-1  form-control-label">품번</label>&nbsp;&nbsp;
+										<input type="text" id="" class="form-control ">
+										<div class="input-group">
+											<div class="input-group-addon">
+												<i class="ti-search"></i>
+											</div>
+										</div>
 									</div>
 									<div class="form-group col-6 mt-1">
 										<label class="pr-1  form-control-label">수주업체</label>&nbsp;&nbsp;
-										<input
-											type="text" id="" class="form-control ">
-											<div class="input-group">
-                                        	<div class="input-group-addon"><i class="ti-search"></i></div>
-                                    	</div>
+										<input type="text" id="" class="form-control ">
+										<div class="input-group">
+											<div class="input-group-addon">
+												<i class="ti-search"></i>
+											</div>
+										</div>
 									</div>
 							</div>
 						</div>
@@ -146,12 +149,8 @@
 								<strong class="card-title">출하현황</strong>
 							</div>
 							<div class="card-body">
-
-								<!-- 체크박스로 선택해 글 여러개 삭제가능  -->
-								<%-- 								<form action="${pageContext.request.contextPath}/client/delete" --%>
-								<!-- 									method="post"> -->
-								<!-- 									<input type="submit" value="삭제"> -->
-
+								<input type="button" class="btn btn-secondary float-right"
+									value="바코드">
 								<table id="bootstrap-data-table"
 									class="table table-striped table-bordered">
 									<thead class="thead-dark">
@@ -185,7 +184,8 @@
 												<td>${shipDTO.ord_cd }</td>
 												<td>${shipDTO.ord_count }</td>
 												<td>${shipDTO.ship_count }</td>
-												<td><input type="button" class="btn btn-secondary" value="삭제"
+												<td><input type="button" class="btn btn-secondary"
+													value="삭제"
 													onclick="location.href='${pageContext.request.contextPath}/ship/currDelete?ship_cd=${shipDTO.ship_cd}'"></td>
 											</tr>
 										</c:forEach>

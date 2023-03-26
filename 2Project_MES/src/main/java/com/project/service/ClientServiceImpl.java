@@ -63,7 +63,14 @@ public class ClientServiceImpl implements ClientService {
 		System.out.println("ClientServiceImpl updateClient()");
 
 		clientDAO.updateClient(clientDTO);
+	}
 
+	@Override
+	public int clientDupCheck(String cli_num) {
+		System.out.println("ClientServiceImpl clientDupCheck()");
+
+		int count = clientDAO.clientDupCheck(cli_num);
+		return count;
 	}
 
 }
