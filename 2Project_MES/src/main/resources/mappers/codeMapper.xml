@@ -27,6 +27,16 @@
 		select count(*) from code
 		where code_grp = #{code_grp}
 	</select>
+	
+	<delete id="deleteCode">
+		delete from code
+		where code_cd = #{code_cd}
+	</delete>
+
+	<select id="getCode" resultType="com.project.domain.CodeDTO">
+		select distinct(code_grp), code_grp_nm from code
+		where code_grp = #{code_grp}
+	</select>
 
 
 

@@ -44,6 +44,7 @@ public class EmployeeDAOImpl implements EmployeeDAO{
 	public void insertEmployee(EmployeeDTO employeeDTO) {
 		System.out.println("EmployeeDAOImpl insertEmployee()");
 		
+		
 		sqlSession.insert(namespace+".insertEmployee", employeeDTO);
 	}
 
@@ -67,6 +68,12 @@ public class EmployeeDAOImpl implements EmployeeDAO{
 		System.out.println("EmployeeDAOImpl updateEmployee()");
 		sqlSession.update(namespace+".updateEmployee", employeeDTO);
 		
+	}
+
+	@Override
+	public Integer getMaxNum() {
+		System.out.println("EmployeeDAOImpl getMaxNum()");
+		return sqlSession.selectOne(namespace+".getMaxNum");
 	}
 
 

@@ -26,8 +26,55 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
-
 </head>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.js"></script>
+<script type="text/javascript">
+
+$(function(){
+    //전체선택 체크박스 클릭
+	$("#ckAll").click(function(){
+		//만약 전체 선택 체크박스가 체크된상태일경우
+		if($("#ckAll").prop("checked")) {
+			//해당화면에 전체 checkbox들을 체크해준다
+			$("input[type=checkbox]").prop("checked",true);
+		// 전체선택 체크박스가 해제된 경우
+		} else {
+			//해당화면에 모든 checkbox들의 체크를해제시킨다.
+			$("input[type=checkbox]").prop("checked",false);
+		}
+	})
+})
+
+
+// function fun1(index){
+// 	if(index==1){
+// 		document.ckDelete.action='${pageContext.request.contextPath}/code/insertCode';
+// 	}
+// }
+
+	      
+// function fun1(index) {
+// 	if(index==1){
+// 	   let check = false;
+// 	   with(document.ckDelete) {
+// 	      if(ck.length==undefined) {
+// 	         if(ck.checked) { check = true; }
+// 	      } else {
+// 	         for(let i=0;i<ck.length;i++) {
+// 	            if(ck[i].checked) { check = true; } }
+// 	      } if(!check) {
+// 	      alert("삭제할 사용자를 선택하세요");
+// 	         return;
+// 	      } else {
+// 	         if(confirm("삭제처리 하시겠습니까?")) { submit(); }
+// 	      } } }}
+	      
+// 	else if (index==2){
+// 		document.form.action="${pageContext.request.contextPath}/code/insertCode"
+// 	}}
+  
+</script>
+
 <body>
 	<!-- Left Panel1 -->
 	<jsp:include page="../inc/leftPanel.jsp" />
@@ -79,7 +126,12 @@
 			</div>
 		</div><!-- .content -->
 		
+		<form>
         <div class="content">
+        <input type="submit" name="ckDelete" value="삭제" onclick="fun1(1)" >
+<!--         <input type="submit" name="add" value="추가"> -->
+<%--         <input type="submit" name="add" value="추가" onclick="location.href='${pageContext.request.contextPath}/code/codeList2?code_grp=${codeDTO.code_grp}'"> --%>
+        <input type="submit" name="add" value="추가" onclick="location.href='${pageContext.request.contextPath}/code/codeList2?code_grp=${codeDTO.code_grp}'">
 			<div class="animated fadeIn">
 				<div class="row">
 					<div class="col-lg">
@@ -88,49 +140,36 @@
 								<strong class="card-title">Table Head</strong>
 							</div>
 							<div class="card-body">
-									<form>
+<%-- 								<form name="ckDelete" action="${pageContext.request.contextPath}/code/deletePro" method="post"> --%>
+<!-- 								<form name="ckDelete" method="post"> -->
 								<table class="table">
 									<thead class="thead-dark">
 										<tr>
-											<th scope="col">그룹코드</th>
-											<th scope="col">그룹명</th>
-											<th scope="col">상세보기</th>
+		
+											<th scope="col"><input type="checkbox" id="ckAll" name="ckAll"></th>
+											<th scope="col">코드</th>
+											<th scope="col">코드명</th>
+											<th scope="col">정렬순서</th>
+											<th scope="col">비고</th>										
+											
 										</tr>
 									</thead>
+
 									<tbody>
-										<c:forEach var="codeDTO" items="${codeGrpList }">
+									
+									<c:forEach var="codeDTO" items="${codeList }">
 										<tr>
-											<td>${codeDTO.code_grp}</td>
-											<td>${codeDTO.code_grp_nm}</td>
-											<td><input type="button" value="상세보기" onclick="location.href='${pageContext.request.contextPath}/code/codeList2?code_grp=${codeDTO.code_grp}'"></td>
-										</tr>	
-										</c:forEach>
+											<td><input type="checkBox" name="ck" id="ck" value="${codeDTO.code_cd}"/></td>
+											<td>${codeDTO.code_cd}</td>
+											<td>${codeDTO.code_nm}</td>
+											<td>${codeDTO.code_num}</td>
+											<td>${codeDTO.code_note}</td>
+										</tr>										
+									</c:forEach>
+									
+									
 									</tbody>
 								</table>
-								</form>
-<!-- 								<table class="table"> -->
-<!-- 									<thead class="thead-dark"> -->
-										
-<!-- 										<tr> -->
-											
-<!-- 											<th scope="col">코드명</th> -->
-<!-- 											<th scope="col">정렬순서</th> -->
-<!-- 											<th scope="col">비고</th> -->
-											
-
-<!-- 										</tr> -->
-<!-- 									</thead> -->
-<!-- 									<tbody> -->
-<%-- 									<c:forEach var="codeDTO2" items="${codeList }"> --%>
-<!-- 										<tr> -->
-<%-- 											<td>${codeDTO2.code_cd}</td> --%>
-<%-- 											<td>${codeDTO2.code_nm}</td> --%>
-<%-- 											<td>${codeDTO2.code_num}</td> --%>
-<%-- 											<td>${codeDTO2.code_note}</td> --%>
-<!-- 										</tr>										 -->
-<%-- 									</c:forEach> --%>
-<!-- 									</tbody> -->
-<!-- 								</table> -->
 							</div>
 						</div>
 					</div>
@@ -138,6 +177,7 @@
 			</div>
 		</div><!-- .content -->
 
+								</form>
 		<div class="clearfix"></div>
 		<!-- 푸터 넣는 곳 -->
 		<jsp:include page="../inc/footer.jsp" />
