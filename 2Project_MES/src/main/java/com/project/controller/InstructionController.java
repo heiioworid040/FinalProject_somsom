@@ -12,19 +12,26 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.project.domain.PageDTO;
 import com.project.domain.InstructionDTO;
+import com.project.domain.LineDTO;
 import com.project.service.InstructionService;
+import com.project.service.LineService;
 
 @Controller
 public class InstructionController {
 	private InstructionService instService;
+	private LineService lineService;
 	
 	@Inject
 	public void setInstService(InstructionService instService) {
 		this.instService = instService;
 	}
+	@Inject
+	public void setLineService(LineService lineService) {
+		this.lineService = lineService;
+	}
 
 	@RequestMapping(value = "/instruction/infoInst", method = RequestMethod.GET)
-	public String getInfoInst(HttpServletRequest request, Model model) {
+	public String getInfoInst(HttpServletRequest request, Model model,  Model model2) {
 		System.out.println("testController getInfoInst()");
 		int pageSize=10;
 		
@@ -56,6 +63,9 @@ public class InstructionController {
 		pageDTO.setPageCount(pageCount);
 		
 		model.addAttribute("instList", instList);
+//		라인 검색 옵션
+		List<LineDTO> searchLine=lineService.getSearchLine();
+		model2.addAttribute("searchLine", searchLine);
 		
 		return "instruction/infoInstruction";
 	}

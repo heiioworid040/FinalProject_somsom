@@ -7,8 +7,8 @@ import com.project.domain.PageDTO;
 
 public interface LineDAO {
 
-	public List<LineDTO> getLineList(PageDTO pageDTO);
+	List<LineDTO> getSearchLine();
 
-	public int getLineCount();
+
 
 }

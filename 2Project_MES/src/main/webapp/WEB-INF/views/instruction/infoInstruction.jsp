@@ -92,10 +92,10 @@
                                     	<label for="exampleInputName2" class="pr-1 form-control-label">라인</label>
                                     	<div class="p-0 col">
                                             <select name="select" id="select" class="form-control">
-                                                <option value="0">전체</option>
-                                                <option value="1">Option #1</option>
-                                                <option value="2">Option #2</option>
-                                                <option value="3">Option #3</option>
+                                                <option value="0">--</option>
+                                                <c:forEach var="lineDTO" items="${searchLine }">
+                                                <option>${lineDTO.line_nm}(${lineDTO.line_cd })</option>
+                                                </c:forEach>
                                             </select>
                                         </div>
                                     </div>

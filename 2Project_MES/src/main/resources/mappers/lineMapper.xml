@@ -7,15 +7,10 @@
 <!--  파일이름 대신 namespace 이름을 불러서 사용 -->
 <mapper namespace="com.project.mappers.lineMapper">
 	
-    <select id="getLineList" resultType="com.project.domain.LineDTO">
-    select line_cd, line_nm, line_process, line_place, line_num, line_st, line_note
+    <select id="getSearchLine" resultType="com.project.domain.LineDTO">
+    select DISTINCT line_cd, line_nm
     from line
     </select>
-
-    <select id="getLineCount" resultType="java.lang.Integer">
-    select count(*) from line
-    </select>
-
 <!-- id-"이름" spl구문 하나하나 이름
 	 ? 대신에 MemberDTO 멤버변수명 #{id}	-->
 <!-- 	<insert id="insertTest"> -->
