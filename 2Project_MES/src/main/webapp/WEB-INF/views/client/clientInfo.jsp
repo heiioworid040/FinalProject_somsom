@@ -37,8 +37,8 @@
 
 <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
-<!-- 체크박스 모두 선택하는 함수  -->
 <script type="text/javascript">
+	// 체크박스 모두 선택하는 함수
 	function allChk(obj) {
 		var chkObj = document.getElementsByName("chk");
 		var rowCnt = chkObj.length - 1;
@@ -52,6 +52,32 @@
 			for (var i = 0; i <= rowCnt; i++) {
 				if (chkObj[i].type == "checkbox") {
 					chkObj[i].checked = false;
+				}
+			}
+		}
+	}
+
+	// 체크박스 삭제 메시지 
+	function deleteMsg() {
+		let check = false;
+		with (document.chkDelete) {
+			if (chk.length == undefined) {
+				if (chk.checked) {
+					check = true;
+				}
+			} else {
+				for (let i = 0; i < chk.length; i++) {
+					if (chk[i].checked) {
+						check = true;
+					}
+				}
+			}
+			if (!check) {
+				alert("삭제할 거래처를 선택하세요.");
+				return;
+			} else {
+				if (confirm("선택한 거래처를 삭제하시겠습니까?")) {
+					submit();
 				}
 			}
 		}
@@ -192,12 +218,15 @@
 							<div class="card-body">
 
 								<!-- 체크박스로 선택해 글 여러개 삭제가능  -->
-								<form action="${pageContext.request.contextPath}/client/delete"
+								<form name="chkDelete"
+									action="${pageContext.request.contextPath}/client/delete"
 									method="post">
-									<input type="submit" class="btn btn-secondary" value="삭제"> <input type="button" class="btn btn-secondary" 
-										value="추가"
-										onclick="location.href='${pageContext.request.contextPath}/client/insert'">
-
+									<div class="btn-div float-right">
+										<input type="button" class="btn btn-secondary" value="추가"
+											onclick="location.href='${pageContext.request.contextPath}/client/insert'">
+										<input type="button" class="btn btn-secondary" value="삭제"
+											onclick="deleteMsg()">
+									</div>
 									<table id="bootstrap-data-table"
 										class="table table-striped table-bordered">
 										<thead class="thead-dark">
@@ -213,12 +242,6 @@
 												<th scope="col">대표자</th>
 												<th scope="col">담당자</th>
 												<th scope="col">주소</th>
-<!-- 												<th scope="col">상세주소</th> -->
-<!-- 												<th scope="col">전화번호</th> -->
-<!-- 												<th scope="col">휴대폰번호</th> -->
-<!-- 												<th scope="col">팩스번호</th> -->
-<!-- 												<th scope="col">이메일</th> -->
-<!-- 												<th scope="col">비고</th> -->
 												<th scope="col"></th>
 											</tr>
 										</thead>
@@ -226,7 +249,7 @@
 											<c:forEach var="clientDTO" items="${clientInfo }">
 												<tr>
 													<th scope="row"><input type="checkbox" name="chk"
-														value="${clientDTO.cli_cd }"></th>
+														id="chk" value="${clientDTO.cli_cd }"></th>
 													<td>${clientDTO.cli_cd }</td>
 													<td>${clientDTO.cli_nm }</td>
 													<td>${clientDTO.cli_type }</td>
@@ -236,13 +259,8 @@
 													<td>${clientDTO.cli_boss }</td>
 													<td>${clientDTO.cli_emp }</td>
 													<td>${clientDTO.cli_addr }</td>
-													<%-- <td>${clientDTO.cli_addr2 }</td> --%>
-													<%-- <td>${clientDTO.cli_tel }</td> --%>
-													<%-- <td>${clientDTO.cli_emp_tel }</td> --%>
-													<%-- <td>${clientDTO.cli_fax }</td> --%>
-													<%-- <td>${clientDTO.cli_email }</td> --%>
-													<%-- <td>${clientDTO.cli_note }</td> --%>
-													<td><input type="button" class="btn btn-secondary" value="수정"
+													<td><input type="button" class="btn btn-secondary"
+														value="수정"
 														onclick="location.href='${pageContext.request.contextPath}/client/update?cli_cd=${clientDTO.cli_cd}'"></td>
 												</tr>
 											</c:forEach>

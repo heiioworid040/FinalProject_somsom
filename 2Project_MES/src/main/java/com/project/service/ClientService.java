@@ -17,4 +17,7 @@ public interface ClientService {
 	public ClientDTO getClient(String cli_cd);
 
 	public void updateClient(ClientDTO clientDTO);
+
+	public int clientDupCheck(String cli_num);
+
 }

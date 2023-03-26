@@ -6,10 +6,14 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.domain.ClientDTO;
 import com.project.domain.PageDTO;
@@ -89,12 +93,12 @@ public class ClientController {
 
 		return "client/clientUpdate";
 	}
-	
+
 	@RequestMapping(value = "/client/updatePro", method = RequestMethod.POST)
 	public String updatePro(ClientDTO clientDTO) {
-		
+
 		clientService.updateClient(clientDTO);
-		
+
 		// 주소변경 하면서 이동
 		return "redirect:/client/clientInfo";
 	}
@@ -114,6 +118,18 @@ public class ClientController {
 
 		// 주소변경 하면서 이동
 		return "redirect:/client/clientInfo";
+	}
+
+	// 사업자번호 중복체크 
+	@ResponseBody
+	@RequestMapping(value = "/client/clientDupCheck", method = RequestMethod.POST)
+	public String clientDupCheck(@RequestParam String cli_num) {
+		int count = clientService.clientDupCheck(cli_num);
+		if (count == 0) {
+			return "success";
+		} else {
+			return "fail";
+		}
 	}
 
 }

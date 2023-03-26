@@ -37,6 +37,63 @@
 
 <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
+<!-- 필수입력 제어  -->
+<script type="text/javascript">
+	function essential() {
+
+		if (document.fr.cli_nm.value == "") {
+			alert("거래처명을 입력하세요.");
+			document.fr.cli_nm.focus();
+			return false;
+		}
+
+		if (document.fr.cli_num.value == "") {
+			alert("사업자번호를 입력하세요.");
+			document.fr.cli_num.focus();
+			return false;
+		}
+
+		if (document.fr.cli_num.value.length != 10) {
+			alert("사업자번호 10자리를 입력하세요.");
+			document.fr.cli_num.focus();
+			return false;
+		}
+
+		if (document.fr.cli_business.value == "") {
+			alert("업태를 입력하세요.");
+			document.fr.cli_business.focus();
+			return false;
+		}
+
+		if (document.fr.cli_prod.value == "") {
+			alert("종목을 입력하세요.");
+			document.fr.cli_prod.focus();
+			return false;
+		}
+
+		if (document.fr.cli_boss.value == "") {
+			alert("대표자를 입력하세요.");
+			document.fr.cli_boss.focus();
+			return false;
+		}
+
+		if (document.fr.cli_emp.value == "") {
+			alert("담당자를 입력하세요.");
+			document.fr.cli_emp.focus();
+			return false;
+		}
+
+		if (document.fr.cli_addr.value == "") {
+			alert("주소를 입력하세요.");
+			document.fr.cli_addr.focus();
+			return false;
+		}
+		
+		alert("수정 완료되었습니다.");
+		
+	}
+</script>
+
 </head>
 <body>
 	<!-- Left Panel1 -->
@@ -85,7 +142,7 @@
 
 								<form
 									action="${pageContext.request.contextPath}/client/updatePro"
-									method="post">
+									method="post" name="fr" onsubmit="return essential()">
 									<table id="bootstrap-data-table"
 										class="table table-striped table-bordered">
 										<thead class="thead-dark">
@@ -106,22 +163,30 @@
 												<td>${clientDTO.cli_cd}</td>
 												<input type="hidden" name="cli_cd"
 													value="${clientDTO.cli_cd}">
-												<td><input type="text" name="cli_nm"
+												<td><input type="text" name="cli_nm" placeholder="예)서울원단"
 													style="width: 105px;" value="${clientDTO.cli_nm}"></td>
-												<td><input type="text" name="cli_type"
-													style="width: 60px;" value="${clientDTO.cli_type}"></td>
-												<td><input type="text" name="cli_num"
-													style="width: 100px;" value="${clientDTO.cli_num}"></td>
+												<td><select name="cli_type" id="select"
+													class="form-control" style="width: 100px;">
+														<option value="협력사"
+															${clientDTO.cli_type == '협력사' ? 'selected' : ''}>협력사</option>
+														<option value="고객사"
+															${clientDTO.cli_type == '고객사' ? 'selected' : ''}>고객사</option>
+														<option value="자사"
+															${clientDTO.cli_type == '자사' ? 'selected' : ''}>자사</option>
+												</select></td>
+												<td>${clientDTO.cli_num}</td>
+												<input type="hidden" name="cli_num"
+													value="${clientDTO.cli_num}">
 												<td><input type="text" name="cli_business"
-													style="width: 110px;" value="${clientDTO.cli_business}"></td>
+													style="width: 110px;" value="${clientDTO.cli_business}" placeholder="예)제조업"></td>
 												<td><input type="text" name="cli_prod"
-													style="width: 75px;" value="${clientDTO.cli_prod}"></td>
+													style="width: 75px;" value="${clientDTO.cli_prod}" placeholder="예)원단"></td>
 												<td><input type="text" name="cli_boss"
 													style="width: 60px;" value="${clientDTO.cli_boss}"></td>
 												<td><input type="text" name="cli_emp"
 													style="width: 60px;" value="${clientDTO.cli_emp}"></td>
 												<td><input type="text" name="cli_addr"
-													style="width: 110px;" value="${clientDTO.cli_addr}"></td>
+													style="width: 110px;" value="${clientDTO.cli_addr}" placeholder="예)서울 종로구"></td>
 											</tr>
 										</tbody>
 									</table>

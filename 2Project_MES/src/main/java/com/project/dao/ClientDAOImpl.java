@@ -65,4 +65,11 @@ public class ClientDAOImpl implements ClientDAO {
 
 	}
 
+	@Override
+	public int clientDupCheck(String cli_num) {
+		System.out.println("ClientDAOImpl clientDupCheck()");
+		
+		return sqlSession.selectOne(namespace + ".clientDupCheck", cli_num);
+	}
+
 }
