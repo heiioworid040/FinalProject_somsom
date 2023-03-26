@@ -39,8 +39,18 @@ public class OrderDAO {
 	}
 	
 	//수주 추가
-	public void insertPro(OrderDTO orderDTO) {
-		sqlSession.insert(namespace+".insertPro", orderDTO);
+	public void orderAdd(OrderDTO orderDTO) {
+		sqlSession.insert(namespace+".orderAdd", orderDTO);
+	}
+	
+	//수주 수정
+	public void orderEdit(OrderDTO orderDTO) {
+		sqlSession.update(namespace+".orderEdit",orderDTO);
+	}
+
+	//수주 삭제
+	public void orderDel(OrderDTO orderDTO) {
+		sqlSession.delete(namespace+".orderDel",orderDTO);
 	}
 
 	//수주 현황
@@ -60,5 +70,6 @@ public class OrderDAO {
 		pageDTO.setStartRow(pageDTO.getStartRow()-1);
 		return sqlSession.selectList(namespace+".getOrderPop", pageDTO);
 	}
+
 
 }

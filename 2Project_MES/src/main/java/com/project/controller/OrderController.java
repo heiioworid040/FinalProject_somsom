@@ -96,23 +96,36 @@ public class OrderController {
 		
 		@RequestMapping(value = "/order/orderInsertPro", method = RequestMethod.POST)
 		public String insertPro(HttpServletRequest request, Model model) {
+			String ord_cd=(String)request.getParameter("ord_cd");
 			String cli_cd=(String)request.getParameter("cli_cd");
 			String emp_cd=(String)request.getParameter("emp_cd");
 			String prod_cd=(String)request.getParameter("prod_cd");
 			int ord_count=Integer.parseInt(request.getParameter("ord_count"));
 			Timestamp ord_date=Timestamp.valueOf((String)request.getParameter("ord_date")+" 23:59:59");
 			Timestamp ord_d_date=Timestamp.valueOf((String)request.getParameter("ord_d_date")+" 23:59:59");
-			
+
 			OrderDTO orderDTO=new OrderDTO();
+			orderDTO.setOrd_cd(ord_cd);
 			orderDTO.setCli_cd(cli_cd);
 			orderDTO.setEmp_cd(emp_cd);
 			orderDTO.setProd_cd(prod_cd);
 			orderDTO.setOrd_count(ord_count);
 			orderDTO.setOrd_date(ord_date);
 			orderDTO.setOrd_d_date(ord_d_date);
-			orderService.insertPro(orderDTO);
 			
-			model.addAttribute("orderDTO", orderDTO);
+			String btn_add=(String)request.getParameter("btn_add");
+			String btn_edit=(String)request.getParameter("btn_edit");
+			String btn_del=(String)request.getParameter("btn_del");
+			
+			if(btn_add!=null) {
+				orderService.orderAdd(orderDTO);
+			}else if(btn_edit!=null) {
+				orderService.orderEdit(orderDTO);
+			}else if(btn_del!=null){
+				orderService.orderDel(orderDTO);
+			}
+			
+//			model.addAttribute("orderDTO", orderDTO);
 			return "redirect:/order/orderInsert";
 		}
 		

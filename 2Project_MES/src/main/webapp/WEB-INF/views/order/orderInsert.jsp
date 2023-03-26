@@ -34,6 +34,7 @@
 	function fun3() {
 		window.open('${pageContext.request.contextPath }/order/prodPop','prodPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=600,height=510,top=90,left=200')
 	}
+	
 // 	function fun4(ord_cd) {
 // 		alert(ord_cd);
 // 		document.orderInsert2.submit();
@@ -155,12 +156,13 @@
 		<!-- .content -->
 		
 		<form action="${pageContext.request.contextPath }/order/orderInsertPro" method="POST">
+		<input type="hidden" name="ord_cd" value="${orderDTO.ord_cd }">
 		<div class="content-div">
 			<div class="search-btn-div">
 				<div class="btn-div">
-					<button type="submit" class="btn-test" name="btn_add">추가</button>
-					<button type="button" class="btn-test" name="btn_edit">수정</button>
-					<button type="button" class="btn-test" name="btn_del">삭제</button>
+					<button type="submit" class="btn-test" name="btn_add" value="add">추가</button>
+					<button type="submit" class="btn-test" name="btn_edit" value="edit">수정</button>
+					<button type="submit" class="btn-test" name="btn_del" value="del">삭제</button>
 				</div>
 			</div>
 			<div class="animated fadeIn">
@@ -174,7 +176,7 @@
 								<table class="table">
 									<thead class="thead-dark">
 										<tr>
-											<th scope="col">수주업체코드</th><td><input type="text" id="cli_cd" name="cli_cd" value="${orderDTO.cli_cd }" readonly><input type="text" id="cli_nm" value="${orderDTO.cli_nm }" readonly><button type="button" id="pop" value="cli" onclick="fun1('cli')">돋보기</button></td>
+											<th scope="col">수주업체코드</th><td><input type="text" id="cli_cd" name="cli_cd" value="${orderDTO.cli_cd }" readonly><input type="text" id="cli_nm" value="${orderDTO.cli_nm }" readonly><button type="button" id="pop" value="cli" onclick="fun1()">돋보기</button></td>
 											<th scope="col">수주일자</th><td><input type="date" name="ord_date" value="${ord_date }"></td>
 										</tr>
 										<tr>
@@ -208,23 +210,24 @@
 									<tbody>
 											<tr>
 												<td></td>
-												<td>${orderDTO.prod_cd }</td>
-												<td>${orderDTO.prod_nm }</td>
-												<td>${orderDTO.prod_unit }</td>
-												<td>${orderDTO.ord_count }</td>
-												<td>${orderDTO.prod_note }</td>
+												<td><input type="text" id="prod_cd" name="prod_cd"  value="${orderDTO.prod_cd }" readonly></td>
+												<td><input type="text" id="prod_nm" value="${orderDTO.prod_nm }" readonly></td>
+												<td><input type="text" id="prod_unit" value="${orderDTO.prod_unit }" readonly></td>
+												<td><input type="text" id="ord_count" value="${orderDTO.ord_count }" name="ord_count"></td>
+												<td><input type="text" id="prod_note" value="${orderDTO.prod_note }" readonly></td>
+												<td><button type="reset" class="btn-test" name="btn_can" value="del">-</button></td>
 <!-- 												<td><button type="button" class="btn-test" name="btn_can" value="del">-</button></td> -->
 											</tr>
 <%-- 										<c:if test="${!empty btn_can }"> --%>
-											<tr>
-												<td></td>
-												<td><input type="text" id="prod_cd" name="prod_cd" readonly></td>
-												<td><input type="text" id="prod_nm" readonly></td>
-												<td><input type="text" id="prod_unit" readonly></td>
-												<td><input type="text" id="ord_count" name="ord_count"></td>
-												<td><input type="text" id="prod_note" readonly></td>
-												<td><button type="reset" class="btn-test" name="btn_can" value="del">-</button></td>
-											</tr>
+<!-- 											<tr> -->
+<!-- 												<td></td> -->
+<!-- 												<td><input type="text" id="prod_cd" name="prod_cd" readonly></td> -->
+<!-- 												<td><input type="text" id="prod_nm" readonly></td> -->
+<!-- 												<td><input type="text" id="prod_unit" readonly></td> -->
+<!-- 												<td><input type="text" id="ord_count" name="ord_count"></td> -->
+<!-- 												<td><input type="text" id="prod_note" readonly></td> -->
+<!-- 												<td><button type="reset" class="btn-test" name="btn_can" value="del">-</button></td> -->
+<!-- 											</tr> -->
 <%-- 										</c:if> --%>
 									</tbody>
 								</table>

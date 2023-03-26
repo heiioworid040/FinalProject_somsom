@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-.search-btn-div {
+.search-btn-div, .search-result-div {
 	height: 35px;
 }
 .search-btn {

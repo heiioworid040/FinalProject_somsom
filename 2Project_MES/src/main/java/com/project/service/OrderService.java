@@ -33,7 +33,7 @@ public class OrderService {
 	}
 	
 	//수주 추가
-	public void insertPro(OrderDTO orderDTO) {
+	public void orderAdd(OrderDTO orderDTO) {
 		String num;
 		if(orderDAO.getMaxNum(orderDTO)==null) {
 			num="001";
@@ -48,7 +48,17 @@ public class OrderService {
 		}
 		orderDTO.setOrd_cd((String.valueOf(orderDTO.getOrd_date()).substring(0,10)).replace("-", "")+num);
 		
-		orderDAO.insertPro(orderDTO);
+		orderDAO.orderAdd(orderDTO);
+	}
+	
+	//수주 수정
+	public void orderEdit(OrderDTO orderDTO) {
+		orderDAO.orderEdit(orderDTO);
+	}
+	
+	//수주 삭제
+	public void orderDel(OrderDTO orderDTO) {
+		orderDAO.orderDel(orderDTO);
 	}
 	
 	//수주현황
