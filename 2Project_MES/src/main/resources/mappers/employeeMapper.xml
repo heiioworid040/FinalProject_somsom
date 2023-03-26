@@ -22,7 +22,7 @@
 
 	<insert id="insertEmployee">
 		insert into employee(emp_cd, emp_nm, emp_pass, emp_dept, emp_position, emp_email, emp_tel)
-		values(#{emp_cd}, #{emp_nm}, #{emp_pass}, #{emp_dept}, #{emp_position}, #{emp_email}, #{emp_tel})
+		values(concat(year(now()),#{emp_cd}), #{emp_nm}, #{emp_pass}, #{emp_dept}, #{emp_position}, #{emp_email}, #{emp_tel})
 	</insert>
 	
 	<delete id="deleteEmployee">
@@ -39,6 +39,12 @@
 		update employee set emp_nm = #{emp_nm}, emp_position = #{emp_position}, emp_email = #{emp_email}, emp_tel = #{emp_tel} 
 		where emp_cd = #{emp_cd}
 	</update>
+	
+	<select id="getMaxNum" resultType="java.lang.Integer">
+        select max(substr(emp_cd, 5))
+		from employee
+    </select>
+	
 	
 	
 	

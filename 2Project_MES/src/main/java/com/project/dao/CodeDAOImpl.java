@@ -52,7 +52,22 @@ public class CodeDAOImpl implements CodeDAO {
 	@Override
 	public List<CodeDTO> getCodeList2(String code_grp) {
 		System.out.println("CodeDAOImpl getCodeList2()");
-		return sqlSession.selectList(namespace+".getCodeList2");
+		return sqlSession.selectList(namespace+".getCodeList2", code_grp);
 	}
+
+	@Override
+	public void deleteCode(String code_cd) {
+		System.out.println("CodeDAOImpl deleteCode()");
+		sqlSession.delete(namespace+".deleteCode", code_cd);
+		
+	}
+
+	@Override
+	public CodeDTO getCode(String code_grp) {
+		System.out.println("CodeDAOImpl getCode()");
+		return sqlSession.selectOne(namespace+".getCode",code_grp);
+	}
+	
+
 
 }

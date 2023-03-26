@@ -17,4 +17,8 @@ public interface CodeDAO {
 
 	List<CodeDTO> getCodeList2(String code_grp);
 
+	void deleteCode(String code_cd);
+
+	CodeDTO getCode(String code_grp);
+
 }
