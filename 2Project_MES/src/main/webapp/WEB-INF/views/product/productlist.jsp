@@ -27,6 +27,7 @@
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
 </head>
+
 <body>
 	<!-- Left Panel1 -->
 	<jsp:include page="../inc/leftPanel.jsp" />
@@ -139,8 +140,18 @@ if(search==null){
 											<td>${productDTO.prod_outprice}</td>
 											<td>${productDTO.prod_count}</td>
 											<td>${productDTO.prod_note}</td>
-											<td><button onclick="location.href='${pageContext.request.contextPath}/product/productdeletePro?prod_number=${productDTO.prod_number}'">삭제</button>
-												<button onclick="location.href='${pageContext.request.contextPath}/product/productupdate?prod_number=${productDTO.prod_number}'">수정</button></td>
+											<td><div style="display: inline-block;">
+												<form name="formupdate" action="${pageContext.request.contextPath}/product/productupdate" method="get">
+    											<input type="hidden" name="prod_number" value="${productDTO.prod_number}">
+    											<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal2">수정</button>
+												</form></div>					
+												
+												<div style="display: inline-block;">
+												<form name="formdelete" action="${pageContext.request.contextPath}/product/productdeletePro" method="get">
+    											<input type="hidden" name="prod_number" value="${productDTO.prod_number}">
+    											<button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal">삭제</button>
+												</form></div>
+											
 										</tr></c:forEach>
 									</tbody>
 								</table>
@@ -152,7 +163,7 @@ if(search==null){
 								</form>
 								</div>								
 								<!-- 검색끝 -->								
-							<!-- 페이징 처리 -->
+								<!-- 페이징 처리 -->
 								<div class="pageNum">
 								<c:if test="${pageDTO.startPage > pageDTO.pageBlock }">
 								<a href="${pageContext.request.contextPath}/product/productlist?pageNum=${pageDTO.startPage - pageDTO.pageBlock}&search=${pageDTO.search}">Prev</a>
@@ -172,7 +183,50 @@ if(search==null){
 				</div>
 			</div>
 		</div>
-		
+<!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">게시물 삭제</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            게시물을 정말 삭제하시겠습니까?
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-primary" onclick="document.forms['formdelete'].submit()">삭제하기</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">취소하기</button>
+          </div>
+        </div>
+      </div>
+    </div>
+<!-- modal 끝 -->
+<!-- Modal -->
+    <div class="modal fade2" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">게시물 수정</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            게시물을 수정하시겠습니까?
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-primary" onclick="document.forms['formupdate'].submit()">수정하기</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">취소하기</button>
+          </div>
+        </div>
+      </div>
+    </div>
+<!-- modal 끝 -->
+
+
 		<!-- .content -->
 
 		<div class="clearfix"></div>
