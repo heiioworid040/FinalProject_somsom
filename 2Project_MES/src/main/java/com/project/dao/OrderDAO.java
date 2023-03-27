@@ -15,7 +15,7 @@ public class OrderDAO {
 	
 	@Inject
 	private SqlSession sqlSession;
-	private static final String namespace="com.project.mappers.OrderMapper";
+	private static final String namespace="com.project.mappers.orderMapper";
 	
 	//수주 관리
 	public List<OrderDTO> getOrderInsertList(PageDTO pageDTO) {
