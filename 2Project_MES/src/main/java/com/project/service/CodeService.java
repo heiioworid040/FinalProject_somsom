@@ -21,6 +21,10 @@ public interface CodeService {
 
 	public CodeDTO getCode(String code_grp);
 
+	public CodeDTO getCode2(String code_cd);
+
+	public void updateCode(CodeDTO codeDTO);
+
 
 
 

@@ -118,11 +118,11 @@
 										<tbody>
 
 											<tr>
-												<td><input type="text" name="code_grp" value="${codeDTO.code_grp }" readonly></td>
-												<td><input type="text" name="code_grp_nm" value="${codeDTO.code_grp_nm }" readonly></td>
-												<td><input type="text" name="code_cd"></td>
-												<td><input type="text" name="code_nm"></td>
-												<td><input type="text" name="code_note"></td>
+												<td><input type="text" name=code_grp value="${codeDTO.code_grp }" readonly></td>
+												<td><input type="text" name=code_grp_nm value="${codeDTO.code_grp_nm }" readonly></td>
+												<td><input type="text" name=code_cd></td>
+												<td><input type="text" name=code_nm></td>
+												<td><input type="text" name=code_note></td>
 											</tr>
 											<c:forEach var="codeDTO" items="${codeList2 }">
 										<tr>
