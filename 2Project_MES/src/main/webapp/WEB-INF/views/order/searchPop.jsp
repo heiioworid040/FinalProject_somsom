@@ -28,19 +28,19 @@
 	function cli(cli_cd,cli_nm) {
 		opener.document.getElementById("search_cli_cd").value=cli_cd;
 		opener.document.getElementById("search_cli_nm").value=cli_nm;
-		document.orderPop.submit();
+		document.searchPop.submit();
 		self.close();
 	}
 	function emp(emp_cd,emp_nm) {
 		opener.document.getElementById("search_emp_cd").value=emp_cd;
 		opener.document.getElementById("search_emp_nm").value=emp_nm;
-		document.orderPop.submit();
+		document.searchPop.submit();
 		self.close();
 	}
 	function prod(prod_cd,prod_nm) {
 		opener.document.getElementById("search_prod_cd").value=prod_cd;
 		opener.document.getElementById("search_prod_nm").value=prod_nm;
-		document.orderPop.submit();
+		document.searchPop.submit();
 		self.close();
 	}
 </script>
@@ -77,8 +77,8 @@
 									<div class="search-div">
 										<div class="search-div-o">
 											<c:if test="${pop eq 'cli' }">
-												<span class="search">업체코드 <input type="text" name="prod_cd"></span>
-												<span class="search">업체명 <input type="text" name="prod_nm"></span>
+												<span class="search">업체코드 <input type="text" name="cd"></span>
+												<span class="search">업체명 <input type="text" name="nm"></span>
 												<span class="search">업체구분 <select class="select-search" name="info">
 																				<option value="">전체</option>
 																				<option value="cli_ja">자사</option>
@@ -87,12 +87,12 @@
 																			</select></span>
 											</c:if>
 											<c:if test="${pop eq 'emp' }">
-												<span class="search">사번 <input type="text" name="emp_cd"></span>
-												<span class="search">이름 <input type="text" name="emp_nm"></span>
+												<span class="search">사번 <input type="text" name="cd"></span>
+												<span class="search">이름 <input type="text" name="nm"></span>
 											</c:if>
 											<c:if test="${pop eq 'prod' }">
-												<span class="search">품번 <input type="text" name="prod_cd"></span>
-												<span class="search">품명 <input type="text" name="prod_nm"></span>
+												<span class="search">품번 <input type="text" name="cd"></span>
+												<span class="search">품명 <input type="text" name="nm"></span>
 												<span class="search">자재유형 <select class="select-search" name="info">
 																				<option value="">전체</option>
 																				<option value="prod_wan">완제품</option>
@@ -112,7 +112,7 @@
 		</form>
 		<!-- .content -->
 		
-		<form action="${pageContext.request.contextPath }/order/orderInsert" name="orderPop" method="get">
+		<form action="${pageContext.request.contextPath }/order/orderInsert" name="searchPop" method="get">
 		<div class="content">
 			<div class="animated fadeIn">
 				<div class="row">
@@ -126,7 +126,7 @@
 												<th scope="col">업체코드</th>
 												<th scope="col">업체명</th>
 												<th scope="col">대표자</th>
-												<th scope="col">E-MAIL</th>
+												<th scope="col">구분</th>
 											</c:if>
 											<c:if test="${ pop eq 'emp' }">
 												<th scope="col">사용자사번</th>
@@ -149,7 +149,7 @@
 													<td>${orderDTO.cli_cd }</td>
 													<td>${orderDTO.cli_nm }</td>
 													<td>${orderDTO.cli_boss }</td>
-													<td>${orderDTO.cli_email }</td>
+													<td>${orderDTO.cli_type }</td>
 												</tr>
 											</c:if>
 											<c:if test="${ pop eq 'emp' }">

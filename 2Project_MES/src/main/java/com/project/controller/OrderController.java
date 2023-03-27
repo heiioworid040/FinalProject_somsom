@@ -37,8 +37,15 @@ public class OrderController {
 		@Inject
 		private ProductService productService;
 		
-		@RequestMapping(value = "/order/searchPop", method = RequestMethod.GET)
-		public String searchPop(HttpServletRequest request, Model model) {
+		@RequestMapping(value = "/order/orderInsert", method = RequestMethod.GET)
+		public String insert(HttpServletRequest request, Model model) {
+			String cli=(String)request.getParameter("cli");
+			String emp=(String)request.getParameter("emp");
+			String ord_date=(String)request.getParameter("ord_date");
+			String ord_date_end=(String)request.getParameter("ord_date_end");
+			String ord_d_date=(String)request.getParameter("ord_d_date");
+			String ord_d_date_end=(String)request.getParameter("ord_d_date_end");
+			
 			int pageSize=10;
 			String pageNum=request.getParameter("pageNum");
 			if(pageNum==null) pageNum="1";
@@ -48,52 +55,12 @@ public class OrderController {
 			pageDTO.setPageSize(pageSize);
 			pageDTO.setPageNum(pageNum);
 			pageDTO.setCurrentPage(currentPage);
-			String pop=(String)request.getParameter("pop");
-			
-			int count=0;
-			if(pop.equals("cli")) {
-				List<ClientDTO> popList=clientService.getClientInfo(pageDTO);
-				model.addAttribute("popList", popList);
-				count=clientService.getClientCount();
-			}else if(pop.equals("emp")) {
-				List<EmployeeDTO> popList=employeeService.getEmployeeList(pageDTO);
-				model.addAttribute("popList", popList);
-				count=employeeService.getEmployeeCount();
-			}else {
-				List<ProductDTO> popList=productService.getProductList(pageDTO);
-				model.addAttribute("popList", popList);
-				count=productService.getProductCount(pageDTO);
-			}
-			int pageBlock=10;
-			int startPage=(currentPage-1)/pageBlock*pageBlock+1;
-			int endPage=startPage+pageBlock-1;
-			int pageCount=count/pageSize+(count%pageSize==0?0:1);
-			if(endPage>pageCount) endPage=pageCount;
-			
-			pageDTO.setCount(count);
-			pageDTO.setPageBlock(pageBlock);
-			pageDTO.setStartPage(startPage);
-			pageDTO.setEndPage(endPage);
-			pageDTO.setPageCount(pageCount);
-			
-			model.addAttribute("pop", pop);
-			model.addAttribute("pageDTO", pageDTO);
-			return "order/searchPop";
-		}
-		
-		@RequestMapping(value = "/order/orderInsert", method = RequestMethod.GET)
-		public String insert(HttpServletRequest request, Model model) {
-			int pageSize=10;
-			String pageNum=request.getParameter("pageNum");
-			if(pageNum==null) {
-				pageNum="1";
-			}
-			int currentPage=Integer.valueOf(pageNum);
-			
-			PageDTO pageDTO=new PageDTO();
-			pageDTO.setPageSize(pageSize);
-			pageDTO.setPageNum(pageNum);
-			pageDTO.setCurrentPage(currentPage);
+			pageDTO.setSearch(cli);
+			pageDTO.setSearch2(emp);
+			pageDTO.setSearch3(ord_date);
+			pageDTO.setSearch4(ord_date_end);
+			pageDTO.setSearch5(ord_d_date);
+			pageDTO.setSearch6(ord_d_date_end);
 			
 			List<OrderDTO> orderInsertList=orderService.getOrderInsertList(pageDTO);
 			
@@ -117,10 +84,10 @@ public class OrderController {
 			String ord_cd=(String)request.getParameter("ord_cd");
 			if(ord_cd!=null) {
 				OrderDTO orderDTO=orderService.getOrderInsert(ord_cd);
-				String ord_date=dfm.format(orderDTO.getOrd_date());
-				String ord_d_date=dfm.format(orderDTO.getOrd_d_date());
-				model.addAttribute("ord_date", ord_date);
-				model.addAttribute("ord_d_date", ord_d_date);
+				String ord_dateD=dfm.format(orderDTO.getOrd_date());
+				String ord_d_dateD=dfm.format(orderDTO.getOrd_d_date());
+				model.addAttribute("ord_date", ord_dateD);
+				model.addAttribute("ord_d_date", ord_d_dateD);
 				model.addAttribute("orderDTO", orderDTO);
 			}
 
@@ -226,26 +193,24 @@ public class OrderController {
 			pageDTO.setPageNum(pageNum);
 			pageDTO.setCurrentPage(currentPage);
 			
-			String cli_cd=request.getParameter("cli_cd");
-			List<OrderDTO> orderList=null;
+			List<OrderDTO> orderList=orderService.getOrderList(pageDTO);
 			
-			//cli_cd=&emp_cd=&ord_date=&ord_date_end=&ord_d_date=&ord_d_date_end=&prod_cd=
-			if(cli_cd!=null) {
-				orderList=orderService.getOrderList(pageDTO, cli_cd);
+			int count=orderService.getOrderCount();
+			int pageBlock=10;
+			int startPage=(currentPage-1)/pageBlock*pageBlock+1;
+			int endPage=startPage+pageBlock-1;
+			int pageCount=count/pageSize+(count%pageSize==0?0:1);
+			if(endPage>pageCount) {
+				endPage=pageCount;
 			}
-			else {
-				orderList=orderService.getOrderList(pageDTO);
-			}
 			
-//			int count=orderService.getOrderCount();
-//			int pageBlock=10;
-//			int startPage=(currentPage-1)/pageBlock*pageBlock+1;
-//			int endPage=startPage+pageBlock-1;
-//			int pageCount=count/pageSize+(count%pageSize==0?0:1);
-//			if(endPage>pageCount) {
-//				endPage=pageCount;
-//			}
+			pageDTO.setCount(count);
+			pageDTO.setPageBlock(pageBlock);
+			pageDTO.setStartPage(startPage);
+			pageDTO.setEndPage(endPage);
+			pageDTO.setPageCount(pageCount);
 			
+			model.addAttribute("pageDTO", pageDTO);
 			model.addAttribute("orderList", orderList);
 			return "order/orderInfo";
 		}

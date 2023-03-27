@@ -128,7 +128,7 @@
 												<th scope="col">업체코드</th>
 												<th scope="col">업체명</th>
 												<th scope="col">대표자</th>
-												<th scope="col">E-MAIL</th>
+												<th scope="col">구분</th>
 											</c:if>
 											<c:if test="${ pop eq 'emp' }">
 												<th scope="col">사용자사번</th>
@@ -151,7 +151,7 @@
 													<td>${orderDTO.cli_cd }</td>
 													<td>${orderDTO.cli_nm }</td>
 													<td>${orderDTO.cli_boss }</td>
-													<td>${orderDTO.cli_email }</td>
+													<td>${orderDTO.cli_type }</td>
 												</tr>
 											</c:if>
 											<c:if test="${ pop eq 'emp' }">

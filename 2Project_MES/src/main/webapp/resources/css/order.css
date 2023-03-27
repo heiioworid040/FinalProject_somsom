@@ -24,3 +24,6 @@ body {
 	width: 100px;
 	border-style: none;
 }
+.pageNum {
+	text-align: center;
+}
