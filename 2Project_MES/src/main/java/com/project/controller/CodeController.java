@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.project.domain.CodeDTO;
+import com.project.domain.EmployeeDTO;
 import com.project.domain.PageDTO;
 import com.project.service.CodeService;
 
@@ -22,10 +23,11 @@ public class CodeController {
 
 	@RequestMapping(value = "/code/codeList", method = RequestMethod.GET)
 	public String codeGrpList(HttpServletRequest request, Model model) {
-		
-//		String code_grp = request.getParameter("code_grp");
-//		System.out.println("code_grp="+code_grp);
-//		model.addAttribute("code_grp", code_grp);
+
+		String plus = request.getParameter("plus");
+		System.out.println("plus"+plus);
+		String code_grp = request.getParameter("code_grp");
+		System.out.println("code_grp="+code_grp);
 		
 		CodeDTO codeDTO = new CodeDTO();
 		
@@ -62,28 +64,19 @@ public class CodeController {
 		model.addAttribute("codeDTO", codeDTO);
 		model.addAttribute("codeGrpList", codeGrpList);
 		model.addAttribute("pageDTO", pageDTO);
-		System.out.println("codeGrpList"+codeGrpList);
+		model.addAttribute("code_grp", code_grp);
 		
+		if(plus!=null) {
+			model.addAttribute(plus);
+			List<CodeDTO> codeList2 = codeService.getCodeList2(code_grp);
+			model.addAttribute("codeList2", codeList2);		
+		}
+				
 		return "code/codeList";
+	
+		
 	}
 	
-	
-	
-//	@RequestMapping(value = "/code/codeList2", method = RequestMethod.GET)
-//	public String codeList(HttpServletRequest request, Model model) {
-//		System.out.println("codeController codeList()");
-//		
-//		String code_grp = request.getParameter("code_grp");
-//		
-//		List<CodeDTO> codeList2 = codeService.getCodeList2(code_grp);
-//
-//		System.out.println("code_grp="+code_grp);
-//
-//		model.addAttribute("code_grp", code_grp);
-//		model.addAttribute("codeList2", codeList2);
-//		
-//		return "code/codeList2";
-//	}
 	
 	@RequestMapping(value = "/code/codeList2", method = RequestMethod.GET)
 	public String codeList2(HttpServletRequest request, Model model) {
@@ -116,6 +109,31 @@ public class CodeController {
 		return "redirect:" + request.getHeader("Referer");			
 	}
 	
+	@RequestMapping(value = "/code/updateCode", method = RequestMethod.GET)
+	public String updateCode(Model model, HttpServletRequest request) {
+		System.out.println("CodeController updateCode()");
+		
+		String code_cd = request.getParameter("code_cd");
+		System.out.println("code_cd="+code_cd);
+		
+		CodeDTO codeDTO = codeService.getCode2(code_cd);
+		
+		model.addAttribute("codeDTO", codeDTO);
+		
+		return "code/updateCode";
+	}
+	
+	@RequestMapping(value = "/code/updatePro", method = RequestMethod.POST)
+	public String updatePro(CodeDTO codeDTO, HttpServletRequest request) {
+		System.out.println("CodeController updatePro()");
+		
+		codeService.updateCode(codeDTO);
+
+//		주소줄 변경하면서 이동 (수정해야함)
+		return "redirect:/code/codeList2";
+	}
+	
+	
 	@RequestMapping(value = "/code/insertCode", method = RequestMethod.GET)
 	public String insertCode(HttpServletRequest request, Model model) {
 		System.out.println("CodeController insertCode()");
@@ -125,25 +143,13 @@ public class CodeController {
 		
 		CodeDTO codeDTO = codeService.getCode(code_grp);
 		
-		request.setAttribute("codeDTO", codeDTO);
 		model.addAttribute("codeDTO", codeDTO);
-		
+		model.addAttribute("code_grp", code_grp);
 		return "code/insertCode";
 	}
 	
-	@RequestMapping(value = "/code/updateCode", method = RequestMethod.GET)
-	public String updateCode(Model model, HttpServletRequest request) {
-		System.out.println("CodeController updateCode()");
-		
-		String code_cd = request.getParameter("code_cd");
-		System.out.println("code_cd="+code_cd);
-		
-		CodeDTO codeDTO = codeService.getCode(code_cd);
-		
-		model.addAttribute("codeDTO", codeDTO);
-		
-		return "code/updateCode";
-	}
+
+	
 
 	
 	//리스트2 페이징

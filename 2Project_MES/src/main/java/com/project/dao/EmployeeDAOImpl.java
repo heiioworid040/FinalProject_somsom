@@ -34,10 +34,10 @@ public class EmployeeDAOImpl implements EmployeeDAO{
 	}
 
 	@Override
-	public int getEmployeeCount() {
+	public int getEmployeeCount(PageDTO pageDTO) {
 		System.out.println("EmployeeDAOImpl getEmployeeCount()");
-		
-		return sqlSession.selectOne(namespace+".getEmployeeCount");
+		System.out.println("search"+pageDTO.getSearch());
+		return sqlSession.selectOne(namespace+".getEmployeeCount", pageDTO);
 	}
 
 	@Override

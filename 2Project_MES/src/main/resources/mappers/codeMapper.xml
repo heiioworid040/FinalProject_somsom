@@ -34,10 +34,19 @@
 	</delete>
 
 	<select id="getCode" resultType="com.project.domain.CodeDTO">
-		select distinct(code_grp), code_grp_nm from code
+		select distinct(code_cd), code_grp_nm from code
 		where code_grp = #{code_grp}
 	</select>
 
+	<select id="getCode2" resultType="com.project.domain.CodeDTO">
+		select * from code
+		where code_cd = #{code_cd}
+	</select>
+	
+	<update id="updateCode">
+		update code set code_cd=#{code_cd}, code_nm=#{code_nm}, code_note=#{code_note}
+		where code_cd = #{code_cd}
+	</update>
 
 
 

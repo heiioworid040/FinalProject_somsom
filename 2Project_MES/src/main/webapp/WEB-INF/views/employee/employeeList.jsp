@@ -45,9 +45,28 @@ $(function(){
 	})
 })
 
-function fun1() {
+// function fun1() {
+// 	   let check = false;
+// 	   with(document.ckDelete) {
+// 	      if(ck.length==undefined) {
+// 	         if(ck.checked) { check = true; }
+// 	      } else {
+// 	         for(let i=0;i<ck.length;i++) {
+// 	            if(ck[i].checked) { check = true; } }
+// 	      } if(!check) {
+// 	      alert("삭제할 사용자를 선택하세요");
+// 	         return;
+// 	      } else {
+// 	         if(confirm("삭제처리 하시겠습니까?")) { document.form.action='${pageContext.request.contextPath}/employee/deletePro' }
+// 	      } } }
+
+
+
+function fun1(index) {
+	   
+	if(index==1){
 	   let check = false;
-	   with(document.ckDelete) {
+	   with(document.form) {
 	      if(ck.length==undefined) {
 	         if(ck.checked) { check = true; }
 	      } else {
@@ -57,8 +76,20 @@ function fun1() {
 	      alert("삭제할 사용자를 선택하세요");
 	         return;
 	      } else {
-	         if(confirm("삭제처리 하시겠습니까?")) { submit(); }
-	      } } }
+	         if(confirm("삭제처리 하시겠습니까?")) { document.form.action='${pageContext.request.contextPath}/employee/deletePro' }
+	      } } } 
+	   
+	else if(index==2)
+		   { document.form.action='${pageContext.request.contextPath}/employee/insertPro' }
+	
+	else if(index==3)
+	  	{ document.form.action='${pageContext.request.contextPath}/employee/employeeList' }
+		
+	   
+	   
+	   
+	   
+	   }
 	      
 </script>
 <body>
@@ -104,6 +135,39 @@ function fun1() {
 						<div class="card">
 							<div class="card-body">
 							<!--	(검색창 위치) -->
+							<div class="content">
+			<div class="animated fadeIn">
+				<div class="row">
+					<div class="col-lg">
+						<div class="card m-0">
+							<div class="card-body card-block">
+								<form action="${pageContext.request.contextPath}/employee/employeeList" method="get" class="form-inline">
+									 <div class="form-group col-6 mt-1">
+                                    	<label for="exampleInputName1" class="pr-1  form-control-label">사용자ID</label>
+                                    	<input type="text" id="search" name="search" class="form-control ">
+                                    	<div class="input-group">
+                                    	</div>
+                                    </div>
+                                     <div class="form-group col-6 mt-1">
+                                    	<label for="exampleInputName1" class="pr-1  form-control-label">사용자명</label>
+                                    	<input type="text" id="search2" name="search2" class="form-control">
+                                    	<div class="input-group">
+                                    	</div>
+                                    </div> 
+                                    <div class="form-group col-6 mt-3">
+                                    <input type="submit" value="search">
+<!--                                     	<div class="input-group"> -->
+<!--                                         	<div class="input-group-addon"><i class="ti-search"></i></div> -->
+                                    	</div>
+								   </form>
+                                    </div>
+                            </div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
 							<!-- 이 이상 긁는건 너무 템플릿에만의존적인 것 같아 나머지 기능은 직접 개발합시다 파이팅! -->
 							</div>
 						</div>
@@ -113,10 +177,11 @@ function fun1() {
 		</div><!-- .content -->
 		
         <div class="content">
-		<input type="button" value="추가"
-								onclick="location.href='${pageContext.request.contextPath}/employee/insertEmployee'">
-			
-		<input type="button" name="ckDelete" value="삭제" onclick="fun1()" >
+<%-- 		<form name="ckDelete" action="${pageContext.request.contextPath}/employee/deletePro" method="post"> --%>
+		<form name="form" method="post">
+<%-- 		<input type="submit" value="add" name="add" onclick="location.href='${pageContext.request.contextPath}/employee/employeeList'">			 --%>
+		<input type="submit" name="ckDelete" value="삭제" onclick="fun1(1)" >
+		<input type="submit" value="add" name="add" onclick="fun1(3)" formmethod="get">			
 													
 			<div class="animated fadeIn">
 			<div class="animated fadeIn">
@@ -127,8 +192,7 @@ function fun1() {
 								<strong class="card-title">Table Head</strong>  
 							</div>
 							<div class="card-body">
-								<form name="ckDelete" action="${pageContext.request.contextPath}/employee/deletePro" method="post">
-								<table class="table">
+								<table class="table" style=>
 									<thead class="thead-dark">
 										<tr>
 											<th scope="col"><input type="checkbox" id="ckAll" name="ckAll"></th>
@@ -139,34 +203,58 @@ function fun1() {
 											<th scope="col">직책</th>
 											<th scope="col">E-MAIL</th>
 											<th scope="col">전화번호</th>
-											<th scope="col">수정</th>										
+											<th scope="col">수정/추가</th>										
 
 											
 										</tr>
 									</thead>
 									<tbody>
-										<c:forEach var="employeeDTO" items="${employeeList }">
+										
+										
+										<c:if test="${! empty add }">
 										<tr>
+											<td><input type="checkBox" name="ck" id="ck" value=""/></td>
+											<td><input type="text" name="emp_cd" readonly></td>
+											<td><input type="text" name="emp_nm"></td>
+											<td><input type="text" name="emp_pass"></td>
+											<td><select name="emp_position">
+												<option value="">직책을 선택하세요</option>
+												<option value="관리자">관리자</option>
+												<option value="파트장">파트장</option>
+												<option value="사원">사원</option>
+												</select></td>
+											<td><input type="email" name="emp_email"></td>
+											<td><input type="text" name="emp_tel"></td>
+<%-- 											<td><input type="submit" value="저장" name="저장" onclick="location.href='${pageContext.request.contextPath}/employee/insertPro'"></td> --%>
+<%-- 											<td><input type="button" value="저장" onclick="location.href='${pageContext.request.contextPath}/employee/insertPro'" ></td> --%>
+											<td><input type="submit" value="저장" onclick="fun1(2)" formmethod="get" ></td>
+										</tr>
+										</c:if>
+										
+										
+										<c:forEach var="employeeDTO" items="${employeeList }">
+										
+										<tr>
+											
 											<td><input type="checkBox" name="ck" id="ck" value="${employeeDTO.emp_cd}"/></td>																					
 											<td>${employeeDTO.emp_cd}</td>
 											<td>${employeeDTO.emp_nm}</td>
 											<td>${employeeDTO.emp_pass}</td>
-<%-- 											<td>${employeeDTO.emp_dept}</td> --%>
 											<td>${employeeDTO.emp_position}</td>
 											<td>${employeeDTO.emp_email}</td>
 											<td>${employeeDTO.emp_tel}</td>
-<!-- 											<td><input type="button" value="수정" onclick="fun2()"></td>		 -->
-<%-- 											<td><a href="javascript:void(window.open('${pageContext.request.contextPath}/employee/updateEmployee?emp_cd=${employeeDTO.emp_cd}', '수정', 'width=500, height=400,left=500, top=200' ))"> --%>
-<!-- 												<input type="button" class="requestBtn" value=수정 style="margin-bottom: 40px;"></a></td> -->
-											<td><input type="button" value="수정" onclick="location.href='${pageContext.request.contextPath}/employee/updateEmployee?emp_cd=${employeeDTO.emp_cd}'"></td>		
+											<td><input type="button" value="수정" onclick="location.href='${pageContext.request.contextPath}/employee/updateEmployee?emp_cd=${employeeDTO.emp_cd}'"></td>													
+										
 										</tr>
 										</c:forEach>
 										
 										
 										
+										
 									</tbody>
 								</table>
-								</form>
+
+						
 <c:if test="${pageDTO.startPage > pageDTO.pageBlock }">
 <a href="${pageContext.request.contextPath}/employee/employeeList?pageNum=${pageDTO.startPage - pageDTO.pageBlock }">◁◁</a>
 </c:if>
@@ -178,6 +266,7 @@ function fun1() {
 <c:if test="${pageDTO.endPage < pageDTO.pageCount }">
 <a href="${pageContext.request.contextPath}/employee/employeeList?pageNum=${pageDTO.startPage + pageDTO.pageBlock }">▷▷</a>
 </c:if>
+	
 							</div>
 						</div>
 					</div>

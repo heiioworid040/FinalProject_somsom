@@ -36,9 +36,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@Override
-	public int getEmployeeCount() {
+	public int getEmployeeCount(PageDTO pageDTO) {
 		System.out.println("EmployeeServiceImpl getEmployeeCount()");
-		return employeeDAO.getEmployeeCount();
+		System.out.println("search"+pageDTO.getSearch());
+		return employeeDAO.getEmployeeCount(pageDTO);
 	}
 
 	@Override
