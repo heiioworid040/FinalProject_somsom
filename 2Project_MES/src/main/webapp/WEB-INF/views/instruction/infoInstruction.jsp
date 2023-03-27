@@ -139,7 +139,7 @@
                                             		<div class="input-group">
                                             			<input type="text" id="input2-group2" name="line_cd" value ="PERFTEST" class="form-control bg-white" disabled>
                                             			<div class="input-group-btn">
-                                            				<button type="button" class="btn btn-primary" id="lineModalBtn" data-toggle="modal" data-target="#lineModal">검색</button>
+                                            				<button type="button" class="btn btn-primary" id="lineModalBtn">검색</button>
                                             			</div>
                                         			</div>
                                             	</td>
@@ -290,8 +290,41 @@
 				</div>
 			</div>
 		</div><!-- .content -->
+		
+
+							<div class="card-body">
+								<table class="table">
+									<thead class="thead-dark">
+										<tr>
+											<th scope="col">라인</th>
+											<th scope="col">라인명</th>
+											<th scope="col">공정</th>
+											<th scope="col">작업장</th>
+											<th scope="col">정렬순서</th>
+											<th scope="col">상태</th>
+											<th scope="col">비고</th>
+										</tr>
+									</thead>
+									<tbody id="lineTableBody">
+<%-- 										<c:forEach var="lineDTO" items="${lineList }"> --%>
+<!-- 											<tr> -->
+<%-- 												<td scope="row">${lineDTO.line_cd }</td> --%>
+<%-- 												<td>${lineDTO.line_nm }</td> --%>
+<%-- 												<td>${lineDTO.line_process }</td> --%>
+<%-- 												<td>${lineDTO.line_place }</td> --%>
+<%-- 												<td>${lineDTO.line_num }</td> --%>
+<%-- 												<td>${lineDTO.line_st }</td> --%>
+<%-- 												<td>${lineDTO.line_note }</td> --%>
+<!-- 											</tr> -->
+<%-- 										</c:forEach> --%>
+									</tbody>
+								</table>
+							</div>
+	
 		<div>
-<%-- 		<jsp:include page="../line/lineModal.jsp" /> --%>
+<%-- 		<jsp:include page="../line/lineModal.jsp" > --%>
+<%-- 		<jsp:param value="" name=""/> --%>
+<%-- 		</jsp:include> --%>
 		<div class="clearfix"></div>
 		<!-- 푸터 넣는 곳 -->
 		<jsp:include page="../inc/footer.jsp" />
@@ -303,7 +336,37 @@
 	<!-- Right Panel -->
 
 	<!-- Scripts -->
-	<script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+	<script type="text/javascript">
+	$(function(){
+		document.getElementById("lineModalBtn").addEventListener('click', getLineModal);
+		
+		function getLineModal(){
+			try {
+				jQuery.ajax({
+					type : 'get',
+					url:'${pageContext.request.contextPath}/line/lineModal',
+					dataType:'json',
+					success:function(linearr){
+						$.each(linearr,function(index,item){
+							$('#lineTableBody').append('<tr><td scope="row">'+item.line_cd+'</td><td>'+item.line_nm+'</td><td>'+item.line_process+'</td><td>'+item.line_place +'</td><td>'+item.line_num +'</td><td>'+item.line_st +'</td><td>'+item.line_note+'</td></tr>');
+						});
+					}
+				});				
+			} catch (e) {
+				  console.log(e instanceof TypeError); // true
+				  console.log(e.message);              // "null has no properties"
+				  console.log(e.name);                 // "TypeError"
+				  console.log(e.fileName);             // "Scratchpad/1"
+				  console.log(e.lineNumber);           // 2
+				  console.log(e.columnNumber);         // 2
+				  console.log(e.stack);                // "@Scratchpad/2:2:3\n"
+
+		}
+	}
+})
+    </script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
