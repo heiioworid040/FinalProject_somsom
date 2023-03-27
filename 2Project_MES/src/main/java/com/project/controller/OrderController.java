@@ -41,9 +41,7 @@ public class OrderController {
 		public String searchPop(HttpServletRequest request, Model model) {
 			int pageSize=10;
 			String pageNum=request.getParameter("pageNum");
-			if(pageNum==null) {
-				pageNum="1";
-			}
+			if(pageNum==null) pageNum="1";
 			int currentPage=Integer.valueOf(pageNum);
 			
 			PageDTO pageDTO=new PageDTO();
@@ -51,7 +49,7 @@ public class OrderController {
 			pageDTO.setPageNum(pageNum);
 			pageDTO.setCurrentPage(currentPage);
 			String pop=(String)request.getParameter("pop");
-
+			
 			int count=0;
 			if(pop.equals("cli")) {
 				List<ClientDTO> popList=clientService.getClientInfo(pageDTO);
@@ -70,9 +68,7 @@ public class OrderController {
 			int startPage=(currentPage-1)/pageBlock*pageBlock+1;
 			int endPage=startPage+pageBlock-1;
 			int pageCount=count/pageSize+(count%pageSize==0?0:1);
-			if(endPage>pageCount) {
-				endPage=pageCount;
-			}
+			if(endPage>pageCount) endPage=pageCount;
 			
 			pageDTO.setCount(count);
 			pageDTO.setPageBlock(pageBlock);

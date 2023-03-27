@@ -95,9 +95,6 @@
 										<span class="search">수주일자 <input type="date" name="ord_date"> <input type="date" name="ord_date_end"></span>
 										<span class="search">납품예정일 <input type="date" name="ord_d_date"> <input type="date" name="ord_d_date_end"></span>
 									</div>
-									<div class="search-500">
-										<span class="search">품번 <input type=text id="search_prod_cd" name="prod_cd" readonly> <input type=text id="search_prod_nm" readonly><button type="button" onclick="searchPop(3)">돋보기</button></span>
-									</div>
 									<!-- 이 이상 긁는건 너무 템플릿에만의존적인 것 같아 나머지 기능은 직접 개발합시다 파이팅! -->
 								</div>
 							</div>
@@ -121,7 +118,7 @@
 								<strong class="card-title">수주품목</strong>
 							</div>
 							<div class="card-body">
-								<table class="table">
+								<table class="table" id="hover_tb">
 									<thead class="thead-dark">
 										<tr>
 											<th scope="col">수주업체코드</th>

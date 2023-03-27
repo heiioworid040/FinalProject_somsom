@@ -26,6 +26,13 @@
 <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
 </head>
+<script>
+function searchPop(search) {
+	if(search==1) window.open('${pageContext.request.contextPath }/order/searchPop?pop=cli','searchPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=900,height=510,top=90,left=200')
+	else if(search==2) window.open('${pageContext.request.contextPath }/order/searchPop?pop=emp','searchPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=900,height=510,top=90,left=200')
+	else window.open('${pageContext.request.contextPath }/order/searchPop?pop=prod','searchPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=900,height=510,top=90,left=200')
+}
+</script>
 <body>
 	<!-- Left Panel1 -->
 	<jsp:include page="../inc/leftPanel.jsp" />
@@ -73,15 +80,15 @@
 								<div class="card-body">
 									<!--	(검색창 위치) -->
 									<div class="search-500">
-										<span class="search">업체 <input type="text" name="cli_cd"> <input type="text" readonly></span>
-										<span class="search">담당자 <input type="text" name="emp_cd"> <input type="text" readonly></span>
+										<span class="search">업체 <input type="text" id="search_cli_cd" name="cli_cd" readonly> <input type="text" id="search_cli_nm" readonly><button type="button" onclick="searchPop(1)">돋보기</button></span>
+										<span class="search">담당자 <input type="text" id="search_emp_cd" name="emp_cd" readonly> <input type="text" id="search_emp_nm" readonly><button type="button" onclick="searchPop(2)">돋보기</button></span>
 									</div>
 									<div class="search-450">
 										<span class="search">수주일자 <input type="date" name="ord_date"> <input type="date" name="ord_date_end"></span>
 										<span class="search">납품예정일 <input type="date" name="ord_d_date"> <input type="date" name="ord_d_date_end"></span>
 									</div>
 									<div class="search-500">
-										<span class="search">품번 <input type=text name="prod_cd"> <input type=text readonly></span>
+										<span class="search">품번 <input type=text id="search_prod_cd" name="prod_cd" readonly> <input type=text id="search_prod_nm" readonly><button type="button" onclick="searchPop(3)">돋보기</button></span>
 									</div>
 									<!-- 이 이상 긁는건 너무 템플릿에만의존적인 것 같아 나머지 기능은 직접 개발합시다 파이팅! -->
 								</div>
@@ -110,7 +117,7 @@
 								<strong class="card-title">수주현황</strong>
 							</div>
 							<div class="card-body">
-								<table class="table">
+								<table class="table" id="hover_tb">
 									<thead class="thead-dark">
 										<tr>
 											<th scope="col">수주번호</th>

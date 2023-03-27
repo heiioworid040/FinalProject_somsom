@@ -1,4 +1,7 @@
 @charset "UTF-8";
+#hover_tb tr:hover {
+	background-color: #C4C4C4;
+}
 .content-div2 {
 	width: 100%;
 }
@@ -20,7 +23,4 @@ body {
 #prod_cd, #prod_nm, #prod_unit, #ord_count, #prod_note {
 	width: 100px;
 	border-style: none;
-}
-.btn_can {
-	
 }

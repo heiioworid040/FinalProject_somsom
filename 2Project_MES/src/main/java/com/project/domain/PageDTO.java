@@ -14,23 +14,19 @@ public class PageDTO {
 
 	//검색어 pageDTO에 담아간다.
 	private String search;
+	private String search2;
+	private String search3;
+	private String search4;
+	private String search5;
+	private String search6;
+	private String search7;
 	
-
-
-
+	
 	@Override
 	public String toString() {
 		return "PageDTO [pageSize=" + pageSize + ", pageNum=" + pageNum + ", currentPage=" + currentPage + ", startRow="
 				+ startRow + ", endRow=" + endRow + ", pageBlock=" + pageBlock + ", startPage=" + startPage
 				+ ", endPage=" + endPage + ", count=" + count + ", pageCount=" + pageCount + "]";
-	}
-	
-	public String getSearch() {
-		return search;
-	}
-
-	public void setSearch(String search) {
-		this.search = search;
 	}
 	
 	//set get
@@ -93,5 +89,62 @@ public class PageDTO {
 	}
 	public void setPageCount(int pageCount) {
 		this.pageCount = pageCount;
+	}
+	
+	//search
+	public String getSearch() {
+		return search;
+	}
+
+	public void setSearch(String search) {
+		this.search = search;
+	}
+
+	public String getSearch2() {
+		return search2;
+	}
+
+	public void setSearch2(String search2) {
+		this.search2 = search2;
+	}
+
+	public String getSearch3() {
+		return search3;
+	}
+
+	public void setSearch3(String search3) {
+		this.search3 = search3;
+	}
+
+	public String getSearch4() {
+		return search4;
+	}
+
+	public void setSearch4(String search4) {
+		this.search4 = search4;
+	}
+
+	public String getSearch5() {
+		return search5;
+	}
+
+	public void setSearch5(String search5) {
+		this.search5 = search5;
+	}
+
+	public String getSearch6() {
+		return search6;
+	}
+
+	public void setSearch6(String search6) {
+		this.search6 = search6;
+	}
+
+	public String getSearch7() {
+		return search7;
+	}
+
+	public void setSearch7(String search7) {
+		this.search7 = search7;
 	}
 }
