@@ -58,12 +58,6 @@ public class OrderDAO {
 		pageDTO.setStartRow(pageDTO.getStartRow()-1);
 		return sqlSession.selectList(namespace+".getOrderList", pageDTO);
 	}
-
-	//수주 현황 검색 수정 중
-	public List<OrderDTO> getOrderList(PageDTO pageDTO, String cli_cd) {
-		pageDTO.setStartRow(pageDTO.getStartRow()-1);
-		return sqlSession.selectList(namespace+".getOrderList_cli_cd", cli_cd);
-	}
 	
 	//수주 관리 팝업
 	public List<OrderDTO> getOrderPop(PageDTO pageDTO) {

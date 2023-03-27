@@ -26,9 +26,9 @@
 </head>
 <script>
 	function searchPop(search) {
-		if(search==1) window.open('${pageContext.request.contextPath }/order/searchPop?pop=cli','searchPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=900,height=510,top=90,left=200')
-		else if(search==2) window.open('${pageContext.request.contextPath }/order/searchPop?pop=emp','searchPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=900,height=510,top=90,left=200')
-		else window.open('${pageContext.request.contextPath }/order/searchPop?pop=prod','searchPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=900,height=510,top=90,left=200')
+		if(search==1) window.open('${pageContext.request.contextPath }/search/searchPop?pop=cli','searchPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=900,height=510,top=90,left=200')
+		else if(search==2) window.open('${pageContext.request.contextPath }/search/searchPop?pop=emp','searchPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=900,height=510,top=90,left=200')
+		else window.open('${pageContext.request.contextPath }/search/searchPop?pop=prod','searchPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=900,height=510,top=90,left=200')
 	}
 	function orderPop(order) {
 		if(order==1) window.open('${pageContext.request.contextPath }/order/orderPop?pop=cli','cliPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=900,height=510,top=90,left=200')
@@ -88,8 +88,8 @@
 								<div class="card-body">
 									<!--	(검색창 위치) -->
 									<div class="search-500">
-										<span class="search">업체 <input type="text" id="search_cli_cd" name="cli_cd" readonly> <input type="text" id="search_cli_nm" readonly><button type="button" onclick="searchPop(1)">돋보기</button></span>
-										<span class="search">담당자 <input type="text" id="search_emp_cd" name="emp_cd" readonly> <input type="text" id="search_emp_nm" readonly><button type="button" onclick="searchPop(2)">돋보기</button></span>
+										<span class="search">업체 <input type="text" id="search_cli_cd" name="cli" readonly> <input type="text" id="search_cli_nm" readonly><button type="button" onclick="searchPop(1)">돋보기</button></span>
+										<span class="search">담당자 <input type="text" id="search_emp_cd" name="emp" readonly> <input type="text" id="search_emp_nm" readonly><button type="button" onclick="searchPop(2)">돋보기</button></span>
 									</div>
 									<div class="search-450">
 										<span class="search">수주일자 <input type="date" name="ord_date"> <input type="date" name="ord_date_end"></span>
@@ -105,7 +105,6 @@
 		</form>
 		<!-- .content -->
 		
-<%-- 		<form action="${pageContext.request.contextPath}/order/orderInsert" name="orderInsert2" method="get"> --%>
 		<div class="content-div">
 			<div class="search-result-div">
 				<span class="search-result">총 n건</span>
@@ -131,9 +130,7 @@
 									</thead>
 									<tbody>
 										<c:forEach var="orderDTO" items="${orderInsertList }">
-<!-- 											<tr> -->
 											<tr onclick="location.href='${pageContext.request.contextPath }/order/orderInsert?ord_cd=${orderDTO.ord_cd }'">
-<%-- 												<td><input type="submit" name="ord_cd" value="${orderDTO.ord_cd}"></td> --%>
 												<td>${orderDTO.cli_cd }</td>
 												<td>${orderDTO.cli_nm }</td>
 												<td>${orderDTO.ord_date }</td>
@@ -144,14 +141,39 @@
 										</c:forEach>
 									</tbody>
 								</table>
+								<!-- .content -->
+								
+							<div class="pageNum">
+								<c:if test="${empty search}">
+								<c:if test="${pageDTO.startPage > pageDTO.pageBlock }">
+									<a href="${pageContext.request.contextPath }/order/orderInsert?pageNum=${pageDTO.startPage-pageDTO.pageBlock }">Prev</a>
+								</c:if>
+								<c:forEach var="i" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1">
+									<a href="${pageContext.request.contextPath }/order/orderInsert?pageNum=${i}">${i}</a> 
+								</c:forEach>
+								<c:if test="${pageDTO.endPage < pageDTO.pageCount }">
+									<a href="${pageContext.request.contextPath }/order/orderInsert?pageNum=${pageDTO.startPage+pageDTO.pageBlock }">Next</a>
+								</c:if>
+								</c:if>
+					<!-- }else{ -->
+								<c:if test="${!empty search }">
+									<c:if test="${pageDTO.startPage > pageDTO.pageBlock }">
+										<a href="${pageContext.request.contextPath }/order/orderInsert?pageNum=${pageDTO.startPage-pageDTO.pageBlock }&search=${pageDTO.search }">Prev</a>
+									</c:if>
+									<c:forEach var="i" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1">
+										<a href="${pageContext.request.contextPath }/order/orderInsert?pageNum=${i}&search=${pageDTO.search}">${i}</a> 
+									</c:forEach>
+									<c:if test="${pageDTO.endPage < pageDTO.pageCount }">
+										<a href="${pageContext.request.contextPath }/order/orderInsert?pageNum=${pageDTO.startPage+pageDTO.pageBlock }&search=${pageDTO.search}">Next</a>
+									</c:if>
+								</c:if>	
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-<!-- 		</form> -->
-		<!-- .content -->
+	</div>
 		
 		<form action="${pageContext.request.contextPath }/order/orderInsertPro" method="POST">
 		<input type="hidden" name="ord_cd" value="${orderDTO.ord_cd }">
@@ -216,22 +238,9 @@
 												<td><button type="reset" class="btn-test" name="btn_can" value="del">-</button></td>
 <!-- 												<td><button type="button" class="btn-test" name="btn_can" value="del">-</button></td> -->
 											</tr>
-<%-- 										<c:if test="${!empty btn_can }"> --%>
-<!-- 											<tr> -->
-<!-- 												<td></td> -->
-<!-- 												<td><input type="text" id="prod_cd" name="prod_cd" readonly></td> -->
-<!-- 												<td><input type="text" id="prod_nm" readonly></td> -->
-<!-- 												<td><input type="text" id="prod_unit" readonly></td> -->
-<!-- 												<td><input type="text" id="ord_count" name="ord_count"></td> -->
-<!-- 												<td><input type="text" id="prod_note" readonly></td> -->
-<!-- 												<td><button type="reset" class="btn-test" name="btn_can" value="del">-</button></td> -->
-<!-- 											</tr> -->
-<%-- 										</c:if> --%>
 									</tbody>
 								</table>
 									<button type="button" class="btn_can" name="btn_can" value="add" onclick="orderPop(3)">+</button>
-									${btn_can }
-<!-- 								<button type="button" class="btn-test" name="btn_can" value="edit">수정</button> -->
 							</div>
 						</div>
 					</div>

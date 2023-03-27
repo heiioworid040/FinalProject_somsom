@@ -22,27 +22,24 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/search.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/order.css">
 <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
-<!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 </head>
 <script>
 	function cli(cli_cd,cli_nm) {
-		opener.document.getElementById("cli_cd").value=cli_cd;
-		opener.document.getElementById("cli_nm").value=cli_nm;
-		document.orderPop.submit();
+		opener.document.getElementById("search_cli_cd").value=cli_cd;
+		opener.document.getElementById("search_cli_nm").value=cli_nm;
+		document.searchPop.submit();
 		self.close();
 	}
 	function emp(emp_cd,emp_nm) {
-		opener.document.getElementById("emp_cd").value=emp_cd;
-		opener.document.getElementById("emp_nm").value=emp_nm;
-		document.orderPop.submit();
+		opener.document.getElementById("search_emp_cd").value=emp_cd;
+		opener.document.getElementById("search_emp_nm").value=emp_nm;
+		document.searchPop.submit();
 		self.close();
 	}
-	function prod(prod_cd,prod_nm,prod_unit,prod_note) {
-		opener.document.getElementById("prod_cd").value=prod_cd;
-		opener.document.getElementById("prod_nm").value=prod_nm;
-		opener.document.getElementById("prod_unit").value=prod_unit;
-		opener.document.getElementById("prod_note").value=prod_note;
-		document.orderPop.submit();
+	function prod(prod_cd,prod_nm) {
+		opener.document.getElementById("search_prod_cd").value=prod_cd;
+		opener.document.getElementById("search_prod_nm").value=prod_nm;
+		document.searchPop.submit();
 		self.close();
 	}
 </script>
@@ -68,7 +65,7 @@
 				</div>
 			</div>
 		</div>
-		<form action="${pageContext.request.contextPath }/order/cliPop" method="get">
+		<form action="${pageContext.request.contextPath }/order/searchPop" method="get">
 			<div class="content">
 				<div class="animated fadeIn">
 					<div class="row">
@@ -79,8 +76,8 @@
 									<div class="search-div">
 										<div class="search-div-o">
 											<c:if test="${pop eq 'cli' }">
-												<span class="search">업체코드 <input type="text" name="prod_cd"></span>
-												<span class="search">업체명 <input type="text" name="prod_nm"></span>
+												<span class="search">업체코드 <input type="text" name="cd"></span>
+												<span class="search">업체명 <input type="text" name="nm"></span>
 												<span class="search">업체구분 <select class="select-search" name="info">
 																				<option value="">전체</option>
 																				<option value="cli_ja">자사</option>
@@ -89,12 +86,12 @@
 																			</select></span>
 											</c:if>
 											<c:if test="${pop eq 'emp' }">
-												<span class="search">사번 <input type="text" name="emp_cd"></span>
-												<span class="search">이름 <input type="text" name="emp_nm"></span>
+												<span class="search">사번 <input type="text" name="cd"></span>
+												<span class="search">이름 <input type="text" name="nm"></span>
 											</c:if>
 											<c:if test="${pop eq 'prod' }">
-												<span class="search">품번 <input type="text" name="prod_cd"></span>
-												<span class="search">품명 <input type="text" name="prod_nm"></span>
+												<span class="search">품번 <input type="text" name="cd"></span>
+												<span class="search">품명 <input type="text" name="nm"></span>
 												<span class="search">자재유형 <select class="select-search" name="info">
 																				<option value="">전체</option>
 																				<option value="prod_wan">완제품</option>
@@ -114,7 +111,7 @@
 		</form>
 		<!-- .content -->
 		
-		<form action="${pageContext.request.contextPath }/order/orderInsert" name="orderPop" method="get">
+		<form action="${pageContext.request.contextPath }/order/orderInsert" name="searchPop" method="get">
 		<div class="content">
 			<div class="animated fadeIn">
 				<div class="row">
@@ -161,7 +158,7 @@
 												</tr>
 											</c:if>
 											<c:if test="${ pop eq 'prod' }">
-												<tr onclick="prod('${orderDTO.prod_cd }','${orderDTO.prod_nm }','${orderDTO.prod_unit }','${orderDTO.prod_note }')">
+												<tr onclick="prod('${orderDTO.prod_cd }','${orderDTO.prod_nm }')">
 													<td>${orderDTO.prod_cd }</td>
 													<td>${orderDTO.prod_nm }</td>
 													<td>${orderDTO.prod_mat }</td>

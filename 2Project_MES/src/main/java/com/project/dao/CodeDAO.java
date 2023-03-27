@@ -21,4 +21,8 @@ public interface CodeDAO {
 
 	CodeDTO getCode(String code_grp);
 
+	CodeDTO getCode2(String code_cd);
+
+	void updateCode(CodeDTO codeDTO);
+
 }

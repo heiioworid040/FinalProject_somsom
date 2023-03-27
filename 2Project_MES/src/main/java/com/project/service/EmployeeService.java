@@ -11,7 +11,7 @@ public interface EmployeeService {
 
 	public List<EmployeeDTO> getEmployeeList(PageDTO pageDTO);
 
-	public int getEmployeeCount();
+	public int getEmployeeCount(PageDTO pageDTO);
 
 	public void insertEmployee(EmployeeDTO employeeDTO);
 
