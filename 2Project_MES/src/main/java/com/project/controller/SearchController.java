@@ -59,7 +59,7 @@ public class SearchController {
 		}else if(pop.equals("emp")) {
 			List<EmployeeDTO> popList=employeeService.getEmployeeList(pageDTO);
 			model.addAttribute("popList", popList);
-			count=employeeService.getEmployeeCount();
+			count=employeeService.getEmployeeCount(pageDTO);
 		}else {
 			List<ProductDTO> popList=productService.getProductList(pageDTO);
 			model.addAttribute("popList", popList);
