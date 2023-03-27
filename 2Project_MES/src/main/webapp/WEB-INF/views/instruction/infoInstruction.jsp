@@ -24,28 +24,6 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
-
-    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
-<script type="text/javascript">
-// $(document).ready(function(){
-// 	$("#lineModalBtn").click(function(){
-		
-// 		$.ajax({
-// 			type: "get"
-// 			url:"/line/lineInfo",
-// 			dataType:"JSON",
-// 			success:function(data){
-// 				$.each(arr, function(index,item){
-// 					$("lineTableBody").append('<tr><th scope="row">'+라인번호+'</th><td>'+라인명+'</td><td>'+공정+'</td><td>'+작업장+'</td><td>'+정렬순서+'</td><td>'+설비상태+'</td><td>'+비고+'</td></tr>');
-// 				});
-// 			},
-// 			error: function(xhr,status,error) {
-// 	            console.log(error);
-// 	        }
-// 		});
-// 	});
-// });
-</script>
 </head>
 <body>
 	<!-- Left Panel1 -->
@@ -92,10 +70,10 @@
                                     	<label for="exampleInputName2" class="pr-1 form-control-label">라인</label>
                                     	<div class="p-0 col">
                                             <select name="select" id="select" class="form-control">
-                                                <option value="0">전체</option>
-                                                <option value="1">Option #1</option>
-                                                <option value="2">Option #2</option>
-                                                <option value="3">Option #3</option>
+                                                <option value="0">--</option>
+                                                <c:forEach var="lineDTO" items="${searchLine }">
+                                                <option>${lineDTO.line_nm}(${lineDTO.line_cd })</option>
+                                                </c:forEach>
                                             </select>
                                         </div>
                                     </div>
@@ -142,7 +120,7 @@
 					<div class="col-lg">
 						<div class="card m-0">
 							<div class="card-body card-block">
-								<form action="#" method="post">
+								<form action="${pageContext.request.contextPath}/instruction/instinsert" method="post">
 									<table id="bootstrap-data-table" class="table table-striped table-bordered">
 										<thead class="thead-dark">
 											<tr>
@@ -151,7 +129,6 @@
 												<th scope="col">품번</th>
 												<th scope="col">품명</th>
 												<th scope="col">단위</th>
-												<th scope="col">지시날짜</th>
 												<th scope="col">지시수량</th>
 												<th scope="col">수주번호</th>
 												<th scope="col">업체명</th>
@@ -160,46 +137,99 @@
 											<tr>
 												<td scope="row">
                                             		<div class="input-group">
-                                            			<input type="text" id="input2-group2" name="input2-group2" placeholder="라인 코드" class="form-control bg-white" disabled>
+                                            			<input type="text" id="input2-group2" name="line_cd" value ="PERFTEST" class="form-control bg-white" disabled>
                                             			<div class="input-group-btn">
-                                            				<button type="button" class="btn btn-primary" id="lineModalBtn" data-toggle="modal" data-target="#lineModal" data-what="hello">버튼</button>
+                                            				<button type="button" class="btn btn-primary" id="lineModalBtn">검색</button>
                                             			</div>
                                         			</div>
                                             	</td>
 												<td>
-													<input type="text" id="disabled-input" name="disabled-input" placeholder="Disabled" disabled class="form-control">
+													<input type="text" id="disabled-input" disabled class="form-control">
 												</td>
 												<td>
 													<div class="input-group">
-                                            			<input type="text" id="input2-group2" name="input2-group2" placeholder="품목 코드" class="form-control bg-white" disabled>
+                                            			<input type="text" id="input2-group2" class="form-control bg-white" disabled>
                                             			<div class="input-group-btn"><input type="button" class="btn btn-primary" value="검색"></div>
 													</div>
 												</td>
 												<td>
-													<input type="text" id="disabled-input" name="disabled-input" placeholder="Disabled" disabled class="form-control">
+													<input type="text" id="disabled-input" disabled class="form-control">
 												</td>
 												<td>
-													<input type="text" id="disabled-input" name="disabled-input" placeholder="Disabled" disabled class="form-control">
+													<input type="text" id="disabled-input" disabled class="form-control">
 												</td>
 												<td>
-													<input type="text" id="disabled-input" name="disabled-input" placeholder="Disabled" disabled class="form-control">
-												</td>
-												<td>
-													<input type="text" id="text-input" name="text-input" placeholder="Text" class="form-control">
+                                            			<input type="text" id="input2-group2" name="inst_count" value="150" class="form-control  bg-white">
 												</td>
 												<td>
 													<div class="input-group">
-                                            			<input type="text" id="input2-group2" name="input2-group2" placeholder="수주 번호" class="form-control  bg-white" disabled>
-                                            			<div class="input-group-btn"><input type="button" class="btn btn-primary" value="검색"></div>
+													<input type="text" id="disabled-input" name="ord_cd" value="SHIPTEST" disabled class="form-control">
+                                            		<div class="input-group-btn"><input type="button" class="btn btn-primary" value="검색"></div>
 													</div>
 												</td>
 												<td>
-													<input type="text" id="disabled-input" name="disabled-input" placeholder="Disabled" disabled class="form-control">
+													<input type="text" id="disabled-input" disabled class="form-control">
 												</td>
 											</tr>
 										</tbody>
 									</table>
-									<button type="button" class="btn btn-primary col-2 float-right">추가</button>
+<!-- 									<table id="bootstrap-data-table" class="table table-striped table-bordered"> -->
+<!-- 										<thead class="thead-dark"> -->
+<!-- 											<tr> -->
+<!-- 												<th scope="col">라인</th> -->
+<!-- 												<th scope="col">라인명</th> -->
+<!-- 												<th scope="col">품번</th> -->
+<!-- 												<th scope="col">품명</th> -->
+<!-- 												<th scope="col">단위</th> -->
+<!-- 												<th scope="col">지시날짜</th> -->
+<!-- 												<th scope="col">지시수량</th> -->
+<!-- 												<th scope="col">수주번호</th> -->
+<!-- 												<th scope="col">업체명</th> -->
+<!-- 										</thead> -->
+<!-- 										<tbody> -->
+<!-- 											<tr> -->
+<!-- 												<td scope="row"> -->
+<!--                                             		<div class="input-group"> -->
+<!--                                             			<input type="text" id="input2-group2" name="input2-group2" placeholder="라인 코드" class="form-control bg-white" disabled> -->
+<!--                                             			<div class="input-group-btn"> -->
+<!--                                             				<button type="button" class="btn btn-primary" id="lineModalBtn" data-toggle="modal" data-target="#lineModal">검색</button> -->
+<!--                                             			</div> -->
+<!--                                         			</div> -->
+<!--                                             	</td> -->
+<!-- 												<td> -->
+<!-- 													<input type="text" id="disabled-input" name="disabled-input" placeholder="Disabled" disabled class="form-control"> -->
+<!-- 												</td> -->
+<!-- 												<td> -->
+<!-- 													<div class="input-group"> -->
+<!--                                             			<input type="text" id="input2-group2" name="input2-group2" placeholder="품목 코드" class="form-control bg-white" disabled> -->
+<!--                                             			<div class="input-group-btn"><input type="button" class="btn btn-primary" value="검색"></div> -->
+<!-- 													</div> -->
+<!-- 												</td> -->
+<!-- 												<td> -->
+<!-- 													<input type="text" id="disabled-input" name="disabled-input" placeholder="Disabled" disabled class="form-control"> -->
+<!-- 												</td> -->
+<!-- 												<td> -->
+<!-- 													<input type="text" id="disabled-input" name="disabled-input" placeholder="Disabled" disabled class="form-control"> -->
+<!-- 												</td> -->
+<!-- 												<td> -->
+<!-- 													<input type="text" id="disabled-input" name="disabled-input" placeholder="Disabled" disabled class="form-control"> -->
+<!-- 												</td> -->
+<!-- 												<td> -->
+<!-- 													<input type="text" id="text-input" name="text-input" placeholder="Text" class="form-control"> -->
+<!-- 												</td> -->
+<!-- 												<td> -->
+<!-- 													<div class="input-group"> -->
+<!--                                             			<input type="text" id="input2-group2" name="input2-group2" placeholder="수주 번호" class="form-control  bg-white" disabled> -->
+<!--                                             			<div class="input-group-btn"><input type="button" class="btn btn-primary" value="검색"></div> -->
+<!-- 													</div> -->
+<!-- 												</td> -->
+<!-- 												<td> -->
+<!-- 													<input type="text" id="disabled-input" name="disabled-input" placeholder="Disabled" disabled class="form-control"> -->
+<!-- 												</td> -->
+<!-- 											</tr> -->
+<!-- 										</tbody> -->
+<!-- 									</table> -->
+									<button type="submit" class="btn btn-primary col-2 float-right" >추가</button>
 								</form>
                             </div>
 						</div>
@@ -260,23 +290,86 @@
 				</div>
 			</div>
 		</div><!-- .content -->
-		<jsp:include page="../line/linePop.jsp" />
+		
+
+							<div class="card-body">
+								<table class="table">
+									<thead class="thead-dark">
+										<tr>
+											<th scope="col">라인</th>
+											<th scope="col">라인명</th>
+											<th scope="col">공정</th>
+											<th scope="col">작업장</th>
+											<th scope="col">정렬순서</th>
+											<th scope="col">상태</th>
+											<th scope="col">비고</th>
+										</tr>
+									</thead>
+									<tbody id="lineTableBody">
+<%-- 										<c:forEach var="lineDTO" items="${lineList }"> --%>
+<!-- 											<tr> -->
+<%-- 												<td scope="row">${lineDTO.line_cd }</td> --%>
+<%-- 												<td>${lineDTO.line_nm }</td> --%>
+<%-- 												<td>${lineDTO.line_process }</td> --%>
+<%-- 												<td>${lineDTO.line_place }</td> --%>
+<%-- 												<td>${lineDTO.line_num }</td> --%>
+<%-- 												<td>${lineDTO.line_st }</td> --%>
+<%-- 												<td>${lineDTO.line_note }</td> --%>
+<!-- 											</tr> -->
+<%-- 										</c:forEach> --%>
+									</tbody>
+								</table>
+							</div>
+	
+		<div>
+<%-- 		<jsp:include page="../line/lineModal.jsp" > --%>
+<%-- 		<jsp:param value="" name=""/> --%>
+<%-- 		</jsp:include> --%>
 		<div class="clearfix"></div>
 		<!-- 푸터 넣는 곳 -->
 		<jsp:include page="../inc/footer.jsp" />
 		<!-- 푸터 넣는 곳 -->
+		</div>
 	</div>
 	<!-- /#right-panel -->
 
 	<!-- Right Panel -->
 
 	<!-- Scripts -->
-	<script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+	<script type="text/javascript">
+	$(function(){
+		document.getElementById("lineModalBtn").addEventListener('click', getLineModal);
+		
+		function getLineModal(){
+			try {
+				jQuery.ajax({
+					type : 'get',
+					url:'${pageContext.request.contextPath}/line/lineModal',
+					dataType:'json',
+					success:function(linearr){
+						$.each(linearr,function(index,item){
+							$('#lineTableBody').append('<tr><td scope="row">'+item.line_cd+'</td><td>'+item.line_nm+'</td><td>'+item.line_process+'</td><td>'+item.line_place +'</td><td>'+item.line_num +'</td><td>'+item.line_st +'</td><td>'+item.line_note+'</td></tr>');
+						});
+					}
+				});				
+			} catch (e) {
+				  console.log(e instanceof TypeError); // true
+				  console.log(e.message);              // "null has no properties"
+				  console.log(e.name);                 // "TypeError"
+				  console.log(e.fileName);             // "Scratchpad/1"
+				  console.log(e.lineNumber);           // 2
+				  console.log(e.columnNumber);         // 2
+				  console.log(e.stack);                // "@Scratchpad/2:2:3\n"
+
+		}
+	}
+})
+    </script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
-
-
 </body>
 </html>
