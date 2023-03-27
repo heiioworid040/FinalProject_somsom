@@ -35,27 +35,27 @@
 			document.fr.prod_cd.focus();
 			return false;
 		}
-		if (document.fr.prod_nm.value == "") {
+		if (document.fr.prod_nm.value == "품명") {
 			alert("품명을 선택하세요.");
 			document.fr.prod_nm.focus();
 			return false;
 		}
 		if (document.fr.prod_mat.value == "") {
 			alert("자재유형을 선택하세요.");
-			document.fr.prod_cd.focus();
+			document.fr.prod_mat.focus();
 			return false;
 		}
-		if (document.fr.prod_unit.value == "") {
+		if (document.fr.prod_unit.value == "단위") {
 			alert("재고단위을 선택하세요.");
 			document.fr.prod_unit.focus();
 			return false;
 		}
-		if (document.fr.prod_text.value == "") {
+		if (document.fr.prod_text.value == "재질") {
 			alert("재질을 선택하세요.");
 			document.fr.prod_text.focus();
 			return false;
 		}
-		if (document.fr.prod_size.value == "") {
+		if (document.fr.prod_size.value == "규격") {
 			alert("규격을 선택하세요.");
 			document.fr.prod_size.focus();
 			return false;

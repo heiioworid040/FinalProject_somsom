@@ -130,7 +130,7 @@ if(search==null){
 										<tr>
 										<th scope="row"><input type="checkbox" name="chk"
 											id="chk" value="${productDTO.prod_number}">
-											<td><a href="${pageContext.request.contextPath}/product/productcontext?prod_number=${productDTO.prod_number}">${productDTO.prod_cd}</a></td>
+											<td><a href="javascript:void(0);" onclick="window.open('${pageContext.request.contextPath}/product/productcontext?prod_number=${productDTO.prod_number}', 'newwindow', 'width=400, height=400');">${productDTO.prod_cd}</a></td>
 											<td>${productDTO.cli_cd}</td>
 											<td>${productDTO.prod_nm}</td>
 											<td>${productDTO.prod_mat}</td>
