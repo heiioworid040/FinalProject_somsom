@@ -30,11 +30,12 @@
 <script type="text/javascript">
 	// 필수입력 제어	
 	function essential() {
-		if (document.fr.prod_cd.value == "") {
-			alert("품목코드을 입력하세요.");
-			document.fr.prod_cd.focus();
-			return false;
-		}
+// 		if (document.fr.prod_cd.value == "") {
+// 			alert("품목코드을 입력하세요.");
+// 			document.fr.prod_cd.focus();
+// 			return false;
+// 		}
+		
 		if (document.fr.prod_nm.value == "품명") {
 			alert("품명을 선택하세요.");
 			document.fr.prod_nm.focus();
@@ -79,6 +80,16 @@
 
 		alert("추가 완료되었습니다.");
 
+	}
+	
+	function searchPop(search) {
+		if(search==1) window.open('${pageContext.request.contextPath }/product/searchPop?pop=cli','searchPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=900,height=510,top=90,left=200')
+		
+	}
+	function orderPop(order) {
+		
+		if(order==1) window.open('${pageContext.request.contextPath }/product/productorderPop?pop=cli','cliPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=900,height=510,top=90,left=200')
+	
 	}
 	</script>
 
@@ -131,7 +142,7 @@
 							<form action="${pageContext.request.contextPath}/product/productwritePro" method="post" name="fr" onsubmit="return essential()">
 							<table border="1">
 							<tr><td>품목코드</td>
-							    <td><input type="text" name="prod_cd" placeholder="ex)P001"></td></tr>
+							    <td><input name="prod_cd" placeholder="ex)P001"></td></tr>
 							<tr><td>품명<span style="color:red">*</span></td>
 							    <td><select name="prod_nm">
 							    	<option value="품명" selected="selected">품명</option>
@@ -140,9 +151,8 @@
 							    	<option value="기타">기타</option>
 							</select></td></tr>
 							<tr><td>거래처코드</td>
-							   <td scope="row">
-									
-                                          </td></tr>
+							 <td><input type="text" id="cli_cd" name="cli_cd" value="${productDTO.cli_cd }" readonly><input type="text" id="cli_nm" value="${productDTO.cli_nm }" readonly>
+							 	 <button type="button" id="pop" value="cli" onclick="orderPop(1)">돋보기</button></td></tr>
 							<tr><td>자재유형</td>
 							    <td><select name="prod_mat">
 							    	<option value="">자재유형</option>
@@ -188,6 +198,13 @@
 				</div>
 			</div>
 		</div><!-- .content -->
+<script type="text/javascript">
+function openProductClie() {
+	  var url = "${pageContext.request.contextPath}/product/productclie";
+	  window.open(url, "_blank", "width=1100, height=700");
+	}
+
+</script>
 
 		<div class="clearfix"></div>
 		<!-- 푸터 넣는 곳 -->

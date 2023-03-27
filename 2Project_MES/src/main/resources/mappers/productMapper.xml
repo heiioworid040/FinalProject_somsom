@@ -7,17 +7,15 @@
 <!--  파일이름 대신 namespace 이름을 불러서 사용 -->
 <mapper namespace="com.project.mappers.productMapper">
 	
-<!-- id-"이름" spl구문 하나하나 이름
-	 ? 대신에 MemberDTO 멤버변수명 #{id}	-->
-    
-    	 <insert id="insertProduct">
-    	insert into product(prod_number,prod_cd,prod_nm,prod_mat,prod_unit,prod_text,prod_size,prod_inprice,prod_outprice,prod_count,prod_note) 
-    	values(#{prod_number},#{prod_cd},#{prod_nm},#{prod_mat},#{prod_unit},#{prod_text},#{prod_size},#{prod_inprice},#{prod_outprice},
-    	#{prod_count},#{prod_note})
-    	</insert>
 
-
+<!-- 	 ? 대신에 MemberDTO 멤버변수명 #{id}	 -->
     
+   	 <insert id="insertProduct"> 
+     	insert into product(prod_number,prod_cd,cli_cd,prod_nm,prod_mat,prod_unit,prod_text,prod_size,prod_inprice,prod_outprice,prod_count,prod_note)  
+     	values(#{prod_number},#{prod_cd},#{cli_cd},#{prod_nm},#{prod_mat},#{prod_unit},#{prod_text},#{prod_size},#{prod_inprice},#{prod_outprice}, 
+     	#{prod_count},#{prod_note}) 
+   	</insert> 
+
     <select id="getMaxnum" resultType="java.lang.Integer">
     	select max(prod_number) from product
     </select>

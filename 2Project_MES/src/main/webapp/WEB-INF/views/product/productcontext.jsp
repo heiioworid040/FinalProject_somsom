@@ -49,7 +49,7 @@
 							<table border="1">
 							<tr><td>글번호</td><td>${productDTO.prod_number}</td></tr>
 							<tr><td>품번</td><td>${productDTO.prod_cd}</td></tr>
-							<tr><td>거래코드</td><td>${clientDTO.cli_cd}</td></tr>
+							<tr><td>거래코드</td><td>${productDTO.cli_cd}</td></tr>
 							<tr><td>품명</td><td>${productDTO.prod_mat}</td></tr>
 							<tr><td>자재유형</td><td>${productDTO.prod_nm}</td></tr>
 							<tr><td>재고단위</td><td>${productDTO.prod_unit}</td></tr>

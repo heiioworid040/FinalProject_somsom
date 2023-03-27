@@ -152,7 +152,7 @@
 							    	<option value="완제품" <c:if test="${productDTO.prod_mat == '완제품'}">selected</c:if>>완제품</option>
 							    	<option value="부자재" <c:if test="${productDTO.prod_mat == '부자재'}">selected</c:if>>부자재</option>
 							    	<option value="기타" <c:if test="${productDTO.prod_mat == '기타'}">selected</c:if>>기타</option>
-							    	</select></td></tr>
+							    	</select></td></tr>	
 							<tr><td>재고단위</td>
 							    <td><select name="prod_unit">
 							    	<option value="">단위</option>
