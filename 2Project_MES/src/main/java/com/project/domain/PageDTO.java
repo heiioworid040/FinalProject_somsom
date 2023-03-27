@@ -21,6 +21,7 @@ public class PageDTO {
 	private String search6;
 	private String search7;
 	
+	
 	@Override
 	public String toString() {
 		return "PageDTO [pageSize=" + pageSize + ", pageNum=" + pageNum + ", currentPage=" + currentPage + ", startRow="
