@@ -35,4 +35,19 @@ public class InstructionServiceImpl implements InstructionService{
 		return instDAO.getInstCount();
 	}
 
+	@Override
+	public void insertInst(InstructionDTO instructionDTO) {
+		System.out.println("InstserviceImpl insertInst()");
+		
+		instDAO.insertInst(instructionDTO);
+	}
+
+	@Override
+	public int maxInst() {
+		System.out.println("InstserviceImpl maxInst()");
+		
+		return instDAO.maxInst();
+	}
+	
+	
 }

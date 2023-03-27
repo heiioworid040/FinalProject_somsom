@@ -23,9 +23,18 @@
     </select>
 
     <select id="getInstCount" resultType="java.lang.Integer">
-    select count(*) from instruction
+    SELECT COUNT(*) FROM instruction
     </select>
-
+	
+	<insert id="insertInst">
+	insert into instruction(inst_cd, line_cd, ord_cd, inst_st, inst_date, inst_count, inst_fcount)
+	values(#{inst_cd}, #{line_cd}, #{ord_cd}, #{inst_st}, #{inst_date}, #{inst_count}, #{inst_fcount})
+	</insert>
+	
+    <select id="maxInst" resultType="java.lang.Integer">
+    SELECT REGEXP_REPLACE(Max(inst_cd), '[a-z]', '')+1
+	from instruction
+    </select>
 <!-- id-"이름" spl구문 하나하나 이름
 	 ? 대신에 MemberDTO 멤버변수명 #{id}	-->
 <!-- 	<insert id="insertTest"> -->

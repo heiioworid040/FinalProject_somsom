@@ -34,8 +34,18 @@ public class InstructionDAOImpl implements InstructionDAO{
 
 
 	@Override
-	public void getInfoInst(InstructionDTO instDTO) {
-		// TODO Auto-generated method stub
+	public void insertInst(InstructionDTO instructionDTO) {
+		System.out.println("InstDAOImpl insertInst()");
 		
+		sqlSession.insert(namespace+".insertInst", instructionDTO);
 	}
+
+
+	@Override
+	public int maxInst() {
+		System.out.println("InstDAOImpl maxInst()");
+		
+		return sqlSession.selectOne(namespace+".maxInst");
+	}
+	
 }
