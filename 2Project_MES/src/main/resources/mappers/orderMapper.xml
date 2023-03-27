@@ -6,8 +6,17 @@
 	<select id="getOrderInsertList" resultType="com.project.domain.OrderDTO">
 		select ord_cd, o.cli_cd, c.cli_nm, ord_date, ord_d_date, e.emp_cd, e.emp_nm
 		from orders o join client c on o.cli_cd=c.cli_cd join employee e on o.emp_cd=e.emp_cd
+		<if test="search!=null || search2!=null">
+			where o.cli_cd like CONCAT('%',#{search},'%') and o.emp_cd like CONCAT('%',#{search2},'%')
+			<if test="search3!=''">
+				and (date_format(ord_date, '%Y-%m-%d') between #{search3} and #{search4})
+			</if>
+			<if test="search5!=''">
+				and (date_format(ord_d_date, '%Y-%m-%d') between #{search5} and #{search6})
+			</if>
+		</if>
 		order by ord_cd
-		limit #{startRow}, #{pageSize}
+<!-- 		limit #{startRow}, #{pageSize} -->
 	</select>
 	
 	<select id="getOrderInsert" resultType="com.project.domain.OrderDTO">

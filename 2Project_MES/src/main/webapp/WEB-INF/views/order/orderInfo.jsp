@@ -28,10 +28,33 @@
 </head>
 <script>
 function searchPop(search) {
-	if(search==1) window.open('${pageContext.request.contextPath }/order/searchPop?pop=cli','searchPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=900,height=510,top=90,left=200')
-	else if(search==2) window.open('${pageContext.request.contextPath }/order/searchPop?pop=emp','searchPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=900,height=510,top=90,left=200')
-	else window.open('${pageContext.request.contextPath }/order/searchPop?pop=prod','searchPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=900,height=510,top=90,left=200')
+	if(search==1) window.open('${pageContext.request.contextPath }/search/searchPop?pop=cli','searchPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=900,height=510,top=90,left=200')
+	else if(search==2) window.open('${pageContext.request.contextPath }/search/searchPop?pop=emp','searchPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=900,height=510,top=90,left=200')
+	else window.open('${pageContext.request.contextPath }/search/searchPop?pop=prod','searchPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=900,height=510,top=90,left=200')
 }
+
+function fun1() {
+	   let check = false;
+	   with(document.ckDelete) {
+	      if(ck.length==undefined) {
+	         if(ck.checked) { check = true; }
+	      } else {
+	         for(let i=0;i<ck.length;i++) {
+	            if(ck[i].checked) { check = true; } }
+	      } if(!check) {
+	      alert("삭제할 게시글을 선택하세요");
+	         return;
+	      } else {
+	         if(confirm("삭제처리 하시겠습니까?")) { submit(); }
+	      } } }
+
+function fun2() {
+	   if($("input:checked[id='ckAll']").prop("checked")) {
+	    $("input[type=checkbox]").prop("checked", true); 
+	   }else {
+	    $("input[type=checkbox]").prop("checked", false); 
+	   }
+	}
 </script>
 <body>
 	<!-- Left Panel1 -->
@@ -106,7 +129,7 @@ function searchPop(search) {
 				<div class="btn-div">
 					<button type="button" class="btn-test">추가</button>
 					<button type="button" class="btn-test">수정</button>
-					<button type="button" class="btn-test">삭제</button>
+					<button type="button" class="btn-test" onclick="fun1()">삭제</button>
 				</div>
 			</div>
 			<div class="animated fadeIn">
@@ -117,9 +140,11 @@ function searchPop(search) {
 								<strong class="card-title">수주현황</strong>
 							</div>
 							<div class="card-body">
-								<table class="table" id="hover_tb">
+								<table class="table">
 									<thead class="thead-dark">
 										<tr>
+											<th scope="col"></th>
+											<th scope="col"><input type="checkbox" id="ckAll" name="ckAll" onclick="fun2()"></th>
 											<th scope="col">수주번호</th>
 											<th scope="col">업체</th>
 											<th scope="col">수주일자</th>
@@ -134,18 +159,20 @@ function searchPop(search) {
 									</thead>
 									<tbody>
 										<c:forEach var="orderDTO" items="${orderList }">
-											<tr>
-												<th scope="row">${orderDTO.ord_cd }</th>
-												<td>${orderDTO.cli_nm }</td>
-												<td>${orderDTO.ord_date }</td>
-												<td>${orderDTO.emp_nm }</td>
-												<td>${orderDTO.prod_cd }</td>
-												<td>${orderDTO.prod_nm }</td>
-												<td>${orderDTO.prod_unit }</td>
-												<td>${orderDTO.ord_d_date }</td>
-												<td>${orderDTO.ord_count }</td>
-												<td>${orderDTO.ship_count }</td>
-											</tr>
+												<tr>
+													<td>${i }</td>
+													<td><input type="checkbox" id="ck" name="ck" value="${orderDTO.ord_cd }"></td>
+													<th scope="row">${orderDTO.ord_cd }</th>
+													<td>${orderDTO.cli_nm }</td>
+													<td>${orderDTO.ord_date }</td>
+													<td>${orderDTO.emp_nm }</td>
+													<td>${orderDTO.prod_cd }</td>
+													<td>${orderDTO.prod_nm }</td>
+													<td>${orderDTO.prod_unit }</td>
+													<td>${orderDTO.ord_d_date }</td>
+													<td>${orderDTO.ord_count }</td>
+													<td>${orderDTO.ship_count }</td>
+												</tr>
 										</c:forEach>
 									</tbody>
 								</table>
