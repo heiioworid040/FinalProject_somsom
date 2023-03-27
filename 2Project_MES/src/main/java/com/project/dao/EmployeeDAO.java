@@ -21,6 +21,8 @@ public interface EmployeeDAO {
 
 	public void updateEmployee(EmployeeDTO employeeDTO);
 
+	public Integer getMaxNum();
+
 
 
 }

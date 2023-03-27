@@ -81,7 +81,6 @@
 						<div class="card">
 							<div class="card-body">
 								<!--	(검색창 위치) -->
-								<input type="text" name="search">
 								<!-- 이 이상 긁는건 너무 템플릿에만의존적인 것 같아 나머지 기능은 직접 개발합시다 파이팅! -->
 							</div>
 						</div>
@@ -91,10 +90,10 @@
 		</div>
 		<!-- .content -->
 
-		<form action="${pageContext.request.contextPath}/employee/insertPro"
+		<form action="${pageContext.request.contextPath}/code/insertPro"
 			method="post">
-			<input type="submit" value="추가">
 			<div class="content">
+			<input type="submit" value="추가" >
 				<div class="animated fadeIn">
 					<div class="row">
 						<div class="col-lg">
@@ -110,66 +109,38 @@
 										<thead class="thead-dark">
 											<tr>
 												<!-- 												<th scope="col">#</th> -->
-<!-- 												<th scope="col">사용자 ID</th> -->
-												<th scope="col">사용자명</th>
-												<th scope="col">비밀번호</th>
-<!-- 												<th scope="col">부서</th> -->
-												<th scope="col">직책</th>
-												<th scope="col">E-MAIL</th>
-												<th scope="col">전화번호</th>
+												<th scope="col">그룹코드</th>
+												<th scope="col">그룹코드명</th>
+												<th scope="col">코드</th>
+												<th scope="col">코드명</th>
+												<th scope="col">비고</th>
 											</tr>
 										<tbody>
 
 											<tr>
-<!-- 												<td><input type="text" name="emp_cd"></td> -->
-												<td><input type="text" name="emp_nm"></td>
-												<td><input type="text" name="emp_pass"></td>
-<!-- 												<td><input type="text" name="emp_dept"></td> -->
-<!-- 												<td><input type="text" name="emp_position"></td> -->
-												<td><select name="emp_position">
-													<option value="">직책을 선택하세요</option>
-													<option value="관리자">관리자</option>
-													<option value="파트장">파트장</option>
-													<option value="사원">사원</option>
-												</select></td>
-												<td><input type="email" name="emp_email"></td>
-												<td><input type="text" name="emp_tel"></td>
+												<td><input type="text" name="code_grp" value="${codeDTO.code_grp }" readonly></td>
+												<td><input type="text" name="code_grp_nm" value="${codeDTO.code_grp_nm }" readonly></td>
+												<td><input type="text" name="code_cd"></td>
+												<td><input type="text" name="code_nm"></td>
+												<td><input type="text" name="code_note"></td>
 											</tr>
-
-											<c:forEach var="employeeDTO" items="${employeeList }">
-												<tr>
-													<!-- 													<th scope="row">1</th> -->
-													<!-- 													<td><th scope="col">#</th></td> -->
-<%-- 													<td>${employeeDTO.emp_cd}</td> --%>
-													<td>${employeeDTO.emp_nm}</td>
-													<td>${employeeDTO.emp_pass}</td>
-<%-- 													<td>${employeeDTO.emp_dept}</td> --%>
-													<td>${employeeDTO.emp_position}</td>
-													<td>${employeeDTO.emp_email}</td>
-													<td>${employeeDTO.emp_tel}</td>
-												</tr>
-											</c:forEach>
-
-
+											<c:forEach var="codeDTO" items="${codeList2 }">
+										<tr>
+											<td><input type="checkBox" name="ck" id="ck" value="${codeDTO.code_cd}"/></td>
+											<td>${codeDTO.code_cd}</td>
+											<td>${codeDTO.code_nm}</td>
+											<td>${codeDTO.code_num}</td>
+											<td>${codeDTO.code_note}</td>
+										</tr>										
+										</c:forEach>
 										</tbody>
+						
 										</thead>
+										
+										
 									</table>
-
-									<c:if test="${pageDTO.startPage > pageDTO.pageBlock }">
-										<a
-											href="${pageContext.request.contextPath}/employee/insertEmployee?pageNum=${pageDTO.startPage - pageDTO.pageBlock }">◁◁</a>
-									</c:if>
-
-									<c:forEach var="i" begin="${pageDTO.startPage }"
-										end="${pageDTO.endPage }" step="1">
-										<a
-											href="${pageContext.request.contextPath}/employee/insertEmployee?pageNum=${i}">${i}</a>
-									</c:forEach>
-
-									<c:if test="${pageDTO.endPage < pageDTO.pageCount }">
-										<a
-											href="${pageContext.request.contextPath}/employee/insertEmployee?pageNum=${pageDTO.startPage + pageDTO.pageBlock }">▷▷</a>
-									</c:if>
+									
+	
 
 
 								</div>

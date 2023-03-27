@@ -37,6 +37,99 @@
 
 <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/resources/js/jquery-3.6.3.js"></script>
+<script type="text/javascript">
+	// 필수입력 제어	
+	function essential() {
+
+		if (document.fr.cli_nm.value == "") {
+			alert("거래처명을 입력하세요.");
+			document.fr.cli_nm.focus();
+			return false;
+		}
+
+		if (document.fr.cli_num.value == "") {
+			alert("사업자번호를 입력하세요.");
+			document.fr.cli_num.focus();
+			return false;
+		}
+
+		if (document.fr.cli_num.value.length != 10) {
+			alert("사업자번호 10자리를 입력하세요.");
+			document.fr.cli_num.focus();
+			return false;
+		}
+
+		if (document.fr.cli_business.value == "") {
+			alert("업태를 입력하세요.");
+			document.fr.cli_business.focus();
+			return false;
+		}
+
+		if (document.fr.cli_prod.value == "") {
+			alert("종목을 입력하세요.");
+			document.fr.cli_prod.focus();
+			return false;
+		}
+
+		if (document.fr.cli_boss.value == "") {
+			alert("대표자를 입력하세요.");
+			document.fr.cli_boss.focus();
+			return false;
+		}
+
+		if (document.fr.cli_emp.value == "") {
+			alert("담당자를 입력하세요.");
+			document.fr.cli_emp.focus();
+			return false;
+		}
+
+		if (document.fr.cli_addr.value == "") {
+			alert("주소를 입력하세요.");
+			document.fr.cli_addr.focus();
+			return false;
+		}
+
+		if ($('.spanResult').text() !== "사용 가능한 사업자번호입니다.") {
+		    alert("사업자번호 중복확인을 해주세요.");
+		    return false;
+		  }
+
+		alert("추가 완료되었습니다.");
+
+	}
+
+	// 사업자번호 중복확인 
+	$(function() {
+		$('.dup')
+				.click(
+						function() {
+							var cli_num = $('.cli_num').val();
+							$
+									.ajax({
+										url : "${pageContext.request.contextPath}/client/clientDupCheck",
+										type : "post",
+										data : {
+											"cli_num" : cli_num
+										},
+										success : function(data) {
+											if (data == "success") {
+												$('.spanResult').text(
+														"사용 가능한 사업자번호입니다.")
+														.css("color", "blue");
+											} else {
+												$('.spanResult').text(
+														"이미 등록된 사업자번호입니다.")
+														.css("color", "red");
+											}
+										}
+									});
+						});
+	});
+
+</script>
+
 </head>
 <body>
 	<!-- Left Panel1 -->
@@ -82,10 +175,9 @@
 								<strong class="card-title">거래처</strong>
 							</div>
 							<div class="card-body">
-
 								<form
 									action="${pageContext.request.contextPath}/client/insertPro"
-									method="post">
+									method="post" name="fr" onsubmit="return essential()">
 									<table id="bootstrap-data-table"
 										class="table table-striped table-bordered">
 										<thead class="thead-dark">
@@ -103,27 +195,33 @@
 										</thead>
 										<tbody>
 											<tr>
-												<td><input type="text" name="cli_cd"
-													style="width: 90px;"></td>
+												<td>자동생성</td>
 												<td><input type="text" name="cli_nm"
-													style="width: 105px;"></td>
-												<td><input type="text" name="cli_type"
-													style="width: 60px;"></td>
-												<td><input type="text" name="cli_num"
-													style="width: 100px;"></td>
+													placeholder="예)서울원단" style="width: 105px;"></td>
+												<td><select name="cli_type" id="select"
+													class="form-control" style="width: 100px;">
+														<option value="협력사">협력사</option>
+														<option value="고객사">고객사</option>
+														<option value="자사">자사</option>
+												</select></td>
+												<td><input type="text" pattern="[0-9]+" name="cli_num"
+													class="cli_num" style="width: 100px;" placeholder="10자리 숫자"
+													maxlength="10" onblur="$('.dup').click()"></td>
 												<td><input type="text" name="cli_business"
-													style="width: 110px;"></td>
+													style="width: 110px;" placeholder="예)제조업"></td>
 												<td><input type="text" name="cli_prod"
-													style="width: 75px;"></td>
+													style="width: 75px;" placeholder="예)원단"></td>
 												<td><input type="text" name="cli_boss"
 													style="width: 60px;"></td>
 												<td><input type="text" name="cli_emp"
 													style="width: 60px;"></td>
 												<td><input type="text" name="cli_addr"
-													style="width: 110px;"></td>
+													style="width: 110px;" placeholder="예)서울 종로구"></td>
 											</tr>
 										</tbody>
 									</table>
+									<input type="button" class="btn btn-primary dup"
+										value="사업자번호 중복확인"> &nbsp;<span class="spanResult"></span>
 									<div class="btn-div float-right">
 										<input type="submit" class="btn btn-secondary" value="추가">
 										<input type="button" class="btn btn-secondary" value="취소"

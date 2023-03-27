@@ -88,13 +88,14 @@
 								<strong class="card-title">Table Head</strong>
 							</div>
 							<div class="card-body">
-									<form>
+								<form>
 								<table class="table">
 									<thead class="thead-dark">
 										<tr>
-											<th scope="col">그룹코드</th>
+											<th scope="col">그룹코드3</th>
 											<th scope="col">그룹명</th>
 											<th scope="col">상세보기</th>
+											
 										</tr>
 									</thead>
 									<tbody>
@@ -102,35 +103,41 @@
 										<tr>
 											<td>${codeDTO.code_grp}</td>
 											<td>${codeDTO.code_grp_nm}</td>
-											<td><input type="button" value="상세보기" onclick="location.href='${pageContext.request.contextPath}/code/codeList2?code_grp=${codeDTO.code_grp}'"></td>
+<%-- 											<td><input type="submit" value="상세보기" onclick="location.href='${pageContext.request.contextPath}/code/codeList?code_grp=${codeDTO.code_grp}'"></td>	 --%>
+											<td><input type="submit" name="plus" value="상세보기" onclick="location.href='${pageContext.request.contextPath}/code/codeList?code_grp=${codeDTO.code_grp}'"></td>	
+<%-- 											<td><input type="submit" name="plus" value="상세보기" onclick="location.href='${pageContext.request.contextPath}/code/codeList'"></td>	 --%>
+
 										</tr>	
 										</c:forEach>
 									</tbody>
 								</table>
 								</form>
-<!-- 								<table class="table"> -->
-<!-- 									<thead class="thead-dark"> -->
+								<table class="table">
+									<thead class="thead-dark">
 										
-<!-- 										<tr> -->
+										<tr>
 											
-<!-- 											<th scope="col">코드명</th> -->
-<!-- 											<th scope="col">정렬순서</th> -->
-<!-- 											<th scope="col">비고</th> -->
+											<th scope="col">코드</th>
+											<th scope="col">코드명</th>
+											<th scope="col">정렬순서</th>
+											<th scope="col">비고</th>
 											
 
-<!-- 										</tr> -->
-<!-- 									</thead> -->
-<!-- 									<tbody> -->
-<%-- 									<c:forEach var="codeDTO2" items="${codeList }"> --%>
-<!-- 										<tr> -->
-<%-- 											<td>${codeDTO2.code_cd}</td> --%>
-<%-- 											<td>${codeDTO2.code_nm}</td> --%>
-<%-- 											<td>${codeDTO2.code_num}</td> --%>
-<%-- 											<td>${codeDTO2.code_note}</td> --%>
-<!-- 										</tr>										 -->
-<%-- 									</c:forEach> --%>
-<!-- 									</tbody> -->
-<!-- 								</table> -->
+										</tr>
+									</thead>
+									<c:if test="${!empty plus}">
+									<tbody>
+									<c:forEach var="codeDTO" items="${codeList }">
+										<tr>
+											<td>${codeDTO.code_cd}</td>
+											<td>${codeDTO.code_nm}</td>
+											<td>${codeDTO.code_num}</td>
+											<td>${codeDTO.code_note}</td>
+										</tr>										
+									</c:forEach>
+									</tbody>
+									</c:if>
+								</table>
 							</div>
 						</div>
 					</div>

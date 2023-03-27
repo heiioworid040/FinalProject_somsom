@@ -58,8 +58,26 @@ public class CodeServiceImpl implements CodeService {
 	@Override
 	public List<CodeDTO> getCodeList2(String code_grp) {
 		System.out.println("CodeServiceImpl getCodeList2()");
+		System.out.println(code_grp);
 		return codeDAO.getCodeList2(code_grp);
 	}
+
+	@Override
+	public void deleteCode(String code_cd) {
+		System.out.println("CodeServiceImpl deleteCode");
+		codeDAO.deleteCode(code_cd);
+	}
+
+	@Override
+	public CodeDTO getCode(String code_grp) {
+		System.out.println("CodeServiceImpl getCode()");
+		
+		return codeDAO.getCode(code_grp);
+	}
+
+
+
+
 
 	
 }

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <!DOCTYPE html>
 <html>
@@ -28,6 +28,42 @@
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
 </head>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.js"></script>
+<script type="text/javascript">
+
+$(function(){
+    //전체선택 체크박스 클릭
+	$("#ckAll").click(function(){
+		//만약 전체 선택 체크박스가 체크된상태일경우
+		if($("#ckAll").prop("checked")) {
+			//해당화면에 전체 checkbox들을 체크해준다
+			$("input[type=checkbox]").prop("checked",true);
+		// 전체선택 체크박스가 해제된 경우
+		} else {
+			//해당화면에 모든 checkbox들의 체크를해제시킨다.
+			$("input[type=checkbox]").prop("checked",false);
+		}
+	})
+})
+
+function fun1() {
+	   let check = false;
+	   with(document.ckDelete) {
+	      if(ck.length==undefined) {
+	         if(ck.checked) { check = true; }
+	      } else {
+	         for(let i=0;i<ck.length;i++) {
+	            if(ck[i].checked) { check = true; } }
+	      } if(!check) {
+	      alert("삭제할 사용자를 선택하세요");
+	         return;
+	      } else {
+	         if(confirm("삭제처리 하시겠습니까?")) { submit(); }
+	      } } }
+
+
+</script>
+
 <body>
 	<!-- Left Panel1 -->
 	<jsp:include page="../inc/leftPanel.jsp" />
@@ -78,8 +114,9 @@
 				</div>
 			</div>
 		</div><!-- .content -->
-		
+		<form>
         <div class="content">
+        <input type="button" value="추가" onclick="location.href='${pageContext.request.contextPath}/code/insertCode?code_grp=${codeDTO.code_grp}'">
 			<div class="animated fadeIn">
 				<div class="row">
 					<div class="col-lg">
@@ -88,35 +125,40 @@
 								<strong class="card-title">Table Head</strong>
 							</div>
 							<div class="card-body">
-								<form name="codeList" action="${pageContext.request.contextPath}/code/codeList?code_grp=${codeDTO.code_grp}" method="GET">
 								<table class="table">
 									<thead class="thead-dark">
 										<tr>
+											<th scope="col"><input type="checkbox" id="ckAll" name="ckAll"></th>
 											<th scope="col">코드</th>
 											<th scope="col">코드명</th>
 											<th scope="col">정렬순서</th>
 											<th scope="col">비고</th>
-											
+											<th scope="col">수정</th>	
 										</tr>
 									</thead>
 									<tbody>
-									<c:forEach var="codeDTO2" items="${codeList }">
+										<c:forEach var="codeDTO" items="${codeList2 }">
 										<tr>
+											<td><input type="checkBox" name="ck" id="ck" value="${codeDTO.code_cd}"/></td>
 											<td>${codeDTO.code_cd}</td>
 											<td>${codeDTO.code_nm}</td>
 											<td>${codeDTO.code_num}</td>
 											<td>${codeDTO.code_note}</td>
+											<td><input type="button" value="수정" onclick="location.href='${pageContext.request.contextPath}/code/updateCode?code_cd=${codeDTO.code_cd }'"></td>		
+											
 										</tr>										
-									</c:forEach>
+										</c:forEach>
+											
 									</tbody>
 								</table>
-								</form>
+
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div><!-- .content -->
+		</div>
+		</form><!-- .content -->
 
 		<div class="clearfix"></div>
 		<!-- 푸터 넣는 곳 -->

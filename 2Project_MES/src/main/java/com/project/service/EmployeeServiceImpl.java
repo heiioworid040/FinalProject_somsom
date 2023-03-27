@@ -45,6 +45,16 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public void insertEmployee(EmployeeDTO employeeDTO) {
 		System.out.println("EmployeeServiceImpl insertEmployee()");
 		
+		if(employeeDAO.getMaxNum() == null) {	
+			employeeDTO.setEmp_cd("00"+1);
+		}else if(employeeDAO.getMaxNum()>=99) {
+			employeeDTO.setEmp_cd(""+(employeeDAO.getMaxNum()+1));
+		}else if(employeeDAO.getMaxNum()>=9) {
+			employeeDTO.setEmp_cd("0"+(employeeDAO.getMaxNum()+1));		
+		}else {
+			employeeDTO.setEmp_cd("00"+(employeeDAO.getMaxNum()+1));
+		}
+		
 		employeeDAO.insertEmployee(employeeDTO);
 		
 	}

@@ -14,25 +14,37 @@
 		client
 	</select>
 
+	<!-- 거래처코드 C001, C002처럼 자동입력 -->
 	<insert id="insertClient">
-		insert into client(cli_cd, cli_nm, cli_type, cli_num,
-		cli_business, cli_prod, cli_boss, cli_emp, cli_addr)
-		values(#{cli_cd},
+		insert into client (cli_cd, cli_nm, cli_type,
+		cli_num,
+		cli_business,
+		cli_prod, cli_boss, cli_emp, cli_addr)
+		select
+		concat('C',
+		lpad(coalesce(substring(max(cli_cd), 2), 0) + 1, 3, '0')),
 		#{cli_nm}, #{cli_type}, #{cli_num}, #{cli_business},
-		#{cli_prod}, #{cli_boss}, #{cli_emp}, #{cli_addr})
+		#{cli_prod},
+		#{cli_boss},
+		#{cli_emp}, #{cli_addr}
+		from client
 	</insert>
 
 	<select id="getClient" resultType="com.project.domain.ClientDTO">
 		select * from client
-		where cli_cd = #{cli_cd}
+		where
+		cli_cd = #{cli_cd}
 	</select>
 
 	<update id="updateClient">
-		update client set cli_cd = #{cli_cd}, cli_nm = #{cli_nm}, cli_type = #{cli_type}, cli_num = #{cli_num},
-		cli_business = #{cli_business},
-		cli_prod = #{cli_prod}, cli_boss = #{cli_boss}, cli_emp = #{cli_emp},
-		cli_addr = #{cli_addr}, cli_addr2 = #{cli_addr2}, cli_tel = #{cli_tel},
-		cli_emp_tel = #{cli_emp_tel}, cli_fax = #{cli_fax}, cli_email = #{cli_email}, cli_note = #{cli_note}
+		update client set cli_nm =
+		#{cli_nm}, cli_type =
+		#{cli_type}, cli_num = #{cli_num},
+		cli_business =
+		#{cli_business},
+		cli_prod = #{cli_prod}, cli_boss = #{cli_boss},
+		cli_emp = #{cli_emp},
+		cli_addr = #{cli_addr}
 		where cli_cd = #{cli_cd}
 	</update>
 
@@ -40,5 +52,11 @@
 		delete from client
 		where cli_cd = #{cli_cd}
 	</delete>
+
+	<select id="clientDupCheck" resultType="int">
+		select count(*)
+		from client
+		where cli_num = #{cli_num}
+	</select>
 
 </mapper>

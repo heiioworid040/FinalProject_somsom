@@ -17,6 +17,12 @@ public interface CodeService {
 
 	public List<CodeDTO> getCodeList2(String code_grp);
 
+	public void deleteCode(String code_cd);
+
+	public CodeDTO getCode(String code_grp);
+
+
+
 
 	}
 
