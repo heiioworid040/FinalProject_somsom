@@ -87,8 +87,7 @@
 							<tr><td colspan="2"></td></tr></table>
 							<input type="button" value="글수정" onclick="location.href='${pageContext.request.contextPath}/product/productupdate?prod_number=${productDTO.prod_number }'">
 							</div>
-						</div>
-						
+						</div>	
 					</div>
 				</div>
 			</div>
