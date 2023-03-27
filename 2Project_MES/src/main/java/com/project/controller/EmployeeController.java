@@ -49,8 +49,12 @@ public class EmployeeController {
 		System.out.println("EmployeeController employee_List()");
 		
 		String add = request.getParameter("add");
-		String update = request.getParameter("update");
-		System.out.println("add"+add);
+		
+		//검색어 가져오기
+		String search=request.getParameter("search");
+		System.out.println("serarch:"+search);
+		String search2=request.getParameter("search2");
+		System.out.println("search2:"+search2);
 		
 		int pageSize=10;
 		String pageNum = request.getParameter("pageNum");
@@ -64,10 +68,17 @@ public class EmployeeController {
 		pageDTO.setPageSize(pageSize);
 		pageDTO.setPageNum(pageNum);
 		pageDTO.setCurrentPage(currentPage);
+		//검색어
+		pageDTO.setSearch(search);
+		pageDTO.setSearch2(search2);
 		
 		List<EmployeeDTO> employeeList = employeeService.getEmployeeList(pageDTO);
 		
-		int count = employeeService.getEmployeeCount();
+		
+		
+		//페이징처리
+		//검색어
+		int count = employeeService.getEmployeeCount(pageDTO);
 		int pageBlock=10;
 		int startPage=(currentPage-1)/pageBlock*pageBlock+1;
 		int endPage=startPage+pageBlock-1;
@@ -89,22 +100,65 @@ public class EmployeeController {
 			model.addAttribute("add", add);
 			
 		}
-		
-		if(update!=null) {
-			model.addAttribute("update", update);
-		}
-		
-		
-		
-		
-		
-		
-		
-		
+			
 		return "employee/employeeList";
 		
 	}
 	
+	
+	
+//	@RequestMapping(value = "/employee/employeeList", method = RequestMethod.GET)
+//	public String employeeList(HttpServletRequest request, Model model) {
+//		System.out.println("EmployeeController employee_List()");
+//		
+//		String add = request.getParameter("add");
+//		String update = request.getParameter("update");
+//		System.out.println("add"+add);
+//		
+//		int pageSize=10;
+//		String pageNum = request.getParameter("pageNum");
+//		if(pageNum==null) {
+//			pageNum="1";
+//		}
+//		
+//		int currentPage=Integer.parseInt(pageNum);
+//		
+//		PageDTO pageDTO = new PageDTO();
+//		pageDTO.setPageSize(pageSize);
+//		pageDTO.setPageNum(pageNum);
+//		pageDTO.setCurrentPage(currentPage);
+//		
+//		List<EmployeeDTO> employeeList = employeeService.getEmployeeList(pageDTO);
+//		
+//		int count = employeeService.getEmployeeCount();
+//		int pageBlock=10;
+//		int startPage=(currentPage-1)/pageBlock*pageBlock+1;
+//		int endPage=startPage+pageBlock-1;
+//		int pageCount=count/pageSize+(count%pageSize==0?0:1);
+//		if(endPage > pageCount){
+//			endPage = pageCount;
+//		}
+//		
+//		pageDTO.setCount(count);
+//		pageDTO.setPageBlock(pageBlock);
+//		pageDTO.setStartPage(startPage);
+//		pageDTO.setEndPage(endPage);
+//		pageDTO.setPageCount(pageCount);
+//		
+//		model.addAttribute("employeeList", employeeList);
+//		model.addAttribute("pageDTO", pageDTO);
+//		
+//		if(add!=null) {
+//			model.addAttribute("add", add);
+//			
+//		}
+//		
+//		
+//		
+//		return "employee/employeeList";
+//		
+//	}
+//	
 
 	
 

@@ -13,11 +13,18 @@
 
 	<select id="getEmployeeList" resultType="com.project.domain.EmployeeDTO">
 		select * from employee
+		<if test="search != null ">
+			where emp_cd like CONCAT('%',#{search},'%') 
+		</if>
+		order by emp_cd
 		limit #{startRow} , #{pageSize}
 	</select>
 	
 	<select id="getEmployeeCount" resultType="java.lang.Integer">
 		select count(*) from employee
+		<if test="search != null">
+			where emp_cd like CONCAT('%',#{search},'%')
+		</if>
 	</select>
 
 	<insert id="insertEmployee">

@@ -135,6 +135,39 @@ function fun1(index) {
 						<div class="card">
 							<div class="card-body">
 							<!--	(검색창 위치) -->
+							<div class="content">
+			<div class="animated fadeIn">
+				<div class="row">
+					<div class="col-lg">
+						<div class="card m-0">
+							<div class="card-body card-block">
+								<form action="${pageContext.request.contextPath}/employee/employeeList" method="get" class="form-inline">
+									 <div class="form-group col-6 mt-1">
+                                    	<label for="exampleInputName1" class="pr-1  form-control-label">사용자ID</label>
+                                    	<input type="text" id="search" name="search" class="form-control ">
+                                    	<div class="input-group">
+                                    	</div>
+                                    </div>
+                                     <div class="form-group col-6 mt-1">
+                                    	<label for="exampleInputName1" class="pr-1  form-control-label">사용자명</label>
+                                    	<input type="text" id="search2" name="search2" class="form-control">
+                                    	<div class="input-group">
+                                    	</div>
+                                    </div> 
+                                    <div class="form-group col-6 mt-3">
+                                    <input type="submit" value="search">
+<!--                                     	<div class="input-group"> -->
+<!--                                         	<div class="input-group-addon"><i class="ti-search"></i></div> -->
+                                    	</div>
+								   </form>
+                                    </div>
+                            </div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
 							<!-- 이 이상 긁는건 너무 템플릿에만의존적인 것 같아 나머지 기능은 직접 개발합시다 파이팅! -->
 							</div>
 						</div>
@@ -147,8 +180,8 @@ function fun1(index) {
 <%-- 		<form name="ckDelete" action="${pageContext.request.contextPath}/employee/deletePro" method="post"> --%>
 		<form name="form" method="post">
 <%-- 		<input type="submit" value="add" name="add" onclick="location.href='${pageContext.request.contextPath}/employee/employeeList'">			 --%>
-		<input type="submit" value="add" name="add" onclick="fun1(3)" formmethod="get">			
 		<input type="submit" name="ckDelete" value="삭제" onclick="fun1(1)" >
+		<input type="submit" value="add" name="add" onclick="fun1(3)" formmethod="get">			
 													
 			<div class="animated fadeIn">
 			<div class="animated fadeIn">
@@ -159,7 +192,7 @@ function fun1(index) {
 								<strong class="card-title">Table Head</strong>  
 							</div>
 							<div class="card-body">
-								<table class="table">
+								<table class="table" style=>
 									<thead class="thead-dark">
 										<tr>
 											<th scope="col"><input type="checkbox" id="ckAll" name="ckAll"></th>
@@ -220,7 +253,8 @@ function fun1(index) {
 										
 									</tbody>
 								</table>
-								
+
+						
 <c:if test="${pageDTO.startPage > pageDTO.pageBlock }">
 <a href="${pageContext.request.contextPath}/employee/employeeList?pageNum=${pageDTO.startPage - pageDTO.pageBlock }">◁◁</a>
 </c:if>
@@ -232,6 +266,7 @@ function fun1(index) {
 <c:if test="${pageDTO.endPage < pageDTO.pageCount }">
 <a href="${pageContext.request.contextPath}/employee/employeeList?pageNum=${pageDTO.startPage + pageDTO.pageBlock }">▷▷</a>
 </c:if>
+	
 							</div>
 						</div>
 					</div>
