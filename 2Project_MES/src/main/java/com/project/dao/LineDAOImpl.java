@@ -18,17 +18,23 @@ public class LineDAOImpl implements LineDAO {
 	private static final String namespace="com.project.mappers.lineMapper";
 
 	@Override
-	public List<LineDTO> getLineList(PageDTO pageDTO) {
+	public List<LineDTO> getSearchLine() {
+		System.out.println("LineDAOImpl getSearchLine()");
+		
+		return sqlSession.selectList(namespace+".getSearchLine");
+	}
+
+	@Override
+	public List<LineDTO> getInstList(PageDTO pageDTO) {
 		System.out.println("LineDAOImpl getLineList()");
-		pageDTO.setStartRow(pageDTO.getStartRow()-1);
-		
-		
-		return sqlSession.selectList(namespace+".getLineList", pageDTO);
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".getLineList");
 	}
 
 	@Override
 	public int getLineCount() {
 		System.out.println("LineDAOImpl getLineCount()");
+		// TODO Auto-generated method stub
 		return sqlSession.selectOne(namespace+".getLineCount");
 	}
 	

@@ -18,7 +18,7 @@
 		join product p
 		on o.prod_cd = p.prod_cd
 		join client c
-		on p.cli_cd = c.cli_cd
+		on o.cli_cd = c.cli_cd
 		limit #{startRow}, #{pageSize}
 	</select>
 
