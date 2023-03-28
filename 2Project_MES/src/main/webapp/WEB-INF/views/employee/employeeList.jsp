@@ -62,8 +62,14 @@ function fun1(index) {
 	      alert("삭제할 사용자를 선택하세요");
 	         return;
 	      } else {
-	         if(confirm("삭제처리 하시겠습니까?")) { document.form.action='${pageContext.request.contextPath}/employee/deletePro' }
-	      } } } 
+	         if(confirm("삭제처리 하시겠습니까?")==true) { document.form.action='${pageContext.request.contextPath}/employee/deletePro'}
+	         else{
+	        	 form.method='GET';
+	        	 document.form.action='${pageContext.request.contextPath}/employee/employeeList';
+	         }
+	      }
+	    	  
+	   } } 
 	   
 	else if(index==2)
 		   { document.form.action='${pageContext.request.contextPath}/employee/insertPro' }
