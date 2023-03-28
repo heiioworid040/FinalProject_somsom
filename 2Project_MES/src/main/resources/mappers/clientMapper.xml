@@ -55,8 +55,9 @@
 
 	<select id="clientDupCheck" resultType="int">
 		select count(*)
-		from client
+		from
+		client
 		where cli_num = #{cli_num}
 	</select>
-
+	
 </mapper>

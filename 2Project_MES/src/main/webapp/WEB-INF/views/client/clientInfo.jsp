@@ -83,54 +83,6 @@
 		}
 	}
 </script>
-
-<!-- 추가 버튼 함수  -->
-<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
-<script>
-	// 	$(document)
-	// 			.ready(
-	// 					function() {
-	// 						$("#add-row")
-	// 								.click(
-	// 										function() {
-	// 											var newRow = '<tr><th></th>'
-	// 													+ '<td><input type="text" style="width: 100px; name="prod_cd"></td>'
-	// 													+ '<td><input type="text" style="width: 90px; name="prod_nm"></td>'
-	// 													+ '<td><input type="text" style="width: 50px; name="prod_mat"></td>'
-	// 													+ '<td><input type="text" style="width: 100px; name="prod_unit"></td>'
-	// 													+ '<td><input type="text" style="width: 60px; name="prod_text"></td>'
-	// 													+ '<td><input type="text" style="width: 80px; name="prod_size"></td>'
-	// 													+ '<td><input type="text" style="width: 60px; name="prod_inprice"></td>'
-	// 													+ '<td><input type="text" style="width: 60px; name="prod_outprice"></td>'
-	// 													+ '<td><input type="text" style="width: 130px; name="prod_count"></td>'
-	// 													+ '<td><input type="text" style="width: 110px; name="prod_note"></td>'
-	// 													+ '<td><input type="text" style="width: 110px; name="prod_note"></td>'
-	// 													+ '<td><input type="text" style="width: 120px; name="prod_note"></td>'
-	// 													+ '<td><input type="text" style="width: 110px; name="prod_note"></td>'
-	// 													+ '<td><input type="text" style="width: 180px; name="prod_note"></td>'
-	// 													+ '<td><button class-"submit-Btn">전송</button></td></tr>';
-	// 											$('#bootstrap-data-table').append(
-	// 													newRow);
-	// 										});
-	// 					});
-
-	// 전송버튼	
-	// $(document).ready(function() {
-	//   $("#MyForm").submit(function(event) {
-	//     event.preventDefault(); // 기본 동작 방지
-	//     var formData = $(this).serialize(); // 폼 데이터 가져오기
-	//     $.ajax({
-	//       url: "./servlet-context", // 데이터를 전송할 서버 URL
-	//       type: "POST",
-	//       data: formData,
-	//       success: function(result) {
-	//       	alert('전송 되었습니다'); // 전송 결과 로그 출력
-	//       }
-	//     });
-	//   });
-	// });
-</script>
-
 </head>
 <body>
 	<!-- Left Panel1 -->
@@ -178,16 +130,16 @@
 									method="get" class="form-inline">
 									<div class="form-group col-6 mb-1">
 										<label class="pr-1 form-control-label">거래처코드</label>&nbsp;&nbsp;<input
-											type="text" id="" class="form-control ">
+											type="text" name="cli_cd" class="form-control ">
 									</div>
 									<div class="form-group col-6 mb-1">
 										<label class="pr-1  form-control-label">거래처명</label>&nbsp;&nbsp;<input
-											type="text" id="" class="form-control ">
+											type="text" name="cli_nm" class="form-control ">
 									</div>
 									<div class="form-group col-6 mt-1">
 										<label class="pr-1  form-control-label">거래처구분</label>&nbsp;&nbsp;
 										<div class="p-0 col">
-											<select name="select" id="select" class="form-control">
+											<select name="cli_type" id="select" class="form-control">
 												<option value="0">전체</option>
 												<option value="1">협력사</option>
 												<option value="2">고객사</option>
@@ -202,7 +154,6 @@
 					</div>
 				</div>
 			</div>
-
 		</div>
 		</form>
 		<!-- 	검색창 -->
