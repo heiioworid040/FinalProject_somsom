@@ -81,7 +81,12 @@ public class CodeDAOImpl implements CodeDAO {
 		sqlSession.update(namespace+".updateCode", codeDTO);
 	}
 	
-
+	@Override
+	public List<CodeDTO> getCodeList3(String code_grp) {
+		System.out.println("CodeDAOImpl getCodeList3()");
+		System.out.println(code_grp);
+		return sqlSession.selectList(namespace+".getCodeList3", code_grp);
+	}
 
 
 }

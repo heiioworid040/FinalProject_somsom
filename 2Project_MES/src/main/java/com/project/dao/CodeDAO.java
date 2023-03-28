@@ -25,4 +25,6 @@ public interface CodeDAO {
 
 	void updateCode(CodeDTO codeDTO);
 
+	List<CodeDTO> getCodeList3(String code_grp);
+
 }

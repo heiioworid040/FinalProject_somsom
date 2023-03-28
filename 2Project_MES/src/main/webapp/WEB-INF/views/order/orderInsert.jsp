@@ -26,9 +26,9 @@
 </head>
 <script>
 	function searchPop(search) {
-		if(search==1) window.open('${pageContext.request.contextPath }/search/searchPop?pop=cli','searchPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=900,height=510,top=90,left=200')
-		else if(search==2) window.open('${pageContext.request.contextPath }/search/searchPop?pop=emp','searchPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=900,height=510,top=90,left=200')
-		else window.open('${pageContext.request.contextPath }/search/searchPop?pop=prod','searchPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=900,height=510,top=90,left=200')
+		if(search==1) window.open('${pageContext.request.contextPath }/order/searchPop?pop=cli','searchPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=900,height=510,top=90,left=200')
+		else if(search==2) window.open('${pageContext.request.contextPath }/order/searchPop?pop=emp','searchPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=900,height=510,top=90,left=200')
+		else window.open('${pageContext.request.contextPath }/order/searchPop?pop=prod','searchPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=900,height=510,top=90,left=200')
 	}
 	function orderPop(order) {
 		if(order==1) window.open('${pageContext.request.contextPath }/order/orderPop?pop=cli','cliPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=900,height=510,top=90,left=200')

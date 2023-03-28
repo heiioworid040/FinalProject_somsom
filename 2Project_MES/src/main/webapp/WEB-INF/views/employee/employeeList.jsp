@@ -28,7 +28,9 @@
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 </head>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/script/jquery-3.6.3.js"></script>
 <script type="text/javascript">
+
 
 $(function(){
     //전체선택 체크박스 클릭
@@ -44,22 +46,6 @@ $(function(){
 		}
 	})
 })
-
-// function fun1() {
-// 	   let check = false;
-// 	   with(document.ckDelete) {
-// 	      if(ck.length==undefined) {
-// 	         if(ck.checked) { check = true; }
-// 	      } else {
-// 	         for(let i=0;i<ck.length;i++) {
-// 	            if(ck[i].checked) { check = true; } }
-// 	      } if(!check) {
-// 	      alert("삭제할 사용자를 선택하세요");
-// 	         return;
-// 	      } else {
-// 	         if(confirm("삭제처리 하시겠습니까?")) { document.form.action='${pageContext.request.contextPath}/employee/deletePro' }
-// 	      } } }
-
 
 
 function fun1(index) {
@@ -84,10 +70,8 @@ function fun1(index) {
 	
 	else if(index==3)
 	  	{ document.form.action='${pageContext.request.contextPath}/employee/employeeList' }
-		
 	   
-	   
-	   
+
 	   
 	   }
 	      
@@ -99,9 +83,9 @@ function fun1(index) {
 	
     <!-- Right Panel -->
     <div id="right-panel" class="right-panel">
-        <!-- Header--> 
+        Header 
 		<jsp:include page="../inc/top.jsp" />
-        <!-- Header-->
+        Header
         
         <div class="breadcrumbs">
             <div class="breadcrumbs-inner">
@@ -133,8 +117,8 @@ function fun1(index) {
 				<div class="row">
 					<div class="col-lg">
 						<div class="card">
-							<div class="card-body">
-							<!--	(검색창 위치) -->
+							<div class="card-body" style="padding=50px">
+<!-- 								(검색창 위치) -->
 							<div class="content">
 			<div class="animated fadeIn">
 				<div class="row">
@@ -156,8 +140,8 @@ function fun1(index) {
                                     </div> 
                                     <div class="form-group col-6 mt-3">
                                     <input type="submit" value="search">
-<!--                                     	<div class="input-group"> -->
-<!--                                         	<div class="input-group-addon"><i class="ti-search"></i></div> -->
+                                    	<div class="input-group">
+                                        	<div class="input-group-addon"><i class="ti-search"></i></div>
                                     	</div>
 								   </form>
                                     </div>
@@ -174,7 +158,8 @@ function fun1(index) {
 					</div>
 				</div>
 			</div>
-		</div><!-- .content -->
+		</div>
+<!-- 		.content -->
 		
         <div class="content">
 <%-- 		<form name="ckDelete" action="${pageContext.request.contextPath}/employee/deletePro" method="post"> --%>
@@ -214,19 +199,18 @@ function fun1(index) {
 										<c:if test="${! empty add }">
 										<tr>
 											<td><input type="checkBox" name="ck" id="ck" value=""/></td>
-											<td><input type="text" name="emp_cd" readonly></td>
-											<td><input type="text" name="emp_nm"></td>
-											<td><input type="text" name="emp_pass"></td>
-											<td><select name="emp_position">
+											<td><input type="text" name="emp_cd" class="emp_cd" readonly></td>
+											<td><input type="text" name="emp_nm" class="emp_nm"></td>
+											<td><input type="text" name="emp_pass" class="emp_pass"></td>
+											<td><select name="emp_position" class="emp_position">
 												<option value="">직책을 선택하세요</option>
 												<option value="관리자">관리자</option>
 												<option value="파트장">파트장</option>
 												<option value="사원">사원</option>
 												</select></td>
-											<td><input type="email" name="emp_email"></td>
-											<td><input type="text" name="emp_tel"></td>
-<%-- 											<td><input type="submit" value="저장" name="저장" onclick="location.href='${pageContext.request.contextPath}/employee/insertPro'"></td> --%>
-<%-- 											<td><input type="button" value="저장" onclick="location.href='${pageContext.request.contextPath}/employee/insertPro'" ></td> --%>
+											<td><input type="email" name="emp_email" class="emp_email"></td>
+											<td><input type="text" name="emp_tel" class="emp_tel"></td>
+<!-- 											<td><input type="submit" value="저장" onclick="fun1(2)" formmethod="get" ></td> -->
 											<td><input type="submit" value="저장" onclick="fun1(2)" formmethod="get" ></td>
 										</tr>
 										</c:if>
@@ -254,19 +238,19 @@ function fun1(index) {
 									</tbody>
 								</table>
 
-						
+<div align="center">					
 <c:if test="${pageDTO.startPage > pageDTO.pageBlock }">
-<a href="${pageContext.request.contextPath}/employee/employeeList?pageNum=${pageDTO.startPage - pageDTO.pageBlock }">◁◁</a>
+<a href="${pageContext.request.contextPath}/employee/employeeList?pageNum=${pageDTO.startPage - pageDTO.pageBlock }&search=${pageDTO.search}&search2=${pageDTO.search2}">◁◁</a>
 </c:if>
 
 <c:forEach var="i" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1">
-<a href="${pageContext.request.contextPath}/employee/employeeList?pageNum=${i}">${i}</a> 
+<a href="${pageContext.request.contextPath}/employee/employeeList?pageNum=${i}&search=${pageDTO.search}&search2=${pageDTO.search2}">${i}</a> 
 </c:forEach>
 
 <c:if test="${pageDTO.endPage < pageDTO.pageCount }">
-<a href="${pageContext.request.contextPath}/employee/employeeList?pageNum=${pageDTO.startPage + pageDTO.pageBlock }">▷▷</a>
+<a href="${pageContext.request.contextPath}/employee/employeeList?pageNum=${pageDTO.startPage + pageDTO.pageBlock }&search=${pageDTO.search}&search2=${pageDTO.search2}">▷▷</a>
 </c:if>
-	
+</div>		
 							</div>
 						</div>
 					</div>
