@@ -1,11 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>header</title>
-</head>
-<body>
         <!-- Header-->
         <header id="header" class="header">
             <div class="top-left">
@@ -110,5 +104,3 @@
             </div>
         </header><!-- /header -->
         <!-- Header-->
-</body>
-</html>

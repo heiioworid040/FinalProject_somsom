@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<!-- src/main/resources -->
+<!-- mybatis-config.xml 파일 만들기 -->
+<!--  파일이름 대신 namespace 이름을 불러서 사용 -->
+<mapper namespace="com.project.mappers.lineMapper">
+	
+    <select id="getSearchLine" resultType="com.project.domain.LineDTO">
+    SELECT DISTINCT line_cd, line_nm
+    FROM line
+    ORDER BY line_cd
+    </select>
+
+    <select id="getLineList" resultType="com.project.domain.LineDTO">
+    SELECT * 
+	FROM line
+	ORDER BY line_cd
+	</select>
+
+    <select id="getLineCount" resultType="java.lang.Integer">
+    SELECT COUNT(*) 
+	FROM line
+	</select>
+	
+<!-- id-"이름" spl구문 하나하나 이름
+	 ? 대신에 MemberDTO 멤버변수명 #{id}	-->
+<!-- 	<insert id="insertTest"> -->
+<!-- 		insert into test1(num,name) -->
+<!-- 		values(#{num},#{name}) -->
+<!-- 	</insert> -->
+    
+<!--     <select id="" resultType=""> -->
+<!--     </select> -->
+
+<!-- 	<update id=""> -->
+<!-- 	</update> -->
+
+<!-- 	<delete id=""> -->
+<!-- 	</delete> -->
+			
+</mapper>
