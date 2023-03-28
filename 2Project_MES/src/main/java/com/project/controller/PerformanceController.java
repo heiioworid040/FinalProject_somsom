@@ -24,8 +24,8 @@ public class PerformanceController {
 	@Inject
 	private PerformanceService performanceService;
 
-	@Inject
-	private LineService lineService;
+//	@Inject
+//	private LineService lineService;
 
 	// 생산실적 현황 목록
 	@RequestMapping(value = "/performance/performanceCurrentInfo", method = RequestMethod.GET)
@@ -68,8 +68,8 @@ public class PerformanceController {
 		model.addAttribute("performanceCurrentInfo", performanceCurrentInfo);
 		model.addAttribute("pageDTO", pageDTO);
 		// 라인 검색 옵션 셀렉트박스 값 
-		List<LineDTO> searchLine = lineService.getSearchLine();
-		model.addAttribute("searchLine", searchLine);
+//		List<LineDTO> searchLine = lineService.getSearchLine();
+//		model.addAttribute("searchLine", searchLine);
 		// 주소변경 없이 이동
 		return "performance/performanceCurrentInfo";
 	}
