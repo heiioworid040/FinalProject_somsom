@@ -37,7 +37,7 @@ public class OrderController {
 		@Inject
 		private ProductService productService;
 		
-		@RequestMapping(value = "/search/searchPop", method = RequestMethod.GET)
+		@RequestMapping(value = "/order/searchPop", method = RequestMethod.GET)
 		public String searchPop(HttpServletRequest request, Model model) {
 			String pop=(String)request.getParameter("pop");
 			String cli=(String)request.getParameter("cli");
@@ -86,7 +86,7 @@ public class OrderController {
 			
 			model.addAttribute("pop", pop);
 			model.addAttribute("pageDTO", pageDTO);
-			return "search/searchPop";
+			return "order/searchPop";
 		}
 		
 		@RequestMapping(value = "/order/orderInsert", method = RequestMethod.GET)
