@@ -9,9 +9,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.project.domain.LineDTO;
 import com.project.domain.PageDTO;
 import com.project.domain.PerformanceDTO;
+import com.project.service.LineService;
 import com.project.service.PerformanceService;
 
 @Controller
@@ -20,6 +24,10 @@ public class PerformanceController {
 	@Inject
 	private PerformanceService performanceService;
 
+	@Inject
+	private LineService lineService;
+
+	// 생산실적 현황 목록
 	@RequestMapping(value = "/performance/performanceCurrentInfo", method = RequestMethod.GET)
 	public String currentInfo(HttpServletRequest request, Model model) {
 		System.out.println("PerformanceController currentInfo()");
@@ -59,7 +67,20 @@ public class PerformanceController {
 
 		model.addAttribute("performanceCurrentInfo", performanceCurrentInfo);
 		model.addAttribute("pageDTO", pageDTO);
+		// 라인 검색 옵션 셀렉트박스 값 
+		List<LineDTO> searchLine = lineService.getSearchLine();
+		model.addAttribute("searchLine", searchLine);
 		// 주소변경 없이 이동
 		return "performance/performanceCurrentInfo";
 	}
+
+	// 생산실적 현황 json 리스트
+	@ResponseBody
+	@RequestMapping(value = "/performance/perfCurrJsonList", method = RequestMethod.GET)
+	public List<PerformanceDTO> perfCurrJsonList(@RequestParam("prod_cd") String prod_cd) {
+		List<PerformanceDTO> perfCurrJsonList = performanceService.perfCurrJsonList(prod_cd);
+
+		return perfCurrJsonList;
+	}
+
 }

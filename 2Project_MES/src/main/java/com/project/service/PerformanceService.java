@@ -9,4 +9,6 @@ public interface PerformanceService {
 	public List<PerformanceDTO> performanceCurrentInfo(PageDTO pageDTO);
 
 	public int performanceCurrentCount();
+
+	public List<PerformanceDTO> perfCurrJsonList(String prod_cd);
 }

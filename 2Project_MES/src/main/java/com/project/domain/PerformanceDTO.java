@@ -11,6 +11,10 @@ public class PerformanceDTO extends InstructionDTO {
 	private String perf_cause;
 	private String perf_note;
 	private String line_nm;
+	private String r_prod_cd;
+	private String r_prod_nm;
+	private String r_prod_unit;
+	private String req_req;
 
 	public int getPerf_num() {
 		return perf_num;
@@ -60,6 +64,28 @@ public class PerformanceDTO extends InstructionDTO {
 	public void setLine_nm(String line_nm) {
 		this.line_nm = line_nm;
 	}
-	
-	
+	public String getR_prod_cd() {
+		return r_prod_cd;
+	}
+	public void setR_prod_cd(String r_prod_cd) {
+		this.r_prod_cd = r_prod_cd;
+	}
+	public String getR_prod_nm() {
+		return r_prod_nm;
+	}
+	public void setR_prod_nm(String r_prod_nm) {
+		this.r_prod_nm = r_prod_nm;
+	}
+	public String getR_prod_unit() {
+		return r_prod_unit;
+	}
+	public void setR_prod_unit(String r_prod_unit) {
+		this.r_prod_unit = r_prod_unit;
+	}
+	public String getReq_req() {
+		return req_req;
+	}
+	public void setReq_req(String req_req) {
+		this.req_req = req_req;
+	}
 }

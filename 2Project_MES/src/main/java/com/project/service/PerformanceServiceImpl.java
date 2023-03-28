@@ -35,4 +35,11 @@ public class PerformanceServiceImpl implements PerformanceService {
 
 		return performanceDAO.performanceCurrentCount();
 	}
+
+	@Override
+	public List<PerformanceDTO> perfCurrJsonList(String prod_cd) {
+		System.out.println("PerformanceServiceImpl perfCurrJsonList()");
+
+		return performanceDAO.perfCurrJsonList(prod_cd);
+	}
 }
