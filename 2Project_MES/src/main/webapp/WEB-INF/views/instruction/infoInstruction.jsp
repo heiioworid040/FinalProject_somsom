@@ -290,42 +290,8 @@
 				</div>
 			</div>
 		</div><!-- .content -->
-		
-
-							<div class="card-body">
-								<table class="table">
-									<thead class="thead-dark">
-										<tr>
-											<th scope="col">라인</th>
-											<th scope="col">라인명</th>
-											<th scope="col">공정</th>
-											<th scope="col">작업장</th>
-											<th scope="col">정렬순서</th>
-											<th scope="col">상태</th>
-											<th scope="col">비고</th>
-										</tr>
-									</thead>
-									<tbody id="lineTableBody">
-<%-- 										<c:forEach var="lineDTO" items="${lineList }"> --%>
-<!-- 											<tr> -->
-<%-- 												<td scope="row">${lineDTO.line_cd }</td> --%>
-<%-- 												<td>${lineDTO.line_nm }</td> --%>
-<%-- 												<td>${lineDTO.line_process }</td> --%>
-<%-- 												<td>${lineDTO.line_place }</td> --%>
-<%-- 												<td>${lineDTO.line_num }</td> --%>
-<%-- 												<td>${lineDTO.line_st }</td> --%>
-<%-- 												<td>${lineDTO.line_note }</td> --%>
-<!-- 											</tr> -->
-<%-- 										</c:forEach> --%>
-									</tbody>
-								</table>
-							</div>
-	
 		<div>
-<%-- 		<jsp:include page="../line/lineModal.jsp" > --%>
-<%-- 		<jsp:param value="" name=""/> --%>
-<%-- 		</jsp:include> --%>
-		<div class="clearfix"></div>
+		<jsp:include page="../line/lineModal.jsp" />
 		<!-- 푸터 넣는 곳 -->
 		<jsp:include page="../inc/footer.jsp" />
 		<!-- 푸터 넣는 곳 -->
@@ -337,7 +303,7 @@
 
 	<!-- Scripts -->
 
-	<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
 	<script type="text/javascript">
 	$(function(){
 		document.getElementById("lineModalBtn").addEventListener('click', getLineModal);
@@ -346,11 +312,11 @@
 			try {
 				jQuery.ajax({
 					type : 'get',
-					url:'${pageContext.request.contextPath}/line/lineModal',
+					url:'${pageContext.request.contextPath}/ajax/lineModal',
 					dataType:'json',
 					success:function(linearr){
-						$.each(linearr,function(index,item){
-							$('#lineTableBody').append('<tr><td scope="row">'+item.line_cd+'</td><td>'+item.line_nm+'</td><td>'+item.line_process+'</td><td>'+item.line_place +'</td><td>'+item.line_num +'</td><td>'+item.line_st +'</td><td>'+item.line_note+'</td></tr>');
+						jQuery.each(linearr,function(index,item){
+							jQuery('#lineTableBody').append('<tr><td scope="row">'+item.line_cd+'</td><td>'+item.line_nm+'</td><td>'+item.line_process+'</td><td>'+item.line_place +'</td><td>'+item.line_num +'</td><td>'+item.line_st +'</td><td>'+item.line_note+'</td></tr>');
 						});
 					}
 				});				
@@ -363,7 +329,9 @@
 				  console.log(e.columnNumber);         // 2
 				  console.log(e.stack);                // "@Scratchpad/2:2:3\n"
 
-		}
+			}
+			jQuery('#lineModal').modal("show");
+			
 	}
 })
     </script>
