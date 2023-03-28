@@ -47,7 +47,6 @@
 								<strong class="card-title">품목별 상세페이지</strong><br>
 							</div>
 							<table border="1">
-							<tr><td>글번호</td><td>${productDTO.prod_number}</td></tr>
 							<tr><td>품번</td><td>${productDTO.prod_cd}</td></tr>
 							<tr><td>거래코드</td><td>${productDTO.cli_cd}</td></tr>
 							<tr><td>품명</td><td>${productDTO.prod_mat}</td></tr>

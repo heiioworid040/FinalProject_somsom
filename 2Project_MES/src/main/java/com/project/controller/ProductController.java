@@ -154,7 +154,7 @@ public class ProductController {
 		return "redirect:/product/productlist";
 	}
 	
-	//검색
+	//거래처 검색
 
 	
 	@RequestMapping(value = "/product/productorderPop", method = RequestMethod.GET)

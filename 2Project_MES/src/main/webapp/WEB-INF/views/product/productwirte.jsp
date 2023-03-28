@@ -142,7 +142,7 @@
 							<form action="${pageContext.request.contextPath}/product/productwritePro" method="post" name="fr" onsubmit="return essential()">
 							<table border="1">
 							<tr><td>품목코드</td>
-							    <td><input name="prod_cd" placeholder="ex)P001"></td></tr>
+							    <td><input name="prod_cd" placeholder="P001 형식으로 자동생성" readonly></td></tr>
 							<tr><td>품명<span style="color:red">*</span></td>
 							    <td><select name="prod_nm">
 							    	<option value="품명" selected="selected">품명</option>
@@ -151,7 +151,7 @@
 							    	<option value="기타">기타</option>
 							</select></td></tr>
 							<tr><td>거래처코드</td>
-							 <td><input type="text" id="cli_cd" name="cli_cd" value="${productDTO.cli_cd }" readonly><input type="text" id="cli_nm" value="${productDTO.cli_nm }" readonly>
+							 <td><input type="text" id="cli_cd" name="cli_cd" value="${productDTO.cli_cd }" readonly>
 							 	 <button type="button" id="pop" value="cli" onclick="orderPop(1)">돋보기</button></td></tr>
 							<tr><td>자재유형</td>
 							    <td><select name="prod_mat">

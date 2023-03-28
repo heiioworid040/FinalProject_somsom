@@ -25,9 +25,12 @@
 <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 </head>
 <script>
-	function cli(cli_cd,cli_nm) {
-		opener.document.getElementById("cli_cd").value=cli_cd;
-		document.orderPop.submit();
+
+	function prod(prod_cd,prod_nm,prod_mat) {
+		opener.document.getElementById("search_prod_cd").value=prod_cd;
+		opener.document.getElementById("search_prod_nm").value=prod_nm;
+		opener.document.getElementById("search_prod_mat").value=prod_mat;
+		document.searchPop.submit();
 		self.close();
 	}
 </script>
@@ -41,14 +44,19 @@
 								<c:if test="${pop eq 'cli' }">
 									<h3>거래처 조회</h3>
 								</c:if>
-
+								<c:if test="${pop eq 'emp' }">
+									<h3>담당자 조회</h3>
+								</c:if>
+								<c:if test="${pop eq 'prod' }">
+									<h3>품목 조회</h3>
+								</c:if>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<form action="${pageContext.request.contextPath }/product/productouterPop" method="get">
+		<form action="${pageContext.request.contextPath }/order/searchPop" method="get">
 			<div class="content">
 				<div class="animated fadeIn">
 					<div class="row">
@@ -56,21 +64,6 @@
 							<div class="card">
 								<div class="card-body">
 									<!--	(검색창 위치) -->
-									<div class="search-div">
-										<div class="search-div-o">
-											<c:if test="${pop eq 'cli' }">
-												<span class="search">업체코드 <input type="text" name="prod_cd"></span>
-												<span class="search">업체명 <input type="text" name="prod_nm"></span>
-												<span class="search">업체구분 <select class="select-search" name="info">
-																				<option value="">전체</option>
-																				<option value="cli_ja">자사</option>
-																				<option value="cli_h">협력사</option>
-																				<option value="cli_go">고객사</option>
-																			</select></span>
-											</c:if>
-										</div>
-										<button type="submit" class="search-btn">조회</button>
-									</div>
 									<!-- 이 이상 긁는건 너무 템플릿에만의존적인 것 같아 나머지 기능은 직접 개발합시다 파이팅! -->
 								</div>
 							</div>
@@ -81,7 +74,7 @@
 		</form>
 		<!-- .content -->
 		
-		<form action="${pageContext.request.contextPath }/product/productwirte" name="orderPop" method="get">
+		<form action="${pageContext.request.contextPath }/req/reqinsert" name="searchPop" method="get">
 		<div class="content">
 			<div class="animated fadeIn">
 				<div class="row">
@@ -91,22 +84,26 @@
 								<table class="table" id="hover_tb">
 									<thead class="thead-dark">
 										<tr>
-											<c:if test="${pop eq 'cli' }">
-												<th scope="col">업체코드</th>
-												<th scope="col">업체명</th>
-												<th scope="col">대표자</th>
-												<th scope="col">E-MAIL</th>
+											<c:if test="${ pop eq 'prod' }">
+												<th scope="col">상품코드</th>
+												<th scope="col">상품이름</th>
+												<th scope="col">자재유형</th>
+												<th scope="col">단위</th>
+												<th scope="col">재질</th>
+												<th scope="col">규격</th>
 											</c:if>
 										</tr>
 									</thead>
 									<tbody>
-										<c:forEach var="productDTO" items="${popList }">
-											<c:if test="${pop eq 'cli' }">
-												<tr onclick="cli('${productDTO.cli_cd }','${productDTO.cli_nm }')">
-													<td>${productDTO.cli_cd }</td>
-													<td>${productDTO.cli_nm }</td>
-													<td>${productDTO.cli_boss }</td>
-													<td>${productDTO.cli_email }</td>
+										<c:forEach var="reqDTO" items="${popList }">
+											<c:if test="${ pop eq 'prod' }">
+												<tr onclick="prod('${reqDTO.prod_cd }','${reqDTO.prod_nm }','${reqDTO.prod_mat }')">
+													<td>${reqDTO.prod_cd }</td>
+													<td>${reqDTO.prod_nm }</td>
+													<td>${reqDTO.prod_mat }</td>
+													<td>${reqDTO.prod_unit }</td>
+													<td>${reqDTO.prod_text }</td>
+													<td>${reqDTO.prod_size }</td>
 												</tr>
 											</c:if>
 										</c:forEach>
@@ -120,5 +117,19 @@
 		</div>
 		</form>
 		<!-- .content -->
+		
+<!-- 	<div style="text-align : center;"> -->
+<%-- 		<c:if test="${pageDTO.startPage>pageDTO.pageBlock}"> --%>
+<%-- 			<a href="${pageContext.request.contextPath}/order/cliPop?pageNum=${pageDTO.startPage-pageDTO.pageBlock}">◀</a> --%>
+<%-- 		</c:if> --%>
+
+<%-- 		<c:forEach var="i" begin="${pageDTO.startPage}" end="${pageDTO.endPage}" step="1"> --%>
+<%-- 			<a href="${pageContext.request.contextPath}/order/cliPop?pageNum=${i}">${i}</a> --%>
+<%-- 		</c:forEach> --%>
+
+<%-- 		<c:if test="${pageDTO.endPage<pageDTO.pageCount}"> --%>
+<%-- 			<a href="${pageContext.request.contextPath}/order/cliPop?pageNum=${pageDTO.startPage+pageDTO.pageBlock}">▶</a> --%>
+<%-- 		</c:if> --%>
+<!-- 	</div> -->
 </body>
 </html>

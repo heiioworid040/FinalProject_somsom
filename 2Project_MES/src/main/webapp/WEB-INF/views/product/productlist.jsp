@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/cs-skin-elastic.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
-
+	
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
@@ -119,6 +119,14 @@ if(search==null){
 }
 %> 															
 							<div class="card-body">
+									<!-- 검색어 -->								
+								<div id="table_search" style="text-align: right;">
+								<form action="${pageContext.request.contextPath}/product/productlist" method="GET">
+								<input type="text" name="search" class="input_box" placeholder="품목코드/품목별 검색기능">
+								<input type="submit" value="search" class="btn">
+								</form>
+								</div>
+								<!-- 검색어 끝 -->	
 								<table class="table" id="table2" border="1">
 									<thead class="thead-dark">	
 										<tr>
@@ -169,28 +177,40 @@ if(search==null){
 										</td></tr></c:forEach>
 									</tbody>
 								</table>
-								<!-- 검색어 -->								
-								<div id="table_search">
-								<form action="${pageContext.request.contextPath}/product/productlist" method="GET">
-								<input type="text" name="search" class="input_box" placeholder="품목코드별 검색기능">
-								<input type="submit" value="search" class="btn">
-								</form>
-								</div>								
+														
 								<!-- 검색끝 -->								
 								<!-- 페이징 처리 -->
-								<div class="pageNum">
-								<c:if test="${pageDTO.startPage > pageDTO.pageBlock }">
-								<a href="${pageContext.request.contextPath}/product/productlist?pageNum=${pageDTO.startPage - pageDTO.pageBlock}&search=${pageDTO.search}">Prev</a>
-								</c:if>
+<!-- 								<div class="pageNum"> -->
+<%-- 								<c:if test="${pageDTO.startPage > pageDTO.pageBlock }"> --%>
+<%-- 								<a href="${pageContext.request.contextPath}/product/productlist?pageNum=${pageDTO.startPage - pageDTO.pageBlock}&search=${pageDTO.search}">Prev</a> --%>
+<%-- 								</c:if> --%>
 								
-								<c:forEach var="i" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1">
-								<a href="${pageContext.request.contextPath}/product/productlist?pageNum=${i}">${i}</a>
-								</c:forEach>
+<%-- 								<c:forEach var="i" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1"> --%>
+<%-- 								<a href="${pageContext.request.contextPath}/product/productlist?pageNum=${i}">${i}</a> --%>
+<%-- 								</c:forEach> --%>
 								
-								<c:if test="${pageDTO.endPage < pageDTO.pageCount }">
-								<a href="${pageContext.request.contextPath}/product/productlist?pageNum=${pageDTO.startPage + pageDTO.pageBlock}&search=${pageDTO.search}">Next</a>
-								</c:if>
+<%-- 								<c:if test="${pageDTO.endPage < pageDTO.pageCount }"> --%>
+<%-- 								<a href="${pageContext.request.contextPath}/product/productlist?pageNum=${pageDTO.startPage + pageDTO.pageBlock}&search=${pageDTO.search}">Next</a> --%>
+<%-- 								</c:if> --%>
+<!-- 								</div> -->
+
+								<div id="pageNum2" style="text-align: center;">
+    								<c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
+        							<a href="${pageContext.request.contextPath}/product/productlist?pageNum=${pageDTO.startPage - pageDTO.pageBlock}&search=${pageDTO.search}">Prev</a>
+    								</c:if>
+								    <c:forEach var="i" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1">
+								        <c:if test="${i eq pageDTO.currentPage}">
+								            <strong>${i}</strong>
+								        </c:if>
+								        <c:if test="${i ne pageDTO.currentPage}">
+								            <a href="${pageContext.request.contextPath}/product/productlist?pageNum=${i}">${i}</a>
+								        </c:if>
+								    </c:forEach>
+								    <c:if test="${pageDTO.endPage < pageDTO.pageCount }">
+								        <a href="${pageContext.request.contextPath}/product/productlist?pageNum=${pageDTO.startPage + pageDTO.pageBlock}&search=${pageDTO.search}">Next</a>
+								    </c:if>
 								</div>
+
 							</div>
 						</div>
 					</div>

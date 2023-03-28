@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.mappers.reqMapper">
+
+    <select id="getReqList" resultType="com.project.domain.ReqDTO">
+    	select * from requirement
+<!--     	<if test="search != null"> -->
+<!--         where prod_cd like CONCAT('%',#{search},'%') or prod_nm like CONCAT('%',#{search},'%') or prod_mat like CONCAT('%',#{search},'%') -->
+<!--         </if>  -->
+    	order by req_num desc
+  
+    	limit #{startRow}, #{pageSize}
+    </select>
+	
+	
+	 <select id="getReqCount" resultType="java.lang.Integer">
+    	select count(*) from requirement
+<!--     	<if test="search != null"> -->
+<!--         	where prod_cd like CONCAT('%',#{search},'%') or prod_nm like CONCAT('%',#{search},'%')or prod_mat like CONCAT('%',#{search},'%') -->
+<!--         </if>  -->
+    </select>
+    
+      <select id="getMaxnum" resultType="java.lang.Integer">
+    	select max(req_num) from requirement
+    </select>
+    
+     <insert id="insertReq"> 
+     	insert into requirement(req_num,prod_cd,prod_nm,prod_mat,prod_fcd,prod_fnm,req_req,req_add_emp,req_add_date,req_edit_emp,req_edit_date)  
+  		value(#{req_num},#{prod_cd},#{prod_nm},#{prod_mat},#{prod_fcd},#{prod_fnm},#{req_req},#{req_add_emp},#{req_add_date},#{req_edit_emp},#{req_edit_date})
+   	</insert>
+   	
+   	    
+     <select id="getReq" resultType="com.project.domain.ReqDTO">
+    	select * from requirement where req_num = #{req_num}
+    </select>
+    
+    
+    <update id="updateReq">
+    	update requirement set
+    	prod_fcd = #{prod_fcd},
+    	prod_fnm = #{prod_fnm},
+    	req_req = #{req_req},
+    	req_add_emp = #{req_add_emp},
+    	req_add_date =#{req_add_date},
+    	req_edit_emp = #{req_edit_emp},
+    	req_edit_date =#{req_edit_date}
+    	where req_num = #{req_num}
+    </update>
+    
+    <!-- daolmpl 이름이랑 같아야한다. -->
+    <delete id="deleteReq">
+    delete from requirement
+    where req_num = #{req_num}
+    </delete>
+    
+    
+    <select id="getService" resultType="com.project.domain.ReqDTO">
+	select * 
+    from requirement 
+    where title like '%service%'
+    order by req_num desc 
+    limit 10, 10;
+	</select>
+    
+</mapper>
