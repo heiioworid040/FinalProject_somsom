@@ -310,6 +310,8 @@
 		
 		function getLineModal(){
 			try {
+				
+				jQuery('#lineTableBody').html('');
 				jQuery.ajax({
 					type : 'get',
 					url:'${pageContext.request.contextPath}/ajax/lineModal',
