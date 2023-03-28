@@ -35,4 +35,11 @@ public class PerformanceDAOImpl implements PerformanceDAO {
 
 		return sqlSession.selectOne(namespace + ".performanceCurrentCount");
 	}
+
+	@Override
+	public List<PerformanceDTO> perfCurrJsonList(String prod_cd) {
+		System.out.println("PerformanceDAOImpl perfCurrJsonList()");
+		
+		return sqlSession.selectList(namespace + ".perfCurrJsonList", prod_cd);
+	}
 }
