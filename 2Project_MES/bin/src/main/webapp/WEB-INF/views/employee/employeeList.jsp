@@ -29,9 +29,11 @@
 </head>
 <script>
 
-function fun1() {
+function fun1(index) {
+	   
+	if(index==1){
 	   let check = false;
-	   with(document.ckDelete) {
+	   with(document.form) {
 	      if(ck.length==undefined) {
 	         if(ck.checked) { check = true; }
 	      } else {
@@ -41,8 +43,20 @@ function fun1() {
 	      alert("삭제할 사용자를 선택하세요");
 	         return;
 	      } else {
-	         if(confirm("삭제처리 하시겠습니까?")) { submit(); }
-	      } } }
+	         if(confirm("삭제처리 하시겠습니까?")) { document.form.action='${pageContext.request.contextPath}/employee/deletePro' }
+	      } } } 
+	   
+	else if(index==2)
+		   { document.form.action='${pageContext.request.contextPath}/employee/insertPro' }
+	
+	else if(index==3)
+	  	{ document.form.action='${pageContext.request.contextPath}/employee/employeeList' }
+		
+	   
+	   
+	   
+	   
+	   }
 
 
 
@@ -98,6 +112,38 @@ function fun2() {
 						<div class="card">
 							<div class="card-body">
 							<!--	(검색창 위치) -->
+								<div class="content">
+			<div class="animated fadeIn">
+				<div class="row">
+					<div class="col-lg">
+						<div class="card m-0">
+							<div class="card-body card-block">
+								<form action="${pageContext.request.contextPath}/employee/employeeList" method="get" class="form-inline">
+									 <div class="form-group col-6 mt-1">
+                                    	<label for="exampleInputName1" class="pr-1  form-control-label">사용자ID</label>
+                                    	<input type="text" id="search" name="search" class="form-control ">
+                                    	<div class="input-group">
+                                    	</div>
+                                    </div>
+                                     <div class="form-group col-6 mt-1">
+                                    	<label for="exampleInputName1" class="pr-1  form-control-label">사용자명</label>
+                                    	<input type="text" id="search2" name="search2" class="form-control">
+                                    	<div class="input-group">
+                                    	</div>
+                                    </div> 
+                                    <div class="form-group col-6 mt-3">
+                                    <input type="submit" value="search">
+<!--                                     	<div class="input-group"> -->
+<!--                                         	<div class="input-group-addon"><i class="ti-search"></i></div> -->
+                                    	</div>
+								   </form>
+                                    </div>
+                            </div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 							<!-- 이 이상 긁는건 너무 템플릿에만의존적인 것 같아 나머지 기능은 직접 개발합시다 파이팅! -->
 							</div>
 						</div>
@@ -108,10 +154,10 @@ function fun2() {
 		
         <div class="content">
 		<input type="button" value="추가"
-								onclick="location.href='${pageContext.request.contextPath}/employee/insertEmployee'">
+								onclick="fun2(3)'">
 		<input type="button" value="수정"
-								onclick="location.href='${pageContext.request.contextPath}/employee/updateEmployee?emp_cd=${employeeDTO.emp_cd}'">						
-		<input type="button" name="ckDelete" value="삭제" onclick="fun1()" >
+								onclick="fun2(2)">						
+		<input type="button" name="ckDelete" value="삭제" onclick="fun1(1)" >
 <!-- 		<input type="button" name="ckDelete" value="삭제"  -->
 <%-- 								onclick="location.href='${pageContext.request.contextPath}/employee/deletePro?emp_cd=${employeeDTO.emp_cd}'" > --%>
 													

@@ -25,6 +25,8 @@ public interface CodeService {
 
 	public void updateCode(CodeDTO codeDTO);
 
+	public List<CodeDTO> getCodeList3(String code_grp);
+
 
 
 

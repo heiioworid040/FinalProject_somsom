@@ -40,6 +40,14 @@
 		where emp_cd = #{emp_cd}
 	</update>
 	
+	<select id = "emailCk" resultType="java.lang.Integer">
+		select count(*) from employee
+		where emp_email = #{emp_email}
+	</select>
 	
+	<select id = "telCk" resultType = "java.lang.Integer">
+		select count(*) from employee
+		where emp_tel = #{emp_tel}
+	</select>
 	
 </mapper>

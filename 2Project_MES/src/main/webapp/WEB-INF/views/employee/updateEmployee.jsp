@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,7 +26,10 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
+<%--  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/script/jquery-3.6.3.js"></script> --%>
+ <script type="text/javascript">
 
+</script>
 </head>
 <body>
 	<!-- Left Panel1 -->
@@ -80,10 +83,14 @@
 		</div><!-- .content -->
 		
         <div class="content">
-		<form name="update" action="${pageContext.request.contextPath}/employee/updatePro" method="post">
-		<input type="submit" value="저장">					
-		<input type="button" value="취소"
-								onclick="historyBack()">						
+		<form id="update" action="${pageContext.request.contextPath}/employee/updatePro" method="post">
+		
+		<div>
+		<input type="submit" value="저장" class="submit" id="submit">					
+<%-- 		<input type="button" value="취소" onclick="location.href='${pageContext.request.contextPath}/employee/employeeList'">				 --%>
+		<input type="button" class="cancel" id="cancel" value="취소">				
+		</div>
+		
 			<div class="animated fadeIn">
 				<div class="row">
 					<div class="col-lg">
@@ -106,12 +113,17 @@
 									</thead>
 									<tbody>
 										<tr>
-											<td><input type="text" name=emp_cd value="${employeeDTO.emp_cd }" readonly></td>
-											<td><input type="text" name=emp_nm value="${employeeDTO.emp_nm }"></td>
-											<td><input type="text" name=emp_pass value="${employeeDTO.emp_pass }"></td>
-											<td><input type="text" name=emp_position value="${employeeDTO.emp_position }"></td>
-											<td><input type="text" name=emp_email value="${employeeDTO.emp_email }"></td>
-											<td><input type="text" name=emp_tel value="${employeeDTO.emp_tel }"></td>
+											<td><input type="text" name=emp_cd class="emp_cd" id="emp_cd" value="${employeeDTO.emp_cd }" readonly></td>
+											<td><input type="text" name=emp_nm class="emp_nm" id="emp_nm" value="${employeeDTO.emp_nm }"></td>
+											<td><input type="text" name=emp_pass class="emp_pass" id="emp_pass" value="${employeeDTO.emp_pass }"></td>
+											<td><select name="emp_position" class="emp_position" id="emp_position">
+												<option value="">직책을 선택하세요</option>
+												<option value="관리자">관리자</option>
+												<option value="파트장">파트장</option>
+												<option value="사원">사원</option>
+												</select></td>
+											<td><input type="text" name=emp_email class="emp_email" id="emp_email" value="${employeeDTO.emp_email }"></td>
+											<td><input type="text" name=emp_tel class="emp_tel" id="emp_tel" value="${employeeDTO.emp_tel }"></td>
 										</tr>
 
 										

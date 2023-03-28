@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <!DOCTYPE html>
 <html>
@@ -31,24 +31,11 @@
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.js"></script>
 <script type="text/javascript">
 
-$(function(){
-    //전체선택 체크박스 클릭
-	$("#ckAll").click(function(){
-		//만약 전체 선택 체크박스가 체크된상태일경우
-		if($("#ckAll").prop("checked")) {
-			//해당화면에 전체 checkbox들을 체크해준다
-			$("input[type=checkbox]").prop("checked",true);
-		// 전체선택 체크박스가 해제된 경우
-		} else {
-			//해당화면에 모든 checkbox들의 체크를해제시킨다.
-			$("input[type=checkbox]").prop("checked",false);
-		}
-	})
-})
-
-function fun1() {
+function fun1(index, code_grp) {
+	   
+	if(index==1){
 	   let check = false;
-	   with(document.ckDelete) {
+	   with(document.form) {
 	      if(ck.length==undefined) {
 	         if(ck.checked) { check = true; }
 	      } else {
@@ -58,12 +45,22 @@ function fun1() {
 	      alert("삭제할 사용자를 선택하세요");
 	         return;
 	      } else {
-	         if(confirm("삭제처리 하시겠습니까?")) { submit(); }
-	      } } }
-
-
+	         if(confirm("삭제처리 하시겠습니까?")) { document.form.action='${pageContext.request.contextPath}/employee/deletePro' }
+	      } } } 
+	   
+	else if(index==2)
+		   { location.href='${pageContext.request.contextPath}/code/codeList?plus=plus&code_grp='+code_grp }
+	
+	else if(index==3)
+	  	{ document.form.action='${pageContext.request.contextPath}/employee/employeeList' }
+		
+	   
+	   
+	   
+	   
+	   }
+	      
 </script>
-
 <body>
 	<!-- Left Panel1 -->
 	<jsp:include page="../inc/leftPanel.jsp" />
@@ -114,9 +111,7 @@ function fun1() {
 				</div>
 			</div>
 		</div><!-- .content -->
-		<form>
         <div class="content">
-        <input type="button" value="추가" onclick="location.href='${pageContext.request.contextPath}/code/insertCode?code_grp=${codeDTO.code_grp}'">
 			<div class="animated fadeIn">
 				<div class="row">
 					<div class="col-lg">
@@ -125,7 +120,28 @@ function fun1() {
 								<strong class="card-title">Table Head</strong>
 							</div>
 							<div class="card-body">
+								<form>
 								<table class="table">
+									<thead class="thead-dark">
+										<tr>
+											<th scope="col">그룹코드3</th>
+											<th scope="col">그룹명</th>
+											<th scope="col">상세보기</th>
+											
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach var="codeDTO" items="${codeGrpList }"> 
+										<tr>
+											<td>${codeDTO.code_grp}</td>
+											<td>${codeDTO.code_grp_nm}</td>
+											<td><input type="button" name="plus" value="plus" onclick="fun1(2,'${codeDTO.code_grp}')"></td>	
+										</tr>	
+										</c:forEach>
+									</tbody>
+								</table>			
+
+								<table>
 									<thead class="thead-dark">
 										<tr>
 											<th scope="col"><input type="checkbox" id="ckAll" name="ckAll"></th>
@@ -137,7 +153,8 @@ function fun1() {
 										</tr>
 									</thead>
 									<tbody>
-										<c:forEach var="codeDTO" items="${codeList2 }">
+									<c:if test="${! empty plus}">
+									<c:forEach var="codeDTO" items="${codeList2 }">
 										<tr>
 											<td><input type="checkBox" name="ck" id="ck" value="${codeDTO.code_cd}"/></td>
 											<td>${codeDTO.code_cd}</td>
@@ -145,19 +162,18 @@ function fun1() {
 											<td>${codeDTO.code_num}</td>
 											<td>${codeDTO.code_note}</td>
 											<td><input type="button" value="수정" onclick="location.href='${pageContext.request.contextPath}/code/updateCode?code_cd=${codeDTO.code_cd}'"></td>											
-										</tr>										
-										</c:forEach>
-											
+										</tr>											
+									</c:forEach>
+									</c:if>
 									</tbody>
 								</table>
-
+								</form>	
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		</form><!-- .content -->
+		</div><!-- .content -->
 
 		<div class="clearfix"></div>
 		<!-- 푸터 넣는 곳 -->

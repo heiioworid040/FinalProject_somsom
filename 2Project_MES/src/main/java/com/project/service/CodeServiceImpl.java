@@ -88,6 +88,13 @@ public class CodeServiceImpl implements CodeService {
 		
 	}
 
+	@Override
+	public List<CodeDTO> getCodeList3(String code_grp) {
+		System.out.println("CodeServiceImpl getCodeList3()");
+		System.out.println(code_grp);
+		return codeDAO.getCodeList3(code_grp);
+	}
+
 
 
 
