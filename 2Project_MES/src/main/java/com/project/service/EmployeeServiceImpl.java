@@ -78,6 +78,18 @@ public class EmployeeServiceImpl implements EmployeeService {
 		System.out.println("EmployeeServiceImpl updateEmployee()");
 		employeeDAO.updateEmployee(employeeDTO);
 	}
+
+	@Override
+	public int emailCk(EmployeeDTO employeeDTO) throws Exception {
+		int result = employeeDAO.emailCk(employeeDTO);
+		return result;
+	}
+
+	@Override
+	public int telCk(EmployeeDTO employeeDTO) throws Exception {
+		int result = employeeDAO.telCk(employeeDTO);
+		return result;
+	}
 	
 	
 

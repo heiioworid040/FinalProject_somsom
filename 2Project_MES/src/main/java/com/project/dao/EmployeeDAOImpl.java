@@ -76,6 +76,20 @@ public class EmployeeDAOImpl implements EmployeeDAO{
 		return sqlSession.selectOne(namespace+".getMaxNum");
 	}
 
+	@Override
+	public int emailCk(EmployeeDTO employeeDTO) throws Exception {
+		System.out.println("EmployeeDAOImpl emailCk()");
+		return sqlSession.selectOne(namespace+".emailCk", employeeDTO);
+	}
+
+	@Override
+	public int telCk(EmployeeDTO employeeDTO) throws Exception {
+		System.out.println("EmployeeDAOImpl telCk()");
+		return sqlSession.selectOne(namespace+".telCk", employeeDTO);
+	}
+
+
+
 
 
 	

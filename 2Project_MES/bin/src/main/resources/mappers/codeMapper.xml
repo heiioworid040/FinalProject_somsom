@@ -43,16 +43,18 @@
 		where code_cd = #{code_cd}
 	</select>
 	
+	<select id="getCodeList3" resultType="com.project.domain.CodeDTO">
+		select * from code
+		where code_grp = #{code_grp}
+		order by code_num
+	</select>
+	
+
+	
 	<update id="updateCode">
 		update code set code_cd=#{code_cd}, code_nm=#{code_nm}, code_note=#{code_note}
 		where code_cd = #{code_cd}
 	</update>
-	
-	<select id="getCodeList3" resultType="com.project.domain.CodeDTO">
-		select code_cd, code_nm, code_num, code_note from code
-		where code_grp = #{code_grp}
-		order by code_cd	
-	</select>
 
 
 

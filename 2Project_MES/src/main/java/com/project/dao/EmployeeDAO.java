@@ -23,6 +23,8 @@ public interface EmployeeDAO {
 
 	public Integer getMaxNum();
 
+	public int emailCk(EmployeeDTO employeeDTO) throws Exception;
 
+	public int telCk(EmployeeDTO employeeDTO) throws Exception;
 
 }

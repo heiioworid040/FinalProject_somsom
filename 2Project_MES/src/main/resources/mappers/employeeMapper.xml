@@ -13,9 +13,12 @@
 
 	<select id="getEmployeeList" resultType="com.project.domain.EmployeeDTO">
 		select * from employee
-		<if test="search != null ">
+		<if test = "search != null ">
 			where emp_cd like CONCAT('%',#{search},'%') 
 		</if>
+		<if test = "search2 != null">
+			and emp_nm like CONCAT('%',#{search2},'%') 
+		</if>		
 		order by emp_cd
 		limit #{startRow} , #{pageSize}
 	</select>
@@ -24,6 +27,9 @@
 		select count(*) from employee
 		<if test="search != null">
 			where emp_cd like CONCAT('%',#{search},'%')
+		</if>
+		<if test = "search2 != null">
+			and emp_nm like CONCAT('%',#{search2},'%')
 		</if>
 	</select>
 

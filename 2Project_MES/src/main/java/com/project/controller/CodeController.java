@@ -94,6 +94,8 @@ public class CodeController {
 		return "code/codeList2";
 	}
 	
+
+	
 	@RequestMapping(value = "/code/deletePro", method = RequestMethod.POST)
 	public String deletetPro(HttpServletRequest request) {
 		System.out.println("CodeController deletePro");
@@ -108,6 +110,7 @@ public class CodeController {
 			
 		return "redirect:" + request.getHeader("Referer");			
 	}
+	
 	
 	@RequestMapping(value = "/code/updateCode", method = RequestMethod.GET)
 	public String updateCode(Model model, HttpServletRequest request) {
