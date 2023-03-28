@@ -99,8 +99,4 @@ public class ProductServicelmpl implements ProductService{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-
-
-	
 }

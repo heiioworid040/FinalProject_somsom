@@ -27,6 +27,63 @@
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
 </head>
+<script type="text/javascript">
+	// 필수입력 제어	
+	function essential() {
+
+		if (document.fr.prod_cd.value == "") {
+			alert("품목코드를 입력하세요.");
+			document.fr.prod_cd.focus();
+			return false;
+		}
+
+		if (document.fr.prod_nm.value == "품명") {
+			alert("품명을 선택하세요.");
+			document.fr.cli_num.focus();
+			return false;
+		}
+		if (document.fr.prod_mat.value == "") {
+			alert("자재유형을 선택하세요.");
+			document.fr.prod_mat.focus();
+			return false;
+		}
+		if (document.fr.prod_unit.value == "단위") {
+			alert("재고단위을 선택하세요.");
+			document.fr.prod_unit.focus();
+			return false;
+		}
+		if (document.fr.prod_text.value == "재질") {
+			alert("재질을 선택하세요.");
+			document.fr.prod_text.focus();
+			return false;
+		}
+		if (document.fr.prod_size.value == "규격") {
+			alert("규격을 선택하세요.");
+			document.fr.prod_size.focus();
+			return false;
+		}
+
+		if (document.fr.prod_inprice.value == "") {
+			alert("매입단가를 입력하세요.");
+			document.fr.prod_inprice.focus();
+			return false;
+		}
+		if (document.fr.prod_outprice.value == "") {
+			alert("매출단가를 입력하세요.");
+			document.fr.prod_outprice.focus();
+			return false;
+		}
+		if (document.fr.prod_count.value == "") {
+			alert("현재고를 입력하세요.");
+			document.fr.prod_count.focus();
+			return false;
+		}
+
+		alert("수정 완료되었습니다.");
+
+	}
+	</script>
+
 <body>
 	<!-- Left Panel1 -->
 	<jsp:include page="../inc/leftPanel.jsp" />
@@ -75,7 +132,7 @@
 								<strong class="card-title">행 수정</strong>
 							</div>
 							<div class="card-body">
-							<form action="${pageContext.request.contextPath }/product/productupdatePro" method="POST">	
+							<form action="${pageContext.request.contextPath }/product/productupdatePro" method="POST" name="fr" onsubmit="return essential()">	
 							<input type="hidden" name="prod_number" value="${productDTO.prod_number }">
 							<table border="1">
 							<tr><td>품번</td>
@@ -95,7 +152,7 @@
 							    	<option value="완제품" <c:if test="${productDTO.prod_mat == '완제품'}">selected</c:if>>완제품</option>
 							    	<option value="부자재" <c:if test="${productDTO.prod_mat == '부자재'}">selected</c:if>>부자재</option>
 							    	<option value="기타" <c:if test="${productDTO.prod_mat == '기타'}">selected</c:if>>기타</option>
-							    	</select></td></tr>
+							    	</select></td></tr>	
 							<tr><td>재고단위</td>
 							    <td><select name="prod_unit">
 							    	<option value="">단위</option>

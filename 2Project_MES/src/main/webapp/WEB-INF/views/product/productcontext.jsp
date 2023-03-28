@@ -37,31 +37,6 @@
         <!-- Header--> 
 		<jsp:include page="../inc/top.jsp" />
         <!-- Header-->
-        
-        <div class="breadcrumbs">
-            <div class="breadcrumbs-inner">
-                <div class="row m-0">
-                    <div class="col-sm-4">
-                        <div class="page-header float-left">
-                            <div class="page-title">
-                                <h1>Table</h1>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-8">
-                        <div class="page-header float-right">
-                            <div class="page-title">
-                                <ol class="breadcrumb text-right">
-                                    <li><a href="${pageContext.request.contextPath}/product/productlist">조회</a></li>
-                                         <li><a href="${pageContext.request.contextPath}/product/productwrite">추가</a></li>
-                                    <li class="active">메인</li>
-                                </ol>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 	
  <div class="content">
 			<div class="animated fadeIn">
@@ -74,21 +49,20 @@
 							<table border="1">
 							<tr><td>글번호</td><td>${productDTO.prod_number}</td></tr>
 							<tr><td>품번</td><td>${productDTO.prod_cd}</td></tr>
-							<tr><td>거래코드</td><td>${clientDTO.cli_cd}</td></tr>
+							<tr><td>거래코드</td><td>${productDTO.cli_cd}</td></tr>
 							<tr><td>품명</td><td>${productDTO.prod_mat}</td></tr>
-							<tr><td>자재유형</td><td>>${productDTO.prod_nm}</td></tr>
-							<tr><td>재고단위</td><td>>${productDTO.prod_unit}</td></tr>
-							<tr><td>재고재질</td><td>>${productDTO.prod_text}</td></tr>
-							<tr><td>규격</td><td>>${productDTO.prod_size}</td></tr>
-							<tr><td>매입단가</td><td>>${productDTO.prod_inprice}</td></tr>
-							<tr><td>매출단가</td><td>>${productDTO.prod_outprice}</td></tr>
-							<tr><td>현재고</td><td>>${productDTO.prod_count}</td></tr>
-							<tr><td>비고</td><td>>${productDTO.prod_note}</td></tr>
+							<tr><td>자재유형</td><td>${productDTO.prod_nm}</td></tr>
+							<tr><td>재고단위</td><td>${productDTO.prod_unit}</td></tr>
+							<tr><td>재고재질</td><td>${productDTO.prod_text}</td></tr>
+							<tr><td>규격</td><td>${productDTO.prod_size}</td></tr>
+							<tr><td>매입단가</td><td>${productDTO.prod_inprice}</td></tr>
+							<tr><td>매출단가</td><td>${productDTO.prod_outprice}</td></tr>
+							<tr><td>현재고</td><td>${productDTO.prod_count}</td></tr>
+							<tr><td>비고</td><td>${productDTO.prod_note}</td></tr>
 							<tr><td colspan="2"></td></tr></table>
-							<input type="button" value="글수정" onclick="location.href='${pageContext.request.contextPath}/product/productupdate?prod_number=${productDTO.prod_number }'">
+							<input type="button" value="창닫기" onClick="window.close()">
 							</div>
-						</div>
-						
+						</div>	
 					</div>
 				</div>
 			</div>

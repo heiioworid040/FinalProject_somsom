@@ -27,6 +27,18 @@
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
 </head>
+<script type="text/javascript">
+function searchPop(search) {
+	if(search==1) window.open('${pageContext.request.contextPath }/order/searchPop?pop=cli','searchPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=900,height=510,top=90,left=200')
+	else window.open('${pageContext.request.contextPath }/order/searchPop?pop=prod','searchPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=900,height=510,top=90,left=200')
+}
+function orderPop(order) {
+	if(order==1) window.open('${pageContext.request.contextPath }/order/orderPop?pop=cli','cliPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=900,height=510,top=90,left=200')
+	else window.open('${pageContext.request.contextPath }/order/orderPop?pop=prod','prodPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=600,height=510,top=90,left=200')
+}
+
+
+</script>
 
 <body>
 	<!-- Left Panel1 -->
@@ -111,8 +123,8 @@ if(search==null){
 									<thead class="thead-dark">	
 										<tr>
 											<th scope="col" >#</th>
-											<th scope="col" >품번</th>
-											<th scope="col" >거래코드</th>
+											<th scope="col" >품목코드</th>
+											<th scope="col" >거래처코드</th>
 											<th scope="col" >품명</th>
 											<th scope="col">자재유형</th>
 											<th scope="col">재고단위</th>
@@ -126,10 +138,11 @@ if(search==null){
 										</tr>
 									</thead>
 									<tbody>
-										<c:forEach var="productDTO" items="${productList}"> 
+										<c:forEach var="productDTO" items="${productList}">
 										<tr>
-											<td>${productDTO.prod_number}</td>
-											<td><a href="${pageContext.request.contextPath}/product/productcontext?prod_number=${productDTO.prod_number}">${productDTO.prod_cd}</a></td>
+										<th scope="row"><input type="checkbox" name="chk"
+											id="chk" value="${productDTO.prod_number}">
+											<td><a href="javascript:void(0);" onclick="window.open('${pageContext.request.contextPath}/product/productcontext?prod_number=${productDTO.prod_number}', 'newwindow', 'width=400, height=400');">${productDTO.prod_cd}</a></td>
 											<td>${productDTO.cli_cd}</td>
 											<td>${productDTO.prod_nm}</td>
 											<td>${productDTO.prod_mat}</td>
@@ -140,25 +153,26 @@ if(search==null){
 											<td>${productDTO.prod_outprice}</td>
 											<td>${productDTO.prod_count}</td>
 											<td>${productDTO.prod_note}</td>
-											<td><div style="display: inline-block;">
-												<form name="formupdate" action="${pageContext.request.contextPath}/product/productupdate" method="get">
-    											<input type="hidden" name="prod_number" value="${productDTO.prod_number}">
-    											<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal2">수정</button>
-												</form></div>					
-												
-												<div style="display: inline-block;">
-												<form name="formdelete" action="${pageContext.request.contextPath}/product/productdeletePro" method="get">
-    											<input type="hidden" name="prod_number" value="${productDTO.prod_number}">
-    											<button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal">삭제</button>
-												</form></div>
-											
-										</tr></c:forEach>
+											<td>
+										  <div style="display: inline-block;">
+										  <form name="updateModal" action="${pageContext.request.contextPath}/product/productupdate" method="get" onsubmit="return confirm('수정하시겠습니까?')">
+										    <input type="hidden" name="prod_number" value="${productDTO.prod_number}">
+										    <button type="submit" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal2">수정</button>
+										  </form>
+										</div>
+										<div style="display: inline-block;">
+									  	<form name="deleteModal" action="${pageContext.request.contextPath}/product/productdeletePro" method="get" onsubmit="return confirm('삭제하시겠습니까?')">
+									    <input type="hidden" name="prod_number" value="${productDTO.prod_number}">
+									    <button type="submit" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal">삭제</button>
+									  </form>
+									</div>
+										</td></tr></c:forEach>
 									</tbody>
 								</table>
 								<!-- 검색어 -->								
 								<div id="table_search">
 								<form action="${pageContext.request.contextPath}/product/productlist" method="GET">
-								<input type="text" name="search" class="input_box" placeholder="품번별 검색기능">
+								<input type="text" name="search" class="input_box" placeholder="품목코드별 검색기능">
 								<input type="submit" value="search" class="btn">
 								</form>
 								</div>								
@@ -183,49 +197,6 @@ if(search==null){
 				</div>
 			</div>
 		</div>
-<!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">게시물 삭제</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            게시물을 정말 삭제하시겠습니까?
-          </div>
-          <div class="modal-footer">
-            <button class="btn btn-primary" onclick="document.forms['formdelete'].submit()">삭제하기</button>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">취소하기</button>
-          </div>
-        </div>
-      </div>
-    </div>
-<!-- modal 끝 -->
-<!-- Modal -->
-    <div class="modal fade2" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">게시물 수정</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            게시물을 수정하시겠습니까?
-          </div>
-          <div class="modal-footer">
-            <button class="btn btn-primary" onclick="document.forms['formupdate'].submit()">수정하기</button>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">취소하기</button>
-          </div>
-        </div>
-      </div>
-    </div>
-<!-- modal 끝 -->
-
 
 		<!-- .content -->
 
