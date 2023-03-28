@@ -8,6 +8,7 @@ public class LineDTO extends OrderDTO{
 	private int line_num;
 	private String line_st;
 	private String line_note;
+	
 	public String getLine_cd() {
 		return line_cd;
 	}

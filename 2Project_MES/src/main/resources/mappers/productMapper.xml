@@ -10,7 +10,7 @@
 
 <!-- 	 ? 대신에 MemberDTO 멤버변수명 #{id}	 -->
     
-   	 <insert id="insertProduct"> 
+   	 <insert id="insertProduct">
      	insert into product(prod_cd,prod_number,cli_cd,prod_nm,prod_mat,prod_unit,prod_text,prod_size,prod_inprice,prod_outprice,prod_count,prod_note)  
      	select
 		concat('P',
@@ -20,7 +20,7 @@
      	from product
    	</insert>
    	
-   	 
+
     <select id="getMaxnum" resultType="java.lang.Integer">
     	select max(prod_number) from product
     </select>

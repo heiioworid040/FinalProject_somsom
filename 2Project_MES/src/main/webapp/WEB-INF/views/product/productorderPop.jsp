@@ -27,6 +27,7 @@
 <script>
 	function cli(cli_cd,cli_nm) {
 		opener.document.getElementById("cli_cd").value=cli_cd;
+
 		document.orderPop.submit();
 		self.close();
 	}

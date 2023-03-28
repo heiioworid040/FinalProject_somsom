@@ -7,7 +7,7 @@
 		resultType="com.project.domain.PerformanceDTO">
 		select pe.perf_date, l.line_nm, p.prod_cd, p.prod_nm,
 		p.prod_unit, pe.perf_good, pe.perf_err, pe.perf_cause, pe.perf_note,
-		i.inst_cd, o.ord_cd, c.cli_nm
+		i.inst_cd, o.ord_cd, c.cli_nm            
 		from performance pe
 		join instruction i
 		on pe.inst_cd = i.inst_cd
@@ -26,6 +26,24 @@
 		resultType="java.lang.Integer">
 		select count(*) from
 		performance
+	</select>
+	
+	<select id="perfCurrJsonList"
+		resultType="com.project.domain.PerformanceDTO">
+		select r.prod_cd as r_prod_cd, r.prod_nm as r_prod_nm, 
+		p2.prod_unit as r_prod_unit, r.req_req, pe.perf_good, pe.perf_err
+		from performance pe
+		join instruction i
+		on pe.inst_cd = i.inst_cd
+		join orders o
+		on i.ord_cd = o.ord_cd
+		join product p
+		on o.prod_cd = p.prod_cd
+		join requirement r
+		on p.prod_cd = r.prod_fcd
+		join product p2
+		on r.prod_cd = p2.prod_cd
+		where r.prod_fcd = #{prod_cd}
 	</select>
 
 </mapper>

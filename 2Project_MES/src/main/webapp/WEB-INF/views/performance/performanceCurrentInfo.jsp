@@ -34,10 +34,46 @@
 	href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800'
 	rel='stylesheet' type='text/css'>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/client.css">
+	href="${pageContext.request.contextPath}/resources/css/performanceCurr.css">
 
 <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
+<script type="text/javascript"
+        src="${pageContext.request.contextPath}/resources/js/jquery-3.6.3.js"></script>	
+	<script type="text/javascript">
+	
+	// 생산실적 현황 json 리스트
+	$(document).ready(function() {
+		  // 첫번째 표에서 데이터 클릭시 이벤트 리스너 추가
+		  jQuery('.data-row').on('click', function() {
+		    var prod_cd = jQuery(this).data('prod-cd');
+		    jQuery.ajax({
+		      url: '${pageContext.request.contextPath}/performance/perfCurrJsonList',
+		      data: {prod_cd: prod_cd},
+		      success: function(data) {
+		        // 결과를 두번째 표에 출력
+		        var resultTable = jQuery('#result-table').find('tbody');
+		        resultTable.empty();
+		        for (var i = 0; i < data.length; i++) {
+		          var row = '<tr>' +
+		            '<td>' + data[i].r_prod_cd + '</td>' +
+		            '<td>' + data[i].r_prod_nm + '</td>' +
+		            '<td>' + data[i].r_prod_unit + '</td>' +
+		            '<td>' + data[i].req_req * (data[i].perf_good + data[i].perf_err) + '</td>' +
+		            '</tr>';
+		          resultTable.append(row);
+		        }
+		      },
+		      error: function(xhr, textStatus, errorThrown) {
+                  console.log(xhr.responseText);
+                  console.log(textStatus);
+                  console.log(errorThrown);
+              }
+		    });
+		  });
+		});
+	
+</script>
 </head>
 <body>
 	<!-- Left Panel1 -->
@@ -106,9 +142,9 @@
 											<div class="p-0 col">
 											<select name="select" id="select" class="form-control">
 												<option value="0">전체</option>
-												<option value="1">cut001</option>
-												<option value="2">cut002</option>
-												<option value="3">cut003</option>
+												<c:forEach var="lineDTO" items="${searchLine }">
+                                                <option>${lineDTO.line_nm}(${lineDTO.line_cd })</option>
+                                                </c:forEach>
 											</select>
 										</div>
                                     	
@@ -136,7 +172,7 @@
 							<div class="card-body">
 									
 												
-									<table id="bootstrap-data-table"
+									<table id="hover_tb"
 										class="table table-striped table-bordered">
 										<thead class="thead-dark">
 											<tr>
@@ -156,7 +192,7 @@
 										</thead>
 										<tbody>
 											<c:forEach var="performanceDTO" items="${performanceCurrentInfo }">
-												<tr>
+												<tr class="data-row" data-prod-cd="${performanceDTO.prod_cd}">
 													<td><fmt:formatDate value="${performanceDTO.perf_date}" pattern="yyyy.MM.dd"/></td>
 													<td>${performanceDTO.line_nm }</td>
 													<td>${performanceDTO.prod_cd }</td>
@@ -177,29 +213,30 @@
 									<br><br>
 									
 									<b>생산실적 현황</b>
-									<table id="bootstrap-data-table"
+									<table id="result-table"
 										class="table table-striped table-bordered">
 										<thead class="thead-dark">
 											<tr>
-												<th scope="col">품번</th>
-												<th scope="col">품명</th>
+												<th scope="col" style="width: 25%;">품번</th>
+												<th scope="col" style="width: 25%;">품명</th>
 												<th scope="col">단위</th>
 												<th scope="col">투입량</th>
 											</tr>
 										</thead>
 										<tbody>
-											<c:forEach var="performanceDTO" items="${performanceCurrentInfo }">
-												<tr>
-													<td>${performanceDTO.prod_cd }</td>
-													<td>${performanceDTO.prod_nm }</td>
-													<td>${performanceDTO.prod_unit }</td>
-													<td></td>
-												</tr>
-											</c:forEach>
+										<tr>
+										<td colspan="4" style="text-align: center;">검색된 자료가 없습니다.</td>
+										</tr>
+<%-- 											<c:forEach var="performanceDTO" items="${performanceCurrentInfo }"> --%>
+<!-- 												<tr> -->
+<%-- 													<td>${performanceDTO.r_prod_cd }</td> --%>
+<%-- 													<td>${performanceDTO.r_prod_nm }</td> --%>
+<%-- 													<td>${performanceDTO.r_prod_unit }</td> --%>
+<%-- 													<td>${performanceDTO.req_req * (performanceDTO.perf_good + performanceDTO.perf_err)}</td> --%>
+<!-- 												</tr> -->
+<%-- 											</c:forEach> --%>
 										</tbody>
 									</table>
-								
-
 								<!-- 페이징 처리 -->
 								<div class="pageNum">
 									<c:if test="${pageDTO.startPage > pageDTO.pageBlock }">

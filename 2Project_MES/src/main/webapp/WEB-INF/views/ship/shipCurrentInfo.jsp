@@ -39,26 +39,59 @@
 
 <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
-<!-- 체크박스 모두 선택하는 함수  -->
-<script type="text/javascript">
-	function allChk(obj) {
-		var chkObj = document.getElementsByName("chk");
-		var rowCnt = chkObj.length - 1;
-		var check = obj.checked;
-		if (check) {
-			for (var i = 0; i <= rowCnt; i++) {
-				if (chkObj[i].type == "checkbox")
-					chkObj[i].checked = true;
-			}
-		} else {
-			for (var i = 0; i <= rowCnt; i++) {
-				if (chkObj[i].type == "checkbox") {
-					chkObj[i].checked = false;
-				}
-			}
-		}
+<!-- QR코드 라이브러리  -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<!-- 엑셀 라이브러리  -->
+<script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+<script>
+//바코드 버튼 QR코드 출력 함수 
+function generateQrCode() {
+  // 체크박스가 선택된 행들의 출하번호를 가져옴
+  var checkedShipCds = [];
+  jQuery('input[name="chk"]:checked').each(function() {
+    checkedShipCds.push(jQuery(this).val());
+  });
+
+  // 출하번호가 선택되어 있지 않으면 경고창 출력 후 함수 종료
+  if (checkedShipCds.length == 0) {
+    alert("출하정보를 선택해주세요.");
+    return;
+  }
+
+  // 첫 번째 출하번호를 이용하여 QR 코드 생성
+  var qrcode = new QRCode(document.createElement("div"), {
+    text: checkedShipCds[0],
+    width: 256,
+    height: 256,
+    colorDark : "#000000",
+    colorLight : "#ffffff",
+    correctLevel : QRCode.CorrectLevel.H
+  });
+
+  // QR 코드 팝업창 띄우기
+  var popup = window.open("", "qrcode_popup", "width=300, height=300");
+  popup.document.body.appendChild(qrcode._el);
+}
+
+// 엑셀파일 다운 함수 
+function downloadExcel() {
+    // SheetJS 라이브러리를 사용하여 새 워크북 객체를 생성
+    var workbook = XLSX.utils.book_new();
+
+    // SheetJS 라이브러리를 사용하여 새 시트 객체를 생성
+    var sheet = XLSX.utils.table_to_sheet(document.getElementById('bootstrap-data-table'));
+
+    // 워크북 객체에 시트를 추가
+    XLSX.utils.book_append_sheet(workbook, sheet, 'Sheet1');
+
+    // 엑셀 파일을 저장할 파일명을 지정
+    var filename = 'shipCurr.xlsx';
+
+    // 엑셀 파일을 생성하고 다운로드
+    XLSX.writeFile(workbook, filename);
 	}
 </script>
+
 
 </head>
 <body>
@@ -150,49 +183,51 @@
 								<strong class="card-title">출하현황</strong>
 							</div>
 							<div class="card-body">
-								<input type="button" class="btn btn-secondary float-right"
-									value="바코드">
-								<table id="bootstrap-data-table"
-									class="table table-striped table-bordered">
-									<thead class="thead-dark">
-										<tr>
-											<th scope="col"><input id="allCheck" type="checkbox"
-												onclick="allChk(this);" /></th>
-											<th scope="col">출하번호</th>
-											<th scope="col">출하일자</th>
-											<th scope="col">거래처명</th>
-											<th scope="col">상품코드</th>
-											<th scope="col">상품이름</th>
-											<th scope="col">단위</th>
-											<th scope="col">수주번호</th>
-											<th scope="col">수주량</th>
-											<th scope="col">출하량</th>
-											<th scope="col"></th>
-										</tr>
-									</thead>
-									<tbody>
-										<c:forEach var="shipDTO" items="${shipCurrentInfo }">
+							<div class="btn-div float-right">
+									<input type="button" class="btn btn-secondary"
+										value="바코드" onclick="generateQrCode()">
+										<input type="button" class="btn btn-secondary"
+										value="엑셀다운" onclick="downloadExcel()">
+										</div>
+									<table id="bootstrap-data-table"
+										class="table table-striped table-bordered">
+										<thead class="thead-dark">
 											<tr>
-												<th scope="row"><input type="checkbox" name="chk"
-													value="${shipDTO.ship_cd }"></th>
-												<td>${shipDTO.ship_cd }</td>
-												<td><fmt:formatDate value="${shipDTO.ship_date}"
-														pattern="yyyy.MM.dd" /></td>
-												<td>${shipDTO.cli_nm }</td>
-												<td>${shipDTO.prod_cd }</td>
-												<td>${shipDTO.prod_nm }</td>
-												<td>${shipDTO.prod_unit }</td>
-												<td>${shipDTO.ord_cd }</td>
-												<td>${shipDTO.ord_count }</td>
-												<td>${shipDTO.ship_count }</td>
-												<td><input type="button" class="btn btn-secondary"
-													value="삭제"
-													onclick="location.href='${pageContext.request.contextPath}/ship/currDelete?ship_cd=${shipDTO.ship_cd}'"></td>
+												<th scope="col"></th>
+												<th scope="col">출하번호</th>
+												<th scope="col">출하일자</th>
+												<th scope="col">거래처명</th>
+												<th scope="col">상품코드</th>
+												<th scope="col">상품이름</th>
+												<th scope="col">단위</th>
+												<th scope="col">수주번호</th>
+												<th scope="col">수주량</th>
+												<th scope="col">출하량</th>
+												<th scope="col"></th>
 											</tr>
-										</c:forEach>
-									</tbody>
-								</table>
-								<!-- 								</form> -->
+										</thead>
+										<tbody>
+											<c:forEach var="shipDTO" items="${shipCurrentInfo }">
+												<tr>
+													<th scope="row"><input type="checkbox" name="chk"
+														value="${shipDTO.ship_cd }"></th>
+													<td>${shipDTO.ship_cd }</td>
+													<td><fmt:formatDate value="${shipDTO.ship_date}"
+															pattern="yyyy.MM.dd" /></td>
+													<td>${shipDTO.cli_nm }</td>
+													<td>${shipDTO.prod_cd }</td>
+													<td>${shipDTO.prod_nm }</td>
+													<td>${shipDTO.prod_unit }</td>
+													<td>${shipDTO.ord_cd }</td>
+													<td>${shipDTO.ord_count }</td>
+													<td>${shipDTO.ship_count }</td>
+													<td><input type="button" class="btn btn-secondary"
+														value="삭제"
+														onclick="location.href='${pageContext.request.contextPath}/ship/currDelete?ship_cd=${shipDTO.ship_cd}'"></td>
+												</tr>
+											</c:forEach>
+										</tbody>
+									</table>
 
 
 								<!-- 페이징 처리 -->
