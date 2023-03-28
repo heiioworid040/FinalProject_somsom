@@ -64,7 +64,7 @@
 					dataType:'json',
 					success:function(linearr){
 						jQuery.each(linearr,function(index,item){
-							jQuery('#lineTableBody').append('<tr id="lineModaTr"><td scope="row" id="lineTdCd">'+item.line_cd+'</td><td id="lineTdNm">'+item.line_nm+'</td><td>'+item.line_process+'</td><td>'+item.line_place +'</td><td>'+item.line_num +'</td><td>'+item.line_st +'</td><td>'+item.line_note+'</td></tr>');
+							jQuery('#lineTableBody').append('<tr id="'+item.line_cd+'"><td scope="row" id="lineTdCd">'+item.line_cd+'</td><td id="lineTdNm">'+item.line_nm+'</td><td>'+item.line_process+'</td><td>'+item.line_place +'</td><td>'+item.line_num +'</td><td>'+item.line_st +'</td><td>'+item.line_note+'</td></tr>');
 						});
 					}
 				});				
@@ -84,6 +84,7 @@
 		document.getElementById("lineModaTr").addEventListener('click', selectLine);
 		
 		function selectLine(){
+			
 			const line_cd = document.getElementById("#lineTdCd");
 			const line_nm = document.getElementById("#lineTdNm");
 			
