@@ -12,15 +12,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.project.domain.ClientDTO;
-import com.project.domain.EmployeeDTO;
 import com.project.domain.OrderDTO;
 import com.project.domain.PageDTO;
-import com.project.domain.ProductDTO;
-import com.project.service.ClientService;
-import com.project.service.EmployeeService;
 import com.project.service.OrderService;
-import com.project.service.ProductService;
 
 @Controller
 public class OrderController {
@@ -28,22 +22,12 @@ public class OrderController {
 		@Inject
 		private OrderService orderService;
 		
-		@Inject
-		private EmployeeService employeeService;
-
-		@Inject
-		private ClientService clientService;
-
-		@Inject
-		private ProductService productService;
-		
 		@RequestMapping(value = "/order/searchPop", method = RequestMethod.GET)
 		public String searchPop(HttpServletRequest request, Model model) {
 			String pop=(String)request.getParameter("pop");
-			String cli=(String)request.getParameter("cli");
-			String emp=(String)request.getParameter("emp");
-			String prod=(String)request.getParameter("prod");
-			
+			String cd=(String)request.getParameter("cd");
+			String nm=(String)request.getParameter("nm");
+			String info=(String)request.getParameter("info");
 			
 			int pageSize=10;
 			String pageNum=request.getParameter("pageNum");
@@ -54,23 +38,21 @@ public class OrderController {
 			pageDTO.setPageSize(pageSize);
 			pageDTO.setPageNum(pageNum);
 			pageDTO.setCurrentPage(currentPage);
-			pageDTO.setSearch(cli);
-			pageDTO.setSearch2(emp);
-			pageDTO.setSearch3(prod);
+			pageDTO.setSearch(cd);
+			pageDTO.setSearch2(nm);
+			pageDTO.setSearch3(info);
 			
 			int count=0;
-			if(pop.equals("cli")) {
-				List<ClientDTO> popList=clientService.getClientInfo(pageDTO);
-				model.addAttribute("popList", popList);
-				count=clientService.getClientCount();
-			}else if(pop.equals("emp")) {
-				List<EmployeeDTO> popList=employeeService.getEmployeeList(pageDTO);
-				model.addAttribute("popList", popList);
-				count=employeeService.getEmployeeCount(pageDTO);
+			List<OrderDTO> popList;
+			if(pop.equals("cliS")||pop.equals("cli")) {
+				popList=orderService.getSearchCli(pageDTO);
+				count=orderService.getSearchCliCount(pageDTO);
+			}else if(pop.equals("empS")||pop.equals("emp")) {
+				popList=orderService.getSearchEmp(pageDTO);
+				count=orderService.getSearchEmpCount(pageDTO);
 			}else {
-				List<ProductDTO> popList=productService.getProductList(pageDTO);
-				model.addAttribute("popList", popList);
-				count=productService.getProductCount(pageDTO);
+				popList=orderService.getSearchProd(pageDTO);
+				count=orderService.getSearchProdCount(pageDTO);
 			}
 			int pageBlock=10;
 			int startPage=(currentPage-1)/pageBlock*pageBlock+1;
@@ -85,6 +67,7 @@ public class OrderController {
 			pageDTO.setPageCount(pageCount);
 			
 			model.addAttribute("pop", pop);
+			model.addAttribute("popList", popList);
 			model.addAttribute("pageDTO", pageDTO);
 			return "order/searchPop";
 		}
@@ -183,56 +166,16 @@ public class OrderController {
 			return "redirect:/order/orderInsert";
 		}
 		
-		@RequestMapping(value = "/order/orderPop", method = RequestMethod.GET)
-		public String orderPop(HttpServletRequest request, Model model) {
-			int pageSize=10;
-			String pageNum=request.getParameter("pageNum");
-			if(pageNum==null) {
-				pageNum="1";
-			}
-			int currentPage=Integer.valueOf(pageNum);
-			
-			PageDTO pageDTO=new PageDTO();
-			pageDTO.setPageSize(pageSize);
-			pageDTO.setPageNum(pageNum);
-			pageDTO.setCurrentPage(currentPage);
-			String pop=(String)request.getParameter("pop");
-
-			int count=0;
-			if(pop.equals("cli")) {
-				List<ClientDTO> popList=clientService.getClientInfo(pageDTO);
-				model.addAttribute("popList", popList);
-				count=clientService.getClientCount();
-			}else if(pop.equals("emp")) {
-				List<EmployeeDTO> popList=employeeService.getEmployeeList(pageDTO);
-				model.addAttribute("popList", popList);
-				count=employeeService.getEmployeeCount(pageDTO);
-			}else {
-				List<ProductDTO> popList=productService.getProductList(pageDTO);
-				model.addAttribute("popList", popList);
-				count=productService.getProductCount(pageDTO);
-			}
-			int pageBlock=10;
-			int startPage=(currentPage-1)/pageBlock*pageBlock+1;
-			int endPage=startPage+pageBlock-1;
-			int pageCount=count/pageSize+(count%pageSize==0?0:1);
-			if(endPage>pageCount) {
-				endPage=pageCount;
-			}
-			
-			pageDTO.setCount(count);
-			pageDTO.setPageBlock(pageBlock);
-			pageDTO.setStartPage(startPage);
-			pageDTO.setEndPage(endPage);
-			pageDTO.setPageCount(pageCount);
-			
-			model.addAttribute("pop", pop);
-			model.addAttribute("pageDTO", pageDTO);
-			return "order/orderPop";
-		}
-		
 		@RequestMapping(value = "/order/orderInfo", method = RequestMethod.GET)
 		public String info(HttpServletRequest request, Model model) {
+			String cli=(String)request.getParameter("cli");
+			String emp=(String)request.getParameter("emp");
+			String ord_date=(String)request.getParameter("ord_date");
+			String ord_date_end=(String)request.getParameter("ord_date_end");
+			String ord_d_date=(String)request.getParameter("ord_d_date");
+			String ord_d_date_end=(String)request.getParameter("ord_d_date_end");
+			String prod=(String)request.getParameter("prod");
+			
 			int pageSize=10;
 			String pageNum=request.getParameter("pageNum");
 			if(pageNum==null) {
@@ -244,6 +187,13 @@ public class OrderController {
 			pageDTO.setPageSize(pageSize);
 			pageDTO.setPageNum(pageNum);
 			pageDTO.setCurrentPage(currentPage);
+			pageDTO.setSearch(cli);
+			pageDTO.setSearch2(emp);
+			pageDTO.setSearch3(ord_date);
+			pageDTO.setSearch4(ord_date_end);
+			pageDTO.setSearch5(ord_d_date);
+			pageDTO.setSearch6(ord_d_date_end);
+			pageDTO.setSearch7(prod);
 			
 			List<OrderDTO> orderList=orderService.getOrderList(pageDTO);
 			

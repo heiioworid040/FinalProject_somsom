@@ -25,23 +25,23 @@
 <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 </head>
 <script>
-	function cli(cli_cd,cli_nm) {
-		opener.document.getElementById("search_cli_cd").value=cli_cd;
-		opener.document.getElementById("search_cli_nm").value=cli_nm;
-		document.searchPop.submit();
-		self.close();
-	}
-	function emp(emp_cd,emp_nm) {
-		opener.document.getElementById("search_emp_cd").value=emp_cd;
-		opener.document.getElementById("search_emp_nm").value=emp_nm;
-		document.searchPop.submit();
-		self.close();
-	}
-	function prod(prod_cd,prod_nm) {
-		opener.document.getElementById("search_prod_cd").value=prod_cd;
-		opener.document.getElementById("search_prod_nm").value=prod_nm;
-		document.searchPop.submit();
-		self.close();
+	function search(search,cd,nm,mat,unit) {
+		<c:if test="${pop eq 'cliS' or pop eq 'empS' or pop eq 'prodS' }">
+			opener.document.getElementById(search+"S_cd").value=cd;
+			opener.document.getElementById(search+"S_nm").value=nm;
+			document.searchPop.submit();
+			self.close();
+		</c:if>
+		<c:if test="${pop eq 'cli' or pop eq 'emp' or pop eq 'prod' }">
+			opener.document.getElementById(search+"_cd").value=cd;
+			opener.document.getElementById(search+"_nm").value=nm;
+			<c:if test="${pop eq 'prod'}">
+			opener.document.getElementById(search+"_mat").value=mat;
+			opener.document.getElementById(search+"_unit").value=unit;
+			</c:if>
+			document.searchPop.submit();
+			self.close();
+		</c:if>
 	}
 </script>
 <body>
@@ -51,13 +51,13 @@
 					<div class="col-sm-4">
 						<div class="page-header float-left">
 							<div class="page-title">
-								<c:if test="${pop eq 'cli' }">
+								<c:if test="${pop eq 'cli' or pop eq 'cliS' }">
 									<h3>거래처 조회</h3>
 								</c:if>
-								<c:if test="${pop eq 'emp' }">
+								<c:if test="${pop eq 'emp' or pop eq 'empS' }">
 									<h3>담당자 조회</h3>
 								</c:if>
-								<c:if test="${pop eq 'prod' }">
+								<c:if test="${pop eq 'prod' or pop eq 'prodS' }">
 									<h3>품목 조회</h3>
 								</c:if>
 							</div>
@@ -67,6 +67,7 @@
 			</div>
 		</div>
 		<form action="${pageContext.request.contextPath }/order/searchPop" method="get">
+		<input type="hidden" name="pop" value="${pop }">
 			<div class="content">
 				<div class="animated fadeIn">
 					<div class="row">
@@ -76,27 +77,27 @@
 									<!--	(검색창 위치) -->
 									<div class="search-div">
 										<div class="search-div-o">
-											<c:if test="${pop eq 'cli' }">
+											<c:if test="${pop eq 'cli' or pop eq 'cliS' }">
 												<span class="search">업체코드 <input type="text" name="cd"></span>
 												<span class="search">업체명 <input type="text" name="nm"></span>
 												<span class="search">업체구분 <select class="select-search" name="info">
 																				<option value="">전체</option>
-																				<option value="cli_ja">자사</option>
-																				<option value="cli_h">협력사</option>
-																				<option value="cli_go">고객사</option>
+																				<option value="자사">자사</option>
+																				<option value="협력사">협력사</option>
+																				<option value="고객사">고객사</option>
 																			</select></span>
 											</c:if>
-											<c:if test="${pop eq 'emp' }">
+											<c:if test="${pop eq 'emp' or pop eq 'empS' }">
 												<span class="search">사번 <input type="text" name="cd"></span>
 												<span class="search">이름 <input type="text" name="nm"></span>
 											</c:if>
-											<c:if test="${pop eq 'prod' }">
+											<c:if test="${pop eq 'prod' or pop eq 'prodS' }">
 												<span class="search">품번 <input type="text" name="cd"></span>
 												<span class="search">품명 <input type="text" name="nm"></span>
 												<span class="search">자재유형 <select class="select-search" name="info">
 																				<option value="">전체</option>
-																				<option value="prod_wan">완제품</option>
-																				<option value="prod_bu">부자재</option>
+																				<option value="완제품">완제품</option>
+																				<option value="부자재">부자재</option>
 																			</select></span>
 											</c:if>
 										</div>
@@ -122,17 +123,17 @@
 								<table class="table" id="hover_tb">
 									<thead class="thead-dark">
 										<tr>
-											<c:if test="${pop eq 'cli' }">
+											<c:if test="${pop eq 'cli' or pop eq 'cliS' }">
 												<th scope="col">업체코드</th>
 												<th scope="col">업체명</th>
 												<th scope="col">대표자</th>
 												<th scope="col">구분</th>
 											</c:if>
-											<c:if test="${ pop eq 'emp' }">
+											<c:if test="${ pop eq 'emp' or pop eq 'empS' }">
 												<th scope="col">사용자사번</th>
 												<th scope="col">사용자명</th>
 											</c:if>
-											<c:if test="${ pop eq 'prod' }">
+											<c:if test="${ pop eq 'prod' or pop eq 'prodS' }">
 												<th scope="col">상품코드</th>
 												<th scope="col">상품이름</th>
 												<th scope="col">자재유형</th>
@@ -144,22 +145,22 @@
 									</thead>
 									<tbody>
 										<c:forEach var="orderDTO" items="${popList }">
-											<c:if test="${pop eq 'cli' }">
-												<tr onclick="cli('${orderDTO.cli_cd }','${orderDTO.cli_nm }')">
+											<c:if test="${pop eq 'cli' or pop eq 'cliS' }">
+												<tr onclick="search('cli','${orderDTO.cli_cd }','${orderDTO.cli_nm }')">
 													<td>${orderDTO.cli_cd }</td>
 													<td>${orderDTO.cli_nm }</td>
 													<td>${orderDTO.cli_boss }</td>
 													<td>${orderDTO.cli_type }</td>
 												</tr>
 											</c:if>
-											<c:if test="${ pop eq 'emp' }">
-												<tr onclick="emp('${orderDTO.emp_cd}','${orderDTO.emp_nm }')">
+											<c:if test="${ pop eq 'emp' or pop eq 'empS' }">
+												<tr onclick="search('emp','${orderDTO.emp_cd}','${orderDTO.emp_nm }')">
 													<td>${orderDTO.emp_cd }</td>
 													<td>${orderDTO.emp_nm }</td>
 												</tr>
 											</c:if>
-											<c:if test="${ pop eq 'prod' }">
-												<tr onclick="prod('${orderDTO.prod_cd }','${orderDTO.prod_nm }')">
+											<c:if test="${ pop eq 'prod' or pop eq 'prodS' }">
+												<tr onclick="search('prod','${orderDTO.prod_cd }','${orderDTO.prod_nm }','${orderDTO.prod_mat }','${orderDTO.prod_unit }')">
 													<td>${orderDTO.prod_cd }</td>
 													<td>${orderDTO.prod_nm }</td>
 													<td>${orderDTO.prod_mat }</td>
@@ -180,18 +181,30 @@
 		</form>
 		<!-- .content -->
 		
-<!-- 	<div style="text-align : center;"> -->
-<%-- 		<c:if test="${pageDTO.startPage>pageDTO.pageBlock}"> --%>
-<%-- 			<a href="${pageContext.request.contextPath}/order/cliPop?pageNum=${pageDTO.startPage-pageDTO.pageBlock}">◀</a> --%>
-<%-- 		</c:if> --%>
-
-<%-- 		<c:forEach var="i" begin="${pageDTO.startPage}" end="${pageDTO.endPage}" step="1"> --%>
-<%-- 			<a href="${pageContext.request.contextPath}/order/cliPop?pageNum=${i}">${i}</a> --%>
-<%-- 		</c:forEach> --%>
-
-<%-- 		<c:if test="${pageDTO.endPage<pageDTO.pageCount}"> --%>
-<%-- 			<a href="${pageContext.request.contextPath}/order/cliPop?pageNum=${pageDTO.startPage+pageDTO.pageBlock}">▶</a> --%>
-<%-- 		</c:if> --%>
-<!-- 	</div> -->
+		<div class="pageNum">
+			<c:if test="${empty search}">
+				<c:if test="${pageDTO.startPage > pageDTO.pageBlock }">
+					<a href="${pageContext.request.contextPath }/order/searchPop?pop=${pop }&pageNum=${pageDTO.startPage-pageDTO.pageBlock }">Prev</a>
+				</c:if>
+				<c:forEach var="i" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1">
+					<a href="${pageContext.request.contextPath }/order/searchPop?pop=${pop }&pageNum=${i}">${i}</a> 
+				</c:forEach>
+				<c:if test="${pageDTO.endPage < pageDTO.pageCount }">
+				<a href="${pageContext.request.contextPath }/order/searchPop?pop=${pop }&pageNum=${pageDTO.startPage+pageDTO.pageBlock }">Next</a>
+				</c:if>
+			</c:if>
+		<!-- }else{ -->
+			<c:if test="${!empty search }">
+				<c:if test="${pageDTO.startPage > pageDTO.pageBlock }">
+					<a href="${pageContext.request.contextPath }/order/searchPop?pop=${pop }&pageNum=${pageDTO.startPage-pageDTO.pageBlock }&cd=${pageDTO.search }&nm=${pageDTO.search2 }&info=${pageDTO.search3 }">Prev</a>
+				</c:if>
+				<c:forEach var="i" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1">
+					<a href="${pageContext.request.contextPath }/order/searchPop?pop=${pop }&pageNum=${i}&cd=${pageDTO.search }&nm=${pageDTO.search2 }&info=${pageDTO.search3 }">${i}</a> 
+				</c:forEach>
+				<c:if test="${pageDTO.endPage < pageDTO.pageCount }">
+					<a href="${pageContext.request.contextPath }/order/searchPop?pop=${pop }&pageNum=${pageDTO.startPage+pageDTO.pageBlock }&cd=${pageDTO.search }&nm=${pageDTO.search2 }&info=${pageDTO.search3 }">Next</a>
+				</c:if>
+			</c:if>
+		</div>
 </body>
 </html>
