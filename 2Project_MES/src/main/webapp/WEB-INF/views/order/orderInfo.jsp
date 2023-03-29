@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,11 +28,9 @@
 
 </head>
 <script>
-function searchPop(search) {
-	if(search==1) window.open('${pageContext.request.contextPath }/order/searchPop?pop=cli','searchPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=900,height=510,top=90,left=200')
-	else if(search==2) window.open('${pageContext.request.contextPath }/order/searchPop?pop=emp','searchPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=900,height=510,top=90,left=200')
-	else window.open('${pageContext.request.contextPath }/order/searchPop?pop=prod','searchPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=900,height=510,top=90,left=200')
-}
+	function searchPop(search) {
+	window.open('${pageContext.request.contextPath }/order/searchPop?pop='+search,'searchPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=900,height=510,top=90,left=200')
+	}
 
 function fun1() {
 	   let check = false;
@@ -103,15 +102,15 @@ function fun2() {
 								<div class="card-body">
 									<!--	(검색창 위치) -->
 									<div class="search-500">
-										<span class="search">업체 <input type="text" id="search_cli_cd" name="cli_cd" readonly> <input type="text" id="search_cli_nm" readonly><button type="button" onclick="searchPop(1)">돋보기</button></span>
-										<span class="search">담당자 <input type="text" id="search_emp_cd" name="emp_cd" readonly> <input type="text" id="search_emp_nm" readonly><button type="button" onclick="searchPop(2)">돋보기</button></span>
+										<span class="search">업체 <input type="text" id="cliS_cd" name="cli" readonly> <input type="text" id="cliS_nm" readonly><button type="button" onclick="searchPop('cliS')">돋보기</button></span>
+										<span class="search">담당자 <input type="text" id="empS_cd" name="emp" readonly> <input type="text" id="empS_nm" readonly><button type="button" onclick="searchPop('empS')">돋보기</button></span>
 									</div>
 									<div class="search-450">
 										<span class="search">수주일자 <input type="date" name="ord_date"> <input type="date" name="ord_date_end"></span>
 										<span class="search">납품예정일 <input type="date" name="ord_d_date"> <input type="date" name="ord_d_date_end"></span>
 									</div>
 									<div class="search-500">
-										<span class="search">품번 <input type=text id="search_prod_cd" name="prod_cd" readonly> <input type=text id="search_prod_nm" readonly><button type="button" onclick="searchPop(3)">돋보기</button></span>
+										<span class="search">품번 <input type=text id="prodS_cd" name="prod" readonly> <input type=text id="prodS_nm" readonly><button type="button" onclick="searchPop('prodS')">돋보기</button></span>
 									</div>
 									<!-- 이 이상 긁는건 너무 템플릿에만의존적인 것 같아 나머지 기능은 직접 개발합시다 파이팅! -->
 								</div>
@@ -160,16 +159,16 @@ function fun2() {
 									<tbody>
 										<c:forEach var="orderDTO" items="${orderList }">
 												<tr>
-													<td>${i }</td>
+													<td></td>
 													<td><input type="checkbox" id="ck" name="ck" value="${orderDTO.ord_cd }"></td>
 													<th scope="row">${orderDTO.ord_cd }</th>
 													<td>${orderDTO.cli_nm }</td>
-													<td>${orderDTO.ord_date }</td>
+													<td><fmt:formatDate pattern="yyyy-MM-dd" value="${orderDTO.ord_date }"/></td>
 													<td>${orderDTO.emp_nm }</td>
 													<td>${orderDTO.prod_cd }</td>
 													<td>${orderDTO.prod_nm }</td>
 													<td>${orderDTO.prod_unit }</td>
-													<td>${orderDTO.ord_d_date }</td>
+													<td><fmt:formatDate pattern="yyyy-MM-dd" value="${orderDTO.ord_d_date }"/></td>
 													<td>${orderDTO.ord_count }</td>
 													<td>${orderDTO.ship_count }</td>
 												</tr>

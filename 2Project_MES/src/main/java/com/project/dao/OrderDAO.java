@@ -34,6 +34,10 @@ public class OrderDAO {
 	}
 	
 	//수주 추가 수주번호
+	public String getOrdNum() {
+		return sqlSession.selectOne(namespace+".getOrdNum");
+	}
+	
 	public Integer getMaxNum(OrderDTO orderDTO) {
 		return sqlSession.selectOne(namespace+".getMaxNum", orderDTO);
 	}
@@ -59,11 +63,29 @@ public class OrderDAO {
 		return sqlSession.selectList(namespace+".getOrderList", pageDTO);
 	}
 	
-	//수주 관리 팝업
-	public List<OrderDTO> getOrderPop(PageDTO pageDTO) {
-		pageDTO.setStartRow(pageDTO.getStartRow()-1);
-		return sqlSession.selectList(namespace+".getOrderPop", pageDTO);
+	//팝업
+	public List<OrderDTO> getSearchCli(PageDTO pageDTO) {
+		return sqlSession.selectList(namespace+".getSearchCli", pageDTO);
+	}
+	
+	public int getSearchCliCount(PageDTO pageDTO) {
+		return sqlSession.selectOne(namespace+".getSearchCliCount", pageDTO);
 	}
 
+	public List<OrderDTO> getSearchEmp(PageDTO pageDTO) {
+		return sqlSession.selectList(namespace+".getSearchEmp", pageDTO);
+	}
+	
+	public int getSearchEmpCount(PageDTO pageDTO) {
+		return sqlSession.selectOne(namespace+".getSearchEmpCount", pageDTO);
+	}
+	
+	public List<OrderDTO> getSearchProd(PageDTO pageDTO) {
+		return sqlSession.selectList(namespace+".getSearchProd", pageDTO);
+	}
+	
+	public int getSearchProdCount(PageDTO pageDTO) {
+		return sqlSession.selectOne(namespace+".getSearchProdCount", pageDTO);
+	}
 
 }
