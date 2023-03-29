@@ -130,20 +130,20 @@
 									method="get" class="form-inline">
 									<div class="form-group col-6 mb-1">
 										<label class="pr-1 form-control-label">거래처코드</label>&nbsp;&nbsp;<input
-											type="text" name="cli_cd" class="form-control ">
+											type="text" name="search" class="form-control ">
 									</div>
 									<div class="form-group col-6 mb-1">
 										<label class="pr-1  form-control-label">거래처명</label>&nbsp;&nbsp;<input
-											type="text" name="cli_nm" class="form-control ">
+											type="text" name="search2" class="form-control ">
 									</div>
 									<div class="form-group col-6 mt-1">
 										<label class="pr-1  form-control-label">거래처구분</label>&nbsp;&nbsp;
 										<div class="p-0 col">
-											<select name="cli_type" id="select" class="form-control">
-												<option value="0">전체</option>
-												<option value="1">협력사</option>
-												<option value="2">고객사</option>
-												<option value="3">자사</option>
+											<select name="search3" id="select" class="form-control">
+												<option>전체</option>
+												<option value="협력사">협력사</option>
+												<option value="고객사">고객사</option>
+												<option value="자사">자사</option>
 											</select>
 										</div>
 									</div>
@@ -224,19 +224,19 @@
 								<div class="pageNum">
 									<c:if test="${pageDTO.startPage > pageDTO.pageBlock }">
 										<a
-											href="${pageContext.request.contextPath}/client/clientInfo?pageNum=${pageDTO.startPage - pageDTO.pageBlock }">[10페이지
+											href="${pageContext.request.contextPath}/client/clientInfo?pageNum=${pageDTO.startPage - pageDTO.pageBlock }&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}">[10페이지
 											이전]</a>
 									</c:if>
 
 									<c:forEach var="i" begin="${pageDTO.startPage }"
 										end="${pageDTO.endPage }" step="1">
 										<a
-											href="${pageContext.request.contextPath}/client/clientInfo?pageNum=${i}">${i}</a>
+											href="${pageContext.request.contextPath}/client/clientInfo?pageNum=${i}&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}">${i}</a>
 									</c:forEach>
 
 									<c:if test="${pageDTO.endPage < pageDTO.pageCount }">
 										<a
-											href="${pageContext.request.contextPath}/client/clientInfo?pageNum=${pageDTO.startPage + pageDTO.pageBlock }">[10페이지
+											href="${pageContext.request.contextPath}/client/clientInfo?pageNum=${pageDTO.startPage + pageDTO.pageBlock }&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}">[10페이지
 											다음]</a>
 									</c:if>
 								</div>
