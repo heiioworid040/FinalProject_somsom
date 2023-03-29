@@ -82,7 +82,7 @@
 									<div class="form-group col-6 mb-1">
 										<label for="exampleInputName2" class="pr-1 form-control-label">라인</label>
 										<div class="p-0 col">
-											<select name="select" id="select" class="form-control">
+											<select name="fLine " aria-label="filter" id="select" class="form-control">
 												<option value="0">--</option>
 												<c:forEach var="lineDTO" items="${searchLine }">
 													<option>${lineDTO.line_nm}(${lineDTO.line_cd })</option>
@@ -91,15 +91,13 @@
 										</div>
 									</div>
 									<div class="form-group col-6 mb-1">
-										<label for="exampleInputName2"
-											class="pr-1  form-control-label">지시일자</label> <input
-											type="date" id="order_d_date" class="form-control ">~
-										<input type="date" id="order_d_date" class="form-control">
+										<label for="exampleInputName2" class="pr-1  form-control-label">지시일자</label>
+										<input type="date" aria-label="filter" id="order_d_date1" class="form-control ">~
+										<input type="date" aria-label="filter" id="order_d_date2" class="form-control">
 									</div>
 									<div class="form-group col-6 mt-1">
-										<label for="exampleInputName2"
-											class="pr-1  form-control-label">품번</label> <input
-											type="text" id="" class="form-control ">
+										<label for="exampleInputName2" class="pr-1  form-control-label">품번</label>
+										<input type="text" aria-label="filter" id="" class="form-control ">
 										<div class="input-group">
 											<div class="input-group-addon">
 												<i class="ti-search"></i>
@@ -144,7 +142,7 @@
 								<form
 									action="${pageContext.request.contextPath}/instruction/instinsert"
 									method="post">
-									<table id="bootstrap-data-table"
+									<table id="table"
 										class="table table-striped table-bordered">
 										<thead class="thead-dark">
 											<tr>
@@ -161,36 +159,36 @@
 											<tr>
 												<td scope="row">
 													<div class="input-group">
-														<input type="text" id="sLineInputCd" name="line_cd"
+														<input type="text" id="sLineInputCd" name="sline_cd" value=""
 															placeholder="Line Code" class="form-control bg-white"
 															disabled>
-														<div class="input-group-btn" id="sLineInputNm">
+														<div class="input-group-btn">
 															<button type="button" class="btn btn-primary"
 																id="lineModalBtn">검색</button>
 														</div>
 													</div>
 												</td>
-												<td><input type="text" id="sLineInput" disabled
+												<td><input type="text" id="sLineInputNm" name="sline_nm" value="" disabled
 													class="form-control"></td>
 												<td>
 													<div class="input-group">
-														<input type="text" id="sLineInput" placeholder="Prod Code"
+														<input type="text" id="" placeholder="Prod Code"
 															class="form-control bg-white" disabled>
 														<div class="input-group-btn">
 															<input type="button" class="btn btn-primary" value="검색">
 														</div>
 													</div>
 												</td>
-												<td><input type="text" id="sLineInput" disabled
+												<td><input type="text" id="" disabled
 													class="form-control"></td>
-												<td><input type="text" id="sLineInput" disabled
+												<td><input type="text" id="" disabled
 													class="form-control"></td>
-												<td><input type="text" id="sLineInput"
-													name="inst_count" placeholder=""
+												<td><input type="text" id=""
+													name="inst_count" 
 													class="form-control  bg-white"></td>
 												<td>
 													<div class="input-group">
-														<input type="text" id="sLineInput" name="ord_cd"
+														<input type="text" id="" name="ord_cd"
 															placeholder="Ord Code" disabled class="form-control">
 														<div class="input-group-btn">
 															<input type="button" class="btn btn-primary" value="검색">
@@ -262,17 +260,35 @@
 									<div class="dataTables_paginate paging_simple_numbers"
 										id="bootstrap-data-table_paginate">
 										<ul class="pagination">
-											<li class="paginate_button page-item previous disabled"
-												id="bootstrap-data-table_previous"><a href="#"
+										<c:if test="${pageDTO.startPage > pageDTO.pageBlock }">
+											<li class="paginate_button page-item previous disabled" id="bootstrap-data-table_previous">
+												<a href="${pageContext.request.contextPath}/instruction/infoInst?pageNum=${pageDTO.startPage - pageDTO.pageBlock}"
 												aria-controls="bootstrap-data-table" data-dt-idx="0"
 												tabindex="0" class="page-link">Previous</a></li>
-											<li class="paginate_button page-item active"><a href="#"
+										</c:if>
+										<c:if test="${pageDTO.startPage < pageDTO.pageBlock }">
+											<li class="paginate_button page-item previous" id="bootstrap-data-table_previous">
+												<a href="${pageContext.request.contextPath}/instruction/infoInst?pageNum=${pageDTO.startPage - pageDTO.pageBlock}"
+												aria-controls="bootstrap-data-table" data-dt-idx="0"
+												tabindex="0" class="page-link">Previous</a></li>
+										</c:if>
+										<c:forEach var="i" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1">
+											<li class="paginate_button page-item active"><a href="${pageContext.request.contextPath}/instruction/infoInst?pageNum=${i}"
 												aria-controls="bootstrap-data-table" data-dt-idx="1"
-												tabindex="0" class="page-link">1</a></li>
-											<li class="paginate_button page-item next"
-												id="bootstrap-data-table_next"><a href="#"
+												tabindex="0" class="page-link">${i}</a></li>
+										</c:forEach>
+										<c:if test="${pageDTO.endPage > pageDTO.pageCount }">
+											<li class="paginate_button page-item next disabled"
+												id="bootstrap-data-table_next"><a href="${pageContext.request.contextPath}/instruction/infoInst?pageNum=${pageDTO.startPage + pageDTO.pageBlock}"
 												aria-controls="bootstrap-data-table" data-dt-idx="7"
 												tabindex="0" class="page-link">Next</a></li>
+										</c:if>
+										<c:if test="${pageDTO.endPage < pageDTO.pageCount }">
+											<li class="paginate_button page-item next "
+												id="bootstrap-data-table_next"><a href="${pageContext.request.contextPath}/instruction/infoInst?pageNum=${pageDTO.startPage + pageDTO.pageBlock}"
+												aria-controls="bootstrap-data-table" data-dt-idx="7"
+												tabindex="0" class="page-link">Next</a></li>
+										</c:if>
 										</ul>
 									</div>
 								</div>
