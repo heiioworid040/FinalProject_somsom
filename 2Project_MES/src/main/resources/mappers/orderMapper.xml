@@ -2,6 +2,50 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.project.mappers.orderMapper">
+	<select id="getSearchCli" resultType="com.project.domain.OrderDTO">
+		select cli_cd, cli_nm, cli_boss ,cli_type
+		from client
+		<if test="search!=null||search2!=null||search3!=null">
+			where cli_cd like CONCAT('%',#{search},'%') and cli_nm like CONCAT('%',#{search2},'%') and cli_type like CONCAT('%',#{search3},'%')
+		</if>
+	</select>
+	
+	<select id="getSearchCliCount" resultType="java.lang.Integer">
+		select count(*) from client
+		<if test="search!=null||search2!=null||search3!=null">
+			where cli_cd like CONCAT('%',#{search},'%') and cli_nm like CONCAT('%',#{search2},'%') and cli_type like CONCAT('%',#{search3},'%')
+		</if>
+	</select>
+	
+	<select id="getSearchEmp" resultType="com.project.domain.OrderDTO">
+		select emp_cd, emp_nm
+		from employee
+		<if test="search!=null||search2!=null">
+			where emp_cd like CONCAT('%',#{search},'%') and emp_nm like CONCAT('%',#{search2},'%')
+		</if>
+	</select>
+	
+	<select id="getSearchEmpCount" resultType="java.lang.Integer">
+		select count(*) from employee
+		<if test="search!=null||search2!=null">
+			where emp_cd like CONCAT('%',#{search},'%') and emp_nm like CONCAT('%',#{search2},'%')
+		</if>
+	</select>
+	
+	<select id="getSearchProd" resultType="com.project.domain.OrderDTO">
+		select prod_cd, prod_nm, prod_mat, prod_unit, prod_text, prod_size
+		from product
+		<if test="search!=null||search2!=null||search3!=null">
+			where prod_cd like CONCAT('%',#{search},'%') and prod_nm like CONCAT('%',#{search2},'%') and prod_mat like CONCAT('%',#{search3},'%')
+		</if>
+	</select>
+	
+	<select id="getSearchProdCount" resultType="java.lang.Integer">
+		select count(*) from product
+		<if test="search!=null||search2!=null||search3!=null">
+			where prod_cd like CONCAT('%',#{search},'%') and prod_nm like CONCAT('%',#{search2},'%') and prod_mat like CONCAT('%',#{search3},'%')
+		</if>
+	</select>
 	
 	<select id="getOrderInsertList" resultType="com.project.domain.OrderDTO">
 		select ord_cd, o.cli_cd, c.cli_nm, ord_date, ord_d_date, e.emp_cd, e.emp_nm
@@ -15,20 +59,23 @@
 				and (date_format(ord_d_date, '%Y-%m-%d') between #{search5} and #{search6})
 			</if>
 		</if>
-		order by ord_cd
+		order by ord_date
 <!-- 		limit #{startRow}, #{pageSize} -->
 	</select>
 	
 	<select id="getOrderInsert" resultType="com.project.domain.OrderDTO">
-		select ord_cd, o.cli_cd, c.cli_nm, ord_date, ord_d_date, ord_count, e.emp_cd, e.emp_nm, p.prod_cd, p.prod_nm, p.prod_unit, p.prod_note
+		select ord_cd, o.cli_cd, c.cli_nm, ord_date, ord_d_date, ord_count, e.emp_cd, e.emp_nm, p.prod_cd, p.prod_nm, p.prod_mat, p.prod_unit
 		from orders o join client c on o.cli_cd=c.cli_cd join employee e on o.emp_cd=e.emp_cd join product p on o.prod_cd=p.prod_cd
 		where ord_cd=#{ord_cd}
 	</select>
 	
-	<select id="getMaxNum" resultType="java.lang.Integer">
-		select max(cast(substring(ord_cd,9,3) as unsigned)) from orders where ord_date=#{ord_date}
+	<select id="getOrdNum" resultType="java.lang.String">
+		select * from code where code_cd='ord_cd'
 	</select>
-<!-- 	첫글자 추가 후 9=> 10으로 바꾸기 -->
+	
+	<select id="getMaxNum" resultType="java.lang.Integer">
+		select max(cast(substring(ord_cd,2,3) as unsigned)) from orders where ord_date=#{ord_date}
+	</select>
 	
 	<insert id="orderAdd">
 		insert into orders values (#{ord_cd}, #{prod_cd}, #{emp_cd}, #{cli_cd}, #{ord_date}, #{ord_d_date}, #{ord_count})
@@ -45,25 +92,11 @@
 	<select id="getOrderList" resultType="com.project.domain.OrderDTO">
 		select o.ord_cd, c.cli_nm, ord_date, e.emp_nm, p.prod_cd, p.prod_nm, p.prod_unit, ord_d_date, ord_count, ship_count
 		from orders o join product p on o.prod_cd=p.prod_cd join client c on o.cli_cd=c.cli_cd join employee e on o.emp_cd=e.emp_cd left join ship s on o.ord_cd=s.ord_cd
-		order by ord_cd limit #{startRow}, #{pageSize}
-	</select>
-	
-	<select id="getOrderList_cli_cd" resultType="com.project.domain.OrderDTO">
-		select o.ord_cd, c.cli_nm, ord_date, e.emp_nm, p.prod_cd, p.prod_nm, p.prod_unit, o.ord_d_date, o.ord_count, s.ship_count
-		from orders o join product p on o.prod_cd=p.prod_cd join client c on p.cli_cd=c.cli_cd join employee e on o.emp_cd=e.emp_cd left join ship s on o.ord_cd=s.ord_cd
-		where c.cli_cd=#{cli_cd}
-		order by ord_cd
-<!-- 		 limit #{startRow}, #{pageSize} -->
+		order by ord_date limit #{startRow}, #{pageSize}
 	</select>
 	
 	<select id="getOrderCount" resultType="java.lang.Integer">
 	select count(*) from orders
-	</select>
-	
-	<select id="getOrderPop" resultType="com.project.domain.OrderDTO">
-		select emp_cd, emp_nm
-		from employee
-		order by emp_cd limit #{startRow}, #{pageSize}
 	</select>
 
 <!-- 	<select id="getOrderList" resultType="com.project.order.OrderDTO"> -->
