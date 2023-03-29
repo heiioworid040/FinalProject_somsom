@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
     
 <!DOCTYPE html>
 <html>
@@ -31,6 +32,106 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/script/jquery-3.6.3.js"></script>
 <script type="text/javascript">
 
+$(document).ready(function(){
+	$('.emp_email').on('input',function(){
+		$.ajax({
+			url:'${pageContext.request.contextPath}/employee/emailCk',
+			data:{'emp_email':$('.emp_email').val()},
+			success:function(result){
+//					alert(result);
+				// result.trim() => 결과값 앞뒤로 공백 제거
+				if(result.trim()=="emailUp"){
+					result="이메일 중복";
+					$('.divresult_1').val("0");
+					$('.divresult').html(result).css("color","red");
+				}else{
+					result="이메일 사용가능";
+					$('.divresult_1').val("1");
+					$('.divresult').html(result).css("color","blue");
+				}
+			}
+		});
+	   
+	   });
+});
+
+$(document).ready(function(){
+	$('.emp_tel').on('input',function(){
+		$.ajax({
+			url:'${pageContext.request.contextPath}/employee/telCk',
+			data:{'emp_tel':$('.emp_tel').val()},
+			success:function(result){
+//					alert(result);
+				// result.trim() => 결과값 앞뒤로 공백 제거
+				if(result.trim()=="telUp"){
+					result="전화번호 중복";
+					$('.divresult_2').val("0");
+					$('.divresult2').html(result).css("color","red");
+				}else{
+					$('.divresult_2').val("1");
+					result="전화번호 사용가능";
+					$('.divresult2').html(result).css("color","blue");
+				}
+			}
+		});
+	   
+	   });
+});
+
+
+$(document).ready(function(){
+    $(".cancel").on("click", function(){
+      location.href = "${pageContext.request.contextPath}/employee/employeeList";
+    })
+    
+    $("#save").on("click", function(){
+      if($("#emp_nm").val()==""){
+        alert("이름을 입력해주세요.");
+        $("#emp_nm").focus();
+        return false;
+      }
+      if($("#emp_pass").val()==""){
+        alert("비밀번호를 입력해주세요.");
+        $("#emp_pass").focus();
+        return false;
+      }
+      if($("#emp_position").val()==""){
+          alert("직책을 입력해주세요.");
+          $("#emp_position").focus();
+          return false;
+      }
+    
+      if($("#emp_email").val()==""){
+          alert("이메일을 입력해주세요.");
+          $("#emp_email").focus();
+          return false;
+      }
+
+      if($("#emp_tel").val()==""){
+        alert("전화번호를 입력해주세요.");
+        $("#emp_tel").focus();
+        return false;
+      }
+      
+      if($(".divresult_1").val()=="0"){
+          alert("이메일 중복확인 해주세요.");
+          $("#emp_email").focus();
+          return false;
+        }
+      
+      if($(".divresult_2").val()=="0"){
+          alert("전화번호 중복확인 해주세요.");
+          $("#emp_tel").focus();
+          return false;
+        }
+   
+     	 form.method='GET';
+     	 document.form.action='${pageContext.request.contextPath}/employee/insertPro';
+   		 document.form.submit();
+    });
+  })
+  
+
 
 $(function(){
     //전체선택 체크박스 클릭
@@ -48,8 +149,7 @@ $(function(){
 })
 
 
-function fun1(index) {
-	   
+function fun1(index) {	   
 	if(index==1){
 	   let check = false;
 	   with(document.form) {
@@ -60,7 +160,8 @@ function fun1(index) {
 	            if(ck[i].checked) { check = true; } }
 	      } if(!check) {
 	      alert("삭제할 사용자를 선택하세요");
-	         return;
+	  	    form.method='GET';
+     		 document.form.action='${pageContext.request.contextPath}/employee/employeeList';
 	      } else {
 	         if(confirm("삭제처리 하시겠습니까?")==true) { document.form.action='${pageContext.request.contextPath}/employee/deletePro'}
 	         else{
@@ -69,17 +170,16 @@ function fun1(index) {
 	         }
 	      }
 	    	  
-	   } } 
+	   } } }
 	   
-	else if(index==2)
-		   { document.form.action='${pageContext.request.contextPath}/employee/insertPro' }
+// 	else if(index==2)
+// 		   { document.form.action='${pageContext.request.contextPath}/employee/insertPro' }
 	
-	else if(index==3)
-	  	{ document.form.action='${pageContext.request.contextPath}/employee/employeeList' }
+// 	else if(index==3)
+// 	  	{ document.form.action='${pageContext.request.contextPath}/employee/employeeList' }
 	   
 
-	   
-	   }
+
 	      
 </script>
 <body>
@@ -190,7 +290,6 @@ function fun1(index) {
 											<th scope="col">사용자 ID</th>
 											<th scope="col">사용자명</th>
 											<th scope="col">비밀번호</th>
-<!-- 											<th scope="col">부서</th> -->
 											<th scope="col">직책</th>
 											<th scope="col">E-MAIL</th>
 											<th scope="col">전화번호</th>
@@ -205,19 +304,29 @@ function fun1(index) {
 										<c:if test="${! empty add }">
 										<tr>
 											<td><input type="checkBox" name="ck" id="ck" value=""/></td>
-											<td><input type="text" name="emp_cd" class="emp_cd" readonly></td>
-											<td><input type="text" name="emp_nm" class="emp_nm"></td>
-											<td><input type="text" name="emp_pass" class="emp_pass"></td>
-											<td><select name="emp_position" class="emp_position">
+											<td><input type="text" name="emp_cd" id="emp_cd" class="emp_cd" readonly></td>
+											<td><input type="text" name="emp_nm" id="emp_nm" class="emp_nm"></td>
+											<td><input type="text" name="emp_pass" id="emp_pass" class="emp_pass"></td>
+											<td><select name="emp_position" id="emp_position" class="emp_position">
 												<option value="">직책을 선택하세요</option>
 												<option value="관리자">관리자</option>
 												<option value="파트장">파트장</option>
 												<option value="사원">사원</option>
 												</select></td>
-											<td><input type="email" name="emp_email" class="emp_email"></td>
-											<td><input type="text" name="emp_tel" class="emp_tel"></td>
-<!-- 											<td><input type="submit" value="저장" onclick="fun1(2)" formmethod="get" ></td> -->
-											<td><input type="submit" value="저장" onclick="fun1(2)" formmethod="get" ></td>
+											
+											<td><input type="email" id="emp_email" name="emp_email" class="emp_email"><br>
+											<div class="divresult"></div><input type="hidden" class="divresult_1"><br>
+											</td>
+											
+											<td><input type="text" name="emp_tel" id="emp_tel" class="emp_tel"><br>
+											<div class="divresult2"></div><input type="hidden" class="divresult_2"><br></td>
+
+
+
+<!-- 											<td><input type="submit" value="저장" onclick="fun1(2)" formmethod="get" id="save" ><br> -->
+											<td><input type="submit" value="저장" formmethod="get" id="save" ><br>
+<!-- 											<input type="submit" value="취소" onclick="fun1(3)" formmethod="get" class="cancel" ></td> -->
+											<input type="submit" value="취소"  formmethod="get" class="cancel" ></td>
 										</tr>
 										</c:if>
 										
