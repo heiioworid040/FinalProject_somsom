@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,10 +26,42 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
- <script type="text/javascript">
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/script/jquery-3.6.3.js"></script>
+<script type="text/javascript">
+//jQuery 준비 => 대상.함수()
+	$(document).ready(function(){
+// 		alert("준비");
+		// class="brown" 클릭했을때  "클릭"
+// 		$('.plus').click(function(){
 
+			//화면 초기화
+// 			$('.table2').html('');
+			
+			$.ajax({
+				url:'${pageContext.request.contextPath}/code/listjson',
+				dataType:'json',
+				success:function(arr){
+					
+//			        반복해서 출력 .each()
+					$.each(arr,function(index,item){
+//		 				alert(index);
+//		 				alert(item.subject);
+//		 				alert(item.date);
+//		               태그 뒤부분에 추가해서 넣기 append()
+						$('.table2').append('<tr><td class="contxt">'+item.code_cd+'</td><td>'+item.code_nm+'</td><td>'+item.code_num+'</td><td>''</td></tr>');
+					});
+					
+				}
+			});
+
+
+
+
+		});
+	});
 </script>
 </head>
+
 <body>
 	<!-- Left Panel1 -->
 	<jsp:include page="../inc/leftPanel.jsp" />
@@ -80,62 +112,68 @@
 				</div>
 			</div>
 		</div><!-- .content -->
-		
         <div class="content">
-		<form id="update" action="${pageContext.request.contextPath}/employee/updatePro" method="post">
-		
-		<div>
-		<input type="submit" value="저장" class="submit" id="submit">					
-<%-- 		<input type="button" value="취소" onclick="location.href='${pageContext.request.contextPath}/employee/employeeList'">				 --%>
-		<input type="button" class="cancel" id="cancel" value="취소">				
-		</div>
-		
 			<div class="animated fadeIn">
 				<div class="row">
 					<div class="col-lg">
 						<div class="card">
 							<div class="card-header">
-								<strong class="card-title">Table Head</strong>  
+								<strong class="card-title">Table Head</strong>
 							</div>
 							<div class="card-body">
+								<form>
 								<table class="table">
 									<thead class="thead-dark">
 										<tr>
-											<th scope="col">사용자 ID</th>
-											<th scope="col">사용자명</th>
-											<th scope="col">비밀번호</th>
-											<th scope="col">직책</th>
-											<th scope="col">E-MAIL</th>
-											<th scope="col">전화번호</th>
+											<th scope="col">그룹코드3</th>
+											<th scope="col">그룹명</th>
+											<th scope="col">상세보기</th>
 											
 										</tr>
 									</thead>
 									<tbody>
+										<c:forEach var="codeDTO" items="${codeGrpList }"> 
 										<tr>
-											<td><input type="text" name=emp_cd class="emp_cd" id="emp_cd" value="${employeeDTO.emp_cd }" readonly></td>
-											<td><input type="text" name=emp_nm class="emp_nm" id="emp_nm" value="${employeeDTO.emp_nm }"></td>
-											<td><input type="text" name=emp_pass class="emp_pass" id="emp_pass" value="${employeeDTO.emp_pass }"></td>
-											<td><select name="emp_position" class="emp_position" id="emp_position">
-												<option value="">직책을 선택하세요</option>
-												<option value="관리자">관리자</option>
-												<option value="파트장">파트장</option>
-												<option value="사원">사원</option>
-												</select></td>
-											<td><input type="text" name=emp_email class="emp_email" id="emp_email" value="${employeeDTO.emp_email }"></td>
-											<td><input type="text" name=emp_tel class="emp_tel" id="emp_tel" value="${employeeDTO.emp_tel }"></td>
+											<td>${codeDTO.code_grp}</td>
+											<td>${codeDTO.code_grp_nm}</td>
+											<td><input type="button" name="plus" class="plus" value="더보기"></td>		
+										</tr>	
+										</c:forEach>
+									</tbody>
+								</table>			
+						
+							
+						
+								<table>
+									<thead class="thead-dark">
+										<tr>
+<!-- 										<th scope="col"><input type="checkbox" id="ckAll" name="ckAll"></th> -->
+											<th scope="col">코드</th>
+											<th scope="col">코드명</th>
+											<th scope="col">정렬순서</th>
+											<th scope="col">비고</th>
 										</tr>
-
-										
-										
-										
+									</thead>
+									<tbody>
+	
+									<c:forEach var="codeDTO" items="${codeList2 }">
+										<tr>
+<%-- 											<td><input type="checkBox" name="ck" id="ck" value="${codeDTO.code_cd}"/></td> --%>
+											<td>${codeDTO.code_cd}</td>
+											<td>${codeDTO.code_nm}</td>
+											<td>${codeDTO.code_num}</td>
+											<td>${codeDTO.code_note}</td>
+										</tr>											
+									</c:forEach>
 									</tbody>
 								</table>
+							
+				</form>	
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-							</form>
 		</div><!-- .content -->
 
 		<div class="clearfix"></div>
@@ -153,6 +191,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
-	
+
+
 </body>
 </html>
