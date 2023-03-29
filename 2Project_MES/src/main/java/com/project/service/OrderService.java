@@ -117,5 +117,4 @@ public class OrderService {
 	public int getSearchProdCount(PageDTO pageDTO) {
 		return orderDAO.getSearchProdCount(pageDTO);
 	}
-
 }

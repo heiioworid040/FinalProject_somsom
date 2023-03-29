@@ -38,6 +38,7 @@
 <body>
 	<!-- 모달 -->
 	<jsp:include page="../line/lineModal.jsp" />
+	<jsp:include page="../order/orderModal.jsp" />
 	<!-- 모달 -->
 	<!-- Left Panel1 -->
 	<jsp:include page="../inc/leftPanel.jsp" />
@@ -191,7 +192,7 @@
 														<input type="text" id="" name="ord_cd"
 															placeholder="Ord Code" disabled class="form-control">
 														<div class="input-group-btn">
-															<input type="button" class="btn btn-primary" value="검색">
+															<input type="button" class="btn btn-primary" id="orderModalBtn" value="검색">
 														</div>
 													</div>
 												</td>
