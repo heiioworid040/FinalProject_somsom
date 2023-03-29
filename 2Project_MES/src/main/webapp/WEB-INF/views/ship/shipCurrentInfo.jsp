@@ -141,12 +141,12 @@ function downloadExcel() {
 									method="get" class="form-inline">
 									<div class="form-group col-6 mb-1">
 										<label class="pr-1  form-control-label">출하일자</label>&nbsp;&nbsp;
-										<input type="date" id="" class="form-control">&nbsp;~&nbsp;
-										<input type="date" id="" class="form-control">
+										<input type="date" name="search" class="form-control">&nbsp;~&nbsp;
+										<input type="date" name="search2" class="form-control">
 									</div>
 									<div class="form-group col-6 mb-1">
 										<label class="pr-1  form-control-label">품번</label>&nbsp;&nbsp;
-										<input type="text" id="" class="form-control ">
+										<input type="text" name="search3" class="form-control ">
 										<div class="input-group">
 											<div class="input-group-addon">
 												<i class="ti-search"></i>
@@ -155,7 +155,7 @@ function downloadExcel() {
 									</div>
 									<div class="form-group col-6 mt-1">
 										<label class="pr-1  form-control-label">수주업체</label>&nbsp;&nbsp;
-										<input type="text" id="" class="form-control ">
+										<input type="text" name="search4" class="form-control ">
 										<div class="input-group">
 											<div class="input-group-addon">
 												<i class="ti-search"></i>
@@ -186,7 +186,7 @@ function downloadExcel() {
 							<div class="btn-div float-right">
 									<input type="button" class="btn btn-secondary"
 										value="바코드" onclick="generateQrCode()">
-										<input type="button" class="btn btn-secondary"
+										<input type="button" class="btn btn-primary"
 										value="엑셀다운" onclick="downloadExcel()">
 										</div>
 									<table id="bootstrap-data-table"
@@ -234,19 +234,19 @@ function downloadExcel() {
 								<div class="pageNum">
 									<c:if test="${pageDTO.startPage > pageDTO.pageBlock }">
 										<a
-											href="${pageContext.request.contextPath}/ship/shipCurrentInfo?pageNum=${pageDTO.startPage - pageDTO.pageBlock }">[10페이지
+											href="${pageContext.request.contextPath}/ship/shipCurrentInfo?pageNum=${pageDTO.startPage - pageDTO.pageBlock }&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}&search4=${pageDTO.search4}">[10페이지
 											이전]</a>
 									</c:if>
 
 									<c:forEach var="i" begin="${pageDTO.startPage }"
 										end="${pageDTO.endPage }" step="1">
 										<a
-											href="${pageContext.request.contextPath}/ship/shipCurrentInfo?pageNum=${i}">${i}</a>
+											href="${pageContext.request.contextPath}/ship/shipCurrentInfo?pageNum=${i}&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}&search4=${pageDTO.search4}">${i}</a>
 									</c:forEach>
 
 									<c:if test="${pageDTO.endPage < pageDTO.pageCount }">
 										<a
-											href="${pageContext.request.contextPath}/ship/shipCurrentInfo?pageNum=${pageDTO.startPage + pageDTO.pageBlock }">[10페이지
+											href="${pageContext.request.contextPath}/ship/shipCurrentInfo?pageNum=${pageDTO.startPage + pageDTO.pageBlock }&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}&search4=${pageDTO.search4}">[10페이지
 											다음]</a>
 									</c:if>
 								</div>

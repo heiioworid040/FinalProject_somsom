@@ -8,7 +8,8 @@ import com.project.domain.PerformanceDTO;
 public interface PerformanceDAO {
 	public List<PerformanceDTO> performanceCurrentInfo(PageDTO pageDTO);
 
-	public int performanceCurrentCount();
+	// 검색어
+	public int performanceCurrentCount(PageDTO pageDTO);
 
 	public List<PerformanceDTO> perfCurrJsonList(String prod_cd);
 }

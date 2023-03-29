@@ -29,11 +29,12 @@ public class PerformanceServiceImpl implements PerformanceService {
 		return performanceDAO.performanceCurrentInfo(pageDTO);
 	}
 
+	// 검색어
 	@Override
-	public int performanceCurrentCount() {
+	public int performanceCurrentCount(PageDTO pageDTO) {
 		System.out.println("PerformanceServiceImpl performanceCurrentCount()");
 
-		return performanceDAO.performanceCurrentCount();
+		return performanceDAO.performanceCurrentCount(pageDTO);
 	}
 
 	@Override

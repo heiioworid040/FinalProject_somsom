@@ -8,7 +8,8 @@ import com.project.domain.ShipDTO;
 public interface ShipService {
 	public List<ShipDTO> shipCurrentInfo(PageDTO pageDTO);
 
-	public int shipCurrentCount();
+	// 검색어
+	public int shipCurrentCount(PageDTO pageDTO);
 
 	public void currDelete(String ship_cd);
 }

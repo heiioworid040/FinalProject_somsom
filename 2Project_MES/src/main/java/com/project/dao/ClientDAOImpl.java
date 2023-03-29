@@ -30,10 +30,10 @@ public class ClientDAOImpl implements ClientDAO {
 	}
 
 	@Override
-	public int getClientCount() {
+	public int getClientCount(PageDTO pageDTO) {
 		System.out.println("ClientDAOImpl getClientCount()");
 
-		return sqlSession.selectOne(namespace + ".getClientCount");
+		return sqlSession.selectOne(namespace + ".getClientCount", pageDTO);
 	}
 
 	@Override

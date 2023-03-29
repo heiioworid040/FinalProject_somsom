@@ -29,11 +29,12 @@ public class ShipServiceImpl implements ShipService {
 		return shipDAO.shipCurrentInfo(pageDTO);
 	}
 
+	// 검색어
 	@Override
-	public int shipCurrentCount() {
+	public int shipCurrentCount(PageDTO pageDTO) {
 		System.out.println("ShipServiceImpl shipCurrentCount()");
 
-		return shipDAO.shipCurrentCount();
+		return shipDAO.shipCurrentCount(pageDTO);
 	}
 
 	@Override

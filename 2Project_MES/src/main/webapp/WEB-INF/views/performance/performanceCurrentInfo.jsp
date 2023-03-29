@@ -122,12 +122,12 @@
 									method="get" class="form-inline">
 									<div class="form-group col-6 mb-1">
 										<label class="pr-1  form-control-label">실적일자</label>&nbsp;&nbsp; <input
-											type="date" id="" class="form-control ">&nbsp;~&nbsp;
-										<input type="date" id="" class="form-control">
+											type="date" name="search" class="form-control ">&nbsp;~&nbsp;
+										<input type="date" name="search2" class="form-control">
 									</div>
 									<div class="form-group col-6 mb-1">
 										<label class="pr-1  form-control-label">품번</label>&nbsp;&nbsp; <input
-											type="text" id="" class="form-control ">
+											type="text" name="search3" class="form-control ">
 											<div class="input-group">
                                         	<div class="input-group-addon"><i class="ti-search"></i></div>
                                     	</div>
@@ -135,15 +135,15 @@
 									<div class="form-group col-6 mt-1">
 										<label class="pr-1  form-control-label">지시번호</label>&nbsp;&nbsp;
 										<input
-											type="text" id="" class="form-control ">
+											type="text" name="search4" class="form-control ">
 									</div>
 									<div class="form-group col-6 mb-1">
 										<label class="pr-1  form-control-label">라인</label>&nbsp;&nbsp; 
 											<div class="p-0 col">
-											<select name="select" id="select" class="form-control">
-												<option value="0">전체</option>
+											<select name="search5" id="select" class="form-control">
+												<option>전체</option>
 												<c:forEach var="lineDTO" items="${searchLine }">
-                                                <option>${lineDTO.line_nm}(${lineDTO.line_cd })</option>
+                                                <option value="${lineDTO.line_cd }">${lineDTO.line_nm}(${lineDTO.line_cd })</option>
                                                 </c:forEach>
 											</select>
 										</div>
@@ -241,19 +241,19 @@
 								<div class="pageNum">
 									<c:if test="${pageDTO.startPage > pageDTO.pageBlock }">
 										<a
-											href="${pageContext.request.contextPath}/performance/performanceCurrentInfo?pageNum=${pageDTO.startPage - pageDTO.pageBlock }">[10페이지
+											href="${pageContext.request.contextPath}/performance/performanceCurrentInfo?pageNum=${pageDTO.startPage - pageDTO.pageBlock }&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}&search4=${pageDTO.search4}&search5=${pageDTO.search5}">[10페이지
 											이전]</a>
 									</c:if>
 
 									<c:forEach var="i" begin="${pageDTO.startPage }"
 										end="${pageDTO.endPage }" step="1">
 										<a
-											href="${pageContext.request.contextPath}/performance/performanceCurrentInfo?pageNum=${i}">${i}</a>
+											href="${pageContext.request.contextPath}/performance/performanceCurrentInfo?pageNum=${i}&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}&search4=${pageDTO.search4}&search5=${pageDTO.search5}">${i}</a>
 									</c:forEach>
 
 									<c:if test="${pageDTO.endPage < pageDTO.pageCount }">
 										<a
-											href="${pageContext.request.contextPath}/performance/performanceCurrentInfo?pageNum=${pageDTO.startPage + pageDTO.pageBlock }">[10페이지
+											href="${pageContext.request.contextPath}/performance/performanceCurrentInfo?pageNum=${pageDTO.startPage + pageDTO.pageBlock }&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}&search4=${pageDTO.search4}&search5=${pageDTO.search5}">[10페이지
 											다음]</a>
 									</c:if>
 								</div>
