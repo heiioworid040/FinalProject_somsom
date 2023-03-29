@@ -80,16 +80,18 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@Override
-	public int emailCk(EmployeeDTO employeeDTO) throws Exception {
-		int result = employeeDAO.emailCk(employeeDTO);
-		return result;
+	public EmployeeDTO emailCk(String emp_email) {
+		System.out.println("EmployeeServiceImpl emailCk()");
+		return employeeDAO.emailCk(emp_email);
 	}
 
 	@Override
-	public int telCk(EmployeeDTO employeeDTO) throws Exception {
-		int result = employeeDAO.telCk(employeeDTO);
-		return result;
+	public EmployeeDTO telCk(String emp_tel) {
+		System.out.println("EmployeeServiceImpl telCk()");
+		return employeeDAO.telCk(emp_tel);
 	}
+
+
 	
 	
 

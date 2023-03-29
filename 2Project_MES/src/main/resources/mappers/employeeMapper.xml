@@ -58,6 +58,22 @@
 		from employee
     </select>
 	
+	<select id="emailCk" resultType="com.project.domain.EmployeeDTO">
+		select * from employee
+		where emp_email = #{emp_email}
+	</select>
+	
+	<select id="telCk" resultType="com.project.domain.EmployeeDTO">
+		select * from employee
+		where emp_tel = #{emp_tel}
+	</select>
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

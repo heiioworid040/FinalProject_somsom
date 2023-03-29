@@ -77,16 +77,17 @@ public class EmployeeDAOImpl implements EmployeeDAO{
 	}
 
 	@Override
-	public int emailCk(EmployeeDTO employeeDTO) throws Exception {
+	public EmployeeDTO emailCk(String emp_email) {
 		System.out.println("EmployeeDAOImpl emailCk()");
-		return sqlSession.selectOne(namespace+".emailCk", employeeDTO);
+		return sqlSession.selectOne(namespace+".emailCk",emp_email);
 	}
 
 	@Override
-	public int telCk(EmployeeDTO employeeDTO) throws Exception {
+	public EmployeeDTO telCk(String emp_tel) {
 		System.out.println("EmployeeDAOImpl telCk()");
-		return sqlSession.selectOne(namespace+".telCk", employeeDTO);
+		return sqlSession.selectOne(namespace+".telCk",emp_tel);
 	}
+
 
 
 
