@@ -42,14 +42,13 @@ public class InstructionController {
 			pageNum="1";
 		}
 		int currentPage=Integer.parseInt(pageNum);
-		System.out.println(currentPage);
+		
 		PageDTO pageDTO=new PageDTO();
 		pageDTO.setPageSize(pageSize);
 		pageDTO.setPageNum(pageNum);
 		pageDTO.setCurrentPage(currentPage);
 		
 		List<InstructionDTO> instList=instService.getInstList(pageDTO);
-		System.out.println(currentPage);
 		
 		int count = instService.getInstCount();
 		int pageBlock=10;
