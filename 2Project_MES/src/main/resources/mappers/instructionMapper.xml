@@ -8,7 +8,7 @@
 <mapper namespace="com.project.mappers.instructionMapper">
 	
     <select id="getInstList" resultType="com.project.domain.InstructionDTO">
-    select i.inst_cd, i.line_cd, l.line_nm, o.prod_cd, p.prod_nm, p.prod_unit, i.inst_st, i.inst_date, i.inst_count, i.ord_cd,  c.cli_nm, i.inst_fcount
+    select i.inst_cd, i.line_cd, l.line_nm, o.prod_cd, p.prod_nm, p.prod_unit, i.inst_st, i.inst_date, i.inst_count, i.ord_cd, c.cli_nm, i.inst_fcount
 	from instruction i 
 	join line l
 	on i.line_cd = l.line_cd
