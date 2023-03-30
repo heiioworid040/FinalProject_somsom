@@ -177,7 +177,7 @@ public class ProductController {
 		if(pop.equals("cli")) {
 			List<ClientDTO> popList=clientService.getClientInfo(pageDTO);
 			model.addAttribute("popList", popList);
-			count=clientService.getClientCount();
+			count=clientService.getClientCount(pageDTO);
 		}
 		int pageBlock=10;
 		int startPage=(currentPage-1)/pageBlock*pageBlock+1;

@@ -28,19 +28,6 @@
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
 </head>
-<script type="text/javascript">
-function searchPop(search) {
-	if(search==1) window.open('${pageContext.request.contextPath }/order/searchPop?pop=cli','searchPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=900,height=510,top=90,left=200')
-	else window.open('${pageContext.request.contextPath }/order/searchPop?pop=prod','searchPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=900,height=510,top=90,left=200')
-}
-function orderPop(order) {
-	if(order==1) window.open('${pageContext.request.contextPath }/order/orderPop?pop=cli','cliPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=900,height=510,top=90,left=200')
-	else window.open('${pageContext.request.contextPath }/order/orderPop?pop=prod','prodPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=600,height=510,top=90,left=200')
-}
-
-
-</script>
-
 <body>
 	<!-- Left Panel1 -->
 	<jsp:include page="../inc/leftPanel.jsp" />

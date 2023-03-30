@@ -28,6 +28,24 @@
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
 </head>
+<style>
+table {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  font-weight: bold;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #4CAF50;
+  color: white;
+}
+</style>
 <body>
 	<!-- Left Panel1 -->
 	<jsp:include page="../inc/leftPanel.jsp" />
@@ -36,7 +54,6 @@
     <!-- Right Panel -->
     <div id="right-panel" class="right-panel">
         <!-- Header--> 
-		<jsp:include page="../inc/top.jsp" />
         <!-- Header-->
 	
  <div class="content">
@@ -45,7 +62,7 @@
 					<div class="col-lg">
 						<div class="card">
 							<div class="card-header">
-								<strong class="card-title">품목별 상세페이지</strong><br>
+								<H3>품목별 상세페이지</H3><br>
 							</div>
 							<table border="1">
 							<tr><td>품번</td><td>${productDTO.prod_cd}</td></tr>

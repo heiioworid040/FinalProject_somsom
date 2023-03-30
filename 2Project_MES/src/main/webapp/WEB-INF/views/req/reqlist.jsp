@@ -29,12 +29,6 @@
 
 </head>
 <script>
-function searchPop(search) {
-	if(search==1) window.open('${pageContext.request.contextPath }/req/searchPop?pop=cli','searchPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=900,height=510,top=90,left=200')
-	else if(search==2) window.open('${pageContext.request.contextPath }/req/searchPop?pop=emp','searchPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=900,height=510,top=90,left=200')
-	else window.open('${pageContext.request.contextPath }/req/searchPop?pop=prod','searchPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=900,height=510,top=90,left=200')
-}
-
 function fun1() {
 	   let check = false;
 	   with(document.ckDelete) {
@@ -152,7 +146,6 @@ if(search==null){
 											<th socpe="col">#</th>														
 											<th scope="col" >상위품번</th>
 											<th scope="col" >상위품명</th>
-											<th scope="col" >자재유형</th>
 											<th scope="col" >하위품번</th>
 											<th scope="col" >하위품명</th>
 											<th scope="col" >소요량</th>
@@ -170,7 +163,6 @@ if(search==null){
 											id="chk" value="${reqDTO.req_num}">
 											<td>${reqDTO.prod_cd}</td>
 											<td>${reqDTO.prod_nm}</td>
-											<td>${reqDTO.prod_mat}</td>
 											<td>${reqDTO.prod_fcd}</td>
 											<td>${reqDTO.prod_fnm}</td>
 											<td>${reqDTO.req_req}</td>
@@ -222,7 +214,6 @@ if(search==null){
 								        <a href="${pageContext.request.contextPath}/req/reqlist?pageNum=${pageDTO.startPage + pageDTO.pageBlock}&search=${pageDTO.search}">Next</a>
 								    </c:if>
 								</div>	
-
 		<div class="clearfix"></div>
 		<!-- 푸터 넣는 곳 -->
 		<jsp:include page="../inc/footer.jsp" />
