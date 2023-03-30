@@ -31,7 +31,7 @@ public class ImatController {
 //		return "redirect:/imat/imatbeList";
 //	}
 	
-	@RequestMapping(value = "imat/imatbeList", method = RequestMethod.GET)
+	@RequestMapping(value = "/imat/imatbeList", method = RequestMethod.GET)
 	public String ImatbeList(HttpServletRequest request, Model model) {
 		System.out.println("ImatController ImatbeList()");
 		

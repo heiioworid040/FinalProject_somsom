@@ -16,10 +16,12 @@ import com.project.domain.EmployeeDTO;
 import com.project.domain.LineDTO;
 import com.project.domain.OrderDTO;
 import com.project.domain.PageDTO;
+import com.project.domain.ProductDTO;
 import com.project.service.CodeService;
 import com.project.service.EmployeeService;
 import com.project.service.LineService;
 import com.project.service.OrderService;
+import com.project.service.ProductService;
 
 @RestController
 public class AajaxController {
@@ -34,6 +36,9 @@ public class AajaxController {
 	
 	@Inject
 	private EmployeeService employeeService;
+
+	@Inject
+	private ProductService prodService;
 	
 	@RequestMapping(value = "/ajax/lineModal", method = RequestMethod.GET)
 	public ResponseEntity<List<LineDTO>> getLineModal(HttpServletRequest request) {
@@ -158,6 +163,45 @@ public class AajaxController {
 				new ResponseEntity<List<OrderDTO>>(orderList, HttpStatus.OK);
 		System.out.println(orderList.get(0).getOrd_cd());
 		return orderListE;
+	}
+	@RequestMapping(value = "/ajax/prodModal", method = RequestMethod.GET)
+	public ResponseEntity<List<ProductDTO>> getProdModal(HttpServletRequest request) {
+		System.out.println("ProductController getProdModal");
+		int pageSize=10;
+		
+		String pageNum=request.getParameter("pageNum");
+		if(pageNum==null) {
+			pageNum="1";
+		}
+		int currentPage=Integer.parseInt(pageNum);
+		
+		PageDTO pageDTO=new PageDTO();
+		pageDTO.setPageSize(5);
+		pageDTO.setPageNum("1");
+		pageDTO.setCurrentPage(1);
+		
+		// 디비 최근글 5개 가져오기
+		List<ProductDTO> prodList=prodService.getProductList(pageDTO);
+		
+		int count = prodService.getProductCount(pageDTO);
+		int pageBlock=10;
+		int startPage=(currentPage-1)/pageBlock*pageBlock+1;
+		int endPage=startPage+pageBlock-1;
+		int pageCount=count/pageSize+(count%pageSize==0?0:1);
+		if(endPage > pageCount) {
+			endPage = pageCount;
+		}
+		pageDTO.setCount(count);
+		pageDTO.setPageBlock(pageBlock);
+		pageDTO.setStartPage(startPage);
+		pageDTO.setEndPage(endPage);
+		pageDTO.setPageCount(pageCount);
+		
+		//출력 결과 ResponseEntity 저장 => 되돌아감
+		ResponseEntity<List<ProductDTO>> prodListE=
+				new ResponseEntity<List<ProductDTO>>(prodList, HttpStatus.OK);
+		System.out.println(prodList.get(0).getProd_cd());
+		return prodListE;
 	}
 }
 	

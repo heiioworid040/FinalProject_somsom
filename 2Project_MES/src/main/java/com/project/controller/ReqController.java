@@ -128,7 +128,7 @@ public class ReqController {
 		if(pop.equals("cli")) {
 			List<ClientDTO> popList=clientService.getClientInfo(pageDTO);
 			model.addAttribute("popList", popList);
-			count=clientService.getClientCount();
+			count=clientService.getClientCount(pageDTO);
 		}else if(pop.equals("emp")) {
 			List<EmployeeDTO> popList=employeeService.getEmployeeList(pageDTO);
 			model.addAttribute("popList", popList);

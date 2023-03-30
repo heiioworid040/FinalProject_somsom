@@ -40,6 +40,7 @@
 <body>
 	<!-- 모달 -->
 	<jsp:include page="../line/lineModal.jsp" />
+	<jsp:include page="../product/productModal.jsp" />
 	<jsp:include page="../order/orderModal.jsp" />
 	<!-- 모달 -->
 	<!-- Left Panel1 -->
@@ -151,8 +152,8 @@
 											<tr>
 												<th scope="col">라인</th>
 												<th scope="col">라인명</th>
-												<th scope="col">품번</th>
-												<th scope="col">품명</th>
+												<th scope="col">상품코드</th>
+												<th scope="col">상품명</th>
 												<th scope="col">단위</th>
 												<th scope="col">지시수량</th>
 												<th scope="col">수주번호</th>
@@ -175,30 +176,29 @@
 													class="form-control"></td>
 												<td>
 													<div class="input-group">
-														<input type="text" id="" placeholder="Prod Code"
+														<input type="text" id="sprodInputCd" placeholder="Prod Code"
 															class="form-control bg-white" disabled>
 														<div class="input-group-btn">
-															<input type="button" class="btn btn-primary" value="검색">
+															<input type="button" id="prodModalBtn" class="btn btn-primary" value="검색">
 														</div>
 													</div>
 												</td>
-												<td><input type="text" id="" disabled
+												<td><input type="text" id="sprodInputNm" disabled
 													class="form-control"></td>
-												<td><input type="text" id="" disabled
+												<td><input type="text" id="sprodInputUnit" disabled
 													class="form-control"></td>
 												<td><input type="text" id=""
 													name="inst_count" 
 													class="form-control  bg-white"></td>
 												<td>
 													<div class="input-group">
-														<input type="text" id="" name="ord_cd"
-															placeholder="Ord Code" disabled class="form-control">
+														<input type="text" id="sorderInputCd" name="ord_cd" placeholder="Order Code" disabled class="form-control">
 														<div class="input-group-btn">
 															<input type="button" class="btn btn-primary" id="orderModalBtn" value="검색">
 														</div>
 													</div>
 												</td>
-												<td><input type="text" id="disabled-input" disabled
+												<td><input type="text" id="sclientInputNm" disabled
 													class="form-control"></td>
 											</tr>
 										</tbody>
