@@ -65,12 +65,6 @@ public class OrderService {
 	
 	//수주현황
 	public List<OrderDTO> getOrderList(PageDTO pageDTO) {
-		int startRow=(pageDTO.getCurrentPage()-1)*pageDTO.getPageSize()+1;
-		int endRow=startRow+pageDTO.getPageSize()-1;
-
-		pageDTO.setStartRow(startRow);
-		pageDTO.setEndRow(endRow);
-
 		return orderDAO.getOrderList(pageDTO);
 	}
 	

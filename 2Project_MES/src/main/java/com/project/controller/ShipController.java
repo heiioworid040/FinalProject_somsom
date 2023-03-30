@@ -1,6 +1,6 @@
 package com.project.controller;
 
-import java.text.SimpleDateFormat;
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -83,5 +83,47 @@ public class ShipController {
 
 		// 주소변경 하면서 이동
 		return "redirect:/ship/shipCurrentInfo";
+	}
+	
+	@RequestMapping(value = "/ship/shipInfo", method = RequestMethod.GET)
+	public String info(HttpServletRequest request, Model model) {
+		PageDTO pageDTO=new PageDTO();
+		pageDTO.setSearch(request.getParameter("cli"));
+		pageDTO.setSearch2(request.getParameter("prod"));
+		pageDTO.setSearch3(request.getParameter("ord_date"));
+		pageDTO.setSearch4(request.getParameter("ord_date_end"));
+		pageDTO.setSearch5(request.getParameter("ord_d_date"));
+		pageDTO.setSearch6(request.getParameter("ord_d_date_end"));
+		
+		List<ShipDTO> shipInfo=shipService.shipInfo(pageDTO);
+		
+		model.addAttribute("shipInfo", shipInfo);
+		return "ship/shipInfo";
+	}
+	
+	@RequestMapping(value = "/ship/shipInfoPro", method = RequestMethod.POST)
+	public String insertPro(HttpServletRequest request, Model model) {
+		String ord_cd[]=request.getParameterValues("ord_cd");
+		String ship_ifcount[]=request.getParameterValues("ship_ifcount");
+		String ship_count[]=request.getParameterValues("ship_count");
+//		int ship_over=999;
+//		int ship_inven=111;
+		String ship_date[]=request.getParameterValues("ship_date");
+
+		for(int i=0;i<ord_cd.length;i++) {
+			if(ship_count[i]!="") {
+				ShipDTO shipDTO=new ShipDTO();
+				shipDTO.setOrd_cd(ord_cd[i]);
+				shipDTO.setShip_ifcount(Integer.parseInt(ship_ifcount[i]));
+				shipDTO.setShip_count(Integer.parseInt(ship_count[i]));
+				shipDTO.setShip_over(999);
+				shipDTO.setShip_inven(111);
+				shipDTO.setShip_date(Timestamp.valueOf(ship_date[i]+" 23:59:59"));
+				shipService.shipInfoPro(shipDTO);
+//				System.out.println(shipDTO.getOrd_cd()+" "+shipDTO.getShip_ifcount()+" "+shipDTO.getShip_count()+" "+shipDTO.getShip_date());
+			}
+		}
+		
+		return "redirect:/ship/shipInfo";
 	}
 }

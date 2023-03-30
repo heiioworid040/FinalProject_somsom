@@ -60,7 +60,6 @@
 			</if>
 		</if>
 		order by ord_date
-<!-- 		limit #{startRow}, #{pageSize} -->
 	</select>
 	
 	<select id="getOrderInsert" resultType="com.project.domain.OrderDTO">
@@ -92,11 +91,11 @@
 	<select id="getOrderList" resultType="com.project.domain.OrderDTO">
 		select o.ord_cd, c.cli_nm, ord_date, e.emp_nm, p.prod_cd, p.prod_nm, p.prod_unit, ord_d_date, ord_count, ship_count
 		from orders o join product p on o.prod_cd=p.prod_cd join client c on o.cli_cd=c.cli_cd join employee e on o.emp_cd=e.emp_cd left join ship s on o.ord_cd=s.ord_cd
-		order by ord_date limit #{startRow}, #{pageSize}
+		order by ord_date
 	</select>
 	
 	<select id="getOrderCount" resultType="java.lang.Integer">
-	select count(*) from orders
+		select count(*) from orders
 	</select>
 
 <!-- 	<select id="getOrderList" resultType="com.project.order.OrderDTO"> -->
