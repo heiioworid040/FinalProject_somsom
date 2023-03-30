@@ -83,17 +83,32 @@
 
 	}
 	
-	function searchPop(search) {
-		if(search==1) window.open('${pageContext.request.contextPath }/product/searchPop?pop=cli','searchPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=900,height=510,top=90,left=200')
-		
-	}
+
 	function orderPop(order) {
 		
-		if(order==1) window.open('${pageContext.request.contextPath }/product/productorderPop?pop=cli','cliPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=900,height=510,top=90,left=200')
+		if(order==1) window.open('${pageContext.request.contextPath }/product/productorderPop?pop=cli','cliPop','width=600,height=500')
 	
 	}
 	</script>
 
+<style>
+table {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  font-weight: bold;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #4CAF50;
+  color: white;
+}
+</style>
 <body>
 	<!-- Left Panel1 -->
 	<jsp:include page="../inc/leftPanel.jsp" />
@@ -111,7 +126,6 @@
                     <div class="col-sm-4">
                         <div class="page-header float-left">
                             <div class="page-title">
-                                <h1>Table</h1>
                             </div>
                         </div>
                     </div>
@@ -136,10 +150,9 @@
 					<div class="col-lg">
 						<div class="card">
 							<div class="card-header">
-								<strong class="card-title">행 추가</strong>
+								<h3>추가</h3>
 							</div>
 							<div class="card-body">
-								<h1>생성</h1>
 							<form action="${pageContext.request.contextPath}/product/productwritePro" method="post" name="fr" onsubmit="return essential()">
 							<table border="1">
 							<tr><td>품목코드</td>
@@ -147,43 +160,33 @@
 							    <td><input name="prod_cd" placeholder="P001 형식으로 자동생성" readonly></td></tr>
 
 							<tr><td>품명<span style="color:red">*</span></td>
-							    <td><select name="prod_nm">
-							    	<option value="품명" selected="selected">품명</option>
-							    	<option value="인형">인형</option>
-							    	<option value="바늘">바늘</option>
-							    	<option value="기타">기타</option>
-							</select></td></tr>
+							    <td><input type="text" name="prod_nm"></td></tr>
 							<tr><td>거래처코드</td>
-
-							 <td><input type="text" id="cli_cd" name="cli_cd" value="${productDTO.cli_cd }" readonly>
+							 <td><input type="text" id="cli_cd" name="cli_cd" value="${productDTO.cli_cd }" readonly placeholder="ex)완제품일 경우 선택X">
 
 							 	 <button type="button" id="pop" value="cli" onclick="orderPop(1)">돋보기</button></td></tr>
 							<tr><td>자재유형</td>
 							    <td><select name="prod_mat">
 							    	<option value="">자재유형</option>
 							    	<option value="완제품">완제품</option>
+							    	<option value="원자재">원자재</option>
 							    	<option value="부자재">부자재</option>
-							    	<option value="기타">기타</option>
 							    	</select></td></tr>
 							<tr><td>재고단위</td>
 							    <td><select name="prod_unit">
 							    	<option value="단위" selected="selected">단위</option>
 							    	<option value="EA">EA</option>
-							    	<option value="OP" >OP</option>
+							    	<option value="PK">PK</option>
 							    	<option value="기타">기타</option>
 							    	</select></td></tr>
 							<tr><td>재질</td>
-							    <td><select name="prod_text">
-							    	<option value="재질" selected="selected">재질</option>
-							    	<option value="천">천</option>
-							    	<option value="유리">유리</option>
-							    	<option value="기타">기타</option>
-							    	</select></td></tr>
+							    <td><input type="text" name="prod_text"></td></tr>
 							<tr><td>규격</td>
 							    <td><select name="prod_size">
 							    	<option value="규격" selected="selected">규격</option>
 							    	<option value="10*10">10*10</option>
 							    	<option value="20*20">20*20</option>
+							    	<option value="20*20">30*30</option>
 							    	<option value="기타">기타</option>
 							    	</select></td></tr>    	
 							 <tr><td>매입단가<span style="color:red">*</span></td>

@@ -198,7 +198,45 @@ public class ReqController {
 		return "redirect:/req/reqlist";
 	}
 	
-	
+	@RequestMapping(value = "/req/reqPop", method = RequestMethod.GET)
+	public String reqPop(HttpServletRequest request, Model model) {
+		int pageSize=10;
+		String pageNum=request.getParameter("pageNum");
+		if(pageNum==null) {
+			pageNum="1";
+		}
+		int currentPage=Integer.valueOf(pageNum);
+		
+		PageDTO pageDTO=new PageDTO();
+		pageDTO.setPageSize(pageSize);
+		pageDTO.setPageNum(pageNum);
+		pageDTO.setCurrentPage(currentPage);
+		String pop=(String)request.getParameter("pop");
+
+		int count=0;
+		if(pop.equals("prod")) {
+			List<ProductDTO> popList=productService.getProductList(pageDTO);
+			model.addAttribute("popList", popList);
+			count=productService.getProductCount(pageDTO);
+		}
+		int pageBlock=10;
+		int startPage=(currentPage-1)/pageBlock*pageBlock+1;
+		int endPage=startPage+pageBlock-1;
+		int pageCount=count/pageSize+(count%pageSize==0?0:1);
+		if(endPage>pageCount) {
+			endPage=pageCount;
+		}
+		
+		pageDTO.setCount(count);
+		pageDTO.setPageBlock(pageBlock);
+		pageDTO.setStartPage(startPage);
+		pageDTO.setEndPage(endPage);
+		pageDTO.setPageCount(pageCount);
+		
+		model.addAttribute("pop", pop);
+		model.addAttribute("pageDTO", pageDTO);
+		return "req/reqPop";
+	}
 	
 	
 	
