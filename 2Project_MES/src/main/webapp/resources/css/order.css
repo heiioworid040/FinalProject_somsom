@@ -20,7 +20,7 @@ body {
 #cli_nm, #emp_nm {
 	width: 120px;
 }
-#prod_cd, #prod_nm, #prod_unit, #ord_count, #prod_mat {
+#prod_cd, #prod_nm, #prod_unit, #ord_count, #prod_mat, #ship_count {
 	width: 100px;
 	border-style: none;
 }

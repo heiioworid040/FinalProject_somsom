@@ -74,45 +74,18 @@ public class OrderController {
 		
 		@RequestMapping(value = "/order/orderInsert", method = RequestMethod.GET)
 		public String insert(HttpServletRequest request, Model model) {
-			String cli=(String)request.getParameter("cli");
-			String emp=(String)request.getParameter("emp");
-			String ord_date=(String)request.getParameter("ord_date");
-			String ord_date_end=(String)request.getParameter("ord_date_end");
-			String ord_d_date=(String)request.getParameter("ord_d_date");
-			String ord_d_date_end=(String)request.getParameter("ord_d_date_end");
-			
-			int pageSize=10;
-			String pageNum=request.getParameter("pageNum");
-			if(pageNum==null) pageNum="1";
-			int currentPage=Integer.valueOf(pageNum);
-			
 			PageDTO pageDTO=new PageDTO();
-			pageDTO.setPageSize(pageSize);
-			pageDTO.setPageNum(pageNum);
-			pageDTO.setCurrentPage(currentPage);
-			pageDTO.setSearch(cli);
-			pageDTO.setSearch2(emp);
-			pageDTO.setSearch3(ord_date);
-			pageDTO.setSearch4(ord_date_end);
-			pageDTO.setSearch5(ord_d_date);
-			pageDTO.setSearch6(ord_d_date_end);
+			pageDTO.setSearch(request.getParameter("cli"));
+			pageDTO.setSearch2(request.getParameter("emp"));
+			pageDTO.setSearch3(request.getParameter("ord_date"));
+			pageDTO.setSearch4(request.getParameter("ord_date_end"));
+			pageDTO.setSearch5(request.getParameter("ord_d_date"));
+			pageDTO.setSearch6(request.getParameter("ord_d_date_end"));
 			
 			List<OrderDTO> orderInsertList=orderService.getOrderInsertList(pageDTO);
 			
 			int count=orderService.getOrderCount();
-			int pageBlock=10;
-			int startPage=(currentPage-1)/pageBlock*pageBlock+1;
-			int endPage=startPage+pageBlock-1;
-			int pageCount=count/pageSize+(count%pageSize==0?0:1);
-			if(endPage>pageCount) {
-				endPage=pageCount;
-			}
-			
 			pageDTO.setCount(count);
-			pageDTO.setPageBlock(pageBlock);
-			pageDTO.setStartPage(startPage);
-			pageDTO.setEndPage(endPage);
-			pageDTO.setPageCount(pageCount);
 			
 			SimpleDateFormat dfm=new SimpleDateFormat("yyyy-MM-dd");
 			
@@ -133,22 +106,14 @@ public class OrderController {
 		
 		@RequestMapping(value = "/order/orderInsertPro", method = RequestMethod.POST)
 		public String insertPro(HttpServletRequest request, Model model) {
-			String ord_cd=(String)request.getParameter("ord_cd");
-			String cli_cd=(String)request.getParameter("cli_cd");
-			String emp_cd=(String)request.getParameter("emp_cd");
-			String prod_cd=(String)request.getParameter("prod_cd");
-			int ord_count=Integer.parseInt(request.getParameter("ord_count"));
-			Timestamp ord_date=Timestamp.valueOf((String)request.getParameter("ord_date")+" 23:59:59");
-			Timestamp ord_d_date=Timestamp.valueOf((String)request.getParameter("ord_d_date")+" 23:59:59");
-
 			OrderDTO orderDTO=new OrderDTO();
-			orderDTO.setOrd_cd(ord_cd);
-			orderDTO.setCli_cd(cli_cd);
-			orderDTO.setEmp_cd(emp_cd);
-			orderDTO.setProd_cd(prod_cd);
-			orderDTO.setOrd_count(ord_count);
-			orderDTO.setOrd_date(ord_date);
-			orderDTO.setOrd_d_date(ord_d_date);
+			orderDTO.setOrd_cd(request.getParameter("ord_cd"));
+			orderDTO.setCli_cd(request.getParameter("cli_cd"));
+			orderDTO.setEmp_cd(request.getParameter("emp_cd"));
+			orderDTO.setProd_cd(request.getParameter("prod_cd"));
+			orderDTO.setOrd_count(Integer.parseInt(request.getParameter("ord_count")));
+			orderDTO.setOrd_date(Timestamp.valueOf(request.getParameter("ord_date")+" 23:59:59"));
+			orderDTO.setOrd_d_date(Timestamp.valueOf(request.getParameter("ord_d_date")+" 23:59:59"));
 			
 			String btn_add=(String)request.getParameter("btn_add");
 			String btn_edit=(String)request.getParameter("btn_edit");
@@ -162,55 +127,24 @@ public class OrderController {
 				orderService.orderDel(orderDTO);
 			}
 			
-//			model.addAttribute("orderDTO", orderDTO);
 			return "redirect:/order/orderInsert";
 		}
 		
 		@RequestMapping(value = "/order/orderInfo", method = RequestMethod.GET)
 		public String info(HttpServletRequest request, Model model) {
-			String cli=(String)request.getParameter("cli");
-			String emp=(String)request.getParameter("emp");
-			String ord_date=(String)request.getParameter("ord_date");
-			String ord_date_end=(String)request.getParameter("ord_date_end");
-			String ord_d_date=(String)request.getParameter("ord_d_date");
-			String ord_d_date_end=(String)request.getParameter("ord_d_date_end");
-			String prod=(String)request.getParameter("prod");
-			
-			int pageSize=10;
-			String pageNum=request.getParameter("pageNum");
-			if(pageNum==null) {
-				pageNum="1";
-			}
-			int currentPage=Integer.valueOf(pageNum);
-			
 			PageDTO pageDTO=new PageDTO();
-			pageDTO.setPageSize(pageSize);
-			pageDTO.setPageNum(pageNum);
-			pageDTO.setCurrentPage(currentPage);
-			pageDTO.setSearch(cli);
-			pageDTO.setSearch2(emp);
-			pageDTO.setSearch3(ord_date);
-			pageDTO.setSearch4(ord_date_end);
-			pageDTO.setSearch5(ord_d_date);
-			pageDTO.setSearch6(ord_d_date_end);
-			pageDTO.setSearch7(prod);
+			pageDTO.setSearch(request.getParameter("cli"));
+			pageDTO.setSearch2(request.getParameter("emp"));
+			pageDTO.setSearch3(request.getParameter("ord_date"));
+			pageDTO.setSearch4(request.getParameter("ord_date_end"));
+			pageDTO.setSearch5(request.getParameter("ord_d_date"));
+			pageDTO.setSearch6(request.getParameter("ord_d_date_end"));
+			pageDTO.setSearch7(request.getParameter("prod"));
 			
 			List<OrderDTO> orderList=orderService.getOrderList(pageDTO);
 			
 			int count=orderService.getOrderCount();
-			int pageBlock=10;
-			int startPage=(currentPage-1)/pageBlock*pageBlock+1;
-			int endPage=startPage+pageBlock-1;
-			int pageCount=count/pageSize+(count%pageSize==0?0:1);
-			if(endPage>pageCount) {
-				endPage=pageCount;
-			}
-			
 			pageDTO.setCount(count);
-			pageDTO.setPageBlock(pageBlock);
-			pageDTO.setStartPage(startPage);
-			pageDTO.setEndPage(endPage);
-			pageDTO.setPageCount(pageCount);
 			
 			model.addAttribute("pageDTO", pageDTO);
 			model.addAttribute("orderList", orderList);
