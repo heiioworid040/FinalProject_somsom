@@ -43,7 +43,7 @@
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="menu-icon fa fa-fort-awesome"></i><a href="${pageContext.request.contextPath}/order/orderInsert">수주 관리</a></li>
                             <li><i class="menu-icon ti-themify-logo"></i><a href="${pageContext.request.contextPath}/order/orderInfo">수주 현황</a></li>
-                            <li><i class="menu-icon ti-themify-logo"></i><a href="">출하 관리</a></li>
+                            <li><i class="menu-icon ti-themify-logo"></i><a href="${pageContext.request.contextPath}/ship/shipInfo">출하 관리</a></li>
                             <li><i class="menu-icon ti-themify-logo"></i><a href="${pageContext.request.contextPath}/ship/shipCurrentInfo">출하 현황</a></li>
                         </ul>
                     </li>
