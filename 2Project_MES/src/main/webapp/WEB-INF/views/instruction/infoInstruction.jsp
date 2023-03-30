@@ -176,29 +176,29 @@
 													class="form-control"></td>
 												<td>
 													<div class="input-group">
-														<input type="text" id="sprodInputCd" placeholder="Prod Code"
+														<input type="text" id="sProdInputCd" placeholder="Prod Code"
 															class="form-control bg-white" disabled>
 														<div class="input-group-btn">
 															<input type="button" id="prodModalBtn" class="btn btn-primary" value="검색">
 														</div>
 													</div>
 												</td>
-												<td><input type="text" id="sprodInputNm" disabled
+												<td><input type="text" id="sProdInputNm" disabled
 													class="form-control"></td>
-												<td><input type="text" id="sprodInputUnit" disabled
+												<td><input type="text" id="sProdInputUnit" disabled
 													class="form-control"></td>
-												<td><input type="text" id=""
+												<td><input type="text" id="sProdInputCount"
 													name="inst_count" 
 													class="form-control  bg-white"></td>
 												<td>
 													<div class="input-group">
-														<input type="text" id="sorderInputCd" name="ord_cd" placeholder="Order Code" disabled class="form-control">
+														<input type="text" id="sOrderInputCd" name="ord_cd" placeholder="Order Code" disabled class="form-control">
 														<div class="input-group-btn">
 															<input type="button" class="btn btn-primary" id="orderModalBtn" value="검색">
 														</div>
 													</div>
 												</td>
-												<td><input type="text" id="sclientInputNm" disabled
+												<td><input type="text" id="sClientInputNm" disabled
 													class="form-control"></td>
 											</tr>
 										</tbody>

@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<div class="modal fadel" id="orderModal" tabindex="-1" role="dialog"
-	aria-labelledby="myExtraLargeModalLabel" style="display: none;"
+<div class="modal fade" id="orderModal" tabindex="-1" role="dialog"
+	aria-labelledby="largeModalLabel" style="display: none;"
 	aria-hidden="true">
 	<div class="modal-dialog modal-xl" role="document">
 		<div class="modal-content">
@@ -58,7 +58,7 @@
 					dataType:'json',
 					success:function(orderarr){
 						jQuery.each(orderarr,function(index,item){
-							jQuery('#orderTableBody').append('<tr><td scope="row">'+item.ord_cd+'</td><td id="order">'+item.prod_cd+'</td><td>'+item.emp_cd+'</td><td>'+item.cli_nm +'</td><td>'+item.ord_date+'</td><td>'+item.ord_d_date +'</td><td>'+item.ord_count+'</td></tr>');
+							jQuery('#orderTableBody').append('<tr><td scope="row">'+item.ord_cd+'</td><td id="order">'+item.prod_cd+'</td><td class="hidden">'+item.prod_nm+'</td><td class="hidden">'+item.prod_unit+'</td><td>'+item.emp_cd+'</td><td>'+item.cli_nm +'</td><td>'+item.ord_date+'</td><td>'+item.ord_d_date +'</td><td>'+item.ord_count+'</td></tr>');
 						});
 					}
 				});
@@ -77,7 +77,7 @@
 	
 		// 테이블의 Row 클릭시 값 가져오기
 	$(document).on("click", "#orderTableBody tr", function(){
-		var str = ""
+		var orderArr = ""
 		var orderArr = new Array();	// 배열 선언
 			
 		// 현재 클릭된 Row(<tr>)
@@ -90,11 +90,16 @@
 	 	var sorder_cd = td.eq(0).text();
 	 	var scli_nm = td.eq(3).text();
 	 	var sprod_cd = td.eq(1).text();
-	 	
-	 	$('#sorderInputCd').val(sorder_cd);
-	 	$('#sclientInputNm').val(scli_nm);
-	 	$('#sprodInputCd').val(sprod_cd);
-	 	$('#').val(sprod_cd);
+	 	var sprod_nm = td.eq(2).text();
+	 	var sprod_unit = td.eq(3).text();
+	 	var sord_count = td.eq(8).text();
+		
+	 	$('#sOrderInputCd').val(sorder_cd);
+	 	$('#sClientInputNm').val(scli_nm);
+	 	$('#sProdInputCd').val(sprod_cd);
+	 	$('#sProdInputNm').val(sprod_nm);
+	 	$('#sProdInputUnit').val(sprod_unit);
+	 	$('#sProdInputCount').val(sord_count);
 	 	
 	 	jQuery('#orderModal').modal("hide");
 		});

@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<div class="modal fadel" id="prodModal" tabindex="-1" role="dialog"
-	aria-labelledby="myExtraLargeModalLabel" style="display: none;"
+<div class="modal fade" id="prodModal" tabindex="-1" role="dialog"
+	aria-labelledby="largeModalLabel" style="display: none;"
 	aria-hidden="true">
 	<div class="modal-dialog modal-xl" role="document">
 		<div class="modal-content">
@@ -61,7 +61,7 @@
 					dataType:'json',
 					success:function(prodarr){
 						jQuery.each(prodarr,function(index,item){
-							jQuery('#prodTableBody').append('<tr><td scope="row">'+item.ord_cd+'</td><td id="prod">'+item.prod_cd+'</td><td>'+item.emp_cd+'</td><td>'+item.cli_nm +'</td><td>'+item.ord_date+'</td><td>'+item.ord_d_date +'</td><td>'+item.ord_count+'</td></tr>');
+							jQuery('#prodTableBody').append('<tr><td scope="row">'+item.prod_cd+'</td><td>'+item.prod_nm+'</td><td>'+item.prod_mat +'</td><td>'+item.prod_unit +'</td><td>'+item.prod_text+'</td><td>'+item.prod_size +'</td><td>'+item.prod_inprice+'</td><td>'+item.prod_outprice+'</td><td>'+item.prod_count+'</td><td>'+item.prod_note+'</td></tr>');
 						});
 					}
 				});
@@ -91,9 +91,14 @@
 		console.log("클릭한 Row의 모든 데이터 : "+tr.text());
 			
 	 	var sprod_cd = td.eq(0).text();
+	 	var sprod_nm = td.eq(1).text();
+	 	var sprod_unit = td.eq(3).text();
 
 	 	
-	 	$('#sprodInputCd').val(sprod_cd);
+	 	$('#sProdInputCd').val(sprod_cd);
+	 	$('#sProdInputNm').val(sprod_nm);
+	 	$('#sProdInputUnit').val(sprod_unit);
+
 
 	 	jQuery('#prodModal').modal("hide");
 		});
