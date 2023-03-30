@@ -44,4 +44,24 @@ public class ShipDAOImpl implements ShipDAO {
 
 	}
 
+	@Override
+	public List<ShipDTO> shipInfo(PageDTO pageDTO) {
+		return sqlSession.selectList(namespace + ".shipInfo", pageDTO);
+	}
+
+	@Override
+	public void shipInfoPro(ShipDTO shipDTO) {
+		sqlSession.insert(namespace + ".shipInfoPro", shipDTO);
+	}
+
+	@Override
+	public String getShipNum() {
+		return sqlSession.selectOne(namespace + ".getShipNum");
+	}
+
+	@Override
+	public Integer getMaxNum(ShipDTO shipDTO) {
+		return sqlSession.selectOne(namespace + ".getMaxNum");
+	}
+
 }

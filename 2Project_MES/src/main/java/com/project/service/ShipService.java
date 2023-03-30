@@ -12,4 +12,8 @@ public interface ShipService {
 	public int shipCurrentCount(PageDTO pageDTO);
 
 	public void currDelete(String ship_cd);
+
+	public List<ShipDTO> shipInfo(PageDTO pageDTO);
+
+	public void shipInfoPro(ShipDTO shipDTO);
 }

@@ -12,4 +12,12 @@ public interface ShipDAO {
 	public int shipCurrentCount(PageDTO pageDTO);
 
 	public void currDelete(String ship_cd);
+
+	public List<ShipDTO> shipInfo(PageDTO pageDTO);
+
+	public void shipInfoPro(ShipDTO shipDTO);
+
+	public String getShipNum();
+	
+	public Integer getMaxNum(ShipDTO shipDTO);
 }

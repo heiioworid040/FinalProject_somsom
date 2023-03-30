@@ -74,5 +74,33 @@
     	delete from ship
     	where ship_cd = #{ship_cd}
     </delete>
+    
+    <select id="shipInfo" resultType="com.project.domain.ShipDTO">
+		select o.ord_cd, ord_date, ord_d_date, o.prod_cd, p.prod_nm, ord_count,c.cli_nm,s.ship_count
+		from orders o join product p on o.prod_cd=p.prod_cd join client c on o.cli_cd=c.cli_cd left join ship s on o.ord_cd=s.ord_cd
+		where s.ship_count is null
+		<if test="search!=null || search2!=null">
+			and o.cli_cd like CONCAT('%',#{search},'%') and o.prod_cd like CONCAT('%',#{search2},'%')
+		<if test="search3!=''">
+			and (date_format(ord_date, '%Y-%m-%d') between #{search3} and #{search4})
+		</if>
+		<if test="search5!=''">
+			and (date_format(ord_d_date, '%Y-%m-%d') between #{search5} and #{search6})
+		</if>
+		</if>
+		order by ord_date
+    </select>
+    
+    <select id="getShipNum" resultType="java.lang.String">
+		select * from code where code_cd='ship_cd'
+	</select>
+	
+	<select id="getMaxNum" resultType="java.lang.Integer">
+		select max(cast(substring(ord_cd,2,3) as unsigned)) from ship where ship_date=#{ship_date}
+	</select>
+    
+    <insert id="shipInfoPro">
+    	insert into ship values (#{ship_cd}, #{ord_cd}, #{ship_ifcount}, #{ship_count}, #{ship_over}, #{ship_inven}, #{ship_date})
+    </insert>
 
 </mapper>
