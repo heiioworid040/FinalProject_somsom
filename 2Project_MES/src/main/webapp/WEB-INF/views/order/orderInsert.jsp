@@ -133,32 +133,6 @@
 									</tbody>
 								</table>
 								<!-- .content -->
-								
-							<div class="pageNum">
-								<c:if test="${empty search}">
-								<c:if test="${pageDTO.startPage > pageDTO.pageBlock }">
-									<a href="${pageContext.request.contextPath }/order/orderInsert?pageNum=${pageDTO.startPage-pageDTO.pageBlock }">Prev</a>
-								</c:if>
-								<c:forEach var="i" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1">
-									<a href="${pageContext.request.contextPath }/order/orderInsert?pageNum=${i}">${i}</a> 
-								</c:forEach>
-								<c:if test="${pageDTO.endPage < pageDTO.pageCount }">
-									<a href="${pageContext.request.contextPath }/order/orderInsert?pageNum=${pageDTO.startPage+pageDTO.pageBlock }">Next</a>
-								</c:if>
-								</c:if>
-					<!-- }else{ -->
-								<c:if test="${!empty search }">
-									<c:if test="${pageDTO.startPage > pageDTO.pageBlock }">
-										<a href="${pageContext.request.contextPath }/order/orderInsert?pageNum=${pageDTO.startPage-pageDTO.pageBlock }&search=${pageDTO.search }">Prev</a>
-									</c:if>
-									<c:forEach var="i" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1">
-										<a href="${pageContext.request.contextPath }/order/orderInsert?pageNum=${i}&search=${pageDTO.search}">${i}</a> 
-									</c:forEach>
-									<c:if test="${pageDTO.endPage < pageDTO.pageCount }">
-										<a href="${pageContext.request.contextPath }/order/orderInsert?pageNum=${pageDTO.startPage+pageDTO.pageBlock }&search=${pageDTO.search}">Next</a>
-									</c:if>
-								</c:if>	
-							</div>
 						</div>
 					</div>
 				</div>

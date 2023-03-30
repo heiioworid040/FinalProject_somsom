@@ -59,7 +59,6 @@ public class OrderDAO {
 
 	//수주 현황
 	public List<OrderDTO> getOrderList(PageDTO pageDTO) {
-		pageDTO.setStartRow(pageDTO.getStartRow()-1);
 		return sqlSession.selectList(namespace+".getOrderList", pageDTO);
 	}
 	
