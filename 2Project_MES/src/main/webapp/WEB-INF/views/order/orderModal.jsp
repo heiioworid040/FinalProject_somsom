@@ -88,10 +88,13 @@
 		console.log("클릭한 Row의 모든 데이터 : "+tr.text());
 			
 	 	var sorder_cd = td.eq(0).text();
-	 	var sorder_nm = td.eq(1).text();
+	 	var scli_nm = td.eq(3).text();
+	 	var sprod_cd = td.eq(1).text();
 	 	
 	 	$('#sorderInputCd').val(sorder_cd);
-	 	$('#sorderInputNm').val(sorder_nm);
+	 	$('#sclientInputNm').val(scli_nm);
+	 	$('#sprodInputCd').val(sprod_cd);
+	 	$('#').val(sprod_cd);
 	 	
 	 	jQuery('#orderModal').modal("hide");
 		});
