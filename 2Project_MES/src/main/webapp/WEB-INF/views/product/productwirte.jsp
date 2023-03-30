@@ -146,14 +146,8 @@
 							    <td><input name="prod_cd" placeholder="P001 형식으로 자동생성" readonly></td></tr>
 
 							<tr><td>품명<span style="color:red">*</span></td>
-							    <td><select name="prod_nm">
-							    	<option value="품명" selected="selected">품명</option>
-							    	<option value="인형">인형</option>
-							    	<option value="바늘">바늘</option>
-							    	<option value="기타">기타</option>
-							</select></td></tr>
+							    <td><input type="text" name="prod_nm"></td></tr>
 							<tr><td>거래처코드</td>
-
 							 <td><input type="text" id="cli_cd" name="cli_cd" value="${productDTO.cli_cd }" readonly>
 
 							 	 <button type="button" id="pop" value="cli" onclick="orderPop(1)">돋보기</button></td></tr>
@@ -161,28 +155,24 @@
 							    <td><select name="prod_mat">
 							    	<option value="">자재유형</option>
 							    	<option value="완제품">완제품</option>
+							    	<option value="원자재">원자재</option>
 							    	<option value="부자재">부자재</option>
-							    	<option value="기타">기타</option>
 							    	</select></td></tr>
 							<tr><td>재고단위</td>
 							    <td><select name="prod_unit">
 							    	<option value="단위" selected="selected">단위</option>
 							    	<option value="EA">EA</option>
-							    	<option value="OP" >OP</option>
+							    	<option value="PK">PK</option>
 							    	<option value="기타">기타</option>
 							    	</select></td></tr>
 							<tr><td>재질</td>
-							    <td><select name="prod_text">
-							    	<option value="재질" selected="selected">재질</option>
-							    	<option value="천">천</option>
-							    	<option value="유리">유리</option>
-							    	<option value="기타">기타</option>
-							    	</select></td></tr>
+							    <td><input type="text" name="prod_text"></td></tr>
 							<tr><td>규격</td>
 							    <td><select name="prod_size">
 							    	<option value="규격" selected="selected">규격</option>
 							    	<option value="10*10">10*10</option>
 							    	<option value="20*20">20*20</option>
+							    	<option value="20*20">30*30</option>
 							    	<option value="기타">기타</option>
 							    	</select></td></tr>    	
 							 <tr><td>매입단가<span style="color:red">*</span></td>
