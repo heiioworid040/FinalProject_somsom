@@ -12,11 +12,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.domain.CodeDTO;
-//import com.project.domain.EmployeeDTO;
+import com.project.domain.EmployeeDTO;
 import com.project.domain.LineDTO;
 import com.project.domain.OrderDTO;
 import com.project.domain.PageDTO;
 import com.project.service.CodeService;
+import com.project.service.EmployeeService;
 import com.project.service.LineService;
 import com.project.service.OrderService;
 
@@ -31,8 +32,8 @@ public class AajaxController {
 	@Inject
 	private CodeService codeService;
 	
-//	@Inject
-//	private EmployeeService employeeService;
+	@Inject
+	private EmployeeService employeeService;
 	
 	@RequestMapping(value = "/ajax/lineModal", method = RequestMethod.GET)
 	public ResponseEntity<List<LineDTO>> getLineModal(HttpServletRequest request) {
@@ -87,37 +88,37 @@ public class AajaxController {
 		return entity;
 	}
 	
-//	@RequestMapping(value = "/employee/emailCk", method = RequestMethod.GET)
-//	public ResponseEntity<String> idCheck(HttpServletRequest request) {
-//		String result="";
-//		String emp_email=request.getParameter("emp_email");
-//		EmployeeDTO employeeDTO=employeeService.emailCk(emp_email);
-//		
-//		if(employeeDTO!=null) {
-//			result="emailUp";
-//		}else {
-//			result="emailOk";
-//		}
-//		
-//		ResponseEntity<String> entity=
-//				new ResponseEntity<String>(result,HttpStatus.OK);
-//		return entity;
-//	}
-//	
-//	@RequestMapping(value = "/employee/telCk", method = RequestMethod.GET)
-//	public ResponseEntity<String> telCk(HttpServletRequest request) {
-//		String result="";
-//		String emp_tel=request.getParameter("emp_tel");
-//		EmployeeDTO employeeDTO=employeeService.telCk(emp_tel);
-//		if(employeeDTO!=null) {
-//			result="telUp";
-//		}else {
-//			result="telOk";
-//		}
-//		ResponseEntity<String> entity=
-//				new ResponseEntity<String>(result,HttpStatus.OK);
-//		return entity;
-//	}
+	@RequestMapping(value = "/employee/emailCk", method = RequestMethod.GET)
+	public ResponseEntity<String> idCheck(HttpServletRequest request) {
+		String result="";
+		String emp_email=request.getParameter("emp_email");
+		EmployeeDTO employeeDTO=employeeService.emailCk(emp_email);
+		
+		if(employeeDTO!=null) {
+			result="emailUp";
+		}else {
+			result="emailOk";
+		}
+		
+		ResponseEntity<String> entity=
+				new ResponseEntity<String>(result,HttpStatus.OK);
+		return entity;
+	}
+	
+	@RequestMapping(value = "/employee/telCk", method = RequestMethod.GET)
+	public ResponseEntity<String> telCk(HttpServletRequest request) {
+		String result="";
+		String emp_tel=request.getParameter("emp_tel");
+		EmployeeDTO employeeDTO=employeeService.telCk(emp_tel);
+		if(employeeDTO!=null) {
+			result="telUp";
+		}else {
+			result="telOk";
+		}
+		ResponseEntity<String> entity=
+				new ResponseEntity<String>(result,HttpStatus.OK);
+		return entity;
+	}
 	
 	@RequestMapping(value = "/ajax/orderModal", method = RequestMethod.GET)
 	public ResponseEntity<List<OrderDTO>> getorderModal(HttpServletRequest request) {
