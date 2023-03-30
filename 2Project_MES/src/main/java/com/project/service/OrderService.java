@@ -35,8 +35,6 @@ public class OrderService {
 	//수주 추가
 	public void orderAdd(OrderDTO orderDTO) {
 		String num;
-		System.out.println(orderDAO.getOrdNum());
-//		orderDAO.getOrdNum() 50행 num 앞에 붙이기
 		if(orderDAO.getMaxNum(orderDTO)==null) {
 			num="001";
 		}else {
