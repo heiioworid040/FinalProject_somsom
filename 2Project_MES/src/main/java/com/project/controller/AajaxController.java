@@ -14,15 +14,20 @@ import org.springframework.web.bind.annotation.RestController;
 import com.project.domain.CodeDTO;
 import com.project.domain.EmployeeDTO;
 import com.project.domain.LineDTO;
+import com.project.domain.OrderDTO;
 import com.project.domain.PageDTO;
 import com.project.service.CodeService;
 import com.project.service.EmployeeService;
 import com.project.service.LineService;
+import com.project.service.OrderService;
 
 @RestController
 public class AajaxController {
 	@Inject
 	private LineService lineService;
+	
+	@Inject
+	private OrderService orderService;
 	
 	@Inject
 	private CodeService codeService;
@@ -31,8 +36,16 @@ public class AajaxController {
 	private EmployeeService employeeService;
 	
 	@RequestMapping(value = "/ajax/lineModal", method = RequestMethod.GET)
-	public ResponseEntity<List<LineDTO>> getLineModal() {
+	public ResponseEntity<List<LineDTO>> getLineModal(HttpServletRequest request) {
 		System.out.println("LineController getLineModal");
+		int pageSize=10;
+		
+		String pageNum=request.getParameter("pageNum");
+		if(pageNum==null) {
+			pageNum="1";
+		}
+		int currentPage=Integer.parseInt(pageNum);
+		
 		PageDTO pageDTO=new PageDTO();
 		pageDTO.setPageSize(5);
 		pageDTO.setPageNum("1");
@@ -40,6 +53,21 @@ public class AajaxController {
 		
 		// 디비 최근글 5개 가져오기
 		List<LineDTO> lineList=lineService.getlineList(pageDTO);
+		
+		int count = lineService.getLineCount();
+		int pageBlock=10;
+		int startPage=(currentPage-1)/pageBlock*pageBlock+1;
+		int endPage=startPage+pageBlock-1;
+		int pageCount=count/pageSize+(count%pageSize==0?0:1);
+		if(endPage > pageCount) {
+			endPage = pageCount;
+		}
+		pageDTO.setCount(count);
+		pageDTO.setPageBlock(pageBlock);
+		pageDTO.setStartPage(startPage);
+		pageDTO.setEndPage(endPage);
+		pageDTO.setPageCount(pageCount);
+		
 		//출력 결과 ResponseEntity 저장 => 되돌아감
 		ResponseEntity<List<LineDTO>> lineListE=
 				new ResponseEntity<List<LineDTO>>(lineList, HttpStatus.OK);
@@ -51,6 +79,7 @@ public class AajaxController {
 	public ResponseEntity<List<CodeDTO>> listjson(HttpServletRequest request) {
 		
 		String code_grp = request.getParameter("code_grp");
+		System.out.println("AjaxController:"+code_grp);
 		List<CodeDTO> codeList3=codeService.getCodeList3(code_grp);
 		
 		//출력 결과 ResponseEntity 저장 => 되돌아감
@@ -92,11 +121,45 @@ public class AajaxController {
 		return entity;
 	}
 	
-	
-	
-	
-	
-	
+	@RequestMapping(value = "/ajax/orderModal", method = RequestMethod.GET)
+	public ResponseEntity<List<OrderDTO>> getorderModal(HttpServletRequest request) {
+		System.out.println("orderController getorderModal");
+		int pageSize=10;
+		
+		String pageNum=request.getParameter("pageNum");
+		if(pageNum==null) {
+			pageNum="1";
+		}
+		int currentPage=Integer.parseInt(pageNum);
+		
+		PageDTO pageDTO=new PageDTO();
+		pageDTO.setPageSize(5);
+		pageDTO.setPageNum("1");
+		pageDTO.setCurrentPage(1);
+		
+		// 디비 최근글 5개 가져오기
+		List<OrderDTO> orderList=orderService.getOrderList(pageDTO);
+		
+		int count = orderService.getOrderCount();
+		int pageBlock=10;
+		int startPage=(currentPage-1)/pageBlock*pageBlock+1;
+		int endPage=startPage+pageBlock-1;
+		int pageCount=count/pageSize+(count%pageSize==0?0:1);
+		if(endPage > pageCount) {
+			endPage = pageCount;
+		}
+		pageDTO.setCount(count);
+		pageDTO.setPageBlock(pageBlock);
+		pageDTO.setStartPage(startPage);
+		pageDTO.setEndPage(endPage);
+		pageDTO.setPageCount(pageCount);
+		
+		//출력 결과 ResponseEntity 저장 => 되돌아감
+		ResponseEntity<List<OrderDTO>> orderListE=
+				new ResponseEntity<List<OrderDTO>>(orderList, HttpStatus.OK);
+		System.out.println(orderList.get(0).getOrd_cd());
+		return orderListE;
+	}
 }
 	
 	

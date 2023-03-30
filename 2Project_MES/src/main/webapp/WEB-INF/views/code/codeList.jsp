@@ -15,7 +15,8 @@
     <link rel="shortcut icon" href="https://i.imgur.com/QRAUqs9.png">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
+<!--     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
@@ -27,40 +28,37 @@
 
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
-</head>
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/script/jquery-3.6.3.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.6.3.js"></script>	
 <script type="text/javascript">
 //jQuery 준비 => 대상.함수()
-	$(document).ready(function(){
-// 		alert("준비");
-		// class="brown" 클릭했을때  "클릭"
-		$('.brown').click(function(){			
-			//화면 초기화
-			$('table').html('');
-			
-			$.ajax({
-				url:'${pageContext.request.contextPath}/code/listjson',
-				dataType:'json',
-				success:function(arr){
+$(document).ready(function(){
+// 	alert("준비"); 
+	$('.group').click(function(){
+// 		alert("클릭"); 
+// 	var code_grp = $(this).data('code-grp');
+	var code_grp = jQuery(this).data('code-grp');
+// 		alert(code_grp);
+		$('.code').html('');			
+		$.ajax({
+			url:'${pageContext.request.contextPath}/code/listjson',
+			data:{code_grp : code_grp},
+			dataType:'json',
+			success:function(arr){					
+				$.each(arr,function(index,item){
+// 						alert(index);
+// 						alert(item.code_cd);
+// 						alert(item.code_nm);
+// 						alert(item.code_num);
+// 						alert(item.code_note);					
+					$('.code').append('<tr><td>'+item.code_cd+'</td><td>'+item.code_nm+'</td><td>'+item.code_num+'</td><td>'+item.code_note+'</td></tr>');
+				});
 					
-//			        반복해서 출력 .each()
-					$.each(arr,function(index,item){
-//		 				alert(index);
-//		 				alert(item.subject);
-//		 				alert(item.date);
-//		               태그 뒤부분에 추가해서 넣기 append()
-						$('table').append('<tr><td class="contxt"><a href="#">'+item.code_cd+'</a></td><td>'+item.code_nm+'</td></tr>');
-					});
-					
-				}
-			});
-
-
-
-
+			}
+		});
 		});
 	});
 </script>
+</head>
 <body>
 	<!-- Left Panel1 -->
 	<jsp:include page="../inc/leftPanel.jsp" />
@@ -130,10 +128,9 @@
 									</thead>
 									<tbody>
 										<c:forEach var="codeDTO" items="${codeGrpList }"> 
-										<tr>
+										<tr class="group" data-code-grp="${codeDTO.code_grp}">
 											<td>${codeDTO.code_grp}</td>
 											<td>${codeDTO.code_grp_nm}</td>
-<%-- 											<td><input type="button" name="plus" value="plus" onclick="fun1(2,'${codeDTO.code_grp}')"></td>	 --%>
 										</tr>	
 										</c:forEach>
 									</tbody>
@@ -162,17 +159,10 @@
 											<th scope="col">코드명</th>
 											<th scope="col">정렬순서</th>
 											<th scope="col">비고</th>
-											<th scope="col">수정</th>											
 										</tr>
 									</thead>
-									<tbody>
-										<tr>
-											<th scope="row">3</th>
-											<td>Larry</td>
-											<td>the Bird</td>
-											<td>예시</td>
-											<td>예시</td>
-										</tr>	
+									<tbody class="code">
+											
 									</tbody>
 								</table>			
 								</form>	
