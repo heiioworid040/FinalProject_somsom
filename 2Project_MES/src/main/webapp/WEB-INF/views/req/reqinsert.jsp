@@ -40,15 +40,11 @@
 <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
 <script>
-	function searchPop(search) {
-		if(search==1) window.open('${pageContext.request.contextPath }/req/searchPop?pop=cli','searchPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=900,height=510,top=90,left=200')
-		else if(search==2) window.open('${pageContext.request.contextPath }/req/searchPop?pop=emp','searchPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=900,height=510,top=90,left=200')
-		else window.open('${pageContext.request.contextPath }/req/searchPop?pop=prod','searchPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=900,height=510,top=90,left=200')
-	}
 	function orderPop(order) {
-		if(order==1) window.open('${pageContext.request.contextPath }/req/orderPop?pop=cli','cliPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=900,height=510,top=90,left=200')
-		else if(order==2) window.open('${pageContext.request.contextPath }/req/orderPop?pop=emp','empPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=600,height=510,top=90,left=200')
-		else window.open('${pageContext.request.contextPath }/req/orderPop?pop=prod','prodPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=600,height=510,top=90,left=200')
+		if(order==3) window.open('${pageContext.request.contextPath }/req/orderPop?pop=prod','prodPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=600,height=510,top=90,left=200')
+	}
+	function reqPop(order) {
+		if(order==1) window.open('${pageContext.request.contextPath }/req/reqPop?pop=prod','prodPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=600,height=510,top=90,left=200')
 	}
 	
 	function essential() {
@@ -133,7 +129,6 @@
 											<th socpe="col">#</th>														
 											<th scope="col" >상위품번</th>
 											<th scope="col" >상위품명</th>
-											<th scope="col" >자재유형</th>
 											<th scope="col" >하위품번</th>
 											<th scope="col" >하위품명</th>
 											<th scope="col" >소요량</th>
@@ -151,12 +146,11 @@
 												<td><input type="text" id="prod_cd" name="prod_cd" value="${reqDTO.prod_cd }" readonly style="width : 70px;"
 															placeholder="오른쪽"></td>
 												<td><input type="text" id="prod_nm" name="prod_nm" value="${reqDTO.prod_nm }" readonly style="width : 70px;"
-															placeholder="돋보기"></td>
-												<td><input type="text" id="prod_mat" name="prod_mat" value="${reqDTO.prod_mat }" readonly style="width : 70px;"
-															placeholder="클릭"> 
-												<button type="button" id="pop" value="prod" onclick="orderPop(3)">돋보기</button></td>
+															placeholder="버튼클릭">
+												<button type="button" id="pop" value="prod" onclick="orderPop(3)">검색</button></td>
 												<td><input type="text" name="prod_fcd" style="width : 80px;"></td>
-												<td><input type="text" name="prod_fnm" style="width : 80px;"></td>
+												<td><input type="text" name="prod_fnm" style="width : 80px;">
+													<button type="button" id="pop" value="prod" onclick="reqPop(1)">검색</button></td>
 												<td><input type="text" name="req_req"
 													style="width: 60px;"></td>
 												<td><input type="text" name="req_add_emp"

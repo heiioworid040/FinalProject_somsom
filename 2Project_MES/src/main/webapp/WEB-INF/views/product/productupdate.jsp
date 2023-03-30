@@ -38,8 +38,8 @@
 			return false;
 		}
 
-		if (document.fr.prod_nm.value == "품명") {
-			alert("품명을 선택하세요.");
+		if (document.fr.prod_nm.value == "") {
+			alert("품명을 입력하세요.");
 			document.fr.cli_num.focus();
 			return false;
 		}
@@ -53,8 +53,8 @@
 			document.fr.prod_unit.focus();
 			return false;
 		}
-		if (document.fr.prod_text.value == "재질") {
-			alert("재질을 선택하세요.");
+		if (document.fr.prod_text.value == "") {
+			alert("재질을 입력하세요.");
 			document.fr.prod_text.focus();
 			return false;
 		}
@@ -84,7 +84,24 @@
 
 	}
 	</script>
+<style>
+table {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  font-weight: bold;
+}
 
+th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #4CAF50;
+  color: white;
+}
+</style>
 <body>
 	<!-- Left Panel1 -->
 	<jsp:include page="../inc/leftPanel.jsp" />
@@ -130,7 +147,7 @@
 					<div class="col-lg">
 						<div class="card">
 							<div class="card-header">
-								<strong class="card-title">행 수정</strong>
+								<h3>수정</h3>
 							</div>
 							<div class="card-body">
 							<form action="${pageContext.request.contextPath }/product/productupdatePro" method="POST" name="fr" onsubmit="return essential()">	
@@ -139,20 +156,15 @@
 							<tr><td>품번</td>
 							    <td><input type="text" name="prod_cd" value="${productDTO.prod_cd}"></td></tr>
 								<tr><td>품명</td>
-		                          <td><select name="prod_nm">
-							      <option value="">품명</option>
-							      <option value="인형" <c:if test="${productDTO.prod_nm == '인형'}">selected</c:if>>인형</option>
-							      <option value="바늘" <c:if test="${productDTO.prod_nm == '바늘'}">selected</c:if>>바늘</option>
-							      <option value="기타" <c:if test="${productDTO.prod_nm == '기타'}">selected</c:if>>기타</option>
-							    </select>
+		                          <td><input type="text" name="prod_nm">
 							  </td>
 							</tr>  
 							<tr><td>자재유형</td>
 							    <td><select name="prod_mat">
 							    	<option value="">자재유형</option>
 							    	<option value="완제품" <c:if test="${productDTO.prod_mat == '완제품'}">selected</c:if>>완제품</option>
+							    	<option value="원자재" <c:if test="${productDTO.prod_mat == '원자재'}">selected</c:if>>부자재</option>
 							    	<option value="부자재" <c:if test="${productDTO.prod_mat == '부자재'}">selected</c:if>>부자재</option>
-							    	<option value="기타" <c:if test="${productDTO.prod_mat == '기타'}">selected</c:if>>기타</option>
 							    	</select></td></tr>	
 							<tr><td>재고단위</td>
 							    <td><select name="prod_unit">
@@ -162,17 +174,13 @@
 							    	<option value="기타" <c:if test="${productDTO.prod_unit == '기타'}">selected</c:if>>기타</option>
 							    	</select></td></tr>
 							<tr><td>재질</td>
-							    <td><select name="prod_text">
-							    	<option value="">재질</option>
-							    	<option value="천" <c:if test="${productDTO.prod_text == '천'}">selected</c:if>>천</option>
-							    	<option value="유리" <c:if test="${productDTO.prod_text == '유리'}">selected</c:if>>유리</option>
-							    	<option value="기타" <c:if test="${productDTO.prod_text == '기타'}">selected</c:if>>기타</option>
-							    	</select></td></tr>
+							    <td><input type="text" name="prod_text"></td></tr>
 							<tr><td>규격</td>
 							    <td><select name="prod_size">
 							    	<option value="">규격</option>
 							    	<option value="10*10" <c:if test="${productDTO.prod_size == '10*10'}">selected</c:if>>10*10</option>
 							    	<option value="20*20" <c:if test="${productDTO.prod_size == '20*20'}">selected</c:if>>20*20</option>
+							    	<option value="30*30" <c:if test="${productDTO.prod_size == '30*30'}">selected</c:if>>30*30</option>
 							    	<option value="기타" <c:if test="${productDTO.prod_size == '기타'}">selected</c:if>>기타</option>
 							    	</select></td></tr>    	
 							 <tr><td>매입단가</td>

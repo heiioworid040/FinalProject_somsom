@@ -27,10 +27,10 @@
 </head>
 <script>
 
-	function prod(prod_cd,prod_nm) {
-		opener.document.getElementById("prod_cd").value=prod_cd;
-		opener.document.getElementById("prod_nm").value=prod_nm;
-		document.orderPop.submit();
+	function prod(,) {
+		opener.document.getElementById("").value=;
+		opener.document.getElementById("").value=;
+		document.reqPop.submit();
 		self.close();
 	}
 </script>
@@ -42,7 +42,6 @@
 						<div class="page-header float-left">
 							<div class="page-title">
 								<c:if test="${pop eq 'prod' }">
-									<h4>품목 리스트</h4>
 								</c:if>
 							</div>
 						</div>
@@ -50,7 +49,7 @@
 				</div>
 			</div>
 		</div>	
-		<form action="${pageContext.request.contextPath }/req/reqinsert" name="orderPop" method="get">
+		<form action="${pageContext.request.contextPath }/req/reqinsert" name="reqPop" method="get">
 		<div class="content">
 			<div class="animated fadeIn">
 				<div class="row">
@@ -61,9 +60,8 @@
 									<thead class="thead-dark">
 										<tr>
 											<c:if test="${ pop eq 'prod' }">
-												<th scope="col">상품코드</th>
+												<th scope="col">하위상품코드</th>
 												<th scope="col">상품이름</th>
-												<th scope="col">자재유형</th>
 											</c:if>
 										</tr>
 									</thead>
@@ -71,10 +69,9 @@
 										<c:forEach var="reqDTO" items="${popList }">
 										
 											<c:if test="${ pop eq 'prod' }">
-												<tr onclick="prod('${reqDTO.prod_cd }','${reqDTO.prod_nm }')">
-													<td>${reqDTO.prod_cd }</td>
-													<td>${reqDTO.prod_nm }</td>
+												<tr onclick="prod('${reqDTO.prod_mat }','${reqDTO.prod_text }')">
 													<td>${reqDTO.prod_mat }</td>
+													<td>${reqDTO.prod_text }</td>
 												</tr>
 											</c:if>
 										</c:forEach>
