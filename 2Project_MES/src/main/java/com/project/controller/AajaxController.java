@@ -84,6 +84,7 @@ public class AajaxController {
 	public ResponseEntity<List<CodeDTO>> listjson(HttpServletRequest request) {
 		
 		String code_grp = request.getParameter("code_grp");
+		System.out.println("AjaxController:"+code_grp);
 		List<CodeDTO> codeList3=codeService.getCodeList3(code_grp);
 		
 		//출력 결과 ResponseEntity 저장 => 되돌아감
