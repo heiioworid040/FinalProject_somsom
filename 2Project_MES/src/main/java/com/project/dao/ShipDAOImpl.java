@@ -30,10 +30,10 @@ public class ShipDAOImpl implements ShipDAO {
 	}
 
 	@Override
-	public int shipCurrentCount() {
+	public int shipCurrentCount(PageDTO pageDTO) {
 		System.out.println("ShipDAOImpl shipCurrentCount()");
 
-		return sqlSession.selectOne(namespace + ".shipCurrentCount");
+		return sqlSession.selectOne(namespace + ".shipCurrentCount", pageDTO);
 	}
 
 	@Override

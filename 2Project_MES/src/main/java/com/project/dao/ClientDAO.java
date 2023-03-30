@@ -7,8 +7,9 @@ import com.project.domain.PageDTO;
 
 public interface ClientDAO {
 	public List<ClientDTO> getClientInfo(PageDTO pageDTO);
-
-	public int getClientCount();
+	
+	// 검색어
+	public int getClientCount(PageDTO pageDTO);
 	
 	public void deleteClient(String cli_cd);
 	

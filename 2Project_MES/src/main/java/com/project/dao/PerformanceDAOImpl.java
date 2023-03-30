@@ -30,10 +30,10 @@ public class PerformanceDAOImpl implements PerformanceDAO {
 	}
 
 	@Override
-	public int performanceCurrentCount() {
+	public int performanceCurrentCount(PageDTO pageDTO) {
 		System.out.println("PerformanceDAOImpl performanceCurrentCount()");
 
-		return sqlSession.selectOne(namespace + ".performanceCurrentCount");
+		return sqlSession.selectOne(namespace + ".performanceCurrentCount", pageDTO);
 	}
 
 	@Override

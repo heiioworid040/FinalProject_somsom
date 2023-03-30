@@ -14,12 +14,60 @@
 		on o.prod_cd = p.prod_cd
 		join client c
 		on o.cli_cd = c.cli_cd
+		where 1=1
+		<if test="search != null">
+			<if test='search != ""'>
+				and s.ship_date &gt;= #{search}
+			</if>
+		</if>
+		<if test="search2 != null">
+			<if test='search2 != ""'>
+				and s.ship_date &lt;= #{search2}
+			</if>
+		</if>
+		<if test="search3 != null">
+			<if test='search3 != ""'>
+				and p.prod_cd = #{search3}
+			</if>
+		</if>
+		<if test="search4 != null">
+			<if test='search4 != ""'>
+				and c.cli_cd = #{search4}
+			</if>
+		</if>
 		limit #{startRow}, #{pageSize}
 	</select>
 
 	<select id="shipCurrentCount" resultType="java.lang.Integer">
-		select count(*) from
-		ship
+		select count(*)
+		from ship s
+		join orders o
+		on s.ord_cd=o.ord_cd
+		join product p
+		on o.prod_cd = p.prod_cd
+		join client c
+		on o.cli_cd = c.cli_cd
+		where 1=1
+		<if test="search != null">
+			<if test='search != ""'>
+				and s.ship_date &gt;= #{search}
+			</if>
+		</if>
+		<if test="search2 != null">
+			<if test='search2 != ""'>
+				and s.ship_date &lt;= #{search2}
+			</if>
+		</if>
+		<if test="search3 != null">
+			<if test='search3 != ""'>
+				and p.prod_cd = #{search3}
+			</if>
+		</if>
+		<if test="search4 != null">
+			<if test='search4 != ""'>
+				and c.cli_cd = #{search4}
+			</if>
+		</if>
 	</select>
 	
 	<delete id="currDelete">

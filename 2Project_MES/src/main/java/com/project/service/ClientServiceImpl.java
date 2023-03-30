@@ -28,12 +28,13 @@ public class ClientServiceImpl implements ClientService {
 
 		return clientDAO.getClientInfo(pageDTO);
 	}
-
+	
+	// 검색어
 	@Override
-	public int getClientCount() {
+	public int getClientCount(PageDTO pageDTO) {
 		System.out.println("ClientServiceImpl getClientCount()");
 
-		return clientDAO.getClientCount();
+		return clientDAO.getClientCount(pageDTO);
 	}
 
 	@Override
