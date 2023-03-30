@@ -20,9 +20,11 @@ public interface EmployeeService {
 	public EmployeeDTO getEmployee(String emp_cd);
 
 	public void updateEmployee(EmployeeDTO employeeDTO);
-	
-	public int emailCk(EmployeeDTO employeeDTO) throws Exception;
 
-	public int telCk(EmployeeDTO employeeDTO) throws Exception;
+	public EmployeeDTO emailCk(String emp_email);
+
+	public EmployeeDTO telCk(String emp_tel);
+	
+
 
 }

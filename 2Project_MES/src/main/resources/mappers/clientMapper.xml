@@ -6,12 +6,47 @@
 	<select id="getClientInfo"
 		resultType="com.project.domain.ClientDTO">
 		select * from client
+		where 1=1
+		<if test="search != null">
+			<if test='search != ""'>
+				and cli_cd like CONCAT('%',#{search},'%')
+			</if>
+		</if>
+		<if test="search2 != null">
+			<if test='search2 != ""'>
+				and cli_nm like CONCAT('%',#{search2},'%')
+			</if>
+		</if>
+		<if test="search3 != null">
+			<if test='search3 != ""'>
+				<if test='search3 != "전체"'>
+					and cli_type = #{search3}
+				</if>
+			</if>
+		</if>
 		limit #{startRow} , #{pageSize}
 	</select>
 
 	<select id="getClientCount" resultType="java.lang.Integer">
-		select count(*) from
-		client
+		select count(*) from client
+		where 1=1
+		<if test="search != null">
+			<if test='search != ""'>
+				and cli_cd like CONCAT('%',#{search},'%')
+			</if>
+		</if>
+		<if test="search2 != null">
+			<if test='search2 != ""'>
+				and cli_nm like CONCAT('%',#{search2},'%')
+			</if>
+		</if>
+		<if test="search3 != null">
+			<if test='search3 != ""'>
+				<if test='search3 != "전체"'>
+					and cli_type = #{search3}
+				</if>
+			</if>
+		</if>
 	</select>
 
 	<!-- 거래처코드 C001, C002처럼 자동입력 -->
@@ -59,5 +94,5 @@
 		client
 		where cli_num = #{cli_num}
 	</select>
-	
+
 </mapper>

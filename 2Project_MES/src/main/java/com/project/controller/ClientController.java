@@ -28,6 +28,10 @@ public class ClientController {
 	@RequestMapping(value = "/client/clientInfo", method = RequestMethod.GET)
 	public String info(HttpServletRequest request, Model model) {
 		System.out.println("ClientController info()");
+		// 검색어 가져오기
+		String search = request.getParameter("search");
+		String search2 = request.getParameter("search2");
+		String search3 = request.getParameter("search3");
 		// 한 화면에 보여줄 글 개수 설정
 		int pageSize = 20;
 		// 현페이지 번호 가져오기
@@ -43,11 +47,16 @@ public class ClientController {
 		pageDTO.setPageSize(pageSize);
 		pageDTO.setPageNum(pageNum);
 		pageDTO.setCurrentPage(currentPage);
+		// 검색어
+		pageDTO.setSearch(search);
+		pageDTO.setSearch2(search2);
+		pageDTO.setSearch3(search3);
 
 		List<ClientDTO> clientInfo = clientService.getClientInfo(pageDTO);
 
 		// 페이징 처리
-		int count = clientService.getClientCount();
+		// 검색어
+		int count = clientService.getClientCount(pageDTO);
 		int pageBlock = 10;
 		int startPage = (currentPage - 1) / pageBlock * pageBlock + 1;
 		int endPage = startPage + pageBlock - 1;
@@ -120,7 +129,7 @@ public class ClientController {
 		return "redirect:/client/clientInfo";
 	}
 
-	// 사업자번호 중복체크 
+	// 사업자번호 중복체크
 	@ResponseBody
 	@RequestMapping(value = "/client/clientDupCheck", method = RequestMethod.POST)
 	public String clientDupCheck(@RequestParam String cli_num) {
@@ -131,5 +140,5 @@ public class ClientController {
 			return "fail";
 		}
 	}
-	
+
 }

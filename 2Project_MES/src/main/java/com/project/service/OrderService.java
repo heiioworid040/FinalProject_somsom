@@ -35,6 +35,8 @@ public class OrderService {
 	//수주 추가
 	public void orderAdd(OrderDTO orderDTO) {
 		String num;
+		System.out.println(orderDAO.getOrdNum());
+//		orderDAO.getOrdNum() 50행 num 앞에 붙이기
 		if(orderDAO.getMaxNum(orderDTO)==null) {
 			num="001";
 		}else {
@@ -46,7 +48,7 @@ public class OrderService {
 				num=""+(orderDAO.getMaxNum(orderDTO)+1);
 			}
 		}
-		orderDTO.setOrd_cd((String.valueOf(orderDTO.getOrd_date()).substring(0,10)).replace("-", "")+num);
+		orderDTO.setOrd_cd(orderDAO.getOrdNum()+num+(String.valueOf(orderDTO.getOrd_date()).substring(0,10)).replace("-", ""));
 		
 		orderDAO.orderAdd(orderDTO);
 	}
@@ -77,14 +79,42 @@ public class OrderService {
 	}
 	
 	//팝업
-	public List<OrderDTO> getOrderPop(PageDTO pageDTO) {
+	public List<OrderDTO> getSearchCli(PageDTO pageDTO) {
 		int startRow=(pageDTO.getCurrentPage()-1)*pageDTO.getPageSize()+1;
 		int endRow=startRow+pageDTO.getPageSize()-1;
-
 		pageDTO.setStartRow(startRow);
 		pageDTO.setEndRow(endRow);
-
-		return orderDAO.getOrderPop(pageDTO);
+		
+		return orderDAO.getSearchCli(pageDTO);
+	}
+	
+	public int getSearchCliCount(PageDTO pageDTO) {
+		return orderDAO.getSearchCliCount(pageDTO);
 	}
 
+	public List<OrderDTO> getSearchEmp(PageDTO pageDTO) {
+		int startRow=(pageDTO.getCurrentPage()-1)*pageDTO.getPageSize()+1;
+		int endRow=startRow+pageDTO.getPageSize()-1;
+		pageDTO.setStartRow(startRow);
+		pageDTO.setEndRow(endRow);
+		
+		return orderDAO.getSearchEmp(pageDTO);
+	}
+	
+	public int getSearchEmpCount(PageDTO pageDTO) {
+		return orderDAO.getSearchEmpCount(pageDTO);
+	}
+
+	public List<OrderDTO> getSearchProd(PageDTO pageDTO) {
+		int startRow=(pageDTO.getCurrentPage()-1)*pageDTO.getPageSize()+1;
+		int endRow=startRow+pageDTO.getPageSize()-1;
+		pageDTO.setStartRow(startRow);
+		pageDTO.setEndRow(endRow);
+		
+		return orderDAO.getSearchProd(pageDTO);
+	}
+	
+	public int getSearchProdCount(PageDTO pageDTO) {
+		return orderDAO.getSearchProdCount(pageDTO);
+	}
 }

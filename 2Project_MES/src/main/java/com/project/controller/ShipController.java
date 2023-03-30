@@ -24,6 +24,11 @@ public class ShipController {
 	@RequestMapping(value = "/ship/shipCurrentInfo", method = RequestMethod.GET)
 	public String currentInfo(HttpServletRequest request, Model model) {
 		System.out.println("ShipController currentInfo()");
+		// 검색어 가져오기
+		String search = request.getParameter("search");
+		String search2 = request.getParameter("search2");
+		String search3 = request.getParameter("search3");
+		String search4 = request.getParameter("search4");
 		// 한 화면에 보여줄 글 개수 설정
 		int pageSize = 20;
 		// 현페이지 번호 가져오기
@@ -39,11 +44,17 @@ public class ShipController {
 		pageDTO.setPageSize(pageSize);
 		pageDTO.setPageNum(pageNum);
 		pageDTO.setCurrentPage(currentPage);
+		// 검색어
+		pageDTO.setSearch(search);
+		pageDTO.setSearch2(search2);
+		pageDTO.setSearch3(search3);
+		pageDTO.setSearch4(search4);
 
 		List<ShipDTO> shipCurrentInfo = shipService.shipCurrentInfo(pageDTO);
 
 		// 페이징 처리
-		int count = shipService.shipCurrentCount();
+		// 검색어
+		int count = shipService.shipCurrentCount(pageDTO);
 		int pageBlock = 10;
 		int startPage = (currentPage - 1) / pageBlock * pageBlock + 1;
 		int endPage = startPage + pageBlock - 1;
