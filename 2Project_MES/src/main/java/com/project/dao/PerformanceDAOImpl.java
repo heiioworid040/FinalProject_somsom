@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.project.domain.PageDTO;
 import com.project.domain.PerformanceDTO;
+import com.project.domain.ProductDTO;
 
 @Repository
 public class PerformanceDAOImpl implements PerformanceDAO {
@@ -41,5 +42,21 @@ public class PerformanceDAOImpl implements PerformanceDAO {
 		System.out.println("PerformanceDAOImpl perfCurrJsonList()");
 		
 		return sqlSession.selectList(namespace + ".perfCurrJsonList", prod_cd);
+	}
+
+	@Override
+	public List<ProductDTO> getProductInfo(PageDTO pageDTO) {
+		System.out.println("PerformanceDAOImpl getProductInfo()");
+
+		pageDTO.setStartRow(pageDTO.getStartRow() - 1);
+
+		return sqlSession.selectList(namespace + ".getProductInfo", pageDTO);
+	}
+
+	@Override
+	public int getProductCount(PageDTO pageDTO) {
+		System.out.println("PerformanceDAOImpl getProductCount()");
+
+		return sqlSession.selectOne(namespace + ".getProductCount", pageDTO);
 	}
 }

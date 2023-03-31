@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.project.dao.PerformanceDAO;
 import com.project.domain.PageDTO;
 import com.project.domain.PerformanceDTO;
+import com.project.domain.ProductDTO;
 
 @Service
 public class PerformanceServiceImpl implements PerformanceService {
@@ -42,5 +43,25 @@ public class PerformanceServiceImpl implements PerformanceService {
 		System.out.println("PerformanceServiceImpl perfCurrJsonList()");
 
 		return performanceDAO.perfCurrJsonList(prod_cd);
+	}
+
+	@Override
+	public List<ProductDTO> getProductInfo(PageDTO pageDTO) {
+		System.out.println("PerformanceServiceImpl getProductInfo()");
+		// 시작하는 행번호 구하기
+		int startRow = (pageDTO.getCurrentPage() - 1) * pageDTO.getPageSize() + 1;
+		int endRow = startRow + pageDTO.getPageSize() - 1;
+
+		pageDTO.setStartRow(startRow);
+		pageDTO.setEndRow(endRow);
+
+		return performanceDAO.getProductInfo(pageDTO);
+	}
+
+	@Override
+	public int getProductCount(PageDTO pageDTO) {
+		System.out.println("PerformanceServiceImpl getProductCount()");
+
+		return performanceDAO.getProductCount(pageDTO);
 	}
 }

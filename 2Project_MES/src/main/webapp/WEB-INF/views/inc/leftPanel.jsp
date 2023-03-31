@@ -32,7 +32,7 @@
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-th"></i>기준정보</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="menu-icon fa fa-th"></i><a href="${pageContext.request.contextPath}/performance/performanceCurrentInfo">품목 정보</a></li>
+                            <li><i class="menu-icon fa fa-th"></i><a href="${pageContext.request.contextPath}/product/productlist">품목 정보</a></li>
                             <li><i class="menu-icon fa fa-th"></i><a href="${pageContext.request.contextPath}/req/reqlist">소요량</a></li>
                             <li><i class="menu-icon fa fa-th"></i><a href=" ">라인 정보</a></li>
                             <li><i class="menu-icon fa fa-th"></i><a href="${pageContext.request.contextPath}/client/clientInfo">거래처 정보</a></li>

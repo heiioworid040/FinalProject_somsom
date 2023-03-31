@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>clientInfo</title>
+<title>clientSearchPop</title>
 <meta name="description" content="Ela Admin - HTML5 Admin Template">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -40,81 +40,26 @@
 <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
 <script type="text/javascript">
-	// 체크박스 모두 선택하는 함수
-	function allChk(obj) {
-		var chkObj = document.getElementsByName("chk");
-		var rowCnt = chkObj.length - 1;
-		var check = obj.checked;
-		if (check) {
-			for (var i = 0; i <= rowCnt; i++) {
-				if (chkObj[i].type == "checkbox")
-					chkObj[i].checked = true;
-			}
-		} else {
-			for (var i = 0; i <= rowCnt; i++) {
-				if (chkObj[i].type == "checkbox") {
-					chkObj[i].checked = false;
-				}
-			}
-		}
-	}
-
-	// 체크박스 삭제 메시지 
-	function deleteMsg() {
-		let check = false;
-		with (document.chkDelete) {
-			if (chk.length == undefined) {
-				if (chk.checked) {
-					check = true;
-				}
-			} else {
-				for (let i = 0; i < chk.length; i++) {
-					if (chk[i].checked) {
-						check = true;
-					}
-				}
-			}
-			if (!check) {
-				alert("삭제할 거래처를 선택하세요.");
-				return;
-			} else {
-				if (confirm("선택한 거래처를 삭제하시겠습니까?")) {
-					submit();
-				}
-			}
-		}
+function search(cli_cd) {
+	  // 부모창의 input 요소에 선택한 거래처 코드를 넣어줌
+	  opener.document.getElementById("clientSearchId").value = cli_cd;
+	  // 자식 창을 닫음
+	  self.close();
 	}
 </script>
 </head>
 <body>
-	<!-- Left Panel1 -->
-	<jsp:include page="../inc/leftPanel.jsp" />
-	<!-- Left Panel1 -->
-
-	<!-- Right Panel -->
-	<div id="right-panel" class="right-panel">
-		<!-- Header-->
-		<jsp:include page="../inc/top.jsp" />
-		<!-- Header-->
-
 		<div class="breadcrumbs">
 			<div class="breadcrumbs-inner">
 				<div class="row m-0">
 					<div class="col-sm-4">
 						<div class="page-header float-left">
 							<div class="page-title">
-								<h1>기준정보 관리</h1>
 							</div>
 						</div>
 					</div>
 					<div class="col-sm-8">
 						<div class="page-header float-right">
-							<div class="page-title">
-								<ol class="breadcrumb text-right">
-									<li><a href="#">기준정보 관리</a></li>
-									<li class="active">거래처</li>
-								</ol>
-							</div>
 						</div>
 					</div>
 				</div>
@@ -128,7 +73,7 @@
 						<div class="card m-0">
 							<div class="card-body card-block">
 								<form
-									action="${pageContext.request.contextPath }/client/clientInfo"
+									action="${pageContext.request.contextPath }/client/clientSearchPop"
 									method="get" class="form-inline">
 									<div class="form-group col-6 mb-1">
 										<label class="pr-1 form-control-label">거래처코드</label>&nbsp;&nbsp;<input
@@ -169,52 +114,25 @@
 								<strong class="card-title">거래처</strong>
 							</div>
 							<div class="card-body">
-
-								<!-- 체크박스로 선택해 글 여러개 삭제가능  -->
-								<form name="chkDelete"
-									action="${pageContext.request.contextPath}/client/delete"
-									method="post">
-									<div class="btn-div float-right">
-										<input type="button" class="btn btn-secondary" value="추가"
-											onclick="location.href='${pageContext.request.contextPath}/client/insert'">
-										<input type="button" class="btn btn-secondary" value="삭제"
-											onclick="deleteMsg()">
-									</div>
-									<table id="bootstrap-data-table"
+									<table id="hover_tb"
 										class="table table-striped table-bordered">
 										<thead class="thead-dark">
 											<tr>
-												<th scope="col"><input id="allCheck" type="checkbox"
-													onclick="allChk(this);" /></th>
-												<th scope="col">거래처코드</th>
-												<th scope="col">거래처명</th>
-												<th scope="col">구분</th>
-												<th scope="col">사업자번호</th>
-												<th scope="col">업태</th>
-												<th scope="col">종목</th>
-												<th scope="col">대표자</th>
-												<th scope="col">담당자</th>
-												<th scope="col">주소</th>
-												<th scope="col"></th>
+												<th scope="col" style="width: 20%">거래처코드</th>
+												<th scope="col" style="width: 20%">거래처명</th>
+												<th scope="col" style="width: 20%">구분</th>
+												<th scope="col" style="width: 20%">업태</th>
+												<th scope="col" style="width: 20%">종목</th>
 											</tr>
 										</thead>
 										<tbody>
 											<c:forEach var="clientDTO" items="${clientInfo }">
-												<tr>
-													<th scope="row"><input type="checkbox" name="chk"
-														id="chk" value="${clientDTO.cli_cd }"></th>
-													<td>${clientDTO.cli_cd }</td>
+												<tr onclick="search('${clientDTO.cli_cd }')">
+													<td scope="row">${clientDTO.cli_cd }</td>
 													<td>${clientDTO.cli_nm }</td>
 													<td>${clientDTO.cli_type }</td>
-													<td>${clientDTO.cli_num }</td>
 													<td>${clientDTO.cli_business }</td>
 													<td>${clientDTO.cli_prod }</td>
-													<td>${clientDTO.cli_boss }</td>
-													<td>${clientDTO.cli_emp }</td>
-													<td>${clientDTO.cli_addr }</td>
-													<td><input type="button" class="btn btn-secondary"
-														value="수정"
-														onclick="location.href='${pageContext.request.contextPath}/client/update?cli_cd=${clientDTO.cli_cd}'"></td>
 												</tr>
 											</c:forEach>
 										</tbody>
@@ -226,19 +144,19 @@
 								<div class="pageNum">
 									<c:if test="${pageDTO.startPage > pageDTO.pageBlock }">
 										<a
-											href="${pageContext.request.contextPath}/client/clientInfo?pageNum=${pageDTO.startPage - pageDTO.pageBlock }&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}">[10페이지
+											href="${pageContext.request.contextPath}/client/clientSearchPop?pageNum=${pageDTO.startPage - pageDTO.pageBlock }&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}">[10페이지
 											이전]</a>
 									</c:if>
 
 									<c:forEach var="i" begin="${pageDTO.startPage }"
 										end="${pageDTO.endPage }" step="1">
 										<a
-											href="${pageContext.request.contextPath}/client/clientInfo?pageNum=${i}&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}">${i}</a>
+											href="${pageContext.request.contextPath}/client/clientSearchPop?pageNum=${i}&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}">${i}</a>
 									</c:forEach>
 
 									<c:if test="${pageDTO.endPage < pageDTO.pageCount }">
 										<a
-											href="${pageContext.request.contextPath}/client/clientInfo?pageNum=${pageDTO.startPage + pageDTO.pageBlock }&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}">[10페이지
+											href="${pageContext.request.contextPath}/client/clientSearchPop?pageNum=${pageDTO.startPage + pageDTO.pageBlock }&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}">[10페이지
 											다음]</a>
 									</c:if>
 								</div>
@@ -251,10 +169,7 @@
 		<!-- .content -->
 
 		<div class="clearfix"></div>
-		<!-- 푸터 넣는 곳 -->
-		<jsp:include page="../inc/footer.jsp" />
-		<!-- 푸터 넣는 곳 -->
-	</div>
+<!-- 	</div> -->
 	<!-- /#right-panel -->
 
 	<!-- Right Panel -->
