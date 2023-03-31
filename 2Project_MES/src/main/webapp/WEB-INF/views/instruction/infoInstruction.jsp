@@ -142,12 +142,9 @@
 				<div class="row">
 					<div class="col-lg">
 						<div class="card m-0">
-							<div class="card-body card-block">
-								<form
-									action="${pageContext.request.contextPath}/instruction/instinsert"
-									method="post">
-									<table id="table"
-										class="table table-striped table-bordered">
+							<form action="${pageContext.request.contextPath}/instruction/insertInst" method="post">
+								<div class="card-body card-block">
+									<table id="table" class="table table-striped table-bordered">
 										<thead class="thead-dark">
 											<tr>
 												<th scope="col">라인</th>
@@ -163,49 +160,39 @@
 											<tr>
 												<td scope="row">
 													<div class="input-group">
-														<input type="text" id="sLineInputCd" name="sline_cd" value=""
-															placeholder="Line Code" class="form-control bg-white"
-															disabled>
+														<input type="text" id="sLineInputCd" name="line_cd" value="" placeholder="Line Code" class="form-control bg-white">
 														<div class="input-group-btn">
-															<button type="button" class="btn btn-primary"
-																id="lineModalBtn">검색</button>
+															<button type="button" class="btn btn-primary" id="lineModalBtn">검색</button>
 														</div>
 													</div>
 												</td>
-												<td><input type="text" id="sLineInputNm" name="sline_nm" value="" disabled
-													class="form-control"></td>
+												<td><input type="text" id="sLineInputNm" disabled class="form-control"></td>
 												<td>
 													<div class="input-group">
-														<input type="text" id="sProdInputCd" placeholder="Prod Code"
-															class="form-control bg-white" disabled>
+														<input type="text" id="sProdInputCd" placeholder="Prod Code" class="form-control bg-white" disabled>
 														<div class="input-group-btn">
 															<input type="button" id="prodModalBtn" class="btn btn-primary" value="검색">
 														</div>
 													</div>
 												</td>
-												<td><input type="text" id="sProdInputNm" disabled
-													class="form-control"></td>
-												<td><input type="text" id="sProdInputUnit" disabled
-													class="form-control"></td>
-												<td><input type="text" id="sProdInputCount"
-													name="inst_count" 
-													class="form-control  bg-white"></td>
+												<td><input type="text" id="sProdInputNm" disabled class="form-control"></td>
+												<td><input type="text" id="sProdInputUnit" disabled class="form-control"></td>
+												<td><input type="text" id="sProdInputCount" name="inst_count" class="form-control  bg-white"></td>
 												<td>
 													<div class="input-group">
-														<input type="text" id="sOrderInputCd" name="ord_cd" placeholder="Order Code" disabled class="form-control">
+														<input type="text" id="sOrderInputCd" name="ord_cd" value="" placeholder="Order Code" class="form-control">
 														<div class="input-group-btn">
 															<input type="button" class="btn btn-primary" id="orderModalBtn" value="검색">
 														</div>
 													</div>
 												</td>
-												<td><input type="text" id="sClientInputNm" disabled
-													class="form-control"></td>
+												<td><input type="text" id="sClientInputNm" disabled class="form-control"></td>
 											</tr>
 										</tbody>
 									</table>
-									<button type="submit" class="btn btn-primary col-2 float-right">추가</button>
-								</form>
-							</div>
+									<input type="submit"  class="btn btn-primary col-2 float-right" value="추가">
+								</div>
+							</form>
 						</div>
 					</div>
 				</div>
@@ -222,8 +209,7 @@
 								<strong class="card-title">작업지시</strong>
 							</div>
 							<div class="card-body">
-								<table id="bootstrap-data-table"
-									class="table table-striped table-bordered">
+								<table class="table table-striped table-bordered">
 									<thead class="thead-dark">
 										<tr>
 											<th scope="col">지시번호</th>
@@ -260,37 +246,34 @@
 								</table>
 								<!-- 페이징 -->
 								<div class="col-sm-12 col-md-7">
-									<div class="dataTables_paginate paging_simple_numbers"
-										id="bootstrap-data-table_paginate">
+									<div class="dataTables_paginate paging_simple_numbers">
 										<ul class="pagination">
-										<c:if test="${pageDTO.startPage > pageDTO.pageBlock }">
-											<li class="paginate_button page-item previous disabled" id="bootstrap-data-table_previous">
+										<c:if test="${pageDTO.startPage >= pageDTO.pageBlock }">
+											<li class="paginate_button page-item previous disabled">
 												<a href="${pageContext.request.contextPath}/instruction/infoInst?pageNum=${pageDTO.startPage - pageDTO.pageBlock}"
-												aria-controls="bootstrap-data-table" data-dt-idx="0"
-												tabindex="0" class="page-link">Previous</a></li>
+												class="page-link">Previous</a></li>
 										</c:if>
 										<c:if test="${pageDTO.startPage < pageDTO.pageBlock }">
-											<li class="paginate_button page-item previous" id="bootstrap-data-table_previous">
+											<li class="ppaginate_button page-item previous" >
 												<a href="${pageContext.request.contextPath}/instruction/infoInst?pageNum=${pageDTO.startPage - pageDTO.pageBlock}"
-												aria-controls="bootstrap-data-table" data-dt-idx="0"
-												tabindex="0" class="page-link">Previous</a></li>
+												class="page-link">Previous</a></li>
 										</c:if>
+										
 										<c:forEach var="i" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1">
-											<li class="paginate_button page-item active"><a href="${pageContext.request.contextPath}/instruction/infoInst?pageNum=${i}"
-												aria-controls="bootstrap-data-table" data-dt-idx="1"
-												tabindex="0" class="page-link">${i}</a></li>
+											<li class="paginate_button page-item ">
+												<a class="page-link" href="${pageContext.request.contextPath}/instruction/infoInst?pageNum=${i}">${i}</a>
+											</li>
 										</c:forEach>
-										<c:if test="${pageDTO.endPage > pageDTO.pageCount }">
-											<li class="paginate_button page-item next disabled"
-												id="bootstrap-data-table_next"><a href="${pageContext.request.contextPath}/instruction/infoInst?pageNum=${pageDTO.startPage + pageDTO.pageBlock}"
-												aria-controls="bootstrap-data-table" data-dt-idx="7"
-												tabindex="0" class="page-link">Next</a></li>
+										
+										<c:if test="${pageDTO.endPage >= pageDTO.pageCount }">
+											<li class="paginate_button page-item next disabled" id="bootstrap-data-table_next">
+												<a href="${pageContext.request.contextPath}/instruction/infoInst?pageNum=${pageDTO.startPage + pageDTO.pageBlock}" class="page-link">Next</a>
+											</li>
 										</c:if>
 										<c:if test="${pageDTO.endPage < pageDTO.pageCount }">
-											<li class="paginate_button page-item next "
-												id="bootstrap-data-table_next"><a href="${pageContext.request.contextPath}/instruction/infoInst?pageNum=${pageDTO.startPage + pageDTO.pageBlock}"
-												aria-controls="bootstrap-data-table" data-dt-idx="7"
-												tabindex="0" class="page-link">Next</a></li>
+											<li class="paginate_button page-item next" id="bootstrap-data-table_next">
+												<a href="${pageContext.request.contextPath}/instruction/infoInst?pageNum=${pageDTO.startPage + pageDTO.pageBlock}" class="page-link">Next</a>
+											</li>
 										</c:if>
 										</ul>
 									</div>

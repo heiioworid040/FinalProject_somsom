@@ -9,9 +9,9 @@ public interface InstructionDAO {
 	
 	public List<InstructionDTO> getInstList(PageDTO pageDTO);
 	
-	public int getInstCount();
+	public int getInstCount(PageDTO pageDTO);
 
 	public void insertInst(InstructionDTO instructionDTO);
 
-	public int maxInst();
+	public Integer getMaxInst();
 }
