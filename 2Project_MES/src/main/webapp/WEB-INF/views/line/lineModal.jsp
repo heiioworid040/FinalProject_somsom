@@ -89,7 +89,8 @@
 	 	var sline_cd = td.eq(0).text();
 	 	var sline_nm = td.eq(1).text();
 	 	
-	 	$('#sLineInputCd').val(sline_cd);
+	 	$('input[name=line_cd]').attr('value',sline_cd);
+// 	 	$('#sLineInputCd').val(sline_cd);
 	 	$('#sLineInputNm').val(sline_nm);
 	 	
 	 	jQuery('#lineModal').modal("hide");

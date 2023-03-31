@@ -19,7 +19,7 @@
     join client c
 	on p.cli_cd=c.cli_cd
 	order by inst_cd desc
-    limit #{startRow}, #{pageSize}
+    limit #{startRow} , #{pageSize}
     </select>
 
     <select id="getInstCount" resultType="java.lang.Integer">
@@ -27,12 +27,12 @@
     </select>
 	
 	<insert id="insertInst">
-	insert into instruction(inst_cd, line_cd, ord_cd, inst_st, inst_date, inst_count, inst_fcount)
-	values(#{inst_cd}, #{line_cd}, #{ord_cd}, #{inst_st}, #{inst_date}, #{inst_count}, #{inst_fcount})
+	insert into instruction(inst_cd, line_cd, ord_cd, inst_st, inst_date, inst_count)
+	values(#{inst_cd}, #{line_cd}, #{ord_cd}, #{inst_st}, #{inst_date}, #{inst_count})
 	</insert>
 	
-    <select id="maxInst" resultType="java.lang.Integer">
-    SELECT REGEXP_REPLACE(Max(inst_cd), '[a-z]', '')+1
+    <select id="getMaxInst" resultType="java.lang.Integer">
+    SELECT MAX(REGEXP_REPLACE(inst_cd, '[a-z]', ''))+1
 	from instruction
     </select>
 <!-- id-"이름" spl구문 하나하나 이름
