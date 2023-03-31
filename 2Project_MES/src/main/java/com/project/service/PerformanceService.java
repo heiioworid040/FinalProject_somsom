@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.project.domain.PageDTO;
 import com.project.domain.PerformanceDTO;
+import com.project.domain.ProductDTO;
 
 public interface PerformanceService {
 	public List<PerformanceDTO> performanceCurrentInfo(PageDTO pageDTO);
@@ -12,4 +13,8 @@ public interface PerformanceService {
 	public int performanceCurrentCount(PageDTO pageDTO);
 
 	public List<PerformanceDTO> perfCurrJsonList(String prod_cd);
+
+	public List<ProductDTO> getProductInfo(PageDTO pageDTO);
+
+	public int getProductCount(PageDTO pageDTO);
 }
