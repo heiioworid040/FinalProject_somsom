@@ -33,9 +33,14 @@
 		</if>
 	</select>
 
+<!-- 	<insert id="insertEmployee"> -->
+<!-- 		insert into employee(emp_cd, emp_nm, emp_pass, emp_dept, emp_position, emp_email, emp_tel) -->
+<!-- 		values(concat(year(now()),#{emp_cd}), #{emp_nm}, #{emp_pass}, #{emp_dept}, #{emp_position}, #{emp_email}, #{emp_tel}) -->
+<!-- 	</insert> -->
+	
 	<insert id="insertEmployee">
 		insert into employee(emp_cd, emp_nm, emp_pass, emp_dept, emp_position, emp_email, emp_tel)
-		values(concat(year(now()),#{emp_cd}), #{emp_nm}, #{emp_pass}, #{emp_dept}, #{emp_position}, #{emp_email}, #{emp_tel})
+		values(concat(year(now()),#{emp_cd}), #{emp_nm}, substr(#{emp_tel},8), #{emp_dept}, #{emp_position}, #{emp_email}, #{emp_tel})
 	</insert>
 	
 	<delete id="deleteEmployee">

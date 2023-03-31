@@ -74,7 +74,6 @@ $(document).ready(function(){
 				}
 			}
 		});
-	   
 	   });
 });
 
@@ -90,11 +89,12 @@ $(document).ready(function(){
         $("#emp_nm").focus();
         return false;
       }
-      if($("#emp_pass").val()==""){
-        alert("비밀번호를 입력해주세요.");
-        $("#emp_pass").focus();
-        return false;
-      }
+//       if($("#emp_pass").val()==""){
+//         alert("비밀번호를 입력해주세요.");
+//         $("#emp_pass").focus();
+//         return false;
+//       }
+      
       if($("#emp_position").val()==""){
           alert("직책을 입력해주세요.");
           $("#emp_position").focus();
