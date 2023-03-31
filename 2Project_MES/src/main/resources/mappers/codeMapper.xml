@@ -51,7 +51,7 @@
 	<select id="getCodeList3" resultType="com.project.domain.CodeDTO">
 		select code_cd, code_nm, code_num, code_note from code
 		where code_grp = #{code_grp}
-		order by code_cd	
+		order by code_num	
 	</select>
 
 
