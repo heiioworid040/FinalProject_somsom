@@ -2,12 +2,16 @@ package com.project.domain;
 
 import java.sql.Timestamp;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class OrderDTO extends ProductDTO {
 	private String ord_cd;
 	private String emp_cd;
 	private String emp_nm;
 	private String cli_cd;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private Timestamp ord_date;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private Timestamp ord_d_date;
 	private int ord_count;
 	private int ship_count;

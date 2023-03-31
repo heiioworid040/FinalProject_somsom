@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <div class="modal fade" id="orderModal" tabindex="-1" role="dialog"
 	aria-labelledby="largeModalLabel" style="display: none;"
 	aria-hidden="true">
@@ -23,6 +24,8 @@
 										<tr>
 											<th scope="col">수주번호</th>
 											<th scope="col">상품코드</th>
+											<th scope="col">상품명</th>
+											<th scope="col">담당자 코드</th>
 											<th scope="col">담당자</th>
 											<th scope="col">거래처</th>
 											<th scope="col">수주일자</th>
@@ -58,7 +61,7 @@
 					dataType:'json',
 					success:function(orderarr){
 						jQuery.each(orderarr,function(index,item){
-							jQuery('#orderTableBody').append('<tr><td scope="row">'+item.ord_cd+'</td><td id="order">'+item.prod_cd+'</td><td class="hidden">'+item.prod_nm+'</td><td class="hidden">'+item.prod_unit+'</td><td>'+item.emp_cd+'</td><td>'+item.cli_nm +'</td><td>'+item.ord_date+'</td><td>'+item.ord_d_date +'</td><td>'+item.ord_count+'</td></tr>');
+							jQuery('#orderTableBody').append('<tr><td scope="row">'+item.ord_cd+'</td><td>'+item.prod_cd+'</td><td>'+item.prod_nm+'</td><td class="d-none">'+item.prod_unit+'</td><td>'+item.emp_cd+'</td><td>'+item.emp_nm +'</td><td>'+item.cli_nm+'</td><td>'+item.ord_date+'</td><td>'+item.ord_d_date +'</td><td>'+item.ord_count+'</td></tr>');
 						});
 					}
 				});
@@ -88,11 +91,11 @@
 		console.log("클릭한 Row의 모든 데이터 : "+tr.text());
 			
 	 	var sorder_cd = td.eq(0).text();
-	 	var scli_nm = td.eq(3).text();
 	 	var sprod_cd = td.eq(1).text();
 	 	var sprod_nm = td.eq(2).text();
 	 	var sprod_unit = td.eq(3).text();
-	 	var sord_count = td.eq(8).text();
+	 	var scli_nm = td.eq(6).text();
+	 	var sord_count = td.eq(9).text();
 		
 	 	$('#sOrderInputCd').val(sorder_cd);
 	 	$('#sClientInputNm').val(scli_nm);
