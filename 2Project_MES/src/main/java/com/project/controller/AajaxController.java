@@ -167,6 +167,7 @@ public class AajaxController {
 	}
 	@RequestMapping(value = "/ajax/prodModal", method = RequestMethod.GET)
 	public ResponseEntity<List<ProductDTO>> getProdModal(HttpServletRequest request) {
+		
 		System.out.println("ProductController getProdModal");
 		int pageSize=10;
 		
