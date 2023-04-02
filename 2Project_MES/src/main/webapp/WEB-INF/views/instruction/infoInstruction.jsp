@@ -75,36 +75,58 @@
 				</div>
 			</div>
 		</div>
-		<!-- 	검색창 -->
+		<!-- 	검색창 search(오브젝트)-->
 		<div class="content">
 			<div class="animated fadeIn">
 				<div class="row">
 					<div class="col-lg">
 						<div class="card m-0">
 							<div class="card-body card-block">
-								<form action="#" method="post" class="form-inline">
+								<form action="${pageContext.request.contextPath}/instruction/infoInst" class="form-inline" method="get">
 									<div class="form-group col-6 mb-1">
-										<label for="exampleInputName2" class="pr-1 form-control-label">라인</label>
-										<div class="p-0 col">
-											<select name="fLine " aria-label="filter" id="select" class="form-control">
-												<option value="0">--</option>
-												<c:forEach var="lineDTO" items="${searchLine }">
-													<option>${lineDTO.line_nm}(${lineDTO.line_cd })</option>
-												</c:forEach>
-											</select>
+										<label for="searchLine" class="pr-1 form-control-label">라인</label>
+										<div class="input-group modalP">
+											<c:if test="${empty pageDTO.search }">
+											<input type="text" id="modalLineCd" name="searchLineCd" placeholder="Line Code" class="form-control bg-white" readonly>
+											</c:if>
+											<c:if test="${not empty pageDTO.search }">
+											<input type="text" id="modalLineCd" name="searchLineCd" value="${pageDTO.search }" placeholder="Line Code" class="form-control bg-white" readonly>
+											</c:if>
+											<div class="input-group-btn">
+												<input type="button" class="btn btn-primary ml-2" id="lineModalBtn" value="검색">
+											</div>
 										</div>
 									</div>
 									<div class="form-group col-6 mb-1">
-										<label for="exampleInputName2" class="pr-1  form-control-label">지시일자</label>
-										<input type="date" aria-label="filter" id="order_d_date1" class="form-control ">~
-										<input type="date" aria-label="filter" id="order_d_date2" class="form-control">
+										<label for="searchOrdDate" class="pr-1  form-control-label">지시일자</label>
+										<c:if test="${empty pageDTO.search2 }">
+										<input type="date" id="searchOrdDate1" name="searchOrdDate1" class="form-control" >
+										</c:if>
+										<c:if test="${not empty pageDTO.search2 }">
+										<input type="date" id="searchOrdDate1" name="searchOrdDate1" class="form-control" value="${pageDTO.search2 }">
+										</c:if>
+										~
+										<c:if test="${empty pageDTO.search3 }">
+										<input type="date" id="searchOrdDate2" name="searchOrdDate2" class="form-control">
+										</c:if>
+										<c:if test="${not empty pageDTO.search3 }">
+										<input type="date" id="searchOrdDate2" name="searchOrdDate2" class="form-control" value="${pageDTO.search3 }">
+										</c:if>
 									</div>
 									<div class="form-group col-6 mt-1">
-										<label for="exampleInputName2" class="pr-1  form-control-label">품번</label>
-										<input type="text" aria-label="filter" id="" class="form-control ">
+										<label for="searchProd" class="pr-1 form-control-label">품번</label>
+										<c:if test="${empty pageDTO.search4 }">
+										<input type="text" aria-label="filter" id="searchProdCd" name="searchProdCd" placeholder="Prod Code" class="form-control bg-white" readonly>
+										</c:if>
+										<c:if test="${not empty pageDTO.search4 }">
+										<input type="text" aria-label="filter" id="searchProdCd" name="searchProdCd" placeholder="Prod Code" class="form-control bg-white" value="${pageDTO.search4 }" readonly>
+										</c:if>
+										<input type="text" id="searchProdNm" disabled class="form-control ml-2">										
 										<div class="input-group">
-											<div class="input-group-addon">
+											<div class="input-group">
+												<button id="prodModalBtn" class="btn btn-primary ml-2">검색
 												<i class="ti-search"></i>
+												</button>
 											</div>
 										</div>
 									</div>
@@ -113,20 +135,24 @@
 										<div class="form-control border-0">
 											<div class="form-check-inline form-check">
 												<label for="inline-checkbox1" class="form-check-label ">
-													<input type="checkbox" id="inline-checkbox1"
-													name="inline-checkbox1" value="option1"
-													class="form-check-input">지시
-												</label> <label for="inline-checkbox2" class="form-check-label ">
+													<input type="checkbox" id="inline-checkbox1" name="searchInstSt1" value="대기" class="form-check-input" checked>대기
+												</label>
+												<label for="inline-checkbox2" class="form-check-label ">
 													<input type="checkbox" id="inline-checkbox2"
-													name="inline-checkbox2" value="option2"
-													class="form-check-input">시작
-												</label> <label for="inline-checkbox3" class="form-check-label ">
+													name="searchInstSt2" value="진행"
+													class="form-check-input" checked>진행
+												</label>
+												<label for="inline-checkbox3" class="form-check-label ">
 													<input type="checkbox" id="inline-checkbox3"
-													name="inline-checkbox3" value="option3"
-													class="form-check-input">마감
+													name="searchInstSt3" value="완료"
+													class="form-check-input" checked>완료
 												</label>
 											</div>
-										</div>
+										</div>									
+									</div>
+									<div class="col p-0">
+									<input type="submit" class="btn btn-primary col-2 float-right ml-3" id="searchInst" value="검색">
+									<input type="reset" class="btn btn-secondary col-1 float-right" value="취소">
 									</div>
 								</form>
 							</div>
@@ -136,7 +162,7 @@
 			</div>
 		</div>
 
-		<!-- 	편집창 -->
+		<!-- 	편집창 insert(오브젝트)-->
 		<div class="content pt-0">
 			<div class="animated fadeIn">
 				<div class="row">
@@ -159,38 +185,36 @@
 										<tbody>
 											<tr>
 												<td scope="row">
-													<div class="input-group">
-														<input type="text" id="sLineInputCd" name="line_cd" value="" placeholder="Line Code" class="form-control bg-white">
+													<div class="input-group modalP">
+														<input type="text" id="modalLineCd" name="line_cd" value="" placeholder="Line Code" class="form-control bg-white" readonly>
 														<div class="input-group-btn">
-															<button type="button" class="btn btn-primary" id="lineModalBtn">검색</button>
+															<input type="button" class="btn btn-primary" id="lineModalBtn" value="검색">
 														</div>
 													</div>
 												</td>
-												<td><input type="text" id="sLineInputNm" disabled class="form-control"></td>
+												<td><input type="text" id="insertLineNm" disabled class="form-control"></td>
 												<td>
 													<div class="input-group">
-														<input type="text" id="sProdInputCd" placeholder="Prod Code" class="form-control bg-white" disabled>
-														<div class="input-group-btn">
-															<input type="button" id="prodModalBtn" class="btn btn-primary" value="검색">
-														</div>
+														<input type="text" id="insertProdCd" placeholder="Prod Code" class="form-control bg-white" disabled>
 													</div>
 												</td>
-												<td><input type="text" id="sProdInputNm" disabled class="form-control"></td>
-												<td><input type="text" id="sProdInputUnit" disabled class="form-control"></td>
-												<td><input type="text" id="sProdInputCount" name="inst_count" class="form-control  bg-white"></td>
+												<td><input type="text" id="insertProdNm" disabled class="form-control"></td>
+												<td><input type="text" id="insertProdUnit" disabled class="form-control"></td>
+												<td><input type="text" id="insertProdCount" name="inst_count" class="form-control  bg-white"></td>
 												<td>
 													<div class="input-group">
-														<input type="text" id="sOrderInputCd" name="ord_cd" value="" placeholder="Order Code" class="form-control">
+														<input type="text" id="insertOrderCd" name="ord_cd" value="" placeholder="Order Code" class="form-control bg-white" readonly>
 														<div class="input-group-btn">
 															<input type="button" class="btn btn-primary" id="orderModalBtn" value="검색">
 														</div>
 													</div>
 												</td>
-												<td><input type="text" id="sClientInputNm" disabled class="form-control"></td>
+												<td><input type="text" id="insertClientNm" disabled class="form-control"></td>
 											</tr>
 										</tbody>
 									</table>
-									<input type="submit"  class="btn btn-primary col-2 float-right" value="추가">
+									<input type="submit"  class="btn btn-primary col-2 float-right ml-3" id="insertInstBtn" value="추가">
+									<input type="reset"  class="btn btn-secondary col-1 float-right" value="취소">
 								</div>
 							</form>
 						</div>
@@ -248,31 +272,31 @@
 								<div class="col-sm-12 col-md-7">
 									<div class="dataTables_paginate paging_simple_numbers">
 										<ul class="pagination">
-										<c:if test="${pageDTO.startPage >= pageDTO.pageBlock }">
+										<c:if test="${pageDTO.startPage <= pageDTO.pageBlock }">
 											<li class="paginate_button page-item previous disabled">
-												<a href="${pageContext.request.contextPath}/instruction/infoInst?pageNum=${pageDTO.startPage - pageDTO.pageBlock}"
+												<a href="${pageContext.request.contextPath}/instruction/infoInst?pageNum=${pageDTO.startPage - pageDTO.pageBlock}&search=${pageDTO.search}"
 												class="page-link">Previous</a></li>
 										</c:if>
-										<c:if test="${pageDTO.startPage < pageDTO.pageBlock }">
+										<c:if test="${pageDTO.startPage > pageDTO.pageBlock }">
 											<li class="ppaginate_button page-item previous" >
-												<a href="${pageContext.request.contextPath}/instruction/infoInst?pageNum=${pageDTO.startPage - pageDTO.pageBlock}"
+												<a href="${pageContext.request.contextPath}/instruction/infoInst?pageNum=${pageDTO.startPage - pageDTO.pageBlock}&search=${pageDTO.search}"
 												class="page-link">Previous</a></li>
 										</c:if>
 										
 										<c:forEach var="i" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1">
 											<li class="paginate_button page-item ">
-												<a class="page-link" href="${pageContext.request.contextPath}/instruction/infoInst?pageNum=${i}">${i}</a>
+												<a class="page-link" href="${pageContext.request.contextPath}/instruction/infoInst?pageNum=${i}&search=${pageDTO.search}">${i}</a>
 											</li>
 										</c:forEach>
 										
 										<c:if test="${pageDTO.endPage >= pageDTO.pageCount }">
 											<li class="paginate_button page-item next disabled" id="bootstrap-data-table_next">
-												<a href="${pageContext.request.contextPath}/instruction/infoInst?pageNum=${pageDTO.startPage + pageDTO.pageBlock}" class="page-link">Next</a>
+												<a href="${pageContext.request.contextPath}/instruction/infoInst?pageNum=${pageDTO.startPage + pageDTO.pageBlock}&search=${pageDTO.search}" class="page-link">Next</a>
 											</li>
 										</c:if>
 										<c:if test="${pageDTO.endPage < pageDTO.pageCount }">
 											<li class="paginate_button page-item next" id="bootstrap-data-table_next">
-												<a href="${pageContext.request.contextPath}/instruction/infoInst?pageNum=${pageDTO.startPage + pageDTO.pageBlock}" class="page-link">Next</a>
+												<a href="${pageContext.request.contextPath}/instruction/infoInst?pageNum=${pageDTO.startPage + pageDTO.pageBlock}&search=${pageDTO.search}" class="page-link">Next</a>
 											</li>
 										</c:if>
 										</ul>
@@ -298,8 +322,19 @@
 
 	<!-- Scripts -->
 
-	<script
-		src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).on("click", "#insertInstBtn", function(){
+			if($('#insertLineCd').val() == ''){
+				alert("라인코드를 입력해주세요.");
+				return false;
+			}
+			if($('#insertOrderCd').val() == ''){
+				alert("수주번호를 입력해주세요.");
+				return false;
+			}
+		});
+	</script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
 	<script

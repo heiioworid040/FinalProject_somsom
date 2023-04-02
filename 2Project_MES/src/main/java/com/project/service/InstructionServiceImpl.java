@@ -46,7 +46,7 @@ public class InstructionServiceImpl implements InstructionService{
 		}else if(instDAO.getMaxInst()<100){
 			instructionDTO.setInst_cd("Wi"+0+instDAO.getMaxInst());
 		}else {
-			instructionDTO.setInst_cd("Wi"+instDAO.getMaxInst());			
+			instructionDTO.setInst_cd("Wi"+instDAO.getMaxInst());		
 		}
 		System.out.println(instructionDTO.getLine_cd());
 		instructionDTO.setInst_st("대기");

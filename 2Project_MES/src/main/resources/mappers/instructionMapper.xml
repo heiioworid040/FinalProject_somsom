@@ -18,6 +18,10 @@
 	on p.prod_cd=o.prod_cd
     join client c
 	on p.cli_cd=c.cli_cd
+	where 1=1
+	<if test='search != null'>
+		and i.line_cd = #{search }
+	</if>
 	order by inst_cd desc
     limit #{startRow} , #{pageSize}
     </select>

@@ -90,14 +90,13 @@
 		// tr.text()는 클릭된 Row 즉 tr에 있는 모든 값을 가져온다.
 		console.log("클릭한 Row의 모든 데이터 : "+tr.text());
 			
-	 	var sprod_cd = td.eq(0).text();
-	 	var sprod_nm = td.eq(1).text();
-	 	var sprod_unit = td.eq(3).text();
+	 	var prod_cd = td.eq(0).text();
+	 	var prod_nm = td.eq(1).text();
+	 	var prod_unit = td.eq(3).text();
 
 	 	
-	 	$('#sProdInputCd').val(sprod_cd);
-	 	$('#sProdInputNm').val(sprod_nm);
-	 	$('#sProdInputUnit').val(sprod_unit);
+	 	$('#searchProdCd').val(prod_cd);
+	 	$('#searchProdNm').val(prod_nm);
 
 
 	 	jQuery('#prodModal').modal("hide");
