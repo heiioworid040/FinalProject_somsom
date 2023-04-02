@@ -101,13 +101,13 @@ function fun2() {
 										<span class="search-cl">거래처</span><input type="text" id="cliS_cd" name="cli" readonly><input type="text" id="cliS_nm" readonly><button type="button" class="input-group-addon search-btn" style="cursor: pointer;" onclick="searchPop('cliS')"><i class="ti-search"></i></button>
 									</div>
 									<div class="search-div">
-										<span class="search-cl2">수주일자</span><input type="date" id="ord_date" name="ord_date"><input type="date" id="ord_date_end" name="ord_date_end">
+										<span class="search-cl2">수주일자</span><input type="date" id="ordS_date" name="ord_date"><input type="date" id="ordS_date_end" name="ord_date_end">
 									</div>
 									<div class="search-div">
 										<span class="search-cl">담당자</span><input type="text" id="empS_cd" name="emp" readonly><input type="text" id="empS_nm" readonly><button type="button" class="input-group-addon search-btn" style="cursor: pointer;" onclick="searchPop('empS')"><i class="ti-search"></i></button>
 									</div>
 									<div class="search-div">
-										<span class="search-cl">납품예정일</span><input type="date" id="ord_d_date" name="ord_d_date"><input type="date" id="ord_d_date_end" name="ord_d_date_end">
+										<span class="search-cl">납품예정일</span><input type="date" id="ordS_d_date" name="ord_d_date"><input type="date" id="ordS_d_date_end" name="ord_d_date_end">
 									</div>
 									<div class="search-div">
 										<span class="search-cl2">품목</span><input type="text" id="prodS_cd" name="prod" readonly><input type="text" id="prodS_nm" readonly><button type="button" class="input-group-addon search-btn" style="cursor: pointer;" onclick="searchPop('prodS')"><i class="ti-search"></i></button>
@@ -140,7 +140,7 @@ function fun2() {
 								<strong class="card-title">수주현황</strong>
 							</div>
 							<div class="card-body">
-								<table id="hover_tb" class="table table-striped table-bordered">
+								<table class="table table-striped table-bordered">
 									<thead class="thead-dark">
 										<tr>
 											<th scope="col"></th>
