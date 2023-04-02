@@ -205,6 +205,15 @@ public class AajaxController {
 		System.out.println(prodList.get(0).getProd_cd());
 		return prodListE;
 	}
+	
+	@RequestMapping(value = "/order/orderInsertD", method = RequestMethod.GET)
+	public ResponseEntity<OrderDTO> orderInsertD(HttpServletRequest request) {
+		String ord_cd=(String)request.getParameter("ord_cd");
+		OrderDTO orderDTO=orderService.getOrderInsert(ord_cd);
+		ResponseEntity<OrderDTO> entity=new ResponseEntity<OrderDTO>(orderDTO,HttpStatus.OK);
+		
+		return entity;
+	}
 }
 	
 	

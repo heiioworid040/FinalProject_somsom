@@ -1,7 +1,6 @@
 package com.project.controller;
 
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -29,7 +28,7 @@ public class OrderController {
 			String nm=(String)request.getParameter("nm");
 			String info=(String)request.getParameter("info");
 			
-			int pageSize=10;
+			int pageSize=5;
 			String pageNum=request.getParameter("pageNum");
 			if(pageNum==null) pageNum="1";
 			int currentPage=Integer.valueOf(pageNum);
@@ -86,18 +85,6 @@ public class OrderController {
 			
 			int count=orderService.getOrderCount();
 			pageDTO.setCount(count);
-			
-			SimpleDateFormat dfm=new SimpleDateFormat("yyyy-MM-dd");
-			
-			String ord_cd=(String)request.getParameter("ord_cd");
-			if(ord_cd!=null) {
-				OrderDTO orderDTO=orderService.getOrderInsert(ord_cd);
-				String ord_dateD=dfm.format(orderDTO.getOrd_date());
-				String ord_d_dateD=dfm.format(orderDTO.getOrd_d_date());
-				model.addAttribute("ord_date", ord_dateD);
-				model.addAttribute("ord_d_date", ord_d_dateD);
-				model.addAttribute("orderDTO", orderDTO);
-			}
 
 			model.addAttribute("pageDTO", pageDTO);
 			model.addAttribute("orderInsertList", orderInsertList);
@@ -126,7 +113,6 @@ public class OrderController {
 			}else if(btn_del!=null){
 				orderService.orderDel(orderDTO);
 			}
-			
 			return "redirect:/order/orderInsert";
 		}
 		
