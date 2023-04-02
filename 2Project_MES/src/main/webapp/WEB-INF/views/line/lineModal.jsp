@@ -48,33 +48,31 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).on("click", "#lineModalBtn", function(){
-		event.preventDefault();
-			try {
-				jQuery('#lineTableBody').html('');
-				jQuery.ajax({
-					type : 'get',
-					url:'${pageContext.request.contextPath}/ajax/lineModal',
-					dataType:'json',
-					success:function(linearr){
-						jQuery.each(linearr,function(index,item){
-							jQuery('#lineTableBody').append('<tr><td scope="row">'+item.line_cd+'</td><td id="line">'+item.line_nm+'</td><td>'+item.line_process+'</td><td>'+item.line_place +'</td><td>'+item.line_num +'</td><td>'+item.line_st +'</td><td>'+item.line_note+'</td></tr>');
-						});
-					}
-				});
-			} catch (e) {
-				  console.log(e instanceof TypeError); // true
-				  console.log(e.message);              // "null has no properties"
-				  console.log(e.name);                 // "TypeError"
-				  console.log(e.fileName);             // "Scratchpad/1"
-				  console.log(e.lineNumber);           // 2
-				  console.log(e.columnNumber);         // 2
-				  console.log(e.stack);                // "@Scratchpad/2:2:3\n"
-
-			}
-			jQuery('#lineModal').modal("show");
-		});
-	
+		var clickBtnDiv = $(this).closest('.modalP');
+		try {
+			jQuery('#lineTableBody').html('');
+			jQuery.ajax({
+				type : 'get',
+				url:'${pageContext.request.contextPath}/ajax/lineModal',
+				dataType:'json',
+				success:function(linearr){
+					jQuery.each(linearr,function(index,item){
+						jQuery('#lineTableBody').append('<tr><td scope="row">'+item.line_cd+'</td><td id="line">'+item.line_nm+'</td><td>'+item.line_process+'</td><td>'+item.line_place +'</td><td>'+item.line_num +'</td><td>'+item.line_st +'</td><td>'+item.line_note+'</td></tr>');
+					});
+				}
+			});
+		} catch (e) {
+			console.log(e instanceof TypeError); // true
+			console.log(e.message);              // "null has no properties"
+			console.log(e.name);                 // "TypeError"
+			console.log(e.fileName);             // "Scratchpad/1"
+			console.log(e.lineNumber);           // 2
+			console.log(e.columnNumber);         // 2
+			console.log(e.stack);                // "@Scratchpad/2:2:3\n"
+		}
+		jQuery('#lineModal').modal("show");
 		// 테이블의 Row 클릭시 값 가져오기
+		
 	$(document).on("click", "#lineTableBody tr", function(){
 		var str = ""
 		var lineArr = new Array();	// 배열 선언
@@ -85,14 +83,17 @@
 			
 		// tr.text()는 클릭된 Row 즉 tr에 있는 모든 값을 가져온다.
 		console.log("클릭한 Row의 모든 데이터 : "+tr.text());
+		console.log(clickBtnDiv);
+		console.log(clickBtnDiv.closest('#insertLineCd'));
 			
-	 	var sline_cd = td.eq(0).text();
-	 	var sline_nm = td.eq(1).text();
-	 	
-	 	$('input[name=line_cd]').attr('value',sline_cd);
-// 	 	$('#sLineInputCd').val(sline_cd);
-	 	$('#sLineInputNm').val(sline_nm);
+	 	var line_cd = td.eq(0).text();
+	 	var line_nm = td.eq(1).text();
+// 	 	clickBtnDiv.children('input[name=line_cd]').val(line_cd);
+	 	clickBtnDiv.children('#modalLineCd').val(line_cd);
+	 	$('#insertLineNm').val(line_nm);
 	 	
 	 	jQuery('#lineModal').modal("hide");
 		});
+	});
+	
 </script>

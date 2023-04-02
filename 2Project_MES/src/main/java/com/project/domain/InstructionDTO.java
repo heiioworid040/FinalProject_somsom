@@ -1,7 +1,6 @@
 package com.project.domain;
 
 import java.sql.Timestamp;
-
 public class InstructionDTO extends LineDTO{
 
 	private String inst_cd;
