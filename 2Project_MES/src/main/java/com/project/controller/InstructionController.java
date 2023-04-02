@@ -12,27 +12,29 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.project.domain.PageDTO;
 import com.project.domain.InstructionDTO;
-import com.project.domain.LineDTO;
 import com.project.service.InstructionService;
-import com.project.service.LineService;
 
 @Controller
 public class InstructionController {
 	private InstructionService instService;
-	private LineService lineService;
+
 	
 	@Inject
 	public void setInstService(InstructionService instService) {
 		this.instService = instService;
 	}
-	@Inject
-	public void setLineService(LineService lineService) {
-		this.lineService = lineService;
-	}
 
 	@RequestMapping(value = "/instruction/infoInst", method = RequestMethod.GET)
-	public String getInfoInst(HttpServletRequest request, Model model,  Model model2) {
+	public String getInfoInst(HttpServletRequest request, Model model) {
 		System.out.println("instructionController getInfoInst()");
+		String searchLine=request.getParameter("searchLineCd");
+		String searchOrdDate1 =request.getParameter("searchOrdDate1");
+		String searchOrdDate2 =request.getParameter("searchOrdDate2");
+		String searchProdCd =request.getParameter("searchProdCd");
+		String searchInstSt1 =request.getParameter("searchInstSt1");
+		String searchInstSt2 =request.getParameter("searchInstSt2");
+		String searchInstSt3 =request.getParameter("searchInstSt3");
+		
 		int pageSize=10;
 		
 		String pageNum=request.getParameter("pageNum");
@@ -45,6 +47,22 @@ public class InstructionController {
 		pageDTO.setPageSize(pageSize);
 		pageDTO.setPageNum(pageNum);
 		pageDTO.setCurrentPage(currentPage);
+		
+		pageDTO.setSearch(searchLine);
+		pageDTO.setSearch2(searchOrdDate1);
+		pageDTO.setSearch3(searchOrdDate2);
+		pageDTO.setSearch4(searchProdCd);
+		pageDTO.setSearch5(searchInstSt1);
+		pageDTO.setSearch6(searchInstSt2);
+		pageDTO.setSearch7(searchInstSt3);
+		
+		System.out.println("서치"+pageDTO.getSearch());
+		System.out.println("서치"+pageDTO.getSearch2());
+		System.out.println("서치"+pageDTO.getSearch3());
+		System.out.println("서치"+pageDTO.getSearch4());
+		System.out.println("서치"+pageDTO.getSearch5());
+		System.out.println("서치"+pageDTO.getSearch6());
+		System.out.println("서치"+pageDTO.getSearch7());
 		
 		List<InstructionDTO> instList=instService.getInstList(pageDTO);
 		
@@ -64,9 +82,7 @@ public class InstructionController {
 		
 		model.addAttribute("instList", instList);
 		model.addAttribute("pageDTO", pageDTO);
-//		라인 검색 옵션
-		List<LineDTO> searchLine=lineService.getSearchLine();
-		model2.addAttribute("searchLine", searchLine);
+		System.out.println(endPage);
 		return "instruction/infoInstruction";
 	}
 	
