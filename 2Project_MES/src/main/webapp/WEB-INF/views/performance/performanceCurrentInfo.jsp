@@ -85,6 +85,10 @@
 </script>
 </head>
 <body>
+	<!-- 	로그인 안했을시 로그인페이지로 이동  -->
+	<c:if test="${empty sessionScope.emp_cd }">
+		<c:redirect url="/employee/login"></c:redirect>
+	</c:if>
 	<!-- Left Panel1 -->
 	<jsp:include page="../inc/leftPanel.jsp" />
 	<!-- Left Panel1 -->

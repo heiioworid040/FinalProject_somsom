@@ -70,6 +70,8 @@ public class ClientController {
 
 		model.addAttribute("clientInfo", clientInfo);
 		model.addAttribute("pageDTO", pageDTO);
+		
+		System.out.println();
 		// 주소변경 없이 이동
 		return "client/clientInfo";
 	}
