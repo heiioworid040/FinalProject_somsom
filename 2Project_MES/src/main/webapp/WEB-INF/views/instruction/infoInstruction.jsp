@@ -85,12 +85,12 @@
 								<form action="${pageContext.request.contextPath}/instruction/infoInst" class="form-inline" method="get">
 									<div class="form-group col-6 mb-1">
 										<label for="searchLine" class="pr-1 form-control-label">라인</label>
-										<div class="input-group modalP">
+										<div class="input-group modalP" id="modalP1">
 											<c:if test="${empty pageDTO.search }">
-											<input type="text" id="modalLineCd" name="searchLineCd" placeholder="Line Code" class="form-control bg-white" readonly>
+											<input type="text" id="modalLineCd1" name="searchLineCd" placeholder="Line Code" class="form-control bg-white" readonly>
 											</c:if>
 											<c:if test="${not empty pageDTO.search }">
-											<input type="text" id="modalLineCd" name="searchLineCd" value="${pageDTO.search }" placeholder="Line Code" class="form-control bg-white" readonly>
+											<input type="text" id="modalLineCd1" name="searchLineCd" value="${pageDTO.search }" placeholder="Line Code" class="form-control bg-white" readonly>
 											</c:if>
 											<div class="input-group-btn">
 												<input type="button" class="btn btn-primary ml-2" id="lineModalBtn" value="검색">
@@ -119,9 +119,8 @@
 										<input type="text" aria-label="filter" id="searchProdCd" name="searchProdCd" placeholder="Prod Code" class="form-control bg-white" readonly>
 										</c:if>
 										<c:if test="${not empty pageDTO.search4 }">
-										<input type="text" aria-label="filter" id="searchProdCd" name="searchProdCd" placeholder="Prod Code" class="form-control bg-white" value="${pageDTO.search4 }" readonly>
+										<input type="text" aria-label="filter" id="searchProdCd" name="searchProdCd" placeholder="Prod Code" class="form-control bg-white" value="${pageDTO.search4 }" readonly>									
 										</c:if>
-										<input type="text" id="searchProdNm" disabled class="form-control ml-2">										
 										<div class="input-group">
 											<div class="input-group">
 												<button id="prodModalBtn" class="btn btn-primary ml-2">검색
@@ -185,14 +184,14 @@
 										<tbody>
 											<tr>
 												<td scope="row">
-													<div class="input-group modalP">
-														<input type="text" id="modalLineCd" name="line_cd" value="" placeholder="Line Code" class="form-control bg-white" readonly>
+													<div class="input-group modalP" id="modalP2">
+														<input type="text" id="modalLineCd2" name="line_cd" value="" placeholder="Line Code" class="form-control bg-white" readonly>
 														<div class="input-group-btn">
 															<input type="button" class="btn btn-primary" id="lineModalBtn" value="검색">
 														</div>
 													</div>
 												</td>
-												<td><input type="text" id="insertLineNm" disabled class="form-control"></td>
+												<td><input type="text" id="modalLineNm" disabled class="form-control"></td>
 												<td>
 													<div class="input-group">
 														<input type="text" id="insertProdCd" placeholder="Prod Code" class="form-control bg-white" disabled>
