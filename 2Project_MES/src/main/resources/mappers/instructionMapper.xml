@@ -19,7 +19,7 @@
     join client c
 	on p.cli_cd=c.cli_cd
 	where 1=1
-	<if test='search != null'>
+	<if test="search!=null and !search.equals('')">
 		and i.line_cd = #{search }
 	</if>
 	order by inst_cd desc
