@@ -60,6 +60,12 @@
 			return;
 		}
 
+		// 출하정보가 하나 이상 선택되었을 때
+		if (checkedShipCds.length > 1) {
+			alert("출하정보를 하나만 선택해 주세요.");
+			return;
+		}
+
 		// 첫 번째 출하번호를 이용하여 QR 코드 생성
 		var qrcode = new QRCode(document.createElement("div"), {
 			text : checkedShipCds[0],
@@ -112,6 +118,10 @@
 
 </head>
 <body>
+	<!-- 	로그인 안했을시 로그인페이지로 이동  -->
+	<c:if test="${empty sessionScope.emp_cd }">
+		<c:redirect url="/employee/login"></c:redirect>
+	</c:if>
 	<!-- Left Panel1 -->
 	<jsp:include page="../inc/leftPanel.jsp" />
 	<!-- Left Panel1 -->
@@ -223,7 +233,13 @@
 											<th scope="col">수주번호</th>
 											<th scope="col">수주량</th>
 											<th scope="col">출하량</th>
-											<th scope="col"></th>
+											<!-- 사원이 아닐때 (관리자, 파트장) 삭제 권한  -->
+											<c:if test="${ ! empty sessionScope.emp_cd }">
+												<c:if test="${sessionScope.emp_position ne '사원' }">
+													<th scope="col"></th>
+												</c:if>
+											</c:if>
+
 										</tr>
 									</thead>
 									<tbody>
@@ -241,9 +257,14 @@
 												<td>${shipDTO.ord_cd }</td>
 												<td>${shipDTO.ord_count }</td>
 												<td>${shipDTO.ship_count }</td>
-												<td><input type="button" class="btn btn-secondary"
-													value="삭제"
-													onclick="location.href='${pageContext.request.contextPath}/ship/currDelete?ship_cd=${shipDTO.ship_cd}'"></td>
+												<!-- 사원이 아닐때 (관리자, 파트장) 삭제 권한  -->
+												<c:if test="${ ! empty sessionScope.emp_cd }">
+													<c:if test="${sessionScope.emp_position ne '사원' }">
+														<td><input type="button" class="btn btn-secondary"
+															value="삭제"
+															onclick="location.href='${pageContext.request.contextPath}/ship/currDelete?ship_cd=${shipDTO.ship_cd}'"></td>
+													</c:if>
+												</c:if>
 											</tr>
 										</c:forEach>
 									</tbody>

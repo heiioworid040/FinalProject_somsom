@@ -34,12 +34,12 @@ public class EmployeeController {
 	public String loginPro(EmployeeDTO employeeDTO, HttpSession session) {
 		System.out.println("EmployeeController loginPro()");
 		
-		EmployeeDTO employeeDTO2 = employeeService.userCheck(employeeDTO);		
+		EmployeeDTO employeeDTO2 = employeeService.userCheck(employeeDTO);
 		
 		if(employeeDTO2 != null) {
 			System.out.println("아이디 비밀번호 일치");
 			session.setAttribute("emp_cd", employeeDTO.getEmp_cd());
-			session.setAttribute("emp_position", employeeDTO.getEmp_position());
+			session.setAttribute("emp_position", employeeDTO2.getEmp_position());
 			return "instruction/infoInstruction";
 		}else {
 			System.out.println("아이디 비밀번호 틀림");
@@ -160,7 +160,12 @@ public class EmployeeController {
 		return "redirect:/employee/employeeList";
 	}
 		
-
+	@RequestMapping(value = "/employee/logout", method = RequestMethod.GET)
+	public String logout(HttpSession session) {
+		session.invalidate();
+		
+		return "redirect:/employee/login";
+	}
 	
 	
 	

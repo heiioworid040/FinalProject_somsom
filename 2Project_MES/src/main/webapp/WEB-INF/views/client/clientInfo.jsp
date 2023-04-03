@@ -17,7 +17,7 @@
 	href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
 <!-- <link rel="stylesheet" -->
 <!-- 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"> -->
-<link rel="stylesheet" 
+<link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
@@ -87,6 +87,10 @@
 </script>
 </head>
 <body>
+	<!-- 	로그인 안했을시 로그인페이지로 이동  -->
+	<c:if test="${empty sessionScope.emp_cd }">
+		<c:redirect url="/employee/login"></c:redirect>
+	</c:if>
 	<!-- Left Panel1 -->
 	<jsp:include page="../inc/leftPanel.jsp" />
 	<!-- Left Panel1 -->
@@ -174,18 +178,28 @@
 								<form name="chkDelete"
 									action="${pageContext.request.contextPath}/client/delete"
 									method="post">
-									<div class="btn-div float-right">
-										<input type="button" class="btn btn-secondary" value="추가"
-											onclick="location.href='${pageContext.request.contextPath}/client/insert'">
-										<input type="button" class="btn btn-secondary" value="삭제"
-											onclick="deleteMsg()">
-									</div>
+									<!-- 									사원이 아닐때 (관리자, 파트장) 추가 삭제 권한  -->
+									<c:if test="${ ! empty sessionScope.emp_cd }">
+										<c:if test="${sessionScope.emp_position ne '사원' }">
+											<div class="btn-div float-right">
+												<input type="button" class="btn btn-secondary" value="추가"
+													onclick="location.href='${pageContext.request.contextPath}/client/insert'">
+												<input type="button" class="btn btn-secondary" value="삭제"
+													onclick="deleteMsg()">
+											</div>
+										</c:if>
+									</c:if>
 									<table id="bootstrap-data-table"
 										class="table table-striped table-bordered">
 										<thead class="thead-dark">
 											<tr>
-												<th scope="col"><input id="allCheck" type="checkbox"
-													onclick="allChk(this);" /></th>
+												<!-- 사원이 아닐때 (관리자, 파트장) 삭제 권한  -->
+												<c:if test="${ ! empty sessionScope.emp_cd }">
+													<c:if test="${sessionScope.emp_position ne '사원' }">
+														<th scope="col"><input id="allCheck" type="checkbox"
+															onclick="allChk(this);" /></th>
+													</c:if>
+												</c:if>
 												<th scope="col">거래처코드</th>
 												<th scope="col">거래처명</th>
 												<th scope="col">구분</th>
@@ -195,14 +209,24 @@
 												<th scope="col">대표자</th>
 												<th scope="col">담당자</th>
 												<th scope="col">주소</th>
-												<th scope="col"></th>
+												<!-- 사원이 아닐때 (관리자, 파트장) 수정 권한  -->
+												<c:if test="${ ! empty sessionScope.emp_cd }">
+													<c:if test="${sessionScope.emp_position ne '사원' }">
+														<th scope="col"></th>
+													</c:if>
+												</c:if>
 											</tr>
 										</thead>
 										<tbody>
 											<c:forEach var="clientDTO" items="${clientInfo }">
 												<tr>
-													<th scope="row"><input type="checkbox" name="chk"
-														id="chk" value="${clientDTO.cli_cd }"></th>
+													<!-- 사원이 아닐때 (관리자, 파트장) 삭제 권한  -->
+													<c:if test="${ ! empty sessionScope.emp_cd }">
+														<c:if test="${sessionScope.emp_position ne '사원' }">
+															<th scope="row"><input type="checkbox" name="chk"
+																id="chk" value="${clientDTO.cli_cd }"></th>
+														</c:if>
+													</c:if>
 													<td>${clientDTO.cli_cd }</td>
 													<td>${clientDTO.cli_nm }</td>
 													<td>${clientDTO.cli_type }</td>
@@ -212,9 +236,14 @@
 													<td>${clientDTO.cli_boss }</td>
 													<td>${clientDTO.cli_emp }</td>
 													<td>${clientDTO.cli_addr }</td>
-													<td><input type="button" class="btn btn-secondary"
-														value="수정"
-														onclick="location.href='${pageContext.request.contextPath}/client/update?cli_cd=${clientDTO.cli_cd}'"></td>
+													<!-- 사원이 아닐때 (관리자, 파트장) 수정 권한  -->
+													<c:if test="${ ! empty sessionScope.emp_cd }">
+														<c:if test="${sessionScope.emp_position ne '사원' }">
+															<td><input type="button" class="btn btn-secondary"
+																value="수정"
+																onclick="location.href='${pageContext.request.contextPath}/client/update?cli_cd=${clientDTO.cli_cd}'"></td>
+														</c:if>
+													</c:if>
 												</tr>
 											</c:forEach>
 										</tbody>
