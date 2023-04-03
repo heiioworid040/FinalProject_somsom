@@ -160,7 +160,12 @@ public class EmployeeController {
 		return "redirect:/employee/employeeList";
 	}
 		
-
+	@RequestMapping(value = "/employee/logout", method = RequestMethod.GET)
+	public String logout(HttpSession session) {
+		session.invalidate();
+		
+		return "redirect:/employee/login";
+	}
 	
 	
 	
