@@ -113,6 +113,12 @@ $(document).ready(function(){
         return false;
       }
       
+      if($("#emp_tel").length!=11){
+          alert("전화번호를 11자 입력해주세요.");
+          $("#emp_tel").focus();
+          return false;
+        }
+      
       if($(".divresult_1").val()=="0"){
           alert("이메일 중복확인 해주세요.");
           $("#emp_email").focus();
@@ -244,7 +250,7 @@ function fun1(index) {
                                     	<div class="input-group">
                                     	</div>
                                     </div> 
-                                    <div class="form-group col-6 mt-3">
+<!--                                     <div class="form-group col-6 mt-3"> -->
                                     <input type="submit" value="search">
                                     	<div class="input-group">
                                         	<div class="input-group-addon"><i class="ti-search"></i></div>
@@ -272,7 +278,7 @@ function fun1(index) {
 		<form name="form" method="post">
 <%-- 		<input type="submit" value="add" name="add" onclick="location.href='${pageContext.request.contextPath}/employee/employeeList'">			 --%>
 		<input type="submit" name="ckDelete" value="삭제" onclick="fun1(1)" >
-		<input type="submit" value="add" name="add" onclick="fun1(3)" formmethod="get">			
+		<input type="submit" value="추가" name="add" onclick="fun1(3)" formmethod="get">			
 													
 			<div class="animated fadeIn">
 			<div class="animated fadeIn">
