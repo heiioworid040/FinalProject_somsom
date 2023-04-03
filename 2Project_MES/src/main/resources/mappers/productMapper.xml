@@ -30,7 +30,7 @@
     	<if test="search != null">
         where prod_cd like CONCAT('%',#{search},'%') or prod_nm like CONCAT('%',#{search},'%') or prod_mat like CONCAT('%',#{search},'%')
         </if> 
-    	order by prod_number desc
+    	order by prod_mat desc
   
     	limit #{startRow}, #{pageSize}
     </select>

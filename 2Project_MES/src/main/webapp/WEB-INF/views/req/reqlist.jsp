@@ -81,7 +81,7 @@ if(search==null){
 <%}else{ %>
                          <div class="page-header float-left">
                             <div class="page-title">
-                                <h1>검색결과</h1>
+        
                             </div>
                         </div>  
                     </div>
@@ -134,12 +134,13 @@ if(search==null){
 									<!-- 검색어 -->								
 								<div id="table_search" style="text-align: right;">
 								<form action="${pageContext.request.contextPath}/req/reqlist" method="GET">
-								<input type="text" name="search" class="input_box" placeholder="품목코드/품목별 검색기능">
+								<input type="text" name="search" class="input_box" placeholder="등록자별 검색기능">
 								<input type="submit" value="search" class="btn">
 								</form>
 								</div>
 								<!-- 검색어 끝 -->	
-								<table class="table" id="table2">
+								<table id="bootstrap-data-table"
+										class="table table-striped table-bordered">
 									<thead class="thead-dark">	
 										<tr>
 											<th socpe="col">#</th>														
@@ -206,7 +207,7 @@ if(search==null){
 								            <strong>${i}</strong>
 								        </c:if>
 								        <c:if test="${i ne pageDTO.currentPage}">
-								            <a href="${pageContext.request.contextPath}/req/reqlist?pageNum=${i}">${i}</a>
+								            <a href="${pageContext.request.contextPath}/req/reqlist?pageNum=${i}&search=${pageDTO.search}">${i}</a>
 								        </c:if>
 								    </c:forEach>
 								    <c:if test="${pageDTO.endPage < pageDTO.pageCount }">
