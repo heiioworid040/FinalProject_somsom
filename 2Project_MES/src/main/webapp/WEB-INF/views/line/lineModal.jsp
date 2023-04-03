@@ -47,9 +47,10 @@
 </div>
 <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
 <script type="text/javascript">
+$(function(){
+	var clickBtnP = "";
 	$(document).on("click", "#lineModalBtn", function(){
-		var clickBtnP = null;
-	 	clickBtnP = $(this).closest('.modalP');
+		clickBtnP = $(this).closest('.modalP');
 		try {
 			jQuery('#lineTableBody').html('');
 			jQuery.ajax({
@@ -62,6 +63,8 @@
 					});
 				}
 			});
+			jQuery('#lineModal').modal("show");
+			// 테이블의 Row 클릭시 값 가져오기
 		} catch (e) {
 			console.log(e instanceof TypeError); // true
 			console.log(e.message);              // "null has no properties"
@@ -71,45 +74,47 @@
 			console.log(e.columnNumber);         // 2
 			console.log(e.stack);                // "@Scratchpad/2:2:3\n"
 		}
-		jQuery('#lineModal').modal("show");
-		// 테이블의 Row 클릭시 값 가져오기
-		
-		$(document).on("click", "#lineTableBody tr", function(){
-			var str = ""
-			var lineArr = new Array();	// 배열 선언
-			// 현재 클릭된 Row(<tr>)
-			var mdalLineCd1="";
-			var mdalLineCd2="";
-			
-	 		if(clickBtnP.attr('id')=='modalP1'){
-				var tr1 = $(this);
-				var td1 = tr1.children();
-			
-	 			mdalLineCd1 = td1.eq(0).text();
-				mdalLineCd2="";
-	 		
-				console.log("클릭한 Row의 모든 데이터1 : "+tr1.text());
-			
-				$('#modalLineCd1').val(mdalLineCd1);
-	 		}else{
-				var tr2 = $(this);
-				var td2 = tr2.children();
-
-				mdalLineCd1="";
-				mdalLineCd2 = td2.eq(0).text();
-	 			mdalLineNm = td2.eq(1).text();
-				console.log("클릭한 Row의 모든 데이터2 : "+tr2.text());
-	 			$('#modalLineCd2').val(mdalLineCd2);
-	 			$('#modalLineNm').val(mdalLineNm);	 
-	 		}
-			// tr.text()는 클릭된 Row 즉 tr에 있는 모든 값을 가져온다.
-			console.log(clickBtnP.attr('id') == 'modalP1');
-			console.log(clickBtnP.attr('id') == 'modalP2');
-			console.log($('#modalLineCd1').val());
-			console.log($('#modalLineCd2').val());
-	 		jQuery('#lineModal').modal("hide");
-	 		
-		});
 	});
-	
+
+	$(document).on("click", "#lineTableBody tr", function() {
+		event.preventDefault();
+		var str = ""
+		var lineArr = new Array(); // 배열 선언
+		// 현재 클릭된 Row(<tr>)
+		var mdalLineCd1 = "";
+		var mdalLineCd2 = "";
+
+		if (clickBtnP.attr('id') === 'modalP1') {
+			var tr1 = $(this);
+			var td1 = tr1.children();
+
+			mdalLineCd1 = td1.eq(0).text();
+			mdalLineCd2 = "";
+
+			console.log("클릭한 Row의 모든 데이터1 : " + tr1.text());
+
+			$('#modalLineCd1').val(mdalLineCd1);
+			event.preventDefault();
+		}
+		if (clickBtnP.attr('id') === 'modalP2') {
+			var tr2 = $(this);
+			var td2 = tr2.children();
+
+			mdalLineCd1 = "";
+			mdalLineCd2 = td2.eq(0).text();
+			mdalLineNm = td2.eq(1).text();
+			console.log("클릭한 Row의 모든 데이터2 : " + tr2.text());
+			$('#modalLineCd2').val(mdalLineCd2);
+			$('#modalLineNm').val(mdalLineNm);
+			event.preventDefault();
+		}
+		// tr.text()는 클릭된 Row 즉 tr에 있는 모든 값을 가져온다.
+		console.log(clickBtnP.attr('id'));
+		console.log(clickBtnP.attr('id') == 'modalP1');
+		console.log(clickBtnP.attr('id') == 'modalP2');
+		console.log($('#modalLineCd1').val());
+		console.log($('#modalLineCd2').val());
+		jQuery('#lineModal').modal("hide");
+	});
+})
 </script>

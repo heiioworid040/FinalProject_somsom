@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,8 +26,9 @@ public class InstructionController {
 	}
 
 	@RequestMapping(value = "/instruction/infoInst", method = RequestMethod.GET)
-	public String getInfoInst(HttpServletRequest request, Model model) {
+	public String getInfoInst(HttpServletRequest request, Model model, HttpSession session) {
 		System.out.println("instructionController getInfoInst()");
+		
 		String searchLine=request.getParameter("searchLineCd");
 		String searchOrdDate1 =request.getParameter("searchOrdDate1");
 		String searchOrdDate2 =request.getParameter("searchOrdDate2");
@@ -80,8 +82,12 @@ public class InstructionController {
 		pageDTO.setEndPage(endPage);
 		pageDTO.setPageCount(pageCount);
 		
+		
 		model.addAttribute("instList", instList);
 		model.addAttribute("pageDTO", pageDTO);
+		System.out.println(count);
+		System.out.println(pageCount);
+		System.out.println(currentPage);
 		System.out.println(endPage);
 		return "instruction/infoInstruction";
 	}
