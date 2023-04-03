@@ -31,7 +31,7 @@
 	$(document).ready(function(){
 		$('#btn_add').click(function(){
 			num = $('.ord_cd').length + 1;
-			$('.orderInfo').append('<tr><td>'+num+'</td><td><input type="text" class="ord_cd" readonly></td><td class="Rcli_nm"><input type="text" id="cli_nm'+num+'" class="Ocli_nm" onclick="searchPop(\'cliO\',\''+num+'\')"></td><td><input type="date" class="Oord_date"></td><td><input type="text" class="Oemp_nm" onclick="searchPop(\'emp\')"></td><td><input type="text" id="prod_cd" onclick="searchPop(\'prod\')"></td><td><input type="text" id="prod_nm"></td><td><input type="text" id="prod_unit"></td><td><input type="date" class="Oord_d_date"></td><td><input type="text" id="ord_count"></td><td><input type="checkbox"></td></tr>');
+			$('.orderInfo').append('<tr><td>'+num+'</td><td><input type="text" name="ord_cd" class="ord_cd" readonly></td><td><input type="text" id="cli_nm'+num+'" name="cli_nm" class="Ocli_nm" onclick="searchPop(\'cliO\',\''+num+'\')"></td><td><input type="date" name="ord_date" class="Oord_date"></td><td><input type="text" id="emp_nm'+num+'" name="emp_nm" class="Oemp_nm" onclick="searchPop(\'empO\',\''+num+'\')"></td><td><input type="text" id="prod_cd'+num+'" name="prod_cd" class="prod_cd" onclick="searchPop(\'prodO\',\''+num+'\')"></td><td><input type="text" id="prod_nm'+num+'" class="prod_nm"></td><td><input type="text" id="prod_unit'+num+'" class="prod_unit"></td><td><input type="date" name="ord_d_date" class="Oord_d_date"></td><td><input type="text" id="ord_count" name="ord_count" class="ord_count"></td><td><input type="checkbox"></td></tr>');
 		});
 	});
 </script>
@@ -134,12 +134,12 @@ function fun2() {
 		<!-- 	검색창 -->
 		
 		<!-- .content -->
-		<form action="${pageContext.request.contextPath }/order/orderInfoPro" method="get">
+		<form action="${pageContext.request.contextPath }/order/orderInfoPro" method="post">
 		<div class="content">
 			<div style="width: 100%; height: 50px">
-					<button type="submit" name="btn_del" value="del" class="btn btn-secondary float-right"  style="margin: 2px">삭제</button>
-					<button type="submit" name="btn_edit" value="edit" class="btn btn-secondary float-right" style="margin: 2px">수정</button>
-					<button type="button" id="btn_add" name="btn_add" value="add" class="btn btn-secondary float-right" style="margin: 2px">추가</button>
+					<button type="submit" name="btn" value="del" class="btn btn-secondary float-right"  style="margin: 2px">삭제</button>
+					<button type="submit" name="btn" value="edit" class="btn btn-secondary float-right" style="margin: 2px">저장</button>
+					<button type="button" id="btn_add" name="btn" value="add" class="btn btn-secondary float-right" style="margin: 2px">추가</button>
 			</div>
 			<div class="animated fadeIn">
 				<div class="row">
@@ -175,10 +175,10 @@ function fun2() {
 													<td><input type="date" id="ord_date" name="ord_date" class="Oord_date" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${orderDTO.ord_date }"/>"></td>
 													<td><input type="text" id="emp_nm${status.count }" name="emp_nm" class="Oemp_nm" value="${orderDTO.emp_nm }" onclick="searchPop('empO','${status.count }')"></td>
 													<td><input type="text" id="prod_cd${status.count }" name="prod_cd" class="prod_cd" value="${orderDTO.prod_cd }" onclick="searchPop('prodO','${status.count }')"></td>
-													<td><input type="text" id="prod_nm" value="${orderDTO.prod_nm }" readonly></td>
-													<td><input type="text" id="prod_unit" value="${orderDTO.prod_unit }" readonly></td>
+													<td><input type="text" id="prod_nm" class="prod_nm" value="${orderDTO.prod_nm }" readonly></td>
+													<td><input type="text" id="prod_unit" class="prod_unit" value="${orderDTO.prod_unit }" readonly></td>
 													<td><input type="date" id="ord_d_date" name="ord_d_date" class="Oord_d_date" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${orderDTO.ord_d_date }"/>"></td>
-													<td><input type="text" id="ord_count" name="ord_count" value="${orderDTO.ord_count }"></td>
+													<td><input type="text" id="ord_count" name="ord_count" class="ord_count" value="${orderDTO.ord_count }"></td>
 <%-- 													<td><input type="text" id="ship_count" name="ship_count" value="${orderDTO.ship_count }"></td> --%>
 													<td><input type="checkbox" id="ck" name="ck" value="${orderDTO.ord_cd }"></td>
 												</tr>
