@@ -20,7 +20,7 @@
 .search-result-div {
 	height: 50px;
 }
-#cli_cd, #cli_nm, #emp_cd, #emp_nm, #ord_date, #ord_d_date,
+.cli_cd, .cli_nm, .emp_cd, .emp_nm, .ord_date, .ord_d_date,
 #cliS_cd, #cliS_nm, #empS_cd, #empS_nm, #prodS_cd, #prodS_nm, #ordS_date, #ordS_d_date, #ordS_date_end, #ordS_d_date_end {
 	padding: 0.375rem 0.75rem;
 	color: #212529;
@@ -32,9 +32,13 @@
 #cli_cd, #emp_cd {
 	width: 100px;
 }
-#ord_cd {
-	width: 130px;
+.prod_cd, .ord_cd, .Ocli_nm, .Oemp_nm, .Oord_date, .Oord_d_date {
+	width: 140px;
 	border-style: none;
+	background: transparent;
+}
+.Oemp_nm {
+	width: 100px;
 }
 #prod_cd, #prod_nm, #prod_unit, #ord_count, #prod_mat, #ship_count, #ship_date {
 	width: 100px;
@@ -46,6 +50,11 @@
 }
 #ship_date {
 	width: 115px;
+}
+.Info {
+	width: 100px;
+	border-style: none; !importent
+	background: transparent; !importent
 }
 .search-div {
 	width: 50%;

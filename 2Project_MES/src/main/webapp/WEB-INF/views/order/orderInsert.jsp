@@ -182,16 +182,16 @@
 								<table class="table">
 									<thead class="thead-dark">
 										<tr>
-											<th scope="col">수주번호</th><td><input type="text" id="ord_cd" name="ord_cd" value="" readonly></td>
+											<th scope="col">수주번호</th><td><input type="text" id="ord_cd" name="ord_cd" class="ord_cd" readonly></td>
 											<td></td><td></td>
 										</tr>
 										<tr>
-											<th scope="col">담당자</th><td><input type="text" id="emp_cd" name="emp_cd" value="${orderDTO.emp_cd }" readonly><input type="text" id="emp_nm" value="${orderDTO.emp_nm }" readonly><button type="button" class="input-group-addon search-btn" style="cursor: pointer;" onclick="searchPop('emp')"><i class="ti-search"></i></button></td>
-											<th scope="col">수주일자</th><td><input type="date" id="ord_date" name="ord_date" value="${ord_date }"></td>
+											<th scope="col">담당자</th><td><input type="text" id="emp_cd" name="emp_cd" class="emp_cd" value="${orderDTO.emp_cd }" readonly><input type="text" id="emp_nm" class="emp_nm" value="${orderDTO.emp_nm }" readonly><button type="button" class="input-group-addon search-btn" style="cursor: pointer;" onclick="searchPop('emp')"><i class="ti-search"></i></button></td>
+											<th scope="col">수주일자</th><td><input type="date" id="ord_date" name="ord_date" class="ord_date" value="${ord_date }"></td>
 										</tr>
 										<tr>
-											<th scope="col">거래처</th><td><input type="text" id="cli_cd" name="cli_cd" value="${orderDTO.cli_cd }" readonly><input type="text" id="cli_nm" value="${orderDTO.cli_nm }" readonly><button type="button" class="input-group-addon search-btn" style="cursor: pointer;" onclick="searchPop('cli')"><i class="ti-search"></i></button></td>
-											<th scope="col">납품예정일</th><td><input type="date" id="ord_d_date" name="ord_d_date" value="${ord_d_date }"></td>
+											<th scope="col">거래처</th><td><input type="text" id="cli_cd" name="cli_cd" class="cli_cd" value="${orderDTO.cli_cd }" readonly><input type="text" id="cli_nm" value="${orderDTO.cli_nm }" class="cli_nm" readonly><button type="button" class="input-group-addon search-btn" style="cursor: pointer;" onclick="searchPop('cli')"><i class="ti-search"></i></button></td>
+											<th scope="col">납품예정일</th><td><input type="date" id="ord_d_date" name="ord_d_date" class="ord_d_date" value="${ord_d_date }"></td>
 										</tr>
 									</thead>
 								</table>
