@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -24,10 +25,11 @@ public class EmployeeController {
 	
 	@RequestMapping(value = "/employee/login", method = RequestMethod.GET)
 	public String login() {
-
+		
 		return "employee/login";
 	}
 	
+
 	@RequestMapping(value = "/employee/loginPro", method = RequestMethod.POST)
 	public String loginPro(EmployeeDTO employeeDTO, HttpSession session) {
 		System.out.println("EmployeeController loginPro()");
@@ -37,7 +39,8 @@ public class EmployeeController {
 		if(employeeDTO2 != null) {
 			System.out.println("아이디 비밀번호 일치");
 			session.setAttribute("emp_cd", employeeDTO.getEmp_cd());
-			return "redirect:/employee/login";
+			session.setAttribute("emp_position", employeeDTO.getEmp_position());
+			return "instruction/infoInstruction";
 		}else {
 			System.out.println("아이디 비밀번호 틀림");
 			return "employee/msg";
