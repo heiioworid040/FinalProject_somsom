@@ -61,7 +61,7 @@ public class ShipDAOImpl implements ShipDAO {
 
 	@Override
 	public Integer getMaxNum(ShipDTO shipDTO) {
-		return sqlSession.selectOne(namespace + ".getMaxNum");
+		return sqlSession.selectOne(namespace + ".getMaxNum", shipDTO);
 	}
 
 }

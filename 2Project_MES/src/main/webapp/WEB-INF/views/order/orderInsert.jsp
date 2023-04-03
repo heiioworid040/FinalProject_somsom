@@ -220,11 +220,11 @@
 									<tbody>
 											<tr>
 												<td></td>
-												<td><input type="text" id="prod_cd" name="prod_cd"  value="${orderDTO.prod_cd }" readonly></td>
-												<td><input type="text" id="prod_nm" value="${orderDTO.prod_nm }" readonly></td>
-												<td><input type="text" id="prod_mat" value="${orderDTO.prod_mat }" readonly></td>
-												<td><input type="text" id="prod_unit" value="${orderDTO.prod_unit }" readonly></td>
-												<td><input type="text" id="ord_count" value="${orderDTO.ord_count }" name="ord_count"></td>
+												<td><input type="text" id="prod_cd" name="prod_cd" class="prod_cd" value="${orderDTO.prod_cd }" readonly></td>
+												<td><input type="text" id="prod_nm" class="prod_nm" value="${orderDTO.prod_nm }" readonly></td>
+												<td><input type="text" id="prod_mat" class="prod_mat" value="${orderDTO.prod_mat }" readonly></td>
+												<td><input type="text" id="prod_unit" class="prod_unit" value="${orderDTO.prod_unit }" readonly></td>
+												<td><input type="text" id="ord_count" class="ord_count" value="${orderDTO.ord_count }" name="ord_count"></td>
 <!-- 												<td><button type="reset" class="btn-test" name="btn_can" value="del">-</button></td> -->
 <!-- 												<td><button type="button" class="btn-test" name="btn_can" value="del">-</button></td> -->
 											</tr>

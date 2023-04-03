@@ -147,8 +147,8 @@
 													<td></td>
 <%-- 													<td><input type="hidden" name="ship_over" value="${shipDTO.ship_over }">${shipDTO.ship_over }</td> --%>
 <%-- 													<td><input type="hidden" name="ship_inven" value="${shipDTO.ship_inven }">${shipDTO.ship_inven }</td> --%>
-													<td><input type="text" id="ship_count" name="ship_count"></td>
-													<td><input type="date" id="ship_date" name="ship_date"></td>
+													<td><input type="text" id="ship_count" name="ship_count" class="ship_count"></td>
+													<td><input type="date" id="ship_date" name="ship_date" class="ship_date"></td>
 													<td>${shipDTO.cli_nm }</td>
 												</tr>
 										</c:forEach>

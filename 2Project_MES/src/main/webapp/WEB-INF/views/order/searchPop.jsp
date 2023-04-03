@@ -41,8 +41,12 @@
 			document.searchPop.submit();
 			self.close();
 		</c:if>
-		<c:if test="${pop eq 'cliO'}">
+		<c:if test="${pop eq 'cliO' or pop eq 'empO' or pop eq 'prodO' }">
 			opener.document.getElementById(search+"_nm"+"${id}").value=nm;
+			<c:if test="${pop eq 'prodO'}">
+			opener.document.getElementById(search+"_cd"+"${id}").value=cd;
+			opener.document.getElementById(search+"_unit"+"${id}").value=unit;
+			</c:if>
 			document.searchPop.submit();
 			self.close();
 		</c:if>
@@ -53,10 +57,10 @@
 								<c:if test="${pop eq 'cli' or pop eq 'cliS' or pop eq 'cliO' }">
 									<h3 class="search-text">거래처 조회</h3>
 								</c:if>
-								<c:if test="${pop eq 'emp' or pop eq 'empS' }">
+								<c:if test="${pop eq 'emp' or pop eq 'empS' or pop eq 'empO' }">
 									<h3 class="search-text">담당자 조회</h3>
 								</c:if>
-								<c:if test="${pop eq 'prod' or pop eq 'prodS' }">
+								<c:if test="${pop eq 'prod' or pop eq 'prodS' or pop eq 'prodO' }">
 									<h3 class="search-text">품목 조회</h3>
 								</c:if>
 							</div>
@@ -70,6 +74,7 @@
 							<div class="card-body card-block">
 								<form action="${pageContext.request.contextPath }/order/searchPop" method="get" class="form-inline">
 								<input type="hidden" name="pop" value="${pop }">
+								<input type="hidden" name="id" value="${id }">
 											<c:if test="${pop eq 'cli' or pop eq 'cliS' or pop eq 'cliO' }">
 												<div class="search-div3">
 													<span class="search-cl3">업체코드</span><input type="text" id="cliS_cd" name="cd">
@@ -87,7 +92,7 @@
 												</div>
 											</c:if>
 											
-											<c:if test="${pop eq 'emp' or pop eq 'empS' }">
+											<c:if test="${pop eq 'emp' or pop eq 'empS' or pop eq 'empO' }">
 												<div class="search-div4">
 													<span class="search-cl3">사번</span><input type="text" id="empS_cd" name="cd">
 												</div>
@@ -96,7 +101,7 @@
 												</div>
 											</c:if>
 											
-											<c:if test="${pop eq 'prod' or pop eq 'prodS' }">
+											<c:if test="${pop eq 'prod' or pop eq 'prodS' or pop eq 'prodO' }">
 												<div class="search-div3">
 													<span class="search-cl3">품번</span><input type="text" id="prodS_cd" name="cd">
 												</div>
@@ -112,12 +117,12 @@
 												</div>
 											</c:if>
 											
-									<c:if test="${pop eq 'emp' or pop eq 'empS' }">
+									<c:if test="${pop eq 'emp' or pop eq 'empS' or pop eq 'empO' }">
 										<div style="width: 25%">
 											<input type="submit" class="btn btn-secondary float-right" value="조회">
 										</div>
 									</c:if>
-									<c:if test="${pop eq 'cli' or pop eq 'cliS' or pop eq 'prod' or pop eq 'prodS' }">
+									<c:if test="${pop eq 'cli' or pop eq 'cliS' or pop eq 'cliO' or pop eq 'prod' or pop eq 'prodS' or pop eq 'prodO' }">
 										<div class="search-div2">
 											<input type="submit" class="btn btn-secondary float-right" style="margin-top: 6px" value="조회">
 										</div>
@@ -148,11 +153,11 @@
 												<th scope="col">대표자</th>
 												<th scope="col">구분</th>
 											</c:if>
-											<c:if test="${ pop eq 'emp' or pop eq 'empS' }">
+											<c:if test="${ pop eq 'emp' or pop eq 'empS' or pop eq 'empO' }">
 												<th scope="col">사용자사번</th>
 												<th scope="col">사용자명</th>
 											</c:if>
-											<c:if test="${ pop eq 'prod' or pop eq 'prodS' }">
+											<c:if test="${ pop eq 'prod' or pop eq 'prodS' or pop eq 'prodO' }">
 												<th scope="col">상품코드</th>
 												<th scope="col">상품이름</th>
 												<th scope="col">자재유형</th>
@@ -172,13 +177,13 @@
 													<td>${orderDTO.cli_type }</td>
 												</tr>
 											</c:if>
-											<c:if test="${ pop eq 'emp' or pop eq 'empS' }">
+											<c:if test="${ pop eq 'emp' or pop eq 'empS' or pop eq 'empO' }">
 												<tr onclick="search('emp','${orderDTO.emp_cd}','${orderDTO.emp_nm }')">
 													<td>${orderDTO.emp_cd }</td>
 													<td>${orderDTO.emp_nm }</td>
 												</tr>
 											</c:if>
-											<c:if test="${ pop eq 'prod' or pop eq 'prodS' }">
+											<c:if test="${ pop eq 'prod' or pop eq 'prodS' or pop eq 'prodO' }">
 												<tr onclick="search('prod','${orderDTO.prod_cd }','${orderDTO.prod_nm }','${orderDTO.prod_mat }','${orderDTO.prod_unit }')">
 													<td>${orderDTO.prod_cd }</td>
 													<td>${orderDTO.prod_nm }</td>
