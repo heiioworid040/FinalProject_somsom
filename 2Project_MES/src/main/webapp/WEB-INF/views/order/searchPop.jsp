@@ -41,11 +41,16 @@
 			document.searchPop.submit();
 			self.close();
 		</c:if>
+		<c:if test="${pop eq 'cliO'}">
+			opener.document.getElementById(search+"_nm"+"${id}").value=nm;
+			document.searchPop.submit();
+			self.close();
+		</c:if>
 	}
 </script>
 <body>
 							<div class="search-text-div">
-								<c:if test="${pop eq 'cli' or pop eq 'cliS' }">
+								<c:if test="${pop eq 'cli' or pop eq 'cliS' or pop eq 'cliO' }">
 									<h3 class="search-text">거래처 조회</h3>
 								</c:if>
 								<c:if test="${pop eq 'emp' or pop eq 'empS' }">
@@ -65,7 +70,7 @@
 							<div class="card-body card-block">
 								<form action="${pageContext.request.contextPath }/order/searchPop" method="get" class="form-inline">
 								<input type="hidden" name="pop" value="${pop }">
-											<c:if test="${pop eq 'cli' or pop eq 'cliS' }">
+											<c:if test="${pop eq 'cli' or pop eq 'cliS' or pop eq 'cliO' }">
 												<div class="search-div3">
 													<span class="search-cl3">업체코드</span><input type="text" id="cliS_cd" name="cd">
 												</div>
@@ -137,7 +142,7 @@
 								<table class="table table-striped table-bordered" id="hover_tb">
 									<thead class="thead-dark">
 										<tr>
-											<c:if test="${pop eq 'cli' or pop eq 'cliS' }">
+											<c:if test="${pop eq 'cli' or pop eq 'cliS' or pop eq 'cliO' }">
 												<th scope="col">업체코드</th>
 												<th scope="col">업체명</th>
 												<th scope="col">대표자</th>
@@ -159,7 +164,7 @@
 									</thead>
 									<tbody>
 										<c:forEach var="orderDTO" items="${popList }">
-											<c:if test="${pop eq 'cli' or pop eq 'cliS' }">
+											<c:if test="${pop eq 'cli' or pop eq 'cliS' or pop eq 'cliO' }">
 												<tr onclick="search('cli','${orderDTO.cli_cd }','${orderDTO.cli_nm }')">
 													<td>${orderDTO.cli_cd }</td>
 													<td>${orderDTO.cli_nm }</td>
