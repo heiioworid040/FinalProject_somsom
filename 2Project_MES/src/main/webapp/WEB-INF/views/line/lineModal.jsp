@@ -14,7 +14,30 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				<form>
+			<div class="col">
+				<div class="row">
+					<div class="col-lg">
+							<div class="card-body card-block">
+								<form class="form-inline" method="get" id="lineSearchForm">
+									<div class="form-group col-6 mb-1">
+										<div class="input-group modalP" id="modalP1">
+										<label for="searchLine" class="pr-1 form-control-label">라인 코드</label>
+											<input type="text" id="searchLineCd" name="searchLineCd" placeholder="Line Code" class="form-control bg-white mr-4" >
+										<label for="searchLine" class="pr-1 form-control-label">라인명</label>
+											<input type="text" id="searchLineNm" name="searchLineNm" placeholder="Line Name" class="form-control bg-white" >
+											<div class="input-group-btn">
+												<input type="button" class="btn btn-primary ml-2" id="lineSearchBtn" value="검색">
+											</div>
+										</div>
+									</div>
+									<div class="col p-0">
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+
 					<div class="col">
 						<div class="card">
 							<div class="card-body">
@@ -37,10 +60,9 @@
 							</div>
 						</div>
 					</div>
-				</form>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+				<button type="button" class="btn btn-secondary" id="cancleModal">취소</button>
 			</div>
 		</div>
 	</div>
@@ -54,7 +76,7 @@ $(function(){
 		try {
 			jQuery('#lineTableBody').html('');
 			jQuery.ajax({
-				type : 'get',
+				type : 'post',
 				url:'${pageContext.request.contextPath}/ajax/lineModal',
 				dataType:'json',
 				success:function(linearr){
@@ -64,7 +86,35 @@ $(function(){
 				}
 			});
 			jQuery('#lineModal').modal("show");
+			event.preventDefault();
 			// 테이블의 Row 클릭시 값 가져오기
+		} catch (e) {
+			console.log(e instanceof TypeError); // true
+			console.log(e.message);              // "null has no properties"
+			console.log(e.name);                 // "TypeError"
+			console.log(e.fileName);             // "Scratchpad/1"
+			console.log(e.lineNumber);           // 2
+			console.log(e.columnNumber);         // 2
+			console.log(e.stack);                // "@Scratchpad/2:2:3\n"
+		}
+	});
+
+	$(document).on("click", "#lineSearchBtn", function(){
+		console.log("모달 내부 검색");
+		try {
+			jQuery('#lineTableBody').html('');
+			jQuery.ajax({
+				type : 'post',
+				url:'${pageContext.request.contextPath}/ajax/lineModal',
+				data: $('#lineSearchForm').serialize(),
+				dataType:'json',
+				success:function(slinearr){
+					jQuery.each(slinearr,function(index,sitem){
+						jQuery('#lineTableBody').append('<tr><td scope="row">'+sitem.line_cd+'</td><td>'+sitem.line_nm+'</td><td>'+sitem.line_process+'</td><td>'+sitem.line_place +'</td><td>'+sitem.line_num +'</td><td>'+sitem.line_st +'</td><td>'+sitem.line_note+'</td></tr>');
+					});
+				}
+			});
+			event.preventDefault();
 		} catch (e) {
 			console.log(e instanceof TypeError); // true
 			console.log(e.message);              // "null has no properties"
@@ -108,12 +158,31 @@ $(function(){
 			$('#modalLineNm').val(mdalLineNm);
 			event.preventDefault();
 		}
-		// tr.text()는 클릭된 Row 즉 tr에 있는 모든 값을 가져온다.
-		console.log(clickBtnP.attr('id'));
-		console.log(clickBtnP.attr('id') == 'modalP1');
-		console.log(clickBtnP.attr('id') == 'modalP2');
-		console.log($('#modalLineCd1').val());
-		console.log($('#modalLineCd2').val());
+		
+		jQuery('#searchLineCd').val("");
+		jQuery('#searchLineNm').val("");
+		jQuery('#lineModal').modal("hide");
+	});
+	
+	$(document).on("click", "#cancleModal", function() {
+		event.preventDefault();
+		if (clickBtnP.attr('id') === 'modalP1') {
+			mdalLineCd1 = "";
+
+			$('#modalLineCd1').val(mdalLineCd1);
+			event.preventDefault();
+		}
+		
+		if (clickBtnP.attr('id') === 'modalP2') {
+			mdalLineCd2 = "";
+			mdalLineNm = "";
+			
+			$('#modalLineCd2').val(mdalLineCd2);
+			$('#modalLineNm').val(mdalLineNm);
+			event.preventDefault();
+		}
+		jQuery('#searchLineCd').val("");
+		jQuery('#searchLineNm').val("");
 		jQuery('#lineModal').modal("hide");
 	});
 })

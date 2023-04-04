@@ -39,7 +39,7 @@ public class InstructionServiceImpl implements InstructionService{
 	@Override
 	public void insertInst(InstructionDTO instructionDTO) {
 		System.out.println("InstserviceImpl insertInst()");
-		if(instDAO.getMaxInst() == 1) {
+		if(instDAO.getMaxInst() == null) {
 			instructionDTO.setInst_cd("Wi001");
 		}else if(instDAO.getMaxInst()<10){
 			instructionDTO.setInst_cd("Wi"+"00"+instDAO.getMaxInst());

@@ -109,17 +109,35 @@
 										</div>
 									</div>
 									<div class="form-group col-6 mt-1">
-										<label class="pr-1  form-control-label">지시상태</label>
-										<div class="form-control border-0">
+										<label class="pr-1  form-control-label" for="instStCk">지시상태</label>
+										<div class="form-control border-0" id="instStCk">
 											<div class="form-check-inline form-check">
-												<label for="searchInstSt1" class="form-check-label ">
-													<input type="checkbox" id="searchInstSt1" name="searchInstSt1" class="form-check-input" checked value="대기">대기
+												<label for="searchInstSt1" class="form-check-label mr-2">
+													<!-- 대기 -->
+													<c:if test="${! empty pageDTO.search5 }">
+													<input style='zoom:1.8;' type="checkbox" id="searchInstSt1" name="searchInstSt1" class="form-check-input" checked value="대기">대기
+													</c:if>
+													<c:if test="${empty pageDTO.search5 }">
+													<input style='zoom:1.8;' type="checkbox" id="searchInstSt1" name="searchInstSt1" class="form-check-input" value="대기">대기
+													</c:if>
 												</label>
-												<label for="searchInstSt2" class="form-check-label ">
-													<input type="checkbox" id="searchInstSt2" name="searchInstSt2" class="form-check-input" checked value="진행">진행
+												<label for="searchInstSt2" class="form-check-label mr-2">
+													<!-- 진행 -->
+													<c:if test="${! empty pageDTO.search6 }">
+													<input style='zoom:1.8;' type="checkbox" id="searchInstSt2" name="searchInstSt2" class="form-check-input" checked value="진행">진행
+													</c:if>
+													<c:if test="${empty pageDTO.search6 }">
+													<input style='zoom:1.8;' type="checkbox" id="searchInstSt2" name="searchInstSt2" class="form-check-input" value="진행">진행
+													</c:if>
 												</label>
-												<label for="searchInstSt3" class="form-check-label ">
-													<input type="checkbox" id="searchInstSt3" name="searchInstSt3" class="form-check-input" checked value="완료">완료
+												<label for="searchInstSt3" class="form-check-label mr-2">
+													<!-- 마감 -->
+													<c:if test="${! empty pageDTO.search7 }">
+													<input style='zoom:1.8;' type="checkbox" id="searchInstSt3" name="searchInstSt3" class="form-check-input" checked value="완료">완료
+													</c:if>
+													<c:if test="${empty pageDTO.search7 }">
+													<input style='zoom:1.8;' type="checkbox" id="searchInstSt3" name="searchInstSt3" class="form-check-input" value="완료">완료
+													</c:if>
 												</label>
 											</div>
 										</div>									

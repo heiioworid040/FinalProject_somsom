@@ -16,12 +16,26 @@
     <select id="getLineList" resultType="com.project.domain.LineDTO">
     SELECT * 
 	FROM line
+	WHERE 1=1
+	<if test="search != null">
+		and line_cd like CONCAT('%',#{search },'%')
+	</if>
+	<if test="search2 != null">
+		and line_nm like CONCAT('%',#{search2 },'%')
+	</if>
 	ORDER BY line_cd
 	</select>
 
     <select id="getLineCount" resultType="java.lang.Integer">
-    SELECT COUNT(*) 
+    SELECT COUNT(*)
 	FROM line
+	WHERE 1=1
+	<if test="search != null">
+		and line_cd like CONCAT('%',#{search },'%')
+	</if>
+	<if test="search2 != null">
+		and line_nm like CONCAT('%',#{search2 },'%')
+	</if>
 	</select>
 	
 <!-- id-"이름" spl구문 하나하나 이름
