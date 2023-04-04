@@ -64,6 +64,7 @@ public class OrderDAO {
 	
 	//팝업
 	public List<OrderDTO> getSearchCli(PageDTO pageDTO) {
+		pageDTO.setStartRow(pageDTO.getStartRow()-1);
 		return sqlSession.selectList(namespace+".getSearchCli", pageDTO);
 	}
 	
@@ -72,6 +73,7 @@ public class OrderDAO {
 	}
 
 	public List<OrderDTO> getSearchEmp(PageDTO pageDTO) {
+		pageDTO.setStartRow(pageDTO.getStartRow()-1);
 		return sqlSession.selectList(namespace+".getSearchEmp", pageDTO);
 	}
 	
@@ -80,6 +82,7 @@ public class OrderDAO {
 	}
 	
 	public List<OrderDTO> getSearchProd(PageDTO pageDTO) {
+		pageDTO.setStartRow(pageDTO.getStartRow()-1);
 		return sqlSession.selectList(namespace+".getSearchProd", pageDTO);
 	}
 	

@@ -8,6 +8,7 @@
 		<if test="search!=null||search2!=null||search3!=null">
 			where cli_cd like CONCAT('%',#{search},'%') and cli_nm like CONCAT('%',#{search2},'%') and cli_type like CONCAT('%',#{search3},'%')
 		</if>
+		 limit #{startRow} , #{pageSize}
 	</select>
 	
 	<select id="getSearchCliCount" resultType="java.lang.Integer">
@@ -23,6 +24,7 @@
 		<if test="search!=null||search2!=null">
 			where emp_cd like CONCAT('%',#{search},'%') and emp_nm like CONCAT('%',#{search2},'%')
 		</if>
+		 limit #{startRow} , #{pageSize}
 	</select>
 	
 	<select id="getSearchEmpCount" resultType="java.lang.Integer">
@@ -38,6 +40,7 @@
 		<if test="search!=null||search2!=null||search3!=null">
 			where prod_cd like CONCAT('%',#{search},'%') and prod_nm like CONCAT('%',#{search2},'%') and prod_mat like CONCAT('%',#{search3},'%')
 		</if>
+		 limit #{startRow} , #{pageSize}
 	</select>
 	
 	<select id="getSearchProdCount" resultType="java.lang.Integer">
@@ -70,7 +73,7 @@
 	</select>
 	
 	<select id="getOrdNum" resultType="java.lang.String">
-		select * from code where code_cd='ord_cd'
+		select code_grp from code where code_cd='ord_cd' and code_grp_nm='수주'
 	</select>
 	
 	<select id="getMaxNum" resultType="java.lang.Integer">

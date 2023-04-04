@@ -49,11 +49,47 @@
 				}
 			});
 		});
+		
+		$('#orderInsert').submit(function(){
+			if($('#emp_cd').val()==""){
+				alert("담당자 선택");
+				return false;
+			}
+            if($('#cli_cd').val()==""){
+            	alert("거래처 선택");
+            	return false;
+            }
+            if($('#ord_date').val()==""){
+            	alert("수주일자 입력");
+            	return false;
+            }
+            if($('#ord_d_date').val()==""){
+            	alert("납품예정일 입력");
+            	return false;
+            }
+            if($('#ord_date').val()>$('#ord_d_date').val()){
+            	alert("납품예정일이 맞지 않습니다");
+            	return false;
+            }
+            if($('#prod_cd').val()==""){
+            	alert("품목 선택");
+            	return false;
+            }
+            if($('#ord_count').val()==""){
+            	alert("수주량 입력");
+            	return false;
+            }
+            var num = /[0-9]/;
+            if(!num.test($('#ord_count').val())){
+            	alert("숫자만 입력");
+            	return false;
+            }
+		});
 	});
 </script>
 <script>
 	function searchPop(search) {
-		window.open('${pageContext.request.contextPath }/order/searchPop?pop='+search,'searchPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=900,height=510,top=90,left=200')
+		window.open('${pageContext.request.contextPath }/order/searchPop?pop='+search,'searchPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=900,height=787,top=90,left=200')
 	}
 </script>	
 <body>
@@ -164,12 +200,13 @@
 		</div>
 	</div>
 		
-		<form action="${pageContext.request.contextPath }/order/orderInsertPro" method="POST">
+		<form action="${pageContext.request.contextPath }/order/orderInsertPro" id="orderInsert" method="POST">
 		<div class="content-div div-right">
 			<div style="width: 100%; height: 50px">
-					<button type="submit" name="btn_del" value="del" class="btn btn-secondary float-right"  style="margin: 2px">삭제</button>
-					<button type="submit" name="btn_edit" value="edit" class="btn btn-secondary float-right" style="margin: 2px">수정</button>
-					<button type="submit" name="btn_add" value="add" class="btn btn-secondary float-right" style="margin: 2px">추가</button>
+					<button type="submit" id="btn_del" name="btn_del" value="del" class="btn btn-secondary float-right"  style="margin: 2px">삭제</button>
+					<button type="reset" class="btn btn-secondary float-right"  style="margin: 2px">취소</button>
+					<button type="submit" id="btn_edit" name="btn_edit" value="edit" class="btn btn-secondary float-right" style="margin: 2px">수정</button>
+					<button type="submit" id="btn_add" name="btn_add" value="add" class="btn btn-secondary float-right" style="margin: 2px">추가</button>
 			</div>
 			<div class="animated fadeIn">
 				<div class="row">
