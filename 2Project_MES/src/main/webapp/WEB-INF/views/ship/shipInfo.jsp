@@ -27,9 +27,29 @@
 <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
 </head>
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery-3.6.3.js"></script>
+<script>
+	$(document).ready(function(){
+		$('#shipInfo').submit(function(){
+			if($('#ship_count').val()==""){
+				alert("출하량 입력");
+				return false;
+			}
+            var num = /[0-9]/;
+            if(!num.test($('#ship_count').val())){
+            	alert("숫자만 입력");
+            	return false;
+            }
+			if($('#ship_date').val()==""){
+				alert("출하일자 입력");
+				return false;
+			}
+		});
+	});
+</script>
 <script>
 	function searchPop(search) {
-	window.open('${pageContext.request.contextPath }/order/searchPop?pop='+search,'searchPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=900,height=510,top=90,left=200')
+	window.open('${pageContext.request.contextPath }/order/searchPop?pop='+search,'searchPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=900,height=787,top=90,left=200')
 	}
 </script>
 <body>
@@ -99,7 +119,7 @@
 		<!-- 	검색창 -->
 		
 		<!-- .content -->
-		<form action="${pageContext.request.contextPath }/ship/shipInfoPro" method="POST">
+		<form action="${pageContext.request.contextPath }/ship/shipInfoPro" id="shipInfo" method="POST">
 		<div class="content">
 			<div style="width: 100%; height: 50px">
 				<button type="reset" class="btn btn-secondary float-right" style="margin: 2px">취소</button>

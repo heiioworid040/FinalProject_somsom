@@ -33,11 +33,18 @@
 			num = $('.ord_cd').length + 1;
 			$('.orderInfo').append('<tr><td>'+num+'</td><td><input type="text" name="ord_cd" class="ord_cd" readonly></td><td><input type="text" id="cli_nm'+num+'" name="cli_nm" class="Ocli_nm" onclick="searchPop(\'cliO\',\''+num+'\')"></td><td><input type="date" name="ord_date" class="Oord_date"></td><td><input type="text" id="emp_nm'+num+'" name="emp_nm" class="Oemp_nm" onclick="searchPop(\'empO\',\''+num+'\')"></td><td><input type="text" id="prod_cd'+num+'" name="prod_cd" class="prod_cd" onclick="searchPop(\'prodO\',\''+num+'\')"></td><td><input type="text" id="prod_nm'+num+'" class="prod_nm"></td><td><input type="text" id="prod_unit'+num+'" class="prod_unit"></td><td><input type="date" name="ord_d_date" class="Oord_d_date"></td><td><input type="text" id="ord_count" name="ord_count" class="ord_count"></td><td><input type="checkbox"></td></tr>');
 		});
+		
+// 		$('#orderInfo').submit(function(){
+// 			if($('#ck').val()==""){
+// 				alert("데이터가 없습니다");
+// 				return false;
+// 			}
+// 		});
 	});
 </script>
 <script>
 	function searchPop(search, id) {
-	window.open('${pageContext.request.contextPath }/order/searchPop?pop='+search+'&id='+id,'searchPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=900,height=510,top=90,left=200')
+	window.open('${pageContext.request.contextPath }/order/searchPop?pop='+search+'&id='+id,'searchPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=900,height=787,top=90,left=200')
 	}
 
 function fun1() {
@@ -134,11 +141,12 @@ function fun2() {
 		<!-- 	검색창 -->
 		
 		<!-- .content -->
-		<form action="${pageContext.request.contextPath }/order/orderInfoPro" method="post">
+		<form action="${pageContext.request.contextPath }/order/orderInfoPro" id="orderInfo" method="post">
 		<div class="content">
 			<div style="width: 100%; height: 50px">
-					<button type="submit" name="btn" value="del" class="btn btn-secondary float-right"  style="margin: 2px">삭제</button>
-					<button type="submit" name="btn" value="edit" class="btn btn-secondary float-right" style="margin: 2px">저장</button>
+					<button type="submit" id="btn_del" name="btn" value="del" class="btn btn-secondary float-right"  style="margin: 2px">삭제</button>
+					<button type="submit" id="btn_ins" name="btn" value="ins" class="btn btn-secondary float-right" style="margin: 2px">저장</button>
+					<button type="submit" id="btn_edit" name="btn" value="edit" class="btn btn-secondary float-right" style="margin: 2px">수정</button>
 					<button type="button" id="btn_add" name="btn" value="add" class="btn btn-secondary float-right" style="margin: 2px">추가</button>
 			</div>
 			<div class="animated fadeIn">
@@ -170,17 +178,17 @@ function fun2() {
 										<c:forEach var="orderDTO" items="${orderList }" varStatus="status">
 												<tr>
 													<td scope="col" data-count="${status.count }">${status.count }</td>
-													<td><input type="text" id="ord_cd" name="ord_cd" class="ord_cd" value="${orderDTO.ord_cd }" readonly></td>
-													<td><input type="text" id="cli_nm${status.count }" name="cli_nm" class="Ocli_nm" value="${orderDTO.cli_nm }" onclick="searchPop('cliO','${status.count }')"></td>
-													<td><input type="date" id="ord_date" name="ord_date" class="Oord_date" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${orderDTO.ord_date }"/>"></td>
-													<td><input type="text" id="emp_nm${status.count }" name="emp_nm" class="Oemp_nm" value="${orderDTO.emp_nm }" onclick="searchPop('empO','${status.count }')"></td>
-													<td><input type="text" id="prod_cd${status.count }" name="prod_cd" class="prod_cd" value="${orderDTO.prod_cd }" onclick="searchPop('prodO','${status.count }')"></td>
-													<td><input type="text" id="prod_nm" class="prod_nm" value="${orderDTO.prod_nm }" readonly></td>
-													<td><input type="text" id="prod_unit" class="prod_unit" value="${orderDTO.prod_unit }" readonly></td>
-													<td><input type="date" id="ord_d_date" name="ord_d_date" class="Oord_d_date" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${orderDTO.ord_d_date }"/>"></td>
-													<td><input type="text" id="ord_count" name="ord_count" class="ord_count" value="${orderDTO.ord_count }"></td>
+													<td><input type="text" id="ord_cd" name="ord_cd${status.count }" class="ord_cd" value="${orderDTO.ord_cd }" readonly></td>
+													<td><input type="text" id="cli_nm${status.count }" name="cli_nm${status.count }" class="Ocli_nm" value="${orderDTO.cli_nm }" onclick="searchPop('cliO','${status.count }')"></td>
+													<td><input type="date" id="ord_date" name="ord_date${status.count }" class="Oord_date" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${orderDTO.ord_date }"/>"></td>
+													<td><input type="text" id="emp_nm${status.count }" name="emp_nm${status.count }" class="Oemp_nm" value="${orderDTO.emp_nm }" onclick="searchPop('empO','${status.count }')"></td>
+													<td><input type="text" id="prod_cd${status.count }" name="prod_cd${status.count }" class="prod_cd" value="${orderDTO.prod_cd }" onclick="searchPop('prodO','${status.count }')"></td>
+													<td><input type="text" id="prod_nm${status.count }" class="prod_nm" value="${orderDTO.prod_nm }" readonly></td>
+													<td><input type="text" id="prod_unit${status.count }" class="prod_unit" value="${orderDTO.prod_unit }" readonly></td>
+													<td><input type="date" id="ord_d_date" name="ord_d_date${status.count }" class="Oord_d_date" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${orderDTO.ord_d_date }"/>"></td>
+													<td><input type="text" id="ord_count" name="ord_count${status.count }" class="ord_count" value="${orderDTO.ord_count }"></td>
 <%-- 													<td><input type="text" id="ship_count" name="ship_count" value="${orderDTO.ship_count }"></td> --%>
-													<td><input type="checkbox" id="ck" name="ck" value="${orderDTO.ord_cd }"></td>
+													<td><input type="checkbox" id="ck" name="ck" value="${status.count },${orderDTO.ord_cd }"></td>
 												</tr>
 										</c:forEach>
 									</tbody>

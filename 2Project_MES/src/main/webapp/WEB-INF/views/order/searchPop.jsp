@@ -198,31 +198,21 @@
 								</table>
 								
 								<!-- 페이징 아직 수정 중 -->
+<!-- 								pop 값___O 도 추가 수정하기 -->
 								<div class="pageNum">
-									<c:if test="${empty search}">
-										<c:if test="${pageDTO.startPage > pageDTO.pageBlock }">
-											<a href="${pageContext.request.contextPath }/order/searchPop?pop=${pop }&pageNum=${pageDTO.startPage-pageDTO.pageBlock }">Prev</a>
-										</c:if>
-										<c:forEach var="i" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1">
-											<a href="${pageContext.request.contextPath }/order/searchPop?pop=${pop }&pageNum=${i}">${i}</a> 
-										</c:forEach>
-										<c:if test="${pageDTO.endPage < pageDTO.pageCount }">
-										<a href="${pageContext.request.contextPath }/order/searchPop?pop=${pop }&pageNum=${pageDTO.startPage+pageDTO.pageBlock }">Next</a>
-										</c:if>
-									</c:if>
-								<!-- }else{ -->
-									<c:if test="${!empty search }">
-										<c:if test="${pageDTO.startPage > pageDTO.pageBlock }">
-											<a href="${pageContext.request.contextPath }/order/searchPop?pop=${pop }&pageNum=${pageDTO.startPage-pageDTO.pageBlock }&cd=${pageDTO.search }&nm=${pageDTO.search2 }&info=${pageDTO.search3 }">Prev</a>
-										</c:if>
-										<c:forEach var="i" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1">
-											<a href="${pageContext.request.contextPath }/order/searchPop?pop=${pop }&pageNum=${i}&cd=${pageDTO.search }&nm=${pageDTO.search2 }&info=${pageDTO.search3 }">${i}</a> 
-										</c:forEach>
-										<c:if test="${pageDTO.endPage < pageDTO.pageCount }">
-											<a href="${pageContext.request.contextPath }/order/searchPop?pop=${pop }&pageNum=${pageDTO.startPage+pageDTO.pageBlock }&cd=${pageDTO.search }&nm=${pageDTO.search2 }&info=${pageDTO.search3 }">Next</a>
+									<c:if test="${pop eq 'cli' or pop eq 'cliS' or pop eq 'cliO' or pop eq 'prod' or pop eq 'prodS' or pop eq 'prodO' or pop eq 'emp' or pop eq 'empS' or pop eq 'empO' }">
+										<c:if test="${empty cd and empty nm and empty info}">
+											<c:if test="${pageDTO.startPage > pageDTO.pageBlock }">
+												<a href="${pageContext.request.contextPath }/order/searchPop?pop=${pop }&pageNum=${pageDTO.startPage-pageDTO.pageBlock }&id=${id }&cd=${pageDTO.search }&nm=${pageDTO.search2 }&info=${pageDTO.search3 }">◁</a>
+											</c:if>
+											<c:forEach var="i" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1">
+												<a href="${pageContext.request.contextPath }/order/searchPop?pop=${pop }&pageNum=${i}&id=${id }&cd=${pageDTO.search }&nm=${pageDTO.search2 }&info=${pageDTO.search3 }">${i}</a> 
+											</c:forEach>
+											<c:if test="${pageDTO.endPage < pageDTO.pageCount }">
+											<a href="${pageContext.request.contextPath }/order/searchPop?pop=${pop }&pageNum=${pageDTO.startPage+pageDTO.pageBlock }&id=${id }&cd=${pageDTO.search }&nm=${pageDTO.search2 }&info=${pageDTO.search3 }">▷</a>
+											</c:if>
 										</c:if>
 									</c:if>
-								</div>
 								<!-- 페이징 -->
 								
 							</div>
