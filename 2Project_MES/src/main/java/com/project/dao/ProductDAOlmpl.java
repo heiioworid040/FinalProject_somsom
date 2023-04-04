@@ -45,7 +45,7 @@ public class ProductDAOlmpl implements ProductDAO{
 	@Override
 	public int getProductCount(PageDTO pageDTO) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne(namespace+".getProductCount");
+		return sqlSession.selectOne(namespace+".getProductCount",pageDTO);
 	}
 	
 	@Override

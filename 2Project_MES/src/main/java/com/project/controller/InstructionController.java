@@ -29,13 +29,22 @@ public class InstructionController {
 	public String getInfoInst(HttpServletRequest request, Model model, HttpSession session) {
 		System.out.println("instructionController getInfoInst()");
 		
-		String searchLine=request.getParameter("searchLineCd");
+		String searchLineCd=request.getParameter("searchLineCd");
 		String searchOrdDate1 =request.getParameter("searchOrdDate1");
 		String searchOrdDate2 =request.getParameter("searchOrdDate2");
 		String searchProdCd =request.getParameter("searchProdCd");
-		String searchInstSt1 =request.getParameter("searchInstSt1");
-		String searchInstSt2 =request.getParameter("searchInstSt2");
-		String searchInstSt3 =request.getParameter("searchInstSt3");
+		String searchInstSt1;
+		String searchInstSt2;
+		String searchInstSt3;
+		if(searchLineCd==null) {
+			searchInstSt1 ="대기";
+			searchInstSt2 ="진행";
+			searchInstSt3 ="완료";		
+		}else{
+			searchInstSt1 =request.getParameter("searchInstSt1");
+			searchInstSt2 =request.getParameter("searchInstSt2");
+			searchInstSt3 =request.getParameter("searchInstSt3");
+		}
 		
 		int pageSize=10;
 		
@@ -50,7 +59,7 @@ public class InstructionController {
 		pageDTO.setPageNum(pageNum);
 		pageDTO.setCurrentPage(currentPage);
 		
-		pageDTO.setSearch(searchLine);
+		pageDTO.setSearch(searchLineCd);
 		pageDTO.setSearch2(searchOrdDate1);
 		pageDTO.setSearch3(searchOrdDate2);
 		pageDTO.setSearch4(searchProdCd);
@@ -89,6 +98,7 @@ public class InstructionController {
 		System.out.println(pageCount);
 		System.out.println(currentPage);
 		System.out.println(endPage);
+		System.out.println(pageDTO.getStartRow());
 		return "instruction/infoInstruction";
 	}
 	

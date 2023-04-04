@@ -84,6 +84,7 @@ public class ProductController {
 		
 		//페이징
 		int count = productService.getProductCount(pageDTO);
+		
 		int pageBlock=10;
 		int startPage=(currentPage-1)/pageBlock*pageBlock+1;
 		int endPage=startPage+pageBlock-1;
@@ -96,6 +97,8 @@ public class ProductController {
 		pageDTO.setStartPage(startPage);
 		pageDTO.setEndPage(endPage);
 		pageDTO.setPageCount(pageCount);
+		System.out.println("카운트 : "+count);
+		System.out.println("페이지카운트 : "+pageCount);
 
 		model.addAttribute("productList",productList);
 		model.addAttribute(pageDTO);

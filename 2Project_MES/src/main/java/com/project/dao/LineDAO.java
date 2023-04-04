@@ -9,7 +9,7 @@ public interface LineDAO {
 
 	List<LineDTO> getSearchLine();
 
-	List<LineDTO> getInstList(PageDTO pageDTO);
+	List<LineDTO> getLineList(PageDTO pageDTO);
 
 	int getLineCount();
 

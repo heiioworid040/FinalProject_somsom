@@ -35,7 +35,7 @@ public class ReqDAOlmpl implements ReqDAO{
 	@Override
 	public int getReqCount(PageDTO pageDTO) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne(namespace+".getReqCount");
+		return sqlSession.selectOne(namespace+".getReqCount",pageDTO);
 	}
 
 	@Override

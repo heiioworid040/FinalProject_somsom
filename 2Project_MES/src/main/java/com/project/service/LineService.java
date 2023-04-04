@@ -8,7 +8,7 @@ import com.project.domain.PageDTO;
 public interface LineService {
 	List<LineDTO> getSearchLine();
 
-	List<LineDTO> getlineList(PageDTO pageDTO);
+	List<LineDTO> getLineList(PageDTO pageDTO);
 
 	int getLineCount();
 }

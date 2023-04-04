@@ -67,6 +67,7 @@ public class ProductServicelmpl implements ProductService{
 		System.out.println("getProductCount");
 		return productDAO.getProductCount(pageDTO);
 	}
+	
 
 	@Override
 	public ProductDTO getProduct(int prod_number) {
