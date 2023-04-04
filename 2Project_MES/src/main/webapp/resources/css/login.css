@@ -81,6 +81,9 @@ h1 {
     opacity: 1;
 }
 
+.box_tf{
+	margin: 5px 0px;
+}
 .set_login {
     margin-top: 25px;
     display: block;
@@ -133,6 +136,7 @@ h1 {
     font-weight: 400;
     font-size: 16px;
     line-height: 51px;
-    color: #191919;
-    background-color: #f0f0f0;
+    color: #fff;
+    background-color:#6C757D;
+    border: none;
 }

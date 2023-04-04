@@ -27,5 +27,7 @@ public interface EmployeeDAO {
 
 	public EmployeeDTO telCk(String emp_tel);
 
+	public void insertPass(String emp_tel);
+
 
 }

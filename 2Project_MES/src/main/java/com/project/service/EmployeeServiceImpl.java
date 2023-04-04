@@ -55,6 +55,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 		}else {
 			employeeDTO.setEmp_cd("00"+(employeeDAO.getMaxNum()+1));
 		}
+
+		
 		
 		employeeDAO.insertEmployee(employeeDTO);
 		
@@ -89,6 +91,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public EmployeeDTO telCk(String emp_tel) {
 		System.out.println("EmployeeServiceImpl telCk()");
 		return employeeDAO.telCk(emp_tel);
+	}
+
+	@Override
+	public void insertPass(String emp_tel) {
+		System.out.println("EmployeeServiceImpl insertPass");
+		employeeDAO.insertPass(emp_tel);
 	}
 
 

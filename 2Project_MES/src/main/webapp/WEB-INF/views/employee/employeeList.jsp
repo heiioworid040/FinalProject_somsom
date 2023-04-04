@@ -89,11 +89,6 @@ $(document).ready(function(){
         $("#emp_nm").focus();
         return false;
       }
-//       if($("#emp_pass").val()==""){
-//         alert("비밀번호를 입력해주세요.");
-//         $("#emp_pass").focus();
-//         return false;
-//       }
       
       if($("#emp_position").val()==""){
           alert("직책을 입력해주세요.");
@@ -113,11 +108,11 @@ $(document).ready(function(){
         return false;
       }
       
-      if($("#emp_tel").length!=11){
-          alert("전화번호를 11자 입력해주세요.");
-          $("#emp_tel").focus();
-          return false;
-        }
+//       if($("#emp_tel").length!=11){
+//           alert("전화번호를 11자 입력해주세요.");
+//           $("#emp_tel").focus();
+//           return false;
+//         }
       
       if($(".divresult_1").val()=="0"){
           alert("이메일 중복확인 해주세요.");
@@ -308,7 +303,8 @@ function fun1(index) {
 											<td><input type="checkBox" name="ck" id="ck" value=""/></td>
 											<td><input type="text" name="emp_cd" id="emp_cd" class="emp_cd form-control" readonly></td>
 											<td><input type="text" name="emp_nm" id="emp_nm" class="emp_nm form-control"></td>
-											<td><input type="text" name="emp_pass" id="emp_pass" class="emp_pass form-control"></td>
+<!-- 											<td><input type="text" name="emp_pass" id="emp_pass" class="emp_pass form-control"></td> -->
+											<td><input type="text" class="emp_pass form-control" readonly></td>
 											<td><select name="emp_position" id="emp_position" class="emp_position form-control">
 												<option value="">직책을 선택하세요</option>
 												<option value="관리자">관리자</option>
