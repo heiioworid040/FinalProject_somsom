@@ -10,5 +10,5 @@ public interface LineService {
 
 	List<LineDTO> getLineList(PageDTO pageDTO);
 
-	int getLineCount();
+	int getLineCount(PageDTO pageDTO);
 }

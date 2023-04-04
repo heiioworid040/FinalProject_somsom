@@ -35,10 +35,10 @@ public class LineServiceImpl implements LineService{
 	}
 
 	@Override
-	public int getLineCount() {
+	public int getLineCount(PageDTO pageDTO) {
 		System.out.println("LineServiceImpl getLineCount()");
 		
-		return lineDAO.getLineCount();
+		return lineDAO.getLineCount(pageDTO);
 	}
 	
 	

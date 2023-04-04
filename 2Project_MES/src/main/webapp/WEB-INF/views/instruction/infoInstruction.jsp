@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -86,7 +87,7 @@
 									<div class="form-group col-6 mb-1">
 										<label for="searchLine" class="pr-1 form-control-label">라인</label>
 										<div class="input-group modalP" id="modalP1">
-											<input type="text" id="modalLineCd1" name="searchLineCd" placeholder="Line Code" class="form-control bg-white" value="${pageDTO.search }" readonly>
+											<input type="text" id="searchLineCd1" name="searchLineCd" placeholder="Line Code" class="form-control bg-white" value="${pageDTO.search }" readonly>
 											<div class="input-group-btn">
 												<input type="button" class="btn btn-primary ml-2" id="lineModalBtn" value="검색">
 											</div>
@@ -178,13 +179,13 @@
 											<tr>
 												<td scope="row">
 													<div class="input-group modalP" id="modalP2">
-														<input type="text" id="modalLineCd2" name="line_cd" value="" placeholder="Line Code" class="form-control bg-white" readonly>
+														<input type="text" id="searchLineCd2" name="line_cd" value="" placeholder="Line Code" class="form-control bg-white" readonly>
 														<div class="input-group-btn">
 															<input type="button" class="btn btn-primary" id="lineModalBtn" value="검색">
 														</div>
 													</div>
 												</td>
-												<td><input type="text" id="modalLineNm" disabled class="form-control"></td>
+												<td><input type="text" id="searchLineNm" disabled class="form-control"></td>
 												<td>
 													<div class="input-group">
 														<input type="text" id="insertProdCd" placeholder="Prod Code" class="form-control bg-white" disabled>
@@ -206,6 +207,7 @@
 										</tbody>
 									</table>
 									<input type="submit"  class="btn btn-primary col-2 float-right ml-3" id="insertInstBtn" value="추가">
+									<input type="button"  class="btn btn-primary col-1 float-right ml-3" id="updateInstBtn" value="수정">
 									<input type="reset"  class="btn btn-secondary col-1 float-right" value="취소">
 								</div>
 							</form>
@@ -251,7 +253,7 @@
 												<td>${instructionDTO.prod_nm }</td>
 												<td>${instructionDTO.prod_unit }</td>
 												<td>${instructionDTO.inst_st }</td>
-												<td>${instructionDTO.inst_date }</td>
+												<td><fmt:formatDate value="${instructionDTO.inst_date }" pattern="yyyy.MM.dd hh:mm"/></td>
 												<td>${instructionDTO.inst_count }</td>
 												<td>${instructionDTO.ord_cd }</td>
 												<td>${instructionDTO.cli_nm }</td>
