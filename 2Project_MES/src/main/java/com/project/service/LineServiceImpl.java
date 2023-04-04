@@ -24,14 +24,14 @@ public class LineServiceImpl implements LineService{
 	}
 
 	@Override
-	public List<LineDTO> getlineList(PageDTO pageDTO) {
+	public List<LineDTO> getLineList(PageDTO pageDTO) {
 		System.out.println("LineServiceImpl getLineList()");
 		int startRow=(pageDTO.getCurrentPage()-1)*pageDTO.getPageSize()+1;
 		int endRow = startRow+pageDTO.getPageSize()-1;
-		
+
 		pageDTO.setStartRow(startRow);
 		pageDTO.setEndRow(endRow);
-		return lineDAO.getInstList(pageDTO);
+		return lineDAO.getLineList(pageDTO);
 	}
 
 	@Override

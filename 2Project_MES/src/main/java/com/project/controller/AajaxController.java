@@ -40,9 +40,11 @@ public class AajaxController {
 	@Inject
 	private ProductService prodService;
 	
-	@RequestMapping(value = "/ajax/lineModal", method = RequestMethod.GET)
+	@RequestMapping(value = "/ajax/lineModal", method = RequestMethod.POST)
 	public ResponseEntity<List<LineDTO>> getLineModal(HttpServletRequest request) {
-		System.out.println("LineController getLineModal");
+		System.out.println("AjaxController getLineModal");
+		String searchLineCd=request.getParameter("searchLineCd");
+		String searchLineNm=request.getParameter("searchLineNm");
 		int pageSize=10;
 		
 		String pageNum=request.getParameter("pageNum");
@@ -51,13 +53,17 @@ public class AajaxController {
 		}
 		int currentPage=Integer.parseInt(pageNum);
 		
+
 		PageDTO pageDTO=new PageDTO();
 		pageDTO.setPageSize(5);
 		pageDTO.setPageNum("1");
 		pageDTO.setCurrentPage(1);
-		
+		pageDTO.setSearch(searchLineCd);
+		pageDTO.setSearch2(searchLineNm);
 		// 디비 최근글 5개 가져오기
-		List<LineDTO> lineList=lineService.getlineList(pageDTO);
+		List<LineDTO> lineList=null;
+		lineList=lineService.getLineList(pageDTO);
+		System.out.println("라인리스트"+lineList.get(0).getLine_cd());
 		
 		int count = lineService.getLineCount();
 		int pageBlock=10;
@@ -77,6 +83,9 @@ public class AajaxController {
 		ResponseEntity<List<LineDTO>> lineListE=
 				new ResponseEntity<List<LineDTO>>(lineList, HttpStatus.OK);
 		System.out.println(lineList.get(0).getLine_cd());
+
+		System.out.println(pageDTO.getSearch());
+		System.out.println(pageDTO.getSearch2());
 		return lineListE;
 	}
 

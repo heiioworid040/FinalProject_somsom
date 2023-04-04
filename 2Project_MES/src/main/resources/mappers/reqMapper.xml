@@ -9,7 +9,7 @@
     	<if test="search != null">
         where req_add_emp like CONCAT('%',#{search},'%')
         </if> 
-    	order by req_num desc
+    	order by prod_nm desc
   
     	limit #{startRow}, #{pageSize}
     </select>

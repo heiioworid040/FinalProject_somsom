@@ -53,8 +53,8 @@ public class OrderDAO {
 	}
 
 	//수주 삭제
-	public void orderDel(OrderDTO orderDTO) {
-		sqlSession.delete(namespace+".orderDel",orderDTO);
+	public void orderDel(String ord_cd) {
+		sqlSession.delete(namespace+".orderDel",ord_cd);
 	}
 
 	//수주 현황
@@ -87,4 +87,11 @@ public class OrderDAO {
 		return sqlSession.selectOne(namespace+".getSearchProdCount", pageDTO);
 	}
 
+	public String orderCli(String cli_nm) {
+		return sqlSession.selectOne(namespace+".orderCli", cli_nm);
+	}
+
+	public String orderEmp(String emp_nm) {
+		return sqlSession.selectOne(namespace+".orderEmp", emp_nm);
+	}
 }

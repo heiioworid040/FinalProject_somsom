@@ -86,12 +86,7 @@
 									<div class="form-group col-6 mb-1">
 										<label for="searchLine" class="pr-1 form-control-label">라인</label>
 										<div class="input-group modalP" id="modalP1">
-											<c:if test="${empty pageDTO.search }">
-											<input type="text" id="modalLineCd1" name="searchLineCd" placeholder="Line Code" class="form-control bg-white" readonly>
-											</c:if>
-											<c:if test="${not empty pageDTO.search }">
-											<input type="text" id="modalLineCd1" name="searchLineCd" value="${pageDTO.search }" placeholder="Line Code" class="form-control bg-white" readonly>
-											</c:if>
+											<input type="text" id="modalLineCd1" name="searchLineCd" placeholder="Line Code" class="form-control bg-white" value="${pageDTO.search }" readonly>
 											<div class="input-group-btn">
 												<input type="button" class="btn btn-primary ml-2" id="lineModalBtn" value="검색">
 											</div>
@@ -99,59 +94,57 @@
 									</div>
 									<div class="form-group col-6 mb-1">
 										<label for="searchOrdDate" class="pr-1  form-control-label">지시일자</label>
-										<c:if test="${empty pageDTO.search2 }">
-										<input type="date" id="searchOrdDate1" name="searchOrdDate1" class="form-control" >
-										</c:if>
-										<c:if test="${not empty pageDTO.search2 }">
 										<input type="date" id="searchOrdDate1" name="searchOrdDate1" class="form-control" value="${pageDTO.search2 }">
-										</c:if>
 										~
-										<c:if test="${empty pageDTO.search3 }">
-										<input type="date" id="searchOrdDate2" name="searchOrdDate2" class="form-control">
-										</c:if>
-										<c:if test="${not empty pageDTO.search3 }">
 										<input type="date" id="searchOrdDate2" name="searchOrdDate2" class="form-control" value="${pageDTO.search3 }">
-										</c:if>
 									</div>
 									<div class="form-group col-6 mt-1">
 										<label for="searchProd" class="pr-1 form-control-label">품번</label>
-										<c:if test="${empty pageDTO.search4 }">
-										<input type="text" aria-label="filter" id="searchProdCd" name="searchProdCd" placeholder="Prod Code" class="form-control bg-white" readonly>
-										</c:if>
-										<c:if test="${not empty pageDTO.search4 }">
-										<input type="text" aria-label="filter" id="searchProdCd" name="searchProdCd" placeholder="Prod Code" class="form-control bg-white" value="${pageDTO.search4 }" readonly>									
-										</c:if>
+										<input type="text" aria-label="filter" id="searchProdCd" name="searchProdCd" placeholder="Prod Code" class="form-control bg-white" value="${pageDTO.search4 }"readonly>
 										<div class="input-group">
 											<div class="input-group">
 												<button id="prodModalBtn" class="btn btn-primary ml-2">검색
-												<i class="ti-search"></i>
 												</button>
 											</div>
 										</div>
 									</div>
 									<div class="form-group col-6 mt-1">
-										<label class="pr-1  form-control-label">지시상태</label>
-										<div class="form-control border-0">
+										<label class="pr-1  form-control-label" for="instStCk">지시상태</label>
+										<div class="form-control border-0" id="instStCk">
 											<div class="form-check-inline form-check">
-												<label for="inline-checkbox1" class="form-check-label ">
-													<input type="checkbox" id="inline-checkbox1" name="searchInstSt1" value="대기" class="form-check-input" checked>대기
+												<label for="searchInstSt1" class="form-check-label mr-2">
+													<!-- 대기 -->
+													<c:if test="${! empty pageDTO.search5 }">
+													<input style='zoom:1.8;' type="checkbox" id="searchInstSt1" name="searchInstSt1" class="form-check-input" checked value="대기">대기
+													</c:if>
+													<c:if test="${empty pageDTO.search5 }">
+													<input style='zoom:1.8;' type="checkbox" id="searchInstSt1" name="searchInstSt1" class="form-check-input" value="대기">대기
+													</c:if>
 												</label>
-												<label for="inline-checkbox2" class="form-check-label ">
-													<input type="checkbox" id="inline-checkbox2"
-													name="searchInstSt2" value="진행"
-													class="form-check-input" checked>진행
+												<label for="searchInstSt2" class="form-check-label mr-2">
+													<!-- 진행 -->
+													<c:if test="${! empty pageDTO.search6 }">
+													<input style='zoom:1.8;' type="checkbox" id="searchInstSt2" name="searchInstSt2" class="form-check-input" checked value="진행">진행
+													</c:if>
+													<c:if test="${empty pageDTO.search6 }">
+													<input style='zoom:1.8;' type="checkbox" id="searchInstSt2" name="searchInstSt2" class="form-check-input" value="진행">진행
+													</c:if>
 												</label>
-												<label for="inline-checkbox3" class="form-check-label ">
-													<input type="checkbox" id="inline-checkbox3"
-													name="searchInstSt3" value="완료"
-													class="form-check-input" checked>완료
+												<label for="searchInstSt3" class="form-check-label mr-2">
+													<!-- 마감 -->
+													<c:if test="${! empty pageDTO.search7 }">
+													<input style='zoom:1.8;' type="checkbox" id="searchInstSt3" name="searchInstSt3" class="form-check-input" checked value="완료">완료
+													</c:if>
+													<c:if test="${empty pageDTO.search7 }">
+													<input style='zoom:1.8;' type="checkbox" id="searchInstSt3" name="searchInstSt3" class="form-check-input" value="완료">완료
+													</c:if>
 												</label>
 											</div>
 										</div>									
 									</div>
 									<div class="col p-0">
 									<input type="submit" class="btn btn-primary col-2 float-right ml-3" id="searchInst" value="검색">
-									<input type="reset" class="btn btn-secondary col-1 float-right" value="취소">
+									<input type="reset" class="btn btn-secondary col-1 float-right reset" value="취소">
 									</div>
 								</form>
 							</div>
@@ -273,29 +266,30 @@
 										<ul class="pagination">
 										<c:if test="${pageDTO.startPage <= pageDTO.pageBlock }">
 											<li class="paginate_button page-item previous disabled">
-												<a href="${pageContext.request.contextPath}/instruction/infoInst?pageNum=${pageDTO.startPage - pageDTO.pageBlock}&search=${pageDTO.search}"
+												<a href="${pageContext.request.contextPath}/instruction/infoInst?pageNum=${pageDTO.startPage - pageDTO.pageBlock}&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}&search4=${pageDTO.search4}&search5=${pageDTO.search5}&search6=${pageDTO.search6}&search7=${pageDTO.search7}"
 												class="page-link">Previous</a></li>
 										</c:if>
 										<c:if test="${pageDTO.startPage > pageDTO.pageBlock }">
 											<li class="ppaginate_button page-item previous" >
-												<a href="${pageContext.request.contextPath}/instruction/infoInst?pageNum=${pageDTO.startPage - pageDTO.pageBlock}&search=${pageDTO.search}"
-												class="page-link">Previous</a></li>
+												<a href="${pageContext.request.contextPath}/instruction/infoInst?pageNum=${pageDTO.startPage - pageDTO.pageBlock}&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}&search4=${pageDTO.search4}&search5=${pageDTO.search5}&search6=${pageDTO.search6}&search7=${pageDTO.search7}"
+												class="page-link">Previous</a>
+											</li>
 										</c:if>
 										
 										<c:forEach var="i" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1">
 											<li class="paginate_button page-item ">
-												<a class="page-link" href="${pageContext.request.contextPath}/instruction/infoInst?pageNum=${i}&search=${pageDTO.search}">${i}</a>
+												<a class="page-link" href="${pageContext.request.contextPath}/instruction/infoInst?pageNum=${i}&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}&search4=${pageDTO.search4}&search5=${pageDTO.search5}&search6=${pageDTO.search6}&search7=${pageDTO.search7}">${i}</a>
 											</li>
 										</c:forEach>
 										
 										<c:if test="${pageDTO.endPage >= pageDTO.pageCount }">
 											<li class="paginate_button page-item next disabled" id="bootstrap-data-table_next">
-												<a href="${pageContext.request.contextPath}/instruction/infoInst?pageNum=${pageDTO.startPage + pageDTO.pageBlock}&search=${pageDTO.search}" class="page-link">Next</a>
+												<a href="${pageContext.request.contextPath}/instruction/infoInst?pageNum=${pageDTO.startPage + pageDTO.pageBlock}&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}&search4=${pageDTO.search4}&search5=${pageDTO.search5}&search6=${pageDTO.search6}&search7=${pageDTO.search7}" class="page-link">Next</a>
 											</li>
 										</c:if>
 										<c:if test="${pageDTO.endPage < pageDTO.pageCount }">
 											<li class="paginate_button page-item next" id="bootstrap-data-table_next">
-												<a href="${pageContext.request.contextPath}/instruction/infoInst?pageNum=${pageDTO.startPage + pageDTO.pageBlock}&search=${pageDTO.search}" class="page-link">Next</a>
+												<a href="${pageContext.request.contextPath}/instruction/infoInst?pageNum=${pageDTO.startPage + pageDTO.pageBlock}&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}&search4=${pageDTO.search4}&search5=${pageDTO.search5}&search6=${pageDTO.search6}&search7=${pageDTO.search7}" class="page-link">Next</a>
 											</li>
 										</c:if>
 										</ul>
@@ -331,6 +325,36 @@
 			if($('#insertOrderCd').val() == ''){
 				alert("수주번호를 입력해주세요.");
 				return false;
+			}
+		});
+		
+		$(document).on("click", ".reset", function(){
+			console.log($(this).closest('form').find('div input[type="text"]'));
+			$(this).closest('form').find('div input[type="text"]').attr('value', '');
+			$(this).closest('form').find('div input[type="date"]').attr('value', '');
+		});
+		
+		$("#searchInstSt1").change(function(){
+			if($("#searchInstSt1").is(":checked")){
+				$("#searchInstSt1").attr('value', '대기');
+			}else{
+				$("#searchInstSt1").attr('value', '');
+			}
+		});
+		
+		$("#searchInstSt2").change(function(){
+			if($("#searchInstSt2").is(":checked")){
+				$("#searchInstSt2").attr('value', '진행');				
+			}else{
+				$("#searchInstSt2").attr('value', '');
+			}
+		});
+			
+		$("#searchInstSt3").change(function(){
+			if($("#searchInstSt3").is(":checked")){
+				$("#searchInstSt3").attr('value', '완료');
+			}else{
+				$("#searchInstSt3").attr('value', '');
 			}
 		});
 	</script>

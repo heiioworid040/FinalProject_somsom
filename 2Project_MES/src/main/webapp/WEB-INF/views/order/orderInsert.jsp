@@ -182,16 +182,16 @@
 								<table class="table">
 									<thead class="thead-dark">
 										<tr>
-											<th scope="col">수주번호</th><td><input type="text" id="ord_cd" name="ord_cd" value="" readonly></td>
+											<th scope="col">수주번호</th><td><input type="text" id="ord_cd" name="ord_cd" class="ord_cd" readonly></td>
 											<td></td><td></td>
 										</tr>
 										<tr>
-											<th scope="col">담당자</th><td><input type="text" id="emp_cd" name="emp_cd" value="${orderDTO.emp_cd }" readonly><input type="text" id="emp_nm" value="${orderDTO.emp_nm }" readonly><button type="button" class="input-group-addon search-btn" style="cursor: pointer;" onclick="searchPop('emp')"><i class="ti-search"></i></button></td>
-											<th scope="col">수주일자</th><td><input type="date" id="ord_date" name="ord_date" value="${ord_date }"></td>
+											<th scope="col">담당자</th><td><input type="text" id="emp_cd" name="emp_cd" class="emp_cd" value="${orderDTO.emp_cd }" readonly><input type="text" id="emp_nm" class="emp_nm" value="${orderDTO.emp_nm }" readonly><button type="button" class="input-group-addon search-btn" style="cursor: pointer;" onclick="searchPop('emp')"><i class="ti-search"></i></button></td>
+											<th scope="col">수주일자</th><td><input type="date" id="ord_date" name="ord_date" class="ord_date" value="${ord_date }"></td>
 										</tr>
 										<tr>
-											<th scope="col">거래처</th><td><input type="text" id="cli_cd" name="cli_cd" value="${orderDTO.cli_cd }" readonly><input type="text" id="cli_nm" value="${orderDTO.cli_nm }" readonly><button type="button" class="input-group-addon search-btn" style="cursor: pointer;" onclick="searchPop('cli')"><i class="ti-search"></i></button></td>
-											<th scope="col">납품예정일</th><td><input type="date" id="ord_d_date" name="ord_d_date" value="${ord_d_date }"></td>
+											<th scope="col">거래처</th><td><input type="text" id="cli_cd" name="cli_cd" class="cli_cd" value="${orderDTO.cli_cd }" readonly><input type="text" id="cli_nm" value="${orderDTO.cli_nm }" class="cli_nm" readonly><button type="button" class="input-group-addon search-btn" style="cursor: pointer;" onclick="searchPop('cli')"><i class="ti-search"></i></button></td>
+											<th scope="col">납품예정일</th><td><input type="date" id="ord_d_date" name="ord_d_date" class="ord_d_date" value="${ord_d_date }"></td>
 										</tr>
 									</thead>
 								</table>
@@ -220,11 +220,11 @@
 									<tbody>
 											<tr>
 												<td></td>
-												<td><input type="text" id="prod_cd" name="prod_cd"  value="${orderDTO.prod_cd }" readonly></td>
-												<td><input type="text" id="prod_nm" value="${orderDTO.prod_nm }" readonly></td>
-												<td><input type="text" id="prod_mat" value="${orderDTO.prod_mat }" readonly></td>
-												<td><input type="text" id="prod_unit" value="${orderDTO.prod_unit }" readonly></td>
-												<td><input type="text" id="ord_count" value="${orderDTO.ord_count }" name="ord_count"></td>
+												<td><input type="text" id="prod_cd" name="prod_cd" class="prod_cd" value="${orderDTO.prod_cd }" readonly></td>
+												<td><input type="text" id="prod_nm" class="prod_nm" value="${orderDTO.prod_nm }" readonly></td>
+												<td><input type="text" id="prod_mat" class="prod_mat" value="${orderDTO.prod_mat }" readonly></td>
+												<td><input type="text" id="prod_unit" class="prod_unit" value="${orderDTO.prod_unit }" readonly></td>
+												<td><input type="text" id="ord_count" class="ord_count" value="${orderDTO.ord_count }" name="ord_count"></td>
 <!-- 												<td><button type="reset" class="btn-test" name="btn_can" value="del">-</button></td> -->
 <!-- 												<td><button type="button" class="btn-test" name="btn_can" value="del">-</button></td> -->
 											</tr>

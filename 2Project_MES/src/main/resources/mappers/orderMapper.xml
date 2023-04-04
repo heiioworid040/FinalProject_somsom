@@ -105,6 +105,14 @@
 		order by ord_date
 	</select>
 	
+	<select id="orderCli" resultType="java.lang.String">
+		select cli_cd from client where cli_nm=#{cli_nm}
+	</select>
+	
+	<select id="orderEmp" resultType="java.lang.String">
+		select emp_cd from employee where emp_nm=#{emp_nm}
+	</select>
+	
 	<select id="getOrderCount" resultType="java.lang.Integer">
 		select count(*) from orders
 	</select>

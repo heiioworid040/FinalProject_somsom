@@ -57,8 +57,8 @@ public class OrderService {
 	}
 	
 	//수주 삭제
-	public void orderDel(OrderDTO orderDTO) {
-		orderDAO.orderDel(orderDTO);
+	public void orderDel(String ord_cd) {
+		orderDAO.orderDel(ord_cd);
 	}
 	
 	//수주현황
@@ -110,4 +110,11 @@ public class OrderService {
 		return orderDAO.getSearchProdCount(pageDTO);
 	}
 
+	public String orderCli(String cli_nm) {
+		return orderDAO.orderCli(cli_nm);
+	}
+
+	public String orderEmp(String emp_nm) {
+		return orderDAO.orderEmp(emp_nm);
+	}
 }

@@ -35,11 +35,11 @@ public class OrderDTO extends ProductDTO {
 	public void setEmp_nm(String emp_nm) {
 		this.emp_nm = emp_nm;
 	}
-	public String getCil_cd() {
+	public String getCli_cd() {
 		return cli_cd;
 	}
-	public void setCil_cd(String cil_cd) {
-		this.cli_cd = cil_cd;
+	public void setCli_cd(String cli_cd) {
+		this.cli_cd = cli_cd;
 	}
 	public Timestamp getOrd_date() {
 		return ord_date;

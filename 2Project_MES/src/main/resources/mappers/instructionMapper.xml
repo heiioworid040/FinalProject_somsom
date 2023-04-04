@@ -17,17 +17,67 @@
 	join product p
 	on p.prod_cd=o.prod_cd
     join client c
-	on p.cli_cd=c.cli_cd
+	on o.cli_cd=c.cli_cd
 	where 1=1
-	<if test="search!=null and !search.equals('')">
-		and i.line_cd = #{search }
+	<if test="search != null and search != ''">
+		and i.line_cd = #{search}
+	</if>
+	<if test="search2 != null and search2 != ''">
+		and date_format(i.inst_date, '%Y-%m-%d') <![CDATA[>=]]> date_format(#{search2}, '%Y-%m-%d')
+	</if>
+	<if test="search3 != null and search3 != ''">
+		and date_format(i.inst_date, '%Y-%m-%d') <![CDATA[<=]]> date_format(#{search3}, '%Y-%m-%d')
+	</if>
+	<if test="search4 != null and search4 != ''">
+		and o.prod_cd = #{search4}
+	</if>
+	<if test="search5 == null or search5 == ''">
+		and not i.inst_st='대기'
+	</if>
+	<if test="search6 == null or search6 == ''">
+		and not i.inst_st='진행'
+	</if>
+	<if test="search7 == null or search7 == ''">
+		and not i.inst_st='완료'
 	</if>
 	order by inst_cd desc
     limit #{startRow} , #{pageSize}
     </select>
 
     <select id="getInstCount" resultType="java.lang.Integer">
-    SELECT COUNT(*) FROM instruction
+    select count(*)
+	from (select i.inst_cd, i.line_cd, l.line_nm, o.prod_cd, p.prod_nm, p.prod_unit, i.inst_st, i.inst_date, i.inst_count, i.ord_cd,  c.cli_nm, i.inst_fcount
+		from instruction i 
+		join line l
+		on i.line_cd = l.line_cd
+		join orders o
+		on i.ord_cd=o.ord_cd
+		join product p
+		on p.prod_cd=o.prod_cd
+		join client c
+		on o.cli_cd=c.cli_cd
+		where 1=1
+		<if test="search != null and search != ''">
+		and i.line_cd = #{search}
+		</if>
+		<if test="search2 != null and search2 != ''">
+		and date_format(i.inst_date, '%Y-%m-%d') <![CDATA[>=]]> date_format(#{search2}, '%Y-%m-%d')
+		</if>
+		<if test="search3 != null and search3 != ''">
+		and date_format(i.inst_date, '%Y-%m-%d') <![CDATA[<=]]> date_format(#{search3}, '%Y-%m-%d')
+		</if>
+		<if test="search4 != null and search4 != ''">
+		and o.prod_cd = #{search4}
+		</if>
+		<if test="search5 == null or search5 == ''">
+		and not i.inst_st='대기'
+		</if>
+		<if test="search6 == null or search6 == ''">
+		and not i.inst_st='진행'
+		</if>
+		<if test="search7 == null or search7 == ''">
+		and not i.inst_st='완료'
+		</if>) instlist
     </select>
 	
 	<insert id="insertInst">

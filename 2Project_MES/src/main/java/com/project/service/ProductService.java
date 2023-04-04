@@ -21,6 +21,5 @@ public interface ProductService {
 	
 	public int getProductCount(PageDTO pageDTO);
 	
-	
 
 }
