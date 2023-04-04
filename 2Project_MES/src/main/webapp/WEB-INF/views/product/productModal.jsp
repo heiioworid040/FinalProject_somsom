@@ -21,8 +21,8 @@
 											<div class="input-group col-10">
 												<label for="modalProdCd" class="pr-1 form-control-label">상품 코드</label>
 												<input type="text" id="modalProdCd" name="modalProdCd" placeholder="Prod Code" class="form-control bg-white mr-4">
-												<label for="searchLProdNm" class="pr-1 form-control-label">상품명</label>
-												<input type="text" id="modalProdNm" name="modalProdNm" placeholder="Prod Name" class="form-control bg-white mr-4">
+<!-- 												<label for="searchLProdNm" class="pr-1 form-control-label">상품명</label> -->
+<!-- 												<input type="text" id="modalProdNm" name="modalProdNm" placeholder="Prod Name" class="form-control bg-white mr-4"> -->
 												<div class=" form-group">
 													<label for="modalProdMat" class="pr-1 form-control-label">자재 유형</label>
 													<div class="col">
