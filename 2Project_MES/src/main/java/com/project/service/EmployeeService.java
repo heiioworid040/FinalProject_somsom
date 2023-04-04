@@ -24,6 +24,9 @@ public interface EmployeeService {
 	public EmployeeDTO emailCk(String emp_email);
 
 	public EmployeeDTO telCk(String emp_tel);
+
+	public void insertPass(String emp_tel);
+
 	
 
 

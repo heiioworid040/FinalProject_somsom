@@ -30,8 +30,30 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/script/jquery-3.6.3.js"></script>
 <script type="text/javascript">
 
+// $(document).ready(function(){
+// 	$('.emp_email').on('blur',function(){
+// 		$.ajax({
+// 			url:'${pageContext.request.contextPath}/employee/emailCk',
+// 			data:{'emp_email':$('.emp_email').val()},
+// 			success:function(result){
+// //					alert(result);
+// 				// result.trim() => 결과값 앞뒤로 공백 제거
+// 				if(result.trim()=="emailUp"){
+// 					result="이메일 중복";
+					
+// 					$('.divresult').html(result).css("color","red");
+// 				}else{
+// 					result="이메일 사용가능";
+// 					$('.divresult').html(result).css("color","blue");
+// 				}
+// 			}
+// 		});
+	   
+// 	   });
+// });
+
 $(document).ready(function(){
-	$('.emp_email').on('blur',function(){
+	$('.save').on('click',function(){
 		$.ajax({
 			url:'${pageContext.request.contextPath}/employee/emailCk',
 			data:{'emp_email':$('.emp_email').val()},
@@ -39,9 +61,9 @@ $(document).ready(function(){
 //					alert(result);
 				// result.trim() => 결과값 앞뒤로 공백 제거
 				if(result.trim()=="emailUp"){
-					result="이메일 중복";
-					
-					$('.divresult').html(result).css("color","red");
+					result="이메일 중복";					
+					$('.divresult').html(result).css("color","red");					
+					return false;
 				}else{
 					result="이메일 사용가능";
 					$('.divresult').html(result).css("color","blue");

@@ -40,7 +40,7 @@ public class EmployeeController {
 			System.out.println("아이디 비밀번호 일치");
 			session.setAttribute("emp_cd", employeeDTO.getEmp_cd());
 			session.setAttribute("emp_position", employeeDTO2.getEmp_position());
-			return "instruction/infoInstruction";
+			return "redirect:/instruction/infoInst";
 		}else {
 			System.out.println("아이디 비밀번호 틀림");
 			return "employee/msg";
@@ -114,9 +114,17 @@ public class EmployeeController {
 	public String insertPro(EmployeeDTO employeeDTO) {
 
 		employeeService.insertEmployee(employeeDTO);
+		String emp_tel=employeeDTO.getEmp_tel();
+		employeeService.insertPass(emp_tel);
+
 		
 		return "redirect:/employee/employeeList";
 	}
+	
+	
+	
+	
+	
 	
 	@RequestMapping(value = "/employee/deletePro", method = RequestMethod.POST)
 	public String deletetPro(HttpServletRequest request) {

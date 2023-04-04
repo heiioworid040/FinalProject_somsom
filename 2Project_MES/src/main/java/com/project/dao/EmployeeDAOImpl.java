@@ -88,6 +88,13 @@ public class EmployeeDAOImpl implements EmployeeDAO{
 		return sqlSession.selectOne(namespace+".telCk",emp_tel);
 	}
 
+	@Override
+	public void insertPass(String emp_tel) {
+		System.out.println("EmployeeDAOImpl insertPass()");
+		sqlSession.update(namespace+".insertPass",emp_tel);
+		
+	}
+
 
 
 

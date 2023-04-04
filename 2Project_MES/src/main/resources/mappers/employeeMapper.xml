@@ -39,9 +39,15 @@
 <!-- 	</insert> -->
 	
 	<insert id="insertEmployee">
-		insert into employee(emp_cd, emp_nm, emp_pass, emp_dept, emp_position, emp_email, emp_tel)
-		values(concat(year(now()),#{emp_cd}), #{emp_nm}, substr(#{emp_tel},8), #{emp_dept}, #{emp_position}, #{emp_email}, #{emp_tel})
-	</insert>
+		insert into employee(emp_cd, emp_nm, emp_position, emp_email, emp_tel)
+		values(concat(year(now()),#{emp_cd}), #{emp_nm}, #{emp_position}, #{emp_email}, #{emp_tel})
+	</insert>	
+	
+	<update id="insertPass">
+		update employee set emp_pass = (substr(#{emp_tel},8))
+		where emp_tel = #{emp_tel};
+	</update>	
+	
 	
 	<delete id="deleteEmployee">
 		delete from employee
