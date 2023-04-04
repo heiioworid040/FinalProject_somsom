@@ -43,9 +43,9 @@ public class AajaxController {
 	@RequestMapping(value = "/ajax/lineModal", method = RequestMethod.POST)
 	public ResponseEntity<List<LineDTO>> getLineModal(HttpServletRequest request) {
 		System.out.println("AjaxController getLineModal");
-		String searchLineCd=request.getParameter("searchLineCd");
-		String searchLineNm=request.getParameter("searchLineNm");
-		int pageSize=10;
+		String searchLineCd=request.getParameter("modalLineCd");
+		String searchLineNm=request.getParameter("modalLineNm");
+		int pageSize=5;
 		
 		String pageNum=request.getParameter("pageNum");
 		if(pageNum==null) {
@@ -65,7 +65,7 @@ public class AajaxController {
 		lineList=lineService.getLineList(pageDTO);
 		System.out.println("라인리스트"+lineList.get(0).getLine_cd());
 		
-		int count = lineService.getLineCount();
+		int count = lineService.getLineCount(pageDTO);
 		int pageBlock=10;
 		int startPage=(currentPage-1)/pageBlock*pageBlock+1;
 		int endPage=startPage+pageBlock-1;
@@ -135,7 +135,7 @@ public class AajaxController {
 		return entity;
 	}
 	
-	@RequestMapping(value = "/ajax/orderModal", method = RequestMethod.GET)
+	@RequestMapping(value = "/ajax/orderModal", method = RequestMethod.POST)
 	public ResponseEntity<List<OrderDTO>> getorderModal(HttpServletRequest request) {
 		System.out.println("orderController getorderModal");
 		int pageSize=10;
@@ -174,11 +174,14 @@ public class AajaxController {
 		System.out.println(orderList.get(0).getOrd_cd());
 		return orderListE;
 	}
-	@RequestMapping(value = "/ajax/prodModal", method = RequestMethod.GET)
+	
+	@RequestMapping(value = "/ajax/prodModal", method = RequestMethod.POST)
 	public ResponseEntity<List<ProductDTO>> getProdModal(HttpServletRequest request) {
-		
-		System.out.println("ProductController getProdModal");
-		int pageSize=10;
+		System.out.println("AjaxController getProdModal");
+		String searchProdCd=request.getParameter("modalProdCd");
+		String searchProdNm=request.getParameter("modalProdNm");
+		String searchProdMat=request.getParameter("modalProdMat");
+		int pageSize=5;
 		
 		String pageNum=request.getParameter("pageNum");
 		if(pageNum==null) {
@@ -190,10 +193,13 @@ public class AajaxController {
 		pageDTO.setPageSize(5);
 		pageDTO.setPageNum("1");
 		pageDTO.setCurrentPage(1);
-		
+		pageDTO.setSearch2(searchProdCd);
+		pageDTO.setSearch3(searchProdNm);
+		pageDTO.setSearch4(searchProdMat);
 		// 디비 최근글 5개 가져오기
 		List<ProductDTO> prodList=prodService.getProductList(pageDTO);
-		
+		System.out.println("상품리스트"+prodList.get(0).getProd_cd());
+
 		int count = prodService.getProductCount(pageDTO);
 		int pageBlock=10;
 		int startPage=(currentPage-1)/pageBlock*pageBlock+1;

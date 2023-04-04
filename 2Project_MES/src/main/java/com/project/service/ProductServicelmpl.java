@@ -47,7 +47,7 @@ public class ProductServicelmpl implements ProductService{
 	
 	@Override
 	public List<ProductDTO> getProductList(PageDTO pageDTO) {
-		// TODO Auto-generated method stub
+		System.out.println("Productservice getProductList");
 		// limit #{startRow-1} . #{pageSzie} 1~10 , 2~11
 		int startRow = (pageDTO.getCurrentPage()-1)*pageDTO.getPageSize()+1;
 		int endRow = startRow+pageDTO.getPageSize()-1;

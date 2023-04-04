@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="modal fade" id="lineModal" tabindex="-1" role="dialog"
 	aria-labelledby="largeModalLabel" style="display: none;"
@@ -14,52 +14,56 @@
 				</button>
 			</div>
 			<div class="modal-body">
-			<div class="col">
-				<div class="row">
-					<div class="col-lg">
-							<div class="card-body card-block">
-								<form class="form-inline" method="get" id="lineSearchForm">
-									<div class="form-group col-6 mb-1">
-										<div class="input-group modalP" id="modalP1">
-										<label for="searchLine" class="pr-1 form-control-label">라인 코드</label>
-											<input type="text" id="searchLineCd" name="searchLineCd" placeholder="Line Code" class="form-control bg-white mr-4" >
-										<label for="searchLine" class="pr-1 form-control-label">라인명</label>
-											<input type="text" id="searchLineNm" name="searchLineNm" placeholder="Line Name" class="form-control bg-white" >
-											<div class="input-group-btn">
-												<input type="button" class="btn btn-primary ml-2" id="lineSearchBtn" value="검색">
+				<div class="col">
+					<div class="row">
+						<div class="col-lg">
+							<div class="card">
+								<div class="card-body card-block">
+									<form class="form-inline" method="post" id="lineSearchForm">
+										<div class="form-group col-6 mb-1">
+											<div class="input-group modalP" id="modalP1">
+												<label for="modalLineCd" class="pr-1 form-control-label">라인 코드</label>
+												<input type="text" id="modalLineCd" name="modalLineCd"
+													placeholder="Line Code" class="form-control bg-white mr-4">
+												<label for="modalLineNm" class="pr-1 form-control-label">라인명</label>
+												<input type="text" id="modalLineNm" name="modalLineNm"
+													placeholder="Line Name" class="form-control bg-white">
+												<div class="input-group-btn">
+													<input type="button" class="btn btn-primary ml-2"
+														id="lineSearchBtn" value="검색">
+												</div>
 											</div>
 										</div>
-									</div>
-									<div class="col p-0">
-									</div>
-								</form>
+										<div class="col p-0"></div>
+									</form>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 
-					<div class="col">
-						<div class="card">
-							<div class="card-body">
-								<table class="table table-hover">
-									<thead class="thead-dark">
-										<tr>
-											<th scope="col">라인코드</th>
-											<th scope="col">라인명</th>
-											<th scope="col">공정</th>
-											<th scope="col">작업장</th>
-											<th scope="col">정렬순서</th>
-											<th scope="col">설비상태</th>
-											<th scope="col">비고</th>
-										</tr>
-									</thead>
-									<tbody id="lineTableBody">
+				<div class="col">
+					<div class="card">
+						<div class="card-body">
+							<table class="table table-hover">
+								<thead class="thead-dark">
+									<tr>
+										<th scope="col">라인코드</th>
+										<th scope="col">라인명</th>
+										<th scope="col">공정</th>
+										<th scope="col">작업장</th>
+										<th scope="col">정렬순서</th>
+										<th scope="col">설비상태</th>
+										<th scope="col">비고</th>
+									</tr>
+								</thead>
+								<tbody id="lineTableBody">
 
-									</tbody>
-								</table>
-							</div>
+								</tbody>
+							</table>
 						</div>
 					</div>
+				</div>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" id="cancleModal">취소</button>
@@ -67,123 +71,124 @@
 		</div>
 	</div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
 <script type="text/javascript">
-$(function(){
-	var clickBtnP = "";
-	$(document).on("click", "#lineModalBtn", function(){
-		clickBtnP = $(this).closest('.modalP');
+	$(function() {
+		var clickBtnP = "";
+		$(document).on("click","#lineModalBtn",function() {
+			// 모달열기
+			clickBtnP = $(this).closest('.modalP');
+			try {
+				jQuery('#lineTableBody').html('');
+				jQuery.ajax({
+					type : 'post',
+					url : '${pageContext.request.contextPath}/ajax/lineModal',
+					dataType : 'json',
+					success : function(linearr) {
+						jQuery.each(linearr,function(index,item) {
+							jQuery('#lineTableBody').append(
+									'<tr><td scope="row">'+ item.line_cd+'</td><td id="line">'+ item.line_nm+'</td><td>'+ item.line_process+ '</td><td>'+ item.line_place+ '</td><td>'+ item.line_num+ '</td><td>'+ item.line_st+'</td><td>'+ item.line_note+ '</td></tr>');
+							});
+						}
+					});
+				jQuery('#lineModal').modal("show");
+				event.preventDefault();
+				} catch (e) {
+					console.log(e instanceof TypeError); // true
+					console.log(e.message); // "null has no properties"
+					console.log(e.name); // "TypeError"
+					console.log(e.fileName); // "Scratchpad/1"
+					console.log(e.lineNumber); // 2
+					console.log(e.columnNumber); // 2
+					console.log(e.stack); // "@Scratchpad/2:2:3\n"
+					}
+				});
+
+		
+	$(document).on("click","#lineSearchBtn",function() {
+		// 모달 내부 검색
 		try {
 			jQuery('#lineTableBody').html('');
 			jQuery.ajax({
 				type : 'post',
-				url:'${pageContext.request.contextPath}/ajax/lineModal',
-				dataType:'json',
-				success:function(linearr){
-					jQuery.each(linearr,function(index,item){
-						jQuery('#lineTableBody').append('<tr><td scope="row">'+item.line_cd+'</td><td id="line">'+item.line_nm+'</td><td>'+item.line_process+'</td><td>'+item.line_place +'</td><td>'+item.line_num +'</td><td>'+item.line_st +'</td><td>'+item.line_note+'</td></tr>');
-					});
+				url : '${pageContext.request.contextPath}/ajax/lineModal',
+				data : $('#lineSearchForm').serialize(),
+				dataType : 'json',
+				success : function(linearr) {
+					jQuery.each(linearr,function(index, item) {
+						jQuery('#lineTableBody').append('<tr><td scope="row">'+ item.line_cd+ '</td><td>'+ item.line_nm+ '</td><td>'+ item.line_process+ '</td><td>'+ item.line_place+ '</td><td>'+ item.line_num+ '</td><td>'+ item.line_st+ '</td><td>'+item.line_note+ '</td></tr>');
+						});
+					}
+				});
+			event.preventDefault();
+			} catch (e) {
+				console.log(e instanceof TypeError); // true
+				console.log(e.message); // "null has no properties"
+				console.log(e.name); // "TypeError"
+				console.log(e.fileName); // "Scratchpad/1"
+				console.log(e.lineNumber); // 2
+				console.log(e.columnNumber); // 2
+				console.log(e.stack); // "@Scratchpad/2:2:3\n"
 				}
 			});
-			jQuery('#lineModal').modal("show");
+
+		$(document).on("click", "#lineTableBody tr", function() {
+			// tr 선택
 			event.preventDefault();
-			// 테이블의 Row 클릭시 값 가져오기
-		} catch (e) {
-			console.log(e instanceof TypeError); // true
-			console.log(e.message);              // "null has no properties"
-			console.log(e.name);                 // "TypeError"
-			console.log(e.fileName);             // "Scratchpad/1"
-			console.log(e.lineNumber);           // 2
-			console.log(e.columnNumber);         // 2
-			console.log(e.stack);                // "@Scratchpad/2:2:3\n"
-		}
-	});
+			var str = ""
+			var lineArr = new Array();
+			var mdalLineCd1 = "";
+			var mdalLineCd2 = "";
 
-	$(document).on("click", "#lineSearchBtn", function(){
-		console.log("모달 내부 검색");
-		try {
-			jQuery('#lineTableBody').html('');
-			jQuery.ajax({
-				type : 'post',
-				url:'${pageContext.request.contextPath}/ajax/lineModal',
-				data: $('#lineSearchForm').serialize(),
-				dataType:'json',
-				success:function(slinearr){
-					jQuery.each(slinearr,function(index,sitem){
-						jQuery('#lineTableBody').append('<tr><td scope="row">'+sitem.line_cd+'</td><td>'+sitem.line_nm+'</td><td>'+sitem.line_process+'</td><td>'+sitem.line_place +'</td><td>'+sitem.line_num +'</td><td>'+sitem.line_st +'</td><td>'+sitem.line_note+'</td></tr>');
-					});
-				}
-			});
+			if (clickBtnP.attr('id') === 'modalP1') {
+				var tr1 = $(this);
+				var td1 = tr1.children();
+
+				mdalLineCd1 = td1.eq(0).text();
+				mdalLineCd2 = "";
+
+				console.log("클릭한 Row의 모든 데이터1 : " + tr1.text());
+
+				$('#searchLineCd1').val(mdalLineCd1);
+				event.preventDefault();
+			}
+			if (clickBtnP.attr('id') === 'modalP2') {
+				var tr2 = $(this);
+				var td2 = tr2.children();
+
+				mdalLineCd1 = "";
+				mdalLineCd2 = td2.eq(0).text();
+				mdalLineNm = td2.eq(1).text();
+				console.log("클릭한 Row의 모든 데이터2 : " + tr2.text());
+				$('#searchLineCd2').val(mdalLineCd2);
+				$('#searchLineNm').val(mdalLineNm);
+				event.preventDefault();
+			}
+
+			jQuery('#lineModal').modal("hide");
+		});
+
+		$(document).on("click", "#cancleModal", function() {
+			// 취소
 			event.preventDefault();
-		} catch (e) {
-			console.log(e instanceof TypeError); // true
-			console.log(e.message);              // "null has no properties"
-			console.log(e.name);                 // "TypeError"
-			console.log(e.fileName);             // "Scratchpad/1"
-			console.log(e.lineNumber);           // 2
-			console.log(e.columnNumber);         // 2
-			console.log(e.stack);                // "@Scratchpad/2:2:3\n"
-		}
-	});
+			if (clickBtnP.attr('id') == 'modalP1') {
+				modalLineCd1 = "";
 
-	$(document).on("click", "#lineTableBody tr", function() {
-		event.preventDefault();
-		var str = ""
-		var lineArr = new Array(); // 배열 선언
-		// 현재 클릭된 Row(<tr>)
-		var mdalLineCd1 = "";
-		var mdalLineCd2 = "";
+				$('#searchLineCd1').val(modalLineCd1);
+				event.preventDefault();
+			}
 
-		if (clickBtnP.attr('id') === 'modalP1') {
-			var tr1 = $(this);
-			var td1 = tr1.children();
+			if (clickBtnP.attr('id') == 'modalP2') {
+				modalLineCd2 = "";
+				modalLineNm = "";
 
-			mdalLineCd1 = td1.eq(0).text();
-			mdalLineCd2 = "";
-
-			console.log("클릭한 Row의 모든 데이터1 : " + tr1.text());
-
-			$('#modalLineCd1').val(mdalLineCd1);
-			event.preventDefault();
-		}
-		if (clickBtnP.attr('id') === 'modalP2') {
-			var tr2 = $(this);
-			var td2 = tr2.children();
-
-			mdalLineCd1 = "";
-			mdalLineCd2 = td2.eq(0).text();
-			mdalLineNm = td2.eq(1).text();
-			console.log("클릭한 Row의 모든 데이터2 : " + tr2.text());
-			$('#modalLineCd2').val(mdalLineCd2);
-			$('#modalLineNm').val(mdalLineNm);
-			event.preventDefault();
-		}
-		
-		jQuery('#searchLineCd').val("");
-		jQuery('#searchLineNm').val("");
-		jQuery('#lineModal').modal("hide");
-	});
-	
-	$(document).on("click", "#cancleModal", function() {
-		event.preventDefault();
-		if (clickBtnP.attr('id') === 'modalP1') {
-			mdalLineCd1 = "";
-
-			$('#modalLineCd1').val(mdalLineCd1);
-			event.preventDefault();
-		}
-		
-		if (clickBtnP.attr('id') === 'modalP2') {
-			mdalLineCd2 = "";
-			mdalLineNm = "";
+				$('#searchLineCd2').val(modalLineCd2);
+				$('#searchLineNm').val(modalLineNm);
+				event.preventDefault();
+			}
 			
-			$('#modalLineCd2').val(mdalLineCd2);
-			$('#modalLineNm').val(mdalLineNm);
-			event.preventDefault();
-		}
-		jQuery('#searchLineCd').val("");
-		jQuery('#searchLineNm').val("");
-		jQuery('#lineModal').modal("hide");
-	});
-})
+			jQuery('#lineModal').modal("hide");
+		});
+	})
 </script>

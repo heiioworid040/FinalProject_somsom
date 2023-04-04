@@ -33,10 +33,10 @@ public class LineDAOImpl implements LineDAO {
 	}
 
 	@Override
-	public int getLineCount() {
+	public int getLineCount(PageDTO pageDTO) {
 		System.out.println("LineDAOImpl getLineCount()");
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne(namespace+".getLineCount");
+		return sqlSession.selectOne(namespace+".getLineCount", pageDTO);
 	}
 	
 	
