@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+.remember_emp {
+	accent-color: #6C757D;
+}
+
 .container-doc {	
 	width: 100%;
 	height: 100%;
@@ -115,14 +119,6 @@ h1 {
 	border-radius: 8px;
 }
 
-.box_desc .desc_error {
-	color: #e65f3e;
-	font-size: 14px;
-}
-
-.box_desc {
-	margin-top: 20px;
-}
 
 .btn_g {
     display: block;
@@ -137,6 +133,18 @@ h1 {
     font-size: 16px;
     line-height: 51px;
     color: #fff;
-    background-color:#6C757D;
+    background-color:#343a40;
     border: none;
+}
+
+#ck{
+	accent-color: #343a40;
+}
+
+#ckAll{
+	accent-color: #343a40;	
+}
+
+.btn3{
+	margin-left: 5px;
 }

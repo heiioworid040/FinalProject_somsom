@@ -40,8 +40,7 @@ public class EmployeeController {
 			System.out.println("아이디 비밀번호 일치");
 			session.setAttribute("emp_cd", employeeDTO.getEmp_cd());
 			session.setAttribute("emp_position", employeeDTO2.getEmp_position());
-			return "instruction/infoInstruction";
-//			return "redirect:/instruction/infoInstruction";
+			return "redirect:/instruction/infoInst";
 		}else {
 			System.out.println("아이디 비밀번호 틀림");
 			return "employee/msg";

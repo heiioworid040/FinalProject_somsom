@@ -143,6 +143,7 @@ $(document).ready(function(){
                         </div>
                         
                         <div class="set_login">
+                        	
     	                   	 <div class="checkbox">
                                 <input type="checkbox" id="remember_emp" class="remember_emp" name="remember_emp"> 
                             <label class="lab_choice">
@@ -150,9 +151,7 @@ $(document).ready(function(){
                             </label>
 							</div>
                         </div>
-                        <div class="box_desc">
-							<p class="desc_error"></p>
-						</div>
+
                         
                         
                         
