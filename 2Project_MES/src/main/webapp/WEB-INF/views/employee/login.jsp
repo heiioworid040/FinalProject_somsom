@@ -23,8 +23,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
-    <link rel="stylesheet" href="assets/css/cs-skin-elastic.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+<!--     <link rel="stylesheet" href="assets/css/cs-skin-elastic.css"> -->
+<!--     <link rel="stylesheet" href="assets/css/style.css"> -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/login.css">
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
@@ -83,8 +84,29 @@ function getCookie(cookieName) {
     }
     return unescape(cookieValue);
 }
-    
-    
+
+
+$(document).ready(function(){
+    $("#login").on("click", function(){
+      if($("#emp_cd").val()==""){
+        alert("아이디를 입력해주세요.");
+        $("#emp_cd").focus();
+        return false;
+      }
+      
+      if($("#emp_pass").val()==""){
+          alert("비밀번호를 입력해주세요.");
+          $("#emp_pass").focus();
+          return false;
+        }
+      
+  
+   
+	   	 form.method='POST';
+     	 document.form.action='${pageContext.request.contextPath}/employee/loginPro';
+   		 document.form.submit();
+    });
+  })
 </script>
     
     
@@ -92,54 +114,70 @@ function getCookie(cookieName) {
 </head>
 <!-- <body class="bg-dark"> -->
 <body>
+<div class="container-doc">
+<div class="ineer_container">
+	<main class="doc-main">
+		<div class="doc-title">
+			<h1 class="tit_service">
+				<span class="logo_somsom">
+					<span class="ir_wa">somsom</span>
+				</span>
+			</h1>
+		</div>
+		
+	<article class="content-article">
+		<div class="cont_login">
+			<form action="${pageContext.request.contextPath}/employee/loginPro" class="form" method="post" >
 
-    <div class="sufee-login d-flex align-content-center flex-wrap">
-        <div class="container">
-            <div class="login-content">
-                <div class="login-logo">
-                    <a href="index.html">
-                        <img class="align-content" src="images/logo.png" alt="">
-                    </a>
-                </div>
 
-                
-                <div class="login-form">
-			<form action="${pageContext.request.contextPath}/employee/loginPro" method="post">
-
-
-                        <div class="form-group">
+                        <div class="box_tf fst">
                             <label>사용자ID</label><br>
-                            <input type="text" name="emp_cd" id="emp_cd" placeholder="사용자ID"><br>
-
+                            <input type="text" name="emp_cd" id="emp_cd" placeholder="사용자ID" class="tf_g"><br>
+							<div class="util_tf"></div>
                         </div>
-                        <div class="form-group">
+                        
+                        <div class="box_tf">
                             <label>비밀번호</label><br>
-                            <input type="password" name="emp_pass" id="emp_pass" placeholder="비밀번호">
+                            <input type="password" class="tf_g" name="emp_pass" id="emp_pass" placeholder="비밀번호">
+                        	<div class="util_tf"></div>
                         </div>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" id="remember_emp" class="remember_emp" name="remember_emp"> 아이디 기억하기
+                        
+                        <div class="set_login">
+                        	
+    	                   	 <div class="checkbox">
+                                <input type="checkbox" id="remember_emp" class="remember_emp" name="remember_emp"> 
+                            <label class="lab_choice">
+                                <span class="ico_comm ico_ckeck"></span>아이디 기억하기
                             </label>
-<!--                             <label class="pull-right"> -->
-<!--                                 <a href="#">Forgotten Password?</a> -->
-<!--                             </label> -->
-
+							</div>
                         </div>
-                        <input type="submit" value="로그인" class="btn btn-success btn-flat m-b-30 m-t-30">
-                        <div class="social-login-content">
 
+                        
+                        
+                        
+                        <div class="confirm_btn">
+                        <button type="submit" class="btn_g highlight submit" id="login" class="login" >로그인</button>
                         </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
+           </form>			
+		</div>
+	
+	</article>		
+		
+		
+		
+		
+		
+		
+			
+                    
+      </main>
+</div>
+</div>
     <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-    <script src="assets/js/main.js"></script>
+<!--     <script src="assets/js/main.js"></script> -->
 
 </body>
 </html>

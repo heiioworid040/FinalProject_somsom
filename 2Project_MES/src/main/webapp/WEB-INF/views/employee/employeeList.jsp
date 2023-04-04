@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>infoWi</title>
+<title>employeeList</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/cs-skin-elastic.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
-
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/login.css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
@@ -89,11 +89,6 @@ $(document).ready(function(){
         $("#emp_nm").focus();
         return false;
       }
-//       if($("#emp_pass").val()==""){
-//         alert("비밀번호를 입력해주세요.");
-//         $("#emp_pass").focus();
-//         return false;
-//       }
       
       if($("#emp_position").val()==""){
           alert("직책을 입력해주세요.");
@@ -113,11 +108,11 @@ $(document).ready(function(){
         return false;
       }
       
-      if($("#emp_tel").length!=11){
-          alert("전화번호를 11자 입력해주세요.");
-          $("#emp_tel").focus();
-          return false;
-        }
+//       if($("#emp_tel").length!=11){
+//           alert("전화번호를 11자 입력해주세요.");
+//           $("#emp_tel").focus();
+//           return false;
+//         }
       
       if($(".divresult_1").val()=="0"){
           alert("이메일 중복확인 해주세요.");
@@ -190,45 +185,37 @@ function fun1(index) {
 	<jsp:include page="../inc/leftPanel.jsp" />
 	<!-- Left Panel1 -->
 	
-<!--     Right Panel -->
-    <div id="right-panel" class="right-panel">
-        Header 
+	<!-- Right Panel -->
+	<div id="right-panel" class="right-panel">
+		<!-- Header-->
 		<jsp:include page="../inc/top.jsp" />
-        Header
+		<!-- Header-->
         
-        <div class="breadcrumbs">
-            <div class="breadcrumbs-inner">
-                <div class="row m-0">
-                    <div class="col-sm-4">
-                        <div class="page-header float-left">
-                            <div class="page-title">
-                                <h1>Dashboard</h1>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-8">
-                        <div class="page-header float-right">
-                            <div class="page-title">
-                                <ol class="breadcrumb text-right">
-                                    <li><a href="#">Dashboard</a></li>
-                                    <li><a href="#">Table</a></li>
-                                    <li class="active">Basic table</li>
-                                </ol>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-				
+		<div class="breadcrumbs">
+			<div class="breadcrumbs-inner">
+				<div class="row m-0">
+					<div class="col-sm-4">
+						<div class="page-header float-left">
+							<div class="page-title">
+								<h1>사용자 관리</h1>
+							</div>
+						</div>
+					</div>
+ 				<div class="col-sm-8">
+						<div class="page-header float-right">
+							<div class="page-title">
+								<ol class="breadcrumb text-right">
+									<li><a href="#">시스템 관리</a></li>
+									<li class="active">사용자 관리</li>
+								</ol>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+<!-- 검색창				 -->
 		<div class="content">
-			<div class="animated fadeIn">
-				<div class="row">
-					<div class="col-lg">
-						<div class="card">
-							<div class="card-body" style="padding=50px">
-<!-- 								(검색창 위치) -->
-							<div class="content">
 			<div class="animated fadeIn">
 				<div class="row">
 					<div class="col-lg">
@@ -247,33 +234,23 @@ function fun1(index) {
                                     	<div class="input-group">
                                     	</div>
                                     </div> 
-<!--                                     <div class="form-group col-6 mt-3"> -->
-                                    <input type="submit" value="search">
-                                    	<div class="input-group">
-                                        	<div class="input-group-addon"><i class="ti-search"></i></div>
-                                    	</div>
+                                   <div style="width: 100%">
+										<input type="submit" class="btn btn-secondary float-right" value="조회">
+									</div>
 								   </form>
-                                    </div>
-                            </div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		
-							<!-- 이 이상 긁는건 너무 템플릿에만의존적인 것 같아 나머지 기능은 직접 개발합시다 파이팅! -->
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-<!-- 		</div> -->
+		</div>
+<!-- 		검색창 -->
 <!-- 		.content -->
 		
         <div class="content">
 		<form name="form" method="post">
 		<div style="width: 100%; height: 50px">
-		<input type="submit" name="ckDelete" value="삭제" onclick="fun1(1)" class="btn btn-secondary float-right">
+		<input type="submit" name="ckDelete" value="삭제" onclick="fun1(1)" class="btn btn-secondary float-right btn3">
 		<input type="submit" value="추가" name="add" onclick="fun1(3)" formmethod="get" class="btn btn-secondary float-right">			
 		</div>			
 			<div class="animated fadeIn">
@@ -282,7 +259,7 @@ function fun1(index) {
 					<div class="col-lg">
 						<div class="card">
 							<div class="card-header">
-								<strong class="card-title">Table Head</strong>  
+								<strong class="card-title">사용자</strong>  
 							</div>
 							<div class="card-body">
 								<table class="table table-striped table-bordered">
@@ -308,7 +285,8 @@ function fun1(index) {
 											<td><input type="checkBox" name="ck" id="ck" value=""/></td>
 											<td><input type="text" name="emp_cd" id="emp_cd" class="emp_cd form-control" readonly></td>
 											<td><input type="text" name="emp_nm" id="emp_nm" class="emp_nm form-control"></td>
-											<td><input type="text" name="emp_pass" id="emp_pass" class="emp_pass form-control"></td>
+<!-- 											<td><input type="text" name="emp_pass" id="emp_pass" class="emp_pass form-control"></td> -->
+											<td><input type="text" class="emp_pass form-control" readonly></td>
 											<td><select name="emp_position" id="emp_position" class="emp_position form-control">
 												<option value="">직책을 선택하세요</option>
 												<option value="관리자">관리자</option>
@@ -326,7 +304,7 @@ function fun1(index) {
 
 
 											<td><input type="submit" value="저장" formmethod="get" id="save" class="btn btn-secondary"><br>
-											<input type="submit" value="취소"  formmethod="get" class="cancel btn btn-secondary" ></td>
+											<input type="submit" value="취소"  formmethod="get" class="cancel btn btn-secondary"></td>
 										</tr>
 										</c:if>
 										
@@ -342,8 +320,8 @@ function fun1(index) {
 											<td>${employeeDTO.emp_position}</td>
 											<td>${employeeDTO.emp_email}</td>
 											<td>${employeeDTO.emp_tel}</td>
-											<td><a href="javascript:void(window.open('${pageContext.request.contextPath}/employee/updateEmployee?emp_cd=${employeeDTO.emp_cd}', '수정', 'width=500, height=1000,left=500, top=200' ))">	
-											<input type="button" class="requestBtn" value="수정"></a></td>										
+											<td><a href="javascript:void(window.open('${pageContext.request.contextPath}/employee/updateEmployee?emp_cd=${employeeDTO.emp_cd}', '수정', 'width=500, height=900,left=500, top=200' ))">	
+											<input type="button" class="btn btn-secondary" value="수정" ></a></td>										
 <%-- 											<td><input type="button" value="수정" class="btn btn-secondary" onclick="location.href='${pageContext.request.contextPath}/employee/updateEmployee?emp_cd=${employeeDTO.emp_cd}'" ></td>													 --%>
 										
 										</tr>
@@ -374,7 +352,9 @@ function fun1(index) {
 				</div>
 			</div>
 		</div>
-		</form><!-- .content -->
+</form>
+<!-- .content -->
+		</div>
 
 		<div class="clearfix"></div>
 		<!-- 푸터 넣는 곳 -->
