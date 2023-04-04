@@ -161,7 +161,7 @@
 				<div class="row">
 					<div class="col-lg">
 						<div class="card m-0">
-							<form action="${pageContext.request.contextPath}/instruction/insertInst" method="post">
+							<form action="${pageContext.request.contextPath}/instruction/insertInst" id="insertInstForm" method="post">
 								<div class="card-body card-block">
 									<table id="table" class="table table-striped table-bordered">
 										<thead class="thead-dark">
@@ -206,9 +206,9 @@
 											</tr>
 										</tbody>
 									</table>
-									<input type="submit"  class="btn btn-primary col-2 float-right ml-3" id="insertInstBtn" value="추가">
-									<input type="button"  class="btn btn-primary col-1 float-right ml-3" id="updateInstBtn" value="수정">
-									<input type="reset"  class="btn btn-secondary col-1 float-right" value="취소">
+									<input type="submit" class="btn btn-primary col-2 float-right ml-3" id="insertInstBtn" value="추가">
+									<input type="button" class="btn btn-primary col-1 float-right ml-3" id="updateInstBtn" value="수정" disabled>
+									<input type="reset"  class="btn btn-secondary col-1 float-right reset" id="resetInstBtn" value="취소">
 								</div>
 							</form>
 						</div>
@@ -233,8 +233,8 @@
 											<th scope="col">지시번호</th>
 											<th scope="col">라인</th>
 											<th scope="col">라인명</th>
-											<th scope="col">품번</th>
-											<th scope="col">품명</th>
+											<th scope="col">상품코드</th>
+											<th scope="col">상품명</th>
 											<th scope="col">단위</th>
 											<th scope="col">지시상태</th>
 											<th scope="col">지시날짜</th>
@@ -242,6 +242,7 @@
 											<th scope="col">수주번호</th>
 											<th scope="col">업체명</th>
 											<th scope="col">생산량</th>
+											<th scope="col"> </th>
 									</thead>
 									<tbody>
 										<c:forEach var="instructionDTO" items="${instList }">
@@ -258,6 +259,11 @@
 												<td>${instructionDTO.ord_cd }</td>
 												<td>${instructionDTO.cli_nm }</td>
 												<td>${instructionDTO.inst_fcount }</td>
+												<td>
+												<div class="input-group">
+												<button id="editInstBtn" class="btn btn-secondary" value="${instructionDTO.line_cd }">수정</button>
+												</div>
+												</td>
 											</tr>
 										</c:forEach>
 									</tbody>
@@ -328,12 +334,44 @@
 				alert("수주번호를 입력해주세요.");
 				return false;
 			}
+			event.preventDefault();
 		});
 		
-		$(document).on("click", ".reset", function(){
+		$(document).on("click",".reset", function(){
 			console.log($(this).closest('form').find('div input[type="text"]'));
+			console.log($(this).attr('id'));
 			$(this).closest('form').find('div input[type="text"]').attr('value', '');
 			$(this).closest('form').find('div input[type="date"]').attr('value', '');
+			if($(this).attr('id')=='resetInstBtn'){
+				$("#insertInstForm").attr('action', '${pageContext.request.contextPath}/instruction/insertInst');
+				$('#updateInstBtn').prop('disabled', true);
+				$('#insertInstBtn').prop('disabled', false);
+			}
+		});
+
+		$(document).on("click", "#editInstBtn", function(){
+			console.log($(this).closest('tr').children('td:eq(0)').text());
+			$(searchLineCd2).val('');
+			$(searchLineNm).val('');
+			$(insertProdCd).val('');
+			$(insertProdNm).val('');
+			$(insertProdUnit).val('');
+			$(insertProdCount).val('');
+			$(insertOrderCd).val('');
+			$(insertClientNm).val('');
+			
+			$(searchLineCd2).val($(this).val());
+			$(searchLineNm).val($(this).closest('tr').children('td:eq(2)').text());
+			$(insertProdCd).val($(this).closest('tr').children('td:eq(3)').text());
+			$(insertProdNm).val($(this).closest('tr').children('td:eq(4)').text());
+			$(insertProdUnit).val($(this).closest('tr').children('td:eq(5)').text());
+			$(insertProdCount).val($(this).closest('tr').children('td:eq(8)').text());
+			$(insertOrderCd).val($(this).closest('tr').children('td:eq(9)').text());
+			$(insertClientNm).val($(this).closest('tr').children('td:eq(10)').text());
+			$("#insertInstForm").attr('action', '${pageContext.request.contextPath}/instruction/updateInst');
+			$('#updateInstBtn').prop('disabled', false);
+			$('#insertInstBtn').prop('disabled', true);
+			$('#lineModalBtn').focus();
 		});
 		
 		$("#searchInstSt1").change(function(){

@@ -41,7 +41,6 @@
         and prod_mat = ${search4}  
         </if>
     	order by prod_mat desc
-  
     	limit #{startRow}, #{pageSize}
     </select>
     
