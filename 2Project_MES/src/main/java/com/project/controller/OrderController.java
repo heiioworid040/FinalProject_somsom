@@ -24,9 +24,6 @@ public class OrderController {
 		@RequestMapping(value = "/order/searchPop", method = RequestMethod.GET)
 		public String searchPop(HttpServletRequest request, Model model) {
 			String pop=(String)request.getParameter("pop");
-			String cd=(String)request.getParameter("cd");
-			String nm=(String)request.getParameter("nm");
-			String info=(String)request.getParameter("info");
 			String id=(String)request.getParameter("id");
 			
 			int pageSize=7;
@@ -38,9 +35,9 @@ public class OrderController {
 			pageDTO.setPageSize(pageSize);
 			pageDTO.setPageNum(pageNum);
 			pageDTO.setCurrentPage(currentPage);
-			pageDTO.setSearch(cd);
-			pageDTO.setSearch2(nm);
-			pageDTO.setSearch3(info);
+			pageDTO.setSearch(request.getParameter("cd"));
+			pageDTO.setSearch2(request.getParameter("nm"));
+			pageDTO.setSearch3(request.getParameter("info"));
 			
 			int count=0;
 			List<OrderDTO> popList;
@@ -88,7 +85,7 @@ public class OrderController {
 			
 			List<OrderDTO> orderInsertList=orderService.getOrderInsertList(pageDTO);
 			
-			int count=orderService.getOrderCount();
+			int count=orderService.getOrderCount(pageDTO);
 			pageDTO.setCount(count);
 
 			model.addAttribute("pageDTO", pageDTO);
@@ -110,13 +107,14 @@ public class OrderController {
 			orderDTO.setOrd_d_date(Timestamp.valueOf(request.getParameter("ord_d_date")+" 23:59:59"));
 			
 			String btn_add=(String)request.getParameter("btn_add");
-			String btn_edit=(String)request.getParameter("btn_edit");
 			String btn_del=(String)request.getParameter("btn_del");
 			
 			if(btn_add!=null) {
-				orderService.orderAdd(orderDTO);
-			}else if(btn_edit!=null) {
-				orderService.orderEdit(orderDTO);
+				if(ord_cd!="") {
+					orderService.orderEdit(orderDTO);
+				}else {
+					orderService.orderAdd(orderDTO);
+				}
 			}else if(btn_del!=null){
 				orderService.orderDel(ord_cd);
 			}
@@ -133,12 +131,12 @@ public class OrderController {
 			pageDTO.setSearch5(request.getParameter("ord_d"));
 			pageDTO.setSearch6(request.getParameter("ord_d_end"));
 			pageDTO.setSearch7(request.getParameter("prod"));
+			pageDTO.setSearch8(request.getParameter("ship"));
 			
 			List<OrderDTO> orderList=orderService.getOrderList(pageDTO);
 			
-			int count=orderService.getOrderCount();
+			int count=orderService.getOrderCount(pageDTO);
 			pageDTO.setCount(count);
-			
 			model.addAttribute("pageDTO", pageDTO);
 			model.addAttribute("orderList", orderList);
 			return "order/orderInfo";
@@ -147,52 +145,51 @@ public class OrderController {
 		@RequestMapping(value = "/order/orderInfoPro", method = RequestMethod.POST)
 		public String infoPro(HttpServletRequest request, Model model) {
 			String ord_cd[]=request.getParameterValues("ord_cd");
-
 			String ck[]=request.getParameterValues("ck");
 			String btn=(String)request.getParameter("btn");
-		
+			
 			if(btn.equals("del")) {
 					for(int i=0;i<ck.length;i++) {
 						String[] str = ck[i].split(",");
 						orderService.orderDel(str[1]);
 					}
-			}else if(btn.equals("edit")) {
-					for(int i=0;i<ck.length;i++) {
-						if(ck[i]!="") {
-							String[] str = ck[i].split(",");
-				
-							OrderDTO orderDTO=new OrderDTO();
-							orderDTO.setOrd_cd(str[1]);
-							orderDTO.setCli_cd(orderService.orderCli(request.getParameter("cli_nm"+str[0])));
-							orderDTO.setEmp_cd(orderService.orderEmp(request.getParameter("emp_nm"+str[0])));
-							orderDTO.setProd_cd(request.getParameter("prod_cd"+str[0]));
-							orderDTO.setOrd_count(Integer.parseInt(request.getParameter("ord_count"+str[0])));
-							orderDTO.setOrd_date(Timestamp.valueOf(request.getParameter("ord_date"+str[0])+" 23:59:59"));
-							orderDTO.setOrd_d_date(Timestamp.valueOf(request.getParameter("ord_d_date"+str[0])+" 23:59:59"));
-							orderService.orderEdit(orderDTO);
+			}else {
+					if(ck!=null) {
+						for(int i=0;i<ck.length;i++) {
+							if(ck[i]!="") {
+								String[] str = ck[i].split(",");
+
+								OrderDTO orderDTO=new OrderDTO();
+								orderDTO.setOrd_cd(str[1]);
+								orderDTO.setCli_cd(request.getParameter("cli_cd"+str[0]));
+								orderDTO.setEmp_cd(request.getParameter("emp_cd"+str[0]));
+								orderDTO.setProd_cd(request.getParameter("prod_cd"+str[0]));
+								orderDTO.setOrd_count(Integer.parseInt(request.getParameter("ord_count"+str[0])));
+								orderDTO.setOrd_date(Timestamp.valueOf(request.getParameter("ord_date"+str[0])+" 23:59:59"));
+								orderDTO.setOrd_d_date(Timestamp.valueOf(request.getParameter("ord_d_date"+str[0])+" 23:59:59"));
+								orderService.orderEdit(orderDTO);
+							}
 						}
 					}
-			}else {
-					for(int i=0;i<ord_cd.length;i++) {
-						String cli_nm[]=request.getParameterValues("cli_nm");
-						String emp_nm[]=request.getParameterValues("emp_nm");
-						String prod_cd[]=request.getParameterValues("prod_cd");
-						String ord_count[]=request.getParameterValues("ord_count");
-						String ord_date[]=request.getParameterValues("ord_date");
-						String ord_d_date[]=request.getParameterValues("ord_d_date");
+					if(ord_cd!=null) {
+						for(int i=0;i<ord_cd.length;i++) {
+							String cli_cd[]=request.getParameterValues("cli_cd");
+							String emp_cd[]=request.getParameterValues("emp_cd");
+							String prod_cd[]=request.getParameterValues("prod_cd");
+							String ord_count[]=request.getParameterValues("ord_count");
+							String ord_date[]=request.getParameterValues("ord_date");
+							String ord_d_date[]=request.getParameterValues("ord_d_date");
 						
-						if(ord_cd[i]==""&&(cli_nm[i]!=""||emp_nm[i]!=""||prod_cd[i]!=""||ord_count[i]!=""||ord_date[i]!=""||ord_d_date[i]!="")) {
-							String cli_cd=orderService.orderCli(cli_nm[i]);
-							String emp_cd=orderService.orderEmp(emp_nm[i]);
-				
-							OrderDTO orderDTO=new OrderDTO();
-							orderDTO.setCli_cd(cli_cd);
-							orderDTO.setEmp_cd(emp_cd);
-							orderDTO.setProd_cd(prod_cd[i]);
-							orderDTO.setOrd_count(Integer.parseInt(ord_count[i]));
-							orderDTO.setOrd_date(Timestamp.valueOf(ord_date[i]+" 23:59:59"));
-							orderDTO.setOrd_d_date(Timestamp.valueOf(ord_d_date[i]+" 23:59:59"));
-							orderService.orderAdd(orderDTO);
+							if(ord_cd[i]==""&&(cli_cd[i]!=""||emp_cd[i]!=""||prod_cd[i]!=""||ord_count[i]!=""||ord_date[i]!=""||ord_d_date[i]!="")) {				
+								OrderDTO orderDTO=new OrderDTO();
+								orderDTO.setCli_cd(cli_cd[i]);
+								orderDTO.setEmp_cd(emp_cd[i]);
+								orderDTO.setProd_cd(prod_cd[i]);
+								orderDTO.setOrd_count(Integer.parseInt(ord_count[i]));
+								orderDTO.setOrd_date(Timestamp.valueOf(ord_date[i]+" 23:59:59"));
+								orderDTO.setOrd_d_date(Timestamp.valueOf(ord_d_date[i]+" 23:59:59"));
+								orderService.orderAdd(orderDTO);
+							}
 						}
 					}
 			}

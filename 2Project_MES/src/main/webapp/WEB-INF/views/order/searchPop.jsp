@@ -42,9 +42,9 @@
 			self.close();
 		</c:if>
 		<c:if test="${pop eq 'cliO' or pop eq 'empO' or pop eq 'prodO' }">
+			opener.document.getElementById(search+"_cd"+"${id}").value=cd;
 			opener.document.getElementById(search+"_nm"+"${id}").value=nm;
 			<c:if test="${pop eq 'prodO'}">
-			opener.document.getElementById(search+"_cd"+"${id}").value=cd;
 			opener.document.getElementById(search+"_unit"+"${id}").value=unit;
 			</c:if>
 			document.searchPop.submit();
@@ -61,7 +61,7 @@
 									<h3 class="search-text">담당자 조회</h3>
 								</c:if>
 								<c:if test="${pop eq 'prod' or pop eq 'prodS' or pop eq 'prodO' }">
-									<h3 class="search-text">품목 조회</h3>
+									<h3 class="search-text">상품 조회</h3>
 								</c:if>
 							</div>
 		
@@ -77,24 +77,24 @@
 								<input type="hidden" name="id" value="${id }">
 											<c:if test="${pop eq 'cli' or pop eq 'cliS' or pop eq 'cliO' }">
 												<div class="search-div3">
-													<span class="search-cl3">업체코드</span><input type="text" id="cliS_cd" name="cd">
+													<span class="search-cl3">거래처코드</span><input type="text" id="cliS_cd" name="cd">
 												</div>
 												<div class="search-div3">
-													<span class="search-cl3">업체명</span><input type="text" id="cliS_nm" name="nm">
+													<span class="search-cl3">거래처명</span><input type="text" id="cliS_nm" name="nm">
 												</div>
 												<div class="search-div3">
-													<span class="search-cl3">업체구분</span><select class="select-search" id="cliS_nm" name="info">
-																					<option value="">전체</option>
-																					<option value="자사">자사</option>
-																					<option value="협력사">협력사</option>
-																					<option value="고객사">고객사</option>
+													<span class="search-cl3">거래처구분</span><select class="select-search" id="cliS_nm" name="info">
+																					<option value="#">전체</option>
+																					<option value="자사" ${pageDTO.search3 eq '자사' ? "selected":"" }>자사</option>
+																					<option value="협력사" ${pageDTO.search3 eq '협력사' ? "selected":"" }>협력사</option>
+																					<option value="고객사" ${pageDTO.search3 eq '고객사' ? "selected":"" }>고객사</option>
 																					</select>
 												</div>
 											</c:if>
 											
 											<c:if test="${pop eq 'emp' or pop eq 'empS' or pop eq 'empO' }">
 												<div class="search-div4">
-													<span class="search-cl3">사번</span><input type="text" id="empS_cd" name="cd">
+													<span class="search-cl3">번호</span><input type="text" id="empS_cd" name="cd">
 												</div>
 												<div class="search-div4">
 													<span class="search-cl3">이름</span><input type="text" id="empS_cd" name="nm">
@@ -102,27 +102,20 @@
 											</c:if>
 											
 											<c:if test="${pop eq 'prod' or pop eq 'prodS' or pop eq 'prodO' }">
-												<div class="search-div3">
-													<span class="search-cl3">품번</span><input type="text" id="prodS_cd" name="cd">
+												<div class="search-div4">
+													<span class="search-cl3">상품코드</span><input type="text" id="prodS_cd" name="cd">
 												</div>
-												<div class="search-div3">
-													<span class="search-cl3">품명</span><input type="text" id="prodS_nm" name="nm">
-												</div>
-												<div class="search-div3">
-													<span class="search-cl3">유형</span><select class="select-search" id="prodS_nm" name="info">
-																				<option value="">전체</option>
-																				<option value="완제품">완제품</option>
-																				<option value="부자재">부자재</option>
-																				</select>
+												<div class="search-div4">
+													<span class="search-cl3">상품명</span><input type="text" id="prodS_nm" name="nm">
 												</div>
 											</c:if>
 											
-									<c:if test="${pop eq 'emp' or pop eq 'empS' or pop eq 'empO' }">
+									<c:if test="${pop eq 'emp' or pop eq 'empS' or pop eq 'empO' or pop eq 'prod' or pop eq 'prodS' or pop eq 'prodO' }">
 										<div style="width: 25%">
 											<input type="submit" class="btn btn-secondary float-right" value="조회">
 										</div>
 									</c:if>
-									<c:if test="${pop eq 'cli' or pop eq 'cliS' or pop eq 'cliO' or pop eq 'prod' or pop eq 'prodS' or pop eq 'prodO' }">
+									<c:if test="${pop eq 'cli' or pop eq 'cliS' or pop eq 'cliO' }">
 										<div class="search-div2">
 											<input type="submit" class="btn btn-secondary float-right" style="margin-top: 6px" value="조회">
 										</div>
@@ -148,18 +141,18 @@
 									<thead class="thead-dark">
 										<tr>
 											<c:if test="${pop eq 'cli' or pop eq 'cliS' or pop eq 'cliO' }">
-												<th scope="col">업체코드</th>
-												<th scope="col">업체명</th>
+												<th scope="col">거래처코드</th>
+												<th scope="col">거래처명</th>
 												<th scope="col">대표자</th>
 												<th scope="col">구분</th>
 											</c:if>
 											<c:if test="${ pop eq 'emp' or pop eq 'empS' or pop eq 'empO' }">
-												<th scope="col">사용자사번</th>
-												<th scope="col">사용자명</th>
+												<th scope="col">담당자번호</th>
+												<th scope="col">담당자</th>
 											</c:if>
 											<c:if test="${ pop eq 'prod' or pop eq 'prodS' or pop eq 'prodO' }">
 												<th scope="col">상품코드</th>
-												<th scope="col">상품이름</th>
+												<th scope="col">상품명</th>
 												<th scope="col">자재유형</th>
 												<th scope="col">단위</th>
 												<th scope="col">재질</th>
@@ -213,8 +206,9 @@
 											</c:if>
 										</c:if>
 									</c:if>
+								</div>
 								<!-- 페이징 -->
-								
+
 							</div>
 						</div>
 					</div>
