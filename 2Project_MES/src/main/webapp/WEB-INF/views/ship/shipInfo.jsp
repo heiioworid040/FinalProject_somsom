@@ -30,21 +30,25 @@
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery-3.6.3.js"></script>
 <script>
 	$(document).ready(function(){
-		$('#shipInfo').submit(function(){
-			if($('#ship_count').val()==""){
-				alert("출하량 입력");
-				return false;
-			}
-            var num = /[0-9]/;
-            if(!num.test($('#ship_count').val())){
-            	alert("숫자만 입력");
-            	return false;
-            }
-			if($('#ship_date').val()==""){
-				alert("출하일자 입력");
-				return false;
-			}
-		});
+// 		$('#shipInfo').submit(function(){
+// 			if($('#ship_count').val()==""){
+// 				alert("출하량 입력");
+// 				return false;
+// 			}
+//             var num = /[0-9]/;
+//             if(!num.test($('#ship_count').val())){
+//             	alert("숫자만 입력");
+//             	return false;
+//             }
+// 			if($('#ship_date').val()==""){
+// 				alert("출하일자 입력");
+// 				return false;
+// 			}
+//             if($('#ord_date').val()>$('#ship_date').val()){
+//             	alert("출하일자를 바르게 입력하세요");
+//             	return false;
+//             }
+// 		});
 	});
 </script>
 <script>
@@ -107,7 +111,7 @@
 									</div>
 									<div class="search-div2">
 										<span class="search-cl">납품예정일</span><input type="date" id="ordS_d_date" name="ord_d_date"><input type="date" id="ordS_d_date_end" name="ord_d_date_end">
-										<input type="submit" class="btn btn-secondary float-right" style="margin-top: 6px" value="조회">
+										<input type="submit" class="btn btn-primary float-right" style="margin-top: 6px" value="검색">
 									</div>
 								</form>
 							</div>
@@ -123,7 +127,7 @@
 		<div class="content">
 			<div style="width: 100%; height: 50px">
 				<button type="reset" class="btn btn-secondary float-right" style="margin: 2px">취소</button>
-				<button type="submit" class="btn btn-secondary float-right" style="margin: 2px">저장</button>
+				<button type="submit" class="btn btn-primary float-right" style="margin: 2px">저장</button>
 			</div>
 			<div class="animated fadeIn">
 				<div class="row">
@@ -154,8 +158,8 @@
 									<tbody>
 										<c:forEach var="shipDTO" items="${shipInfo }" varStatus="status">
 												<tr>
-													<th>${status.count }</th>
-													<th scope="row"><input type="hidden" name="ord_cd" value="${shipDTO.ord_cd }">${shipDTO.ord_cd }</th>
+													<td>${status.count }</td>
+													<td><input type="hidden" name="ord_cd" value="${shipDTO.ord_cd }">${shipDTO.ord_cd }</td>
 													<td><fmt:formatDate pattern="yyyy-MM-dd" value="${shipDTO.ord_date }"/></td>
 													<td><fmt:formatDate pattern="yyyy-MM-dd" value="${shipDTO.ord_d_date }"/></td>
 													<td>${shipDTO.prod_cd }</td>

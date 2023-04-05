@@ -66,8 +66,8 @@ public class OrderService {
 		return orderDAO.getOrderList(pageDTO);
 	}
 	
-	public int getOrderCount() {
-		return orderDAO.getOrderCount();
+	public int getOrderCount(PageDTO pageDTO) {
+		return orderDAO.getOrderCount(pageDTO);
 	}
 	
 	//팝업
@@ -108,13 +108,5 @@ public class OrderService {
 	
 	public int getSearchProdCount(PageDTO pageDTO) {
 		return orderDAO.getSearchProdCount(pageDTO);
-	}
-
-	public String orderCli(String cli_nm) {
-		return orderDAO.orderCli(cli_nm);
-	}
-
-	public String orderEmp(String emp_nm) {
-		return orderDAO.orderEmp(emp_nm);
 	}
 }

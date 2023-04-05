@@ -39,7 +39,7 @@
 						$('input[id=emp_nm]').attr('value',data["emp_nm"]);
 						$('input[id=cli_cd]').attr('value',data["cli_cd"]);
 						$('input[id=cli_nm]').attr('value',data["cli_nm"]);
-						$('input[id=ord_date]').attr('value',data["ord_date"]);
+						$('input[id=ord_date]').attr('value',data["ord_date"]).attr('readonly',true);
 						$('input[id=ord_d_date]').attr('value',data["ord_d_date"]);
 						$('input[id=prod_cd]').attr('value',data["prod_cd"]);
 						$('input[id=prod_nm]').attr('value',data["prod_nm"]);
@@ -48,6 +48,21 @@
 						$('input[id=ord_count]').attr('value',data["ord_count"]);
 				}
 			});
+		});
+		
+		$('#btn_cel').click(function(){
+			$('input[id=ord_cd]').removeAttr('value');
+			$('input[id=emp_cd]').removeAttr('value');
+			$('input[id=emp_nm]').removeAttr('value');
+			$('input[id=cli_cd]').removeAttr('value');
+			$('input[id=cli_nm]').removeAttr('value');
+			$('input[id=ord_date]').removeAttr('value').removeAttr('readonly');
+			$('input[id=ord_d_date]').removeAttr('value');
+			$('input[id=prod_cd]').removeAttr('value');
+			$('input[id=prod_nm]').removeAttr('value');
+			$('input[id=prod_mat]').removeAttr('value');
+			$('input[id=prod_unit]').removeAttr('value');
+			$('input[id=ord_count]').removeAttr('value');
 		});
 		
 		$('#orderInsert').submit(function(){
@@ -68,7 +83,7 @@
             	return false;
             }
             if($('#ord_date').val()>$('#ord_d_date').val()){
-            	alert("납품예정일이 맞지 않습니다");
+            	alert("납품예정일을 바르게 입력하세요");
             	return false;
             }
             if($('#prod_cd').val()==""){
@@ -146,7 +161,7 @@
 									</div>
 									<div class="search-div2">
 										<span class="search-cl">납품예정일</span><input type="date" id="ordS_d_date" name="ord_d_date"><input type="date" id="ordS_d_date_end" name="ord_d_date_end">
-										<input type="submit" class="btn btn-secondary float-right" style="margin-top: 6px" value="조회">
+										<input type="submit" class="btn btn-primary float-right" style="margin-top: 6px" value="검색">
 									</div>
 								</form>
 							</div>
@@ -160,7 +175,7 @@
 		<!-- .content -->
 		<div class="content-div div-left">
 			<div class="search-result-div">
-				<span class="search-result">총 n건</span>
+				<span class="search-result">총 ${pageDTO.count }건</span>
 			</div>
 			<div class="animated fadeIn">
 				<div class="row">
@@ -203,10 +218,9 @@
 		<form action="${pageContext.request.contextPath }/order/orderInsertPro" id="orderInsert" method="POST">
 		<div class="content-div div-right">
 			<div style="width: 100%; height: 50px">
-					<button type="submit" id="btn_del" name="btn_del" value="del" class="btn btn-secondary float-right"  style="margin: 2px">삭제</button>
-					<button type="reset" class="btn btn-secondary float-right"  style="margin: 2px">취소</button>
-					<button type="submit" id="btn_edit" name="btn_edit" value="edit" class="btn btn-secondary float-right" style="margin: 2px">수정</button>
-					<button type="submit" id="btn_add" name="btn_add" value="add" class="btn btn-secondary float-right" style="margin: 2px">추가</button>
+					<button type="reset" id="btn_cel" class="btn btn-secondary float-right"  style="margin: 2px">취소</button>
+					<button type="submit" id="btn_del" name="btn_del" value="del" class="btn btn-primary float-right"  style="margin: 2px">삭제</button>
+					<button type="submit" id="btn_add" name="btn_add" value="add" class="btn btn-primary float-right" style="margin: 2px">저장</button>
 			</div>
 			<div class="animated fadeIn">
 				<div class="row">
@@ -246,8 +260,8 @@
 									<thead class="thead-dark">
 										<tr>
 											<th scope="col"></th>
-											<th scope="col">품번</th>
-											<th scope="col">품명</th>
+											<th scope="col">상품코드</th>
+											<th scope="col">상품명</th>
 											<th scope="col">자재유형</th>
 											<th scope="col">단위</th>
 											<th scope="col">수량</th>

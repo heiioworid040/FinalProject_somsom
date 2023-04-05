@@ -29,8 +29,8 @@ public class OrderDAO {
 	}
 	
 	//수주 총 카운트
-	public int getOrderCount() {
-		return sqlSession.selectOne(namespace+".getOrderCount");
+	public int getOrderCount(PageDTO pageDTO) {
+		return sqlSession.selectOne(namespace+".getOrderCount", pageDTO);
 	}
 	
 	//수주 추가 수주번호
@@ -88,13 +88,5 @@ public class OrderDAO {
 	
 	public int getSearchProdCount(PageDTO pageDTO) {
 		return sqlSession.selectOne(namespace+".getSearchProdCount", pageDTO);
-	}
-
-	public String orderCli(String cli_nm) {
-		return sqlSession.selectOne(namespace+".orderCli", cli_nm);
-	}
-
-	public String orderEmp(String emp_nm) {
-		return sqlSession.selectOne(namespace+".orderEmp", emp_nm);
 	}
 }
