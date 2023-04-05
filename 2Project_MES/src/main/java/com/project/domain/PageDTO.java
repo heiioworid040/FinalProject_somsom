@@ -20,6 +20,7 @@ public class PageDTO {
 	private String search5;
 	private String search6;
 	private String search7;
+	private String search8;
 	
 	
 	@Override
@@ -146,5 +147,13 @@ public class PageDTO {
 
 	public void setSearch7(String search7) {
 		this.search7 = search7;
+	}
+
+	public String getSearch8() {
+		return search8;
+	}
+
+	public void setSearch8(String search8) {
+		this.search8 = search8;
 	}
 }
