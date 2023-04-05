@@ -154,7 +154,7 @@ public class AajaxController {
 		// 디비 최근글 5개 가져오기
 		List<OrderDTO> orderList=orderService.getOrderList(pageDTO);
 		
-		int count = orderService.getOrderCount();
+		int count = orderService.getOrderCount(pageDTO);
 		int pageBlock=10;
 		int startPage=(currentPage-1)/pageBlock*pageBlock+1;
 		int endPage=startPage+pageBlock-1;
