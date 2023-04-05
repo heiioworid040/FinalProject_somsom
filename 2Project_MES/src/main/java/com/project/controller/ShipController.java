@@ -74,12 +74,18 @@ public class ShipController {
 		// 주소변경 없이 이동
 		return "ship/shipCurrentInfo";
 	}
-
-	@RequestMapping(value = "/ship/currDelete", method = RequestMethod.GET)
+	
+	@RequestMapping(value = "/ship/currDelete", method = RequestMethod.POST)
 	public String delete(HttpServletRequest request) {
-		String ship_cd = request.getParameter("ship_cd");
-
-		shipService.currDelete(ship_cd);
+		
+		try {
+			String[] ship_cd = request.getParameterValues("chk");
+			for (int i = 0; i < ship_cd.length; i++) {
+				shipService.currDelete(ship_cd[i]);
+			}
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+		}
 
 		// 주소변경 하면서 이동
 		return "redirect:/ship/shipCurrentInfo";
