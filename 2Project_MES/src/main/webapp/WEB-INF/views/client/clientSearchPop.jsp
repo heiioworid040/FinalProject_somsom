@@ -94,10 +94,11 @@ function search(cli_cd) {
 											</select>
 										</div>
 									</div>
+									<div class="col p-0">
+									<input type="submit" class="btn btn-primary col-2 float-right ml-3" value="검색">
+									</div>
 							</div>
 						</div>
-						<input type="submit" class="btn btn-secondary float-right"
-							value="조회">
 					</div>
 				</div>
 			</div>

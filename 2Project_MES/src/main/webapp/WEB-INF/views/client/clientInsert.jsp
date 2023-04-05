@@ -223,7 +223,7 @@
 									<input type="button" class="btn btn-primary dup"
 										value="사업자번호 중복확인"> &nbsp;<span class="spanResult"></span>
 									<div class="btn-div float-right">
-										<input type="submit" class="btn btn-secondary" value="추가">
+										<input type="submit" class="btn btn-primary" value="추가">
 										<input type="button" class="btn btn-secondary" value="취소"
 											onclick="location.href='${pageContext.request.contextPath}/client/clientInfo'">
 									</div>

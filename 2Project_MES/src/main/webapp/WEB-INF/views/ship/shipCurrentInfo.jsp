@@ -113,9 +113,52 @@
 				"${pageContext.request.contextPath }/product/productSearchPop",
 				"productSearchPop", "width=800,height=650");
 	}
+
+	// 체크박스 모두 선택하는 함수
+	function allChk(obj) {
+		var chkObj = document.getElementsByName("chk");
+		var rowCnt = chkObj.length - 1;
+		var check = obj.checked;
+		if (check) {
+			for (var i = 0; i <= rowCnt; i++) {
+				if (chkObj[i].type == "checkbox")
+					chkObj[i].checked = true;
+			}
+		} else {
+			for (var i = 0; i <= rowCnt; i++) {
+				if (chkObj[i].type == "checkbox") {
+					chkObj[i].checked = false;
+				}
+			}
+		}
+	}
+
+	// 체크박스 삭제 메시지 
+	function deleteMsg() {
+		let check = false;
+		with (document.chkDelete) {
+			if (chk.length == undefined) {
+				if (chk.checked) {
+					check = true;
+				}
+			} else {
+				for (let i = 0; i < chk.length; i++) {
+					if (chk[i].checked) {
+						check = true;
+					}
+				}
+			}
+			if (!check) {
+				alert("삭제할 출하현황을 선택하세요.");
+				return;
+			} else {
+				if (confirm("선택한 출하현황을 삭제하시겠습니까?")) {
+					submit();
+				}
+			}
+		}
+	}
 </script>
-
-
 </head>
 <body>
 	<!-- 	로그인 안했을시 로그인페이지로 이동  -->
@@ -176,10 +219,10 @@
 										<input type="text" id="productSearchId" name="search3"
 											class="form-control ">
 										<div class="input-group">
-											<div class="input-group-addon" onclick="productSearchPop()"
-												style="cursor: pointer;">
-												<i class="ti-search"></i>
-											</div>
+											<input type="button" class="btn btn-primary ml-2"
+												onclick="productSearchPop()" style="cursor: pointer;"
+												value="검색">
+
 										</div>
 									</div>
 									<div class="form-group col-6 mt-1">
@@ -187,16 +230,17 @@
 										<input type="text" id="clientSearchId" name="search4"
 											class="form-control ">
 										<div class="input-group">
-											<div class="input-group-addon" onclick="clientSearchPop()"
-												style="cursor: pointer;">
-												<i class="ti-search"></i>
-											</div>
+											<input type="button" class="btn btn-primary ml-2"
+												onclick="clientSearchPop()" style="cursor: pointer;"
+												value="검색">
 										</div>
+									</div>
+									<div class="col p-0">
+										<input type="submit"
+											class="btn btn-primary col-2 float-right ml-3" value="검색">
 									</div>
 							</div>
 						</div>
-						<input type="submit" class="btn btn-secondary float-right"
-							value="조회">
 					</div>
 				</div>
 			</div>
@@ -204,99 +248,97 @@
 		</div>
 		</form>
 		<!-- 	검색창 -->
-
-		<div class="content">
-			<div class="animated fadeIn">
-				<div class="row">
-					<div class="col-lg">
-						<div class="card">
-							<div class="card-header">
-								<strong class="card-title">출하현황</strong>
-							</div>
-							<div class="card-body">
-								<div class="btn-div float-right">
-									<input type="button" class="btn btn-secondary" value="바코드"
-										onclick="generateQrCode()"> <input type="button"
-										class="btn btn-primary" value="엑셀다운" onclick="downloadExcel()">
+		<!-- 체크박스로 선택해 글 여러개 삭제가능  -->
+		<form name="chkDelete"
+			action="${pageContext.request.contextPath}/ship/currDelete"
+			method="post">
+			<div class="content">
+				<div style="width: 100%; height: 50px">
+					<div class="btn-div float-right">
+						<!-- 사원이 아닐때 (관리자, 파트장) 삭제 권한  -->
+						<c:if test="${ ! empty sessionScope.emp_cd }">
+							<c:if test="${sessionScope.emp_position ne '사원' }">
+								<input type="button" class="btn btn-secondary" value="삭제"
+									onclick="deleteMsg()">
+							</c:if>
+						</c:if>
+						<input type="button" class="btn btn-secondary" value="바코드"
+							onclick="generateQrCode()"> <input type="button"
+							class="btn btn-primary" value="엑셀다운" onclick="downloadExcel()">
+					</div>
+				</div>
+				<div class="animated fadeIn">
+					<div class="row">
+						<div class="col-lg">
+							<div class="card">
+								<div class="card-header">
+									<strong class="card-title">출하현황</strong>
 								</div>
-								<table id="bootstrap-data-table"
-									class="table table-striped table-bordered">
-									<thead class="thead-dark">
-										<tr>
-											<th scope="col"></th>
-											<th scope="col">출하번호</th>
-											<th scope="col">출하일자</th>
-											<th scope="col">거래처명</th>
-											<th scope="col">상품코드</th>
-											<th scope="col">상품이름</th>
-											<th scope="col">단위</th>
-											<th scope="col">수주번호</th>
-											<th scope="col">수주량</th>
-											<th scope="col">출하량</th>
-											<!-- 사원이 아닐때 (관리자, 파트장) 삭제 권한  -->
-											<c:if test="${ ! empty sessionScope.emp_cd }">
-												<c:if test="${sessionScope.emp_position ne '사원' }">
-													<th scope="col"></th>
-												</c:if>
-											</c:if>
-
-										</tr>
-									</thead>
-									<tbody>
-										<c:forEach var="shipDTO" items="${shipCurrentInfo }">
+								<div class="card-body">
+									<table id="bootstrap-data-table"
+										class="table table-striped table-bordered">
+										<thead class="thead-dark">
 											<tr>
-												<th scope="row"><input type="checkbox" name="chk"
-													value="${shipDTO.ship_cd }"></th>
-												<td>${shipDTO.ship_cd }</td>
-												<td><fmt:formatDate value="${shipDTO.ship_date}"
-														pattern="yyyy.MM.dd" /></td>
-												<td>${shipDTO.cli_nm }</td>
-												<td>${shipDTO.prod_cd }</td>
-												<td>${shipDTO.prod_nm }</td>
-												<td>${shipDTO.prod_unit }</td>
-												<td>${shipDTO.ord_cd }</td>
-												<td>${shipDTO.ord_count }</td>
-												<td>${shipDTO.ship_count }</td>
-												<!-- 사원이 아닐때 (관리자, 파트장) 삭제 권한  -->
-												<c:if test="${ ! empty sessionScope.emp_cd }">
-													<c:if test="${sessionScope.emp_position ne '사원' }">
-														<td><input type="button" class="btn btn-secondary"
-															value="삭제"
-															onclick="location.href='${pageContext.request.contextPath}/ship/currDelete?ship_cd=${shipDTO.ship_cd}'"></td>
-													</c:if>
-												</c:if>
+												<th scope="col"><input id="allCheck" type="checkbox"
+													onclick="allChk(this);" /></th>
+												<th scope="col">출하번호</th>
+												<th scope="col">출하일자</th>
+												<th scope="col">거래처명</th>
+												<th scope="col">상품코드</th>
+												<th scope="col">상품이름</th>
+												<th scope="col">단위</th>
+												<th scope="col">수주번호</th>
+												<th scope="col">수주량</th>
+												<th scope="col">출하량</th>
 											</tr>
+										</thead>
+										<tbody>
+											<c:forEach var="shipDTO" items="${shipCurrentInfo }">
+												<tr>
+													<th scope="row"><input type="checkbox" name="chk"
+														value="${shipDTO.ship_cd }"></th>
+													<td>${shipDTO.ship_cd }</td>
+													<td><fmt:formatDate value="${shipDTO.ship_date}"
+															pattern="yyyy.MM.dd" /></td>
+													<td>${shipDTO.cli_nm }</td>
+													<td>${shipDTO.prod_cd }</td>
+													<td>${shipDTO.prod_nm }</td>
+													<td>${shipDTO.prod_unit }</td>
+													<td>${shipDTO.ord_cd }</td>
+													<td>${shipDTO.ord_count }</td>
+													<td>${shipDTO.ship_count }</td>
+												</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+
+									<!-- 페이징 처리 -->
+									<div class="pageNum">
+										<c:if test="${pageDTO.startPage > pageDTO.pageBlock }">
+											<a
+												href="${pageContext.request.contextPath}/ship/shipCurrentInfo?pageNum=${pageDTO.startPage - pageDTO.pageBlock }&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}&search4=${pageDTO.search4}">[10페이지
+												이전]</a>
+										</c:if>
+
+										<c:forEach var="i" begin="${pageDTO.startPage }"
+											end="${pageDTO.endPage }" step="1">
+											<a
+												href="${pageContext.request.contextPath}/ship/shipCurrentInfo?pageNum=${i}&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}&search4=${pageDTO.search4}">${i}</a>
 										</c:forEach>
-									</tbody>
-								</table>
 
-
-								<!-- 페이징 처리 -->
-								<div class="pageNum">
-									<c:if test="${pageDTO.startPage > pageDTO.pageBlock }">
-										<a
-											href="${pageContext.request.contextPath}/ship/shipCurrentInfo?pageNum=${pageDTO.startPage - pageDTO.pageBlock }&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}&search4=${pageDTO.search4}">[10페이지
-											이전]</a>
-									</c:if>
-
-									<c:forEach var="i" begin="${pageDTO.startPage }"
-										end="${pageDTO.endPage }" step="1">
-										<a
-											href="${pageContext.request.contextPath}/ship/shipCurrentInfo?pageNum=${i}&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}&search4=${pageDTO.search4}">${i}</a>
-									</c:forEach>
-
-									<c:if test="${pageDTO.endPage < pageDTO.pageCount }">
-										<a
-											href="${pageContext.request.contextPath}/ship/shipCurrentInfo?pageNum=${pageDTO.startPage + pageDTO.pageBlock }&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}&search4=${pageDTO.search4}">[10페이지
-											다음]</a>
-									</c:if>
+										<c:if test="${pageDTO.endPage < pageDTO.pageCount }">
+											<a
+												href="${pageContext.request.contextPath}/ship/shipCurrentInfo?pageNum=${pageDTO.startPage + pageDTO.pageBlock }&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}&search4=${pageDTO.search4}">[10페이지
+												다음]</a>
+										</c:if>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		</form>
 		<!-- .content -->
 
 		<div class="clearfix"></div>
