@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -139,10 +138,6 @@
 
 
 		<div class="content">
-			<form>
-				<button type="submit"
-					formaction="${pageContext.request.contextPath}/imat/imatinsert">추가</button>
-			</form>
 			<div class="animated fadeIn">
 				<div class="row">
 					<div class="col-lg">
@@ -158,46 +153,28 @@
 
 											<tr>
 												<th><input type="checkbox" name="check" id="chAll"
-													onclick="chAll()"></th>				
+													onclick="chAll()"></th>
 												<th scope="col">#</th>
-												<th scope="col">입고번호</th>
-												<th scope="col">납기일자</th>
 												<th scope="col">품번</th>
 												<th scope="col">품명</th>
+												<th scope="col">자재유형</th>
 												<th scope="col">단위</th>
-												<th scope="col">입고창고</th>
-												<th scope="col">입고수량</th>
-												<th scope="col">거래처번호</th>
-												<th scope="col">거래처명</th>
-												<th scope="col">비고</th>
+												<th scope="col">현재고</th>
 											</tr>
 										</thead>
 										<tbody>
-											<c:forEach var="ImatDTO" items="${ImatbeList}">
+											<c:forEach var="ImatDTO" items="${IomatList}">
 												<tr>
 													<th><input type="checkbox" name="checkRow"
 														id="${ImatDTO.imat_num}" value="${ImatDTO.imat_num}"
 														class="chkbox"></th>
 													<td>${ImatDTO.imat_num}</td>
-													<td>${ImatDTO.imat_cd}</td>
-													<td><fmt:formatDate value="${ImatDTO.imat_date}" pattern="yyyy-MM-dd" type="date"/></td>
 													<td>${ImatDTO.prod_cd}</td>
 													<td>${ImatDTO.prod_nm}</td>
+													<td>${ImatDTO.prod_mat}</td>
 													<td>${ImatDTO.prod_unit}</td>
-													<td>${ImatDTO.imat_stg}</td>
-													<td>${ImatDTO.imat_count}</td>
-													<td>${ImatDTO.cli_cd}</td>
-													<td>${ImatDTO.cli_nm}</td>
-													<td>${ImatDTO.imat_note}</td>
-													<td>
-														<%-- 											<input type="hidden" name="imat_cd" value="${ImatDTO.imat_cd}"> --%>
-														<!--     											<button type="submit">삭제</button> -->
-														<input type="button" value="수정"
-														onclick="location.href='${pageContext.request.contextPath}/imat/imatupdate?imat_cd=${ImatDTO.imat_cd}'">
-														<input type="button" value="삭제"
-														onclick="location.href='${pageContext.request.contextPath}/imat/imatdelete?imat_cd=${ImatDTO.imat_cd}'">
-
-													</td>
+													<td>${ImatDTO.iomat_count}</td>
+													
 												</tr>
 
 												<!-- 										<tr> -->

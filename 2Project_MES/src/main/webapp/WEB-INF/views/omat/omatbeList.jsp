@@ -1,13 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>imatbeList</title>
+<title>omatbeList</title>
 <meta name="description" content="Ela Admin - HTML5 Admin Template">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -86,9 +85,9 @@
 		// 	    $.ajax({
 		// 	      type: "POST",
 		// 	      url: "/addRow",
-		// 	      data: { imat_cd:imat_cd, imat_date:imat_date, prod_cd:prod_cd  
-		// 	    	  imat_stg:imat_stg,prod_unit:prod_unit,imat_stg:imat_stg,
-		// 	    	  imat_count:imat_count, cli_cd:cli_cd,cli_nm:cli_nm,imat_note:imat_note},
+		// 	      data: { omat_cd:omat_cd, omat_date:omat_date, prod_cd:prod_cd  
+		// 	    	  omat_stg:omat_stg,prod_unit:prod_unit,omat_stg:omat_stg,
+		// 	    	  omat_count:omat_count, cli_cd:cli_cd,cli_nm:cli_nm,omat_note:omat_note},
 		// 	      success: function(response) {
 		// 	        // 서버에서 응답받은 HTML을 새로운 행으로 추가
 		// 	        $("#my-table tbody").append(response);
@@ -141,9 +140,9 @@
 		<div class="content">
 			<form>
 				<button type="submit"
-					formaction="${pageContext.request.contextPath}/imat/imatinsert">추가</button>
+					formaction="${pageContext.request.contextPath}/omat/omatinsert">추가</button>
 			</form>
-			<div class="animated fadeIn">
+			<div class="anomated fadeIn">
 				<div class="row">
 					<div class="col-lg">
 						<div class="card">
@@ -151,67 +150,67 @@
 								<strong class="card-title">Table Head</strong>
 							</div>
 							<div class="card-body">
-								<form action="${pageContext.request.contextPath}/imat/delete"
+								<form action="${pageContext.request.contextPath}/omat/delete"
 									id="delete" method="get">
 									<table class="table">
 										<thead class="thead-dark">
 
 											<tr>
 												<th><input type="checkbox" name="check" id="chAll"
-													onclick="chAll()"></th>				
+													onclick="chAll()"></th>
 												<th scope="col">#</th>
-												<th scope="col">입고번호</th>
+												<th scope="col">상품코드</th>
+												<th scope="col">유형</th>
+												<th scope="col">거래처명</th>
+												<th scope="col">담당자명</th>
+												<th scope="col">품목명</th>
 												<th scope="col">납기일자</th>
-												<th scope="col">품번</th>
-												<th scope="col">품명</th>
-												<th scope="col">단위</th>
-												<th scope="col">입고창고</th>
-												<th scope="col">입고수량</th>
-												<th scope="col">거래처번호</th>
+												<th scope="col">입고예정수량</th>
+												<th scope="col">거래처코드</th>
 												<th scope="col">거래처명</th>
 												<th scope="col">비고</th>
 											</tr>
 										</thead>
 										<tbody>
-											<c:forEach var="ImatDTO" items="${ImatbeList}">
+											<c:forEach var="OmatDTO" items="${OmatbeList}">
 												<tr>
 													<th><input type="checkbox" name="checkRow"
-														id="${ImatDTO.imat_num}" value="${ImatDTO.imat_num}"
+														id="${OmatDTO.omat_num}" value="${OmatDTO.omat_num}"
 														class="chkbox"></th>
-													<td>${ImatDTO.imat_num}</td>
-													<td>${ImatDTO.imat_cd}</td>
-													<td><fmt:formatDate value="${ImatDTO.imat_date}" pattern="yyyy-MM-dd" type="date"/></td>
-													<td>${ImatDTO.prod_cd}</td>
-													<td>${ImatDTO.prod_nm}</td>
-													<td>${ImatDTO.prod_unit}</td>
-													<td>${ImatDTO.imat_stg}</td>
-													<td>${ImatDTO.imat_count}</td>
-													<td>${ImatDTO.cli_cd}</td>
-													<td>${ImatDTO.cli_nm}</td>
-													<td>${ImatDTO.imat_note}</td>
+													<td>${OmatDTO.omat_num}</td>
+													<td>${OmatDTO.omat_cd}</td>
+													<td>${OmatDTO.omat_date}</td>
+													<td>${OmatDTO.prod_cd}</td>
+													<td>${OmatDTO.omat_stg}</td>
+													<td>${OmatDTO.prod_unit}</td>
+													<td>${OmatDTO.omat_stg}</td>
+													<td>${OmatDTO.omat_count}</td>
+													<td>${OmatDTO.cli_cd}</td>
+													<td>${OmatDTO.cli_nm}</td>
+													<td>${OmatDTO.omat_note}</td>
 													<td>
-														<%-- 											<input type="hidden" name="imat_cd" value="${ImatDTO.imat_cd}"> --%>
+														<%-- 											<input type="hidden" name="omat_cd" value="${OmatDTO.omat_cd}"> --%>
 														<!--     											<button type="submit">삭제</button> -->
 														<input type="button" value="수정"
-														onclick="location.href='${pageContext.request.contextPath}/imat/imatupdate?imat_cd=${ImatDTO.imat_cd}'">
+														onclick="location.href='${pageContext.request.contextPath}/omat/omatupdate?omat_cd=${OmatDTO.omat_cd}'">
 														<input type="button" value="삭제"
-														onclick="location.href='${pageContext.request.contextPath}/imat/imatdelete?imat_cd=${ImatDTO.imat_cd}'">
+														onclick="location.href='${pageContext.request.contextPath}/omat/omatdelete?omat_cd=${OmatDTO.omat_cd}'">
 
 													</td>
 												</tr>
 
 												<!-- 										<tr> -->
 												<!-- 											<th scope="row">1</th> -->
-												<%--   											<td th:text="${imat_cd}"></td> --%>
-												<%-- 											<td th:text="${imat_date}"></td> --%>
+												<%--   											<td th:text="${omat_cd}"></td> --%>
+												<%-- 											<td th:text="${omat_date}"></td> --%>
 												<%-- 											<td th:text="${prod_cd}"></td> --%>
-												<%-- 											<td th:text="${imat_stg}"></td> --%>
+												<%-- 											<td th:text="${omat_stg}"></td> --%>
 												<%-- 											<td th:text="${prod_unit}"></td> --%>
-												<%-- 											<td th:text="${imat_stg}"></td> --%>
-												<%-- 											<td th:text="${imat_count}"></td> --%>
+												<%-- 											<td th:text="${omat_stg}"></td> --%>
+												<%-- 											<td th:text="${omat_count}"></td> --%>
 												<%-- 											<td th:text="${cli_cd}"></td> --%>
 												<%-- 											<td th:text="${cli_nm}"></td> --%>
-												<%-- 											<td th:text="${imat_note}"></td> --%>
+												<%-- 											<td th:text="${omat_note}"></td> --%>
 												<!-- 										</tr> -->
 											</c:forEach>
 
@@ -223,18 +222,18 @@
 								</form>
 								<%-- 								<c:if test="${pageDTO.startPage > pageDTO.pageBlock }"> --%>
 								<!-- 										<a -->
-								<%-- 											href="${pageContext.request.contextPath}/imat/imatbeList?pageNum=${pageDTO.startPage - pageDTO.pageBlock }">[이전페이지]</a> --%>
+								<%-- 											href="${pageContext.request.contextPath}/omat/omatbeList?pageNum=${pageDTO.startPage - pageDTO.pageBlock }">[이전페이지]</a> --%>
 								<%-- 									</c:if> --%>
 
 								<%-- 									<c:forEach var="i" begin="${pageDTO.startPage }" --%>
 								<%-- 										end="${pageDTO.endPage }" step="1"> --%>
 								<!-- 										<a -->
-								<%-- 											href="${pageContext.request.contextPath}/imat/imatbeList?pageNum=${i}">${i}</a> --%>
+								<%-- 											href="${pageContext.request.contextPath}/omat/omatbeList?pageNum=${i}">${i}</a> --%>
 								<%-- 									</c:forEach> --%>
 
 								<%-- 									<c:if test="${pageDTO.endPage < pageDTO.pageCount }"> --%>
 								<!-- 										<a -->
-								<%-- 											href="${pageContext.request.contextPath}/imat/imatbeList?pageNum=${pageDTO.startPage + pageDTO.pageBlock }">[다음페이지]</a> --%>
+								<%-- 											href="${pageContext.request.contextPath}/omat/omatbeList?pageNum=${pageDTO.startPage + pageDTO.pageBlock }">[다음페이지]</a> --%>
 								<%-- 									</c:if> --%>
 							</div>
 						</div>
