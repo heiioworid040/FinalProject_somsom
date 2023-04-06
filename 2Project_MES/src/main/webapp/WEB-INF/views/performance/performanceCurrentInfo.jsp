@@ -39,50 +39,6 @@
 	href="${pageContext.request.contextPath}/resources/css/performanceCurr.css">
 
 <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
-
-<script type="text/javascript"
-        src="${pageContext.request.contextPath}/resources/js/jquery-3.6.3.js"></script>	
-	<script type="text/javascript">
-	
-	// 생산실적 현황 json 리스트
-	$(document).ready(function() {
-		  // 첫번째 표에서 데이터 클릭시 이벤트 리스너 추가
-		  jQuery('.data-row').on('click', function() {
-		    var prod_cd = jQuery(this).data('prod-cd');
-		    jQuery.ajax({
-		      url: '${pageContext.request.contextPath}/performance/perfCurrJsonList',
-		      data: {prod_cd: prod_cd},
-		      success: function(data) {
-		        // 결과를 두번째 표에 출력
-		        var resultTable = jQuery('#result-table').find('tbody');
-		        resultTable.empty();
-		        for (var i = 0; i < data.length; i++) {
-		          var row = '<tr>' +
-		            '<td>' + data[i].r_prod_cd + '</td>' +
-		            '<td>' + data[i].r_prod_nm + '</td>' +
-		            '<td>' + data[i].r_prod_unit + '</td>' +
-		            '<td>' + data[i].req_req * (data[i].perf_good + data[i].perf_err) + '</td>' +
-		            '</tr>';
-		          resultTable.append(row);
-		        }
-		      },
-		      error: function(xhr, textStatus, errorThrown) {
-                  console.log(xhr.responseText);
-                  console.log(textStatus);
-                  console.log(errorThrown);
-              }
-		    });
-		  });
-		});
-	
-	// 품번 검색 팝업창 
-	function productSearchPop() {
-		// 새로운 윈도우 창을 띄움
-		window.open(
-				"${pageContext.request.contextPath }/product/productSearchPop",
-				"productSearchPop", "width=800,height=650");
-	}	
-</script>
 </head>
 <body>
 	<!-- 	로그인 안했을시 로그인페이지로 이동  -->
@@ -94,6 +50,7 @@
 	<!-- Left Panel1 -->
 
 	<!-- Right Panel -->
+	
 	<div id="right-panel" class="right-panel">
 		<!-- Header-->
 		<jsp:include page="../inc/top.jsp" />
@@ -130,9 +87,7 @@
 					<div class="col-lg">
 						<div class="card m-0">
 							<div class="card-body card-block">
-								<form
-									action="${pageContext.request.contextPath }/performance/performanceCurrentInfo"
-									method="get" class="form-inline">
+								<form action="${pageContext.request.contextPath }/performance/performanceCurrentInfo" method="get" class="form-inline">
 									<div class="form-group col-6 mb-1">
 										<label class="pr-1  form-control-label">실적일자</label>&nbsp;&nbsp; <input
 											type="date" name="search" class="form-control ">&nbsp;~&nbsp;
@@ -153,27 +108,85 @@
 									<div class="form-group col-6 mb-1">
 										<label class="pr-1  form-control-label">라인</label>&nbsp;&nbsp; 
 											<div class="p-0 col">
-											<select name="search5" id="select" class="form-control">
-												<option>전체</option>
-												<c:forEach var="lineDTO" items="${searchLine }">
-                                                <option value="${lineDTO.line_cd }">${lineDTO.line_nm}(${lineDTO.line_cd })</option>
-                                                </c:forEach>
-											</select>
-										</div>
-                                    	
+												<select name="search5" id="select" class="form-control">
+													<option>전체</option>
+													<c:forEach var="lineDTO" items="${searchLine }">
+                                                		<option value="${lineDTO.line_cd }">${lineDTO.line_nm}(${lineDTO.line_cd })</option>
+                                                	</c:forEach>
+												</select>
+											</div>
 									</div>
+                                    <div class="col p-0">
+										<input type="submit" class="btn btn-primary col-2 float-right ml-3" id="searchPerf" value="조회">
+										<input type="reset" class="btn btn-secondary col-1 float-right reset" value="취소">
+									</div>
+								</form>
 							</div>
 						</div>
-						<input type="submit" class="btn btn-secondary float-right"
-							value="조회">
 					</div>
 				</div>
 			</div>
-
 		</div>
-		</form>
 		<!-- 	검색창 -->
-
+		<!-- 	편집창 -->
+		<div class="content pt-0">
+			<div class="animated fadeIn">
+				<div class="row">
+					<div class="col-lg">
+						<div class="card m-0">
+							<form action="${pageContext.request.contextPath}/performance/insertPerf" id="insertInstForm" method="post">
+								<div class="card-body card-block">
+									<table id="table" class="table table-striped table-bordered">
+										<thead class="thead-dark">
+											<tr>
+												<th scope="col">지시번호</th>
+												<th scope="col">실적일자</th>
+												<th scope="col">라인명</th>
+												<th scope="col">상품명</th>
+												<th scope="col">단위</th>
+												<th scope="col">양품</th>
+												<th scope="col">불량</th>
+												<th scope="col">불량사유</th>
+												<th scope="col">수주번호</th>
+												<th scope="col">비고</th>
+										</thead>
+										<tbody>
+											<tr>
+												<td scope="row">
+												<input type="text" id="insertInstCd" name="inst_cd" value="" placeholder="Inst Code" class="form-control bg-white" readonly>
+												</td>
+												<td><input type="text" id="insertPerfDate" disabled class="form-control"></td>												
+												<td><input type="text" id="insertLineNm" disabled class="form-control"></td>
+												<td><input type="text" id="insertProdNm" disabled class="form-control"></td>
+												<td><input type="text" id="insertProdUnit" disabled class="form-control"></td>
+												<td><input type="text" id="insertPerfGd" class="form-control"></td>
+												<td><input type="text" id="insertPerfErr" class="form-control"></td>
+												<td>
+												<div class="p-1 col">
+												<select name="search5" id="select" class="form-control">
+													<option>--</option>
+													<option>기계이상</option>
+													<option>재고부족</option>													
+													<option>기타</option>													
+												</select>
+												</div>
+												<td><input type="text" id="insertOrdCd" disabled class="form-control"></td>
+												<td><input type="text" id="insertPerfNote" class="form-control"></td>
+											</tr>
+										</tbody>
+									</table>
+									<input type="submit" class="btn btn-primary col-2 float-right ml-3" id="insertInstBtn" value="추가">
+									<input type="button" class="btn btn-primary col-1 float-right ml-3" id="updateInstBtn" value="수정" disabled>
+									<input type="reset"  class="btn btn-secondary col-1 float-right reset" id="resetInstBtn" value="취소">
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 	편집창 -->
+		
 		<div class="content">
 			<div class="animated fadeIn">
 				<div class="row">
@@ -183,12 +196,10 @@
 								<strong class="card-title">생산실적</strong>
 							</div>
 							<div class="card-body">
-									
-												
-									<table id="hover_tb"
-										class="table table-striped table-bordered">
+								<table id="hover_tb" class="table table-striped table-bordered">
 										<thead class="thead-dark">
 											<tr>
+												<th scope="col">지시번호</th>
 												<th scope="col">실적일자</th>
 												<th scope="col">라인명</th>
 												<th scope="col">품번</th>
@@ -197,16 +208,16 @@
 												<th scope="col">양품</th>
 												<th scope="col">불량</th>
 												<th scope="col">불량사유</th>
-												<th scope="col">비고</th>
-												<th scope="col">지시번호</th>
 												<th scope="col">수주번호</th>
 												<th scope="col">업체</th>
+												<th scope="col">비고</th>
 											</tr>
 										</thead>
 										<tbody>
 											<c:forEach var="performanceDTO" items="${performanceCurrentInfo }">
-												<tr class="data-row" data-prod-cd="${performanceDTO.prod_cd}">
+													<td>${performanceDTO.ord_cd }</td> 
 													<td><fmt:formatDate value="${performanceDTO.perf_date}" pattern="yyyy.MM.dd"/></td>
+													<td>${performanceDTO.inst_cd }</td>
 													<td>${performanceDTO.line_nm }</td>
 													<td>${performanceDTO.prod_cd }</td>
 													<td>${performanceDTO.prod_nm }</td>
@@ -214,10 +225,9 @@
 													<td>${performanceDTO.perf_good }</td>
 													<td>${performanceDTO.perf_err }</td>
 													<td>${performanceDTO.perf_cause }</td>
-													<td>${performanceDTO.perf_note }</td>
-													<td>${performanceDTO.inst_cd }</td>
-													<td>${performanceDTO.ord_cd }</td>
+													<tr class="data-row" data-prod-cd="${performanceDTO.prod_cd}">
 													<td>${performanceDTO.cli_nm }</td>
+													<td>${performanceDTO.perf_note }</td>
 												</tr>
 											</c:forEach>
 										</tbody>
@@ -280,6 +290,48 @@
 	<!-- Right Panel -->
 
 	<!-- Scripts -->
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.6.3.js"></script>	
+	<script type="text/javascript">
+	
+	// 생산실적 현황 json 리스트
+	$(document).ready(function() {
+		  // 첫번째 표에서 데이터 클릭시 이벤트 리스너 추가
+		  jQuery('.data-row').on('click', function() {
+		    var prod_cd = jQuery(this).data('prod-cd');
+		    jQuery.ajax({
+		      url: '${pageContext.request.contextPath}/performance/perfCurrJsonList',
+		      data: {prod_cd: prod_cd},
+		      success: function(data) {
+		        // 결과를 두번째 표에 출력
+		        var resultTable = jQuery('#result-table').find('tbody');
+		        resultTable.empty();
+		        for (var i = 0; i < data.length; i++) {
+		          var row = '<tr>' +
+		            '<td>' + data[i].r_prod_cd + '</td>' +
+		            '<td>' + data[i].r_prod_nm + '</td>' +
+		            '<td>' + data[i].r_prod_unit + '</td>' +
+		            '<td>' + data[i].req_req * (data[i].perf_good + data[i].perf_err) + '</td>' +
+		            '</tr>';
+		          resultTable.append(row);
+		        }
+		      },
+		      error: function(xhr, textStatus, errorThrown) {
+                  console.log(xhr.responseText);
+                  console.log(textStatus);
+                  console.log(errorThrown);
+              }
+		    });
+		  });
+		});
+	
+	// 품번 검색 팝업창 
+	function productSearchPop() {
+		// 새로운 윈도우 창을 띄움
+		window.open(
+				"${pageContext.request.contextPath }/product/productSearchPop",
+				"productSearchPop", "width=800,height=650");
+	}	
+</script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
 	<script
