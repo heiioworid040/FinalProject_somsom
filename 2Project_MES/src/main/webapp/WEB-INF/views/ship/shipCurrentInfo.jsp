@@ -217,7 +217,7 @@
 									<div class="form-group col-6 mb-1">
 										<label class="pr-1  form-control-label">품번</label>&nbsp;&nbsp;
 										<input type="text" id="productSearchId" name="search3"
-											class="form-control ">
+											class="form-control " placeholder="Prod Code">
 										<div class="input-group">
 											<input type="button" class="btn btn-primary ml-2"
 												onclick="productSearchPop()" style="cursor: pointer;"
@@ -228,7 +228,7 @@
 									<div class="form-group col-6 mt-1">
 										<label class="pr-1  form-control-label">수주업체</label>&nbsp;&nbsp;
 										<input type="text" id="clientSearchId" name="search4"
-											class="form-control ">
+											class="form-control " placeholder="Client Code">
 										<div class="input-group">
 											<input type="button" class="btn btn-primary ml-2"
 												onclick="clientSearchPop()" style="cursor: pointer;"
