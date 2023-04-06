@@ -148,3 +148,12 @@ h1 {
 .btn3{
 	margin-left: 5px;
 }
+
+.count1{
+	text-align: right;
+}
+
+#hover_tbl tbody tr:hover{
+	background-color: #6C757D;
+	color: white;
+}
