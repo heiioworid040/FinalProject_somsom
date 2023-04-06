@@ -3,7 +3,7 @@ package com.project.domain;
 import java.sql.Timestamp;
 
 public class PerformanceDTO extends InstructionDTO {
-	private int perf_num;
+	private String perf_cd;
 	private String inst_cd;
 	private Timestamp perf_date;
 	private int perf_good;
@@ -16,11 +16,11 @@ public class PerformanceDTO extends InstructionDTO {
 	private String r_prod_unit;
 	private String req_req;
 
-	public int getPerf_num() {
-		return perf_num;
+	public String getPerf_cd() {
+		return perf_cd;
 	}
-	public void setPerf_num(int perf_num) {
-		this.perf_num = perf_num;
+	public void setPerf_cd(String perf_cd) {
+		this.perf_cd = perf_cd;
 	}
 	public String getInst_cd() {
 		return inst_cd;

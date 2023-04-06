@@ -17,4 +17,6 @@ public interface InstructionDAO {
 
 	public void updateInst(InstructionDTO instructionDTO);
 
+	public InstructionDTO getInst(String inst_cd);
+
 }

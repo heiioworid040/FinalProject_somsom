@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.project.domain.InstructionDTO;
 import com.project.domain.LineDTO;
 import com.project.domain.PageDTO;
 import com.project.domain.PerformanceDTO;
 import com.project.domain.ProductDTO;
+import com.project.service.InstructionService;
 import com.project.service.LineService;
 import com.project.service.PerformanceService;
 
@@ -24,6 +26,9 @@ public class PerformanceController {
 
 	@Inject
 	private PerformanceService performanceService;
+	
+	@Inject
+	private InstructionService instructionService;
 
 	@Inject
 	private LineService lineService;
@@ -38,6 +43,7 @@ public class PerformanceController {
 		String search3 = request.getParameter("search3");
 		String search4 = request.getParameter("search4");
 		String search5 = request.getParameter("search5");
+		
 		// 한 화면에 보여줄 글 개수 설정
 		int pageSize = 20;
 		// 현페이지 번호 가져오기
@@ -49,6 +55,7 @@ public class PerformanceController {
 		// 페이지번호를 => 정수형 변경
 		int currentPage = Integer.parseInt(pageNum);
 
+
 		PageDTO pageDTO = new PageDTO();
 		pageDTO.setPageSize(pageSize);
 		pageDTO.setPageNum(pageNum);
@@ -59,9 +66,9 @@ public class PerformanceController {
 		pageDTO.setSearch3(search3);
 		pageDTO.setSearch4(search4);
 		pageDTO.setSearch5(search5);
-
+		
 		List<PerformanceDTO> performanceCurrentInfo = performanceService.performanceCurrentInfo(pageDTO);
-
+		
 		// 페이징 처리
 		// 검색어
 		int count = performanceService.performanceCurrentCount(pageDTO);
@@ -79,6 +86,10 @@ public class PerformanceController {
 		pageDTO.setEndPage(endPage);
 		pageDTO.setPageCount(pageCount);
 
+		String inst_cd=search4;
+		InstructionDTO instructionDTO=
+		instructionService.getInst(inst_cd);
+		model.addAttribute("instructionDTO", instructionDTO);
 		model.addAttribute("performanceCurrentInfo", performanceCurrentInfo);
 		model.addAttribute("pageDTO", pageDTO);
 		// 라인 검색 옵션 셀렉트박스 값
@@ -124,7 +135,8 @@ public class PerformanceController {
 		pageDTO.setSearch(search);
 		pageDTO.setSearch2(search2);
 		pageDTO.setSearch3(search3);
-
+		
+		
 		List<ProductDTO> productInfo = performanceService.getProductInfo(pageDTO);
 
 		// 페이징 처리
@@ -148,6 +160,24 @@ public class PerformanceController {
 		model.addAttribute("pageDTO", pageDTO);
 		// 주소변경 없이 이동
 		return "product/productSearchPop";
+	}
+	
+	@RequestMapping(value = "/performance/insertPerf", method = RequestMethod.POST)
+	public String insertInstPro(PerformanceDTO performanceDTO) {
+		System.out.println("instructionController insertInstPro()");
+		performanceService.insertPerf(performanceDTO);
+		
+		return "redirect:/instruction/infoInst";
+	}
+	
+	@RequestMapping(value = "/performance/updatePerf", method = RequestMethod.POST)
+	public String updateInstPro(HttpServletRequest request, PerformanceDTO performanceDTO) {
+		System.out.println("instructionController updateInstPro()");
+		String inst_cd=request.getParameter("inst_cd");
+		performanceDTO.setInst_cd(inst_cd);
+		
+		performanceService.updatePerf(performanceDTO);
+		return "redirect:/Performance/performanceCurrentInfo";
 	}
 
 }

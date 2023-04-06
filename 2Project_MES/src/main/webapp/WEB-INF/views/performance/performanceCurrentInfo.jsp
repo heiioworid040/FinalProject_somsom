@@ -153,14 +153,14 @@
 										<tbody>
 											<tr>
 												<td scope="row">
-												<input type="text" id="insertInstCd" name="inst_cd" value="" placeholder="Inst Code" class="form-control bg-white" readonly>
+												<input type="text" id="insertInstCd" name="inst_cd" value="${pageDTO.search4 }" placeholder="Inst Code" class="form-control bg-white" readonly>
 												</td>
 												<td><input type="text" id="insertPerfDate" disabled class="form-control"></td>												
-												<td><input type="text" id="insertLineNm" disabled class="form-control"></td>
-												<td><input type="text" id="insertProdNm" disabled class="form-control"></td>
-												<td><input type="text" id="insertProdUnit" disabled class="form-control"></td>
-												<td><input type="text" id="insertPerfGd" class="form-control"></td>
-												<td><input type="text" id="insertPerfErr" class="form-control"></td>
+												<td><input type="text" id="insertLineNm" value="${instructionDTO.line_nm}" disabled class="form-control"></td>
+												<td><input type="text" id="insertProdNm" value="${instructionDTO.prod_nm}" disabled class="form-control"></td>
+												<td><input type="text" id="insertProdUnit" value="${instructionDTO.prod_unit}" disabled class="form-control"></td>
+												<td><input type="text" id="insertPerfGd" value="0" class="form-control"></td>
+												<td><input type="text" id="insertPerfErr" value="0" class="form-control"></td>
 												<td>
 												<div class="p-1 col">
 												<select name="search5" id="select" class="form-control">
@@ -170,7 +170,7 @@
 													<option>기타</option>													
 												</select>
 												</div>
-												<td><input type="text" id="insertOrdCd" disabled class="form-control"></td>
+												<td><input type="text" id="insertOrdCd" value="${instructionDTO.ord_cd}" disabled class="form-control"></td>
 												<td><input type="text" id="insertPerfNote" class="form-control"></td>
 											</tr>
 										</tbody>
@@ -199,6 +199,7 @@
 								<table id="hover_tb" class="table table-striped table-bordered">
 										<thead class="thead-dark">
 											<tr>
+												<th scope="col">실적코드</th>
 												<th scope="col">지시번호</th>
 												<th scope="col">실적일자</th>
 												<th scope="col">라인명</th>
@@ -215,9 +216,10 @@
 										</thead>
 										<tbody>
 											<c:forEach var="performanceDTO" items="${performanceCurrentInfo }">
-													<td>${performanceDTO.ord_cd }</td> 
-													<td><fmt:formatDate value="${performanceDTO.perf_date}" pattern="yyyy.MM.dd"/></td>
+													<tr class="data-row" data-prod-cd="${performanceDTO.prod_cd}">
+													<td>${performanceDTO.perf_cd }</td>
 													<td>${performanceDTO.inst_cd }</td>
+													<td><fmt:formatDate value="${performanceDTO.perf_date}" pattern="yyyy.MM.dd"/></td>
 													<td>${performanceDTO.line_nm }</td>
 													<td>${performanceDTO.prod_cd }</td>
 													<td>${performanceDTO.prod_nm }</td>
@@ -225,7 +227,7 @@
 													<td>${performanceDTO.perf_good }</td>
 													<td>${performanceDTO.perf_err }</td>
 													<td>${performanceDTO.perf_cause }</td>
-													<tr class="data-row" data-prod-cd="${performanceDTO.prod_cd}">
+													<td>${performanceDTO.ord_cd }</td> 
 													<td>${performanceDTO.cli_nm }</td>
 													<td>${performanceDTO.perf_note }</td>
 												</tr>
@@ -290,9 +292,8 @@
 	<!-- Right Panel -->
 
 	<!-- Scripts -->
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.6.3.js"></script>	
+	<script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
 	<script type="text/javascript">
-	
 	// 생산실적 현황 json 리스트
 	$(document).ready(function() {
 		  // 첫번째 표에서 데이터 클릭시 이벤트 리스너 추가
@@ -332,8 +333,6 @@
 				"productSearchPop", "width=800,height=650");
 	}	
 </script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
 	<script

@@ -40,13 +40,13 @@ public class InstructionServiceImpl implements InstructionService{
 	public void insertInst(InstructionDTO instructionDTO) {
 		System.out.println("InstserviceImpl insertInstPro()");
 		if(instDAO.getMaxInst() == null) {
-			instructionDTO.setInst_cd("Wi001");
+			instructionDTO.setInst_cd("WI001");
 		}else if(instDAO.getMaxInst()<10){
-			instructionDTO.setInst_cd("Wi"+"00"+instDAO.getMaxInst());
+			instructionDTO.setInst_cd("WI"+"00"+instDAO.getMaxInst());
 		}else if(instDAO.getMaxInst()<100){
-			instructionDTO.setInst_cd("Wi"+"0"+instDAO.getMaxInst());
+			instructionDTO.setInst_cd("WI"+"0"+instDAO.getMaxInst());
 		}else {
-			instructionDTO.setInst_cd("Wi"+instDAO.getMaxInst());		
+			instructionDTO.setInst_cd("WI"+instDAO.getMaxInst());		
 		}
 		instructionDTO.setInst_date(new Timestamp(System.currentTimeMillis()));
 		
@@ -59,6 +59,13 @@ public class InstructionServiceImpl implements InstructionService{
 		System.out.println(instructionDTO.getInst_cd());
 		
 		instDAO.updateInst(instructionDTO);
+	}
+
+	@Override
+	public InstructionDTO getInst(String inst_cd) {
+		System.out.println("InstserviceImpl getInst()");
+		
+		return instDAO.getInst(inst_cd);
 	}
 	
 	
