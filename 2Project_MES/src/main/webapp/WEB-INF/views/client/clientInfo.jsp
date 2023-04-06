@@ -136,11 +136,11 @@
 									method="get" class="form-inline">
 									<div class="form-group col-6 mb-1">
 										<label class="pr-1 form-control-label">거래처코드</label>&nbsp;&nbsp;<input
-											type="text" name="search" class="form-control ">
+											type="text" name="search" class="form-control " placeholder="Client Code">
 									</div>
 									<div class="form-group col-6 mb-1">
 										<label class="pr-1  form-control-label">거래처명</label>&nbsp;&nbsp;<input
-											type="text" name="search2" class="form-control ">
+											type="text" name="search2" class="form-control " placeholder="Client Name">
 									</div>
 									<div class="form-group col-6 mt-1">
 										<label class="pr-1  form-control-label">거래처구분</label>&nbsp;&nbsp;
