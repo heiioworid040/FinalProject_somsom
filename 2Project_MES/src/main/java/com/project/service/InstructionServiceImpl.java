@@ -30,15 +30,15 @@ public class InstructionServiceImpl implements InstructionService{
 	}
 
 	@Override
-	public int getInstCount(PageDTO pageDTO) {
+	public int getInstCount() {
 		System.out.println("InstserviceImpl getInstCount()");
 		
-		return instDAO.getInstCount(pageDTO);
+		return instDAO.getInstCount();
 	}
 
 	@Override
 	public void insertInst(InstructionDTO instructionDTO) {
-		System.out.println("InstserviceImpl insertInst()");
+		System.out.println("InstserviceImpl insertInstPro()");
 		if(instDAO.getMaxInst() == null) {
 			instructionDTO.setInst_cd("Wi001");
 		}else if(instDAO.getMaxInst()<10){
@@ -48,13 +48,20 @@ public class InstructionServiceImpl implements InstructionService{
 		}else {
 			instructionDTO.setInst_cd("Wi"+instDAO.getMaxInst());		
 		}
-		System.out.println(instructionDTO.getLine_cd());
-		instructionDTO.setInst_st("대기");
 		instructionDTO.setInst_date(new Timestamp(System.currentTimeMillis()));
 		
 		instDAO.insertInst(instructionDTO);
 	}
-
+	
+	@Override
+	public void updateInst(InstructionDTO instructionDTO) {
+		System.out.println("InstserviceImpl updateInstPro()");
+		System.out.println(instructionDTO.getInst_cd());
+		
+		instDAO.updateInst(instructionDTO);
+	}
+	
+	
 
 	
 }
