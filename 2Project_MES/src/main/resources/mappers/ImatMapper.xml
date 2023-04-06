@@ -10,10 +10,16 @@
     <select id="getImat" resultType="com.project.domain.ImatDTO">
     select * 
     from in_material
+    where imat_cd = #{imat_cd}
     </select>
-
+    
+<!--     <insert id="insertBoard"> -->
+<!--     	insert into board(num,name,subject,content,readcount,date,file)  -->
+<!--     	values(#{num},#{name},#{subject},#{content},#{readcount},#{date},#{file}) -->
+<!--     </insert> -->
+    
 	<select id="getImatbeList" resultType="com.project.domain.ImatDTO">
-       select i.imat_cd, date_format(i.imat_date, '%y-%m-%d') as imat_date, p.prod_cd, p.prod_nm,p.prod_unit, i.imat_stg, i.imat_count, c.cli_cd, c.cli_nm, i.imat_note
+       select row_number() over(order by i.imat_cd asc) as imat_num,i.imat_cd,i.imat_cd,i.imat_date, p.prod_cd, p.prod_nm,p.prod_unit, i.imat_stg, i.imat_count, c.cli_cd, c.cli_nm, i.imat_note
 		from product p join in_material i
 		on i.prod_cd=p.prod_cd
 		join client c
@@ -22,7 +28,46 @@
 <!--         where id = #{id} and pass = #{pass} -->
     </select>
     
+<!--     <select id="getImatprodList" resultType="com.project.domain.ProductDTO"> -->
+<!--        select prod_cd,prod_nm,prod_mat,prod_unit,prod_text,prod_size -->
+<!--         from product; -->
+<!-- 		limit #{startRow}, #{pageSize} -->
+<!--         where id = #{id} and pass = #{pass} -->
+<!--     </select> -->
+    <select id="getImatprodList" resultType="com.project.domain.ProductDTO">
+    select * from product
+    limit #{startRow}, #{pageSize}
+    </select>
+    
+     <select id="getImatprodList1" resultType="com.project.domain.ProductDTO">
+    select * from product
+    limit #{startRow}, #{pageSize}
+    </select>
+    
+    <select id="getIomatList" resultType="com.project.domain.ImatDTO">
+    select row_number() over(order by i.imat_cd asc) as imat_num,p.prod_cd,p.prod_nm,p.prod_mat,p.prod_unit,imat_count-omat_count as iomat_count
+	from product p join in_material i on p.prod_cd=i.prod_cd
+	join out_material o on p.prod_cd=o.prod_cd
+    </select>
+    
     <select id="getImatCount" resultType="java.lang.Integer">
     select count(*) from in_material
     </select>
+    
+    <delete id="deleteList">
+    	delete from in_material
+    	where imat_cd = #{imat_cd}
+    </delete>
+    
+    <insert id="insertImat">
+    	insert into in_material(imat_cd,prod_cd,imat_date,imat_stg,imat_count,imat_note) 
+    	values(#{imat_cd},#{prod_cd},#{imat_date},#{imat_stg},#{imat_count}, #{imat_note})
+    </insert>
+    
+   
+    
+    <update id="updateImat">
+    	update in_material set imat_cd = #{imat_cd}, prod_cd = #{prod_cd}, imat_stg = #{imat_stg},imat_count = #{imat_count},imat_note = #{imat_note}
+    	where imat_cd = #{imat_cd}   
+    </update>
 </mapper>
