@@ -74,9 +74,8 @@ public class ImatController {
 		
 		ImatService.updateImat(imatDTO);
 		
-//		주소줄 변경하면서 이동
-		return null;
-//		return "redirect:/imat/imatbeList";
+//		주소줄 변경하면서 이동 
+		return "redirect:/imat/imatbeList";
 	}
 	
 	@RequestMapping(value = "imat/imatbeList", method = RequestMethod.GET)

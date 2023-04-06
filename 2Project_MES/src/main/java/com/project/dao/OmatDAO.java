@@ -3,6 +3,7 @@ package com.project.dao;
 import java.util.List;
 
 import com.project.domain.ClientDTO;
+import com.project.domain.ImatDTO;
 import com.project.domain.OmatDTO;
 import com.project.domain.PageDTO;
 import com.project.domain.ProductDTO;
@@ -20,7 +21,7 @@ public interface OmatDAO {
 	public void insertOmat(OmatDTO omatDTO);
 	
 	public void updateOmat(OmatDTO omatDTO);
-
+	
 	public List<ProductDTO> getOmatprodList(PageDTO pageDTO);
 
 	List<ProductDTO> getOmatprodList1(PageDTO pageDTO);

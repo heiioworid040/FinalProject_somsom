@@ -6,6 +6,8 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
+
+import com.project.domain.OmatDTO;
 import com.project.domain.OmatDTO;
 import com.project.domain.PageDTO;
 import com.project.domain.ProductDTO;
@@ -69,20 +71,21 @@ public class OmatDAOImpl implements OmatDAO{
 	}
 
 
+
 	@Override
 	public void updateOmat(OmatDTO omatDTO) {
-		System.out.println("OmatDAOImpl updateomat()");
-		
-		sqlSession.selectOne(namespace+".updateomat",omatDTO);
+		System.out.println("OmatDAOImpl updateOmat()");
+		sqlSession.update(namespace+".updateOmat", omatDTO);
 		
 	}
 
 
 	@Override
 	public OmatDTO getOmat(String omat_cd) {
-		System.out.println("OmatDTODAOImpl getOmat()");
+		System.out.println("OmatDAOImpl getOmat()");
 
 		return sqlSession.selectOne(namespace + ".getOmat", omat_cd);
 	}
+
 
 }

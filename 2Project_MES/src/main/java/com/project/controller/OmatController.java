@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.project.domain.OmatDTO;
+import com.project.domain.OmatDTO;
 import com.project.domain.PageDTO;
 import com.project.domain.ProductDTO;
 import com.project.service.OmatService;
@@ -38,26 +39,15 @@ public class OmatController {
 		return "omat/omatinsert";
 	}
 
-
-	// 가상주소 http://localhost:8080/SFunWeb/board/writePro
-	@RequestMapping(value = "/omat/omatinsertPro", method = RequestMethod.POST)
-	public String omatinsertPro(OmatDTO omatDTO) {
-		System.out.println("OmatController insertPro()");
-		// 글쓰기 처리 BoardService, BoardServiceImpl, insertBoard()
-		// BoardDAO, BoardDAOImpl, insertBoard()
-//			boardService.insertBoard(boardDTO);
-		OmatService.insertOmat(omatDTO);
-//			주소줄 변경하면서 이동
-		return "redirect:/omat/omatbeList";
-	}
-
+	
 	@RequestMapping(value = "/omat/omatupdate", method = RequestMethod.GET)
 	public String omatupdate(HttpServletRequest request, Model model) {
 		
 		String omat_cd = request.getParameter("omat_cd");
 
 		OmatDTO omatDTO = OmatService.getOmat(omat_cd);
-
+		System.out.println(omatDTO);
+		System.out.println("OmatController getOmat()");
 		model.addAttribute("omatDTO", omatDTO);
 		System.out.println("OmatController omatupdate()");
 //		주소줄 변경없이 이동
@@ -75,7 +65,22 @@ public class OmatController {
 		
 //		주소줄 변경하면서 이동
 		return "redirect:/omat/omatbeList";
+//		return "redirect:/omat/omatbeList";
 	}
+	
+
+	// 가상주소 http://localhost:8080/SFunWeb/board/writePro
+	@RequestMapping(value = "/omat/omatinsertPro", method = RequestMethod.POST)
+	public String omatinsertPro(OmatDTO omatDTO) {
+		System.out.println("OmatController insertPro()");
+		// 글쓰기 처리 BoardService, BoardServiceImpl, insertBoard()
+		// BoardDAO, BoardDAOImpl, insertBoard()
+//			boardService.insertBoard(boardDTO);
+		OmatService.insertOmat(omatDTO);
+//			주소줄 변경하면서 이동
+		return "redirect:/omat/omatbeList";
+	}
+
 	
 	@RequestMapping(value = "omat/omatbeList", method = RequestMethod.GET)
 	public String OmatbeList(HttpServletRequest request, Model model) {

@@ -7,7 +7,7 @@
 <!--  파일이름 대신 namespace 이름을 불러서 사용 -->
 <mapper namespace="com.project.mappers.OmatMapper">
 	
-    <select id="getOmat" resultType="com.project.domain.OmatDTO">
+     <select id="getOmat" resultType="com.project.domain.OmatDTO">
     select * 
     from out_material
     where omat_cd = #{omat_cd}
@@ -58,8 +58,8 @@
     	values(#{omat_cd},#{prod_cd},#{omat_date},#{omat_stg},#{omat_count}, #{omat_note})
     </insert>
     
-    <insert id="updateOmat">
-    	update out_material set omat_cd = #{omat_cd}, prod_cd = #{prod_cd}, omat_stg = #{omat_stg}, omat_count = #{omat_count}, omat_note = #{omat_note}
-    	where omat_cd = #{omat_cd}
-    </insert>
+    <update id="updateOmat">
+    	update out_material set omat_cd = #{omat_cd}, prod_cd = #{prod_cd}, omat_stg = #{omat_stg},omat_count = #{omat_count},omat_note = #{omat_note}
+    	where omat_cd = #{omat_cd}   
+    </update>
 </mapper>
