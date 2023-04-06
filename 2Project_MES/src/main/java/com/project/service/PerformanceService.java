@@ -17,4 +17,8 @@ public interface PerformanceService {
 	public List<ProductDTO> getProductInfo(PageDTO pageDTO);
 
 	public int getProductCount(PageDTO pageDTO);
+
+	public void updatePerf(PerformanceDTO performanceDTO);
+
+	public void insertPerf(PerformanceDTO performanceDTO);
 }

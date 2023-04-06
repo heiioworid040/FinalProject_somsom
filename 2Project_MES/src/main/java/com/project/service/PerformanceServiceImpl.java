@@ -1,5 +1,6 @@
 package com.project.service;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -64,4 +65,35 @@ public class PerformanceServiceImpl implements PerformanceService {
 
 		return performanceDAO.getProductCount(pageDTO);
 	}
+
+	@Override
+	public void insertPerf(PerformanceDTO performanceDTO) {
+		System.out.println("PerformanceServiceImpl insertPerf()");
+		if(performanceDAO.getMaxPerf() == null) {
+			performanceDTO.setPerf_cd("WP001");
+		}else if(performanceDAO.getMaxPerf()<10){
+			performanceDTO.setPerf_cd("WP"+"00"+performanceDAO.getMaxPerf());
+		}else if(performanceDAO.getMaxPerf()<100){
+			performanceDTO.setPerf_cd("WP"+"0"+performanceDAO.getMaxPerf());
+		}else {
+			performanceDTO.setPerf_cd("WP"+performanceDAO.getMaxPerf());		
+		}
+//		else if(performanceDAO.getMaxPerf()<10){
+//			performanceDTO.setInst_cd("WP"+"00"+performanceDAO.getMaxInst());
+//		}else if(performanceDAO.getMaxPerf()<100){
+//			performanceDTO.setInst_cd("WP"+"0"+performanceDAO.getMaxInst());
+//		}else {
+//			performanceDTO.setInst_cd("WP"+performanceDAO.getMaxInst());		
+//		}
+		performanceDTO.setPerf_date(new Timestamp(System.currentTimeMillis()));
+		
+		performanceDAO.insertPerf(performanceDTO);
+	}
+
+	@Override
+	public void updatePerf(PerformanceDTO performanceDTO) {
+		System.out.println("PerformanceServiceImpl updatePerf()");
+		
+	}
+
 }

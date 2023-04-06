@@ -59,4 +59,17 @@ public class PerformanceDAOImpl implements PerformanceDAO {
 
 		return sqlSession.selectOne(namespace + ".getProductCount", pageDTO);
 	}
+
+	@Override
+	public void insertPerf(PerformanceDTO performanceDTO) {
+		System.out.println("PerformanceDAOImpl insertPerf()");		
+		sqlSession.insert(namespace+".insertPerf", performanceDTO);
+	}
+
+	@Override
+	public Integer getMaxPerf() {
+		System.out.println("PerformanceDAOImpl getMaxPerf()");		
+		return sqlSession.selectOne(namespace+".getMaxPerf");
+	}
+
 }

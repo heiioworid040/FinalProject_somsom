@@ -17,4 +17,8 @@ public interface PerformanceDAO {
 	public List<ProductDTO> getProductInfo(PageDTO pageDTO);
 
 	public int getProductCount(PageDTO pageDTO);
+
+	public void insertPerf(PerformanceDTO performanceDTO);
+
+	public Integer getMaxPerf();
 }

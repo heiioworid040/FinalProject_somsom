@@ -241,7 +241,7 @@
 								<strong class="card-title">작업지시</strong>
 							</div>
 							<div class="card-body">
-								<table class="table table-striped table-bordered">
+								<table class="table table-hover table-striped table-bordered table-align-middle mb-0">
 									<thead class="thead-dark">
 										<tr>
 											<th scope="col">지시번호</th>
@@ -260,8 +260,9 @@
 									</thead>
 									<tbody>
 										<c:forEach var="instructionDTO" items="${instList }">
-											<tr>
-												<td scope="row">${instructionDTO.inst_cd }</td>
+											<tr id="infoInstTr">
+												<td scope="row">${instructionDTO.inst_cd }
+												</td>
 												<td>${instructionDTO.line_cd }</td>
 												<td>${instructionDTO.line_nm }</td>
 												<td>${instructionDTO.ord_cd }</td>
@@ -372,7 +373,13 @@
 				$('#insertInstBtn').prop('disabled', false);
 			}
 		});
+		
 
+		$(document).on("click","#infoInstTr td:not(:last-child)", function(){
+			location.href='${pageContext.request.contextPath}/performance/performanceCurrentInfo?pageNum=1&search=&search2=&search3=&search4='+$(this).closest('tr').children('td:eq(0)').text()+'&search5=전체';
+		});
+
+		
 		$(document).on("click", "#editInstBtn", function(){
 			console.log($(this).closest('tr').children('td:eq(6)').text());
 			$(searchLineCd2).val('');
@@ -401,6 +408,7 @@
 			$('#updateInstBtn').prop('disabled', false);
 			$('#insertInstBtn').prop('disabled', true);
 			$('#lineModalBtn').focus();
+
 		});
 		
 		$("#searchInstSt1").change(function(){
