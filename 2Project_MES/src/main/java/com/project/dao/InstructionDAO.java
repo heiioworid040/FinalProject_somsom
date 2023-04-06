@@ -13,5 +13,8 @@ public interface InstructionDAO {
 
 	public void insertInst(InstructionDTO instructionDTO);
 
-	public int maxInst();
+	public Integer getMaxInst();
+
+	public void updateInst(InstructionDTO instructionDTO);
+
 }

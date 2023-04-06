@@ -7,23 +7,99 @@
 }
 .content-div {
 	float: left;
-	width: 47%;
+	width: 50%;
 	padding: 1.875em;
-	margin: 0px 15px auto;
+	margin: 0px 0px auto;
 }
-body {
-	font-size: 13px;
+.div-left {
+	padding-right: 1em;
+}
+.div-right {
+	padding-left: 1em;
+}
+.search-result-div {
+	height: 50px;
+}
+.cli_cd, .cli_nm, .emp_cd, .emp_nm, .ord_date, .ord_d_date,
+#cliS_cd, #cliS_nm, #empS_cd, #empS_nm, #prodS_cd, #prodS_nm, #ordS_date, #ordS_d_date, #ordS_date_end, #ordS_d_date_end, #shipS_count {
+	padding: 0.375rem 0.75rem;
+	color: #212529;
+	background-color: #fff;
+	border: 1px solid #ced4da;
+	border-radius: 0.25rem;
+	width: 150px;
 }
 #cli_cd, #emp_cd {
-	width: 90px;
+	width: 100px;
 }
-#cli_nm, #emp_nm {
-	width: 120px;
+.prod_cd, .ord_cd, .Ocli_nm, .Oemp_nm, .Oord_date, .Oord_d_date {
+	width: 140px;
+	border-style: none;
+	background: transparent;
 }
-#prod_cd, #prod_nm, #prod_unit, #ord_count, #prod_mat, #ship_count {
+.Oemp_nm {
+	width: 100px;
+}
+.prod_cd, .prod_nm, .prod_unit, .ord_count, .prod_mat, .ship_count, .ship_date {
 	width: 100px;
 	border-style: none;
+	background: transparent;
+}
+#ship_count {
+	width: 50px;
+}
+#ship_date {
+	width: 115px;
+}
+.Info {
+	width: 100px;
+	border-style: none; !importent
+	background: transparent; !importent
+}
+.search-div {
+	width: 50%;
+	margin: 0 0 5px;
+}
+.search-div2 {
+	width: 50%;
+}
+.search-div3 {
+	width: 50%;
+	text-align: center;
+}
+.search-div4 {
+	width: 35%;
+	text-align: center;
+}
+.search-cl {
+	margin: 0 28px 0 15px;
+}
+.search-cl2 {
+	margin: 0 44px 0 15px;
+}
+.search-cl3 {
+	margin: 0 20px 0 15px;
+	font-weight: bold;
+}
+.search-btn {
+	margin-bottom: 3.5px;
+}
+.search-text-div {
+	width: 100%;
+	background-color: #343A40;
+	height: 70px;
+	margin-bottom: 20px;
+}
+.search-text {
+	text-align: center;
+	color: #fff;
+	font-weight: bold;
+	line-height: 70px;
 }
 .pageNum {
 	text-align: center;
+}
+#ck, #ckAll, #shipC {
+	accent-color: #007BFF;
+	zoom: 1.8;
 }

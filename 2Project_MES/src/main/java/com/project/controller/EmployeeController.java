@@ -24,20 +24,22 @@ public class EmployeeController {
 	
 	@RequestMapping(value = "/employee/login", method = RequestMethod.GET)
 	public String login() {
-
+		
 		return "employee/login";
 	}
 	
+
 	@RequestMapping(value = "/employee/loginPro", method = RequestMethod.POST)
 	public String loginPro(EmployeeDTO employeeDTO, HttpSession session) {
 		System.out.println("EmployeeController loginPro()");
 		
-		EmployeeDTO employeeDTO2 = employeeService.userCheck(employeeDTO);		
+		EmployeeDTO employeeDTO2 = employeeService.userCheck(employeeDTO);
 		
 		if(employeeDTO2 != null) {
 			System.out.println("아이디 비밀번호 일치");
 			session.setAttribute("emp_cd", employeeDTO.getEmp_cd());
-			return "redirect:/employee/login";
+			session.setAttribute("emp_position", employeeDTO2.getEmp_position());
+			return "redirect:/instruction/infoInst";
 		}else {
 			System.out.println("아이디 비밀번호 틀림");
 			return "employee/msg";
@@ -111,9 +113,17 @@ public class EmployeeController {
 	public String insertPro(EmployeeDTO employeeDTO) {
 
 		employeeService.insertEmployee(employeeDTO);
+		String emp_tel=employeeDTO.getEmp_tel();
+		employeeService.insertPass(emp_tel);
+
 		
 		return "redirect:/employee/employeeList";
 	}
+	
+	
+	
+	
+	
 	
 	@RequestMapping(value = "/employee/deletePro", method = RequestMethod.POST)
 	public String deletetPro(HttpServletRequest request) {
@@ -157,7 +167,12 @@ public class EmployeeController {
 		return "redirect:/employee/employeeList";
 	}
 		
-
+	@RequestMapping(value = "/employee/logout", method = RequestMethod.GET)
+	public String logout(HttpSession session) {
+		session.invalidate();
+		
+		return "redirect:/employee/login";
+	}
 	
 	
 	

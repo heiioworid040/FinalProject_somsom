@@ -118,7 +118,6 @@ th {
                     <div class="col-sm-4">
                         <div class="page-header float-left">
                             <div class="page-title">
-                                <h1>수정페이지</h1>
                             </div>
                         </div>
                     </div>
@@ -155,7 +154,7 @@ th {
 							<tr><td>품번</td>
 							    <td><input type="text" name="prod_cd" value="${productDTO.prod_cd}"></td></tr>
 								<tr><td>품명</td>
-		                          <td><input type="text" name="prod_nm">
+		                          <td><input type="text" name="prod_nm" value="${productDTO.prod_nm }">
 							  </td>
 							</tr>  
 							<tr><td>자재유형</td>
@@ -173,7 +172,7 @@ th {
 							    	<option value="기타" <c:if test="${productDTO.prod_unit == '기타'}">selected</c:if>>기타</option>
 							    	</select></td></tr>
 							<tr><td>재질</td>
-							    <td><input type="text" name="prod_text"></td></tr>
+							    <td><input type="text" name="prod_text" value="${productDTO.prod_text }"></td></tr>
 							<tr><td>규격</td>
 							    <td><select name="prod_size">
 							    	<option value="">규격</option>

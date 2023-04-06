@@ -12,6 +12,6 @@ public interface InstructionService {
 
 	public void insertInst(InstructionDTO instructionDTO);
 
-	public int maxInst();
-	
+	public void updateInst(InstructionDTO instructionDTO);
+
 }

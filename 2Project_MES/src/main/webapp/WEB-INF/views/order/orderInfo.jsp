@@ -13,30 +13,49 @@
 <link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png">
 <link rel="shortcut icon" href="https://i.imgur.com/QRAUqs9.png">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/cs-skin-elastic.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/search.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/order.css">
 <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
 <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
 </head>
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery-3.6.3.js"></script>
 <script>
-	function searchPop(search) {
-	window.open('${pageContext.request.contextPath }/order/searchPop?pop='+search,'searchPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=900,height=510,top=90,left=200')
+	$(document).ready(function(){
+		$('#btn_add').click(function(){
+			num = $('.ord_cd').length + 1;
+			$('.orderInfo').append('<tr class="add"><td>'+num+'</td><td><input type="text" name="ord_cd" class="ord_cd" readonly></td><td><input type="text" id="cli_nm'+num+'" name="cli_nm" class="Ocli_nm" onclick="searchPop(\'cliO\',\''+num+'\')"><input type="hidden" id="cli_cd'+num+'" name="cli_cd"></td><td><input type="date" name="ord_date" class="Oord_date"></td><td><input type="text" id="emp_nm'+num+'" name="emp_nm" class="Oemp_nm" onclick="searchPop(\'empO\',\''+num+'\')"><input type="hidden" id="emp_cd'+num+'" name="emp_cd"></td><td><input type="text" id="prod_cd'+num+'" name="prod_cd" class="prod_cd" onclick="searchPop(\'prodO\',\''+num+'\')"></td><td><input type="text" id="prod_nm'+num+'" class="prod_nm"></td><td><input type="text" id="prod_unit'+num+'" class="prod_unit"></td><td><input type="date" name="ord_d_date" class="Oord_d_date"></td><td><input type="text" id="ord_count" name="ord_count" class="ord_count"></td><td><input type="text" id="ship_count" class="ship_count" readonly></td><td><input type="checkbox" id="ck"></td></tr>');
+		});
+		
+		$('#btn_cel').click(function(){
+			$('.add').remove();
+		});
+		
+// 		$('#orderInfo').submit(function(){
+// 			if($('#ck').val()==""){
+// 				alert("데이터가 없습니다");
+// 				return false;
+// 			}
+// 		});
+	});
+</script>
+<script>
+	function searchPop(search, id) {
+	window.open('${pageContext.request.contextPath }/order/searchPop?pop='+search+'&id='+id,'searchPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=900,height=787,top=90,left=200')
 	}
 
-function fun1() {
-	   let check = false;
-	   with(document.ckDelete) {
-	      if(ck.length==undefined) {
-	         if(ck.checked) { check = true; }
+	function fun1() {
+		let check = false;
+		with(document.ckDelete) {
+			if(ck.length==undefined) {
+			if(ck.checked) { check = true; }
 	      } else {
 	         for(let i=0;i<ck.length;i++) {
 	            if(ck[i].checked) { check = true; } }
@@ -47,12 +66,12 @@ function fun1() {
 	         if(confirm("삭제처리 하시겠습니까?")) { submit(); }
 	      } } }
 
-function fun2() {
-	   if($("input:checked[id='ckAll']").prop("checked")) {
-	    $("input[type=checkbox]").prop("checked", true); 
-	   }else {
-	    $("input[type=checkbox]").prop("checked", false); 
-	   }
+	function fun2() {
+		if($("input:checked[id='ckAll']").prop("checked")) {
+			$("input[id=ck]").prop("checked", true); 
+		}else {
+			$("input[id=ck]").prop("checked", false); 
+		}
 	}
 </script>
 <body>
@@ -80,9 +99,8 @@ function fun2() {
 						<div class="page-header float-right">
 							<div class="page-title">
 								<ol class="breadcrumb text-right">
-									<li><a href="#">Dashboard</a></li>
-									<li><a href="#">Table</a></li>
-									<li class="active">Basic table</li>
+									<li><a href="#">영업관리</a></li>
+									<li class="active">수주현황</li>
 								</ol>
 							</div>
 						</div>
@@ -90,46 +108,55 @@ function fun2() {
 				</div>
 			</div>
 		</div>
-		<form action="${pageContext.request.contextPath }/order/orderInfo" method="get">
-			<div class="content">
-				<div class="search-btn-div">
-					<button type="submit" class="search-btn">조회</button>
-				</div>
-				<div class="animated fadeIn">
-					<div class="row">
-						<div class="col-lg">
-							<div class="card">
-								<div class="card-body">
-									<!--	(검색창 위치) -->
-									<div class="search-500">
-										<span class="search">업체 <input type="text" id="cliS_cd" name="cli" readonly> <input type="text" id="cliS_nm" readonly><button type="button" onclick="searchPop('cliS')">돋보기</button></span>
-										<span class="search">담당자 <input type="text" id="empS_cd" name="emp" readonly> <input type="text" id="empS_nm" readonly><button type="button" onclick="searchPop('empS')">돋보기</button></span>
+		
+		<!-- 	검색창 -->
+		<div class="content">
+			<div class="animated fadeIn">
+				<div class="row">
+					<div class="col-lg">
+						<div class="card m-0">
+							<div class="card-body card-block">
+								<form action="${pageContext.request.contextPath }/order/orderInfo" method="get" name="orderSearch" class="form-inline">
+									<div class="search-div">
+										<span class="search-cl">거래처</span><input type="text" id="cliS_cd" name="cli" placeholder="Client Code" readonly><input type="text" id="cliS_nm" placeholder="Client Name" readonly><button type="button" class="input-group-addon search-btn" style="cursor: pointer;" onclick="searchPop('cliS')"><i class="ti-search"></i></button>
 									</div>
-									<div class="search-450">
-										<span class="search">수주일자 <input type="date" name="ord_date"> <input type="date" name="ord_date_end"></span>
-										<span class="search">납품예정일 <input type="date" name="ord_d_date"> <input type="date" name="ord_d_date_end"></span>
+									<div class="search-div">
+										<span class="search-cl2">수주일자</span><input type="date" id="ordS_date" name="ord"><input type="date" id="ordS_date_end" name="ord_end">
 									</div>
-									<div class="search-500">
-										<span class="search">품번 <input type=text id="prodS_cd" name="prod" readonly> <input type=text id="prodS_nm" readonly><button type="button" onclick="searchPop('prodS')">돋보기</button></span>
+									<div class="search-div">
+										<span class="search-cl">담당자</span><input type="text" id="empS_cd" name="emp" placeholder="Emp Code" readonly><input type="text" id="empS_nm" placeholder="Emp Name" readonly><button type="button" class="input-group-addon search-btn" style="cursor: pointer;" onclick="searchPop('empS')"><i class="ti-search"></i></button>
 									</div>
-									<!-- 이 이상 긁는건 너무 템플릿에만의존적인 것 같아 나머지 기능은 직접 개발합시다 파이팅! -->
-								</div>
+									<div class="search-div">
+										<span class="search-cl">납품예정일</span><input type="date" id="ordS_d_date" name="ord_d"><input type="date" id="ordS_d_date_end" name="ord_d_end">
+									</div>
+									<div class="search-div">
+										<span class="search-cl2">품목</span><input type="text" id="prodS_cd" name="prod" placeholder="Prod Code" readonly><input type="text" id="prodS_nm" placeholder="Prod Name" readonly><button type="button" class="input-group-addon search-btn" style="cursor: pointer;" onclick="searchPop('prodS')"><i class="ti-search"></i></button>
+									</div>
+									<div class="search-div2 form-inline">
+										<span class="search-cl2">출하여부</span><div style="margin-top:5px"><input type="checkbox" id="shipC" name="ship" value="ship" ${pageDTO.search8 eq 'ship' ? "checked":"" }></div><span style="margin-left:4px">완료</span>
+										<div style="width: 74.7%">
+										<input type="submit" class="btn btn-primary float-right" value="검색">
+										</div>
+									</div>
+								</form>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</form>
-		<!-- .content -->
+		</div>
+		<!-- 	검색창 -->
 		
-		<form action="${pageContext.request.contextPath }/order/orderInfo" method="get">
+		<!-- .content -->
+		<form action="${pageContext.request.contextPath }/order/orderInfoPro" id="orderInfo" method="post">
 		<div class="content">
-			<div class="search-btn-div">
-				<div class="btn-div">
-					<button type="button" class="btn-test">추가</button>
-					<button type="button" class="btn-test">수정</button>
-					<button type="button" class="btn-test" onclick="fun1()">삭제</button>
-				</div>
+			<div style="width: 100%; height: 50px">
+					<button type="reset" id="btn_cel" class="btn btn-secondary float-right"  style="margin: 2px">취소</button>
+					<button type="submit" id="btn_del" name="btn" value="del" class="btn btn-primary float-right"  style="margin: 2px">삭제</button>
+					<button type="submit" id="btn_ins" name="btn" value="ins" class="btn btn-primary float-right" style="margin: 2px">저장</button>
+					<c:if test="${pageDTO.search8 ne 'ship' }">
+					<button type="button" id="btn_add" name="btn" value="add" class="btn btn-primary float-right" style="margin: 2px">추가</button>
+					</c:if>
 			</div>
 			<div class="animated fadeIn">
 				<div class="row">
@@ -139,43 +166,44 @@ function fun2() {
 								<strong class="card-title">수주현황</strong>
 							</div>
 							<div class="card-body">
-								<table class="table">
+								<table class="table table-striped table-bordered">
 									<thead class="thead-dark">
 										<tr>
 											<th scope="col"></th>
-											<th scope="col"><input type="checkbox" id="ckAll" name="ckAll" onclick="fun2()"></th>
 											<th scope="col">수주번호</th>
 											<th scope="col">업체</th>
 											<th scope="col">수주일자</th>
 											<th scope="col">담당자</th>
-											<th scope="col">품번</th>
-											<th scope="col">품명</th>
+											<th scope="col">상품코드</th>
+											<th scope="col">상품명</th>
 											<th scope="col">단위</th>
 											<th scope="col">납품예정일</th>
 											<th scope="col">수주량</th>
 											<th scope="col">출하량</th>
+											<th scope="col"><input type="checkbox" id="ckAll" name="ckAll" onclick="fun2()"></th>
 										</tr>
 									</thead>
-									<tbody>
-										<c:forEach var="orderDTO" items="${orderList }">
+									<tbody class="orderInfo">
+										<c:forEach var="orderDTO" items="${orderList }" varStatus="status">
 												<tr>
-													<td></td>
-													<td><input type="checkbox" id="ck" name="ck" value="${orderDTO.ord_cd }"></td>
-													<th scope="row">${orderDTO.ord_cd }</th>
-													<td>${orderDTO.cli_nm }</td>
-													<td><fmt:formatDate pattern="yyyy-MM-dd" value="${orderDTO.ord_date }"/></td>
-													<td>${orderDTO.emp_nm }</td>
-													<td>${orderDTO.prod_cd }</td>
-													<td>${orderDTO.prod_nm }</td>
-													<td>${orderDTO.prod_unit }</td>
-													<td><fmt:formatDate pattern="yyyy-MM-dd" value="${orderDTO.ord_d_date }"/></td>
-													<td>${orderDTO.ord_count }</td>
-													<td>${orderDTO.ship_count }</td>
+													<td scope="col" data-count="${status.count }">${status.count }</td>
+													<td><input type="text" id="ord_cd" name="ord_cd${status.count }" class="ord_cd" value="${orderDTO.ord_cd }" readonly></td>
+													<td><input type="text" id="cli_nm${status.count }" name="cli_nm${status.count }" class="Ocli_nm" value="${orderDTO.cli_nm }" onclick="searchPop('cliO','${status.count }')" readonly>
+														<input type="hidden" id="cli_cd${status.count }" name="cli_cd${status.count }" value="${orderDTO.cli_cd }"></td>
+													<td><input type="date" id="ord_date" name="ord_date${status.count }" class="Oord_date" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${orderDTO.ord_date }"/>" readonly></td>
+													<td><input type="text" id="emp_nm${status.count }" name="emp_nm${status.count }" class="Oemp_nm" value="${orderDTO.emp_nm }" onclick="searchPop('empO','${status.count }')" readonly>
+														<input type="hidden" id="emp_cd${status.count }" name="emp_cd${status.count }" value="${orderDTO.emp_cd }"></td>
+													<td><input type="text" id="prod_cd${status.count }" name="prod_cd${status.count }" class="prod_cd" value="${orderDTO.prod_cd }" onclick="searchPop('prodO','${status.count }')" readonly></td>
+													<td><input type="text" id="prod_nm${status.count }" class="prod_nm" value="${orderDTO.prod_nm }" readonly></td>
+													<td><input type="text" id="prod_unit${status.count }" class="prod_unit" value="${orderDTO.prod_unit }" readonly></td>
+													<td><input type="date" id="ord_d_date" name="ord_d_date${status.count }" class="Oord_d_date" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${orderDTO.ord_d_date }"/>"></td>
+													<td><input type="text" id="ord_count" name="ord_count${status.count }" class="ord_count" value="${orderDTO.ord_count }"></td>
+													<td><input type="text" id="ship_count" name="ship_count" class="ship_count" value="${orderDTO.ship_count }" readonly></td>
+													<td><input type="checkbox" id="ck" name="ck" value="${status.count },${orderDTO.ord_cd }"></td>
 												</tr>
 										</c:forEach>
 									</tbody>
 								</table>
-
 							</div>
 						</div>
 					</div>
@@ -204,7 +232,6 @@ function fun2() {
 	<script
 		src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
-
 
 </body>
 </html>

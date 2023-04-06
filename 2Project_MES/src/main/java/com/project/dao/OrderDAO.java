@@ -29,8 +29,8 @@ public class OrderDAO {
 	}
 	
 	//수주 총 카운트
-	public int getOrderCount() {
-		return sqlSession.selectOne(namespace+".getOrderCount");
+	public int getOrderCount(PageDTO pageDTO) {
+		return sqlSession.selectOne(namespace+".getOrderCount", pageDTO);
 	}
 	
 	//수주 추가 수주번호
@@ -53,8 +53,8 @@ public class OrderDAO {
 	}
 
 	//수주 삭제
-	public void orderDel(OrderDTO orderDTO) {
-		sqlSession.delete(namespace+".orderDel",orderDTO);
+	public void orderDel(String ord_cd) {
+		sqlSession.delete(namespace+".orderDel",ord_cd);
 	}
 
 	//수주 현황
@@ -64,6 +64,7 @@ public class OrderDAO {
 	
 	//팝업
 	public List<OrderDTO> getSearchCli(PageDTO pageDTO) {
+		pageDTO.setStartRow(pageDTO.getStartRow()-1);
 		return sqlSession.selectList(namespace+".getSearchCli", pageDTO);
 	}
 	
@@ -72,6 +73,7 @@ public class OrderDAO {
 	}
 
 	public List<OrderDTO> getSearchEmp(PageDTO pageDTO) {
+		pageDTO.setStartRow(pageDTO.getStartRow()-1);
 		return sqlSession.selectList(namespace+".getSearchEmp", pageDTO);
 	}
 	
@@ -80,11 +82,11 @@ public class OrderDAO {
 	}
 	
 	public List<OrderDTO> getSearchProd(PageDTO pageDTO) {
+		pageDTO.setStartRow(pageDTO.getStartRow()-1);
 		return sqlSession.selectList(namespace+".getSearchProd", pageDTO);
 	}
 	
 	public int getSearchProdCount(PageDTO pageDTO) {
 		return sqlSession.selectOne(namespace+".getSearchProdCount", pageDTO);
 	}
-
 }

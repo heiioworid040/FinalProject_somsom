@@ -92,11 +92,11 @@
     </select>
     
     <select id="getShipNum" resultType="java.lang.String">
-		select * from code where code_cd='ship_cd'
+		select code_grp from code where code_cd='ship_cd' and code_grp_nm='출하'
 	</select>
 	
 	<select id="getMaxNum" resultType="java.lang.Integer">
-		select max(cast(substring(ord_cd,2,3) as unsigned)) from ship where ship_date=#{ship_date}
+		select max(cast(substring(ship_cd,2,3) as unsigned)) from ship where ship_date=#{ship_date}
 	</select>
     
     <insert id="shipInfoPro">

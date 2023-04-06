@@ -21,7 +21,7 @@ public class InstructionDAOImpl implements InstructionDAO{
 	public List<InstructionDTO> getInstList(PageDTO pageDTO) {
 		System.out.println("InstDAOImpl getInstList()");
 		pageDTO.setStartRow(pageDTO.getStartRow()-1);
-
+		
 		return sqlSession.selectList(namespace+".getInstList", pageDTO);
 	}
 	
@@ -29,23 +29,33 @@ public class InstructionDAOImpl implements InstructionDAO{
 	@Override
 	public int getInstCount() {
 		System.out.println("InstDAOImpl getInstCount()");
+		System.out.println(sqlSession.selectOne(namespace+".getInstCount"));
 		return sqlSession.selectOne(namespace+".getInstCount");
 	}
 
 
 	@Override
 	public void insertInst(InstructionDTO instructionDTO) {
-		System.out.println("InstDAOImpl insertInst()");
-		
+		System.out.println("InstDAOImpl insertInst()");		
 		sqlSession.insert(namespace+".insertInst", instructionDTO);
 	}
 
 
 	@Override
-	public int maxInst() {
-		System.out.println("InstDAOImpl maxInst()");
-		
-		return sqlSession.selectOne(namespace+".maxInst");
+	public Integer getMaxInst() {
+		System.out.println("InstDAOImpl getMaxInst()");		
+		return sqlSession.selectOne(namespace+".getMaxInst");
 	}
+	
+	@Override
+	public void updateInst(InstructionDTO instructionDTO) {
+		System.out.println("InstDAOImpl updateInstPro()");
+		System.out.println(instructionDTO.getInst_cd());
+		
+		
+		sqlSession.update(namespace+".updateInst", instructionDTO);
+	}
+	
+	
 	
 }

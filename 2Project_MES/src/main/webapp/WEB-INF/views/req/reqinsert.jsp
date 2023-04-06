@@ -93,7 +93,6 @@
 					<div class="col-sm-4">
 						<div class="page-header float-left">
 							<div class="page-title">
-								<h1>소요량 생성</h1>
 							</div>
 						</div>
 					</div>
@@ -147,8 +146,7 @@
 															placeholder="버튼클릭">
 												<button type="button" id="pop" value="prod" onclick="orderPop(3)">검색</button></td>
 												<td><input type="text" name="prod_fcd" style="width : 80px;"></td>
-												<td><input type="text" name="prod_fnm" style="width : 80px;">
-													<button type="button" id="pop" value="prod" onclick="reqPop(1)">검색</button></td>
+												<td><input type="text" name="prod_fnm" style="width : 80px;"></td>
 												<td><input type="text" name="req_req"
 													style="width: 60px;"></td>
 												<td><input type="text" name="req_add_emp"

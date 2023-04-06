@@ -12,14 +12,13 @@
 <link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png">
 <link rel="shortcut icon" href="https://i.imgur.com/QRAUqs9.png">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/cs-skin-elastic.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/search.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/order.css">
 <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
@@ -42,77 +41,95 @@
 			document.searchPop.submit();
 			self.close();
 		</c:if>
+		<c:if test="${pop eq 'cliO' or pop eq 'empO' or pop eq 'prodO' }">
+			opener.document.getElementById(search+"_cd"+"${id}").value=cd;
+			opener.document.getElementById(search+"_nm"+"${id}").value=nm;
+			<c:if test="${pop eq 'prodO'}">
+			opener.document.getElementById(search+"_unit"+"${id}").value=unit;
+			</c:if>
+			document.searchPop.submit();
+			self.close();
+		</c:if>
 	}
 </script>
 <body>
-		<div class="breadcrumbs">
-			<div class="breadcrumbs-inner">
-				<div class="row m-0">
-					<div class="col-sm-4">
-						<div class="page-header float-left">
-							<div class="page-title">
-								<c:if test="${pop eq 'cli' or pop eq 'cliS' }">
-									<h3>거래처 조회</h3>
+							<div class="search-text-div">
+								<c:if test="${pop eq 'cli' or pop eq 'cliS' or pop eq 'cliO' }">
+									<h3 class="search-text">거래처 조회</h3>
 								</c:if>
-								<c:if test="${pop eq 'emp' or pop eq 'empS' }">
-									<h3>담당자 조회</h3>
+								<c:if test="${pop eq 'emp' or pop eq 'empS' or pop eq 'empO' }">
+									<h3 class="search-text">담당자 조회</h3>
 								</c:if>
-								<c:if test="${pop eq 'prod' or pop eq 'prodS' }">
-									<h3>품목 조회</h3>
+								<c:if test="${pop eq 'prod' or pop eq 'prodS' or pop eq 'prodO' }">
+									<h3 class="search-text">상품 조회</h3>
 								</c:if>
+							</div>
+		
+		<!-- 	검색창 -->
+		<div class="content">
+			<div class="animated fadeIn">
+				<div class="row">
+					<div class="col-lg">
+						<div class="card m-0">
+							<div class="card-body card-block">
+								<form action="${pageContext.request.contextPath }/order/searchPop" method="get" class="form-inline">
+								<input type="hidden" name="pop" value="${pop }">
+								<input type="hidden" name="id" value="${id }">
+											<c:if test="${pop eq 'cli' or pop eq 'cliS' or pop eq 'cliO' }">
+												<div class="search-div3">
+													<span class="search-cl3">거래처코드</span><input type="text" id="cliS_cd" name="cd">
+												</div>
+												<div class="search-div3">
+													<span class="search-cl3">거래처명</span><input type="text" id="cliS_nm" name="nm">
+												</div>
+												<div class="search-div3">
+													<span class="search-cl3">거래처구분</span><select class="select-search" id="cliS_nm" name="info">
+																					<option value="#">전체</option>
+																					<option value="자사" ${pageDTO.search3 eq '자사' ? "selected":"" }>자사</option>
+																					<option value="협력사" ${pageDTO.search3 eq '협력사' ? "selected":"" }>협력사</option>
+																					<option value="고객사" ${pageDTO.search3 eq '고객사' ? "selected":"" }>고객사</option>
+																					</select>
+												</div>
+											</c:if>
+											
+											<c:if test="${pop eq 'emp' or pop eq 'empS' or pop eq 'empO' }">
+												<div class="search-div4">
+													<span class="search-cl3">번호</span><input type="text" id="empS_cd" name="cd">
+												</div>
+												<div class="search-div4">
+													<span class="search-cl3">이름</span><input type="text" id="empS_cd" name="nm">
+												</div>
+											</c:if>
+											
+											<c:if test="${pop eq 'prod' or pop eq 'prodS' or pop eq 'prodO' }">
+												<div class="search-div4">
+													<span class="search-cl3">상품코드</span><input type="text" id="prodS_cd" name="cd">
+												</div>
+												<div class="search-div4">
+													<span class="search-cl3">상품명</span><input type="text" id="prodS_nm" name="nm">
+												</div>
+											</c:if>
+											
+									<c:if test="${pop eq 'emp' or pop eq 'empS' or pop eq 'empO' or pop eq 'prod' or pop eq 'prodS' or pop eq 'prodO' }">
+										<div style="width: 25%">
+											<input type="submit" class="btn btn-secondary float-right" value="조회">
+										</div>
+									</c:if>
+									<c:if test="${pop eq 'cli' or pop eq 'cliS' or pop eq 'cliO' }">
+										<div class="search-div2">
+											<input type="submit" class="btn btn-secondary float-right" style="margin-top: 6px" value="조회">
+										</div>
+									</c:if>
+								</form>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<form action="${pageContext.request.contextPath }/order/searchPop" method="get">
-		<input type="hidden" name="pop" value="${pop }">
-			<div class="content">
-				<div class="animated fadeIn">
-					<div class="row">
-						<div class="col-lg">
-							<div class="card">
-								<div class="card-body">
-									<!--	(검색창 위치) -->
-									<div class="search-div">
-										<div class="search-div-o">
-											<c:if test="${pop eq 'cli' or pop eq 'cliS' }">
-												<span class="search">업체코드 <input type="text" name="cd"></span>
-												<span class="search">업체명 <input type="text" name="nm"></span>
-												<span class="search">업체구분 <select class="select-search" name="info">
-																				<option value="">전체</option>
-																				<option value="자사">자사</option>
-																				<option value="협력사">협력사</option>
-																				<option value="고객사">고객사</option>
-																			</select></span>
-											</c:if>
-											<c:if test="${pop eq 'emp' or pop eq 'empS' }">
-												<span class="search">사번 <input type="text" name="cd"></span>
-												<span class="search">이름 <input type="text" name="nm"></span>
-											</c:if>
-											<c:if test="${pop eq 'prod' or pop eq 'prodS' }">
-												<span class="search">품번 <input type="text" name="cd"></span>
-												<span class="search">품명 <input type="text" name="nm"></span>
-												<span class="search">자재유형 <select class="select-search" name="info">
-																				<option value="">전체</option>
-																				<option value="완제품">완제품</option>
-																				<option value="부자재">부자재</option>
-																			</select></span>
-											</c:if>
-										</div>
-										<button type="submit" class="search-btn">조회</button>
-									</div>
-									<!-- 이 이상 긁는건 너무 템플릿에만의존적인 것 같아 나머지 기능은 직접 개발합시다 파이팅! -->
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</form>
-		<!-- .content -->
+		<!-- 	검색창 -->
 		
+		<!-- .content -->
 		<form action="${pageContext.request.contextPath }/order/orderInsert" name="searchPop" method="get">
 		<div class="content">
 			<div class="animated fadeIn">
@@ -120,22 +137,22 @@
 					<div class="col-lg">
 						<div class="card">
 							<div class="card-body">
-								<table class="table" id="hover_tb">
+								<table class="table table-striped table-bordered" id="hover_tb">
 									<thead class="thead-dark">
 										<tr>
-											<c:if test="${pop eq 'cli' or pop eq 'cliS' }">
-												<th scope="col">업체코드</th>
-												<th scope="col">업체명</th>
+											<c:if test="${pop eq 'cli' or pop eq 'cliS' or pop eq 'cliO' }">
+												<th scope="col">거래처코드</th>
+												<th scope="col">거래처명</th>
 												<th scope="col">대표자</th>
 												<th scope="col">구분</th>
 											</c:if>
-											<c:if test="${ pop eq 'emp' or pop eq 'empS' }">
-												<th scope="col">사용자사번</th>
-												<th scope="col">사용자명</th>
+											<c:if test="${ pop eq 'emp' or pop eq 'empS' or pop eq 'empO' }">
+												<th scope="col">담당자번호</th>
+												<th scope="col">담당자</th>
 											</c:if>
-											<c:if test="${ pop eq 'prod' or pop eq 'prodS' }">
+											<c:if test="${ pop eq 'prod' or pop eq 'prodS' or pop eq 'prodO' }">
 												<th scope="col">상품코드</th>
-												<th scope="col">상품이름</th>
+												<th scope="col">상품명</th>
 												<th scope="col">자재유형</th>
 												<th scope="col">단위</th>
 												<th scope="col">재질</th>
@@ -145,7 +162,7 @@
 									</thead>
 									<tbody>
 										<c:forEach var="orderDTO" items="${popList }">
-											<c:if test="${pop eq 'cli' or pop eq 'cliS' }">
+											<c:if test="${pop eq 'cli' or pop eq 'cliS' or pop eq 'cliO' }">
 												<tr onclick="search('cli','${orderDTO.cli_cd }','${orderDTO.cli_nm }')">
 													<td>${orderDTO.cli_cd }</td>
 													<td>${orderDTO.cli_nm }</td>
@@ -153,13 +170,13 @@
 													<td>${orderDTO.cli_type }</td>
 												</tr>
 											</c:if>
-											<c:if test="${ pop eq 'emp' or pop eq 'empS' }">
+											<c:if test="${ pop eq 'emp' or pop eq 'empS' or pop eq 'empO' }">
 												<tr onclick="search('emp','${orderDTO.emp_cd}','${orderDTO.emp_nm }')">
 													<td>${orderDTO.emp_cd }</td>
 													<td>${orderDTO.emp_nm }</td>
 												</tr>
 											</c:if>
-											<c:if test="${ pop eq 'prod' or pop eq 'prodS' }">
+											<c:if test="${ pop eq 'prod' or pop eq 'prodS' or pop eq 'prodO' }">
 												<tr onclick="search('prod','${orderDTO.prod_cd }','${orderDTO.prod_nm }','${orderDTO.prod_mat }','${orderDTO.prod_unit }')">
 													<td>${orderDTO.prod_cd }</td>
 													<td>${orderDTO.prod_nm }</td>
@@ -172,6 +189,26 @@
 										</c:forEach>
 									</tbody>
 								</table>
+								
+								<!-- 페이징 아직 수정 중 -->
+<!-- 								pop 값___O 도 추가 수정하기 -->
+								<div class="pageNum">
+									<c:if test="${pop eq 'cli' or pop eq 'cliS' or pop eq 'cliO' or pop eq 'prod' or pop eq 'prodS' or pop eq 'prodO' or pop eq 'emp' or pop eq 'empS' or pop eq 'empO' }">
+										<c:if test="${empty cd and empty nm and empty info}">
+											<c:if test="${pageDTO.startPage > pageDTO.pageBlock }">
+												<a href="${pageContext.request.contextPath }/order/searchPop?pop=${pop }&pageNum=${pageDTO.startPage-pageDTO.pageBlock }&id=${id }&cd=${pageDTO.search }&nm=${pageDTO.search2 }&info=${pageDTO.search3 }">◁</a>
+											</c:if>
+											<c:forEach var="i" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1">
+												<a href="${pageContext.request.contextPath }/order/searchPop?pop=${pop }&pageNum=${i}&id=${id }&cd=${pageDTO.search }&nm=${pageDTO.search2 }&info=${pageDTO.search3 }">${i}</a> 
+											</c:forEach>
+											<c:if test="${pageDTO.endPage < pageDTO.pageCount }">
+											<a href="${pageContext.request.contextPath }/order/searchPop?pop=${pop }&pageNum=${pageDTO.startPage+pageDTO.pageBlock }&id=${id }&cd=${pageDTO.search }&nm=${pageDTO.search2 }&info=${pageDTO.search3 }">▷</a>
+											</c:if>
+										</c:if>
+									</c:if>
+								</div>
+								<!-- 페이징 -->
+
 							</div>
 						</div>
 					</div>
@@ -181,30 +218,5 @@
 		</form>
 		<!-- .content -->
 		
-		<div class="pageNum">
-			<c:if test="${empty search}">
-				<c:if test="${pageDTO.startPage > pageDTO.pageBlock }">
-					<a href="${pageContext.request.contextPath }/order/searchPop?pop=${pop }&pageNum=${pageDTO.startPage-pageDTO.pageBlock }">Prev</a>
-				</c:if>
-				<c:forEach var="i" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1">
-					<a href="${pageContext.request.contextPath }/order/searchPop?pop=${pop }&pageNum=${i}">${i}</a> 
-				</c:forEach>
-				<c:if test="${pageDTO.endPage < pageDTO.pageCount }">
-				<a href="${pageContext.request.contextPath }/order/searchPop?pop=${pop }&pageNum=${pageDTO.startPage+pageDTO.pageBlock }">Next</a>
-				</c:if>
-			</c:if>
-		<!-- }else{ -->
-			<c:if test="${!empty search }">
-				<c:if test="${pageDTO.startPage > pageDTO.pageBlock }">
-					<a href="${pageContext.request.contextPath }/order/searchPop?pop=${pop }&pageNum=${pageDTO.startPage-pageDTO.pageBlock }&cd=${pageDTO.search }&nm=${pageDTO.search2 }&info=${pageDTO.search3 }">Prev</a>
-				</c:if>
-				<c:forEach var="i" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1">
-					<a href="${pageContext.request.contextPath }/order/searchPop?pop=${pop }&pageNum=${i}&cd=${pageDTO.search }&nm=${pageDTO.search2 }&info=${pageDTO.search3 }">${i}</a> 
-				</c:forEach>
-				<c:if test="${pageDTO.endPage < pageDTO.pageCount }">
-					<a href="${pageContext.request.contextPath }/order/searchPop?pop=${pop }&pageNum=${pageDTO.startPage+pageDTO.pageBlock }&cd=${pageDTO.search }&nm=${pageDTO.search2 }&info=${pageDTO.search3 }">Next</a>
-				</c:if>
-			</c:if>
-		</div>
 </body>
 </html>

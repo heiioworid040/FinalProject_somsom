@@ -63,7 +63,8 @@ th {
 							<div class="card-header">
 								<H3>품목별 상세페이지</H3><br>
 							</div>
-							<table border="1">
+									<table id="bootstrap-data-table"
+										class="table table-striped table-bordered">
 							<tr><td>품번</td><td>${productDTO.prod_cd}</td></tr>
 							<tr><td>거래코드</td><td>${productDTO.cli_cd}</td></tr>
 							<tr><td>품명</td><td>${productDTO.prod_mat}</td></tr>

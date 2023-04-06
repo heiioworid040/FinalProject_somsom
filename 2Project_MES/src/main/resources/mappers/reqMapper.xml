@@ -6,10 +6,10 @@
 
     <select id="getReqList" resultType="com.project.domain.ReqDTO">
     	select * from requirement
-<!--     	<if test="search != null"> -->
-<!--         where prod_cd like CONCAT('%',#{search},'%') or prod_nm like CONCAT('%',#{search},'%') or prod_mat like CONCAT('%',#{search},'%') -->
-<!--         </if>  -->
-    	order by req_num desc
+    	<if test="search != null">
+        where req_add_emp like CONCAT('%',#{search},'%')
+        </if> 
+    	order by prod_nm desc
   
     	limit #{startRow}, #{pageSize}
     </select>
@@ -17,9 +17,9 @@
 	
 	 <select id="getReqCount" resultType="java.lang.Integer">
     	select count(*) from requirement
-<!--     	<if test="search != null"> -->
-<!--         	where prod_cd like CONCAT('%',#{search},'%') or prod_nm like CONCAT('%',#{search},'%')or prod_mat like CONCAT('%',#{search},'%') -->
-<!--         </if>  -->
+    	<if test="search != null">
+        	where req_add_emp like CONCAT('%',#{search},'%') 
+        </if> 
     </select>
     
       <select id="getMaxnum" resultType="java.lang.Integer">

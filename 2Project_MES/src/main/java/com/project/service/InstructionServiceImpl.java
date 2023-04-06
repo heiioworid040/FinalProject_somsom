@@ -1,5 +1,6 @@
 package com.project.service;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -37,17 +38,30 @@ public class InstructionServiceImpl implements InstructionService{
 
 	@Override
 	public void insertInst(InstructionDTO instructionDTO) {
-		System.out.println("InstserviceImpl insertInst()");
+		System.out.println("InstserviceImpl insertInstPro()");
+		if(instDAO.getMaxInst() == null) {
+			instructionDTO.setInst_cd("Wi001");
+		}else if(instDAO.getMaxInst()<10){
+			instructionDTO.setInst_cd("Wi"+"00"+instDAO.getMaxInst());
+		}else if(instDAO.getMaxInst()<100){
+			instructionDTO.setInst_cd("Wi"+"0"+instDAO.getMaxInst());
+		}else {
+			instructionDTO.setInst_cd("Wi"+instDAO.getMaxInst());		
+		}
+		instructionDTO.setInst_date(new Timestamp(System.currentTimeMillis()));
 		
 		instDAO.insertInst(instructionDTO);
 	}
-
+	
 	@Override
-	public int maxInst() {
-		System.out.println("InstserviceImpl maxInst()");
+	public void updateInst(InstructionDTO instructionDTO) {
+		System.out.println("InstserviceImpl updateInstPro()");
+		System.out.println(instructionDTO.getInst_cd());
 		
-		return instDAO.maxInst();
+		instDAO.updateInst(instructionDTO);
 	}
 	
+	
+
 	
 }

@@ -27,20 +27,39 @@
     
     <select id="getProductList" resultType="com.project.domain.ProductDTO">
     	select * from product
+    	where 1=1
     	<if test="search != null">
-        where prod_cd like CONCAT('%',#{search},'%') or prod_nm like CONCAT('%',#{search},'%') or prod_mat like CONCAT('%',#{search},'%')
-        </if> 
-    	order by prod_number desc
-  
+        and prod_cd like CONCAT('%',#{search},'%') or prod_nm like CONCAT('%',#{search},'%') or prod_mat like CONCAT('%',#{search},'%')
+        </if>
+    	<if test="search2 != null">
+        and prod_cd like CONCAT('%',${search2},'%')  
+        </if>
+    	<if test="search3 != null">
+        and prod_nm like CONCAT('%',${search3},'%')  
+        </if>
+    	<if test="search4 != null">
+        and prod_mat = ${search4}  
+        </if>
+    	order by prod_mat desc
     	limit #{startRow}, #{pageSize}
     </select>
     
     
       <select id="getProductCount" resultType="java.lang.Integer">
     	select count(*) from product
+    	where 1=1
     	<if test="search != null">
-        	where prod_cd like CONCAT('%',#{search},'%') or prod_nm like CONCAT('%',#{search},'%')or prod_mat like CONCAT('%',#{search},'%')
-        </if> 
+        and prod_cd like CONCAT('%',#{search},'%') or prod_nm like CONCAT('%',#{search},'%') or prod_mat like CONCAT('%',#{search},'%')
+        </if>
+    	<if test="search2 != null">
+        and prod_cd like CONCAT('%',${search2},'%')  
+        </if>
+    	<if test="search3 != null">
+        and prod_nm like CONCAT('%',${search3},'%')  
+        </if>
+    	<if test="search4 != null">
+        and prod_mat = ${search4}  
+        </if>
     </select>
     
      <select id="getProduct" resultType="com.project.domain.ProductDTO">

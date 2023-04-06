@@ -16,8 +16,10 @@
 
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
+<!-- <link rel="stylesheet" -->
+<!-- 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"> -->
+<link rel="stylesheet" 
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet"
@@ -73,9 +75,20 @@
 		  });
 		});
 	
+	// 품번 검색 팝업창 
+	function productSearchPop() {
+		// 새로운 윈도우 창을 띄움
+		window.open(
+				"${pageContext.request.contextPath }/product/productSearchPop",
+				"productSearchPop", "width=800,height=650");
+	}	
 </script>
 </head>
 <body>
+	<!-- 	로그인 안했을시 로그인페이지로 이동  -->
+	<c:if test="${empty sessionScope.emp_cd }">
+		<c:redirect url="/employee/login"></c:redirect>
+	</c:if>
 	<!-- Left Panel1 -->
 	<jsp:include page="../inc/leftPanel.jsp" />
 	<!-- Left Panel1 -->
@@ -127,9 +140,9 @@
 									</div>
 									<div class="form-group col-6 mb-1">
 										<label class="pr-1  form-control-label">품번</label>&nbsp;&nbsp; <input
-											type="text" name="search3" class="form-control ">
+											type="text" id="productSearchId" name="search3" class="form-control ">
 											<div class="input-group">
-                                        	<div class="input-group-addon"><i class="ti-search"></i></div>
+                                        	<div class="input-group-addon" onclick="productSearchPop()" style="cursor: pointer;"><i class="ti-search"></i></div>
                                     	</div>
 									</div>
 									<div class="form-group col-6 mt-1">
@@ -227,14 +240,6 @@
 										<tr>
 										<td colspan="4" style="text-align: center;">검색된 자료가 없습니다.</td>
 										</tr>
-<%-- 											<c:forEach var="performanceDTO" items="${performanceCurrentInfo }"> --%>
-<!-- 												<tr> -->
-<%-- 													<td>${performanceDTO.r_prod_cd }</td> --%>
-<%-- 													<td>${performanceDTO.r_prod_nm }</td> --%>
-<%-- 													<td>${performanceDTO.r_prod_unit }</td> --%>
-<%-- 													<td>${performanceDTO.req_req * (performanceDTO.perf_good + performanceDTO.perf_err)}</td> --%>
-<!-- 												</tr> -->
-<%-- 											</c:forEach> --%>
 										</tbody>
 									</table>
 								<!-- 페이징 처리 -->

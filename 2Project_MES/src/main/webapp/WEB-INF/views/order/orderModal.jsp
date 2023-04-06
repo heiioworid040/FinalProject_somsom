@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <div class="modal fade" id="orderModal" tabindex="-1" role="dialog"
 	aria-labelledby="largeModalLabel" style="display: none;"
 	aria-hidden="true">
@@ -23,6 +24,7 @@
 										<tr>
 											<th scope="col">수주번호</th>
 											<th scope="col">상품코드</th>
+											<th scope="col">상품명</th>
 											<th scope="col">담당자</th>
 											<th scope="col">거래처</th>
 											<th scope="col">수주일자</th>
@@ -49,16 +51,15 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).on("click", "#orderModalBtn", function(){
-		event.preventDefault();
 			try {
 				jQuery('#orderTableBody').html('');
 				jQuery.ajax({
-					type : 'get',
+					type : 'post',
 					url:'${pageContext.request.contextPath}/ajax/orderModal',
 					dataType:'json',
 					success:function(orderarr){
 						jQuery.each(orderarr,function(index,item){
-							jQuery('#orderTableBody').append('<tr><td scope="row">'+item.ord_cd+'</td><td id="order">'+item.prod_cd+'</td><td class="hidden">'+item.prod_nm+'</td><td class="hidden">'+item.prod_unit+'</td><td>'+item.emp_cd+'</td><td>'+item.cli_nm +'</td><td>'+item.ord_date+'</td><td>'+item.ord_d_date +'</td><td>'+item.ord_count+'</td></tr>');
+							jQuery('#orderTableBody').append('<tr><td scope="row">'+item.ord_cd+'</td><td>'+item.prod_cd+'</td><td>'+item.prod_nm+'</td><td class="d-none">'+item.prod_unit+'</td><td>'+item.emp_nm +'</td><td>'+item.cli_nm+'</td><td>'+item.ord_date+'</td><td>'+item.ord_d_date +'</td><td>'+item.ord_count+'</td></tr>');
 						});
 					}
 				});
@@ -87,19 +88,19 @@
 		// tr.text()는 클릭된 Row 즉 tr에 있는 모든 값을 가져온다.
 		console.log("클릭한 Row의 모든 데이터 : "+tr.text());
 			
-	 	var sorder_cd = td.eq(0).text();
-	 	var scli_nm = td.eq(3).text();
-	 	var sprod_cd = td.eq(1).text();
-	 	var sprod_nm = td.eq(2).text();
-	 	var sprod_unit = td.eq(3).text();
-	 	var sord_count = td.eq(8).text();
+	 	var order_cd = td.eq(0).text();
+	 	var prod_cd = td.eq(1).text();
+	 	var prod_nm = td.eq(2).text();
+	 	var prod_unit = td.eq(3).text();
+	 	var cli_nm = td.eq(5).text();
+	 	var ord_count = td.eq(8).text();
 		
-	 	$('#sOrderInputCd').val(sorder_cd);
-	 	$('#sClientInputNm').val(scli_nm);
-	 	$('#sProdInputCd').val(sprod_cd);
-	 	$('#sProdInputNm').val(sprod_nm);
-	 	$('#sProdInputUnit').val(sprod_unit);
-	 	$('#sProdInputCount').val(sord_count);
+	 	$('#insertOrderCd').val(order_cd);
+	 	$('#insertClientNm').val(cli_nm);
+	 	$('#insertProdCd').val(prod_cd);
+	 	$('#insertProdNm').val(prod_nm);
+	 	$('#insertProdUnit').val(prod_unit);
+	 	$('#insertProdCount').val(ord_count);
 	 	
 	 	jQuery('#orderModal').modal("hide");
 		});

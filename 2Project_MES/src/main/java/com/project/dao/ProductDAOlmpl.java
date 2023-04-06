@@ -36,7 +36,7 @@ public class ProductDAOlmpl implements ProductDAO{
 	
 	@Override
 	public List<ProductDTO> getProductList(PageDTO pageDTO){
-		
+		System.out.println("ProductDAOImpl getProdList");
 		pageDTO.setStartRow(pageDTO.getStartRow()-1);
 		
 	return sqlSession.selectList(namespace+".getProductList",pageDTO);
@@ -45,7 +45,7 @@ public class ProductDAOlmpl implements ProductDAO{
 	@Override
 	public int getProductCount(PageDTO pageDTO) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne(namespace+".getProductCount");
+		return sqlSession.selectOne(namespace+".getProductCount",pageDTO);
 	}
 	
 	@Override
