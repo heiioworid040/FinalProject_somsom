@@ -8,7 +8,10 @@ import com.project.domain.InstructionDTO;
 public interface InstructionService {
 	public List<InstructionDTO> getInstList(PageDTO pageDTO);
 
-	public int getInstCount(PageDTO pageDTO);
+	public int getInstCount();
 
 	public void insertInst(InstructionDTO instructionDTO);
+
+	public void updateInst(InstructionDTO instructionDTO);
+
 }
