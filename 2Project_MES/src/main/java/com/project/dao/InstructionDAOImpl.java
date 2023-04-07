@@ -52,7 +52,6 @@ public class InstructionDAOImpl implements InstructionDAO{
 		System.out.println("InstDAOImpl updateInstPro()");
 		System.out.println(instructionDTO.getInst_cd());
 		
-		
 		sqlSession.update(namespace+".updateInst", instructionDTO);
 	}
 

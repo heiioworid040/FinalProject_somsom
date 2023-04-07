@@ -43,7 +43,7 @@ public class InstructionServiceImpl implements InstructionService{
 			instructionDTO.setInst_cd("WI001");
 		}else if(instDAO.getMaxInst()<10){
 			instructionDTO.setInst_cd("WI"+"00"+instDAO.getMaxInst());
-		}else if(instDAO.getMaxInst()<100){
+		}else if(instDAO.getMaxInst()>9 && instDAO.getMaxInst()<100){
 			instructionDTO.setInst_cd("WI"+"0"+instDAO.getMaxInst());
 		}else {
 			instructionDTO.setInst_cd("WI"+instDAO.getMaxInst());		
@@ -57,6 +57,7 @@ public class InstructionServiceImpl implements InstructionService{
 	public void updateInst(InstructionDTO instructionDTO) {
 		System.out.println("InstserviceImpl updateInstPro()");
 		System.out.println(instructionDTO.getInst_cd());
+		System.out.println(instructionDTO.getInst_st());
 		
 		instDAO.updateInst(instructionDTO);
 	}

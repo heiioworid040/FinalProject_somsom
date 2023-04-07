@@ -167,7 +167,7 @@ public class PerformanceController {
 		System.out.println("instructionController insertInstPro()");
 		performanceService.insertPerf(performanceDTO);
 		
-		return "redirect:/instruction/infoInst";
+		return "redirect:/performance/performanceCurrentInfo";
 	}
 	
 	@RequestMapping(value = "/performance/updatePerf", method = RequestMethod.POST)

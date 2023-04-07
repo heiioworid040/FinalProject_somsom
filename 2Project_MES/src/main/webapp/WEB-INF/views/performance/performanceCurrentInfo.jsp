@@ -97,7 +97,7 @@
 										<label class="pr-1  form-control-label">품번</label>&nbsp;&nbsp; <input
 											type="text" id="productSearchId" name="search3" class="form-control ">
 											<div class="input-group">
-                                        	<div class="input-group-addon" onclick="productSearchPop()" style="cursor: pointer;"><i class="ti-search"></i></div>
+                                        	<div class="input-group-addon" id="productSearchPop" style="cursor: pointer;"><i class="ti-search"></i></div>
                                     	</div>
 									</div>
 									<div class="form-group col-6 mt-1">
@@ -134,11 +134,15 @@
 				<div class="row">
 					<div class="col-lg">
 						<div class="card m-0">
+							<div class="card-header">
+								<strong class="card-title">생산실적 입력/수정</strong>
+							</div>
 							<form action="${pageContext.request.contextPath}/performance/insertPerf" id="insertInstForm" method="post">
 								<div class="card-body card-block">
 									<table id="table" class="table table-striped table-bordered">
 										<thead class="thead-dark">
 											<tr>
+												<th scope="col">실적코드</th>
 												<th scope="col">지시번호</th>
 												<th scope="col">실적일자</th>
 												<th scope="col">라인명</th>
@@ -153,9 +157,12 @@
 										<tbody>
 											<tr>
 												<td scope="row">
+												<input type="text" id="insertInstCd" name="inst_cd" class="form-control" readonly>
+												</td>
+												<td>
 												<input type="text" id="insertInstCd" name="inst_cd" value="${pageDTO.search4 }" placeholder="Inst Code" class="form-control bg-white" readonly>
 												</td>
-												<td><input type="text" id="insertPerfDate" disabled class="form-control"></td>												
+												<td><input type="text" id="insertPerfDate" disabled class="form-control" ></td>												
 												<td><input type="text" id="insertLineNm" value="${instructionDTO.line_nm}" disabled class="form-control"></td>
 												<td><input type="text" id="insertProdNm" value="${instructionDTO.prod_nm}" disabled class="form-control"></td>
 												<td><input type="text" id="insertProdUnit" value="${instructionDTO.prod_unit}" disabled class="form-control"></td>
@@ -212,6 +219,7 @@
 												<th scope="col">수주번호</th>
 												<th scope="col">업체</th>
 												<th scope="col">비고</th>
+												<th scope="col"></th>
 											</tr>
 										</thead>
 										<tbody>
@@ -230,6 +238,11 @@
 													<td>${performanceDTO.ord_cd }</td> 
 													<td>${performanceDTO.cli_nm }</td>
 													<td>${performanceDTO.perf_note }</td>
+													<td>
+														<div class="input-group">
+															<button id="editPerfBtn" class="btn btn-secondary" value="${performanceDTO.perf_cd }">수정</button>
+														</div>
+													</td>
 												</tr>
 											</c:forEach>
 										</tbody>
@@ -295,9 +308,8 @@
 	<script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
 	<script type="text/javascript">
 	// 생산실적 현황 json 리스트
-	$(document).ready(function() {
-		  // 첫번째 표에서 데이터 클릭시 이벤트 리스너 추가
-		  jQuery('.data-row').on('click', function() {
+ 	// 첫번째 표에서 데이터 클릭시 이벤트 리스너 추가
+	$(document).on('click', '.data-row', function() {
 		    var prod_cd = jQuery(this).data('prod-cd');
 		    jQuery.ajax({
 		      url: '${pageContext.request.contextPath}/performance/perfCurrJsonList',
@@ -307,10 +319,7 @@
 		        var resultTable = jQuery('#result-table').find('tbody');
 		        resultTable.empty();
 		        for (var i = 0; i < data.length; i++) {
-		          var row = '<tr>' +
-		            '<td>' + data[i].r_prod_cd + '</td>' +
-		            '<td>' + data[i].r_prod_nm + '</td>' +
-		            '<td>' + data[i].r_prod_unit + '</td>' +
+		          var row = '<tr>' +'<td>' + data[i].r_prod_cd + '</td>' +'<td>' + data[i].r_prod_nm + '</td>' +'<td>' + data[i].r_prod_unit + '</td>' +
 		            '<td>' + data[i].req_req * (data[i].perf_good + data[i].perf_err) + '</td>' +
 		            '</tr>';
 		          resultTable.append(row);
@@ -323,22 +332,49 @@
               }
 		    });
 		  });
-		});
 	
-	// 품번 검색 팝업창 
-	function productSearchPop() {
+	$(document).on("click", "#productSearchPop", function(){
 		// 새로운 윈도우 창을 띄움
 		window.open(
 				"${pageContext.request.contextPath }/product/productSearchPop",
 				"productSearchPop", "width=800,height=650");
-	}	
-</script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
+	});
+	
+	// 품번 검색 팝업창
+	$(document).on("click", "#editPerfBtn", function(){
+		console.log($(this).closest('tr').children('td:eq(6)').text());
+		$(searchLineCd2).val('');
+		$(searchLineNm).val('');
+		$(insertProdCd).val('');
+		$(insertProdNm).val('');
+		$(insertProdUnit).val('');
+		$(insertProdCount).val('');
+		$(insertOrderCd).val('');
+		$(insertClientNm).val('');
+		
+		$('#insertPerfCd').val($(this).closest('tr').children('td:eq(0)').text());
+		$('#searchLineCd2').val($(this).closest('tr').children('td:eq(1)').text());
+		$('#searchLineNm').val($(this).closest('tr').children('td:eq(2)').text());
+		$('#insertOrderCd').val($(this).closest('tr').children('td:eq(3)').text());
+		$('#insertProdCd').val($(this).closest('tr').children('td:eq(4)').text());
+		$('#insertProdNm').val($(this).closest('tr').children('td:eq(5)').text());
+		$('#insertProdUnit').val($(this).closest('tr').children('td:eq(6)').text());
+		$('#insertInstSt').val($(this).closest('tr').children('td:eq(7)').text()).prop('selected', true);
+		$('#insertProdCount').val($(this).closest('tr').children('td:eq(8)').text());
+		$('#insertInstFcount').val($(this).closest('tr').children('td:eq(9)').text());
+		$('#insertClientNm').val($(this).closest('tr').children('td:eq(11)').text());
+		$("#insertInstForm").attr('action', '${pageContext.request.contextPath}/instruction/updateInst');
+		$("#insertInstForm").attr('action', '${pageContext.request.contextPath}/instruction/updateInst');
+		$("#insertInstForm").attr('action', '${pageContext.request.contextPath}/instruction/updateInst');
+		$('#updateInstBtn').prop('disabled', false);
+		$('#insertInstBtn').prop('disabled', true);
+		$('#lineModalBtn').focus();
+
+	});
+	</script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 
 

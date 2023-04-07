@@ -108,10 +108,11 @@ public class InstructionController {
 	}
 	
 	@RequestMapping(value = "/instruction/updateInst", method = RequestMethod.POST)
-	public String updateInstPro(HttpServletRequest request, InstructionDTO instructionDTO) {
+	public String updateInstPro(InstructionDTO instructionDTO) {
 		System.out.println("instructionController updateInstPro()");
-		String inst_cd=request.getParameter("inst_cd");
-		instructionDTO.setInst_cd(inst_cd);
+		System.out.println(instructionDTO.getLine_cd());
+		System.out.println(instructionDTO.getInst_count());
+		System.out.println(instructionDTO.getInst_st());
 		
 		instService.updateInst(instructionDTO);
 		return "redirect:/instruction/infoInst";
