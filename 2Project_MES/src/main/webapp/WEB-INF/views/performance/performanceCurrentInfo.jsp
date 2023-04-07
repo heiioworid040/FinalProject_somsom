@@ -148,6 +148,7 @@
 												<th scope="col">라인명</th>
 												<th scope="col">상품명</th>
 												<th scope="col">단위</th>
+												<th scope="col">지시수량</th>
 												<th scope="col">양품</th>
 												<th scope="col">불량</th>
 												<th scope="col">불량사유</th>
@@ -157,24 +158,25 @@
 										<tbody>
 											<tr>
 												<td scope="row">
-												<input type="text" id="insertInstCd" name="inst_cd" class="form-control" readonly>
+												<input type="text" id="insertPerfCd" name="perf_cd" class="form-control" readonly>
 												</td>
 												<td>
-												<input type="text" id="insertInstCd" name="inst_cd" value="${pageDTO.search4 }" placeholder="Inst Code" class="form-control bg-white" readonly>
+												<input type="text" id="insertInstCd" name="inst_cd" value="${pageDTO.search4 }" placeholder="Inst Code" class="form-control bg-white">
 												</td>
 												<td><input type="text" id="insertPerfDate" disabled class="form-control" ></td>												
 												<td><input type="text" id="insertLineNm" value="${instructionDTO.line_nm}" disabled class="form-control"></td>
 												<td><input type="text" id="insertProdNm" value="${instructionDTO.prod_nm}" disabled class="form-control"></td>
 												<td><input type="text" id="insertProdUnit" value="${instructionDTO.prod_unit}" disabled class="form-control"></td>
+												<td><input type="text" id="insertProdCount" value="${instructionDTO.prod_count}" disabled class="form-control"></td>
 												<td><input type="text" id="insertPerfGd" value="0" class="form-control"></td>
 												<td><input type="text" id="insertPerfErr" value="0" class="form-control"></td>
-												<td>
-												<div class="p-1 col">
-												<select name="search5" id="select" class="form-control">
-													<option>--</option>
-													<option>기계이상</option>
-													<option>재고부족</option>													
-													<option>기타</option>													
+												<td class="col-1">
+												<div class="col p-0">
+												<select name="search5" class="form-control" id="insertPerfCs">
+													<option value="--">--</option>
+													<option value="기계이상">기계이상</option>
+													<option value="재고부족">재고부족</option>													
+													<option value="기타">기타</option>													
 												</select>
 												</div>
 												<td><input type="text" id="insertOrdCd" value="${instructionDTO.ord_cd}" disabled class="form-control"></td>
@@ -182,8 +184,8 @@
 											</tr>
 										</tbody>
 									</table>
-									<input type="submit" class="btn btn-primary col-2 float-right ml-3" id="insertInstBtn" value="추가">
-									<input type="button" class="btn btn-primary col-1 float-right ml-3" id="updateInstBtn" value="수정" disabled>
+									<button type="submit" class="btn btn-primary col-2 float-right ml-3" id="insertPerfBtn">추가</button>
+									<button type="submit" class="btn btn-primary col-1 float-right ml-3" id="updatePerfBtn" disabled>수정</button>
 									<input type="reset"  class="btn btn-secondary col-1 float-right reset" id="resetInstBtn" value="취소">
 								</div>
 							</form>
@@ -213,12 +215,13 @@
 												<th scope="col">품번</th>
 												<th scope="col">품명</th>
 												<th scope="col">단위</th>
+												<th scope="col">지시수량</th>
 												<th scope="col">양품</th>
 												<th scope="col">불량</th>
 												<th scope="col">불량사유</th>
 												<th scope="col">수주번호</th>
 												<th scope="col">업체</th>
-												<th scope="col">비고</th>
+												<th scope="col" class="col-1">비고</th>
 												<th scope="col"></th>
 											</tr>
 										</thead>
@@ -232,6 +235,7 @@
 													<td>${performanceDTO.prod_cd }</td>
 													<td>${performanceDTO.prod_nm }</td>
 													<td>${performanceDTO.prod_unit }</td>
+													<td>${performanceDTO.inst_count }</td>
 													<td>${performanceDTO.perf_good }</td>
 													<td>${performanceDTO.perf_err }</td>
 													<td>${performanceDTO.perf_cause }</td>
@@ -307,9 +311,10 @@
 	<!-- Scripts -->
 	<script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
 	<script type="text/javascript">
-	// 생산실적 현황 json 리스트
- 	// 첫번째 표에서 데이터 클릭시 이벤트 리스너 추가
-	$(document).on('click', '.data-row', function() {
+		// 생산실적 현황 json 리스트
+		$(document).ready(function() {
+		  // 첫번째 표에서 데이터 클릭시 이벤트 리스너 추가
+		  jQuery('.data-row').on('click', function() {
 		    var prod_cd = jQuery(this).data('prod-cd');
 		    var perf_cd = jQuery(this).data('perf-cd');
 		    jQuery.ajax({
@@ -320,7 +325,10 @@
 		        var resultTable = jQuery('#result-table').find('tbody');
 		        resultTable.empty();
 		        for (var i = 0; i < data.length; i++) {
-		          var row = '<tr>' +'<td>' + data[i].r_prod_cd + '</td>' +'<td>' + data[i].r_prod_nm + '</td>' +'<td>' + data[i].r_prod_unit + '</td>' +
+		          var row = '<tr>' +
+		            '<td>' + data[i].r_prod_cd + '</td>' +
+		            '<td>' + data[i].r_prod_nm + '</td>' +
+		            '<td>' + data[i].r_prod_unit + '</td>' +
 		            '<td>' + data[i].req_req * (data[i].perf_good + data[i].perf_err) + '</td>' +
 		            '</tr>';
 		          resultTable.append(row);
@@ -333,51 +341,57 @@
               }
 		    });
 		  });
-	
-	$(document).on("click", "#productSearchPop", function(){
+		});
+		
+		
+		$(document).on("click", "#editPerfBtn", function(){
+			console.log(jQuery(this).closest('tr').children('td:eq(0)').text());
+			jQuery('#insertPerfCd').val(jQuery(this).closest('tr').children('td:eq(0)').text());
+			jQuery('#insertInstCd').val(jQuery(this).closest('tr').children('td:eq(1)').text());
+				if('#insertPerfDate' != null){
+				jQuery('#insertPerfDate').val(jQuery(this).closest('tr').children('td:eq(2)').text());
+			}
+			jQuery('#insertLineNm').val(jQuery(this).closest('tr').children('td:eq(3)').text());
+			jQuery('#insertProdNm').val(jQuery(this).closest('tr').children('td:eq(5)').text());
+			jQuery('#insertProdUnit').val(jQuery(this).closest('tr').children('td:eq(6)').text());
+			jQuery('#insertProdCount').val(jQuery(this).closest('tr').children('td:eq(7)').text());
+			jQuery('#insertPerfGd').val(jQuery(this).closest('tr').children('td:eq(8)').text());
+			jQuery('#insertPerfErr').val(jQuery(this).closest('tr').children('td:eq(9)').text());
+			jQuery('#insertPerfCs').val(jQuery(this).closest('tr').children('td:eq(10)').text()).prop('selected', true);
+			jQuery('#insertPerfForm').attr('action', '${pageContext.request.contextPath}/performance/updatePerf');
+			jQuery('#updatePerfBtn').prop('disabled', false);
+			jQuery('#insertPerfBtn').prop('disabled', true);
+			jQuery('#insertPerfGd').focus();
+
+		});
+		
+		$(document).on("click", "#insertInstCd", function(){
+			if(jQuery.('#insertInstCd')==)
+			
+		});
+		
+		$(document).on("click", "#insertPerfBtn", function(){
+			if(jQuery('#insertPerfGd').val() == 0 && jQuery('#insertPerfErr').val() == 0){
+				alert("양품/불량품 입력해주세요.");
+				return false;
+			}
+			if(jQuery('#insertInstCd').val() == ''){
+				alert("지시번호 입력해주세요.");
+				return false;
+			}
+		});
+		
+		$(document).on("click", "#productSearchPop", function(){
 		// 새로운 윈도우 창을 띄움
-		window.open(
+			window.open(
 				"${pageContext.request.contextPath }/product/productSearchPop",
 				"productSearchPop", "width=800,height=650");
-	});
-	
-	// 품번 검색 팝업창
-	$(document).on("click", "#editPerfBtn", function(){
-		console.log($(this).closest('tr').children('td:eq(6)').text());
-		$(searchLineCd2).val('');
-		$(searchLineNm).val('');
-		$(insertProdCd).val('');
-		$(insertProdNm).val('');
-		$(insertProdUnit).val('');
-		$(insertProdCount).val('');
-		$(insertOrderCd).val('');
-		$(insertClientNm).val('');
+		});
 		
-		$('#insertPerfCd').val($(this).closest('tr').children('td:eq(0)').text());
-		$('#searchLineCd2').val($(this).closest('tr').children('td:eq(1)').text());
-		$('#searchLineNm').val($(this).closest('tr').children('td:eq(2)').text());
-		$('#insertOrderCd').val($(this).closest('tr').children('td:eq(3)').text());
-		$('#insertProdCd').val($(this).closest('tr').children('td:eq(4)').text());
-		$('#insertProdNm').val($(this).closest('tr').children('td:eq(5)').text());
-		$('#insertProdUnit').val($(this).closest('tr').children('td:eq(6)').text());
-		$('#insertInstSt').val($(this).closest('tr').children('td:eq(7)').text()).prop('selected', true);
-		$('#insertProdCount').val($(this).closest('tr').children('td:eq(8)').text());
-		$('#insertInstFcount').val($(this).closest('tr').children('td:eq(9)').text());
-		$('#insertClientNm').val($(this).closest('tr').children('td:eq(11)').text());
-		$("#insertInstForm").attr('action', '${pageContext.request.contextPath}/instruction/updateInst');
-		$("#insertInstForm").attr('action', '${pageContext.request.contextPath}/instruction/updateInst');
-		$("#insertInstForm").attr('action', '${pageContext.request.contextPath}/instruction/updateInst');
-		$('#updateInstBtn').prop('disabled', false);
-		$('#insertInstBtn').prop('disabled', true);
-		$('#lineModalBtn').focus();
-
-	});
 	</script>
-	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
-
-
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 </body>
 </html>

@@ -46,7 +46,7 @@ public class InstructionServiceImpl implements InstructionService{
 		}else if(instDAO.getMaxInst()>9 && instDAO.getMaxInst()<100){
 			instructionDTO.setInst_cd("WI"+"0"+instDAO.getMaxInst());
 		}else {
-			instructionDTO.setInst_cd("WI"+instDAO.getMaxInst());		
+			instructionDTO.setInst_cd("WI"+instDAO.getMaxInst());
 		}
 		instructionDTO.setInst_date(new Timestamp(System.currentTimeMillis()));
 		

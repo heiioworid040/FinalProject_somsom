@@ -121,7 +121,6 @@
 						});
 					}
 				});
-			event.preventDefault();
 			} catch (e) {
 				console.log(e instanceof TypeError); // true
 				console.log(e.message); // "null has no properties"

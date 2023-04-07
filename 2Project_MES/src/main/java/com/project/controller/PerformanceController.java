@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.domain.InstructionDTO;
@@ -172,7 +171,7 @@ public class PerformanceController {
 	}
 	
 	@RequestMapping(value = "/performance/insertPerf", method = RequestMethod.POST)
-	public String insertInstPro(PerformanceDTO performanceDTO) {
+	public String insertPerfPro(PerformanceDTO performanceDTO) {
 		System.out.println("instructionController insertInstPro()");
 		performanceService.insertPerf(performanceDTO);
 		
@@ -180,7 +179,7 @@ public class PerformanceController {
 	}
 	
 	@RequestMapping(value = "/performance/updatePerf", method = RequestMethod.POST)
-	public String updateInstPro(HttpServletRequest request, PerformanceDTO performanceDTO) {
+	public String updatePerfPro(HttpServletRequest request, PerformanceDTO performanceDTO) {
 		System.out.println("instructionController updateInstPro()");
 		String inst_cd=request.getParameter("inst_cd");
 		performanceDTO.setInst_cd(inst_cd);

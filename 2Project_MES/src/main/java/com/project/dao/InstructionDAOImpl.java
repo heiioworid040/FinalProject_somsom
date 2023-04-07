@@ -50,8 +50,7 @@ public class InstructionDAOImpl implements InstructionDAO{
 	@Override
 	public void updateInst(InstructionDTO instructionDTO) {
 		System.out.println("InstDAOImpl updateInstPro()");
-		System.out.println(instructionDTO.getInst_cd());
-		
+		System.out.println(instructionDTO);
 		sqlSession.update(namespace+".updateInst", instructionDTO);
 	}
 

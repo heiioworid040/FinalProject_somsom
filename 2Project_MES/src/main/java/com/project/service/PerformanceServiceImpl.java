@@ -69,6 +69,7 @@ public class PerformanceServiceImpl implements PerformanceService {
 	@Override
 	public void insertPerf(PerformanceDTO performanceDTO) {
 		System.out.println("PerformanceServiceImpl insertPerf()");
+		System.out.println(performanceDTO.getInst_cd());
 		if(performanceDAO.getMaxPerf() == null) {
 			performanceDTO.setPerf_cd("WP001");
 		}else if(performanceDAO.getMaxPerf()<10){

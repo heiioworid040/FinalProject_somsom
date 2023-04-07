@@ -381,18 +381,8 @@
 
 		
 		$(document).on("click", "#editInstBtn", function(){
-			console.log($(this).closest('tr').children('td:eq(6)').text());
-			$('#insertInstCd').val('');
-			$('#insertLineCd').val('');
-			$('#insertLineNm').val('');
-			$('#insertProdCd').val('');
-			$('#insertProdNm').val('');
-			$('#insertProdUnit').val('');
-			$('#insertProdCount').val('');
-			$('#insertOrderCd').val('');
-			$('#insertClientNm').val('');
-			
-			$('#insertInstCd').val($(this).closest('tr').children('td:eq(0)').text());
+			console.log('['+$(this).closest('tr').children('td:eq(0)').text().trim()+']');
+			$('#insertInstCd').val($(this).closest('tr').children('td:eq(0)').text().trim());
 			$('#insertLineCd').val($(this).closest('tr').children('td:eq(1)').text());
 			$('#insertLineNm').val($(this).closest('tr').children('td:eq(2)').text());
 			$('#insertOrderCd').val($(this).closest('tr').children('td:eq(3)').text());

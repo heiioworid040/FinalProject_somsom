@@ -69,8 +69,7 @@
 	<if test="search4 != null and search4 != ''">
 		and o.prod_cd = #{search4}
 	</if>
-
-		) instlist
+	) instlist
 	</select>
 	
 	<insert id="insertInst">
