@@ -44,7 +44,7 @@ h1 {
     font-weight: bold;
 }
 
-.doc-title .tit_service .logo_somsom {
+.doc-title .tit_service  {
     display: block;
     width: 88px;
     height: 27px;
@@ -61,6 +61,7 @@ h1 {
     width: 580px;
     height: 100%;
     margin: 40px auto 42px;
+/*     margin: 50px auto; */
     padding: 100px 69px;
     border: 1px solid rgba(0,0,0,.12);
     font-size: 12px;
@@ -156,4 +157,9 @@ h1 {
 #hover_tbl tbody tr:hover{
 	background-color: #6C757D;
 	color: white;
+}
+
+.logo{
+/* 	    margin: auto 550px; */
+		margin: 40px 860px; 42px;
 }

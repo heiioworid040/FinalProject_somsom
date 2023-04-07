@@ -118,11 +118,9 @@ $(document).ready(function(){
 <div class="ineer_container">
 	<main class="doc-main">
 		<div class="doc-title">
-			<h1 class="tit_service">
-				<span class="logo_somsom">
-					<span class="ir_wa">somsom</span>
-				</span>
-			</h1>
+				<div class="logo_somsom">
+					<div class="logo"><img src="${pageContext.request.contextPath}/resources/images/somsom.png" width="200" ></div>
+				</div>
 		</div>
 		
 	<article class="content-article">
