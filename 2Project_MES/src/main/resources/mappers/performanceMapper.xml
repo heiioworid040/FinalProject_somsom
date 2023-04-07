@@ -109,7 +109,7 @@
 		on p.prod_cd = r.prod_fcd
 		join product p2
 		on r.prod_cd = p2.prod_cd
-		where r.prod_fcd = #{prod_cd}
+		where r.prod_fcd = #{prod_cd} and pe.perf_cd = #{perf_cd}
 	</select>
 	
 		<select id="getProductInfo"

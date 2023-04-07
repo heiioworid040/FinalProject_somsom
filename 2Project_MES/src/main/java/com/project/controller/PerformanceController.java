@@ -99,11 +99,20 @@ public class PerformanceController {
 		return "performance/performanceCurrentInfo";
 	}
 
+//	// 생산실적 현황 json 리스트
+//	@ResponseBody
+//	@RequestMapping(value = "/performance/perfCurrJsonList", method = RequestMethod.GET)
+//	public List<PerformanceDTO> perfCurrJsonList(@RequestParam("prod_cd") String prod_cd) {
+//		List<PerformanceDTO> perfCurrJsonList = performanceService.perfCurrJsonList(prod_cd);
+//
+//		return perfCurrJsonList;
+//	}
 	// 생산실적 현황 json 리스트
+	
 	@ResponseBody
 	@RequestMapping(value = "/performance/perfCurrJsonList", method = RequestMethod.GET)
-	public List<PerformanceDTO> perfCurrJsonList(@RequestParam("prod_cd") String prod_cd) {
-		List<PerformanceDTO> perfCurrJsonList = performanceService.perfCurrJsonList(prod_cd);
+	public List<PerformanceDTO> perfCurrJsonList(PerformanceDTO performanceDTO) {
+		List<PerformanceDTO> perfCurrJsonList = performanceService.perfCurrJsonList(performanceDTO);
 
 		return perfCurrJsonList;
 	}
