@@ -55,16 +55,16 @@ public class ImatServiceImpl implements ImatService{
 		return imatDAO.getIomatList(pageDTO);
 	}
 	
-	@Override
-	public List<ProductDTO> getImatprodList1(PageDTO pageDTO) {
-		System.out.println("ImatServiceimpl getImatprodList1()");
-		int startRow=(pageDTO.getCurrentPage()-1)*pageDTO.getPageSize()+1;
-		int endRow = startRow+pageDTO.getPageSize()-1;
-		pageDTO.setStartRow(startRow);
-		pageDTO.setEndRow(endRow);
-		System.out.println("ImatServiceImpl getImatCount()-1");
-		return imatDAO.getImatprodList1(pageDTO);
-	}
+//	@Override
+//	public List<ProductDTO> getImatprodList1(PageDTO pageDTO) {
+//		System.out.println("ImatServiceimpl getImatprodList1()");
+//		int startRow=(pageDTO.getCurrentPage()-1)*pageDTO.getPageSize()+1;
+//		int endRow = startRow+pageDTO.getPageSize()-1;
+//		pageDTO.setStartRow(startRow);
+//		pageDTO.setEndRow(endRow);
+//		System.out.println("ImatServiceImpl getImatCount()-1");
+//		return imatDAO.getImatprodList1(pageDTO);
+//	}
 	
 	@Override
 	public List<ProductDTO> getImatprodList(PageDTO pageDTO) {
@@ -88,7 +88,15 @@ public class ImatServiceImpl implements ImatService{
 	@Override
 	public void insertImat(ImatDTO imatDTO) {
 		System.out.println("ImatServiceImpl insertImat()");
+		String imatcd=null;
+		if(imatDAO.getMaxCd()==null) {
+			imatDTO.setImat_cd("MI001");
+		}else {
+			imatcd="MI"+String.format("%03d", imatDAO.getMaxCd()+1);
+		}
+		
 		// 현시스템 날짜 저장하는 처리작업
+		imatDTO.setImat_cd(imatcd);
 		imatDTO.setImat_date(new Timestamp(System.currentTimeMillis()));
 		
 		//회원가입 디비 부모인터페이스 MemberDAO, 

@@ -25,6 +25,12 @@ public class ImatDAOImpl implements ImatDAO{
 		sqlSession.insert(namespace+".insertImat", imatDTO);
 	}
 
+	@Override
+	public Integer getMaxCd() {
+		System.out.println("ImatDAOImpl getMaxCd()");
+		
+		return sqlSession.selectOne(namespace+".getMaxCd");
+	}
 
 	@Override
 	public List<ImatDTO> getImatbeList(PageDTO pageDTO) {
@@ -46,14 +52,14 @@ public class ImatDAOImpl implements ImatDAO{
 		
 	}
 	
-	@Override
-	public List<ProductDTO> getImatprodList1(PageDTO pageDTO) {
-		System.out.println("ImatDAOImpl getImatprodList1()");
-		
-		pageDTO.setStartRow(pageDTO.getStartRow()-1);
-		return sqlSession.selectList(namespace+".getImatprodList1", pageDTO);
-		
-	}
+//	@Override
+//	public List<ProductDTO> getImatprodList1(PageDTO pageDTO) {
+//		System.out.println("ImatDAOImpl getImatprodList1()");
+//		
+//		pageDTO.setStartRow(pageDTO.getStartRow()-1);
+//		return sqlSession.selectList(namespace+".getImatprodList1", pageDTO);
+//		
+//	}
 
 	@Override
 	public int getImatCount() {

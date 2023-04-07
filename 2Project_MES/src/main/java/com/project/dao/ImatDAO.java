@@ -26,7 +26,9 @@ public interface ImatDAO {
 
 	public List<ProductDTO> getImatprodList(PageDTO pageDTO);
 
-	List<ProductDTO> getImatprodList1(PageDTO pageDTO);
+	public Integer getMaxCd();
+
+//	List<ProductDTO> getImatprodList1(PageDTO pageDTO);
 
 
 }
