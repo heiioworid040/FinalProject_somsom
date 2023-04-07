@@ -77,10 +77,10 @@
 								<input type="hidden" name="id" value="${id }">
 											<c:if test="${pop eq 'cli' or pop eq 'cliS' or pop eq 'cliO' }">
 												<div class="search-div3">
-													<span class="search-cl3">거래처코드</span><input type="text" id="cliS_cd" name="cd">
+													<span class="search-cl3">거래처코드</span><input type="text" id="cliS_cd" name="cd" placeholder="Client Code">
 												</div>
 												<div class="search-div3">
-													<span class="search-cl3">거래처명</span><input type="text" id="cliS_nm" name="nm">
+													<span class="search-cl3">거래처명</span><input type="text" id="cliS_nm" name="nm" placeholder="Client Name">
 												</div>
 												<div class="search-div3">
 													<span class="search-cl3">거래처구분</span><select class="select-search" id="cliS_nm" name="info">
@@ -94,19 +94,19 @@
 											
 											<c:if test="${pop eq 'emp' or pop eq 'empS' or pop eq 'empO' }">
 												<div class="search-div4">
-													<span class="search-cl3">번호</span><input type="text" id="empS_cd" name="cd">
+													<span class="search-cl3">번호</span><input type="text" id="empS_cd" name="cd" placeholder="Emp Code">
 												</div>
 												<div class="search-div4">
-													<span class="search-cl3">이름</span><input type="text" id="empS_cd" name="nm">
+													<span class="search-cl3">이름</span><input type="text" id="empS_cd" name="nm" placeholder="Emp Name">
 												</div>
 											</c:if>
 											
 											<c:if test="${pop eq 'prod' or pop eq 'prodS' or pop eq 'prodO' }">
 												<div class="search-div4">
-													<span class="search-cl3">상품코드</span><input type="text" id="prodS_cd" name="cd">
+													<span class="search-cl3">상품코드</span><input type="text" id="prodS_cd" name="cd" placeholder="Prod Code">
 												</div>
 												<div class="search-div4">
-													<span class="search-cl3">상품명</span><input type="text" id="prodS_nm" name="nm">
+													<span class="search-cl3">상품명</span><input type="text" id="prodS_nm" name="nm" placeholder="Prod Name">
 												</div>
 											</c:if>
 											
