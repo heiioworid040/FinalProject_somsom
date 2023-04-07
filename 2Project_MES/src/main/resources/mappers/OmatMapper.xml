@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<!-- src/main/resources -->
+<!-- mybatis-config.xml 파일 만들기 -->
+<!--  파일이름 대신 namespace 이름을 불러서 사용 -->
+<mapper namespace="com.project.mappers.OmatMapper">
+	
+     <select id="getOmat" resultType="com.project.domain.OmatDTO">
+    select * 
+    from out_material
+    where omat_cd = #{omat_cd}
+    </select>
+    
+<!--     <insert id="insertBoard"> -->
+<!--     	insert into board(num,name,subject,content,readcount,date,file)  -->
+<!--     	values(#{num},#{name},#{subject},#{content},#{readcount},#{date},#{file}) -->
+<!--     </insert> -->
+    
+	<select id="getOmatbeList" resultType="com.project.domain.OmatDTO">
+       select row_number() over(order by i.omat_cd asc) as omat_num,i.omat_cd,i.omat_cd,i.omat_date, p.prod_cd, p.prod_nm,p.prod_unit, i.omat_stg, i.omat_count, c.cli_cd, c.cli_nm, i.omat_note
+		from product p join out_material i
+		on i.prod_cd=p.prod_cd
+		join client c
+		on c.cli_cd=p.cli_cd
+		limit #{startRow}, #{pageSize}
+<!--         where id = #{id} and pass = #{pass} -->
+    </select>
+    
+<!--     <select id="getOmatprodList" resultType="com.project.domain.ProductDTO"> -->
+<!--        select prod_cd,prod_nm,prod_mat,prod_unit,prod_text,prod_size -->
+<!--         from product; -->
+<!-- 		limit #{startRow}, #{pageSize} -->
+<!--         where id = #{id} and pass = #{pass} -->
+<!--     </select> -->
+    <select id="getOmatprodList" resultType="com.project.domain.ProductDTO">
+    select * from product
+    limit #{startRow}, #{pageSize}
+    </select>
+    
+     <select id="getOmatprodList1" resultType="com.project.domain.ProductDTO">
+    select * from product
+    limit #{startRow}, #{pageSize}
+    </select>
+    
+    <select id="getOmatCount" resultType="java.lang.Integer">
+    select count(*) from out_material
+    </select>
+    
+    <delete id="deleteList">
+    	delete from out_material
+    	where omat_cd = #{omat_cd}
+    </delete>
+    
+    <insert id="insertOmat">
+    	insert into out_material(omat_cd,prod_cd,omat_date,omat_stg,omat_count,omat_note) 
+    	values(#{omat_cd},#{prod_cd},#{omat_date},#{omat_stg},#{omat_count}, #{omat_note})
+    </insert>
+    
+    <update id="updateOmat">
+    	update out_material set omat_cd = #{omat_cd}, prod_cd = #{prod_cd}, omat_stg = #{omat_stg},omat_count = #{omat_count},omat_note = #{omat_note}
+    	where omat_cd = #{omat_cd}   
+    </update>
+</mapper>

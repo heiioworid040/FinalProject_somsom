@@ -9,6 +9,11 @@ public class InstructionDTO extends LineDTO{
 	private int inst_count;
 	private int inst_fcount;
 	
+	@Override
+	public String toString() {
+		return "InstructionDTO [inst_cd=" + inst_cd + ", inst_st=" + inst_st + ", inst_date=" + inst_date
+				+ ", inst_count=" + inst_count + ", inst_fcount=" + inst_fcount + "]";
+	}
 	// get set
 	public String getInst_cd() {
 		return inst_cd;

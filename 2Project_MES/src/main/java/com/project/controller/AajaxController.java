@@ -138,7 +138,7 @@ public class AajaxController {
 	@RequestMapping(value = "/ajax/orderModal", method = RequestMethod.POST)
 	public ResponseEntity<List<OrderDTO>> getorderModal(HttpServletRequest request) {
 		System.out.println("orderController getorderModal");
-		int pageSize=10;
+		int pageSize=5;
 		
 		String pageNum=request.getParameter("pageNum");
 		if(pageNum==null) {

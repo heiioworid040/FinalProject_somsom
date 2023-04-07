@@ -29,21 +29,80 @@
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery-3.6.3.js"></script>
 <script>
 	$(document).ready(function(){
+		first = $('.ord_cd').length+1;
 		$('#btn_add').click(function(){
-			num = $('.ord_cd').length + 1;
-			$('.orderInfo').append('<tr class="add"><td>'+num+'</td><td><input type="text" name="ord_cd" class="ord_cd" readonly></td><td><input type="text" id="cli_nm'+num+'" name="cli_nm" class="Ocli_nm" onclick="searchPop(\'cliO\',\''+num+'\')"><input type="hidden" id="cli_cd'+num+'" name="cli_cd"></td><td><input type="date" name="ord_date" class="Oord_date"></td><td><input type="text" id="emp_nm'+num+'" name="emp_nm" class="Oemp_nm" onclick="searchPop(\'empO\',\''+num+'\')"><input type="hidden" id="emp_cd'+num+'" name="emp_cd"></td><td><input type="text" id="prod_cd'+num+'" name="prod_cd" class="prod_cd" onclick="searchPop(\'prodO\',\''+num+'\')"></td><td><input type="text" id="prod_nm'+num+'" class="prod_nm"></td><td><input type="text" id="prod_unit'+num+'" class="prod_unit"></td><td><input type="date" name="ord_d_date" class="Oord_d_date"></td><td><input type="text" id="ord_count" name="ord_count" class="ord_count"></td><td><input type="text" id="ship_count" class="ship_count" readonly></td><td><input type="checkbox" id="ck"></td></tr>');
+		num = $('.ord_cd').length+1;
+			$('.orderInfo').append('<tr class="add"><td>'+num+'</td><td><input type="text" name="ord_cd" class="ord_cd" readonly></td><td><input type="text" id="cli_nm'+num+'" name="cli_nm" class="Ocli_nm" onclick="searchPop(\'cliO\',\''+num+'\')"><input type="hidden" id="cli_cd'+num+'" name="cli_cd"></td><td><input type="date" id="ord_date'+num+'" name="ord_date" class="Oord_date"></td><td><input type="text" id="emp_nm'+num+'" name="emp_nm" class="Oemp_nm" onclick="searchPop(\'empO\',\''+num+'\')"><input type="hidden" id="emp_cd'+num+'" name="emp_cd"></td><td><input type="text" id="prod_cd'+num+'" name="prod_cd" class="prod_cd" onclick="searchPop(\'prodO\',\''+num+'\')"></td><td><input type="text" id="prod_nm'+num+'" class="prod_nm"></td><td><input type="text" id="prod_unit'+num+'" class="prod_unit"></td><td><input type="date" id="ord_d_date'+num+'" name="ord_d_date" class="Oord_d_date"></td><td><input type="text" id="ord_count'+num+'" name="ord_count" class="ord_count"></td><td><input type="text" id="ship_count" class="ship_count" readonly></td><td><input type="checkbox" id="ck"></td></tr>');
 		});
 		
 		$('#btn_cel').click(function(){
 			$('.add').remove();
 		});
 		
-// 		$('#orderInfo').submit(function(){
-// 			if($('#ck').val()==""){
-// 				alert("데이터가 없습니다");
+		$('#btn_del').click(function(){
+			if(!$("input:checked[id='ck']").prop("checked")){
+				alert("삭제할 데이터를 선택하세요");
+				return false;
+			}
+		});
+
+		$('#btn_ins').click(function(){
+			last = $('.ord_cd').length;
+			if($('#cli_nm'+first)) {
+				alert("저장할 데이터가 없습니다");
+			}
+				
+			for(i=first;i<=last;i++) {
+				if(!$("input:checked[id='ck']").prop("checked")&&$('#cli_nm'+i).val()==""&&$('#ord_date'+i).val()==""&&$('#emp_nm'+i).val()==""&&$('#prod_cd'+i).val()==""&&$('#ord_count'+i).val()==""){
+					alert("저장할 데이터가 없습니다");
+					return false;
+				}else if($('#cli_nm'+i).val()!=""||$('#ord_date'+i).val()!=""||$('#emp_nm'+i).val()!=""||$('#prod_cd'+i).val()!=""||$('#ord_count'+i).val()!="") {
+					if($('#cli_nm'+i).val()=="") {
+					alert("거래처 선택");
+					return false;
+					}
+					if($('#ord_date'+i).val()=="") {
+					alert("수주일자 입력");
+					return false;
+					}
+					if($('#emp_nm'+i).val()=="") {
+					alert("담당자 선택");
+					return false;
+					}
+					if($('#prod_cd'+i).val()=="") {
+					alert("상품 선택");
+					return false;
+					}
+					if($('#ord_d_date'+i).val()=="") {
+					alert("납품예정일 입력");
+					return false;
+					}
+					if($('#ord_count'+i).val()=="") {
+					alert("수주량 입력");
+					return false;
+					}
+// 					return true;
+				}
+			}
+// 			alert(first);
+// 			alert(last);
+// 			alert($('#cli_nm'+num).val());
+
+// 			for(i=first;i<=last;i++) {
+// 				if(!$("input:checked[id='ck']").prop("checked")&&$('#cli_nm'+i).val()==""&&$('#ord_date'+i).val()==""&&$('#emp_nm'+i).val()==""&&$('#prod_cd'+i).val()==""&&$('#ord_count'+i).val()==""){
+// 					alert("저장할 데이터가 없습니다");
+// 				}
+// 				if($('#cli_nm'+i).val()!=""||$('#ord_date'+i).val()!=""||$('#emp_nm'+i).val()!=""||$('#prod_cd'+i).val()!=""||$('#ord_count'+i).val()!=""){
+// 					alert("거래처 선택");
+// 					return false;
+// 				}
+// 			}
+
+// 			if($('#ord_date'+num).val()==""){
+// 				alert("수주일자 입력");
 // 				return false;
 // 			}
-// 		});
+		});
 	});
 </script>
 <script>
@@ -51,20 +110,20 @@
 	window.open('${pageContext.request.contextPath }/order/searchPop?pop='+search+'&id='+id,'searchPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=900,height=787,top=90,left=200')
 	}
 
-	function fun1() {
-		let check = false;
-		with(document.ckDelete) {
-			if(ck.length==undefined) {
-			if(ck.checked) { check = true; }
-	      } else {
-	         for(let i=0;i<ck.length;i++) {
-	            if(ck[i].checked) { check = true; } }
-	      } if(!check) {
-	      alert("삭제할 게시글을 선택하세요");
-	         return;
-	      } else {
-	         if(confirm("삭제처리 하시겠습니까?")) { submit(); }
-	      } } }
+// 	function fun1() {
+// 		let check = false;
+// 		with(document.ckDelete) {
+// 			if(ck.length==undefined) {
+// 			if(ck.checked) { check = true; }
+// 	      } else {
+// 	         for(let i=0;i<ck.length;i++) {
+// 	            if(ck[i].checked) { check = true; } }
+// 	      } if(!check) {
+// 	      alert("삭제할 게시글을 선택하세요");
+// 	         return;
+// 	      } else {
+// 	         if(confirm("삭제처리 하시겠습니까?")) { submit(); }
+// 	      } } }
 
 	function fun2() {
 		if($("input:checked[id='ckAll']").prop("checked")) {

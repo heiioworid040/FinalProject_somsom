@@ -30,31 +30,46 @@ public class InstructionServiceImpl implements InstructionService{
 	}
 
 	@Override
-	public int getInstCount(PageDTO pageDTO) {
+	public int getInstCount() {
 		System.out.println("InstserviceImpl getInstCount()");
 		
-		return instDAO.getInstCount(pageDTO);
+		return instDAO.getInstCount();
 	}
 
 	@Override
 	public void insertInst(InstructionDTO instructionDTO) {
-		System.out.println("InstserviceImpl insertInst()");
+		System.out.println("InstserviceImpl insertInstPro()");
 		if(instDAO.getMaxInst() == null) {
-			instructionDTO.setInst_cd("Wi001");
+			instructionDTO.setInst_cd("WI001");
 		}else if(instDAO.getMaxInst()<10){
-			instructionDTO.setInst_cd("Wi"+"00"+instDAO.getMaxInst());
-		}else if(instDAO.getMaxInst()<100){
-			instructionDTO.setInst_cd("Wi"+"0"+instDAO.getMaxInst());
+			instructionDTO.setInst_cd("WI"+"00"+instDAO.getMaxInst());
+		}else if(instDAO.getMaxInst()>9 && instDAO.getMaxInst()<100){
+			instructionDTO.setInst_cd("WI"+"0"+instDAO.getMaxInst());
 		}else {
-			instructionDTO.setInst_cd("Wi"+instDAO.getMaxInst());		
+			instructionDTO.setInst_cd("WI"+instDAO.getMaxInst());
 		}
-		System.out.println(instructionDTO.getLine_cd());
-		instructionDTO.setInst_st("대기");
 		instructionDTO.setInst_date(new Timestamp(System.currentTimeMillis()));
 		
 		instDAO.insertInst(instructionDTO);
 	}
+	
+	@Override
+	public void updateInst(InstructionDTO instructionDTO) {
+		System.out.println("InstserviceImpl updateInstPro()");
+		System.out.println(instructionDTO.getInst_cd());
+		System.out.println(instructionDTO.getInst_st());
+		
+		instDAO.updateInst(instructionDTO);
+	}
 
+	@Override
+	public InstructionDTO getInst(String inst_cd) {
+		System.out.println("InstserviceImpl getInst()");
+		
+		return instDAO.getInst(inst_cd);
+	}
+	
+	
 
 	
 }

@@ -1,18 +1,50 @@
 package com.project.domain;
 
+import java.sql.Timestamp;
 
 public class ImatDTO extends ProductDTO{
 
+	private int imat_num;
+	
 	private String imat_cd;
 	private String prod_cd;
+	private int iomat_count;
 	
-	private String imat_date;
+	private Timestamp imat_date;
 	private String imat_stg;
 	private int imat_count;
 	private String cli_cd;
 	private String cli_nm;
 	private String imat_note;
+	private String prod_unit;
+	private String prod_mat;
 	
+	
+	public String getProd_mat() {
+		return prod_mat;
+	}
+	public void setProd_mat(String prod_mat) {
+		this.prod_mat = prod_mat;
+	}
+	public String getProd_unit() {
+		return prod_unit;
+	}
+	public void setProd_unit(String prod_unit) {
+		this.prod_unit = prod_unit;
+	}
+	public int getIomat_count() {
+		return iomat_count;
+	}
+	public void setIomat_count(int iomat_count) {
+		this.iomat_count = iomat_count;
+	}
+	
+	public int getImat_num() {
+		return imat_num;
+	}
+	public void setImat_num(int imat_num) {
+		this.imat_num = imat_num;
+	}
 	public String getImat_cd() {
 		return imat_cd;
 	}
@@ -25,11 +57,11 @@ public class ImatDTO extends ProductDTO{
 	public void setProd_cd(String prod_cd) {
 		this.prod_cd = prod_cd;
 	}
-	public String getImat_date() {
+	public Timestamp getImat_date() {
 		return imat_date;
 	}
-	public void setImat_date(String imat_date) {
-		this.imat_date = imat_date;
+	public void setImat_date(Timestamp timestamp) {
+		this.imat_date = timestamp;
 	}
 	public String getImat_stg() {
 		return imat_stg;

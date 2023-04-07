@@ -30,25 +30,46 @@
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery-3.6.3.js"></script>
 <script>
 	$(document).ready(function(){
-// 		$('#shipInfo').submit(function(){
-// 			if($('#ship_count').val()==""){
-// 				alert("출하량 입력");
-// 				return false;
+		$('#shipInfo').submit(function(){
+			last = $('.ship_count').length;
+			for(i=1;i<=last;i++) {
+				if($('#ship_count'+i).val()!=""&&$('#ship_date'+i).val()==""){
+					alert("출하일자를 입력하세요");
+					return false;
+				}else if($('#ship_count'+i).val()==""&&$('#ship_date'+i).val()!=""){
+					alert("출하량을 입력하세요");
+					return false;
+				}
+				else if($('#ship_count'+i).val()==""&&$('#ship_date'+i).val()==""){
+					alert("저장할 데이터가 없습니다");
+					return false;
+				}
+			}
+// 			for(i=1;i<=last;i++) {
+// 				if($('#ship_count'+i).val()==""&&$('#ship_date'+i).val()==""){
+// 					alert("저장할 데이터가 없습니다");
+// 					return false;
+// 				}
 // 			}
-//             var num = /[0-9]/;
-//             if(!num.test($('#ship_count').val())){
-//             	alert("숫자만 입력");
-//             	return false;
-//             }
-// 			if($('#ship_date').val()==""){
-// 				alert("출하일자 입력");
-// 				return false;
+// 			for(i=1;i<=last;i++) {
 // 			}
-//             if($('#ord_date').val()>$('#ship_date').val()){
-//             	alert("출하일자를 바르게 입력하세요");
-//             	return false;
-//             }
-// 		});
+				
+// 				var num = /[0-9]/;
+// 				if(!num.test($('#ship_count').val())){
+// 					alert("숫자만 입력");
+// 					return false;
+// 					}
+// 				if($('#ship_date').val()==""){
+// 					alert("출하일자 입력");
+// 					return false;
+// 				}
+// 				if($('#ord_date').val()>$('#ship_date').val()){
+// 					alert("출하일자를 바르게 입력하세요");
+// 					return false;
+// 				}
+// 			}
+			
+		});
 	});
 </script>
 <script>
@@ -101,13 +122,13 @@
 							<div class="card-body card-block">
 								<form action="${pageContext.request.contextPath }/ship/shipInfo" method="get" class="form-inline">
 									<div class="search-div">
-										<span class="search-cl">거래처</span><input type="text" id="cliS_cd" name="cli" readonly><input type="text" id="cliS_nm" readonly><button type="button" class="input-group-addon search-btn" style="cursor: pointer;" onclick="searchPop('cliS')"><i class="ti-search"></i></button>
+										<span class="search-cl">거래처</span><input type="text" id="cliS_cd" name="cli" placeholder="Client Code" readonly><input type="text" id="cliS_nm" placeholder="Client Name" readonly><button type="button" class="input-group-addon search-btn" style="cursor: pointer;" onclick="searchPop('cliS')"><i class="ti-search"></i></button>
 									</div>
 									<div class="search-div">
 										<span class="search-cl2">수주일자</span><input type="date" id="ordS_date" name="ord_date"><input type="date" id="ordS_date_end" name="ord_date_end">
 									</div>
 									<div class="search-div">
-										<span class="search-cl2">품목</span><input type="text" id="prodS_cd" name="prod" readonly><input type="text" id="prodS_nm" readonly><button type="button" class="input-group-addon search-btn" style="cursor: pointer;" onclick="searchPop('prodS')"><i class="ti-search"></i></button>
+										<span class="search-cl2">품목</span><input type="text" id="prodS_cd" name="prod" placeholder="Prod Code" readonly><input type="text" id="prodS_nm" placeholder="Prod Name" readonly><button type="button" class="input-group-addon search-btn" style="cursor: pointer;" onclick="searchPop('prodS')"><i class="ti-search"></i></button>
 									</div>
 									<div class="search-div2">
 										<span class="search-cl">납품예정일</span><input type="date" id="ordS_d_date" name="ord_d_date"><input type="date" id="ordS_d_date_end" name="ord_d_date_end">
@@ -171,8 +192,8 @@
 													<td></td>
 <%-- 													<td><input type="hidden" name="ship_over" value="${shipDTO.ship_over }">${shipDTO.ship_over }</td> --%>
 <%-- 													<td><input type="hidden" name="ship_inven" value="${shipDTO.ship_inven }">${shipDTO.ship_inven }</td> --%>
-													<td><input type="text" id="ship_count" name="ship_count" class="ship_count"></td>
-													<td><input type="date" id="ship_date" name="ship_date" class="ship_date"></td>
+													<td><input type="text" id="ship_count${status.count }" name="ship_count" class="ship_count"></td>
+													<td><input type="date" id="ship_date${status.count }" name="ship_date" class="ship_date"></td>
 													<td>${shipDTO.cli_nm }</td>
 												</tr>
 										</c:forEach>

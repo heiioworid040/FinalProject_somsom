@@ -236,8 +236,8 @@
 										</div>
 									</div>
 									<div class="col p-0">
-										<input type="submit"
-											class="btn btn-primary col-2 float-right ml-3" value="검색">
+										<input type="submit" class="btn btn-primary float-right ml-3" value="검색">
+										<input type="reset" class="btn btn-secondary float-right reset" value="취소">
 									</div>
 							</div>
 						</div>

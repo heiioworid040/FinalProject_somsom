@@ -40,16 +40,16 @@
 .Oemp_nm {
 	width: 100px;
 }
-.prod_cd, .prod_nm, .prod_unit, .ord_count, .prod_mat, .ship_count, .ship_date {
+.prod_cd, .prod_nm, .prod_unit, .ord_count, .prod_mat, .ship_count .ship_date {
 	width: 100px;
 	border-style: none;
 	background: transparent;
 }
-#ship_count {
+.ship_count {
 	width: 50px;
 }
-#ship_date {
-	width: 115px;
+.ship_date {
+	width: 120px;
 }
 .Info {
 	width: 100px;

@@ -12,9 +12,13 @@ public interface PerformanceDAO {
 	// 검색어
 	public int performanceCurrentCount(PageDTO pageDTO);
 
-	public List<PerformanceDTO> perfCurrJsonList(String prod_cd);
+	public List<PerformanceDTO> perfCurrJsonList(PerformanceDTO performanceDTO);
 
 	public List<ProductDTO> getProductInfo(PageDTO pageDTO);
 
 	public int getProductCount(PageDTO pageDTO);
+
+	public void insertPerf(PerformanceDTO performanceDTO);
+
+	public Integer getMaxPerf();
 }

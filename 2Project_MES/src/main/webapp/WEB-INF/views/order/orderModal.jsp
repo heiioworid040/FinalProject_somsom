@@ -25,7 +25,6 @@
 											<th scope="col">수주번호</th>
 											<th scope="col">상품코드</th>
 											<th scope="col">상품명</th>
-											<th scope="col">담당자 코드</th>
 											<th scope="col">담당자</th>
 											<th scope="col">거래처</th>
 											<th scope="col">수주일자</th>
@@ -52,16 +51,15 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).on("click", "#orderModalBtn", function(){
-		event.preventDefault();
 			try {
 				jQuery('#orderTableBody').html('');
 				jQuery.ajax({
-					type : 'get',
+					type : 'post',
 					url:'${pageContext.request.contextPath}/ajax/orderModal',
 					dataType:'json',
 					success:function(orderarr){
 						jQuery.each(orderarr,function(index,item){
-							jQuery('#orderTableBody').append('<tr><td scope="row">'+item.ord_cd+'</td><td>'+item.prod_cd+'</td><td>'+item.prod_nm+'</td><td class="d-none">'+item.prod_unit+'</td><td>'+item.emp_cd+'</td><td>'+item.emp_nm +'</td><td>'+item.cli_nm+'</td><td>'+item.ord_date+'</td><td>'+item.ord_d_date +'</td><td>'+item.ord_count+'</td></tr>');
+							jQuery('#orderTableBody').append('<tr><td scope="row">'+item.ord_cd+'</td><td>'+item.prod_cd+'</td><td>'+item.prod_nm+'</td><td class="d-none">'+item.prod_unit+'</td><td>'+item.emp_nm +'</td><td>'+item.cli_nm+'</td><td>'+item.ord_date+'</td><td>'+item.ord_d_date +'</td><td>'+item.ord_count+'</td></tr>');
 						});
 					}
 				});
@@ -94,8 +92,8 @@
 	 	var prod_cd = td.eq(1).text();
 	 	var prod_nm = td.eq(2).text();
 	 	var prod_unit = td.eq(3).text();
-	 	var cli_nm = td.eq(6).text();
-	 	var ord_count = td.eq(9).text();
+	 	var cli_nm = td.eq(5).text();
+	 	var ord_count = td.eq(8).text();
 		
 	 	$('#insertOrderCd').val(order_cd);
 	 	$('#insertClientNm').val(cli_nm);

@@ -5,7 +5,7 @@
 
 	<select id="performanceCurrentInfo"
 		resultType="com.project.domain.PerformanceDTO">
-		select pe.perf_date, l.line_nm, p.prod_cd, p.prod_nm,
+		select pe.perf_cd, pe.perf_date, l.line_nm, p.prod_cd, p.prod_nm,
 		p.prod_unit, pe.perf_good, pe.perf_err, pe.perf_cause, pe.perf_note,
 		i.inst_cd, o.ord_cd, c.cli_nm            
 		from performance pe
@@ -109,7 +109,7 @@
 		on p.prod_cd = r.prod_fcd
 		join product p2
 		on r.prod_cd = p2.prod_cd
-		where r.prod_fcd = #{prod_cd}
+		where r.prod_fcd = #{prod_cd} and pe.perf_cd = #{perf_cd}
 	</select>
 	
 		<select id="getProductInfo"
@@ -157,5 +157,15 @@
 			</if>
 		</if>
 	</select>
+	
+	<insert id="insertPerf">
+	insert into performance(perf_cd, inst_cd, perf_date, perf_good, perf_err, perf_cause, perf_note)
+	values(#{perf_cd}, #{inst_cd}, #{perf_date}, #{perf_good}, #{perf_err}, #{perf_cause}, #{perf_note})
+	</insert>
+	
+	<select id="getMaxPerf" resultType="java.lang.Integer">
+	SELECT MAX(REGEXP_REPLACE(perf_cd, '[a-z]', ''))+1
+	from performance
+    </select>
 
 </mapper>
