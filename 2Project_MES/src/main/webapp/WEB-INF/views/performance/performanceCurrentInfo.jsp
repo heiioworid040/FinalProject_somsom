@@ -216,7 +216,7 @@
 										</thead>
 										<tbody>
 											<c:forEach var="performanceDTO" items="${performanceCurrentInfo }">
-													<tr class="data-row" data-prod-cd="${performanceDTO.prod_cd}">
+													<tr class="data-row" data-prod-cd="${performanceDTO.prod_cd}" data-perf-cd="${performanceDTO.perf_cd}">
 													<td>${performanceDTO.perf_cd }</td>
 													<td>${performanceDTO.inst_cd }</td>
 													<td><fmt:formatDate value="${performanceDTO.perf_date}" pattern="yyyy.MM.dd"/></td>
@@ -299,9 +299,10 @@
 		  // 첫번째 표에서 데이터 클릭시 이벤트 리스너 추가
 		  jQuery('.data-row').on('click', function() {
 		    var prod_cd = jQuery(this).data('prod-cd');
+		    var perf_cd = jQuery(this).data('perf-cd');
 		    jQuery.ajax({
 		      url: '${pageContext.request.contextPath}/performance/perfCurrJsonList',
-		      data: {prod_cd: prod_cd},
+		      data: {prod_cd: prod_cd, perf_cd: perf_cd},
 		      success: function(data) {
 		        // 결과를 두번째 표에 출력
 		        var resultTable = jQuery('#result-table').find('tbody');

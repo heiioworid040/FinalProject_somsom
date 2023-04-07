@@ -40,10 +40,10 @@ public class PerformanceServiceImpl implements PerformanceService {
 	}
 
 	@Override
-	public List<PerformanceDTO> perfCurrJsonList(String prod_cd) {
+	public List<PerformanceDTO> perfCurrJsonList(PerformanceDTO performanceDTO) {
 		System.out.println("PerformanceServiceImpl perfCurrJsonList()");
 
-		return performanceDAO.perfCurrJsonList(prod_cd);
+		return performanceDAO.perfCurrJsonList(performanceDTO);
 	}
 
 	@Override
