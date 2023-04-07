@@ -69,22 +69,16 @@ public class PerformanceServiceImpl implements PerformanceService {
 	@Override
 	public void insertPerf(PerformanceDTO performanceDTO) {
 		System.out.println("PerformanceServiceImpl insertPerf()");
+		System.out.println(performanceDTO.getInst_cd());
 		if(performanceDAO.getMaxPerf() == null) {
 			performanceDTO.setPerf_cd("WP001");
 		}else if(performanceDAO.getMaxPerf()<10){
-			performanceDTO.setPerf_cd("WP"+"00"+performanceDAO.getMaxPerf());
-		}else if(performanceDAO.getMaxPerf()<100){
-			performanceDTO.setPerf_cd("WP"+"0"+performanceDAO.getMaxPerf());
+			performanceDTO.setPerf_cd("WP00"+performanceDAO.getMaxPerf());
+		}else if(performanceDAO.getMaxPerf()>9 && performanceDAO.getMaxPerf()<100){
+			performanceDTO.setPerf_cd("WP0"+performanceDAO.getMaxPerf());
 		}else {
 			performanceDTO.setPerf_cd("WP"+performanceDAO.getMaxPerf());		
 		}
-//		else if(performanceDAO.getMaxPerf()<10){
-//			performanceDTO.setInst_cd("WP"+"00"+performanceDAO.getMaxInst());
-//		}else if(performanceDAO.getMaxPerf()<100){
-//			performanceDTO.setInst_cd("WP"+"0"+performanceDAO.getMaxInst());
-//		}else {
-//			performanceDTO.setInst_cd("WP"+performanceDAO.getMaxInst());		
-//		}
 		performanceDTO.setPerf_date(new Timestamp(System.currentTimeMillis()));
 		
 		performanceDAO.insertPerf(performanceDTO);

@@ -87,7 +87,7 @@
 									<div class="form-group col-6 mb-1">
 										<label for="searchLine" class="pr-1 form-control-label">라인</label>
 										<div class="input-group modalP" id="modalP1">
-											<input type="text" id="searchLineCd1" name="searchLineCd" placeholder="Line Code" class="form-control bg-white" value="${pageDTO.search }" readonly>
+											<input type="text" id="searchLineCd" name="searchLineCd" placeholder="Line Code" class="form-control bg-white" value="${pageDTO.search }" readonly>
 											<div class="input-group-btn">
 												<input type="button" class="btn btn-primary ml-2" id="lineModalBtn" value="검색">
 											</div>
@@ -183,13 +183,13 @@
 												<td scope="row"><input type="text" id="insertInstCd" name="inst_cd" class="form-control" readonly></td>
 												<td>
 													<div class="input-group modalP" id="modalP2">
-														<input type="text" id="searchLineCd2" name="line_cd" value="" placeholder="Line Code" class="form-control bg-white" readonly>
+														<input type="text" id="insertLineCd" name="line_cd" value="" placeholder="Line Code" class="form-control bg-white" readonly>
 														<div class="input-group-btn">
 															<input type="button" class="btn btn-primary" id="lineModalBtn" value="검색">
 														</div>
 													</div>
 												</td>
-												<td><input type="text" id="searchLineNm" disabled class="form-control"></td>
+												<td><input type="text" id="insertLineNm" disabled class="form-control"></td>
 												<td>
 													<div class="input-group">
 														<input type="text" id="insertOrderCd" name="ord_cd" value="" placeholder="Order Code" class="form-control bg-white" readonly>
@@ -214,7 +214,7 @@
                                                 	</select>                                            	
 												</div>
 												</td>
-												<td><input type="text" id="insertProdCount" name="inst_count" class="form-control  bg-white"></td>
+												<td><input type="text" id="insertProdCount" name="inst_count" class="form-control  bg-white" 	></td>
 												<td><input type="number" id="insertInstFcount" name="inst_fcount" class="form-control" value="0" ></td>
 												<td><input type="text" id="insertClientNm" disabled class="form-control"></td>
 											</tr>
@@ -276,7 +276,7 @@
 												<td>${instructionDTO.cli_nm }</td>
 												<td>
 												<div class="input-group">
-												<button id="editInstBtn" class="btn btn-secondary" value="${instructionDTO.line_cd }">수정</button>
+												<button id="editInstBtn" class="btn btn-secondary" value="${instructionDTO.inst_cd }">수정</button>
 												</div>
 												</td>
 											</tr>
@@ -381,19 +381,10 @@
 
 		
 		$(document).on("click", "#editInstBtn", function(){
-			console.log($(this).closest('tr').children('td:eq(6)').text());
-			$(searchLineCd2).val('');
-			$(searchLineNm).val('');
-			$(insertProdCd).val('');
-			$(insertProdNm).val('');
-			$(insertProdUnit).val('');
-			$(insertProdCount).val('');
-			$(insertOrderCd).val('');
-			$(insertClientNm).val('');
-			
-			$('#insertInstCd').val($(this).closest('tr').children('td:eq(0)').text());
-			$('#searchLineCd2').val($(this).closest('tr').children('td:eq(1)').text());
-			$('#searchLineNm').val($(this).closest('tr').children('td:eq(2)').text());
+			console.log('['+$(this).closest('tr').children('td:eq(0)').text().trim()+']');
+			$('#insertInstCd').val($(this).closest('tr').children('td:eq(0)').text().trim());
+			$('#insertLineCd').val($(this).closest('tr').children('td:eq(1)').text());
+			$('#insertLineNm').val($(this).closest('tr').children('td:eq(2)').text());
 			$('#insertOrderCd').val($(this).closest('tr').children('td:eq(3)').text());
 			$('#insertProdCd').val($(this).closest('tr').children('td:eq(4)').text());
 			$('#insertProdNm').val($(this).closest('tr').children('td:eq(5)').text());
@@ -402,13 +393,10 @@
 			$('#insertProdCount').val($(this).closest('tr').children('td:eq(8)').text());
 			$('#insertInstFcount').val($(this).closest('tr').children('td:eq(9)').text());
 			$('#insertClientNm').val($(this).closest('tr').children('td:eq(11)').text());
-			$("#insertInstForm").attr('action', '${pageContext.request.contextPath}/instruction/updateInst');
-			$("#insertInstForm").attr('action', '${pageContext.request.contextPath}/instruction/updateInst');
-			$("#insertInstForm").attr('action', '${pageContext.request.contextPath}/instruction/updateInst');
+			$('#insertInstForm').attr('action', '${pageContext.request.contextPath}/instruction/updateInst');
 			$('#updateInstBtn').prop('disabled', false);
 			$('#insertInstBtn').prop('disabled', true);
 			$('#lineModalBtn').focus();
-
 		});
 		
 		$("#searchInstSt1").change(function(){

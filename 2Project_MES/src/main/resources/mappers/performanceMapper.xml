@@ -158,12 +158,12 @@
 		</if>
 	</select>
 	
-	<insert id="insertInst">
+	<insert id="insertPerf">
 	insert into performance(perf_cd, inst_cd, perf_date, perf_good, perf_err, perf_cause, perf_note)
 	values(#{perf_cd}, #{inst_cd}, #{perf_date}, #{perf_good}, #{perf_err}, #{perf_cause}, #{perf_note})
 	</insert>
 	
-	<select id="getMaxInst" resultType="java.lang.Integer">
+	<select id="getMaxPerf" resultType="java.lang.Integer">
 	SELECT MAX(REGEXP_REPLACE(perf_cd, '[a-z]', ''))+1
 	from performance
     </select>
