@@ -24,9 +24,9 @@
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>자재 관리</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-table"></i><a href="">자재 재고 현황</a></li>
+                            <li><i class="fa fa-table"></i><a href="${pageContext.request.contextPath}/iomat/iomatList">자재 재고 현황</a></li>
                             <li><i class="fa fa-table"></i><a href="${pageContext.request.contextPath}/imat/imatbeList">자재 입고</a></li>
-                            <li><i class="fa fa-table"></i><a href="">자재 출고</a></li>
+                            <li><i class="fa fa-table"></i><a href="${pageContext.request.contextPath}/omat/omatbeList">자재 출고</a></li>
                         </ul>
                     </li>
                     <li class="menu-item-has-children dropdown">
