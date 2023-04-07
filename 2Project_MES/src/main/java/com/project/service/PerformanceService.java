@@ -12,7 +12,7 @@ public interface PerformanceService {
 	// 검색어
 	public int performanceCurrentCount(PageDTO pageDTO);
 
-	public List<PerformanceDTO> perfCurrJsonList(String prod_cd);
+	public List<PerformanceDTO> perfCurrJsonList(PerformanceDTO performanceDTO);
 
 	public List<ProductDTO> getProductInfo(PageDTO pageDTO);
 
