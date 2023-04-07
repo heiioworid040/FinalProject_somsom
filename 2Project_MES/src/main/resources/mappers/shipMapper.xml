@@ -35,6 +35,7 @@
 				and c.cli_cd = #{search4}
 			</if>
 		</if>
+		order by ship_date, ship_cd
 		limit #{startRow}, #{pageSize}
 	</select>
 
