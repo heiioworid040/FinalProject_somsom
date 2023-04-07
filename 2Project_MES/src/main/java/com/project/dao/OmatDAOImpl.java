@@ -27,7 +27,13 @@ public class OmatDAOImpl implements OmatDAO{
 		sqlSession.insert(namespace+".insertOmat", omatDTO);
 	}
 
-
+	@Override
+	public Integer getMaxCd() {
+		System.out.println("OmatDAOImpl getMaxCd()");
+		
+		return sqlSession.selectOne(namespace+".getMaxCd");
+	}
+	
 	@Override
 	public List<OmatDTO> getOmatbeList(PageDTO pageDTO) {
 		System.out.println("OmatDAOImpl getOmatbeList()");

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -157,16 +158,16 @@
 
 											<tr>
 												<th><input type="checkbox" name="check" id="chAll"
-													onclick="chAll()"></th>
+													onclick="chAll()"></th>				
 												<th scope="col">#</th>
-												<th scope="col">상품코드</th>
-												<th scope="col">유형</th>
-												<th scope="col">거래처명</th>
-												<th scope="col">담당자명</th>
-												<th scope="col">품목명</th>
+												<th scope="col">출고번호</th>
 												<th scope="col">납기일자</th>
-												<th scope="col">입고예정수량</th>
-												<th scope="col">거래처코드</th>
+												<th scope="col">품번</th>
+												<th scope="col">품명</th>
+												<th scope="col">단위</th>
+												<th scope="col">출고창고</th>
+												<th scope="col">출고수량</th>
+												<th scope="col">거래처번호</th>
 												<th scope="col">거래처명</th>
 												<th scope="col">비고</th>
 											</tr>
@@ -179,9 +180,9 @@
 														class="chkbox"></th>
 													<td>${OmatDTO.omat_num}</td>
 													<td>${OmatDTO.omat_cd}</td>
-													<td>${OmatDTO.omat_date}</td>
+													<td><fmt:formatDate value="${OmatDTO.omat_date}" pattern="yyyy-MM-dd" type="date"/></td>
 													<td>${OmatDTO.prod_cd}</td>
-													<td>${OmatDTO.omat_stg}</td>
+													<td>${OmatDTO.prod_nm}</td>
 													<td>${OmatDTO.prod_unit}</td>
 													<td>${OmatDTO.omat_stg}</td>
 													<td>${OmatDTO.omat_count}</td>

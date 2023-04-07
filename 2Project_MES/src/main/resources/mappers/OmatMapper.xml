@@ -19,11 +19,11 @@
 <!--     </insert> -->
     
 	<select id="getOmatbeList" resultType="com.project.domain.OmatDTO">
-       select row_number() over(order by i.omat_cd asc) as omat_num,i.omat_cd,i.omat_cd,i.omat_date, p.prod_cd, p.prod_nm,p.prod_unit, i.omat_stg, i.omat_count, c.cli_cd, c.cli_nm, i.omat_note
-		from product p join out_material i
-		on i.prod_cd=p.prod_cd
-		join client c
+       select row_number() over(order by i.omat_date desc) as omat_num,i.omat_cd, i.omat_date, p.prod_cd, p.prod_nm,p.prod_unit, i.omat_stg, i.omat_count, c.cli_cd, c.cli_nm, i.omat_note
+		from product p left join client c
 		on c.cli_cd=p.cli_cd
+        join out_material i
+		on i.prod_cd=p.prod_cd
 		limit #{startRow}, #{pageSize}
 <!--         where id = #{id} and pass = #{pass} -->
     </select>
@@ -62,4 +62,8 @@
     	update out_material set omat_cd = #{omat_cd}, prod_cd = #{prod_cd}, omat_stg = #{omat_stg},omat_count = #{omat_count},omat_note = #{omat_note}
     	where omat_cd = #{omat_cd}   
     </update>
+    
+    <select id="getMaxCd" resultType="java.lang.Integer">
+        select max(cast(SUBSTRING(omat_cd,3) as unsigned)) from out_material;
+    </select>
 </mapper>
