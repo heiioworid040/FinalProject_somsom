@@ -70,35 +70,35 @@
 				alert("담당자 선택");
 				return false;
 			}
-            if($('#cli_cd').val()==""){
+			if($('#cli_cd').val()==""){
             	alert("거래처 선택");
             	return false;
             }
-            if($('#ord_date').val()==""){
+			if($('#ord_date').val()==""){
             	alert("수주일자 입력");
             	return false;
             }
-            if($('#ord_d_date').val()==""){
-            	alert("납품예정일 입력");
-            	return false;
+			if($('#ord_d_date').val()==""){
+				alert("납품예정일 입력");
+				return false;
             }
-            if($('#ord_date').val()>$('#ord_d_date').val()){
-            	alert("납품예정일을 바르게 입력하세요");
+			if($('#ord_date').val()>$('#ord_d_date').val()){
+				alert("납품예정일을 바르게 입력하세요");
             	return false;
-            }
-            if($('#prod_cd').val()==""){
-            	alert("품목 선택");
-            	return false;
-            }
-            if($('#ord_count').val()==""){
-            	alert("수주량 입력");
-            	return false;
-            }
-            var num = /[0-9]/;
-            if(!num.test($('#ord_count').val())){
-            	alert("숫자만 입력");
-            	return false;
-            }
+    		}
+			if($('#prod_cd').val()==""){
+				alert("상품 선택");
+				return false;
+			}
+			if($('#ord_count').val()==""){
+				alert("수주량 입력");
+				return false;
+			}
+			var num = /[0-9]/;
+			if(!num.test($('#ord_count').val())){
+				alert("숫자만 입력");
+				return false;
+			}
 		});
 	});
 </script>
@@ -151,13 +151,13 @@
 							<div class="card-body card-block">
 								<form action="${pageContext.request.contextPath }/order/orderInsert" method="get" class="form-inline">
 									<div class="search-div">
-										<span class="search-cl">거래처</span><input type="text" id="cliS_cd" name="cli" readonly><input type="text" id="cliS_nm" readonly><button type="button" class="input-group-addon search-btn" style="cursor: pointer;" onclick="searchPop('cliS')"><i class="ti-search"></i></button>
+										<span class="search-cl">거래처</span><input type="text" id="cliS_cd" name="cli" placeholder="Client Code" readonly><input type="text" id="cliS_nm" placeholder="Client Name" readonly><button type="button" class="input-group-addon search-btn" style="cursor: pointer;" onclick="searchPop('cliS')"><i class="ti-search"></i></button>
 									</div>
 									<div class="search-div">
 										<span class="search-cl2">수주일자</span><input type="date" id="ordS_date" name="ord_date"><input type="date" id="ordS_date_end" name="ord_date_end">
 									</div>
 									<div class="search-div">
-										<span class="search-cl">담당자</span><input type="text" id="empS_cd" name="emp" readonly><input type="text" id="empS_nm" readonly><button type="button" class="input-group-addon search-btn" style="cursor: pointer;" onclick="searchPop('empS')"><i class="ti-search"></i></button>
+										<span class="search-cl">담당자</span><input type="text" id="empS_cd" name="emp" placeholder="Emp Code" readonly><input type="text" id="empS_nm" placeholder="Emp Name" readonly><button type="button" class="input-group-addon search-btn" style="cursor: pointer;" onclick="searchPop('empS')"><i class="ti-search"></i></button>
 									</div>
 									<div class="search-div2">
 										<span class="search-cl">납품예정일</span><input type="date" id="ordS_d_date" name="ord_d_date"><input type="date" id="ordS_d_date_end" name="ord_d_date_end">
