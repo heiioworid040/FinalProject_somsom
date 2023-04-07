@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/cs-skin-elastic.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
-
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/login.css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
@@ -30,30 +30,8 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/script/jquery-3.6.3.js"></script>
 <script type="text/javascript">
 
-// $(document).ready(function(){
-// 	$('.emp_email').on('blur',function(){
-// 		$.ajax({
-// 			url:'${pageContext.request.contextPath}/employee/emailCk',
-// 			data:{'emp_email':$('.emp_email').val()},
-// 			success:function(result){
-// //					alert(result);
-// 				// result.trim() => 결과값 앞뒤로 공백 제거
-// 				if(result.trim()=="emailUp"){
-// 					result="이메일 중복";
-					
-// 					$('.divresult').html(result).css("color","red");
-// 				}else{
-// 					result="이메일 사용가능";
-// 					$('.divresult').html(result).css("color","blue");
-// 				}
-// 			}
-// 		});
-	   
-// 	   });
-// });
-
 $(document).ready(function(){
-	$('.save').on('click',function(){
+	$('.emp_email').on('change',function(){
 		$.ajax({
 			url:'${pageContext.request.contextPath}/employee/emailCk',
 			data:{'emp_email':$('.emp_email').val()},
@@ -61,11 +39,12 @@ $(document).ready(function(){
 //					alert(result);
 				// result.trim() => 결과값 앞뒤로 공백 제거
 				if(result.trim()=="emailUp"){
-					result="이메일 중복";					
-					$('.divresult').html(result).css("color","red");					
-					return false;
+					result="이메일 중복";
+					$('.divresult_1').val("0");
+					$('.divresult').html(result).css("color","red");
 				}else{
 					result="이메일 사용가능";
+					$('.divresult_1').val("1");
 					$('.divresult').html(result).css("color","blue");
 				}
 			}
@@ -75,74 +54,30 @@ $(document).ready(function(){
 });
 
 $(document).ready(function(){
-	$('.emp_tel').on('blur',function(){
+	$('.emp_tel').on('change',function(){
 		$.ajax({
 			url:'${pageContext.request.contextPath}/employee/telCk',
 			data:{'emp_tel':$('.emp_tel').val()},
 			success:function(result){
+//					alert(result);
+				// result.trim() => 결과값 앞뒤로 공백 제거
 				if(result.trim()=="telUp"){
 					result="전화번호 중복";
+					$('.divresult_2').val("0");
 					$('.divresult2').html(result).css("color","red");
 				}else{
+					$('.divresult_2').val("1");
 					result="전화번호 사용가능";
 					$('.divresult2').html(result).css("color","blue");
 				}
 			}
 		});
-	   
 	   });
 });
 
-
-// $(document).ready(function(){	
-//     $(".cancel").on("click", function(){
-//       location.href = "${pageContext.request.contextPath}/employee/employeeList";
-//     })
-    
-//     $("#save").on("click", function(){
-//       if($("#emp_nm").val()==""){
-//         alert("이름을 입력해주세요.");
-//         $("#emp_nm").focus();
-//         return false;
-//       }
-//       if($("#emp_pass").val()==""){
-//         alert("비밀번호를 입력해주세요.");
-//         $("#emp_pass").focus();
-//         return false;
-//       }
-//       if($("#emp_position").val()==""){
-//           alert("직책을 입력해주세요.");
-//           $("#emp_position").focus();
-//           return false;
-//       }
-    
-//       if($("#emp_email").val()==""){
-//           alert("이메일을 입력해주세요.");
-//           $("#emp_email").focus();
-//           return false;
-//       }
-
-//       if($("#emp_tel").val()==""){
-//         alert("전화번호를 입력해주세요.");
-//         $("#emp_tel").focus();
-//         return false;
-//       }
-      
-//       if($(".divresult2")=="이메일 중복"){
-//           alert("이메일 중복확인 해주세요.");
-//           $("#emp_email").focus();
-//           return false;
-//         }
-//       else{
-//      	 form.method='GET';
-//      	 document.form.action='${pageContext.request.contextPath}/employee/updatePro';
-//       }
-//     });
-//   });
   
 $(document).ready(function(){	
     $(".cancel").on("click", function(){
-//       location.href = "${pageContext.request.contextPath}/employee/employeeList";
       window.close();
     })
     
@@ -175,11 +110,18 @@ $(document).ready(function(){
         return false;
       }
       
-      if($(".divresult2")=="이메일 중복"){
-          alert("이메일 중복확인 해주세요.");
+      if($(".divresult_1").val()=="0"){
+          alert("이메일 중복");
           $("#emp_email").focus();
           return false;
         }
+      
+      if($(".divresult_2").val()=="0"){
+          alert("전화번호 중복");
+          $("#emp_tel").focus();
+          return false;
+        }
+      
     	 $('#update2').submit();
     	 setTimeout(function() {   
              window.close();
@@ -212,39 +154,34 @@ $(document).ready(function(){
 										
 											사용자 ID <input type="text" name=emp_cd class="emp_cd form-control" id="emp_cd" value="${employeeDTO.emp_cd }" readonly><br><br>
 											사용자명 <input type="text" name=emp_nm class="emp_nm form-control" id="emp_nm" value="${employeeDTO.emp_nm }"><br><br>
-											비밀번호 <input type="text" name=emp_pass class="emp_pass form-control" id="emp_pass" value="${employeeDTO.emp_pass }"><br><br>
-											직책 <select name="emp_position" class="emp_position form-control" id="emp_position">
-													<option value="">직책을 선택하세요</option>
-													<option value="관리자">관리자</option>
-													<option value="파트장">파트장</option>
-													<option value="사원">사원</option>
-												</select><br><br>
+											비밀번호 <input type="text" name=emp_pass class="emp_pass form-control" id="emp_pass" value="${employeeDTO.emp_pass }"><br><br>										
 											E-MAIL <input type="text" name=emp_email class="emp_email form-control" id="emp_email" value="${employeeDTO.emp_email }"><br>
-													<div class="divresult"></div><br>
+													<div class="divresult"></div><input type="hidden" class="divresult_1"><br>
 											전화번호 <input type="text" name=emp_tel class="emp_tel form-control" id="emp_tel" value="${employeeDTO.emp_tel }"><br>
-												<div class="divresult2"></div>
-										
-		<div>
-		<input type="button" value="저장" class="save btn btn-secondary" id="save">					
-		<input type="button" class="cancel btn btn-secondary" id="cancel" value="취소">				
-		</div>
-										
-										
-										
+												<div class="divresult2"></div><input type="hidden" class="divresult_2">
+											직책 <select name="emp_position" class="emp_position form-control" id="emp_position">
+												<option value="">직책을 선택하세요</option>
+												<option value="관리자">관리자</option>
+												<option value="파트장">파트장</option>
+												<option value="사원">사원</option>
+												</select></div>
 
 							</div>
+							<div>
+		<input type="button" value="저장" class="save btn btn-secondary float-right  btn3" id="save" >					
+		<input type="button" class="cancel btn btn-secondary float-right" id="cancel" value="취소">				
+		</div>
 						</div>
 					</div>
 				</div>
-			</div>
 							</form>
-		</div><!-- .content -->
+			</div>
+		<!-- .content -->
 
 		<div class="clearfix"></div>
 		<!-- 푸터 넣는 곳 -->
 		<jsp:include page="../inc/footer.jsp" />
 		<!-- 푸터 넣는 곳 -->
-	</div>
 	<!-- /#right-panel -->
 
 	<!-- Right Panel -->

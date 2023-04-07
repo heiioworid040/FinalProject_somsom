@@ -79,6 +79,7 @@ $(document).ready(function(){
 
 
 $(document).ready(function(){
+	var emailCheck=RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]/);
     $(".cancel").on("click", function(){
       location.href = "${pageContext.request.contextPath}/employee/employeeList";
     })
@@ -102,6 +103,12 @@ $(document).ready(function(){
           return false;
       }
 
+      if(!emailCheck.test($('.emp_email').val())){
+      	  alert("이메일 형식 아님");
+      	  $('.emp_email').focus();
+      	  return false;
+        }
+      
       if($("#emp_tel").val()==""){
         alert("전화번호를 입력해주세요.");
         $("#emp_tel").focus();
@@ -221,16 +228,17 @@ function fun1(index) {
 					<div class="col-lg">
 						<div class="card m-0">
 							<div class="card-body card-block">
+							
 								<form action="${pageContext.request.contextPath}/employee/employeeList" method="get" class="form-inline">
 									 <div class="form-group col-6 mt-1">
                                     	<label for="exampleInputName1" class="pr-1  form-control-label">사용자ID</label>
-                                    	<input type="text" id="search" name="search" class="form-control ">
+                                    	<input type="text" id="search" name="search" class="form-control" placeholder="Emp Code">
                                     	<div class="input-group">
                                     	</div>
                                     </div>
                                      <div class="form-group col-6 mt-1">
                                     	<label for="exampleInputName1" class="pr-1  form-control-label">사용자명</label>
-                                    	<input type="text" id="search2" name="search2" class="form-control" >
+                                    	<input type="text" id="search2" name="search2" class="form-control" placeholder="Emp Name">
                                     	<div class="input-group">
                                     	</div>
                                     </div> 
@@ -259,7 +267,7 @@ function fun1(index) {
 					<div class="col-lg">
 						<div class="card">
 							<div class="card-header">
-								<strong class="card-title">사용자</strong>  
+								<strong class="card-title">사용자 </strong> <div class="count1">총 ${pageDTO.count}건</div>
 							</div>
 							<div class="card-body">
 								<table class="table table-striped table-bordered">
@@ -294,7 +302,7 @@ function fun1(index) {
 												<option value="사원">사원</option>
 												</select></td>
 											
-											<td><input type="email" id="emp_email" name="emp_email" class="emp_email form-control"><br>
+											<td><input type="text" id="emp_email" name="emp_email" class="emp_email form-control"><br>
 											<div class="divresult"></div><input type="hidden" class="divresult_1"><br>
 											</td>
 											
