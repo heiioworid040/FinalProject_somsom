@@ -36,20 +36,13 @@
 
 <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 </head>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js">
-	$(document).ready(function() {
-		$('#largeModal').on('shown.bs.modal', function() {
-			$.ajax({
-				url : '/imat/ImatprodList',
-				type : 'GET',
-				success : function(data) {
-					// display data in the modal body
-					$('.modal-body').html(data);
-				}
-			});
-		});
-	});
+<script type="text/javascript">
 
+function openPopUp() {
+	window.open("${pageContext.request.contextPath}/imat/imatpop", "imatpop", "width=1000, height=800");
+}
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js">
 	// $(document).ready(function(){
 	// $('#insert').submit(function(){
 
@@ -95,6 +88,8 @@
 	//     }
 
 	// });
+	
+
 </script>
 <body>
 
@@ -143,75 +138,13 @@
 							<strong class="card-title">Table Head</strong>
 						</div>
 						<div class="card-body">
-							<!--<table class="table" > -->
-							<!-- 									<thead class="thead-dark"> -->
-
-							<!-- 										<tr> -->
-							<!-- 											<th scope="col">상품코드</th> -->
-							<!-- 											<th scope="col">유형</th> -->
-							<!-- 											<th scope="col">거래처명</th> -->
-							<!-- 											<th scope="col">담당자명</th> -->
-							<!-- 											<th scope="col">품목명</th> -->
-							<!-- 											<th scope="col">납기일자</th> -->
-							<!-- 											<th scope="col">입고예정수량</th> -->
-							<!-- 											<th scope="col">거래처코드</th> -->
-							<!-- 											<th scope="col">거래처명</th> -->
-							<!-- 											<th scope="col">비고</th> -->
-							<!-- 										</tr> -->
-							<!-- 									</thead> -->
-							<!-- 									<tbody> -->
-
-							<!-- 										<tr> -->
-							<!-- 											<td></td> -->
-							<!-- 											<td></td> -->
-							<!-- 											<td></td> -->
-							<!-- 											<td></td> -->
-							<!-- 											<td></td> -->
-							<!-- 											<td></td> -->
-							<!-- 											<td></td> -->
-							<!-- 											<td></td> -->
-							<!-- 											<td></td> -->
-							<!-- 											<td></td> -->
-							<!-- 										</tr> -->
-							<!-- 									</tbody> -->
-							<!-- 								</table> -->
-
-							<!-- 						<table class="table1" > -->
-							<!-- 									<thead class="thead-dark1"> -->
-
-
-							<!-- 										<tr> -->
-							<!-- 											<th scope="col">품번</th> -->
-							<!-- 											<th scope="col">품명</th> -->
-							<!-- 											<th scope="col">자재유형</th> -->
-							<!-- 											<th scope="col">단위</th> -->
-							<!-- 											<th scope="col">재질</th> -->
-							<!-- 											<th scope="col">규격</th> -->
-							<!-- 										</tr> -->
-
-							<!-- 									</thead> -->
-							<!-- 									<tbody> -->
-
-							<%-- 									<c:forEach var="ProductDTO" items="${ImatprodList1}"> --%>
-							<!-- 										<tr> -->
-							<%-- 											<td>${ProductDTO.prod_cd}</td> --%>
-							<%-- 											<td>${ProductDTO.prod_nm}</td> --%>
-							<%-- 											<td>${ProductDTO.prod_mat}</td> --%>
-							<%-- 											<td>${ProductDTO.prod_unit}</td> --%>
-							<%-- 											<td>${ProductDTO.prod_text}</td> --%>
-							<%-- 											<td>${ProductDTO.prod_size}</td> --%>
-							<!-- 										</tr> -->
-							<%-- 									</c:forEach> --%>
-							<!-- 									</tbody> -->
-							<!-- 								</table> -->
-							<button type="button" data-toggle="modal"
-								data-target="#largeModal">품번선택</button>
+						<input type="button" value="조회" onclick="openPopUp()"><br>
 							<form
 								action="${pageContext.request.contextPath}/imat/imatinsertPro"
 								id="insert" method="post">
 								<fieldset>
 									<label>입고번호</label> <input type="text" name="imat_cd"
-										class="imat_cd"><br> <label>상품코드</label> <input
+										class="imat_cd" readonly><br> <label>품번</label> <input
 										type="text" name="prod_cd" class="prod_cd"><br> <label>입고창고</label>
 									<input type="text" name="imat_stg" class="imat_stg"><br>
 									<label>입고수량</label><input type="text" name="imat_count"
@@ -224,21 +157,7 @@
 										type="reset" value="Cancel" class="cancel">
 								</div>
 							</form>
-							<%-- 								<c:if test="${pageDTO.startPage > pageDTO.pageBlock }"> --%>
-							<!-- 										<a -->
-							<%-- 											href="${pageContext.request.contextPath}/imat/imatbeList?pageNum=${pageDTO.startPage - pageDTO.pageBlock }">[이전페이지]</a> --%>
-							<%-- 									</c:if> --%>
-
-							<%-- 									<c:forEach var="i" begin="${pageDTO.startPage }" --%>
-							<%-- 										end="${pageDTO.endPage }" step="1"> --%>
-							<!-- 										<a -->
-							<%-- 											href="${pageContext.request.contextPath}/imat/imatbeList?pageNum=${i}">${i}</a> --%>
-							<%-- 									</c:forEach> --%>
-
-							<%-- 									<c:if test="${pageDTO.endPage < pageDTO.pageCount }"> --%>
-							<!-- 										<a -->
-							<%-- 											href="${pageContext.request.contextPath}/imat/imatbeList?pageNum=${pageDTO.startPage + pageDTO.pageBlock }">[다음페이지]</a> --%>
-							<%-- 									</c:if> --%>
+							
 						</div>
 					</div>
 				</div>
@@ -247,56 +166,7 @@
 	</div>
 	<!-- .content -->
 
-	<div class="modal fade" id="largeModal" tabindex="-1" role="dialog"
-		aria-labelledby="largeModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-lg" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="largeModalLabel">품목 선택</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-
-					<table class="table">
-						<thead class="thead-dark">
-
-							<tr>
-								<th scope="col">품번</th>
-								<th scope="col">품명</th>
-								<th scope="col">자재유형</th>
-								<th scope="col">단위</th>
-								<th scope="col">재질</th>
-								<th scope="col">규격</th>
-							</tr>
-
-						</thead>
-						<tbody>
-
-							<c:forEach var="ProductDTO" items="${ImatprodList}">
-								<tr>
-									<td>${ProductDTO.prod_cd}</td>
-									<td>${ProductDTO.prod_nm}</td>
-									<td>${ProductDTO.prod_mat}</td>
-									<td>${ProductDTO.prod_unit}</td>
-									<td>${ProductDTO.prod_text}</td>
-									<td>${ProductDTO.prod_size}</td>
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
-
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal">Cancel</button>
-					<button type="button" class="btn btn-primary">Confirm</button>
-				</div>
-			</div>
-		</div>
-	</div>
+	
 
 	<div class="clearfix"></div>
 	<!-- 푸터 넣는 곳 -->

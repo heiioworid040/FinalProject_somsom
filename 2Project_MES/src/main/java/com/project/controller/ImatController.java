@@ -37,8 +37,16 @@ public class ImatController {
 //		/WEB-INF/views/center/write.jsp
 		return "imat/imatinsert";
 	}
-
-
+//
+//	@RequestMapping(value = "/imat/imatpop", method = RequestMethod.GET)
+//	public String imatpop() {
+////		주소줄 변경없이 이동
+////		/WEB-INF/views/파일이름.jsp
+////		/WEB-INF/views/center/write.jsp
+//		return "imat/imatpop";
+//	}
+//	
+	
 	// 가상주소 http://localhost:8080/SFunWeb/board/writePro
 	@RequestMapping(value = "/imat/imatinsertPro", method = RequestMethod.POST)
 	public String imatinsertPro(ImatDTO imatDTO) {
@@ -124,9 +132,10 @@ public class ImatController {
 		model.addAttribute("ImatbeList", imatbeList);
 		model.addAttribute("pageDTO", pageDTO);
 		System.out.println("ImatController ImatbeList()-4");
-		System.out.println("ImatController ImatbeList()-4" + imatbeList.get(0).getImat_cd());
-		System.out.println("ImatController ImatbeList()-4" + imatbeList.get(0).getImat_date());
-		System.out.println("ImatController ImatbeList()-4" + imatbeList.get(0).getImat_num());
+
+		System.out.println("ImatController ImatbeList() Imat_num:" + imatbeList.get(0).getImat_num());
+		System.out.println("ImatController ImatbeList() Imat_cd" + imatbeList.get(0).getImat_cd());
+		System.out.println("ImatController ImatbeList() Imat_date" + imatbeList.get(0).getImat_date());
 		return "imat/imatbeList";
 	}
 
@@ -170,46 +179,46 @@ public class ImatController {
 		return "iomat/iomatList";
 	}
 	
-	@RequestMapping(value = "imat/imatprodList1", method = RequestMethod.GET)
-	public String ImatprodList1(HttpServletRequest request, Model model) {
-		System.out.println("ImatController ImatprodList1()");
+//	@RequestMapping(value = "imat/imatprodList1", method = RequestMethod.GET)
+//	public String ImatprodList1(HttpServletRequest request, Model model) {
+//		System.out.println("ImatController ImatprodList1()");
+//
+//		int pageSize = 10;
+//		String pageNum = request.getParameter("pageNum");
+//		if (pageNum == null) {
+//			pageNum = "1";
+//		}
+//		System.out.println("ImatController ImatprodList1()-1");
+//		int currentPage = Integer.parseInt(pageNum);
+//
+//		PageDTO pageDTO = new PageDTO();
+//		pageDTO.setPageSize(pageSize);
+//		pageDTO.setPageNum(pageNum);
+//		pageDTO.setCurrentPage(currentPage);
+//		System.out.println("ImatController ImatprodList1()-2");
+//		List<ProductDTO> imatprodList1 = ImatService.getImatprodList1(pageDTO);
+//
+//		int count = ImatService.getImatCount();
+//		int pageBlock = 10;
+//		int startPage = (currentPage - 1) / pageBlock * pageBlock + 1;
+//		int endPage = startPage + pageBlock - 1;
+//		int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
+//		if (endPage > pageCount) {
+//			endPage = pageCount;
+//		}
+//		System.out.println("ImatController ImatbeList()-3");
+//		pageDTO.setCount(count);
+//		pageDTO.setPageBlock(pageBlock);
+//		pageDTO.setStartPage(startPage);
+//		pageDTO.setEndPage(endPage);
+//		pageDTO.setPageCount(pageCount);
+//
+//		model.addAttribute("ImatprodList1", imatprodList1);
+//		model.addAttribute("pageDTO", pageDTO);
+//		return "imat/imatinsert";
+//	}
 
-		int pageSize = 10;
-		String pageNum = request.getParameter("pageNum");
-		if (pageNum == null) {
-			pageNum = "1";
-		}
-		System.out.println("ImatController ImatprodList1()-1");
-		int currentPage = Integer.parseInt(pageNum);
-
-		PageDTO pageDTO = new PageDTO();
-		pageDTO.setPageSize(pageSize);
-		pageDTO.setPageNum(pageNum);
-		pageDTO.setCurrentPage(currentPage);
-		System.out.println("ImatController ImatprodList1()-2");
-		List<ProductDTO> imatprodList1 = ImatService.getImatprodList1(pageDTO);
-
-		int count = ImatService.getImatCount();
-		int pageBlock = 10;
-		int startPage = (currentPage - 1) / pageBlock * pageBlock + 1;
-		int endPage = startPage + pageBlock - 1;
-		int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
-		if (endPage > pageCount) {
-			endPage = pageCount;
-		}
-		System.out.println("ImatController ImatbeList()-3");
-		pageDTO.setCount(count);
-		pageDTO.setPageBlock(pageBlock);
-		pageDTO.setStartPage(startPage);
-		pageDTO.setEndPage(endPage);
-		pageDTO.setPageCount(pageCount);
-
-		model.addAttribute("ImatprodList1", imatprodList1);
-		model.addAttribute("pageDTO", pageDTO);
-		return "imat/imatinsert";
-	}
-
-	@RequestMapping(value = "/imat/ImatprodList", method = { RequestMethod.POST, RequestMethod.GET })
+	@RequestMapping(value = "/imat/imatpop", method = { RequestMethod.POST, RequestMethod.GET })
 	public List<ProductDTO> ImatprodList(HttpServletRequest request, Model model) throws Exception {
 		System.out.println("ImatController ImatprodList");
 		int pageSize = 10;

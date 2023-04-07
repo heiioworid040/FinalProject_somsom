@@ -19,11 +19,11 @@
 <!--     </insert> -->
     
 	<select id="getImatbeList" resultType="com.project.domain.ImatDTO">
-       select row_number() over(order by i.imat_cd asc) as imat_num,i.imat_cd,i.imat_cd,i.imat_date, p.prod_cd, p.prod_nm,p.prod_unit, i.imat_stg, i.imat_count, c.cli_cd, c.cli_nm, i.imat_note
-		from product p join in_material i
-		on i.prod_cd=p.prod_cd
-		join client c
+       select row_number() over(order by i.imat_date desc) as imat_num,i.imat_cd, i.imat_date, p.prod_cd, p.prod_nm,p.prod_unit, i.imat_stg, i.imat_count, c.cli_cd, c.cli_nm, i.imat_note
+		from product p left join client c
 		on c.cli_cd=p.cli_cd
+        join in_material i
+		on i.prod_cd=p.prod_cd
 		limit #{startRow}, #{pageSize}
 <!--         where id = #{id} and pass = #{pass} -->
     </select>
@@ -39,10 +39,10 @@
     limit #{startRow}, #{pageSize}
     </select>
     
-     <select id="getImatprodList1" resultType="com.project.domain.ProductDTO">
-    select * from product
-    limit #{startRow}, #{pageSize}
-    </select>
+<!--      <select id="getImatprodList1" resultType="com.project.domain.ProductDTO"> -->
+<!--     select * from product -->
+<!--     limit #{startRow}, #{pageSize} -->
+<!--     </select> -->
     
     <select id="getIomatList" resultType="com.project.domain.ImatDTO">
     select row_number() over(order by i.imat_cd asc) as imat_num,p.prod_cd,p.prod_nm,p.prod_mat,p.prod_unit,imat_count-omat_count as iomat_count
@@ -64,7 +64,9 @@
     	values(#{imat_cd},#{prod_cd},#{imat_date},#{imat_stg},#{imat_count}, #{imat_note})
     </insert>
     
-   
+   <select id="getMaxCd" resultType="java.lang.Integer">
+        select max(cast(SUBSTRING(imat_cd,3) as unsigned)) from in_material;
+    </select>
     
     <update id="updateImat">
     	update in_material set imat_cd = #{imat_cd}, prod_cd = #{prod_cd}, imat_stg = #{imat_stg},imat_count = #{imat_count},imat_note = #{imat_note}
