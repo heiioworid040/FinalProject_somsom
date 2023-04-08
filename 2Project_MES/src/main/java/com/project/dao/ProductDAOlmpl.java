@@ -12,42 +12,42 @@ import com.project.domain.ProductDTO;
 
 @Repository
 public class ProductDAOlmpl implements ProductDAO{
-	
+
 	@Inject
 	private SqlSession sqlSession;
-	
-	
+
+
 	private static final String namespace="com.project.mappers.productMapper";
-	
+
 	@Override
 	public void insertProduct(ProductDTO productDTO) {
-		
+
 		System.out.println("getProduct()");
 		sqlSession.insert(namespace+".insertProduct",productDTO);
-		
+
 	}
-	
+
 	@Override
 	public Integer getMaxnum() {
-		
+
 		return sqlSession.selectOne(namespace+".getMaxnum");
 	}
 
-	
+
 	@Override
 	public List<ProductDTO> getProductList(PageDTO pageDTO){
 		System.out.println("ProductDAOImpl getProdList");
 		pageDTO.setStartRow(pageDTO.getStartRow()-1);
-		
+
 	return sqlSession.selectList(namespace+".getProductList",pageDTO);
 	}
-	
+
 	@Override
 	public int getProductCount(PageDTO pageDTO) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(namespace+".getProductCount",pageDTO);
 	}
-	
+
 	@Override
 	public ProductDTO getProduct(int prod_number) {
 		// TODO Auto-generated method stub
@@ -66,10 +66,10 @@ public class ProductDAOlmpl implements ProductDAO{
 		System.out.println("number : "+productDTO.getProd_number());
 		System.out.println("outprice : "+productDTO.getProd_outprice());
 		System.out.println("size : "+productDTO.getProd_size());
-		
-		
-		
-		
+
+
+
+
 		sqlSession.update(namespace+".updateProduct",productDTO);
 	}
 
@@ -79,5 +79,5 @@ public class ProductDAOlmpl implements ProductDAO{
 	}
 
 
-	
+
 }

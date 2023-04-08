@@ -22,9 +22,11 @@ public class PerformanceDTO extends InstructionDTO {
 	public void setPerf_cd(String perf_cd) {
 		this.perf_cd = perf_cd;
 	}
+	@Override
 	public String getInst_cd() {
 		return inst_cd;
 	}
+	@Override
 	public void setInst_cd(String inst_cd) {
 		this.inst_cd = inst_cd;
 	}
@@ -58,9 +60,11 @@ public class PerformanceDTO extends InstructionDTO {
 	public void setPerf_note(String perf_note) {
 		this.perf_note = perf_note;
 	}
+	@Override
 	public String getLine_nm() {
 		return line_nm;
 	}
+	@Override
 	public void setLine_nm(String line_nm) {
 		this.line_nm = line_nm;
 	}

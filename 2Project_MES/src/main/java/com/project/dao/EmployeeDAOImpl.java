@@ -15,9 +15,9 @@ public class EmployeeDAOImpl implements EmployeeDAO{
 
 	@Inject
 	private SqlSession sqlSession;
-	
+
 	private static final String namespace="com.project.mappers.employeeMapper";
-	
+
 	@Override
 	public EmployeeDTO userCheck(EmployeeDTO employeeDTO) {
 		System.out.println("EmployeeDAOImpl userCheck()");
@@ -27,9 +27,9 @@ public class EmployeeDAOImpl implements EmployeeDAO{
 	@Override
 	public List<EmployeeDTO> getEmployeeList(PageDTO pageDTO) {
 		System.out.println("EmployeeDAOImpl getEmployeeList()");
-		
+
 		pageDTO.setStartRow(pageDTO.getStartRow()-1);
-		
+
 		return sqlSession.selectList(namespace+".getEmployeeList", pageDTO);
 	}
 
@@ -43,8 +43,8 @@ public class EmployeeDAOImpl implements EmployeeDAO{
 	@Override
 	public void insertEmployee(EmployeeDTO employeeDTO) {
 		System.out.println("EmployeeDAOImpl insertEmployee()");
-		
-		
+
+
 		sqlSession.insert(namespace+".insertEmployee", employeeDTO);
 	}
 
@@ -52,10 +52,10 @@ public class EmployeeDAOImpl implements EmployeeDAO{
 	public void deleteEmployee(String emp_cd) {
 		System.out.println("EmployeeDAOImpl deleteEmployee()");
 		sqlSession.delete(namespace+".deleteEmployee", emp_cd);
-		
+
 	}
 
-	
+
 	@Override
 	public EmployeeDTO getEmployee(String emp_cd) {
 		System.out.println("EmployeeDAOImpl getEmployee()");
@@ -67,7 +67,7 @@ public class EmployeeDAOImpl implements EmployeeDAO{
 	public void updateEmployee(EmployeeDTO employeeDTO) {
 		System.out.println("EmployeeDAOImpl updateEmployee()");
 		sqlSession.update(namespace+".updateEmployee", employeeDTO);
-		
+
 	}
 
 	@Override
@@ -92,7 +92,7 @@ public class EmployeeDAOImpl implements EmployeeDAO{
 	public void insertPass(String emp_tel) {
 		System.out.println("EmployeeDAOImpl insertPass()");
 		sqlSession.update(namespace+".insertPass",emp_tel);
-		
+
 	}
 
 
@@ -100,6 +100,6 @@ public class EmployeeDAOImpl implements EmployeeDAO{
 
 
 
-	
-	
+
+
 }

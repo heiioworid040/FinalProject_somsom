@@ -18,6 +18,6 @@ public interface ShipDAO {
 	public void shipInfoPro(ShipDTO shipDTO);
 
 	public String getShipNum();
-	
+
 	public Integer getMaxNum(ShipDTO shipDTO);
 }

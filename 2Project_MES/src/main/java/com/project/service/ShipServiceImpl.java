@@ -65,7 +65,7 @@ public class ShipServiceImpl implements ShipService {
 			}
 		}
 		shipDTO.setShip_cd(shipDAO.getShipNum()+num+(String.valueOf(shipDTO.getShip_date()).substring(0,10)).replace("-", ""));
-		
+
 		shipDAO.shipInfoPro(shipDTO);
 	}
 }

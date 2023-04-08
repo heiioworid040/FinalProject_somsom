@@ -15,7 +15,7 @@ public class OrderDTO extends ProductDTO {
 	private Timestamp ord_d_date;
 	private int ord_count;
 	private int ship_count;
-	
+
 	// set get
 	public String getOrd_cd() {
 		return ord_cd;
@@ -35,9 +35,11 @@ public class OrderDTO extends ProductDTO {
 	public void setEmp_nm(String emp_nm) {
 		this.emp_nm = emp_nm;
 	}
+	@Override
 	public String getCli_cd() {
 		return cli_cd;
 	}
+	@Override
 	public void setCli_cd(String cli_cd) {
 		this.cli_cd = cli_cd;
 	}

@@ -11,15 +11,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.project.domain.PageDTO;
 import com.project.domain.InstructionDTO;
+import com.project.domain.PageDTO;
 import com.project.service.InstructionService;
 
 @Controller
 public class InstructionController {
 	private InstructionService instService;
 
-	
+
 	@Inject
 	public void setInstService(InstructionService instService) {
 		this.instService = instService;
@@ -28,7 +28,7 @@ public class InstructionController {
 	@RequestMapping(value = "/instruction/infoInst", method = RequestMethod.GET)
 	public String getInfoInst(HttpServletRequest request, Model model, HttpSession session) {
 		System.out.println("instructionController getInfoInst()");
-		
+
 		String searchLineCd=request.getParameter("searchLineCd");
 		String searchOrdDate1 =request.getParameter("searchOrdDate1");
 		String searchOrdDate2 =request.getParameter("searchOrdDate2");
@@ -39,25 +39,25 @@ public class InstructionController {
 		if(searchLineCd==null) {
 			searchInstSt1 ="대기";
 			searchInstSt2 ="진행";
-			searchInstSt3 ="완료";		
+			searchInstSt3 ="완료";
 		}else{
 			searchInstSt1 =request.getParameter("searchInstSt1");
 			searchInstSt2 =request.getParameter("searchInstSt2");
 			searchInstSt3 =request.getParameter("searchInstSt3");
 		}
 		int pageSize=10;
-		
+
 		String pageNum=request.getParameter("pageNum");
 		if(pageNum==null) {
 			pageNum="1";
 		}
 		int currentPage=Integer.parseInt(pageNum);
-		
+
 		PageDTO pageDTO=new PageDTO();
 		pageDTO.setPageSize(pageSize);
 		pageDTO.setPageNum(pageNum);
 		pageDTO.setCurrentPage(currentPage);
-		
+
 		pageDTO.setSearch(searchLineCd);
 		pageDTO.setSearch2(searchOrdDate1);
 		pageDTO.setSearch3(searchOrdDate2);
@@ -65,7 +65,7 @@ public class InstructionController {
 		pageDTO.setSearch5(searchInstSt1);
 		pageDTO.setSearch6(searchInstSt2);
 		pageDTO.setSearch7(searchInstSt3);
-		
+
 		System.out.println("대기"+pageDTO.getSearch5() );
 		List<InstructionDTO> instList=instService.getInstList(pageDTO);
 
@@ -86,8 +86,8 @@ public class InstructionController {
 		pageDTO.setStartPage(startPage);
 		pageDTO.setEndPage(endPage);
 		pageDTO.setPageCount(pageCount);
-		
-		
+
+
 		model.addAttribute("instList", instList);
 		model.addAttribute("pageDTO", pageDTO);
 		System.out.println(count);
@@ -98,24 +98,24 @@ public class InstructionController {
 		System.out.println(pageDTO.getStartRow());
 		return "instruction/infoInstruction";
 	}
-	
+
 	@RequestMapping(value = "/instruction/insertInst", method = RequestMethod.POST)
 	public String insertInstPro(InstructionDTO instructionDTO) {
 		System.out.println("instructionController insertInstPro()");
 		instService.insertInst(instructionDTO);
-		
+
 		return "redirect:/instruction/infoInst";
 	}
-	
+
 	@RequestMapping(value = "/instruction/updateInst", method = RequestMethod.POST)
 	public String updateInstPro(InstructionDTO instructionDTO) {
 		System.out.println("instructionController updateInstPro()");
 		System.out.println(instructionDTO.getLine_cd());
 		System.out.println(instructionDTO.getInst_count());
 		System.out.println(instructionDTO.getInst_st());
-		
+
 		instService.updateInst(instructionDTO);
 		return "redirect:/instruction/infoInst";
 	}
-	
+
 }

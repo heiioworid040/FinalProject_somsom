@@ -12,14 +12,14 @@ import com.project.domain.PageDTO;
 
 @Service
 public class LineServiceImpl implements LineService{
-	
+
 	@Inject
 	private LineDAO lineDAO;
 
 	@Override
 	public List<LineDTO> getSearchLine() {
 		System.out.println("LineServiceImpl getSearchLine()");
-		
+
 		return lineDAO.getSearchLine();
 	}
 
@@ -37,10 +37,10 @@ public class LineServiceImpl implements LineService{
 	@Override
 	public int getLineCount(PageDTO pageDTO) {
 		System.out.println("LineServiceImpl getLineCount()");
-		
+
 		return lineDAO.getLineCount(pageDTO);
 	}
-	
-	
+
+
 
 }

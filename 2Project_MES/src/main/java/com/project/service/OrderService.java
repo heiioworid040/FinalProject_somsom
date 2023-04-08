@@ -15,7 +15,7 @@ public class OrderService {
 
 	@Inject
 	private OrderDAO orderDAO;
-	
+
 	//수주관리(수주품목)
 	public List<OrderDTO> getOrderInsertList(PageDTO pageDTO) {
 		int startRow=(pageDTO.getCurrentPage()-1)*pageDTO.getPageSize()+1;
@@ -31,7 +31,7 @@ public class OrderService {
 	public OrderDTO getOrderInsert(String ord_cd) {
 		return orderDAO.getOrderInsert(ord_cd);
 	}
-	
+
 	//수주 추가
 	public void orderAdd(OrderDTO orderDTO) {
 		String num;
@@ -47,39 +47,39 @@ public class OrderService {
 			}
 		}
 		orderDTO.setOrd_cd(orderDAO.getOrdNum()+num+(String.valueOf(orderDTO.getOrd_date()).substring(0,10)).replace("-", ""));
-		
+
 		orderDAO.orderAdd(orderDTO);
 	}
-	
+
 	//수주 수정
 	public void orderEdit(OrderDTO orderDTO) {
 		orderDAO.orderEdit(orderDTO);
 	}
-	
+
 	//수주 삭제
 	public void orderDel(String ord_cd) {
 		orderDAO.orderDel(ord_cd);
 	}
-	
+
 	//수주현황
 	public List<OrderDTO> getOrderList(PageDTO pageDTO) {
 		return orderDAO.getOrderList(pageDTO);
 	}
-	
+
 	public int getOrderCount(PageDTO pageDTO) {
 		return orderDAO.getOrderCount(pageDTO);
 	}
-	
+
 	//팝업
 	public List<OrderDTO> getSearchCli(PageDTO pageDTO) {
 		int startRow=(pageDTO.getCurrentPage()-1)*pageDTO.getPageSize()+1;
 		int endRow=startRow+pageDTO.getPageSize()-1;
 		pageDTO.setStartRow(startRow);
 		pageDTO.setEndRow(endRow);
-		
+
 		return orderDAO.getSearchCli(pageDTO);
 	}
-	
+
 	public int getSearchCliCount(PageDTO pageDTO) {
 		return orderDAO.getSearchCliCount(pageDTO);
 	}
@@ -89,10 +89,10 @@ public class OrderService {
 		int endRow=startRow+pageDTO.getPageSize()-1;
 		pageDTO.setStartRow(startRow);
 		pageDTO.setEndRow(endRow);
-		
+
 		return orderDAO.getSearchEmp(pageDTO);
 	}
-	
+
 	public int getSearchEmpCount(PageDTO pageDTO) {
 		return orderDAO.getSearchEmpCount(pageDTO);
 	}
@@ -102,10 +102,10 @@ public class OrderService {
 		int endRow=startRow+pageDTO.getPageSize()-1;
 		pageDTO.setStartRow(startRow);
 		pageDTO.setEndRow(endRow);
-		
+
 		return orderDAO.getSearchProd(pageDTO);
 	}
-	
+
 	public int getSearchProdCount(PageDTO pageDTO) {
 		return orderDAO.getSearchProdCount(pageDTO);
 	}

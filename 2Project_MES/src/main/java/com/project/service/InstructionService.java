@@ -2,8 +2,8 @@ package com.project.service;
 
 import java.util.List;
 
-import com.project.domain.PageDTO;
 import com.project.domain.InstructionDTO;
+import com.project.domain.PageDTO;
 
 public interface InstructionService {
 	public List<InstructionDTO> getInstList(PageDTO pageDTO);

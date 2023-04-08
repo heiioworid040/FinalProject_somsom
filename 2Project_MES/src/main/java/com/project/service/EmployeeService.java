@@ -27,7 +27,7 @@ public interface EmployeeService {
 
 	public void insertPass(String emp_tel);
 
-	
+
 
 
 }
