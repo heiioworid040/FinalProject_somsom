@@ -17,6 +17,8 @@ public interface OmatDAO {
 	public Integer getMaxCd();
 	
 	public OmatDTO getOmat(String omat_cd);
+	
+	public ProductDTO getProd(String prod_cd);
 
 	public void deleteList(String omat_cd);
 	

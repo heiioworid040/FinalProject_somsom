@@ -35,6 +35,14 @@ public class OmatServiceImpl implements OmatService{
 
 		return omatDAO.getOmat(omat_cd);
 	}
+	
+	@Override
+	public ProductDTO getProd(String prod_cd) {
+		System.out.println("ImatServiceImpl getProd()");
+
+		return omatDAO.getProd(prod_cd);
+	}
+	
 	@Override
 	public List<OmatDTO> getOmatbeList(PageDTO pageDTO) {
 		System.out.println("OmatServiceimpl getOmatbeList()");

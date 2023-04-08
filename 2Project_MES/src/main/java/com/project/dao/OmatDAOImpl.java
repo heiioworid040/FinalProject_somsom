@@ -93,5 +93,10 @@ public class OmatDAOImpl implements OmatDAO{
 		return sqlSession.selectOne(namespace + ".getOmat", omat_cd);
 	}
 
+	@Override
+	public ProductDTO getProd(String prod_cd) {
+		System.out.println("OmatDAOImpl getProd()");
 
+		return sqlSession.selectOne(namespace + ".getProd", prod_cd);
+	}
 }

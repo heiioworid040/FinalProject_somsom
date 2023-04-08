@@ -35,24 +35,17 @@
 	href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800'
 	rel='stylesheet' type='text/css'>
 
-<!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js">
+<script type="text/javascript">
+    function sendChildValue(prod_cd,omat_stg){
+    	opener.document.getElementById("prod_cd").value = prod_cd;
+    	opener.document.getElementById("omat_stg").value = omat_stg;
 
-	$(".move").on("click", function(e){
-		
-		e.preventDefault();
-		
-		let prod_cd= $(this).data("prod_cd");
-		
-		$(opener.document).find("prod_cd_input").val(prod_cd);
-		
-		window.close();
+//     	opener.setChildValue(prod_cd);
 
-	});
-	
-	
-</script>
-	
+    	self.close();
+
+    	}
+    </script>
 </head>
 
 <body>
@@ -93,6 +86,7 @@
 									<td>${ProductDTO.prod_unit}</td>
 									<td>${ProductDTO.prod_text}</td>
 									<td>${ProductDTO.prod_size}</td>
+									<td><input type="button" value="제출" onclick="sendChildValue('${ProductDTO.prod_cd}','${ProductDTO.prod_mat}')"></td>
 								</tr>
 							</c:forEach>
 						</tbody>

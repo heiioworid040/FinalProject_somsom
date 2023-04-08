@@ -2,7 +2,6 @@ package com.project.dao;
 
 import java.util.List;
 
-import com.project.domain.ClientDTO;
 import com.project.domain.ImatDTO;
 import com.project.domain.PageDTO;
 import com.project.domain.ProductDTO;
@@ -17,6 +16,8 @@ public interface ImatDAO {
 	public int getImatCount();
 	
 	public ImatDTO getImat(String imat_cd);
+	
+	public ProductDTO getProd(String prod_cd);
 
 	public void deleteList(String imat_cd);
 	

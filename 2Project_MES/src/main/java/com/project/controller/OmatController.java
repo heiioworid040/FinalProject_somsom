@@ -69,7 +69,19 @@ public class OmatController {
 //		return "redirect:/omat/omatbeList";
 	}
 	
-
+	@RequestMapping(value = "/omat/omatpopPro", method = RequestMethod.GET)
+	public String omatpopPro(HttpServletRequest request, Model model) {
+		System.out.println("ImatController imatpopPro()");
+		String prod_cd = request.getParameter("prod_cd");
+		ProductDTO product = OmatService.getProd(prod_cd);
+		model.addAttribute("prod_cd",product.getProd_cd());
+		model.addAttribute("prod_mat",product.getProd_mat());
+		
+//		주소줄 변경하면서 이동 
+		return "omat/omatinsert";
+	}
+	
+	
 	// 가상주소 http://localhost:8080/SFunWeb/board/writePro
 	@RequestMapping(value = "/omat/omatinsertPro", method = RequestMethod.POST)
 	public String omatinsertPro(OmatDTO omatDTO) {

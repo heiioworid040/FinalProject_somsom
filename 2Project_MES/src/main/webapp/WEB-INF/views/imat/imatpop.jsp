@@ -31,29 +31,21 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/style.css">
 
-<link
-	href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800'
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800'
 	rel='stylesheet' type='text/css'>
+    
+    <script type="text/javascript">
+    function sendChildValue(prod_cd,imat_stg){
+    	opener.document.getElementById("prod_cd").value = prod_cd;
+    	opener.document.getElementById("imat_stg").value = imat_stg;
 
-<!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js">
+//     	opener.setChildValue(prod_cd);
 
-	$(".move").on("click", function(e){
-		
-		e.preventDefault();
-		
-		let prod_cd= $(this).data("prod_cd");
-		
-		$(opener.document).find("prod_cd_input").val(prod_cd);
-		
-		window.close();
+    	self.close();
 
-	});
-	
-	
-</script>
-	
-</head>
+    	}
+    </script>
+    </head>
 
 <body>
 
@@ -70,9 +62,9 @@
 								<strong class="card-title">Table Head</strong>
 							</div>
 							<div class="card-body">
-											<table class="table">
+							<table class="table" id="prodtable">
 						<thead class="thead-dark">
-
+			
 							<tr>
 								<th scope="col">품번</th>
 								<th scope="col">품명</th>
@@ -87,12 +79,19 @@
 
 							<c:forEach var="ProductDTO" items="${ImatprodList}">
 								<tr>
-									<td>${ProductDTO.prod_cd}</td>
+									<td>${ProductDTO.prod_cd}			
+									</td>
 									<td>${ProductDTO.prod_nm}</td>
 									<td>${ProductDTO.prod_mat}</td>
 									<td>${ProductDTO.prod_unit}</td>
 									<td>${ProductDTO.prod_text}</td>
 									<td>${ProductDTO.prod_size}</td>
+									<td><input type="button" value="제출" onclick="sendChildValue('${ProductDTO.prod_cd}','${ProductDTO.prod_mat}')"></td>
+<!-- 									<td> -->
+<%-- 									<form action="${pageContext.request.contextPath}/imat/imatpopPro?prod_cd=${ProductDTO.prod_cd}" id="submitform" method="get"> --%>
+<!-- 									<input type="submit" value="제출"> -->
+<!-- 									</form> -->
+<!-- 									</td> -->
 								</tr>
 							</c:forEach>
 						</tbody>

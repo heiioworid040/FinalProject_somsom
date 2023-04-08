@@ -138,25 +138,44 @@ function openPopUp() {
 							<strong class="card-title">Table Head</strong>
 						</div>
 						<div class="card-body">
-						<input type="button" value="조회" onclick="openPopUp()"><br>
-							<form
-								action="${pageContext.request.contextPath}/omat/omatinsertPro"
-								id="insert" method="post">
-								<fieldset>
-									<label>출고번호</label> <input type="text" name="omat_cd"
-										class="omat_cd" readonly><br> <label>품번</label> <input
-										type="text" name="prod_cd" class="prod_cd"><br> <label>출고창고</label>
-									<input type="text" name="omat_stg" class="omat_stg"><br>
-									<label>출고수량</label><input type="text" name="omat_count"
-										class="omat_count"><br> <label>비고</label><input
-										type="text" name="omat_note" class="omat_note"><br>
-								</fieldset>
-								<div class="clear"></div>
-								<div id="buttons">
-									<input type="submit" value="Submit" class="submit"> <input
-										type="reset" value="Cancel" class="cancel">
+						<form method="post" action="${pageContext.request.contextPath}/omat/omatinsertPro">
+						<table class="table">
+										<thead class="thead-dark">
+
+											<tr>	
+												<th scope="col"></th>	
+												<th scope="col">입고번호</th>
+												<th scope="col">품번</th>
+												<th scope="col">입고창고</th>
+												<th scope="col">입고수량</th>
+												<th scope="col">비고</th>
+											</tr>
+										</thead>
+										<tbody>
+												<tr>
+												<td><input type="button" value="조회" onclick="openPopUp()"></td>
+													<td><input type="text" name="omat_cd"
+										class="omat_cd" readonly></td>
+													<td><input
+										type="text" name="prod_cd" class="prod_cd" id="prod_cd" readonly></td>
+													<td><input type="text" name="omat_stg" class="omat_stg" id="omat_stg" readonly></td>
+													<td><input type="text" name="omat_count"
+										class="omat_count"></td>
+													<td><input
+										type="text" name="omat_note" class="omat_note"></td>
+													
+												</tr>
+
+
+										</tbody>
+
+
+									</table>
+									<div id="buttons">
+									<input type="submit" value="Submit" class="submit"> 
+									<input type="reset" value="Cancel" class="cancel">
 								</div>
-							</form>
+									</form>
 							
 						</div>
 					</div>

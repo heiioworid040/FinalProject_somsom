@@ -13,6 +13,13 @@
     where imat_cd = #{imat_cd}
     </select>
     
+    
+    <select id="getProd" resultType="com.project.domain.ProductDTO">
+    select * 
+    from product
+    where prod_cd = #{prod_cd}
+    </select>
+    
 <!--     <insert id="insertBoard"> -->
 <!--     	insert into board(num,name,subject,content,readcount,date,file)  -->
 <!--     	values(#{num},#{name},#{subject},#{content},#{readcount},#{date},#{file}) -->

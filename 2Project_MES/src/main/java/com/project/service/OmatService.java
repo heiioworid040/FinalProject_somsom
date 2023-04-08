@@ -14,4 +14,5 @@ public interface OmatService {
 	public void insertOmat(OmatDTO omatDTO);
 	public void updateOmat(OmatDTO omatDTO);
 	public OmatDTO getOmat(String omat_cd);
+	public ProductDTO getProd(String prod_cd);
 }
