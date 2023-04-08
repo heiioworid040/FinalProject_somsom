@@ -14,13 +14,13 @@ import com.project.domain.PageDTO;
 public class LineDAOImpl implements LineDAO {
 	@Inject
 	private SqlSession sqlSession;
-	
+
 	private static final String namespace="com.project.mappers.lineMapper";
 
 	@Override
 	public List<LineDTO> getSearchLine() {
 		System.out.println("LineDAOImpl getSearchLine()");
-		
+
 		return sqlSession.selectList(namespace+".getSearchLine");
 	}
 
@@ -28,7 +28,7 @@ public class LineDAOImpl implements LineDAO {
 	public List<LineDTO> getLineList(PageDTO pageDTO) {
 		System.out.println("LineDAOImpl getLineList()");
 		pageDTO.setStartRow(pageDTO.getStartRow()-1);
-		
+
 		return sqlSession.selectList(namespace+".getLineList", pageDTO);
 	}
 
@@ -38,6 +38,6 @@ public class LineDAOImpl implements LineDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(namespace+".getLineCount", pageDTO);
 	}
-	
-	
+
+
 }

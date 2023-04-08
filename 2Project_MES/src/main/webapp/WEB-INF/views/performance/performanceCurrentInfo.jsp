@@ -89,24 +89,23 @@
 							<div class="card-body card-block">
 								<form action="${pageContext.request.contextPath }/performance/performanceCurrentInfo" method="get" class="form-inline">
 									<div class="form-group col-6 mb-1">
-										<label class="pr-1  form-control-label">실적일자</label>&nbsp;&nbsp; <input
-											type="date" name="search" class="form-control ">&nbsp;~&nbsp;
-										<input type="date" name="search2" class="form-control">
+										<label class="pr-1  form-control-label mr-2">지시번호</label>
+										<input type="text" name="search4" class="form-control ">
 									</div>
 									<div class="form-group col-6 mb-1">
-										<label class="pr-1  form-control-label">품번</label>&nbsp;&nbsp; <input
-											type="text" id="productSearchId" name="search3" class="form-control ">
+										<label class="pr-1  form-control-label mr-2">품번</label>
+										<input type="text" id="productSearchId" name="search3" class="form-control ">
 											<div class="input-group">
                                         	<div class="input-group-addon" id="productSearchPop" style="cursor: pointer;"><i class="ti-search"></i></div>
                                     	</div>
 									</div>
-									<div class="form-group col-6 mt-1">
-										<label class="pr-1  form-control-label">지시번호</label>&nbsp;&nbsp;
-										<input
-											type="text" name="search4" class="form-control ">
+									<div class="form-group col-6 mb-1">
+										<label class="pr-1  form-control-label mr-2">실적일자</label>
+										<input type="date" name="perf_date1" class="form-control mr-1">~
+										<input type="date" name="perf_date2" class="form-control ml-1">
 									</div>
 									<div class="form-group col-6 mb-1">
-										<label class="pr-1  form-control-label">라인</label>&nbsp;&nbsp; 
+										<label class="pr-1  form-control-label mr-2">라인</label>
 											<div class="p-0 col">
 												<select name="search5" id="select" class="form-control">
 													<option>전체</option>
@@ -116,7 +115,7 @@
 												</select>
 											</div>
 									</div>
-                                    <div class="col p-0">
+                                    <div class="col p-0 mt-3">
 										<input type="submit" class="btn btn-primary col-2 float-right ml-3" id="searchPerf" value="조회">
 										<input type="reset" class="btn btn-secondary col-1 float-right reset" value="취소">
 									</div>
@@ -137,7 +136,7 @@
 							<div class="card-header">
 								<strong class="card-title">생산실적 입력/수정</strong>
 							</div>
-							<form action="${pageContext.request.contextPath}/performance/insertPerf" id="insertInstForm" method="post">
+							<form action="${pageContext.request.contextPath}/performance/insertPerf" id="insertPerfForm" method="post">
 								<div class="card-body card-block">
 									<table id="table" class="table table-striped table-bordered">
 										<thead class="thead-dark">
@@ -161,19 +160,24 @@
 												<input type="text" id="insertPerfCd" name="perf_cd" class="form-control" readonly>
 												</td>
 												<td>
-												<input type="text" id="insertInstCd" name="inst_cd" value="${pageDTO.search4 }" placeholder="Inst Code" class="form-control bg-white">
+													<div class="input-group modalP" id="modalP2">
+														<input type="text" id="insertInstCd" name="inst_cd" value="${pageDTO.search4 }" readonly placeholder="Inst Code" class="form-control bg-white">
+														<div class="input-group-btn">
+															<input type="button" class="btn btn-primary" id="instListBtn" value="목록">
+														</div>
+													</div>
 												</td>
 												<td><input type="text" id="insertPerfDate" disabled class="form-control" ></td>												
 												<td><input type="text" id="insertLineNm" value="${instructionDTO.line_nm}" disabled class="form-control"></td>
 												<td><input type="text" id="insertProdNm" value="${instructionDTO.prod_nm}" disabled class="form-control"></td>
 												<td><input type="text" id="insertProdUnit" value="${instructionDTO.prod_unit}" disabled class="form-control"></td>
 												<td><input type="text" id="insertProdCount" value="${instructionDTO.prod_count}" disabled class="form-control"></td>
-												<td><input type="text" id="insertPerfGd" value="0" class="form-control"></td>
-												<td><input type="text" id="insertPerfErr" value="0" class="form-control"></td>
+												<td><input type="text" id="insertPerfGd" name="perf_good" value="0" class="form-control"></td>
+												<td><input type="text" id="insertPerfErr" name="perf_err" value="0" class="form-control"></td>
 												<td class="col-1">
 												<div class="col p-0">
-												<select name="search5" class="form-control" id="insertPerfCs">
-													<option value="--">--</option>
+												<select class="form-control" id="insertPerfCs" name="perf_couse" disabled="disabled">
+													<option value="">--</option>
 													<option value="기계이상">기계이상</option>
 													<option value="재고부족">재고부족</option>													
 													<option value="기타">기타</option>													
@@ -309,8 +313,8 @@
 	<!-- Right Panel -->
 
 	<!-- Scripts -->
-	<script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
-	<script type="text/javascript">
+<script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+<script type="text/javascript">
 		// 생산실적 현황 json 리스트
 		$(document).ready(function() {
 		  // 첫번째 표에서 데이터 클릭시 이벤트 리스너 추가
@@ -343,12 +347,12 @@
 		  });
 		});
 		
-		
+		// 회색 수정 버튼
 		$(document).on("click", "#editPerfBtn", function(){
 			console.log(jQuery(this).closest('tr').children('td:eq(0)').text());
 			jQuery('#insertPerfCd').val(jQuery(this).closest('tr').children('td:eq(0)').text());
 			jQuery('#insertInstCd').val(jQuery(this).closest('tr').children('td:eq(1)').text());
-				if('#insertPerfDate' != null){
+			if('#insertPerfDate' != null){
 				jQuery('#insertPerfDate').val(jQuery(this).closest('tr').children('td:eq(2)').text());
 			}
 			jQuery('#insertLineNm').val(jQuery(this).closest('tr').children('td:eq(3)').text());
@@ -362,21 +366,36 @@
 			jQuery('#updatePerfBtn').prop('disabled', false);
 			jQuery('#insertPerfBtn').prop('disabled', true);
 			jQuery('#insertPerfGd').focus();
-
-		});
-		
-		$(document).on("click", "#insertInstCd", function(){
-			if(jQuery.('#insertInstCd')==)
 			
+			if(jQuery('#insertPerfErr').val() != 0){
+				jQuery('#insertPerfCs').attr('disabled', false);
+			}
 		});
 		
+		// 불량사유 on off
+		$(document).on("keyup", "#insertPerfErr", function(){
+			console.log();
+			if(jQuery('#insertPerfErr').val() != 0){
+				jQuery('#insertPerfCs').attr('disabled', false);
+			}
+			if(jQuery('#insertPerfErr').val() == 0){				
+				jQuery('#insertPerfCs').attr('disabled', true);
+			}
+		});
+		
+		// 실적 추가 버튼
 		$(document).on("click", "#insertPerfBtn", function(){
+			console.log(jQuery('#insertPerfCs option:selected').val());
 			if(jQuery('#insertPerfGd').val() == 0 && jQuery('#insertPerfErr').val() == 0){
 				alert("양품/불량품 입력해주세요.");
 				return false;
 			}
 			if(jQuery('#insertInstCd').val() == ''){
 				alert("지시번호 입력해주세요.");
+				return false;
+			}
+			if(jQuery('#insertPerfErr').val() != 0 && jQuery('#insertPerfCs option:selected').val()==''){
+				alert("불량사유 입력해주세요.");
 				return false;
 			}
 		});
@@ -388,7 +407,11 @@
 				"productSearchPop", "width=800,height=650");
 		});
 		
-	</script>
+		// 목록(생산 지시 페이지로 이동)
+		$(document).on("click", "#instListBtn", function(){
+			location.href='${pageContext.request.contextPath}/instruction/infoInst';
+		});
+</script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>

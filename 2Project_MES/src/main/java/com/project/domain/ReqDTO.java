@@ -3,24 +3,24 @@ package com.project.domain;
 import java.sql.Date;
 
 public class ReqDTO extends ProductDTO{
-	
+
 	private int req_num; //소요량 기본키
-	private String req_req; //소요량 
+	private String req_req; //소요량
 	private String req_add_emp; //등록자
 	private Date req_add_date; //등록일
 	private String req_edit_emp; //등록자
 	private Date req_edit_date; //등록일
 	private String prod_fcd;
 	private String prod_fnm;
-	
-	
+
+
 	@Override
 	public String toString() {
 		return "ReqDTO [req_num=" + req_num + ", req_req=" + req_req + ", req_add_emp=" + req_add_emp
 				+ ", req_add_date=" + req_add_date + ", req_edit_emp=" + req_edit_emp + ", req_edit_date="
 				+ req_edit_date + ", prod_fcd=" + prod_fcd + ", prod_fnm=" + prod_fnm + "]";
 	}
-	
+
 	public String getProd_fnm() {
 		return prod_fnm;
 	}
@@ -51,7 +51,7 @@ public class ReqDTO extends ProductDTO{
 	public void setReq_add_emp(String req_add_emp) {
 		this.req_add_emp = req_add_emp;
 	}
-	
+
 	public String getReq_edit_emp() {
 		return req_edit_emp;
 	}
@@ -70,6 +70,6 @@ public class ReqDTO extends ProductDTO{
 	public void setReq_edit_date(Date req_edit_date) {
 		this.req_edit_date = req_edit_date;
 	}
-	
-	
+
+
 }

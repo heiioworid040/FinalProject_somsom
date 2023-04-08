@@ -8,7 +8,7 @@ public class InstructionDTO extends LineDTO{
 	private Timestamp inst_date;
 	private int inst_count;
 	private int inst_fcount;
-	
+
 	@Override
 	public String toString() {
 		return "InstructionDTO [inst_cd=" + inst_cd + ", inst_st=" + inst_st + ", inst_date=" + inst_date
@@ -45,5 +45,5 @@ public class InstructionDTO extends LineDTO{
 	public void setInst_fcount(int inst_fcount) {
 		this.inst_fcount = inst_fcount;
 	}
-	
+
 }// WiDTO

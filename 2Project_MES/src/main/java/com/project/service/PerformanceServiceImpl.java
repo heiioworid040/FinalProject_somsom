@@ -77,10 +77,10 @@ public class PerformanceServiceImpl implements PerformanceService {
 		}else if(performanceDAO.getMaxPerf()>9 && performanceDAO.getMaxPerf()<100){
 			performanceDTO.setPerf_cd("WP0"+performanceDAO.getMaxPerf());
 		}else {
-			performanceDTO.setPerf_cd("WP"+performanceDAO.getMaxPerf());		
+			performanceDTO.setPerf_cd("WP"+performanceDAO.getMaxPerf());
 		}
 		performanceDTO.setPerf_date(new Timestamp(System.currentTimeMillis()));
-		
+
 		performanceDAO.insertPerf(performanceDTO);
 	}
 
@@ -88,6 +88,9 @@ public class PerformanceServiceImpl implements PerformanceService {
 	public void updatePerf(PerformanceDTO performanceDTO) {
 		System.out.println("PerformanceServiceImpl updatePerf()");
 		
+		performanceDAO.updatePerf(performanceDTO);
 	}
+
+	
 
 }

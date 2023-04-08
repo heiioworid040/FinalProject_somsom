@@ -5,11 +5,11 @@ import java.sql.Timestamp;
 public class ImatDTO extends ProductDTO{
 
 	private int imat_num;
-	
+
 	private String imat_cd;
 	private String prod_cd;
 	private int iomat_count;
-	
+
 	private Timestamp imat_date;
 	private String imat_stg;
 	private int imat_count;
@@ -18,17 +18,21 @@ public class ImatDTO extends ProductDTO{
 	private String imat_note;
 	private String prod_unit;
 	private String prod_mat;
-	
-	
+
+
+	@Override
 	public String getProd_mat() {
 		return prod_mat;
 	}
+	@Override
 	public void setProd_mat(String prod_mat) {
 		this.prod_mat = prod_mat;
 	}
+	@Override
 	public String getProd_unit() {
 		return prod_unit;
 	}
+	@Override
 	public void setProd_unit(String prod_unit) {
 		this.prod_unit = prod_unit;
 	}
@@ -38,7 +42,7 @@ public class ImatDTO extends ProductDTO{
 	public void setIomat_count(int iomat_count) {
 		this.iomat_count = iomat_count;
 	}
-	
+
 	public int getImat_num() {
 		return imat_num;
 	}
@@ -51,9 +55,11 @@ public class ImatDTO extends ProductDTO{
 	public void setImat_cd(String imat_cd) {
 		this.imat_cd = imat_cd;
 	}
+	@Override
 	public String getProd_cd() {
 		return prod_cd;
 	}
+	@Override
 	public void setProd_cd(String prod_cd) {
 		this.prod_cd = prod_cd;
 	}
@@ -75,15 +81,19 @@ public class ImatDTO extends ProductDTO{
 	public void setImat_count(int imat_count) {
 		this.imat_count = imat_count;
 	}
+	@Override
 	public String getCli_cd() {
 		return cli_cd;
 	}
+	@Override
 	public void setCli_cd(String cli_cd) {
 		this.cli_cd = cli_cd;
 	}
+	@Override
 	public String getCli_nm() {
 		return cli_nm;
 	}
+	@Override
 	public void setCli_nm(String cli_nm) {
 		this.cli_nm = cli_nm;
 	}

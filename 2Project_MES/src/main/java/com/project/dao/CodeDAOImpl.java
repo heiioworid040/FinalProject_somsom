@@ -12,12 +12,12 @@ import com.project.domain.PageDTO;
 
 @Repository
 public class CodeDAOImpl implements CodeDAO {
-	
+
 	@Inject
 	private SqlSession sqlSession;
-	
+
 	private static final String namespace="com.project.mappers.codeMapper";
-	
+
 	@Override
 	public List<CodeDTO> getCodeGrpList(PageDTO pageDTO) {
 		System.out.println("CodeDAOImpl getCodeGrpList()");
@@ -44,7 +44,7 @@ public class CodeDAOImpl implements CodeDAO {
 	@Override
 	public int getCodeCount() {
 		System.out.println("CodeDAOImpl getCodeCount()");
-		
+
 		return sqlSession.selectOne(namespace+".getCodeCount");
 
 	}
@@ -60,7 +60,7 @@ public class CodeDAOImpl implements CodeDAO {
 	public void deleteCode(String code_cd) {
 		System.out.println("CodeDAOImpl deleteCode()");
 		sqlSession.delete(namespace+".deleteCode", code_cd);
-		
+
 	}
 
 	@Override
@@ -80,7 +80,7 @@ public class CodeDAOImpl implements CodeDAO {
 		System.out.println("CodeDAOImpl updateCode()");
 		sqlSession.update(namespace+".updateCode", codeDTO);
 	}
-	
+
 	@Override
 	public List<CodeDTO> getCodeList3(String code_grp) {
 		System.out.println("CodeDAOImpl getCodeList3()");

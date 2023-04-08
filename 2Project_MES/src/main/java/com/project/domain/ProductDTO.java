@@ -12,7 +12,7 @@ public class ProductDTO extends ClientDTO{
 	private int prod_count; //현재 개수
 	private String prod_note; //비고(이유)
 	private int prod_number;
-	
+
 	public String getProd_cd() {
 		return prod_cd;
 	}
@@ -80,8 +80,8 @@ public class ProductDTO extends ClientDTO{
 	public void setProd_outprice(int prod_outprice) {
 		this.prod_outprice = prod_outprice;
 	}
-	
-	
-	
+
+
+
 
 }

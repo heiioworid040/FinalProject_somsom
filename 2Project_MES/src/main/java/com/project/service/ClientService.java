@@ -7,7 +7,7 @@ import com.project.domain.PageDTO;
 
 public interface ClientService {
 	public List<ClientDTO> getClientInfo(PageDTO pageDTO);
-	
+
 	// 검색어
 	public int getClientCount(PageDTO pageDTO);
 

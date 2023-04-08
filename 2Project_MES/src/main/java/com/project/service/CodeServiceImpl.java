@@ -15,17 +15,17 @@ public class CodeServiceImpl implements CodeService {
 
 	@Inject
 	private CodeDAO codeDAO;
-	
+
 	@Override
 	public List<CodeDTO> getCodeGrpList(PageDTO pageDTO) {
 		System.out.println("CodeServiceImpl getCodeGrpList()");
 		int startRow=(pageDTO.getCurrentPage()-1)*pageDTO.getPageSize()+1;
 		int endRow = startRow+pageDTO.getPageSize()-1;
-			
+
 			pageDTO.setStartRow(startRow);
 			pageDTO.setEndRow(endRow);
-		
-			
+
+
 		return codeDAO.getCodeGrpList(pageDTO);
 	}
 
@@ -40,11 +40,11 @@ public class CodeServiceImpl implements CodeService {
 		System.out.println("CodeServiceImpl getCodeList()");
 		int startRow=(pageDTO.getCurrentPage()-1)*pageDTO.getPageSize()+1;
 		int endRow = startRow+pageDTO.getPageSize()-1;
-			
+
 			pageDTO.setStartRow(startRow);
 			pageDTO.setEndRow(endRow);
-		
-			
+
+
 		return codeDAO.getCodeList(pageDTO);
 	}
 
@@ -71,7 +71,7 @@ public class CodeServiceImpl implements CodeService {
 	@Override
 	public CodeDTO getCode(String code_grp) {
 		System.out.println("CodeServiceImpl getCode()");
-		
+
 		return codeDAO.getCode(code_grp);
 	}
 
@@ -85,7 +85,7 @@ public class CodeServiceImpl implements CodeService {
 	public void updateCode(CodeDTO codeDTO) {
 		System.out.println("CodeServiceImpl updateCode()");
 		codeDAO.updateCode(codeDTO);
-		
+
 	}
 
 	@Override
@@ -99,5 +99,5 @@ public class CodeServiceImpl implements CodeService {
 
 
 
-	
+
 }

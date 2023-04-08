@@ -47,6 +47,7 @@
 				</if>
 			</if>
 		</if>
+		order by pe.perf_cd desc
 		limit #{startRow}, #{pageSize}
 	</select>
 
@@ -167,5 +168,10 @@
 	SELECT MAX(REGEXP_REPLACE(perf_cd, '[a-z]', ''))+1
 	from performance
     </select>
-
+	
+	<update id="updatePerf">
+	update performance
+	set perf_good=#{perf_good}, perf_err=#{perf_err}, perf_cause=#{perf_cause}, perf_note=#{perf_note}
+	where perf_cd = #{perf_cd}
+	</update>
 </mapper>
