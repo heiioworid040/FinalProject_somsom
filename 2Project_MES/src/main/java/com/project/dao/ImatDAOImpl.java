@@ -99,5 +99,10 @@ public class ImatDAOImpl implements ImatDAO{
 
 		return sqlSession.selectOne(namespace + ".getImat", imat_cd);
 	}
+	@Override
+	public ProductDTO getProd(String prod_cd) {
+		System.out.println("ImatDAOImpl getProd()");
 
+		return sqlSession.selectOne(namespace + ".getProd", prod_cd);
+	}
 }

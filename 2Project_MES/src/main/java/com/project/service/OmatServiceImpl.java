@@ -9,6 +9,10 @@ import org.springframework.stereotype.Service;
 
 import com.project.dao.OmatDAO;
 import com.project.domain.OmatDTO;
+
+import com.project.domain.OmatDTO;
+import com.project.domain.OmatDTO;
+
 import com.project.domain.PageDTO;
 import com.project.domain.ProductDTO;
 
@@ -32,6 +36,14 @@ public class OmatServiceImpl implements OmatService{
 
 		return omatDAO.getOmat(omat_cd);
 	}
+	
+	@Override
+	public ProductDTO getProd(String prod_cd) {
+		System.out.println("ImatServiceImpl getProd()");
+
+		return omatDAO.getProd(prod_cd);
+	}
+	
 	@Override
 	public List<OmatDTO> getOmatbeList(PageDTO pageDTO) {
 		System.out.println("OmatServiceimpl getOmatbeList()");
@@ -76,7 +88,15 @@ public class OmatServiceImpl implements OmatService{
 	@Override
 	public void insertOmat(OmatDTO omatDTO) {
 		System.out.println("OmatServiceImpl insertOmat()");
+		String omatcd=null;
+		if(omatDAO.getMaxCd()==null) {
+			omatDTO.setOmat_cd("MO001");
+		}else {
+			omatcd="MO"+String.format("%03d", omatDAO.getMaxCd()+1);
+		}
+		
 		// 현시스템 날짜 저장하는 처리작업
+		omatDTO.setOmat_cd(omatcd);
 		omatDTO.setOmat_date(new Timestamp(System.currentTimeMillis()));
 
 		//회원가입 디비 부모인터페이스 MemberDAO,

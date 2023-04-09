@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>imatinsert</title>
+<title>omatinsert</title>
 <meta name="description" content="Ela Admin - HTML5 Admin Template">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -36,35 +36,11 @@
 
 <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 </head>
-
-<!-- <script type="text/javascript"> -->
-
-// function setChildValue(prod_cd,prod_mat){
-
-//     document.getElementById("prod_cd").value = prod_cd;
-
-// }
-<!-- </script> -->
 <script type="text/javascript">
 
 function openPopUp() {
-	window.open("${pageContext.request.contextPath}/imat/imatpop", "imatpop", "width=1000, height=800");
+	window.open("${pageContext.request.contextPath}/omat/omatpop", "omatpop", "width=1000, height=800");
 }
-
-function openNewWindow(url) {
-	  var name = '_blank';
-	  var specs = 'menubar=no,status=no,toolbar=no';
-	  var newWindow = window.open(url, name, specs);
-	  newWindow.focus();
-	}
-
-	function getReturnValue(returnValue) {
-	  alert(returnValue);
-	}
-
-	$('#openNewWindowButton').click(function() {
-	  openNewWindow('/popUpUrl');
-	});
 </script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js">
 	// $(document).ready(function(){
@@ -75,7 +51,7 @@ function openNewWindow(url) {
 	// 		$('.id').focus();
 	// 		return false;
 	// 	}
-	//     if($('.imat_code').val()==""){
+	//     if($('.omat_code').val()==""){
 	//     	alert("비밀번호 입력하세요");
 	// 		$('.pass').focus();
 	// 		return false;
@@ -154,7 +130,7 @@ function openNewWindow(url) {
 
 
 
-		<div class="animated fadeIn">
+		<div class="anomated fadeIn">
 			<div class="row">
 				<div class="col-lg">
 					<div class="card">
@@ -162,8 +138,7 @@ function openNewWindow(url) {
 							<strong class="card-title">Table Head</strong>
 						</div>
 						<div class="card-body">
-<!-- 						<input type="button" value="조회" onclick="openPopUp()"><br> -->
-							<form method="post" action="${pageContext.request.contextPath}/imat/imatinsertPro">
+						<form method="post" action="${pageContext.request.contextPath}/omat/omatinsertPro">
 						<table class="table">
 										<thead class="thead-dark">
 
@@ -179,15 +154,15 @@ function openNewWindow(url) {
 										<tbody>
 												<tr>
 												<td><input type="button" value="조회" onclick="openPopUp()"></td>
-													<td><input type="text" name="imat_cd"
-										class="imat_cd" readonly></td>
+													<td><input type="text" name="omat_cd"
+										class="omat_cd" readonly></td>
 													<td><input
 										type="text" name="prod_cd" class="prod_cd" id="prod_cd" readonly></td>
-													<td><input type="text" name="imat_stg" class="imat_stg" id="imat_stg" readonly></td>
-													<td><input type="text" name="imat_count"
-										class="imat_count"></td>
+													<td><input type="text" name="omat_stg" class="omat_stg" id="omat_stg" readonly></td>
+													<td><input type="text" name="omat_count"
+										class="omat_count"></td>
 													<td><input
-										type="text" name="imat_note" class="imat_note"></td>
+										type="text" name="omat_note" class="omat_note"></td>
 													
 												</tr>
 
@@ -196,31 +171,11 @@ function openNewWindow(url) {
 
 
 									</table>
-									<div id="buttons"> -->
+									<div id="buttons">
 									<input type="submit" value="Submit" class="submit"> 
 									<input type="reset" value="Cancel" class="cancel">
 								</div>
 									</form>
-									
-<!-- 						<input type="button" value="조회" onclick="openPopUp()"><br> -->
-<!-- 							<form -->
-<%-- 								action="${pageContext.request.contextPath}/imat/imatinsertPro" --%>
-<!-- 								id="insert" method="post"> -->
-<!-- 								<fieldset> -->
-<!-- 									<label>입고번호</label> <input type="text" name="imat_cd" -->
-<!-- 										class="imat_cd" readonly><br> <label>품번</label> <input -->
-<%-- 										type="text" name="prod_cd" id="prod_cd" class="prod_cd" value="${prod_cd}" readonly><br> <label>입고창고</label> --%>
-<!-- 									<input type="text" name="imat_stg" id="imat_stg" class="imat_stg"><br> -->
-<!-- 									<label>입고수량</label><input type="text" name="imat_count" -->
-<!-- 										class="imat_count"><br> <label>비고</label><input -->
-<!-- 										type="text" name="imat_note" class="imat_note"><br> -->
-<!-- 								</fieldset> -->
-<!-- 								<div class="clear"></div> -->
-<!-- 								<div id="buttons"> -->
-<!-- 									<input type="submit" value="Submit" class="submit"> <input -->
-<!-- 										type="reset" value="Cancel" class="cancel"> -->
-<!-- 								</div> -->
-<!-- 							</form> -->
 							
 						</div>
 					</div>

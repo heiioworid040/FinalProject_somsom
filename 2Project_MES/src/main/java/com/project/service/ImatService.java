@@ -16,4 +16,5 @@ public interface ImatService {
 	public void insertImat(ImatDTO imatDTO);
 	public void updateImat(ImatDTO imatDTO);
 	public ImatDTO getImat(String imat_cd);
+	public ProductDTO getProd(String prod_cd);
 }

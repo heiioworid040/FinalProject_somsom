@@ -31,6 +31,7 @@ public class OmatController {
 
 	@RequestMapping(value = "/omat/omatinsert", method = RequestMethod.GET)
 	public String omatinsert() {
+		System.out.println("OmatController omatinsert()");
 //		주소줄 변경없이 이동
 //		/WEB-INF/views/파일이름.jsp
 //		/WEB-INF/views/center/write.jsp
@@ -66,6 +67,19 @@ public class OmatController {
 //		return "redirect:/omat/omatbeList";
 	}
 
+	@RequestMapping(value = "/omat/omatpopPro", method = RequestMethod.GET)
+	public String omatpopPro(HttpServletRequest request, Model model) {
+		System.out.println("ImatController imatpopPro()");
+		String prod_cd = request.getParameter("prod_cd");
+		ProductDTO product = OmatService.getProd(prod_cd);
+		model.addAttribute("prod_cd",product.getProd_cd());
+		model.addAttribute("prod_mat",product.getProd_mat());
+		
+//		주소줄 변경하면서 이동 
+		return "omat/omatinsert";
+	}
+	
+	
 
 	// 가상주소 http://localhost:8080/SFunWeb/board/writePro
 	@RequestMapping(value = "/omat/omatinsertPro", method = RequestMethod.POST)
@@ -123,46 +137,47 @@ public class OmatController {
 		return "omat/omatbeList";
 	}
 
-	@RequestMapping(value = "omat/omatprodList1", method = RequestMethod.GET)
-	public String OmatprodList1(HttpServletRequest request, Model model) {
-		System.out.println("OmatController OmatprodList1()");
+//	@RequestMapping(value = "omat/omatprodList1", method = RequestMethod.GET)
+//	public String OmatprodList1(HttpServletRequest request, Model model) {
+//		System.out.println("OmatController OmatprodList1()");
+//
+//		int pageSize = 10;
+//		String pageNum = request.getParameter("pageNum");
+//		if (pageNum == null) {
+//			pageNum = "1";
+//		}
+//		System.out.println("OmatController OmatprodList1()-1");
+//		int currentPage = Integer.parseInt(pageNum);
+//
+//		PageDTO pageDTO = new PageDTO();
+//		pageDTO.setPageSize(pageSize);
+//		pageDTO.setPageNum(pageNum);
+//		pageDTO.setCurrentPage(currentPage);
+//		System.out.println("OmatController OmatprodList1()-2");
+//		List<ProductDTO> omatprodList1 = OmatService.getOmatprodList1(pageDTO);
+//
+//		int count = OmatService.getOmatCount();
+//		int pageBlock = 10;
+//		int startPage = (currentPage - 1) / pageBlock * pageBlock + 1;
+//		int endPage = startPage + pageBlock - 1;
+//		int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
+//		if (endPage > pageCount) {
+//			endPage = pageCount;
+//		}
+//		System.out.println("OmatController OmatbeList()-3");
+//		pageDTO.setCount(count);
+//		pageDTO.setPageBlock(pageBlock);
+//		pageDTO.setStartPage(startPage);
+//		pageDTO.setEndPage(endPage);
+//		pageDTO.setPageCount(pageCount);
+//
+//		model.addAttribute("OmatprodList1", omatprodList1);
+//		model.addAttribute("pageDTO", pageDTO);
+//		return "omat/omatinsert";
+//	}
 
-		int pageSize = 10;
-		String pageNum = request.getParameter("pageNum");
-		if (pageNum == null) {
-			pageNum = "1";
-		}
-		System.out.println("OmatController OmatprodList1()-1");
-		int currentPage = Integer.parseInt(pageNum);
-
-		PageDTO pageDTO = new PageDTO();
-		pageDTO.setPageSize(pageSize);
-		pageDTO.setPageNum(pageNum);
-		pageDTO.setCurrentPage(currentPage);
-		System.out.println("OmatController OmatprodList1()-2");
-		List<ProductDTO> omatprodList1 = OmatService.getOmatprodList1(pageDTO);
-
-		int count = OmatService.getOmatCount();
-		int pageBlock = 10;
-		int startPage = (currentPage - 1) / pageBlock * pageBlock + 1;
-		int endPage = startPage + pageBlock - 1;
-		int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
-		if (endPage > pageCount) {
-			endPage = pageCount;
-		}
-		System.out.println("OmatController OmatbeList()-3");
-		pageDTO.setCount(count);
-		pageDTO.setPageBlock(pageBlock);
-		pageDTO.setStartPage(startPage);
-		pageDTO.setEndPage(endPage);
-		pageDTO.setPageCount(pageCount);
-
-		model.addAttribute("OmatprodList1", omatprodList1);
-		model.addAttribute("pageDTO", pageDTO);
-		return "omat/omatinsert";
-	}
-
-	@RequestMapping(value = "/omat/OmatprodList", method = { RequestMethod.POST, RequestMethod.GET })
+	
+	@RequestMapping(value = "/omat/omatpop", method = { RequestMethod.POST, RequestMethod.GET })
 	public List<ProductDTO> OmatprodList(HttpServletRequest request, Model model) throws Exception {
 		System.out.println("OmatController OmatprodList");
 		int pageSize = 10;

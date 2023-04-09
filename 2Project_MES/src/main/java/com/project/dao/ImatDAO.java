@@ -16,6 +16,8 @@ public interface ImatDAO {
 	public int getImatCount();
 
 	public ImatDTO getImat(String imat_cd);
+	
+	public ProductDTO getProd(String prod_cd);
 
 	public void deleteList(String imat_cd);
 

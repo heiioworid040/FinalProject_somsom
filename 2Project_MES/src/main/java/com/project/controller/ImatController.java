@@ -5,11 +5,13 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.aop.target.dynamic.AbstractRefreshableTargetSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.fasterxml.jackson.databind.ser.AnyGetterWriter;
 import com.project.domain.ImatDTO;
 import com.project.domain.PageDTO;
 import com.project.domain.ProductDTO;
@@ -83,6 +85,17 @@ public class ImatController {
 
 //		주소줄 변경하면서 이동
 		return "redirect:/imat/imatbeList";
+	}
+
+	@RequestMapping(value = "/imat/imatpopPro", method = RequestMethod.GET)
+	public String imatpopPro(HttpServletRequest request, Model model) {
+		System.out.println("ImatController imatpopPro()");
+		String prod_cd = request.getParameter("prod_cd");
+		ProductDTO product = ImatService.getProd(prod_cd);
+		model.addAttribute("prod_cd",product.getProd_cd());
+		model.addAttribute("prod_mat",product.getProd_mat());
+//		주소줄 변경하면서 이동 
+		return "imat/imatinsert";
 	}
 
 	@RequestMapping(value = "imat/imatbeList", method = RequestMethod.GET)

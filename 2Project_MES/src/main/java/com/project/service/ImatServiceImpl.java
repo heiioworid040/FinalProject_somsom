@@ -33,6 +33,13 @@ public class ImatServiceImpl implements ImatService{
 		return imatDAO.getImat(imat_cd);
 	}
 	@Override
+	public ProductDTO getProd(String prod_cd) {
+		System.out.println("ImatServiceImpl getProd()");
+
+		return imatDAO.getProd(prod_cd);
+	}
+	
+	@Override
 	public List<ImatDTO> getImatbeList(PageDTO pageDTO) {
 		System.out.println("ImatServiceimpl getImatbeList()");
 		int startRow=(pageDTO.getCurrentPage()-1)*pageDTO.getPageSize()+1;
