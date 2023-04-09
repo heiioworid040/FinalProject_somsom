@@ -37,8 +37,11 @@ public class EmployeeController {
 
 		if(employeeDTO2 != null) {
 			System.out.println("아이디 비밀번호 일치");
+			String emp_cd= employeeDTO.getEmp_cd();
 			session.setAttribute("emp_cd", employeeDTO.getEmp_cd());
-			session.setAttribute("emp_position", employeeDTO2.getEmp_position());
+			employeeDTO=employeeService.getEmployee(emp_cd);
+			session.setAttribute("emp_nm", employeeDTO.getEmp_nm());
+			session.setAttribute("emp_position", employeeDTO.getEmp_position());
 			return "redirect:/instruction/infoInst";
 		}else {
 			System.out.println("아이디 비밀번호 틀림");

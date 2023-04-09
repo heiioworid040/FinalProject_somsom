@@ -69,6 +69,14 @@ public class InstructionServiceImpl implements InstructionService{
 		return instDAO.getInst(inst_cd);
 	}
 
+	@Override
+	public void deleteInst(String inst_cd) {
+		System.out.println("InstserviceImpl deleteInst()");
+		
+		instDAO.deletInst(inst_cd);
+	}
+	
+	
 
 
 

@@ -91,6 +91,14 @@ public class PerformanceServiceImpl implements PerformanceService {
 		performanceDAO.updatePerf(performanceDTO);
 	}
 
+	@Override
+	public void deletePerf(String perf_cd) {
+		System.out.println("PerformanceServiceImpl deletePerf()");
+		
+		performanceDAO.deletePerf(perf_cd);
+	}
+	
+	
 	
 
 }

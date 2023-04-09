@@ -21,4 +21,6 @@ public interface PerformanceService {
 	public void updatePerf(PerformanceDTO performanceDTO);
 
 	public void insertPerf(PerformanceDTO performanceDTO);
+
+	public void deletePerf(String perf_cd);
 }

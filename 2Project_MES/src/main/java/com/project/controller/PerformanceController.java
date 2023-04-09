@@ -12,12 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.domain.InstructionDTO;
-import com.project.domain.LineDTO;
 import com.project.domain.PageDTO;
 import com.project.domain.PerformanceDTO;
 import com.project.domain.ProductDTO;
 import com.project.service.InstructionService;
-import com.project.service.LineService;
 import com.project.service.PerformanceService;
 
 @Controller
@@ -29,19 +27,16 @@ public class PerformanceController {
 	@Inject
 	private InstructionService instructionService;
 
-	@Inject
-	private LineService lineService;
-
 	// 생산실적 현황 목록
 	@RequestMapping(value = "/performance/performanceCurrentInfo", method = RequestMethod.GET)
 	public String currentInfo(HttpServletRequest request, Model model) {
 		System.out.println("PerformanceController currentInfo()");
 		// 검색어 가져오기
-		String search = request.getParameter("search");
-		String search2 = request.getParameter("search2");
-		String search3 = request.getParameter("search3");
-		String search4 = request.getParameter("search4");
-		String search5 = request.getParameter("perf_couse");
+		String search = request.getParameter("searchInstCd");
+		String search2 = request.getParameter("searchProdCd");
+		String search3 = request.getParameter("searchPerfDate1");
+		String search4 = request.getParameter("searchPerfDate2");
+		String search5 = request.getParameter("searchLineCd");
 
 		// 한 화면에 보여줄 글 개수 설정
 		int pageSize = 20;
@@ -91,9 +86,6 @@ public class PerformanceController {
 		model.addAttribute("instructionDTO", instructionDTO);
 		model.addAttribute("performanceCurrentInfo", performanceCurrentInfo);
 		model.addAttribute("pageDTO", pageDTO);
-		// 라인 검색 옵션 셀렉트박스 값
-		List<LineDTO> searchLine = lineService.getSearchLine();
-		model.addAttribute("searchLine", searchLine);
 		// 주소변경 없이 이동
 		return "performance/performanceCurrentInfo";
 	}
@@ -185,6 +177,16 @@ public class PerformanceController {
 		performanceDTO.setInst_cd(inst_cd);
 
 		performanceService.updatePerf(performanceDTO);
+		return "redirect:/performance/performanceCurrentInfo";
+	}
+	
+	@RequestMapping(value = "/performance/deletePerf", method = RequestMethod.GET)
+	public String deletePerfPro(HttpServletRequest request, String perf_cd) {
+		System.out.println("instructionController deleteInstPro()");
+		System.out.println(request.getParameter("delInstCd"));
+		perf_cd=request.getParameter("delPerfCd");
+		performanceService.deletePerf(perf_cd);
+		
 		return "redirect:/performance/performanceCurrentInfo";
 	}
 

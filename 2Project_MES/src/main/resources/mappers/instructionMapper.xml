@@ -103,6 +103,10 @@
 	where i.inst_cd = #{inst_Cd}
     </select>
 	
+	<delete id="deleteInst">
+	delete from instruction
+	where inst_cd=#{inst_cd}
+	</delete>
 	
 <!-- id-"이름" spl구문 하나하나 이름
 	 ? 대신에 MemberDTO 멤버변수명 #{id}	-->

@@ -63,5 +63,13 @@ public class InstructionDAOImpl implements InstructionDAO{
 	}
 
 
+	@Override
+	public void deletInst(String inst_cd) {
+		System.out.println("InstDAOImpl deleteInst()");
+		
+		sqlSession.delete(namespace+".deleteInst", inst_cd);
+	}
+
+	
 
 }

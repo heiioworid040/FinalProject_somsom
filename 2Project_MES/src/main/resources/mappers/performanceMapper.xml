@@ -22,22 +22,22 @@
 		where 1=1
 		<if test="search != null">
 			<if test='search != ""'>
-				and pe.perf_date &gt;= #{search}
+				and i.inst_cd = #{search}
 			</if>
 		</if>
 		<if test="search2 != null">
 			<if test='search2 != ""'>
-				and pe.perf_date &lt;= #{search2}
+				and p.prod_cd = #{search2}
 			</if>
 		</if>
 		<if test="search3 != null">
 			<if test='search3 != ""'>
-				and p.prod_cd = #{search3}
+				and pe.perf_date &gt;= #{search3}
 			</if>
 		</if>
 		<if test="search4 != null">
 			<if test='search4 != ""'>
-				and i.inst_cd = #{search4}
+				and pe.perf_date &lt;= #{search4}
 			</if>
 		</if>
 		<if test="search5 != null">
@@ -174,4 +174,9 @@
 	set perf_good=#{perf_good}, perf_err=#{perf_err}, perf_cause=#{perf_cause}, perf_note=#{perf_note}
 	where perf_cd = #{perf_cd}
 	</update>
+	
+	<delete id="deletePerf">
+	delete from performance
+	where perf_cd=#{perf_cd}
+	</delete>
 </mapper>

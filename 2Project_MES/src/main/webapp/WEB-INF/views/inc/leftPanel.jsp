@@ -34,7 +34,7 @@
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="menu-icon fa fa-th"></i><a href="${pageContext.request.contextPath}/product/productlist">품목 정보</a></li>
                             <li><i class="menu-icon fa fa-th"></i><a href="${pageContext.request.contextPath}/req/reqlist">소요량</a></li>
-                            <li><i class="menu-icon fa fa-th"></i><a href=" ">라인 정보</a></li>
+                            <li><i class="menu-icon fa fa-th"></i><a href="${pageContext.request.contextPath}/line/lineInfo">라인 정보</a></li>
                             <li><i class="menu-icon fa fa-th"></i><a href="${pageContext.request.contextPath}/client/clientInfo">거래처 정보</a></li>
                         </ul>
                     </li>

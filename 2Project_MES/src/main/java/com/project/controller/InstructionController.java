@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,7 +25,7 @@ public class InstructionController {
 	}
 
 	@RequestMapping(value = "/instruction/infoInst", method = RequestMethod.GET)
-	public String getInfoInst(HttpServletRequest request, Model model, HttpSession session) {
+	public String getInfoInst(HttpServletRequest request, Model model) {
 		System.out.println("instructionController getInfoInst()");
 
 		String searchLineCd=request.getParameter("searchLineCd");
@@ -70,9 +69,6 @@ public class InstructionController {
 		List<InstructionDTO> instList=instService.getInstList(pageDTO);
 
 		int count = instService.getInstCount();
-		System.out.println("st"+searchInstSt1 );
-		System.out.println("st"+searchInstSt2 );
-		System.out.println("st"+searchInstSt3 );
 		int pageBlock=10;
 		int startPage=(currentPage-1)/pageBlock*pageBlock+1;
 		int endPage=startPage+pageBlock-1;
@@ -117,5 +113,17 @@ public class InstructionController {
 		instService.updateInst(instructionDTO);
 		return "redirect:/instruction/infoInst";
 	}
+
+	@RequestMapping(value = "/instruction/deleteInst", method = RequestMethod.GET)
+	public String deleteInstPro(HttpServletRequest request, String inst_cd) {
+		System.out.println("instructionController deleteInstPro()");
+		System.out.println(request.getParameter("delInstCd"));
+		inst_cd=request.getParameter("delInstCd");
+		instService.deleteInst(inst_cd);
+		
+		return "redirect:/instruction/infoInst";
+	}
+	
+	
 
 }
