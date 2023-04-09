@@ -32,7 +32,7 @@
 		first = $('.ord_cd').length+1;
 		$('#btn_add').click(function(){
 		num = $('.ord_cd').length+1;
-			$('.orderInfo').append('<tr class="add"><td>'+num+'</td><td><input type="text" name="ord_cd" class="ord_cd" readonly></td><td><input type="text" id="cli_nm'+num+'" name="cli_nm" class="Ocli_nm" onclick="searchPop(\'cliO\',\''+num+'\')"><input type="hidden" id="cli_cd'+num+'" name="cli_cd"></td><td><input type="date" id="ord_date'+num+'" name="ord_date" class="Oord_date"></td><td><input type="text" id="emp_nm'+num+'" name="emp_nm" class="Oemp_nm" onclick="searchPop(\'empO\',\''+num+'\')"><input type="hidden" id="emp_cd'+num+'" name="emp_cd"></td><td><input type="text" id="prod_cd'+num+'" name="prod_cd" class="prod_cd" onclick="searchPop(\'prodO\',\''+num+'\')"></td><td><input type="text" id="prod_nm'+num+'" class="prod_nm"></td><td><input type="text" id="prod_unit'+num+'" class="prod_unit"></td><td><input type="date" id="ord_d_date'+num+'" name="ord_d_date" class="Oord_d_date"></td><td><input type="text" id="ord_count'+num+'" name="ord_count" class="ord_count"></td><td><input type="text" id="ship_count" class="ship_count" readonly></td><td><input type="checkbox" id="ck"></td></tr>');
+			$('.orderInfo').append('<tr class="add"><td>'+num+'</td><td><input type="text" name="ord_cd" class="ord_cd" readonly></td><td><input type="text" id="cli_nm'+num+'" name="cli_nm" class="Ocli_nm" onclick="searchPop(\'cliO\',\''+num+'\')"><input type="hidden" id="cli_cd'+num+'" name="cli_cd"></td><td><input type="date" id="ord_date'+num+'" name="ord_date" class="Oord_date"></td><td><input type="text" id="emp_nm'+num+'" name="emp_nm" class="Oemp_nm" onclick="searchPop(\'empO\',\''+num+'\')"><input type="hidden" id="emp_cd'+num+'" name="emp_cd"></td><td><input type="text" id="prod_cd'+num+'" name="prod_cd" class="prod_cd" onclick="searchPop(\'prodO\',\''+num+'\')"></td><td><input type="text" id="prod_nm'+num+'" class="prod_nm"></td><td><input type="text" id="prod_unit'+num+'" class="prod_unit"></td><td><input type="date" id="ord_d_date'+num+'" name="ord_d_date" class="Oord_d_date"></td><td><input type="text" id="ord_count'+num+'" name="ord_count" class="ord_count"></td><td><input type="text" id="ship_count" class="ship_count" readonly></td><td></td></tr>');
 		});
 		
 		$('#btn_cel').click(function(){
@@ -48,60 +48,35 @@
 
 		$('#btn_ins').click(function(){
 			last = $('.ord_cd').length;
-			if($('#cli_nm'+first)) {
-				alert("저장할 데이터가 없습니다");
-			}
-				
-			for(i=first;i<=last;i++) {
-				if(!$("input:checked[id='ck']").prop("checked")&&$('#cli_nm'+i).val()==""&&$('#ord_date'+i).val()==""&&$('#emp_nm'+i).val()==""&&$('#prod_cd'+i).val()==""&&$('#ord_count'+i).val()==""){
-					alert("저장할 데이터가 없습니다");
-					return false;
-				}else if($('#cli_nm'+i).val()!=""||$('#ord_date'+i).val()!=""||$('#emp_nm'+i).val()!=""||$('#prod_cd'+i).val()!=""||$('#ord_count'+i).val()!="") {
-					if($('#cli_nm'+i).val()=="") {
+			
+			for(i=first;i<=last;i++){
+				if($('#cli_nm'+i).val()!=""||$('#ord_date'+i).val()!=""||$('#emp_nm'+i).val()!=""||$('#prod_cd'+i).val()!=""||$('#ord_count'+i).val()!=""){
+					if($('#cli_nm'+i).val()==""){
 					alert("거래처 선택");
 					return false;
 					}
-					if($('#ord_date'+i).val()=="") {
+					if($('#ord_date'+i).val()==""){
 					alert("수주일자 입력");
 					return false;
 					}
-					if($('#emp_nm'+i).val()=="") {
+					if($('#emp_nm'+i).val()==""){
 					alert("담당자 선택");
 					return false;
 					}
-					if($('#prod_cd'+i).val()=="") {
+					if($('#prod_cd'+i).val()==""){
 					alert("상품 선택");
 					return false;
 					}
-					if($('#ord_d_date'+i).val()=="") {
+					if($('#ord_d_date'+i).val()==""){
 					alert("납품예정일 입력");
 					return false;
 					}
-					if($('#ord_count'+i).val()=="") {
+					if($('#ord_count'+i).val()==""){
 					alert("수주량 입력");
 					return false;
 					}
-// 					return true;
 				}
 			}
-// 			alert(first);
-// 			alert(last);
-// 			alert($('#cli_nm'+num).val());
-
-// 			for(i=first;i<=last;i++) {
-// 				if(!$("input:checked[id='ck']").prop("checked")&&$('#cli_nm'+i).val()==""&&$('#ord_date'+i).val()==""&&$('#emp_nm'+i).val()==""&&$('#prod_cd'+i).val()==""&&$('#ord_count'+i).val()==""){
-// 					alert("저장할 데이터가 없습니다");
-// 				}
-// 				if($('#cli_nm'+i).val()!=""||$('#ord_date'+i).val()!=""||$('#emp_nm'+i).val()!=""||$('#prod_cd'+i).val()!=""||$('#ord_count'+i).val()!=""){
-// 					alert("거래처 선택");
-// 					return false;
-// 				}
-// 			}
-
-// 			if($('#ord_date'+num).val()==""){
-// 				alert("수주일자 입력");
-// 				return false;
-// 			}
 		});
 	});
 </script>
@@ -228,7 +203,7 @@
 								<table class="table table-striped table-bordered">
 									<thead class="thead-dark">
 										<tr>
-											<th scope="col"></th>
+											<th scope="col" style="width: 44px"></th>
 											<th scope="col">수주번호</th>
 											<th scope="col">업체</th>
 											<th scope="col">수주일자</th>

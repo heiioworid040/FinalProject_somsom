@@ -66,6 +66,10 @@
 		});
 		
 		$('#orderInsert').submit(function(){
+			if($('#emp_cd').val()==""&&$('#cli_cd').val()==""&&$('#ord_date').val()==""&&$('#ord_d_date').val()==""&&$('#prod_cd').val()==""&&$('#ord_count').val()==""){
+				alert("데이터가 없습니다")
+				return false;
+			}
 			if($('#emp_cd').val()==""){
 				alert("담당자 선택");
 				return false;
