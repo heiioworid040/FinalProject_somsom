@@ -2,7 +2,6 @@ package com.project.controller;
 
 import java.util.List;
 
-
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
@@ -22,7 +21,7 @@ import com.project.service.ImatService;
 public class ImatController {
 	@Inject
 	private ImatService ImatService;
-	
+
 //	@Inject
 //	private ImatService imatService;
 //	@RequestMapping(value = "/imat/imatbeListPro", method = RequestMethod.POST)
@@ -47,8 +46,8 @@ public class ImatController {
 ////		/WEB-INF/views/center/write.jsp
 //		return "imat/imatpop";
 //	}
-//	
-	
+//
+
 	// 가상주소 http://localhost:8080/SFunWeb/board/writePro
 	@RequestMapping(value = "/imat/imatinsertPro", method = RequestMethod.POST)
 	public String imatinsertPro(ImatDTO imatDTO) {
@@ -63,7 +62,7 @@ public class ImatController {
 
 	@RequestMapping(value = "/imat/imatupdate", method = RequestMethod.GET)
 	public String imatupdate(HttpServletRequest request, Model model) {
-		
+
 		String imat_cd = request.getParameter("imat_cd");
 
 		ImatDTO imatDTO = ImatService.getImat(imat_cd);
@@ -76,18 +75,18 @@ public class ImatController {
 //		/WEB-INF/views/center/update.jsp
 		return "imat/imatupdate";
 	}
-	
+
 	// 가상주소 http://localhost:8080/SFunWeb/board/updatePro
 	@RequestMapping(value = "/imat/imatupdatePro", method = RequestMethod.POST)
 	public String imatupdatePro(ImatDTO imatDTO) {
 		System.out.println("ImatController imatupdatePro()");
-		
+
 		ImatService.updateImat(imatDTO);
-		
-//		주소줄 변경하면서 이동 
+
+//		주소줄 변경하면서 이동
 		return "redirect:/imat/imatbeList";
 	}
-	
+
 	@RequestMapping(value = "/imat/imatpopPro", method = RequestMethod.GET)
 	public String imatpopPro(HttpServletRequest request, Model model) {
 		System.out.println("ImatController imatpopPro()");
@@ -98,7 +97,7 @@ public class ImatController {
 //		주소줄 변경하면서 이동 
 		return "imat/imatinsert";
 	}
-	
+
 	@RequestMapping(value = "imat/imatbeList", method = RequestMethod.GET)
 	public String ImatbeList(HttpServletRequest request, Model model) {
 		System.out.println("ImatController ImatbeList()");
@@ -141,7 +140,7 @@ public class ImatController {
 //		} catch (Exception e) {
 //		    e.printStackTrace();
 //		}
-		
+
 		model.addAttribute("ImatbeList", imatbeList);
 		model.addAttribute("pageDTO", pageDTO);
 		System.out.println("ImatController ImatbeList()-4");
@@ -152,7 +151,7 @@ public class ImatController {
 		return "imat/imatbeList";
 	}
 
-	
+
 	@RequestMapping(value = "iomat/iomatList", method = RequestMethod.GET)
 	public String IomatList(HttpServletRequest request, Model model) {
 		System.out.println("ImatController IomatList()");
@@ -163,7 +162,7 @@ public class ImatController {
 		}
 		System.out.println("ImatController iomatList()-1");
 		int currentPage = Integer.parseInt(pageNum);
-		
+
 		PageDTO pageDTO = new PageDTO();
 		pageDTO.setPageSize(pageSize);
 		pageDTO.setPageNum(pageNum);
@@ -188,10 +187,10 @@ public class ImatController {
 
 		model.addAttribute("IomatList",iomatList);
 		model.addAttribute("pageDTO", pageDTO);
-		
+
 		return "iomat/iomatList";
 	}
-	
+
 //	@RequestMapping(value = "imat/imatprodList1", method = RequestMethod.GET)
 //	public String ImatprodList1(HttpServletRequest request, Model model) {
 //		System.out.println("ImatController ImatprodList1()");

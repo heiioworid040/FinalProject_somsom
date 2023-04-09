@@ -70,7 +70,7 @@ public class ClientController {
 
 		model.addAttribute("clientInfo", clientInfo);
 		model.addAttribute("pageDTO", pageDTO);
-		
+
 		System.out.println();
 		// 주소변경 없이 이동
 		return "client/clientInfo";
@@ -117,8 +117,8 @@ public class ClientController {
 
 		try {
 			String[] cli_cd = request.getParameterValues("chk");
-			for (int i = 0; i < cli_cd.length; i++) {
-				clientService.deleteClient(cli_cd[i]);
+			for (String element : cli_cd) {
+				clientService.deleteClient(element);
 			}
 		} catch (NullPointerException e) {
 			e.printStackTrace();

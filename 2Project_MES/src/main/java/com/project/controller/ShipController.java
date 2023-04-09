@@ -74,14 +74,14 @@ public class ShipController {
 		// 주소변경 없이 이동
 		return "ship/shipCurrentInfo";
 	}
-	
+
 	@RequestMapping(value = "/ship/currDelete", method = RequestMethod.POST)
 	public String delete(HttpServletRequest request) {
-		
+
 		try {
 			String[] ship_cd = request.getParameterValues("chk");
-			for (int i = 0; i < ship_cd.length; i++) {
-				shipService.currDelete(ship_cd[i]);
+			for (String element : ship_cd) {
+				shipService.currDelete(element);
 			}
 		} catch (NullPointerException e) {
 			e.printStackTrace();
@@ -90,7 +90,7 @@ public class ShipController {
 		// 주소변경 하면서 이동
 		return "redirect:/ship/shipCurrentInfo";
 	}
-	
+
 	@RequestMapping(value = "/ship/shipInfo", method = RequestMethod.GET)
 	public String info(HttpServletRequest request, Model model) {
 		PageDTO pageDTO=new PageDTO();
@@ -100,13 +100,13 @@ public class ShipController {
 		pageDTO.setSearch4(request.getParameter("ord_date_end"));
 		pageDTO.setSearch5(request.getParameter("ord_d_date"));
 		pageDTO.setSearch6(request.getParameter("ord_d_date_end"));
-		
+
 		List<ShipDTO> shipInfo=shipService.shipInfo(pageDTO);
-		
+
 		model.addAttribute("shipInfo", shipInfo);
 		return "ship/shipInfo";
 	}
-	
+
 	@RequestMapping(value = "/ship/shipInfoPro", method = RequestMethod.POST)
 	public String insertPro(HttpServletRequest request, Model model) {
 		String ord_cd[]=request.getParameterValues("ord_cd");
@@ -129,7 +129,7 @@ public class ShipController {
 //				System.out.println(shipDTO.getOrd_cd()+" "+shipDTO.getShip_ifcount()+" "+shipDTO.getShip_count()+" "+shipDTO.getShip_date());
 			}
 		}
-		
+
 		return "redirect:/ship/shipInfo";
 	}
 }

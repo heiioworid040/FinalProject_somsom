@@ -33,10 +33,15 @@
 	href="${pageContext.request.contextPath}/resources/css/cs-skin-elastic.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/style.css">
-
 <link
 	href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800'
 	rel='stylesheet' type='text/css'>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/performanceCurr.css">
+	
+
+
+	
 </head>
 <body>
 	<!-- 모달 -->
@@ -85,27 +90,17 @@
 							<div class="card-body card-block">
 								<form action="${pageContext.request.contextPath}/instruction/infoInst" class="form-inline" method="get">
 									<div class="form-group col-6 mb-1">
-										<label for="searchLine" class="pr-1 form-control-label">라인</label>
-										<div class="input-group modalP" id="modalP1">
-											<input type="text" id="searchLineCd" name="searchLineCd" placeholder="Line Code" class="form-control bg-white" value="${pageDTO.search }" readonly>
-											<div class="input-group-btn">
-												<input type="button" class="btn btn-primary ml-2" id="lineModalBtn" value="검색">
-											</div>
-										</div>
-									</div>
-									<div class="form-group col-6 mb-1">
 										<label for="searchOrdDate" class="pr-1  form-control-label">지시일자</label>
 										<input type="date" id="searchOrdDate1" name="searchOrdDate1" class="form-control" value="${pageDTO.search2 }">
 										~
 										<input type="date" id="searchOrdDate2" name="searchOrdDate2" class="form-control" value="${pageDTO.search3 }">
 									</div>
-									<div class="form-group col-6 mt-1">
-										<label for="searchProd" class="pr-1 form-control-label">품번</label>
-										<input type="text" aria-label="filter" id="searchProdCd" name="searchProdCd" placeholder="Prod Code" class="form-control bg-white" value="${pageDTO.search4 }"readonly>
-										<div class="input-group">
-											<div class="input-group">
-												<button id="prodModalBtn" class="btn btn-primary ml-2">검색
-												</button>
+									<div class="form-group col-6 mb-1">
+										<label for="searchLine" class="pr-1 form-control-label">라인</label>
+										<div class="input-group modalP" id="modalP1">
+											<input type="text" id="searchLineCd" name="searchLineCd" placeholder="Line Code" class="form-control bg-white" value="${pageDTO.search }" readonly>
+											<div class="input-group-btn">
+												<input type="button" class="btn btn-primary ml-2" id="lineModalBtn" value="검색">
 											</div>
 										</div>
 									</div>
@@ -143,7 +138,17 @@
 											</div>
 										</div>									
 									</div>
-									<div class="col p-0">
+									<div class="form-group col-6 mt-1">
+										<label for="searchProd" class="pr-1 form-control-label">품번</label>
+										<input type="text" aria-label="filter" id="searchProdCd" name="searchProdCd" placeholder="Prod Code" class="form-control bg-white" value="${pageDTO.search4 }"readonly>
+										<div class="input-group">
+											<div class="input-group">
+												<button id="prodModalBtn" class="btn btn-primary ml-2">검색
+												</button>
+											</div>
+										</div>
+									</div>
+									<div class="col p-0 mt-3">
 									<input type="submit" class="btn btn-primary col-2 float-right ml-3" id="searchInst" value="검색">
 									<input type="reset" class="btn btn-secondary col-1 float-right reset" value="취소">
 									</div>
@@ -241,7 +246,7 @@
 								<strong class="card-title">작업지시</strong>
 							</div>
 							<div class="card-body">
-								<table class="table table-hover table-striped table-bordered table-align-middle mb-0">
+								<table id="hover_tb" class="table table-hover table-striped table-bordered table-align-middle mb-0">
 									<thead class="thead-dark">
 										<tr>
 											<th scope="col">지시번호</th>
@@ -255,14 +260,13 @@
 											<th scope="col">지시수량</th>
 											<th scope="col">생산량</th>
 											<th scope="col">지시날짜</th>
-											<th scope="col">업체명</th>
+											<th scope="col">업체</th>
 											<th scope="col"> </th>
 									</thead>
 									<tbody>
 										<c:forEach var="instructionDTO" items="${instList }">
-											<tr id="infoInstTr">
-												<td scope="row">${instructionDTO.inst_cd }
-												</td>
+											<tr id="infoInstTr" class="data-row">
+												<td>${instructionDTO.inst_cd }</td>
 												<td>${instructionDTO.line_cd }</td>
 												<td>${instructionDTO.line_nm }</td>
 												<td>${instructionDTO.ord_cd }</td>

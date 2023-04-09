@@ -8,7 +8,7 @@ public class EmployeeDTO {
 	private String emp_position;
 	private String emp_email;
 	private String emp_tel;
-	
+
 	public String getEmp_cd() {
 		return emp_cd;
 	}
@@ -52,6 +52,6 @@ public class EmployeeDTO {
 	public void setEmp_tel(String emp_tel) {
 		this.emp_tel = emp_tel;
 	}
-	
-	
+
+
 }

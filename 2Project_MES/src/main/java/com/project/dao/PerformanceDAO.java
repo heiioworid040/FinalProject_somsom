@@ -21,4 +21,6 @@ public interface PerformanceDAO {
 	public void insertPerf(PerformanceDTO performanceDTO);
 
 	public Integer getMaxPerf();
+
+	public void updatePerf(PerformanceDTO performanceDTO);
 }

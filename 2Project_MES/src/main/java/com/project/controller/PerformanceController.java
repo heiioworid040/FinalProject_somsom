@@ -25,7 +25,7 @@ public class PerformanceController {
 
 	@Inject
 	private PerformanceService performanceService;
-	
+
 	@Inject
 	private InstructionService instructionService;
 
@@ -41,8 +41,8 @@ public class PerformanceController {
 		String search2 = request.getParameter("search2");
 		String search3 = request.getParameter("search3");
 		String search4 = request.getParameter("search4");
-		String search5 = request.getParameter("search5");
-		
+		String search5 = request.getParameter("perf_couse");
+
 		// 한 화면에 보여줄 글 개수 설정
 		int pageSize = 20;
 		// 현페이지 번호 가져오기
@@ -65,9 +65,9 @@ public class PerformanceController {
 		pageDTO.setSearch3(search3);
 		pageDTO.setSearch4(search4);
 		pageDTO.setSearch5(search5);
-		
+
 		List<PerformanceDTO> performanceCurrentInfo = performanceService.performanceCurrentInfo(pageDTO);
-		
+
 		// 페이징 처리
 		// 검색어
 		int count = performanceService.performanceCurrentCount(pageDTO);
@@ -107,7 +107,7 @@ public class PerformanceController {
 //		return perfCurrJsonList;
 //	}
 	// 생산실적 현황 json 리스트
-	
+
 	@ResponseBody
 	@RequestMapping(value = "/performance/perfCurrJsonList", method = RequestMethod.GET)
 	public List<PerformanceDTO> perfCurrJsonList(PerformanceDTO performanceDTO) {
@@ -115,7 +115,7 @@ public class PerformanceController {
 
 		return perfCurrJsonList;
 	}
-	
+
 	// 품목 검색 팝업창
 	@RequestMapping(value = "/product/productSearchPop", method = RequestMethod.GET)
 	public String productSearchPop(HttpServletRequest request, Model model) {
@@ -143,8 +143,8 @@ public class PerformanceController {
 		pageDTO.setSearch(search);
 		pageDTO.setSearch2(search2);
 		pageDTO.setSearch3(search3);
-		
-		
+
+
 		List<ProductDTO> productInfo = performanceService.getProductInfo(pageDTO);
 
 		// 페이징 처리
@@ -169,23 +169,23 @@ public class PerformanceController {
 		// 주소변경 없이 이동
 		return "product/productSearchPop";
 	}
-	
+
 	@RequestMapping(value = "/performance/insertPerf", method = RequestMethod.POST)
 	public String insertPerfPro(PerformanceDTO performanceDTO) {
 		System.out.println("instructionController insertInstPro()");
 		performanceService.insertPerf(performanceDTO);
-		
+		System.out.println(performanceDTO.getPerf_good());
 		return "redirect:/performance/performanceCurrentInfo";
 	}
-	
+
 	@RequestMapping(value = "/performance/updatePerf", method = RequestMethod.POST)
 	public String updatePerfPro(HttpServletRequest request, PerformanceDTO performanceDTO) {
 		System.out.println("instructionController updateInstPro()");
 		String inst_cd=request.getParameter("inst_cd");
 		performanceDTO.setInst_cd(inst_cd);
-		
+
 		performanceService.updatePerf(performanceDTO);
-		return "redirect:/Performance/performanceCurrentInfo";
+		return "redirect:/performance/performanceCurrentInfo";
 	}
 
 }
