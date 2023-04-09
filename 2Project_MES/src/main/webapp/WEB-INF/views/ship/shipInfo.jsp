@@ -40,34 +40,28 @@
 					alert("출하량을 입력하세요");
 					return false;
 				}
-				else if($('#ship_count'+i).val()==""&&$('#ship_date'+i).val()==""){
-					alert("저장할 데이터가 없습니다");
-					return false;
-				}
-			}
-// 			for(i=1;i<=last;i++) {
-// 				if($('#ship_count'+i).val()==""&&$('#ship_date'+i).val()==""){
+// 				else if($('#ship_count'+i).val()==""&&$('#ship_date'+i).val()==""){
 // 					alert("저장할 데이터가 없습니다");
 // 					return false;
 // 				}
-// 			}
+				var num = /[0-9]/;
+				if(!num.test($('#ship_count'+i).val())&&$('#ship_date'+i).val()!=""){
+					alert("숫자만 입력");
+					return false;
+					}
+// 				if($('#ord_date'+i).val()>$('#ship_date'+i).val()){
+// 					alert("출하일자를 바르게 입력하세요");
+// 					return false;
+// 				}
+			}
+
 // 			for(i=1;i<=last;i++) {
 // 			}
 				
-// 				var num = /[0-9]/;
-// 				if(!num.test($('#ship_count').val())){
-// 					alert("숫자만 입력");
-// 					return false;
-// 					}
 // 				if($('#ship_date').val()==""){
 // 					alert("출하일자 입력");
 // 					return false;
 // 				}
-// 				if($('#ord_date').val()>$('#ship_date').val()){
-// 					alert("출하일자를 바르게 입력하세요");
-// 					return false;
-// 				}
-// 			}
 			
 		});
 	});
@@ -102,9 +96,8 @@
 						<div class="page-header float-right">
 							<div class="page-title">
 								<ol class="breadcrumb text-right">
-									<li><a href="#">Dashboard</a></li>
-									<li><a href="#">Table</a></li>
-									<li class="active">Basic table</li>
+									<li><a href="#">영업관리</a></li>
+									<li class="active">출하관리</li>
 								</ol>
 							</div>
 						</div>
