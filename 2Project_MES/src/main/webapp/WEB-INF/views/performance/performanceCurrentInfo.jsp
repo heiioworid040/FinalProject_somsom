@@ -45,6 +45,9 @@
 	<c:if test="${empty sessionScope.emp_cd }">
 		<c:redirect url="/employee/login"></c:redirect>
 	</c:if>
+	<!-- 모달 -->
+	<jsp:include page="../line/lineModal.jsp" />	
+	<!-- 모달 -->
 	<!-- Left Panel1 -->
 	<jsp:include page="../inc/leftPanel.jsp" />
 	<!-- Left Panel1 -->
@@ -80,7 +83,7 @@
 			</div>
 		</div>
 
-		<!-- 	검색창 -->
+		<!-- 	검색창 name search(오브젝트)  -->
 		<div class="content">
 			<div class="animated fadeIn">
 				<div class="row">
@@ -89,32 +92,31 @@
 							<div class="card-body card-block">
 								<form action="${pageContext.request.contextPath }/performance/performanceCurrentInfo" method="get" class="form-inline">
 									<div class="form-group col-6 mb-1">
-										<label class="pr-1  form-control-label mr-2">지시번호</label>
-										<input type="text" name="search4" class="form-control ">
+										<label class="pr-1 form-control-label mr-2">지시번호</label>
+										<input type="text" name="searchInstCd" class="form-control" value="${pageDTO.search }">
 									</div>
 									<div class="form-group col-6 mb-1">
+										<label for="searchLine" class="pr-1 form-control-label">라인</label>
+										<div class="input-group modalP" id="modalP1">
+											<input type="text" id="searchLineCd" name="searchLineCd" placeholder="Line Code" class="form-control bg-white ml-2" value="${pageDTO.search5}" readonly>
+											<div class="input-group-btn">
+												<input type="button" class="btn btn-primary ml-2" id="lineModalBtn" value="검색">
+											</div>
+										</div>
+									</div>
+									<div class="form-group col-6 mt-1">
+										<label class="pr-1  form-control-label mr-2">실적일자</label>
+										<input type="date" name="searchPerfDate1" class="form-control mr-1" value="${pageDTO.search2 }">~
+										<input type="date" name="searchPerfDate2" class="form-control ml-1" value="${pageDTO.search3 }">
+									</div>
+									<div class="form-group col-6 mt-1">
 										<label class="pr-1  form-control-label mr-2">품번</label>
-										<input type="text" id="productSearchId" name="search3" class="form-control ">
+										<input type="text" id="productSearchId" name="searchProdCd" class="form-control " value="${pageDTO.search4 }">
 											<div class="input-group">
-                                        	<div class="input-group-addon" id="productSearchPop" style="cursor: pointer;"><i class="ti-search"></i></div>
+											<input type="button" class="btn btn-primary ml-2" id="productSearchPop" value="검색">
                                     	</div>
 									</div>
-									<div class="form-group col-6 mb-1">
-										<label class="pr-1  form-control-label mr-2">실적일자</label>
-										<input type="date" name="perf_date1" class="form-control mr-1">~
-										<input type="date" name="perf_date2" class="form-control ml-1">
-									</div>
-									<div class="form-group col-6 mb-1">
-										<label class="pr-1  form-control-label mr-2">라인</label>
-											<div class="p-0 col">
-												<select name="search5" id="select" class="form-control">
-													<option>전체</option>
-													<c:forEach var="lineDTO" items="${searchLine }">
-                                                		<option value="${lineDTO.line_cd }">${lineDTO.line_nm}(${lineDTO.line_cd })</option>
-                                                	</c:forEach>
-												</select>
-											</div>
-									</div>
+									
                                     <div class="col p-0 mt-3">
 										<input type="submit" class="btn btn-primary col-2 float-right ml-3" id="searchPerf" value="조회">
 										<input type="reset" class="btn btn-secondary col-1 float-right reset" value="취소">
@@ -161,7 +163,7 @@
 												</td>
 												<td>
 													<div class="input-group modalP" id="modalP2">
-														<input type="text" id="insertInstCd" name="inst_cd" value="${pageDTO.search4 }" readonly placeholder="Inst Code" class="form-control bg-white">
+														<input type="text" id="insertInstCd" name="inst_cd" value="${pageDTO.search}" readonly placeholder="Inst Code" class="form-control bg-white">
 														<div class="input-group-btn">
 															<input type="button" class="btn btn-primary" id="instListBtn" value="목록">
 														</div>
@@ -190,7 +192,8 @@
 									</table>
 									<button type="submit" class="btn btn-primary col-2 float-right ml-3" id="insertPerfBtn">추가</button>
 									<button type="submit" class="btn btn-primary col-1 float-right ml-3" id="updatePerfBtn" disabled>수정</button>
-									<input type="reset"  class="btn btn-secondary col-1 float-right reset" id="resetInstBtn" value="취소">
+									<button type="button" class="btn btn-secondary col-1 float-right ml-3" id="deletePerfBtn" disabled>삭제</button>
+									<button type="reset"  class="btn btn-secondary col-1 float-right reset" id="resetPerfBtn">취소</button>
 								</div>
 							</form>
 						</div>
@@ -211,6 +214,7 @@
 							<div class="card-body">
 								<table id="hover_tb" class="table table-striped table-bordered">
 										<thead class="thead-dark">
+										
 											<tr>
 												<th scope="col">실적코드</th>
 												<th scope="col">지시번호</th>
@@ -279,19 +283,19 @@
 								<div class="pageNum">
 									<c:if test="${pageDTO.startPage > pageDTO.pageBlock }">
 										<a
-											href="${pageContext.request.contextPath}/performance/performanceCurrentInfo?pageNum=${pageDTO.startPage - pageDTO.pageBlock }&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}&search4=${pageDTO.search4}&search5=${pageDTO.search5}">[10페이지
+											href="${pageContext.request.contextPath}/performance/performanceCurrentInfo?pageNum=${pageDTO.startPage - pageDTO.pageBlock }&searchInstCd=${pageDTO.search}&searchProdCd=${pageDTO.search2}&searchPerfDate1=${pageDTO.search3}&ssearchPerfDate2=${pageDTO.search4}&searchLineCd=${pageDTO.search5}">[10페이지
 											이전]</a>
 									</c:if>
 
 									<c:forEach var="i" begin="${pageDTO.startPage }"
 										end="${pageDTO.endPage }" step="1">
 										<a
-											href="${pageContext.request.contextPath}/performance/performanceCurrentInfo?pageNum=${i}&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}&search4=${pageDTO.search4}&search5=${pageDTO.search5}">${i}</a>
+											href="${pageContext.request.contextPath}/performance/performanceCurrentInfo?pageNum=${i}&searchInstCd=${pageDTO.search}&searchProdCd=${pageDTO.search2}&searchPerfDate1=${pageDTO.search3}&ssearchPerfDate2=${pageDTO.search4}&searchLineCd=${pageDTO.search5}">${i}</a>
 									</c:forEach>
 
 									<c:if test="${pageDTO.endPage < pageDTO.pageCount }">
 										<a
-											href="${pageContext.request.contextPath}/performance/performanceCurrentInfo?pageNum=${pageDTO.startPage + pageDTO.pageBlock }&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}&search4=${pageDTO.search4}&search5=${pageDTO.search5}">[10페이지
+											href="${pageContext.request.contextPath}/performance/performanceCurrentInfo?pageNum=${pageDTO.startPage + pageDTO.pageBlock }&searchInstCd=${pageDTO.search}&searchProdCd=${pageDTO.search2}&searchPerfDate1=${pageDTO.search3}&ssearchPerfDate2=${pageDTO.search4}&searchLineCd=${pageDTO.search5}">[10페이지
 											다음]</a>
 									</c:if>
 								</div>
@@ -364,11 +368,26 @@
 			jQuery('#insertPerfCs').val(jQuery(this).closest('tr').children('td:eq(10)').text()).prop('selected', true);
 			jQuery('#insertPerfForm').attr('action', '${pageContext.request.contextPath}/performance/updatePerf');
 			jQuery('#updatePerfBtn').prop('disabled', false);
+			jQuery('#deletePerfBtn').prop('disabled', false);
 			jQuery('#insertPerfBtn').prop('disabled', true);
 			jQuery('#insertPerfGd').focus();
 			
 			if(jQuery('#insertPerfErr').val() != 0){
 				jQuery('#insertPerfCs').attr('disabled', false);
+			}
+		});
+		
+		// 취소 버튼 (입력창 clear)
+		$(document).on("click",".reset", function(){
+			console.log(jQuery(this).closest('form').find('div input[type="text"]'));
+			console.log(jQuery(this).attr('id'));
+			jQuery(this).closest('form').find('div input[type="text"]').attr('value', '');
+			jQuery(this).closest('form').find('div input[type="select"]').attr('value', '');
+			if(jQuery(this).attr('id')=='resetPerfBtn'){
+				jQuery("#insertPerfForm").attr('action', '${pageContext.request.contextPath}/performance/insertPerf');
+				jQuery('#updatePerfBtn').prop('disabled', true);
+				jQuery('#deletePerfBtn').prop('disabled', true);
+				jQuery('#insertPerfBtn').prop('disabled', false);
 			}
 		});
 		
@@ -398,6 +417,12 @@
 				alert("불량사유 입력해주세요.");
 				return false;
 			}
+		});
+		
+		// 삭제 버튼
+		$(document).on("click", "#deletePerfBtn", function(){
+			console.log(jQuery('#insertPerfCd').val());
+			location.href='${pageContext.request.contextPath}/performance/deletePerf?delPerfCd='+jQuery('#insertPerfCd').val();
 		});
 		
 		$(document).on("click", "#productSearchPop", function(){

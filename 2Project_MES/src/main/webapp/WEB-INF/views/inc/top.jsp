@@ -17,8 +17,8 @@
             </div>
             <div class="top-right">
                 <div class="navbar-header ">
-                    <div class="navbar- float-right p-3">
-                       사용자님 | <a class="navbar" href="${pageContext.request.contextPath}/employee/logout"><i class="fa fa-power-off "></i>Logout</a>
+                    <div class="navbar float-right p-3">
+                    ${sessionScope.emp_nm} ${sessionScope.emp_position}님 | <a class="navbar" href="${pageContext.request.contextPath}/employee/logout"><i class="fa fa-power-off "></i>Logout</a>
                     </div>
                 </div>
             </div>

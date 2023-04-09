@@ -90,13 +90,13 @@
 							<div class="card-body card-block">
 								<form action="${pageContext.request.contextPath}/instruction/infoInst" class="form-inline" method="get">
 									<div class="form-group col-6 mb-1">
-										<label for="searchOrdDate" class="pr-1  form-control-label">지시일자</label>
+										<label for="searchOrdDate" class="pr-1  form-control-label mr-2">지시일자</label>
 										<input type="date" id="searchOrdDate1" name="searchOrdDate1" class="form-control" value="${pageDTO.search2 }">
 										~
 										<input type="date" id="searchOrdDate2" name="searchOrdDate2" class="form-control" value="${pageDTO.search3 }">
 									</div>
 									<div class="form-group col-6 mb-1">
-										<label for="searchLine" class="pr-1 form-control-label">라인</label>
+										<label for="searchLine" class="pr-1 form-control-label mr-2">라인</label>
 										<div class="input-group modalP" id="modalP1">
 											<input type="text" id="searchLineCd" name="searchLineCd" placeholder="Line Code" class="form-control bg-white" value="${pageDTO.search }" readonly>
 											<div class="input-group-btn">
@@ -105,7 +105,7 @@
 										</div>
 									</div>
 									<div class="form-group col-6 mt-1">
-										<label class="pr-1  form-control-label" for="instStCk">지시상태</label>
+										<label class="p  form-control-label" for="instStCk">지시상태</label>
 										<div class="form-control border-0" id="instStCk">
 											<div class="form-check-inline form-check">
 												<label for="searchInstSt1" class="form-check-label mr-2">
@@ -139,7 +139,7 @@
 										</div>									
 									</div>
 									<div class="form-group col-6 mt-1">
-										<label for="searchProd" class="pr-1 form-control-label">품번</label>
+										<label for="searchProd" class="pr-1 form-control-label mr-2">품번</label>
 										<input type="text" aria-label="filter" id="searchProdCd" name="searchProdCd" placeholder="Prod Code" class="form-control bg-white" value="${pageDTO.search4 }"readonly>
 										<div class="input-group">
 											<div class="input-group">
@@ -149,7 +149,7 @@
 										</div>
 									</div>
 									<div class="col p-0 mt-3">
-									<input type="submit" class="btn btn-primary col-2 float-right ml-3" id="searchInst" value="검색">
+									<input type="submit" class="btn btn-primary col-2 float-right ml-3" id="searchInst" value="조회">
 									<input type="reset" class="btn btn-secondary col-1 float-right reset" value="취소">
 									</div>
 								</form>
@@ -227,6 +227,7 @@
 									</table>
 									<button type="submit" class="btn btn-primary col-2 float-right ml-3" id="insertInstBtn">추가</button>
 									<button type="submit" class="btn btn-primary col-1 float-right ml-3" id="updateInstBtn" disabled>수정</button>
+									<button type="button" class="btn btn-secondary col-1 float-right ml-3" id="deleteInstBtn" disabled>삭제</button>
 									<button type="reset"  class="btn btn-secondary col-1 float-right reset" id="resetInstBtn">취소</button>
 								</div>
 							</form>
@@ -276,7 +277,7 @@
 												<td>${instructionDTO.inst_st }</td>
 												<td>${instructionDTO.inst_count }</td>
 												<td>${instructionDTO.inst_fcount }</td>
-												<td><fmt:formatDate value="${instructionDTO.inst_date }" pattern="yyyy.MM.dd hh:mm"/></td>
+												<td><fmt:formatDate value="${instructionDTO.inst_date }" pattern="yyyy.MM.dd HH:mm"/></td>
 												<td>${instructionDTO.cli_nm }</td>
 												<td>
 												<div class="input-group">
@@ -288,8 +289,8 @@
 									</tbody>
 								</table>
 								<!-- 페이징 -->
-								<div class="col-sm-12 col-md-7">
-									<div class="dataTables_paginate paging_simple_numbers">
+								<div class="col p-0 mt-3">
+									<div class="dataTables_paginate paging_simple_numbers float-right">
 										<ul class="pagination">
 										<c:if test="${pageDTO.startPage <= pageDTO.pageBlock }">
 											<li class="paginate_button page-item previous disabled">
@@ -352,6 +353,7 @@
 
 	<script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
 	<script type="text/javascript">
+		// 추가버튼 제어
 		$(document).on("click", "#insertInstBtn", function(){
 			if($('#insertOrderCd').val() == ''){
 				alert("수주번호를 입력해주세요.");
@@ -366,6 +368,7 @@
 			}
 		});
 		
+		// 취소 버튼 (clear)
 		$(document).on("click",".reset", function(){
 			console.log($(this).closest('form').find('div input[type="text"]'));
 			console.log($(this).attr('id'));
@@ -374,16 +377,17 @@
 			if($(this).attr('id')=='resetInstBtn'){
 				$("#insertInstForm").attr('action', '${pageContext.request.contextPath}/instruction/insertInst');
 				$('#updateInstBtn').prop('disabled', true);
+				$('#deleteInstBtn').prop('disabled', true);
 				$('#insertInstBtn').prop('disabled', false);
 			}
 		});
 		
-
+		// 행 클릭시 이동
 		$(document).on("click","#infoInstTr td:not(:last-child)", function(){
-			location.href='${pageContext.request.contextPath}/performance/performanceCurrentInfo?pageNum=1&search=&search2=&search3=&search4='+$(this).closest('tr').children('td:eq(0)').text()+'&search5=전체';
+			location.href='${pageContext.request.contextPath}/performance/performanceCurrentInfo?pageNum=1&search='+$(this).closest('tr').children('td:eq(0)').text()+'&search2=&search3=&search4=&search5=';
 		});
 
-		
+		// 회색 수정 버튼
 		$(document).on("click", "#editInstBtn", function(){
 			console.log('['+$(this).closest('tr').children('td:eq(0)').text().trim()+']');
 			$('#insertInstCd').val($(this).closest('tr').children('td:eq(0)').text().trim());
@@ -399,10 +403,18 @@
 			$('#insertClientNm').val($(this).closest('tr').children('td:eq(11)').text());
 			$('#insertInstForm').attr('action', '${pageContext.request.contextPath}/instruction/updateInst');
 			$('#updateInstBtn').prop('disabled', false);
+			$('#deleteInstBtn').prop('disabled', false);
 			$('#insertInstBtn').prop('disabled', true);
 			$('#lineModalBtn').focus();
 		});
 		
+		// 삭제버튼 제어
+		$(document).on("click", "#deleteInstBtn", function(){
+			console.log($('#insertInstCd').val());
+			location.href='${pageContext.request.contextPath}/instruction/deleteInst?delInstCd='+$('#insertInstCd').val();
+		});
+		
+		// 체크박스 제어
 		$("#searchInstSt1").change(function(){
 			if($("#searchInstSt1").is(":checked")){
 				$("#searchInstSt1").attr('value', '대기');

@@ -78,6 +78,16 @@ public class PerformanceDAOImpl implements PerformanceDAO {
 		
 		sqlSession.update(namespace+".updatePerf", performanceDTO);
 	}
+
+	@Override
+	public void deletePerf(String perf_cd) {
+		System.out.println("PerformanceDAOImpl deletePerf()");
+		
+		sqlSession.delete(namespace+".deletePerf", perf_cd);
+		
+	}
+	
+	
 	
 	
 }

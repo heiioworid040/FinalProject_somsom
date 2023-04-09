@@ -23,4 +23,6 @@ public interface PerformanceDAO {
 	public Integer getMaxPerf();
 
 	public void updatePerf(PerformanceDTO performanceDTO);
+
+	public void deletePerf(String perf_cd);
 }

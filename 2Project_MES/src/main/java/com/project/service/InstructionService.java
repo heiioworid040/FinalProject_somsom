@@ -16,4 +16,6 @@ public interface InstructionService {
 
 	public InstructionDTO getInst(String inst_cd);
 
+	public void deleteInst(String inst_cd);
+
 }

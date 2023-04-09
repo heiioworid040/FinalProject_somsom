@@ -19,4 +19,6 @@ public interface InstructionDAO {
 
 	public InstructionDTO getInst(String inst_cd);
 
+	public void deletInst(String inst_cd);
+
 }
