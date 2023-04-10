@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png">
 <link rel="shortcut icon" href="https://i.imgur.com/QRAUqs9.png">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
@@ -61,89 +61,87 @@ function fun2() {
         <!-- Header--> 
 		<jsp:include page="../inc/top.jsp" />
         <!-- Header-->
-				
-				
-        <div class="breadcrumbs">
-            <div class="breadcrumbs-inner">
-                <div class="row m-0">
-                    <div class="col-sm-4">
-<%
-request.setCharacterEncoding("UTF-8");
-String search =request.getParameter("search");
-if(search==null){
-	%>           
-                        <div class="page-header float-left">
-                            <div class="page-title">
-                               
-                            </div>
-                        </div>  
-                    </div>
-<%}else{ %>
-                         <div class="page-header float-left">
-                            <div class="page-title">
-        
-                            </div>
-                        </div>  
-                    </div>
-	<%
-}
-%> 	                    
-                    <div class="col-sm-8">
-                        <div class="page-header float-right">
-                            <div class="page-title">
-                                <ol class="breadcrumb text-right">
-                                    <li><a href="${pageContext.request.contextPath}/req/reqlist">조회</a></li>
-                                    <li><a href="${pageContext.request.contextPath}/req/reqinsert">추가</a></li>
-                                    <li><a href="${pageContext.request.contextPath}/home.jsp">메인</a></li>                                 
-                                </ol>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-<%
-if(search==null){
-	%>                
- <div class="content">
-			<div class="animated fadeIn">
-				<div class="row">
-					<div class="col-lg">
-						<div class="card">
-							<div class="card-header">
-								<strong class="card-title">소요량 현황</strong><br>
+
+		<div class="breadcrumbs">
+			<div class="breadcrumbs-inner">
+				<div class="row m-0">
+					<div class="col-sm-4">
+						<div class="page-header float-left">
+							<div class="page-title">
+								<h1>기준정보</h1>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-8">
+						<div class="page-header float-right">
+							<div class="page-title">
+								<ol class="breadcrumb text-right">
+									<li><a href="#">기준정보</a></li>
+									<li class="active">소요량</li>
+								</ol>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-<%}else{ %>
- <div class="content">
+		</div>
+
+<!-- 검색어 -->								
+<%
+request.setCharacterEncoding("UTF-8");
+String search =request.getParameter("search");
+%>
+		<div class="content">
 			<div class="animated fadeIn">
 				<div class="row">
 					<div class="col-lg">
-						<div class="card">
+						<div class="card m-0">
+							<div class="card-body card-block">
+								<form action="${pageContext.request.contextPath}/req/reqlist" class="form-inline" method="GET">
+									<div class="form-group col-6 mb-1">
+										<label class="pr-1 form-control-label">등록자</label>&nbsp;&nbsp;<input
+											type="text" name="search" class="form-control" placeholder="Emp Name">
+									</div>
+									<div class="col p-0">
+										<button type="submit" class="btn btn-primary float-right ml-3" value="search">검색</button>
+										<input type="reset" class="btn btn-secondary float-right reset" value="취소">
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+<!-- 검색어 끝 -->	
+
+	<div class="content">
+		<div style="width:100%; height:50px">
+			<button type="button" class="btn btn-primary float-right" style="margin: 2px" onclick="location.href='${pageContext.request.contextPath}/req/reqinsert'">추가</button>
+		</div>
+			<div class="animated fadeIn">
+				<div class="row">
+					<div class="col-lg">
+						<div class="card m-0">
+<%
+if(search==null){
+	%>                
 							<div class="card-header">
-								<strong class="card-title">소요량 검색결과</strong><br>
+								<strong class="card-title">품목별 현황</strong><br>
+							</div>
+<%}else{ %>
+							<div class="card-header">
+								<strong class="card-title">품목별 검색결과</strong><br>
 							</div>
 	<%
 }
-%> 													
-															
-								<div class="card-body">
-									<!-- 검색어 -->								
-								<div id="table_search" style="text-align: right;">
-								<form action="${pageContext.request.contextPath}/req/reqlist" method="GET">
-								<input type="text" name="search" class="input_box" placeholder="등록자별 검색기능">
-								<input type="submit" value="search" class="btn">
-								</form>
-								</div>
-								<!-- 검색어 끝 -->	
+%> 									
+							<div class="card-body card-block">
 								<table id="bootstrap-data-table"
 										class="table table-striped table-bordered">
 									<thead class="thead-dark">	
 										<tr>
-											<th socpe="col">#</th>														
+											<th scope="col" >#</th>														
 											<th scope="col" >상위품번</th>
 											<th scope="col" >상위품명</th>
 											<th scope="col" >하위품번</th>
@@ -153,14 +151,14 @@ if(search==null){
 											<th scope="col">등록일</th>
 											<th scope="col">수정자</th>
 											<th scope="col">변경일</th>
-											<th scope="col">버튼 종류</th>
+											<th scope="col" style="width:150px">버튼</th>
 										</tr>
 									</thead>
 									<tbody>
 										<c:forEach var="reqDTO" items="${reqList}"> 
 										<tr>
 											<th scope="row"><input type="checkbox" name="chk"
-											id="chk" value="${reqDTO.req_num}">
+											id="chk" value="${reqDTO.req_num}" style="zoom:1.8">
 											<td>${reqDTO.prod_cd}</td>
 											<td>${reqDTO.prod_nm}</td>
 											<td>${reqDTO.prod_fcd}</td>
@@ -174,29 +172,19 @@ if(search==null){
 											<div style="display: inline-block;">
 										  <form name="updateModal" action="${pageContext.request.contextPath}/req/requpdate" method="get" onsubmit="return confirm('수정하시겠습니까?')">
 										    <input type="hidden" name="req_num" value="${reqDTO.req_num}">
-										    <button type="submit" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal2">수정</button>
+										    <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal2">수정</button>
 										  </form>
 										</div>
 										<div style="display: inline-block;">
 									  	<form name="deleteModal" action="${pageContext.request.contextPath}/req/reqdeletePro" method="get" onsubmit="return confirm('삭제하시겠습니까?')">
 									    <input type="hidden" name="req_num" value="${reqDTO.req_num}">
-									    <button type="submit" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal">삭제</button>
+									    <button type="submit" class="btn btn-secondary" data-toggle="modal" data-target="#deleteModal">삭제</button>
 									  	</form>
 										</div></td>
 						
 										</tr></c:forEach>
 									</tbody>
 								</table>
-								</div>
-				
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		</form>
-		<!-- .content -->
 		                         <!-- 페이징 -->
 		                        <div id="pageNum2" style="text-align: center;">
     								<c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
@@ -214,25 +202,29 @@ if(search==null){
 								        <a href="${pageContext.request.contextPath}/req/reqlist?pageNum=${pageDTO.startPage + pageDTO.pageBlock}&search=${pageDTO.search}">Next</a>
 								    </c:if>
 								</div>	
+								
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		<!-- .content -->
 		<div class="clearfix"></div>
 		<!-- 푸터 넣는 곳 -->
 		<jsp:include page="../inc/footer.jsp" />
 		<!-- 푸터 넣는 곳 -->
+	</div>
 	<!-- /#right-panel -->
 
 	<!-- Right Panel -->
 
 	<!-- Scripts -->
-	<script
-		src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
-
 
 </body>
 </html>
