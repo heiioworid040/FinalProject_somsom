@@ -69,6 +69,15 @@
 	<if test="search4 != null and search4 != ''">
 		and o.prod_cd = #{search4}
 	</if>
+	<if test="search5 == null">
+		and i.inst_st not in ('대기')
+	</if>
+	<if test="search6 == null">
+		and i.inst_st not in ('진행')
+	</if>
+	<if test="search7 == null">
+		and i.inst_st not in ('완료')
+	</if>
 	) instlist
 	</select>
 	

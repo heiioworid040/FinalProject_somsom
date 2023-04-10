@@ -38,17 +38,8 @@
 	rel='stylesheet' type='text/css'>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/performanceCurr.css">
-	
-
-
-	
 </head>
 <body>
-	<!-- 모달 -->
-	<jsp:include page="../line/lineModal.jsp" />
-	<jsp:include page="../product/productModal.jsp" />
-	<jsp:include page="../order/orderModal.jsp" />
-	<!-- 모달 -->
 	<!-- Left Panel1 -->
 	<jsp:include page="../inc/leftPanel.jsp" />
 	<!-- Left Panel1 -->
@@ -88,7 +79,7 @@
 					<div class="col-lg">
 						<div class="card m-0">
 							<div class="card-body card-block">
-								<form action="${pageContext.request.contextPath}/instruction/infoInst" class="form-inline" method="get">
+								<form action="${pageContext.request.contextPath}/instruction/infoInst" name="searchInst" class="form-inline" method="get">
 									<div class="form-group col-6 mb-1">
 										<label for="searchOrdDate" class="pr-1  form-control-label mr-2">지시일자</label>
 										<input type="date" id="searchOrdDate1" name="searchOrdDate1" class="form-control" value="${pageDTO.search2 }">
@@ -100,7 +91,7 @@
 										<div class="input-group modalP" id="modalP1">
 											<input type="text" id="searchLineCd" name="searchLineCd" placeholder="Line Code" class="form-control bg-white" value="${pageDTO.search }" readonly>
 											<div class="input-group-btn">
-												<input type="button" class="btn btn-primary ml-2" id="lineModalBtn" value="검색">
+												<input type="button" class="btn btn-primary ml-2 linePopBtn" id="linePop" value="검색">
 											</div>
 										</div>
 									</div>
@@ -140,10 +131,10 @@
 									</div>
 									<div class="form-group col-6 mt-1">
 										<label for="searchProd" class="pr-1 form-control-label mr-2">품번</label>
-										<input type="text" aria-label="filter" id="searchProdCd" name="searchProdCd" placeholder="Prod Code" class="form-control bg-white" value="${pageDTO.search4 }"readonly>
+										<input type="text" aria-label="filter" id="productSearchId" name="searchProdCd" placeholder="Prod Code" class="form-control bg-white" value="${pageDTO.search4 }"readonly>
 										<div class="input-group">
 											<div class="input-group">
-												<button id="prodModalBtn" class="btn btn-primary ml-2">검색
+												<button id="productSearchPop" class="btn btn-primary ml-2">검색
 												</button>
 											</div>
 										</div>
@@ -190,7 +181,7 @@
 													<div class="input-group modalP" id="modalP2">
 														<input type="text" id="insertLineCd" name="line_cd" value="" placeholder="Line Code" class="form-control bg-white" readonly>
 														<div class="input-group-btn">
-															<input type="button" class="btn btn-primary" id="lineModalBtn" value="검색">
+															<input type="button" class="btn btn-primary linePopBtn" id="linePopI" value="검색">
 														</div>
 													</div>
 												</td>
@@ -292,6 +283,7 @@
 								<div class="col p-0 mt-3">
 									<div class="dataTables_paginate paging_simple_numbers float-right">
 										<ul class="pagination">
+										<!-- 이전 -->
 										<c:if test="${pageDTO.startPage <= pageDTO.pageBlock }">
 											<li class="paginate_button page-item previous disabled">
 												<a href="${pageContext.request.contextPath}/instruction/infoInst?pageNum=${pageDTO.startPage - pageDTO.pageBlock}&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}&search4=${pageDTO.search4}&search5=${pageDTO.search5}&search6=${pageDTO.search6}&search7=${pageDTO.search7}"
@@ -303,21 +295,22 @@
 												class="page-link">Previous</a>
 											</li>
 										</c:if>
-										
-										
+										<!-- 이전 -->
+										<!-- 현재 -->										
 										<c:forEach var="i" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1">
-											<c:if test="${i==pageDTO.currentPage }">
+											<c:if test="${i==pageDTO.pageNum }">
 												<li class="paginate_button page-item active">
 													<a class="page-link" href="#">${i}</a>
 												</li>											
 											</c:if>
-											<c:if test="${i!=pageDTO.currentPage }">
+											<c:if test="${i!=pageDTO.pageNum }">
 												<li class="paginate_button page-item ">
-													<a class="page-link" href="${pageContext.request.contextPath}/instruction/infoInst?pageNum=${i}&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}&search4=${pageDTO.search4}&search5=${pageDTO.search5}&search6=${pageDTO.search6}&search7=${pageDTO.search7}">${i}</a>
+													<a class="page-link" href="${pageContext.request.contextPath}/instruction/infoInst?	pageNum=${i}&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}&search4=${pageDTO.search4}&search5=${pageDTO.search5}&search6=${pageDTO.search6}&search7=${pageDTO.search7}">${i}</a>
 												</li>
 											</c:if>
 										</c:forEach>
-										
+										<!-- 현재 -->										
+										<!-- 다음 -->																				
 										<c:if test="${pageDTO.endPage >= pageDTO.pageCount }">
 											<li class="paginate_button page-item next disabled" id="bootstrap-data-table_next">
 												<a href="${pageContext.request.contextPath}/instruction/infoInst?pageNum=${pageDTO.startPage + pageDTO.pageBlock}&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}&search4=${pageDTO.search4}&search5=${pageDTO.search5}&search6=${pageDTO.search6}&search7=${pageDTO.search7}" class="page-link">Next</a>
@@ -328,6 +321,7 @@
 												<a href="${pageContext.request.contextPath}/instruction/infoInst?pageNum=${pageDTO.startPage + pageDTO.pageBlock}&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}&search4=${pageDTO.search4}&search5=${pageDTO.search5}&search6=${pageDTO.search6}&search7=${pageDTO.search7}" class="page-link">Next</a>
 											</li>
 										</c:if>
+										<!-- 다음 -->																				
 										</ul>
 									</div>
 								</div>
@@ -387,7 +381,7 @@
 			location.href='${pageContext.request.contextPath}/performance/performanceCurrentInfo?pageNum=1&search='+$(this).closest('tr').children('td:eq(0)').text()+'&search2=&search3=&search4=&search5=';
 		});
 
-		// 회색 수정 버튼
+		// 회색 수정 버튼 
 		$(document).on("click", "#editInstBtn", function(){
 			console.log('['+$(this).closest('tr').children('td:eq(0)').text().trim()+']');
 			$('#insertInstCd').val($(this).closest('tr').children('td:eq(0)').text().trim());
@@ -414,30 +408,44 @@
 			location.href='${pageContext.request.contextPath}/instruction/deleteInst?delInstCd='+$('#insertInstCd').val();
 		});
 		
-		// 체크박스 제어
-		$("#searchInstSt1").change(function(){
-			if($("#searchInstSt1").is(":checked")){
-				$("#searchInstSt1").attr('value', '대기');
-			}else{
-				$("#searchInstSt1").attr('value', '');
-			}
+		// 라인 팝업
+		$(document).on("click", ".linePopBtn", function(){
+			console.log($(this).attr('id'));
+			window.open(
+					'${pageContext.request.contextPath}/line/linePop?btnId='+$(this).attr('id'),
+					'LinePop', 'width=800,height=650');
 		});
 		
-		$("#searchInstSt2").change(function(){
-			if($("#searchInstSt2").is(":checked")){
-				$("#searchInstSt2").attr('value', '진행');				
-			}else{
-				$("#searchInstSt2").attr('value', '');
-			}
-		});
+		// 품목 팝업
+		$(document).on("click", "#productSearchPop", function(){
+			window.open(
+					"${pageContext.request.contextPath }/product/productSearchPop",
+					"productSearchPop", "width=800,height=650");
+			});
+		// 체크박스 제어
+// 		$("#searchInstSt1").change(function(){
+// 			if($("#searchInstSt1").is(":checked")){
+// 				$("#searchInstSt1").attr('value', '대기');
+// 			}else{
+// 				$("#searchInstSt1").attr('value', '');
+// 			}
+// 		});
+		
+// 		$("#searchInstSt2").change(function(){
+// 			if($("#searchInstSt2").is(":checked")){
+// 				$("#searchInstSt2").attr('value', '진행');				
+// 			}else{
+// 				$("#searchInstSt2").attr('value', '');
+// 			}
+// 		});
 			
-		$("#searchInstSt3").change(function(){
-			if($("#searchInstSt3").is(":checked")){
-				$("#searchInstSt3").attr('value', '완료');
-			}else{
-				$("#searchInstSt3").attr('value', '');
-			}
-		});
+// 		$("#searchInstSt3").change(function(){
+// 			if($("#searchInstSt3").is(":checked")){
+// 				$("#searchInstSt3").attr('value', '완료');
+// 			}else{
+// 				$("#searchInstSt3").attr('value', '');
+// 			}
+// 		});
 	</script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
 	<script

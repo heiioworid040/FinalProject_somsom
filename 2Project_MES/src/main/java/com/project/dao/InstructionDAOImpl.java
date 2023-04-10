@@ -27,10 +27,10 @@ public class InstructionDAOImpl implements InstructionDAO{
 
 
 	@Override
-	public int getInstCount() {
+	public int getInstCount(PageDTO pageDTO) {
 		System.out.println("InstDAOImpl getInstCount()");
 		System.out.println(sqlSession.selectOne(namespace+".getInstCount"));
-		return sqlSession.selectOne(namespace+".getInstCount");
+		return sqlSession.selectOne(namespace+".getInstCount", pageDTO);
 	}
 
 

@@ -65,6 +65,19 @@
 					</div>
 				</div>
 			</div>
+			
+			<div class="pageNum">
+				<c:if test="${pageDTO.startPage > pageDTO.pageBlock }">
+					<a href="${pageContext.request.contextPath}/ajax/lineModal?pageNum=${pageDTO.startPage - pageDTO.pageBlock }&modalLineCd=${pageDTO.search}&modalLineNm=${pageDTO.search2}">[10페이지 이전]</a>
+				</c:if>
+
+				<c:forEach var="i" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1">
+					<a href="${pageContext.request.contextPath}/ajax/lineModal?pageNum=${i}&modalLineCd=${pageDTO.search}&modalLineNm=${pageDTO.search2}">${i}</a>
+				</c:forEach>
+				<c:if test="${pageDTO.endPage < pageDTO.pageCount }">
+					<a href="${pageContext.request.contextPath}/ajax/lineModal?pageNum=${pageDTO.startPage + pageDTO.pageBlock }&modalLineCd=${pageDTO.search}&modalLineNm=${pageDTO.search2}">[10페이지 다음]</a>
+				</c:if>
+			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" id="cancleModal">취소</button>
 			</div>
@@ -82,7 +95,7 @@
 			try {
 				jQuery('#lineTableBody').html('');
 				jQuery.ajax({
-					type : 'post',
+					type : 'get',
 					url : '${pageContext.request.contextPath}/ajax/lineModal',
 					dataType : 'json',
 					success : function(linearr) {

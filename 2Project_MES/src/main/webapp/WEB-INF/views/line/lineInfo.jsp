@@ -93,7 +93,7 @@
 												<input type="text" id="modalLineNm" name="modalLineNm"
 													placeholder="Line Name" class="form-control bg-white">
 												<div class="input-group-btn">
-													<input type="button" class="btn btn-primary ml-2"
+													<input type="submit" class="btn btn-primary ml-2"
 														id="lineSearchBtn" value="검색">
 												</div>
 											</div>
@@ -207,15 +207,20 @@
 									</thead>
 									<tbody>
 										<c:forEach var="lineDTO" items="${lineList }">
+											<c:if test="${lineDTO.line_st eq 'err'}">
+											<tr id="infoLineTr" class="data-row bg-danger color-white">
+											</c:if>
+											<c:if test="${lineDTO.line_st ne 'err'}">
 											<tr id="infoLineTr" class="data-row">
-												<td>${lineDTO.line_cd }</td>
+											</c:if>
+												<td><input type="text" class="visually-hidden" value="${lineDTO.line_cd }"></td>
 												<td>${lineDTO.line_nm }</td>
 												<td>${lineDTO.line_process}</td>
 												<td>${lineDTO.line_place}</td>
 												<td>${lineDTO.line_num}</td>
 												<td>${lineDTO.line_st}</td>
 												<td>${lineDTO.line_note}</td>
-											</tr>
+												</tr>
 										</c:forEach>
 									</tbody>
 								</table>

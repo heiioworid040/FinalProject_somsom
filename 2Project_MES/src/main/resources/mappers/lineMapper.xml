@@ -17,11 +17,11 @@
     SELECT * 
 	FROM line
 	WHERE 1=1
-	<if test="search != null">
-		and line_cd like CONCAT('%',#{search },'%')
-	</if>
 	<if test="search2 != null">
-		and line_nm like CONCAT('%',#{search2 },'%')
+		and line_cd like CONCAT('%',#{search2 },'%')
+	</if>
+	<if test="search3 != null">
+		and line_nm like CONCAT('%',#{search3 },'%')
 	</if>
 	ORDER BY line_cd
 	</select>
@@ -30,11 +30,11 @@
     SELECT COUNT(*)
 	FROM line
 	WHERE 1=1
-	<if test="search != null">
-		and line_cd like CONCAT('%',#{search },'%')
-	</if>
 	<if test="search2 != null">
-		and line_nm like CONCAT('%',#{search2 },'%')
+		and line_cd like CONCAT('%',#{search2 },'%')
+	</if>
+	<if test="search3 != null">
+		and line_nm like CONCAT('%',#{search3 },'%')
 	</if>
 	</select>
 	

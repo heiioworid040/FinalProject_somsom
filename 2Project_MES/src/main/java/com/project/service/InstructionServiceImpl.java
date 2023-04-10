@@ -30,10 +30,10 @@ public class InstructionServiceImpl implements InstructionService{
 	}
 
 	@Override
-	public int getInstCount() {
+	public int getInstCount(PageDTO pageDTO) {
 		System.out.println("InstserviceImpl getInstCount()");
 
-		return instDAO.getInstCount();
+		return instDAO.getInstCount(pageDTO);
 	}
 
 	@Override

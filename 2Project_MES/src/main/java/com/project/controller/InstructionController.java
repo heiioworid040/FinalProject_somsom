@@ -27,7 +27,7 @@ public class InstructionController {
 	@RequestMapping(value = "/instruction/infoInst", method = RequestMethod.GET)
 	public String getInfoInst(HttpServletRequest request, Model model) {
 		System.out.println("instructionController getInfoInst()");
-
+		System.out.println(request.getParameter("searchInst"));
 		String searchLineCd=request.getParameter("searchLineCd");
 		String searchOrdDate1 =request.getParameter("searchOrdDate1");
 		String searchOrdDate2 =request.getParameter("searchOrdDate2");
@@ -65,10 +65,12 @@ public class InstructionController {
 		pageDTO.setSearch6(searchInstSt2);
 		pageDTO.setSearch7(searchInstSt3);
 
-		System.out.println("대기"+pageDTO.getSearch5() );
+		System.out.println("대기2"+pageDTO.getSearch5() );
+		System.out.println("진행2"+pageDTO.getSearch6() );
+		System.out.println("완료2"+pageDTO.getSearch7() );
 		List<InstructionDTO> instList=instService.getInstList(pageDTO);
 
-		int count = instService.getInstCount();
+		int count = instService.getInstCount(pageDTO);
 		int pageBlock=10;
 		int startPage=(currentPage-1)/pageBlock*pageBlock+1;
 		int endPage=startPage+pageBlock-1;

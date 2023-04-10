@@ -42,8 +42,8 @@ public class LineController {
 		pageDTO.setPageSize(10);
 		pageDTO.setPageNum("1");
 		pageDTO.setCurrentPage(1);
-		pageDTO.setSearch(searchLineCd);
-		pageDTO.setSearch2(searchLineNm);
+		pageDTO.setSearch2(searchLineCd);
+		pageDTO.setSearch3(searchLineNm);
 		
 		List<LineDTO> lineList=lineService.getLineList(pageDTO);
 		System.out.println("라인리스트"+lineList.get(0).getLine_cd());
@@ -66,6 +66,53 @@ public class LineController {
 		model.addAttribute("pageDTO", pageDTO);
 
 		return "line/lineInfo";
+	}
+	
+	@RequestMapping(value = "/line/linePop", method = RequestMethod.GET)
+	public String getLinePop(HttpServletRequest request, PageDTO pageDTO, Model model) {
+		System.out.println("LineController getLineInfo()");
+		
+		String btnId=request.getParameter("btnId");
+		String searchLineCd=request.getParameter("popLineCd");
+		String searchLineNm=request.getParameter("popLineNm");
+		int pageSize=10;
+
+		String pageNum=request.getParameter("pageNum");
+		if(pageNum==null) {
+			pageNum="1";
+		}
+		int currentPage=Integer.parseInt(pageNum);
+
+
+		pageDTO=new PageDTO();
+		pageDTO.setPageSize(10);
+		pageDTO.setPageNum("1");
+		pageDTO.setCurrentPage(1);
+		pageDTO.setSearch(btnId);
+		pageDTO.setSearch2(searchLineCd);
+		pageDTO.setSearch3(searchLineNm);
+		
+		List<LineDTO> lineList=lineService.getLineList(pageDTO);
+		System.out.println("라인리스트"+lineList.get(0).getLine_cd());
+
+		int count = lineService.getLineCount(pageDTO);
+		int pageBlock=10;
+		int startPage=(currentPage-1)/pageBlock*pageBlock+1;
+		int endPage=startPage+pageBlock-1;
+		int pageCount=count/pageSize+(count%pageSize==0?0:1);
+		if(endPage > pageCount) {
+			endPage = pageCount;
+		}
+		pageDTO.setCount(count);
+		pageDTO.setPageBlock(pageBlock);
+		pageDTO.setStartPage(startPage);
+		pageDTO.setEndPage(endPage);
+		pageDTO.setPageCount(pageCount);
+		
+		model.addAttribute("lineList", lineList);
+		model.addAttribute("pageDTO", pageDTO);
+
+		return "line/linePop";
 	}
 	
 	

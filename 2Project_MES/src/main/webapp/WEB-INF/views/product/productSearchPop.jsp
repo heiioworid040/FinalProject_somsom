@@ -70,9 +70,7 @@ function search(prod_cd) {
 				<div class="col-lg">
 					<div class="card m-0">
 						<div class="card-body card-block">
-							<form
-								action="${pageContext.request.contextPath }/product/productSearchPop"
-								method="get" class="form-inline">
+							<form action="${pageContext.request.contextPath }/product/productSearchPop" method="get" class="form-inline">
 								<div class="form-group col-6 mb-1">
 									<label class="pr-1 form-control-label">품번</label>&nbsp;&nbsp;<input
 										type="text" name="search" class="form-control " placeholder="Prod Code">
@@ -95,17 +93,17 @@ function search(prod_cd) {
 								<div class="col p-0">
 										<input type="submit" class="btn btn-primary float-right ml-3" value="검색">
 										<input type="reset" class="btn btn-secondary float-right reset" value="취소">
-									</div>
+								</div>
+							</form>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	</form>
 	<!-- 	검색창 -->
 
-	<div class="content">
+	<div class="content m-1">
 		<div class="animated fadeIn">
 			<div class="row">
 				<div class="col-lg">

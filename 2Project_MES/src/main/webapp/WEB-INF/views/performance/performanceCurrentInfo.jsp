@@ -45,9 +45,6 @@
 	<c:if test="${empty sessionScope.emp_cd }">
 		<c:redirect url="/employee/login"></c:redirect>
 	</c:if>
-	<!-- 모달 -->
-	<jsp:include page="../line/lineModal.jsp" />	
-	<!-- 모달 -->
 	<!-- Left Panel1 -->
 	<jsp:include page="../inc/leftPanel.jsp" />
 	<!-- Left Panel1 -->
@@ -96,11 +93,11 @@
 										<input type="text" name="searchInstCd" class="form-control" value="${pageDTO.search }">
 									</div>
 									<div class="form-group col-6 mb-1">
-										<label for="searchLine" class="pr-1 form-control-label">라인</label>
+										<label for="searchLine" class="pr-1 form-control-label mr-2">라인</label>
 										<div class="input-group modalP" id="modalP1">
-											<input type="text" id="searchLineCd" name="searchLineCd" placeholder="Line Code" class="form-control bg-white ml-2" value="${pageDTO.search5}" readonly>
+											<input type="text" id="searchLineCd" name="searchLineCd" placeholder="Line Code" class="form-control bg-white" value="${pageDTO.search5}" readonly>
 											<div class="input-group-btn">
-												<input type="button" class="btn btn-primary ml-2" id="lineModalBtn" value="검색">
+												<input type="button" class="btn btn-primary ml-2" id="linePopBtn" value="검색">
 											</div>
 										</div>
 									</div>
@@ -111,7 +108,7 @@
 									</div>
 									<div class="form-group col-6 mt-1">
 										<label class="pr-1  form-control-label mr-2">품번</label>
-										<input type="text" id="productSearchId" name="searchProdCd" class="form-control " value="${pageDTO.search4 }">
+										<input type="text" id="productSearchId" name="searchProdCd" class="form-control" placeholder="Porduct Code" value="${pageDTO.search4 }">
 											<div class="input-group">
 											<input type="button" class="btn btn-primary ml-2" id="productSearchPop" value="검색">
                                     	</div>
@@ -425,6 +422,13 @@
 			location.href='${pageContext.request.contextPath}/performance/deletePerf?delPerfCd='+jQuery('#insertPerfCd').val();
 		});
 		
+		// 라인 팝업
+		$(document).on("click", "#linePopBtn", function(){
+			window.open(
+					'${pageContext.request.contextPath}/line/linePop', 'LinePop', 'width=800,height=650');
+		});
+		
+		// 품목팝업
 		$(document).on("click", "#productSearchPop", function(){
 		// 새로운 윈도우 창을 띄움
 			window.open(
