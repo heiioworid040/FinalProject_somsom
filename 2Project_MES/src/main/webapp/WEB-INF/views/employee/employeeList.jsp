@@ -31,21 +31,19 @@
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/script/jquery-3.6.3.js"></script>
 <script type="text/javascript">
-
 $(document).ready(function(){
+window.close();
 	$('.emp_email').on('input',function(){
 		$.ajax({
 			url:'${pageContext.request.contextPath}/employee/emailCk',
 			data:{'emp_email':$('.emp_email').val()},
 			success:function(result){
-//					alert(result);
-				// result.trim() => 결과값 앞뒤로 공백 제거
 				if(result.trim()=="emailUp"){
 					result="이메일 중복";
 					$('.divresult_1').val("0");
 					$('.divresult').html(result).css("color","red");
 				}else{
-					result="이메일 사용가능";
+					result="이메일 중복아님";
 					$('.divresult_1').val("1");
 					$('.divresult').html(result).css("color","blue");
 				}
@@ -61,15 +59,13 @@ $(document).ready(function(){
 			url:'${pageContext.request.contextPath}/employee/telCk',
 			data:{'emp_tel':$('.emp_tel').val()},
 			success:function(result){
-//					alert(result);
-				// result.trim() => 결과값 앞뒤로 공백 제거
 				if(result.trim()=="telUp"){
 					result="전화번호 중복";
 					$('.divresult_2').val("0");
 					$('.divresult2').html(result).css("color","red");
 				}else{
 					$('.divresult_2').val("1");
-					result="전화번호 사용가능";
+					result="전화번호 중복아님";
 					$('.divresult2').html(result).css("color","blue");
 				}
 			}
@@ -115,11 +111,11 @@ $(document).ready(function(){
         return false;
       }
       
-//       if($("#emp_tel").length!=11){
-//           alert("전화번호를 11자 입력해주세요.");
-//           $("#emp_tel").focus();
-//           return false;
-//         }
+      if($("#emp_tel").val().length!=11){
+   	   alert("전화번호를 11자 입력해주세요.");
+   	   $("#emp_tel").focus();
+   	   return false;
+   	 }
       
       if($(".divresult_1").val()=="0"){
           alert("이메일 중복확인 해주세요.");
@@ -142,15 +138,10 @@ $(document).ready(function(){
 
 
 $(function(){
-    //전체선택 체크박스 클릭
 	$("#ckAll").click(function(){
-		//만약 전체 선택 체크박스가 체크된상태일경우
 		if($("#ckAll").prop("checked")) {
-			//해당화면에 전체 checkbox들을 체크해준다
 			$("input[type=checkbox]").prop("checked",true);
-		// 전체선택 체크박스가 해제된 경우
 		} else {
-			//해당화면에 모든 checkbox들의 체크를해제시킨다.
 			$("input[type=checkbox]").prop("checked",false);
 		}
 	})
@@ -181,8 +172,6 @@ function fun1(index) {
 	   } } 
 	   }
 	
-// 	else if(index==3)
-// 	  	{ document.form.action='${pageContext.request.contextPath}/employee/employeeList' }
 	   
 
 	      
@@ -311,7 +300,7 @@ function fun1(index) {
 
 
 
-											<td><input type="submit" value="저장" formmethod="get" id="save" class="btn btn-secondary"><br>
+											<td><input type="submit" value="저장" formmethod="get" id="save" class="btn btn-secondary btn4"><br>
 											<input type="submit" value="취소"  formmethod="get" class="cancel btn btn-secondary"></td>
 										</tr>
 										</c:if>
