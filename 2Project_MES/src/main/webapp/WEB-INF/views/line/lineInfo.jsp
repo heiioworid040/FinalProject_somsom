@@ -38,10 +38,7 @@
 	rel='stylesheet' type='text/css'>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/performanceCurr.css">
-	
 
-
-	
 </head>
 <body>
 	<!-- Left Panel1 -->
@@ -98,7 +95,7 @@
 												</div>
 											</div>
 										</div>
-										<div class="col p-0"></div>
+										<div class="col p-0"></div>	
 									</form>
 								</div>
 							</div>
@@ -106,84 +103,19 @@
 					</div>
 				</div>
 			</div>
-
-		<!-- 	편집창 insert(오브젝트)-->
-<!-- 		<div class="content pt-0"> -->
-<!-- 			<div class="animated fadeIn"> -->
-<!-- 				<div class="row"> -->
-<!-- 					<div class="col-lg"> -->
-<!-- 						<div class="card m-0"> -->
-<%-- 							<form action="${pageContext.request.contextPath}/instruction/insertInst" id="insertInstForm" method="post"> --%>
-<!-- 								<div class="card-body card-block"> -->
-<!-- 									<table id="table" class="table table-striped table-bordered"> -->
-<!-- 										<thead class="thead-dark"> -->
-<!-- 											<tr> -->
-<!-- 												<th scope="col">지시번호</th> -->
-<!-- 												<th scope="col">라인</th> -->
-<!-- 												<th scope="col">라인명</th> -->
-<!-- 												<th scope="col">수주번호</th> -->
-<!-- 												<th scope="col">상품코드</th> -->
-<!-- 												<th scope="col">상품명</th> -->
-<!-- 												<th scope="col">단위</th> -->
-<!-- 												<th scope="col" class="col-1">지시상태</th> -->
-<!-- 												<th scope="col">지시수량</th> -->
-<!-- 												<th scope="col">생산량</th>  -->
-<!-- 												<th scope="col">업체명</th>  -->
-<!-- 										</thead> -->
-<!-- 										<tbody> -->
-<!-- 											<tr> -->
-<!-- 												<td scope="row"><input type="text" id="insertInstCd" name="inst_cd" class="form-control" readonly></td> -->
-<!-- 												<td> -->
-<!-- 													<div class="input-group modalP" id="modalP2"> -->
-<!-- 														<input type="text" id="insertLineCd" name="line_cd" value="" placeholder="Line Code" class="form-control bg-white" readonly> -->
-<!-- 														<div class="input-group-btn"> -->
-<!-- 															<input type="button" class="btn btn-primary" id="lineModalBtn" value="검색"> -->
-<!-- 														</div> -->
-<!-- 													</div> -->
-<!-- 												</td> -->
-<!-- 												<td><input type="text" id="insertLineNm" disabled class="form-control"></td> -->
-<!-- 												<td> -->
-<!-- 													<div class="input-group"> -->
-<!-- 														<input type="text" id="insertOrderCd" name="ord_cd" value="" placeholder="Order Code" class="form-control bg-white" readonly> -->
-<!-- 														<div class="input-group-btn"> -->
-<!-- 															<input type="button" class="btn btn-primary" id="orderModalBtn" value="검색"> -->
-<!-- 														</div> -->
-<!-- 													</div> -->
-<!-- 												</td> -->
-<!-- 												<td> -->
-<!-- 													<div class="input-group"> -->
-<!-- 														<input type="text" id="insertProdCd" placeholder="Prod Code" class="form-control bg-white" disabled> -->
-<!-- 													</div> -->
-<!-- 												</td> -->
-<!-- 												<td><input type="text" id="insertProdNm" disabled class="form-control"></td> -->
-<!-- 												<td><input type="text" id="insertProdUnit" disabled class="form-control"></td> -->
-<!-- 												<td> -->
-<!-- 												<div> -->
-<!-- 													<select name="inst_st" id="insertInstSt" class="form-control"> -->
-<!--                                                 		<option value="대기">대기</option> -->
-<!--                                                 		<option value="진행">진행</option> -->
-<!--                                                 		<option value="완료">완료</option> -->
-<!--                                                 	</select>                                            	 -->
-<!-- 												</div> -->
-<!-- 												</td> -->
-<!-- 												<td><input type="text" id="insertProdCount" name="inst_count" class="form-control  bg-white" 	></td> -->
-<!-- 												<td><input type="number" id="insertInstFcount" name="inst_fcount" class="form-control" value="0" ></td> -->
-<!-- 												<td><input type="text" id="insertClientNm" disabled class="form-control"></td> -->
-<!-- 											</tr> -->
-<!-- 										</tbody> -->
-<!-- 									</table> -->
-<!-- 									<button type="submit" class="btn btn-primary col-2 float-right ml-3" id="insertInstBtn">추가</button> -->
-<!-- 									<button type="submit" class="btn btn-primary col-1 float-right ml-3" id="updateInstBtn" disabled>수정</button> -->
-<!-- 									<button type="button" class="btn btn-secondary col-1 float-right ml-3" id="deleteInstBtn" disabled>삭제</button> -->
-<!-- 									<button type="reset"  class="btn btn-secondary col-1 float-right reset" id="resetInstBtn">취소</button> -->
-<!-- 								</div> -->
-<!-- 							</form> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
-
+	<div class="content py-1 px-4">
+		<div class="animated fadeIn">
+			<div class="row">
+				<div class="col">
+					<div class="btn-div float-right px-2">
+						<button type="button" class="btn btn-secondary">삭제</button>
+						<button type="button" class="btn btn-primary" id="editBtn">수정</button>
+						<button type="button" class="btn btn-primary">추가</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 		<!-- 리스트 -->
 		<div class="content pt-0">
 			<div class="animated fadeIn">
@@ -194,10 +126,12 @@
 								<strong class="card-title">라인정보</strong>
 							</div>
 							<div class="card-body">
+							<form id="listForm" action="" method="post">
 								<table id="hover_tb" class="table table-hover table-striped table-bordered table-align-middle mb-0">
 									<thead class="thead-dark">
 										<tr>
-											<th scope="col">라인코드</th>
+										<th scope="col"><div class="form-check-inline form-check mr-0 ml-1"><input type="checkbox" class="form-check-input" id="allCheck"></div></th>
+										<th scope="col">라인코드</th>
 										<th scope="col">라인명</th>
 										<th scope="col">공정</th>
 										<th scope="col">작업장</th>
@@ -208,22 +142,24 @@
 									<tbody>
 										<c:forEach var="lineDTO" items="${lineList }">
 											<c:if test="${lineDTO.line_st eq 'err'}">
-											<tr id="infoLineTr" class="data-row bg-danger color-white">
+											<tr id="infoLineTr" class="data-row bg-danger">
 											</c:if>
 											<c:if test="${lineDTO.line_st ne 'err'}">
 											<tr id="infoLineTr" class="data-row">
 											</c:if>
-												<td><input type="text" class="visually-hidden" value="${lineDTO.line_cd }"></td>
-												<td>${lineDTO.line_nm }</td>
-												<td>${lineDTO.line_process}</td>
-												<td>${lineDTO.line_place}</td>
-												<td>${lineDTO.line_num}</td>
-												<td>${lineDTO.line_st}</td>
-												<td>${lineDTO.line_note}</td>
-												</tr>
+												<td><div class="form-check-inline form-check mr-0 ml-1"><input type="checkbox" class="form-check-input m-0"></div></td>
+												<td class="pr-0 pl-0"><input type="text" class="bg-transparent border-0 col-md" value="${lineDTO.line_cd }" readonly></td>
+												<td><input type="text" class="bg-transparent border-0 col-md" value="${lineDTO.line_nm }" readonly></td>
+												<td><input type="text" class="bg-transparent border-0 col-md" value="${lineDTO.line_process}" readonly></td>
+												<td><input type="text" class="bg-transparent border-0 col-md" value="${lineDTO.line_place}" readonly></td>
+												<td><input type="text" class="bg-transparent border-0 col-md" value="${lineDTO.line_num}" readonly></td>
+												<td><input type="text" class="bg-transparent border-0 col-md" value="${lineDTO.line_st}" readonly></td>
+												<td><input type="text" class="bg-transparent border-0 col-md" value="${lineDTO.line_note}" readonly></td>
+											</tr>
 										</c:forEach>
 									</tbody>
 								</table>
+							</form>
 								<!-- 페이징 -->
 								<div class="col p-0 mt-3">
 									<div class="dataTables_paginate paging_simple_numbers float-right">
@@ -289,20 +225,30 @@
 
 	<script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
 	<script type="text/javascript">
-		// 추가버튼 제어
-// 		$(document).on("click", "#insertInstBtn", function(){
-// 			if($('#insertOrderCd').val() == ''){
-// 				alert("수주번호를 입력해주세요.");
-// 				return false;
-// 			}
-// 			if($('#insertLineCd').val() == ''){
-// 				alert("라인코드를 입력해주세요.");
-// 				return false;
-// 			}
-// 			if($('#insertInstFcount').val() == ''){
-// 				$('#insertInstFcount').val('0');
-// 			}
-// 		});
+	// 체크박스 제어
+	$(document).on("change", "#allCheck", function(){
+		if(jQuery("#allCheck").is(":checked")){
+		jQuery('input[type="checkbox"]').prop('checked', true);
+		}else{
+		jQuery('input[type="checkbox"]').prop('checked', false);
+			
+		}
+	});
+	// 수정 버튼 제어
+	$(document).on("click", "#editBtn", function(){
+		jQuery('#listForm tr td input[type="text"]').prop('readonly', false);
+		jQuery('#listForm').attr('action', '${pageContext.request.contextPath}/line/updateLine');
+		console.log(jQuery("#listForm").attr('action'));
+	});
+	// 엔터기 감지
+	$(document).on("keyup", function(event) {
+	    if (event.which === 13) {
+	        alert('Enter is pressed!');
+	    	if(jQuery("#listForm").attr('action')=='${pageContext.request.contextPath}/line/updateLine'){
+	    		jQuery("#listForm").submit();
+	    	}
+	    }
+	});
 		
 // 		// 취소 버튼 (clear)
 // 		$(document).on("click",".reset", function(){
@@ -350,30 +296,7 @@
 // 			location.href='${pageContext.request.contextPath}/instruction/deleteInst?delInstCd='+$('#insertInstCd').val();
 // 		});
 		
-// 		// 체크박스 제어
-// 		$("#searchInstSt1").change(function(){
-// 			if($("#searchInstSt1").is(":checked")){
-// 				$("#searchInstSt1").attr('value', '대기');
-// 			}else{
-// 				$("#searchInstSt1").attr('value', '');
-// 			}
-// 		});
-		
-// 		$("#searchInstSt2").change(function(){
-// 			if($("#searchInstSt2").is(":checked")){
-// 				$("#searchInstSt2").attr('value', '진행');				
-// 			}else{
-// 				$("#searchInstSt2").attr('value', '');
-// 			}
-// 		});
-			
-// 		$("#searchInstSt3").change(function(){
-// 			if($("#searchInstSt3").is(":checked")){
-// 				$("#searchInstSt3").attr('value', '완료');
-// 			}else{
-// 				$("#searchInstSt3").attr('value', '');
-// 			}
-// 		});
+
 	</script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
 	<script

@@ -157,13 +157,13 @@
 										<input type="submit" class="btn btn-primary float-right ml-3" value="검색">
 										<input type="reset" class="btn btn-secondary float-right reset" value="취소">
 									</div>
+		</form>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		</form>
 		<!-- 	검색창 -->
 		
 		<!-- 체크박스로 선택해 글 여러개 삭제가능  -->
