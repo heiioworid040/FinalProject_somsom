@@ -43,7 +43,7 @@ $(document).ready(function(){
 					$('.divresult_1').val("0");
 					$('.divresult').html(result).css("color","red");
 				}else{
-					result="이메일 사용가능";
+					result="이메일 중복아님";
 					$('.divresult_1').val("1");
 					$('.divresult').html(result).css("color","blue");
 				}
@@ -67,7 +67,7 @@ $(document).ready(function(){
 					$('.divresult2').html(result).css("color","red");
 				}else{
 					$('.divresult_2').val("1");
-					result="전화번호 사용가능";
+					result="전화번호 중복아님";
 					$('.divresult2').html(result).css("color","blue");
 				}
 			}
@@ -77,7 +77,9 @@ $(document).ready(function(){
 
   
 $(document).ready(function(){	
-    $(".cancel").on("click", function(){
+	var emailCheck = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]/);
+//   	var telCheck = RegExp((/^010)([0-9]{8})$/);
+	$(".cancel").on("click", function(){
       window.close();
     })
     
@@ -104,11 +106,23 @@ $(document).ready(function(){
           return false;
       }
 
+      if(!emailCheck.test($('.emp_email').val())){
+      	  alert("이메일 형식 아님");
+      	  $('.emp_email').focus();
+      	  return false;
+        }
+      
       if($("#emp_tel").val()==""){
         alert("전화번호를 입력해주세요.");
         $("#emp_tel").focus();
         return false;
       }
+      
+	   if($("#emp_tel").val().length!=11){
+	   alert("전화번호를 11자 입력해주세요.");
+	   $("#emp_tel").focus();
+	   return false;
+	 }
       
       if($(".divresult_1").val()=="0"){
           alert("이메일 중복");
@@ -123,9 +137,9 @@ $(document).ready(function(){
         }
       
     	 $('#update2').submit();
-    	 setTimeout(function() {   
-             window.close();
-          }, 100);
+    	 setTimeout(function() {  
+        	 opener.parent.location.reload();
+             window.close();}, 100);
     });
   });
 
