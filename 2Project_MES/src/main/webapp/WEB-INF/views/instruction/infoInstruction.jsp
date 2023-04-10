@@ -418,6 +418,7 @@
 		
 		// 품목 팝업
 		$(document).on("click", "#productSearchPop", function(){
+			
 			window.open(
 					"${pageContext.request.contextPath }/product/productSearchPop",
 					"productSearchPop", "width=800,height=650");

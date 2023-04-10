@@ -23,7 +23,7 @@ public class LineController {
 		this.lineService=lineService;
 	}
 	
-	@RequestMapping(value = "/line/lineInfo", method = RequestMethod.GET)
+	@RequestMapping(value = "/line/lineInfo", method = RequestMethod.POST)
 	public String getLineList(HttpServletRequest request, PageDTO pageDTO, Model model) {
 		System.out.println("LineController getLineInfo()");
 		
@@ -114,6 +114,13 @@ public class LineController {
 
 		return "line/linePop";
 	}
+	
+	@RequestMapping(value = "/line/updateLine", method = RequestMethod.POST)
+	public String updateLine() {
+		System.out.println("성공적");
+		return "redirect:line/lineInfo";
+	}
+	
 	
 	
 }// controller
