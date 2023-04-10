@@ -48,19 +48,46 @@
     </head>
 
 <body>
-
-		
-
-
+<%
+String searchprcd=(String)request.getAttribute("search"); 
+String searchprnm=(String)request.getAttribute("search2");
+String searchprmat=(String)request.getAttribute("search3");
+%>
 
 		<div class="content">
+		
+		
+		<div class="animated fadeIn">
+				<div class="row">
+					<div class="col-lg">
+						<div class="card">
+<!-- 							<div class="card-header"> -->
+<!-- 								<strong class="card-title">Table Head</strong> -->
+<!-- 							</div> -->
+							<div class="card-body">
+													
+					<div id="table_search">
+							<form action="${pageContext.request.contextPath}/imat/imatpopsear" method="get">
+							<input type="button" value="돌아가기"  class="btn btn-outline-link btn-sm"
+							onclick="location.href='${pageContext.request.contextPath}/imat/imatpop'">
+							<input type="text" name="search" class="input_box" placeholder="품번">
+							<input type="text" name="search2" class="input_box" placeholder="품명">
+							<input type="text" name="search3" class="input_box" placeholder="자재유형">
+							<input type="submit" value="search" class="btn btn-secondary btn-sm">
+							</form>
+							</div>
+													
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		
+		
 			<div class="animated fadeIn">
 				<div class="row">
 					<div class="col-lg">
 						<div class="card">
-							<div class="card-header">
-								<strong class="card-title">Table Head</strong>
-							</div>
 							<div class="card-body">
 							<table class="table" id="prodtable">
 						<thead class="thead-dark">
@@ -72,6 +99,7 @@
 								<th scope="col">단위</th>
 								<th scope="col">재질</th>
 								<th scope="col">규격</th>
+								<th></th>
 							</tr>
 
 						</thead>
@@ -79,14 +107,14 @@
 
 							<c:forEach var="ProductDTO" items="${ImatprodList}">
 								<tr>
-									<td>${ProductDTO.prod_cd}			
+									<td id="prod_cd">${ProductDTO.prod_cd}			
 									</td>
-									<td>${ProductDTO.prod_nm}</td>
-									<td>${ProductDTO.prod_mat}</td>
+									<td id="prod_nm">${ProductDTO.prod_nm}</td>
+									<td id="prod_mat">${ProductDTO.prod_mat}</td>
 									<td>${ProductDTO.prod_unit}</td>
 									<td>${ProductDTO.prod_text}</td>
 									<td>${ProductDTO.prod_size}</td>
-									<td><input type="button" value="제출" onclick="sendChildValue('${ProductDTO.prod_cd}','${ProductDTO.prod_mat}')"></td>
+									<td><input type="button" value="제출" class="btn btn-secondary" onclick="sendChildValue('${ProductDTO.prod_cd}','${ProductDTO.prod_mat}')"></td>
 <!-- 									<td> -->
 <%-- 									<form action="${pageContext.request.contextPath}/imat/imatpopPro?prod_cd=${ProductDTO.prod_cd}" id="submitform" method="get"> --%>
 <!-- 									<input type="submit" value="제출"> -->

@@ -37,6 +37,33 @@
 <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 </head>
 <script type="text/javascript">
+function prodchk(event) {
+	var chkStyle = /\d/ ; 
+	if( document.getElementById( 'prod_cd' ).value== ""){
+		alert("품번 입력하세요");
+		//부모페이지로 이벤트전파방지
+		event.preventDefault();
+		}
+	else if(document.getElementById( 'omat_count' ).value== ""){
+		alert("출고수량 입력하세요");
+		document.fr.omat_count.focus();
+		//부모페이지로 이벤트전파방지
+		
+		event.preventDefault();
+		}
+	else{
+		if(!chkStyle.test((document.getElementById( 'omat_count' ).value))){
+			alert("출고수량에는 숫자만 입력 가능합니다.");
+			document.fr.omat_count.focus();
+			//부모페이지로 이벤트전파방지
+			event.preventDefault();
+			}
+			
+	}
+		
+}
+</script>
+<script type="text/javascript">
 
 function openPopUp() {
 	window.open("${pageContext.request.contextPath}/omat/omatpop", "omatpop", "width=1000, height=800");
@@ -138,16 +165,16 @@ function openPopUp() {
 							<strong class="card-title">Table Head</strong>
 						</div>
 						<div class="card-body">
-						<form method="post" action="${pageContext.request.contextPath}/omat/omatinsertPro">
+						<form method="post" name="fr" action="${pageContext.request.contextPath}/omat/omatinsertPro" onsubmit="prodchk(event);">
 						<table class="table">
 										<thead class="thead-dark">
 
 											<tr>	
 												<th scope="col"></th>	
-												<th scope="col">입고번호</th>
+												<th scope="col">출고번호</th>
 												<th scope="col">품번</th>
-												<th scope="col">입고창고</th>
-												<th scope="col">입고수량</th>
+												<th scope="col">출고창고</th>
+												<th scope="col">출고수량</th>
 												<th scope="col">비고</th>
 											</tr>
 										</thead>
@@ -159,7 +186,7 @@ function openPopUp() {
 													<td><input
 										type="text" name="prod_cd" class="prod_cd" id="prod_cd" readonly></td>
 													<td><input type="text" name="omat_stg" class="omat_stg" id="omat_stg" readonly></td>
-													<td><input type="text" name="omat_count"
+													<td><input type="text" name="omat_count" id="omat_count" 
 										class="omat_count"></td>
 													<td><input
 										type="text" name="omat_note" class="omat_note"></td>

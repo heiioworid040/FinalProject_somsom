@@ -35,67 +35,44 @@
 	rel='stylesheet' type='text/css'>
 
 <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
-</head>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js">
-	$(document).ready(function() {
-		$('#largeModal').on('shown.bs.modal', function() {
-			$.ajax({
-				url : '/omat/OmatprodList',
-				type : 'GET',
-				success : function(data) {
-					// display data in the modal body
-					$('.modal-body').html(data);
-				}
-			});
-		});
-	});
-
-	// $(document).ready(function(){
-	// $('#insert').submit(function(){
-
-	// 	if($('.id').val()==""){
-	// 		alert("아이디 입력하세요");
-	// 		$('.id').focus();
-	// 		return false;
-	// 	}
-	//     if($('.omat_code').val()==""){
-	//     	alert("비밀번호 입력하세요");
-	// 		$('.pass').focus();
-	// 		return false;
-	//     }
-
-	//     if($('.pass2').val()==""){
-	//     	alert("비밀번호2 입력하세요");
-	// 		$('.pass2').focus();
-	// 		return false;
-	//     }
-
-	//     if($('.name').val()==""){
-	//     	alert("이름 입력하세요");
-	// 		$('.name').focus();
-	// 		return false;
-	//     }
-
-	//     if($('.email').val()==""){
-	//     	alert("이메일 입력하세요");
-	// 		$('.email').focus();
-	// 		return false;
-	//     }
-
-	//     if($('.email2').val()==""){
-	//     	alert("이메일2 입력하세요");
-	// 		$('.email2').focus();
-	// 		return false;
-	//     }
-
-	//     if($('.email').val() != $('.email2').val()){
-	//     	alert("이메일 틀림");
-	// 		$('.email2').focus();
-	// 		return false;
-	//     }
-
-	// });
+<script type="text/javascript">
+function prodchk(event) {
+// 	var imat_count = document.getElementById( 'imat_count' ).value;
+// 	 var prod_cd = document.getElementById( 'prod_cd' ).value;
+// 	if( prod_cd== ""){
+// 		alert("품번 입력하세요");
+// 		//부모페이지로 이벤트전파방지
+// 		event.preventDefault();
+// 		}
+	var chkStyle = /\d/ ; 
+	if(document.getElementById( 'omat_count' ).value== ""){
+		alert("출고수량 입력하세요");
+		document.fr.omat_count.focus();
+		//부모페이지로 이벤트전파방지
+		
+		event.preventDefault();
+		}
+	else{
+		if(!chkStyle.test((document.getElementById( 'omat_count' ).value))){
+			alert("출고수량에는 숫자만 입력 가능합니다.");
+			document.fr.omat_count.focus();
+			//부모페이지로 이벤트전파방지
+			event.preventDefault();
+			}
+			
+	}
+	
+// 	if(!chkStyle.test((document.getElementById( 'imat_count' ).value))){
+// 		alert("입고수량에는 숫자만 입력 가능합니다.");
+// // 		$(imat_count).val="";
+// 		//부모페이지로 이벤트전파방지
+// 		event.preventDefault();
+// 		}
+		
+}
 </script>
+</head>
+
 <body>
 
 
@@ -161,15 +138,15 @@
 											<tr>
 
 												<td><input type="text" name="omat_cd"
-													value="${omatDTO.omat_cd}"></td>
-												<td><input type="text" name="prod_cd"
-													value="${omatDTO.prod_cd}"></td>
+													value="${omatDTO.omat_cd}" readonly></td>
+												<td><input type="text" name="prod_cd" id="prod_cd" 
+													value="${omatDTO.prod_cd}" readonly></td>
 												<td><input type="text" name="omat_stg"
-													value="${omatDTO.omat_stg}"></td>
-												<td><input type="text" name="omat_count"
-													value="${omatDTO.omat_count}"></td>
+													value="${omatDTO.omat_stg}" readonly></td>
+												<td><input type="text" name="omat_count" id="omat_count"
+													value="${omatDTO.omat_count}" readonly></td>
 												<td><input type="text" name="omat_note"
-													value="${omatDTO.omat_note}"></td>
+													value="${omatDTO.omat_note}" readonly></td>
 											</tr>
 										</tbody>
 									</table>

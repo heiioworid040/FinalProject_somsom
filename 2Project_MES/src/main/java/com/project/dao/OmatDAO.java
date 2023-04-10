@@ -10,10 +10,11 @@ public interface OmatDAO {
 
 	public List<OmatDTO> getOmatbeList(PageDTO pageDTO);
 
-	public int getOmatCount();
+	public int getOmatCount(PageDTO pageDTO);
+
 	
 	public Integer getMaxCd();
-
+	
 	public OmatDTO getOmat(String omat_cd);
 	
 	public ProductDTO getProd(String prod_cd);

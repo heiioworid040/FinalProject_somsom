@@ -139,10 +139,35 @@
 
 
 		<div class="content">
-			<form>
-				<button type="submit"
+		
+		<div class="animated fadeIn">
+				<div class="row">
+					<div class="col-lg">
+						<div class="card">
+<!-- 							<div class="card-header"> -->
+<!-- 								<strong class="card-title">Table Head</strong> -->
+<!-- 							</div> -->
+							<div class="card-body">
+													
+					<div id="table_search">
+					<form class="form-inline">
+					<button type="submit" class="btn btn-primary"
 					formaction="${pageContext.request.contextPath}/omat/omatinsert">추가</button>
-			</form>
+					</form>
+							<form action="${pageContext.request.contextPath}/omat/omatsearch" method="get">
+							<input type="text" name="search" class="input_box" placeholder="출고번호">
+							<input type="text" name="search2" class="input_box" placeholder="품번">
+							<input type="text" name="search3" class="input_box" placeholder="출고창고">
+							<input type="submit" value="search" class="btn">
+							</form>
+							</div>
+													
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
 			<div class="anomated fadeIn">
 				<div class="row">
 					<div class="col-lg">
@@ -192,27 +217,14 @@
 													<td>
 														<%-- 											<input type="hidden" name="omat_cd" value="${OmatDTO.omat_cd}"> --%>
 														<!--     											<button type="submit">삭제</button> -->
-														<input type="button" value="수정"
+														<input type="button" value="수정" class="btn btn-secondary"
 														onclick="location.href='${pageContext.request.contextPath}/omat/omatupdate?omat_cd=${OmatDTO.omat_cd}'">
-														<input type="button" value="삭제"
+														<input type="button" value="삭제" class="btn btn-danger"
 														onclick="location.href='${pageContext.request.contextPath}/omat/omatdelete?omat_cd=${OmatDTO.omat_cd}'">
 
 													</td>
 												</tr>
 
-												<!-- 										<tr> -->
-												<!-- 											<th scope="row">1</th> -->
-												<%--   											<td th:text="${omat_cd}"></td> --%>
-												<%-- 											<td th:text="${omat_date}"></td> --%>
-												<%-- 											<td th:text="${prod_cd}"></td> --%>
-												<%-- 											<td th:text="${omat_stg}"></td> --%>
-												<%-- 											<td th:text="${prod_unit}"></td> --%>
-												<%-- 											<td th:text="${omat_stg}"></td> --%>
-												<%-- 											<td th:text="${omat_count}"></td> --%>
-												<%-- 											<td th:text="${cli_cd}"></td> --%>
-												<%-- 											<td th:text="${cli_nm}"></td> --%>
-												<%-- 											<td th:text="${omat_note}"></td> --%>
-												<!-- 										</tr> -->
 											</c:forEach>
 
 
@@ -220,22 +232,23 @@
 
 
 									</table>
+									<c:if test="${pageDTO.startPage > pageDTO.pageBlock }">
+											<a href="${pageContext.request.contextPath}/omat/omatbeList?pageNum=${pageDTO.startPage - pageDTO.pageBlock}&search=${pageDTO.search}">[이전페이지]</a>
+																	
+										</c:if>
+
+										<c:forEach var="i" begin="${pageDTO.startPage }"
+											end="${pageDTO.endPage }" step="1">
+											<a
+												href="${pageContext.request.contextPath}/omat/omatbeList?pageNum=${i}&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}">${i}</a>
+										</c:forEach>
+
+										<c:if test="${pageDTO.endPage < pageDTO.pageCount }">
+											<a
+								href="${pageContext.request.contextPath}/omat/omatbeList?pageNum=${pageDTO.startPage + pageDTO.pageBlock}&search=${pageDTO.search}">>[다음페이지]</a>
+										</c:if>
 								</form>
-								<%-- 								<c:if test="${pageDTO.startPage > pageDTO.pageBlock }"> --%>
-								<!-- 										<a -->
-								<%-- 											href="${pageContext.request.contextPath}/omat/omatbeList?pageNum=${pageDTO.startPage - pageDTO.pageBlock }">[이전페이지]</a> --%>
-								<%-- 									</c:if> --%>
-
-								<%-- 									<c:forEach var="i" begin="${pageDTO.startPage }" --%>
-								<%-- 										end="${pageDTO.endPage }" step="1"> --%>
-								<!-- 										<a -->
-								<%-- 											href="${pageContext.request.contextPath}/omat/omatbeList?pageNum=${i}">${i}</a> --%>
-								<%-- 									</c:forEach> --%>
-
-								<%-- 									<c:if test="${pageDTO.endPage < pageDTO.pageCount }"> --%>
-								<!-- 										<a -->
-								<%-- 											href="${pageContext.request.contextPath}/omat/omatbeList?pageNum=${pageDTO.startPage + pageDTO.pageBlock }">[다음페이지]</a> --%>
-								<%-- 									</c:if> --%>
+								
 							</div>
 						</div>
 					</div>

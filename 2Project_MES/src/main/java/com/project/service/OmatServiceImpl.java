@@ -12,7 +12,6 @@ import com.project.domain.OmatDTO;
 
 import com.project.domain.OmatDTO;
 import com.project.domain.OmatDTO;
-
 import com.project.domain.PageDTO;
 import com.project.domain.ProductDTO;
 
@@ -25,9 +24,9 @@ public class OmatServiceImpl implements OmatService{
 
 
 	@Override
-	public int getOmatCount() {
+	public int getOmatCount(PageDTO pageDTO) {
 		System.out.println("OmatServiceImpl getOmatCount()");
-		return omatDAO.getOmatCount();
+		return omatDAO.getOmatCount(pageDTO);
 	}
 
 	@Override

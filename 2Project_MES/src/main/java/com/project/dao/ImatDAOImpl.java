@@ -62,10 +62,9 @@ public class ImatDAOImpl implements ImatDAO{
 //	}
 
 	@Override
-	public int getImatCount() {
+	public int getImatCount(PageDTO pageDTO) {
 		System.out.println("ImatDAOImp getImatCount()");
-		System.out.println("ImatDAOImpl getImatbeList()-2");
-		return sqlSession.selectOne(namespace+".getImatCount");
+		return sqlSession.selectOne(namespace+".getImatCount",pageDTO);
 	}
 
 

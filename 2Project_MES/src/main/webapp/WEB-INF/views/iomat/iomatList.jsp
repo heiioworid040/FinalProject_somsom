@@ -65,7 +65,11 @@
 </head>
 
 <body>
-
+<%
+String searchimcd=(String)request.getAttribute("search"); 
+String searchprcd=(String)request.getAttribute("search2");
+String searchimst=(String)request.getAttribute("search3");
+%>
 	<script type="text/javascript">
 		// function checkAll()  {
 		// 	console.log("checkAll");
@@ -152,8 +156,6 @@
 										<thead class="thead-dark">
 
 											<tr>
-												<th><input type="checkbox" name="check" id="chAll"
-													onclick="chAll()"></th>
 												<th scope="col">#</th>
 												<th scope="col">품번</th>
 												<th scope="col">품명</th>
@@ -165,9 +167,6 @@
 										<tbody>
 											<c:forEach var="ImatDTO" items="${IomatList}">
 												<tr>
-													<th><input type="checkbox" name="checkRow"
-														id="${ImatDTO.imat_num}" value="${ImatDTO.imat_num}"
-														class="chkbox"></th>
 													<td>${ImatDTO.imat_num}</td>
 													<td>${ImatDTO.prod_cd}</td>
 													<td>${ImatDTO.prod_nm}</td>
@@ -176,20 +175,6 @@
 													<td>${ImatDTO.iomat_count}</td>
 													
 												</tr>
-
-												<!-- 										<tr> -->
-												<!-- 											<th scope="row">1</th> -->
-												<%--   											<td th:text="${imat_cd}"></td> --%>
-												<%-- 											<td th:text="${imat_date}"></td> --%>
-												<%-- 											<td th:text="${prod_cd}"></td> --%>
-												<%-- 											<td th:text="${imat_stg}"></td> --%>
-												<%-- 											<td th:text="${prod_unit}"></td> --%>
-												<%-- 											<td th:text="${imat_stg}"></td> --%>
-												<%-- 											<td th:text="${imat_count}"></td> --%>
-												<%-- 											<td th:text="${cli_cd}"></td> --%>
-												<%-- 											<td th:text="${cli_nm}"></td> --%>
-												<%-- 											<td th:text="${imat_note}"></td> --%>
-												<!-- 										</tr> -->
 											</c:forEach>
 
 
@@ -198,21 +183,21 @@
 
 									</table>
 								</form>
-								<%-- 								<c:if test="${pageDTO.startPage > pageDTO.pageBlock }"> --%>
-								<!-- 										<a -->
-								<%-- 											href="${pageContext.request.contextPath}/imat/imatbeList?pageNum=${pageDTO.startPage - pageDTO.pageBlock }">[이전페이지]</a> --%>
-								<%-- 									</c:if> --%>
+						<c:if test="${pageDTO.startPage > pageDTO.pageBlock }">
+											<a href="${pageContext.request.contextPath}/imat/iomatList?pageNum=${pageDTO.startPage - pageDTO.pageBlock}&search=${pageDTO.search}">[이전페이지]</a>
+																	
+										</c:if>
 
-								<%-- 									<c:forEach var="i" begin="${pageDTO.startPage }" --%>
-								<%-- 										end="${pageDTO.endPage }" step="1"> --%>
-								<!-- 										<a -->
-								<%-- 											href="${pageContext.request.contextPath}/imat/imatbeList?pageNum=${i}">${i}</a> --%>
-								<%-- 									</c:forEach> --%>
+										<c:forEach var="i" begin="${pageDTO.startPage }"
+											end="${pageDTO.endPage }" step="1">
+											<a
+												href="${pageContext.request.contextPath}/imat/iomatList?pageNum=${i}&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}">${i}</a>
+										</c:forEach>
 
-								<%-- 									<c:if test="${pageDTO.endPage < pageDTO.pageCount }"> --%>
-								<!-- 										<a -->
-								<%-- 											href="${pageContext.request.contextPath}/imat/imatbeList?pageNum=${pageDTO.startPage + pageDTO.pageBlock }">[다음페이지]</a> --%>
-								<%-- 									</c:if> --%>
+										<c:if test="${pageDTO.endPage < pageDTO.pageCount }">
+											<a
+								href="${pageContext.request.contextPath}/imat/iomatList?pageNum=${pageDTO.startPage + pageDTO.pageBlock}&search=${pageDTO.search}">[다음페이지]</a>
+										</c:if>
 							</div>
 						</div>
 					</div>

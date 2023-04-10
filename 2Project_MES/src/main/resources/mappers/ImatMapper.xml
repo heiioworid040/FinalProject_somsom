@@ -31,6 +31,15 @@
 		on c.cli_cd=p.cli_cd
         join in_material i
 		on i.prod_cd=p.prod_cd
+		<if test="search != null">
+        	where i.imat_cd like CONCAT('%',#{search},'%')
+        </if>
+        <if test="search2 != null">
+        	and p.prod_cd like CONCAT('%',#{search2},'%')
+        </if>
+        <if test="search3 != null">
+        	and i.imat_stg like CONCAT('%',#{search3},'%')
+        </if>
 		limit #{startRow}, #{pageSize}
 <!--         where id = #{id} and pass = #{pass} -->
     </select>
@@ -43,6 +52,15 @@
 <!--     </select> -->
     <select id="getImatprodList" resultType="com.project.domain.ProductDTO">
     select * from product
+    <if test="search != null">
+        	where prod_cd like CONCAT('%',#{search},'%')
+        </if>
+        <if test="search2 != null">
+        	and prod_nm like CONCAT('%',#{search2},'%')
+        </if>
+        <if test="search3 != null">
+        	and prod_mat like CONCAT('%',#{search3},'%')
+        </if>
     limit #{startRow}, #{pageSize}
     </select>
     
@@ -59,6 +77,15 @@
     
     <select id="getImatCount" resultType="java.lang.Integer">
     select count(*) from in_material
+    <if test="search != null">
+        	where imat_cd like CONCAT('%',#{search},'%')
+        </if>
+        <if test="search2 != null">
+        	and prod_cd like CONCAT('%',#{search2},'%')
+        </if>
+        <if test="search3 != null">
+        	and imat_stg like CONCAT('%',#{search3},'%')
+        </if>
     </select>
     
     <delete id="deleteList">
