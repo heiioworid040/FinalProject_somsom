@@ -77,7 +77,7 @@
     </delete>
     
     <select id="shipInfo" resultType="com.project.domain.ShipDTO">
-		select o.ord_cd, ord_date, ord_d_date, o.prod_cd, p.prod_nm, ord_count,c.cli_nm,s.ship_count
+		select o.ord_cd, ord_date, ord_d_date, o.prod_cd, p.prod_nm, ord_count, p.prod_count,c.cli_nm, s.ship_count
 		from orders o join product p on o.prod_cd=p.prod_cd join client c on o.cli_cd=c.cli_cd left join ship s on o.ord_cd=s.ord_cd
 		where s.ship_count is null
 		<if test="search!=null || search2!=null">
