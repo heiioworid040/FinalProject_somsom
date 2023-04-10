@@ -49,20 +49,19 @@
 					alert("숫자만 입력");
 					return false;
 					}
-// 				if($('#ord_date'+i).val()>$('#ship_date'+i).val()){
-// 					alert("출하일자를 바르게 입력하세요");
-// 					return false;
-// 				}
+				if(parseInt($('#ship_count'+i).val()) > parseInt($('#ship_ifcount'+i).val())&&$('#ship_date'+i).val()!=""){
+					alert("입력 출하량이 출하 예정량을 초과할 수 없습니다.");
+					return false;
+					}
+				if(parseInt($('#ship_count'+i).val()) > parseInt($('#ship_inven'+i).val())&&$('#ship_date'+i).val()!=""){
+					alert("재고 수량이 부족합니다.");
+					return false;
+					}
+				if($('#ord_date'+i).val()>$('#ship_date'+i).val()){
+					alert("출하일자를 바르게 입력하세요.");
+					return false;
+				}
 			}
-
-// 			for(i=1;i<=last;i++) {
-// 			}
-				
-// 				if($('#ship_date').val()==""){
-// 					alert("출하일자 입력");
-// 					return false;
-// 				}
-			
 		});
 	});
 </script>
@@ -174,17 +173,16 @@
 												<tr>
 													<td>${status.count }</td>
 													<td><input type="hidden" name="ord_cd" value="${shipDTO.ord_cd }">${shipDTO.ord_cd }</td>
-													<td><fmt:formatDate pattern="yyyy-MM-dd" value="${shipDTO.ord_date }"/></td>
+													<td><input type="hidden" id="ord_date${status.count }" value="<fmt:formatDate pattern='yyyy-MM-dd' value='${shipDTO.ord_date }'/>"><fmt:formatDate pattern="yyyy-MM-dd" value="${shipDTO.ord_date }"/></td>
 													<td><fmt:formatDate pattern="yyyy-MM-dd" value="${shipDTO.ord_d_date }"/></td>
 													<td>${shipDTO.prod_cd }</td>
 													<td>${shipDTO.prod_nm }</td>
 													<td>${shipDTO.ord_count }</td>
-													<td><input type="hidden" name="ship_ifcount" value="${shipDTO.ord_count }">${shipDTO.ord_count }</td>
+													<td><input type="hidden" id="ship_ifcount${status.count }" value="${shipDTO.ord_count }">${shipDTO.ord_count }</td>
 <!-- 													ord_count=ship_ifcount -->
-													<td></td>
-													<td></td>
+													<td>${shipDTO.prod_count - shipDTO.ord_count }</td>
+													<td><input type="hidden" id="ship_inven${status.count }" value="${shipDTO.prod_count }">${shipDTO.prod_count }</td>
 <%-- 													<td><input type="hidden" name="ship_over" value="${shipDTO.ship_over }">${shipDTO.ship_over }</td> --%>
-<%-- 													<td><input type="hidden" name="ship_inven" value="${shipDTO.ship_inven }">${shipDTO.ship_inven }</td> --%>
 													<td><input type="text" id="ship_count${status.count }" name="ship_count" class="ship_count"></td>
 													<td><input type="date" id="ship_date${status.count }" name="ship_date" class="ship_date"></td>
 													<td>${shipDTO.cli_nm }</td>
