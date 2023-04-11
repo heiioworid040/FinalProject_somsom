@@ -92,7 +92,7 @@
 									method="get" class="form-inline">
 									<div class="form-group col-6 mb-1">
 										<label class="pr-1 form-control-label mr-2">지시번호</label> <input
-											type="text" name="searchInstCd" class="form-control" placeholder="Inst Code">
+											type="text" name="searchInstCd" class="form-control instCd" placeholder="Inst Code">
 									</div>
 									<div class="form-group col-6 mb-1">
 										<label for="searchLine" class="pr-1 form-control-label mr-2">라인</label>
@@ -166,7 +166,7 @@
 										<tbody>
 											<tr>
 												<td scope="row"><input type="text" id="insertPerfCd"
-													name="perf_cd" class="form-control" readonly></td>
+													name="perf_cd" class="form-control instCd" ></td>
 												<td>
 													<div class="input-group modalP" id="modalP2">
 														<input type="text" id="insertInstCd" name="inst_cd"
@@ -174,7 +174,7 @@
 															placeholder="Inst Code" class="form-control bg-white">
 														<div class="input-group-btn">
 															<input type="button" class="btn btn-primary"
-																id="instListBtn" value="목록">
+																id="instListBtn" value="검색">
 														</div>
 													</div>
 												</td>
@@ -288,7 +288,7 @@
 												<td>
 													<div class="input-group">
 														<button id="editPerfBtn" class="btn btn-secondary"
-															value="${performanceDTO.perf_cd }">수정</button>
+															value="${performanceDTO.perf_cd }">편집</button>
 													</div>
 												</td>
 											</tr>
@@ -462,6 +462,16 @@
 			if(jQuery('#insertPerfErr').val() == 0){				
 				jQuery('#insertPerfCs').attr('disabled', true);
 			}
+		});
+		
+		//지시 번호 입력
+		$(document).on("focusin", ".instCd", function(){
+			console.log("됨");
+			jQuery('.instCd').on('keyup', function () {
+				jQuery(this).val(jQuery(this).val().replace(/[^0-9]/g, ""));
+			});
+			jQuery(document).on("focusout", ".instCd", function()
+				jQuery('.instCd').attr('value', 'WI');
 		});
 		
 		// 실적 추가 버튼

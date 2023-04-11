@@ -23,7 +23,7 @@ public class LineController {
 		this.lineService=lineService;
 	}
 	
-	@RequestMapping(value = "/line/lineInfo", method = RequestMethod.POST)
+	@RequestMapping(value = "/line/lineInfo", method = RequestMethod.GET)
 	public String getLineList(HttpServletRequest request, PageDTO pageDTO, Model model) {
 		System.out.println("LineController getLineInfo()");
 		

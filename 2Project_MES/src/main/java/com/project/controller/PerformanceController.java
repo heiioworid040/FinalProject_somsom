@@ -32,7 +32,7 @@ public class PerformanceController {
 	public String currentInfo(HttpServletRequest request, Model model) {
 		System.out.println("PerformanceController currentInfo()");
 		// 검색어 가져오기
-		String search = request.getParameter("searchInstCd");
+		String search = request.getParameter("search");
 		String search2 = request.getParameter("searchProdCd");
 		String search3 = request.getParameter("searchPerfDate1");
 		String search4 = request.getParameter("searchPerfDate2");
