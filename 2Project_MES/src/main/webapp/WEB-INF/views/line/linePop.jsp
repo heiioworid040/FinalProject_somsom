@@ -108,9 +108,11 @@
 		
 		console.log($('#btnId').val());
 		popLineCd = td1.eq(0).text();
+		popLineNm = td1.eq(1).text();
 		
 		if($('#btnId').val()=='linePopI'){
 		$("#insertLineCd", opener.document).val(popLineCd);
+		$("#insertLineNm", opener.document).val(popLineNm);
 		}else{
 		$("#searchLineCd", opener.document).val(popLineCd);
 		}
