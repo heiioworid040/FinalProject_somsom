@@ -52,27 +52,27 @@
 			for(i=first;i<=last;i++){
 				if($('#cli_nm'+i).val()!=""||$('#ord_date'+i).val()!=""||$('#emp_nm'+i).val()!=""||$('#prod_cd'+i).val()!=""||$('#ord_count'+i).val()!=""){
 					if($('#cli_nm'+i).val()==""){
-					alert("거래처 선택");
+					alert("거래처를 선택하세요.");
 					return false;
 					}
 					if($('#ord_date'+i).val()==""){
-					alert("수주일자 입력");
+					alert("수주일자를 입력하세요.");
 					return false;
 					}
 					if($('#emp_nm'+i).val()==""){
-					alert("담당자 선택");
+					alert("담당자를 선택하세요.");
 					return false;
 					}
 					if($('#prod_cd'+i).val()==""){
-					alert("상품 선택");
+					alert("상품을 선택하세요.");
 					return false;
 					}
 					if($('#ord_d_date'+i).val()==""){
-					alert("납품예정일 입력");
+					alert("납품예정일을 입력하세요.");
 					return false;
 					}
 					if($('#ord_count'+i).val()==""){
-					alert("수주량 입력");
+					alert("수주량을 입력하세요.");
 					return false;
 					}
 				}
@@ -84,21 +84,6 @@
 	function searchPop(search, id) {
 	window.open('${pageContext.request.contextPath }/order/searchPop?pop='+search+'&id='+id,'searchPop','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=900,height=787,top=90,left=200')
 	}
-
-// 	function fun1() {
-// 		let check = false;
-// 		with(document.ckDelete) {
-// 			if(ck.length==undefined) {
-// 			if(ck.checked) { check = true; }
-// 	      } else {
-// 	         for(let i=0;i<ck.length;i++) {
-// 	            if(ck[i].checked) { check = true; } }
-// 	      } if(!check) {
-// 	      alert("삭제할 게시글을 선택하세요");
-// 	         return;
-// 	      } else {
-// 	         if(confirm("삭제처리 하시겠습니까?")) { submit(); }
-// 	      } } }
 
 	function fun2() {
 		if($("input:checked[id='ckAll']").prop("checked")) {
@@ -155,19 +140,19 @@
 										<span class="search-cl">거래처</span><input type="text" id="cliS_cd" name="cli" placeholder="Client Code" readonly><input type="text" id="cliS_nm" placeholder="Client Name" readonly><button type="button" class="input-group-addon search-btn" style="cursor: pointer;" onclick="searchPop('cliS')"><i class="ti-search"></i></button>
 									</div>
 									<div class="search-div">
-										<span class="search-cl2">수주일자</span><input type="date" id="ordS_date" name="ord"><input type="date" id="ordS_date_end" name="ord_end">
+										<span class="search-cl2">수주일자</span><input type="date" id="ordS_date" name="ord"> ~ <input type="date" id="ordS_date_end" name="ord_end">
 									</div>
 									<div class="search-div">
 										<span class="search-cl">담당자</span><input type="text" id="empS_cd" name="emp" placeholder="Emp Code" readonly><input type="text" id="empS_nm" placeholder="Emp Name" readonly><button type="button" class="input-group-addon search-btn" style="cursor: pointer;" onclick="searchPop('empS')"><i class="ti-search"></i></button>
 									</div>
 									<div class="search-div">
-										<span class="search-cl">납품예정일</span><input type="date" id="ordS_d_date" name="ord_d"><input type="date" id="ordS_d_date_end" name="ord_d_end">
+										<span class="search-cl">납품예정일</span><input type="date" id="ordS_d_date" name="ord_d"> ~ <input type="date" id="ordS_d_date_end" name="ord_d_end">
 									</div>
 									<div class="search-div">
 										<span class="search-cl2">품목</span><input type="text" id="prodS_cd" name="prod" placeholder="Prod Code" readonly><input type="text" id="prodS_nm" placeholder="Prod Name" readonly><button type="button" class="input-group-addon search-btn" style="cursor: pointer;" onclick="searchPop('prodS')"><i class="ti-search"></i></button>
 									</div>
 									<div class="search-div2 form-inline">
-										<span class="search-cl2">출하여부</span><div style="margin-top:5px"><input type="checkbox" id="shipC" name="ship" value="ship" ${pageDTO.search8 eq 'ship' ? "checked":"" }></div><span style="margin-left:4px">완료</span>
+										<span class="search-cl2">출하여부</span><div style="margin-top:5px"><input type="checkbox" name="ship" value="ship" ${pageDTO.search8 eq 'ship' ? "checked":"" }></div><span style="margin-left:4px">완료</span>
 										<div style="width: 74.7%">
 										<input type="submit" class="btn btn-primary float-right" value="검색">
 										</div>
@@ -205,7 +190,7 @@
 										<tr>
 											<th scope="col" style="width: 44px"></th>
 											<th scope="col">수주번호</th>
-											<th scope="col">업체</th>
+											<th scope="col">거래처</th>
 											<th scope="col">수주일자</th>
 											<th scope="col">담당자</th>
 											<th scope="col">상품코드</th>
