@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>imatbeList</title>
+<title>iomatList</title>
 <meta name="description" content="Ela Admin - HTML5 Admin Template">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -35,33 +35,7 @@
 	rel='stylesheet' type='text/css'>
 
 <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
-<script type="text/javascript">
-	function chAll(target) {
-		var chall = document.getElementById("chAll");
-		var is_checked = chall.checked;
-		if (is_checked) {
-			chAllChecked();
-		} else {
-			chAllUnChecked();
-		}
-	}
 
-	function chAllChecked() {
-		document.querySelectorAll(".chkbox").forEach(function(v, i) {
-			v.checked = true;
-		});
-	}
-
-	function chAllUnChecked() {
-		document.querySelectorAll(".chkbox").forEach(function(v, i) {
-			v.checked = false;
-		});
-	}
-
-	function test(num) {
-		alert(num);
-	}
-</script>
 </head>
 
 <body>
@@ -70,39 +44,7 @@ String searchimcd=(String)request.getAttribute("search");
 String searchprcd=(String)request.getAttribute("search2");
 String searchimst=(String)request.getAttribute("search3");
 %>
-	<script type="text/javascript">
-		// function checkAll()  {
-		// 	console.log("checkAll");
-		// 	  const checkboxes 
-		// 	       = document.getElementsByName('checkRow');
 
-		// 	  checkboxes.forEach((checkbox) => {
-		// 		  document.getElementsByName('check')[0].checked = checkAll.checked;
-		// 	  })
-
-		// $(document).ready(function() {
-		// 	  // 버튼 클릭 이벤트 처리
-		// 	  $("#add-row-btn").click(function() {
-		// 	    var name = "새로운 이름";
-		// 	    var age = "새로운 나이";
-
-		// 	    $.ajax({
-		// 	      type: "POST",
-		// 	      url: "/addRow",
-		// 	      data: { imat_cd:imat_cd, imat_date:imat_date, prod_cd:prod_cd  
-		// 	    	  imat_stg:imat_stg,prod_unit:prod_unit,imat_stg:imat_stg,
-		// 	    	  imat_count:imat_count, cli_cd:cli_cd,cli_nm:cli_nm,imat_note:imat_note},
-		// 	      success: function(response) {
-		// 	        // 서버에서 응답받은 HTML을 새로운 행으로 추가
-		// 	        $("#my-table tbody").append(response);
-		// 	      },
-		// 	      error: function() {
-		// 	        alert("오류가 발생했습니다.");
-		// 	      }
-		// 	    });
-		// 	  });
-		// 	});
-	</script>
 
 
 	<!-- Left Panel1 -->
@@ -142,13 +84,37 @@ String searchimst=(String)request.getAttribute("search3");
 
 
 		<div class="content">
-			<div class="animated fadeIn">
+		
+		
+		<div class="animated fadeIn">
 				<div class="row">
 					<div class="col-lg">
 						<div class="card">
 							<div class="card-header">
-								<strong class="card-title">Table Head</strong>
+								<strong class="card-title">자재재고 현황</strong>
 							</div>
+							<div class="card-body">
+													
+					<div id="table_search">
+							<form action="${pageContext.request.contextPath}/iomat/iomatsear" method="get">
+							<input type="text" name="search" class="input_box" placeholder="품번">
+							<input type="text" name="search2" class="input_box" placeholder="품명">
+							<input type="text" name="search3" class="input_box" placeholder="자재유형">
+							<input type="submit" value="search" class="btn btn-secondary btn-sm">
+							</form>
+							</div>
+													
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		
+		
+			<div class="animated fadeIn">
+				<div class="row">
+					<div class="col-lg">
+						<div class="card">
 							<div class="card-body">
 								<form action="${pageContext.request.contextPath}/imat/delete"
 									id="delete" method="get">
@@ -156,7 +122,6 @@ String searchimst=(String)request.getAttribute("search3");
 										<thead class="thead-dark">
 
 											<tr>
-												<th scope="col">#</th>
 												<th scope="col">품번</th>
 												<th scope="col">품명</th>
 												<th scope="col">자재유형</th>
@@ -167,7 +132,6 @@ String searchimst=(String)request.getAttribute("search3");
 										<tbody>
 											<c:forEach var="ImatDTO" items="${IomatList}">
 												<tr>
-													<td>${ImatDTO.imat_num}</td>
 													<td>${ImatDTO.prod_cd}</td>
 													<td>${ImatDTO.prod_nm}</td>
 													<td>${ImatDTO.prod_mat}</td>

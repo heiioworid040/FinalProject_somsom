@@ -57,7 +57,7 @@ public class ImatServiceImpl implements ImatService{
 		int endRow = startRow+pageDTO.getPageSize()-1;
 		pageDTO.setStartRow(startRow);
 		pageDTO.setEndRow(endRow);
-		System.out.println("ImatServiceImpl getImatCount()-1");
+		System.out.println("ImatServiceImpl getIomatList)-1");
 		return imatDAO.getIomatList(pageDTO);
 	}
 

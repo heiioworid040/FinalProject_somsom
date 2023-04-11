@@ -37,70 +37,12 @@
 	rel='stylesheet' type='text/css'>
 
 <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
-<script type="text/javascript">
-	function chAll(target) {
-		var chall = document.getElementById("chAll");
-		var is_checked = chall.checked;
-		if (is_checked) {
-			chAllChecked();
-		} else {
-			chAllUnChecked();
-		}
-	}
 
-	function chAllChecked() {
-		document.querySelectorAll(".chkbox").forEach(function(v, i) {
-			v.checked = true;
-		});
-	}
-
-	function chAllUnChecked() {
-		document.querySelectorAll(".chkbox").forEach(function(v, i) {
-			v.checked = false;
-		});
-	}
-
-	function test(num) {
-		alert(num);
-	}
-</script>
 </head>
 
 <body>
 
-	<script type="text/javascript">
-		// function checkAll()  {
-		// 	console.log("checkAll");
-		// 	  const checkboxes 
-		// 	       = document.getElementsByName('checkRow');
-
-		// 	  checkboxes.forEach((checkbox) => {
-		// 		  document.getElementsByName('check')[0].checked = checkAll.checked;
-		// 	  })
-
-		// $(document).ready(function() {
-		// 	  // 버튼 클릭 이벤트 처리
-		// 	  $("#add-row-btn").click(function() {
-		// 	    var name = "새로운 이름";
-		// 	    var age = "새로운 나이";
-
-		// 	    $.ajax({
-		// 	      type: "POST",
-		// 	      url: "/addRow",
-		// 	      data: { omat_cd:omat_cd, omat_date:omat_date, prod_cd:prod_cd  
-		// 	    	  omat_stg:omat_stg,prod_unit:prod_unit,omat_stg:omat_stg,
-		// 	    	  omat_count:omat_count, cli_cd:cli_cd,cli_nm:cli_nm,omat_note:omat_note},
-		// 	      success: function(response) {
-		// 	        // 서버에서 응답받은 HTML을 새로운 행으로 추가
-		// 	        $("#my-table tbody").append(response);
-		// 	      },
-		// 	      error: function() {
-		// 	        alert("오류가 발생했습니다.");
-		// 	      }
-		// 	    });
-		// 	  });
-		// 	});
-	</script>
+	
 
 
 	<!-- Left Panel1 -->
@@ -151,10 +93,6 @@
 							<div class="card-body">
 													
 					<div id="table_search">
-					<form id="searchform">
-					<button type="submit" class="btn btn-primary"
-					formaction="${pageContext.request.contextPath}/omat/omatinsert">추가</button>
-					</form>
 							<form action="${pageContext.request.contextPath}/omat/omatsearch" id="searchform" method="get">
 							<input type="text" name="search" class="input_box" placeholder="출고번호">
 							<input type="text" name="search2" class="input_box" placeholder="품번">
@@ -177,12 +115,12 @@
 							<div class="card-body">
 								<form action="${pageContext.request.contextPath}/omat/delete"
 									id="delete" method="get">
-									<table class="table">
+									<table class="table table-striped">
 										<thead class="thead-dark">
 
 											<tr>
-												<th><input type="checkbox" name="check" id="chAll"
-													onclick="chAll()"></th>				
+<!-- 												<th><input type="checkbox" name="check" id="chAll" -->
+<!-- 													onclick="chAll()"></th>				 -->
 												<th scope="col">#</th>
 												<th scope="col">출고번호</th>
 												<th scope="col">납기일자</th>
@@ -194,15 +132,19 @@
 												<th scope="col">거래처번호</th>
 												<th scope="col">거래처명</th>
 												<th scope="col">비고</th>
-												<th></th>
+												<th scope="col">작업</th>
 											</tr>
 										</thead>
 										<tbody>
+										<tr>
+													<td colspan="12" id="inser"><input type="button" value="추가" class="btn btn-outline-link"  
+														onclick="location.href='${pageContext.request.contextPath}/omat/omatinsert'" ></td>
+														</tr>
 											<c:forEach var="OmatDTO" items="${OmatbeList}">
 												<tr>
-													<th><input type="checkbox" name="checkRow"
-														id="${OmatDTO.omat_num}" value="${OmatDTO.omat_num}"
-														class="chkbox"></th>
+<!-- 													<th><input type="checkbox" name="checkRow" -->
+<%-- 														id="${OmatDTO.omat_num}" value="${OmatDTO.omat_num}" --%>
+<!-- 														class="chkbox"></th> -->
 													<td>${OmatDTO.omat_num}</td>
 													<td>${OmatDTO.omat_cd}</td>
 													<td><fmt:formatDate value="${OmatDTO.omat_date}" pattern="yyyy-MM-dd" type="date"/></td>
@@ -215,8 +157,6 @@
 													<td>${OmatDTO.cli_nm}</td>
 													<td>${OmatDTO.omat_note}</td>
 													<td>
-														<%-- 											<input type="hidden" name="omat_cd" value="${OmatDTO.omat_cd}"> --%>
-														<!--     											<button type="submit">삭제</button> -->
 														<input type="button" value="수정" class="btn btn-secondary"
 														onclick="location.href='${pageContext.request.contextPath}/omat/omatupdate?omat_cd=${OmatDTO.omat_cd}'">
 														<input type="button" value="삭제" class="btn btn-danger"
