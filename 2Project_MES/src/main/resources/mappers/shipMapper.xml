@@ -15,25 +15,17 @@
 		join client c
 		on o.cli_cd = c.cli_cd
 		where 1=1
-		<if test="search != null">
-			<if test='search != ""'>
-				and s.ship_date &gt;= #{search}
-			</if>
+		<if test="search != null and search != ''">
+				and date_format(s.ship_date, '%Y-%m-%d') <![CDATA[>=]]> date_format(#{search}, '%Y-%m-%d')
 		</if>
-		<if test="search2 != null">
-			<if test='search2 != ""'>
-				and s.ship_date &lt;= #{search2}
-			</if>
+		<if test="search2 != null and search2 != ''">
+				and date_format(s.ship_date, '%Y-%m-%d') <![CDATA[<=]]> date_format(#{search2}, '%Y-%m-%d')
 		</if>
-		<if test="search3 != null">
-			<if test='search3 != ""'>
+		<if test="search3 != null and search3 != ''">
 				and p.prod_cd = #{search3}
-			</if>
 		</if>
-		<if test="search4 != null">
-			<if test='search4 != ""'>
+		<if test="search4 != null and search4 != ''">
 				and c.cli_cd = #{search4}
-			</if>
 		</if>
 		order by ship_date, ship_cd
 		limit #{startRow}, #{pageSize}
@@ -49,25 +41,17 @@
 		join client c
 		on o.cli_cd = c.cli_cd
 		where 1=1
-		<if test="search != null">
-			<if test='search != ""'>
-				and s.ship_date &gt;= #{search}
-			</if>
+		<if test="search != null and search != ''">
+				and date_format(s.ship_date, '%Y-%m-%d') <![CDATA[>=]]> date_format(#{search}, '%Y-%m-%d')
 		</if>
-		<if test="search2 != null">
-			<if test='search2 != ""'>
-				and s.ship_date &lt;= #{search2}
-			</if>
+		<if test="search2 != null and search2 != ''">
+				and date_format(s.ship_date, '%Y-%m-%d') <![CDATA[<=]]> date_format(#{search2}, '%Y-%m-%d')
 		</if>
-		<if test="search3 != null">
-			<if test='search3 != ""'>
+		<if test="search3 != null and search3 != ''">
 				and p.prod_cd = #{search3}
-			</if>
 		</if>
-		<if test="search4 != null">
-			<if test='search4 != ""'>
+		<if test="search4 != null and search4 != ''">
 				and c.cli_cd = #{search4}
-			</if>
 		</if>
 	</select>
 	
