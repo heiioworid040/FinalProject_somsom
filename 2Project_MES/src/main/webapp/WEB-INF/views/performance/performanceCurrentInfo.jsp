@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>  
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +18,7 @@
 	href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
 <!-- <link rel="stylesheet" -->
 <!-- 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"> -->
-<link rel="stylesheet" 
+<link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
@@ -50,7 +50,7 @@
 	<!-- Left Panel1 -->
 
 	<!-- Right Panel -->
-	
+
 	<div id="right-panel" class="right-panel">
 		<!-- Header-->
 		<jsp:include page="../inc/top.jsp" />
@@ -87,36 +87,44 @@
 					<div class="col-lg">
 						<div class="card m-0">
 							<div class="card-body card-block">
-								<form action="${pageContext.request.contextPath }/performance/performanceCurrentInfo" method="get" class="form-inline">
+								<form
+									action="${pageContext.request.contextPath }/performance/performanceCurrentInfo"
+									method="get" class="form-inline">
 									<div class="form-group col-6 mb-1">
-										<label class="pr-1 form-control-label mr-2">지시번호</label>
-										<input type="text" name="searchInstCd" class="form-control" value="${pageDTO.search }">
+										<label class="pr-1 form-control-label mr-2">지시번호</label> <input
+											type="text" name="searchInstCd" class="form-control" placeholder="Inst Code">
 									</div>
 									<div class="form-group col-6 mb-1">
 										<label for="searchLine" class="pr-1 form-control-label mr-2">라인</label>
 										<div class="input-group modalP" id="modalP1">
-											<input type="text" id="searchLineCd" name="searchLineCd" placeholder="Line Code" class="form-control bg-white" value="${pageDTO.search5}" readonly>
+											<input type="text" id="searchLineCd" name="searchLineCd"
+												placeholder="Line Code" class="form-control bg-white"readonly>
 											<div class="input-group-btn">
-												<input type="button" class="btn btn-primary ml-2" id="linePopBtn" value="검색">
+												<input type="button" class="btn btn-primary ml-2"
+													id="linePopBtn" value="검색">
 											</div>
 										</div>
 									</div>
 									<div class="form-group col-6 mt-1">
-										<label class="pr-1  form-control-label mr-2">실적일자</label>
-										<input type="date" name="searchPerfDate1" class="form-control mr-1" value="${pageDTO.search2 }">~
-										<input type="date" name="searchPerfDate2" class="form-control ml-1" value="${pageDTO.search3 }">
+										<label class="pr-1  form-control-label mr-2">실적일자</label> <input
+											type="date" name="searchPerfDate1" class="form-control mr-1">~ <input type="date"
+											name="searchPerfDate2" class="form-control ml-1">
 									</div>
 									<div class="form-group col-6 mt-1">
-										<label class="pr-1  form-control-label mr-2">품번</label>
-										<input type="text" id="productSearchId" name="searchProdCd" class="form-control" placeholder="Porduct Code" value="${pageDTO.search4 }">
-											<div class="input-group">
-											<input type="button" class="btn btn-primary ml-2" id="productSearchPop" value="검색">
-                                    	</div>
+										<label class="pr-1  form-control-label mr-2">품번</label> <input
+											type="text" id="productSearchId" name="searchProdCd"
+											class="form-control" placeholder="Prod Code">
+										<div class="input-group">
+											<input type="button" class="btn btn-primary ml-2"
+												id="productSearchPop" value="검색">
+										</div>
 									</div>
-									
-                                    <div class="col p-0 mt-3">
-										<input type="submit" class="btn btn-primary col-2 float-right ml-3" id="searchPerf" value="조회">
-										<input type="reset" class="btn btn-secondary col-1 float-right reset" value="취소">
+
+									<div class="col p-0 mt-3">
+										<input type="submit"
+											class="btn btn-primary col-2 float-right ml-3"
+											id="searchPerf" value="조회"> <input type="reset"
+											class="btn btn-secondary col-1 float-right reset" value="취소">
 									</div>
 								</form>
 							</div>
@@ -135,7 +143,9 @@
 							<div class="card-header">
 								<strong class="card-title">생산실적 입력/수정</strong>
 							</div>
-							<form action="${pageContext.request.contextPath}/performance/insertPerf" id="insertPerfForm" method="post">
+							<form
+								action="${pageContext.request.contextPath}/performance/insertPerf"
+								id="insertPerfForm" method="post">
 								<div class="card-body card-block">
 									<table id="table" class="table table-striped table-bordered">
 										<thead class="thead-dark">
@@ -155,42 +165,67 @@
 										</thead>
 										<tbody>
 											<tr>
-												<td scope="row">
-												<input type="text" id="insertPerfCd" name="perf_cd" class="form-control" readonly>
-												</td>
+												<td scope="row"><input type="text" id="insertPerfCd"
+													name="perf_cd" class="form-control" readonly></td>
 												<td>
 													<div class="input-group modalP" id="modalP2">
-														<input type="text" id="insertInstCd" name="inst_cd" value="${pageDTO.search}" readonly placeholder="Inst Code" class="form-control bg-white">
+														<input type="text" id="insertInstCd" name="inst_cd"
+															value="${pageDTO.search}" readonly
+															placeholder="Inst Code" class="form-control bg-white">
 														<div class="input-group-btn">
-															<input type="button" class="btn btn-primary" id="instListBtn" value="목록">
+															<input type="button" class="btn btn-primary"
+																id="instListBtn" value="목록">
 														</div>
 													</div>
 												</td>
-												<td><input type="text" id="insertPerfDate" disabled class="form-control" ></td>												
-												<td><input type="text" id="insertLineNm" value="${instructionDTO.line_nm}" disabled class="form-control"></td>
-												<td><input type="text" id="insertProdNm" value="${instructionDTO.prod_nm}" disabled class="form-control"></td>
-												<td><input type="text" id="insertProdUnit" value="${instructionDTO.prod_unit}" disabled class="form-control"></td>
-												<td><input type="text" id="insertProdCount" value="${instructionDTO.prod_count}" disabled class="form-control"></td>
-												<td><input type="text" id="insertPerfGd" name="perf_good" value="0" class="form-control"></td>
-												<td><input type="text" id="insertPerfErr" name="perf_err" value="0" class="form-control"></td>
+												<td><input type="text" id="insertPerfDate" disabled
+													class="form-control"></td>
+												<td><input type="text" id="insertLineNm"
+													value="${instructionDTO.line_nm}" disabled
+													class="form-control"></td>
+												<td><input type="text" id="insertProdNm"
+													value="${instructionDTO.prod_nm}" disabled
+													class="form-control"></td>
+												<td><input type="text" id="insertProdUnit"
+													value="${instructionDTO.prod_unit}" disabled
+													class="form-control"></td>
+												<td><input type="text" id="insertProdCount"
+													value="${instructionDTO.prod_count}" disabled
+													class="form-control"></td>
+												<td><input type="text" id="insertPerfGd"
+													name="perf_good" value="0" class="form-control"></td>
+												<td><input type="text" id="insertPerfErr"
+													name="perf_err" value="0" class="form-control"></td>
 												<td class="col-1">
-												<div class="col p-0">
-												<select class="form-control" id="insertPerfCs" name="perf_couse" disabled="disabled">
-													<option value="">--</option>
-													<option value="기계이상">기계이상</option>
-													<option value="재고부족">재고부족</option>													
-													<option value="기타">기타</option>													
-												</select>
-												</div>
-												<td><input type="text" id="insertOrdCd" value="${instructionDTO.ord_cd}" disabled class="form-control"></td>
-												<td><input type="text" id="insertPerfNote" class="form-control"></td>
+													<div class="col p-0">
+														<select class="form-control" id="insertPerfCs"
+															name="perf_couse" disabled="disabled">
+															<option value="">--</option>
+															<option value="기계이상">기계이상</option>
+															<option value="재고부족">재고부족</option>
+															<option value="기타">기타</option>
+														</select>
+													</div>
+												<td><input type="text" id="insertOrdCd"
+													value="${instructionDTO.ord_cd}" disabled
+													class="form-control"></td>
+												<td><input type="text" id="insertPerfNote"
+													class="form-control"></td>
 											</tr>
 										</tbody>
 									</table>
-									<button type="submit" class="btn btn-primary col-2 float-right ml-3" id="insertPerfBtn">추가</button>
-									<button type="submit" class="btn btn-primary col-1 float-right ml-3" id="updatePerfBtn" disabled>수정</button>
-									<button type="button" class="btn btn-secondary col-1 float-right ml-3" id="deletePerfBtn" disabled>삭제</button>
-									<button type="reset"  class="btn btn-secondary col-1 float-right reset" id="resetPerfBtn">취소</button>
+									<button type="submit"
+										class="btn btn-primary col-2 float-right ml-3"
+										id="insertPerfBtn">추가</button>
+									<button type="submit"
+										class="btn btn-primary col-1 float-right ml-3"
+										id="updatePerfBtn" disabled>수정</button>
+									<button type="button"
+										class="btn btn-secondary col-1 float-right ml-3"
+										id="deletePerfBtn" disabled>삭제</button>
+									<button type="reset"
+										class="btn btn-secondary col-1 float-right reset"
+										id="resetPerfBtn">취소</button>
 								</div>
 							</form>
 						</div>
@@ -199,7 +234,7 @@
 			</div>
 		</div>
 		<!-- 	편집창 -->
-		
+
 		<div class="content">
 			<div class="animated fadeIn">
 				<div class="row">
@@ -210,72 +245,56 @@
 							</div>
 							<div class="card-body">
 								<table id="hover_tb" class="table table-striped table-bordered">
-										<thead class="thead-dark">
-										
-											<tr>
-												<th scope="col">실적코드</th>
-												<th scope="col">지시번호</th>
-												<th scope="col">실적일자</th>
-												<th scope="col">라인명</th>
-												<th scope="col">품번</th>
-												<th scope="col">품명</th>
-												<th scope="col">단위</th>
-												<th scope="col">지시수량</th>
-												<th scope="col">양품</th>
-												<th scope="col">불량</th>
-												<th scope="col">불량사유</th>
-												<th scope="col">수주번호</th>
-												<th scope="col">업체</th>
-												<th scope="col" class="col-1">비고</th>
-												<th scope="col"></th>
-											</tr>
-										</thead>
-										<tbody>
-											<c:forEach var="performanceDTO" items="${performanceCurrentInfo }">
-													<tr class="data-row" data-prod-cd="${performanceDTO.prod_cd}" data-perf-cd="${performanceDTO.perf_cd}">
-													<td>${performanceDTO.perf_cd }</td>
-													<td>${performanceDTO.inst_cd }</td>
-													<td><fmt:formatDate value="${performanceDTO.perf_date}" pattern="yyyy.MM.dd"/></td>
-													<td>${performanceDTO.line_nm }</td>
-													<td>${performanceDTO.prod_cd }</td>
-													<td>${performanceDTO.prod_nm }</td>
-													<td>${performanceDTO.prod_unit }</td>
-													<td>${performanceDTO.inst_count }</td>
-													<td>${performanceDTO.perf_good }</td>
-													<td>${performanceDTO.perf_err }</td>
-													<td>${performanceDTO.perf_cause }</td>
-													<td>${performanceDTO.ord_cd }</td> 
-													<td>${performanceDTO.cli_nm }</td>
-													<td>${performanceDTO.perf_note }</td>
-													<td>
-														<div class="input-group">
-															<button id="editPerfBtn" class="btn btn-secondary" value="${performanceDTO.perf_cd }">수정</button>
-														</div>
-													</td>
-												</tr>
-											</c:forEach>
-										</tbody>
-									</table>
-									
-									<br><br>
-									
-									<b>생산실적 현황</b>
-									<table id="result-table"
-										class="table table-striped table-bordered">
-										<thead class="thead-dark">
-											<tr>
-												<th scope="col" style="width: 25%;">품번</th>
-												<th scope="col" style="width: 25%;">품명</th>
-												<th scope="col">단위</th>
-												<th scope="col">투입량</th>
-											</tr>
-										</thead>
-										<tbody>
+									<thead class="thead-dark">
+
 										<tr>
-										<td colspan="4" style="text-align: center;">검색된 자료가 없습니다.</td>
+											<th scope="col">실적코드</th>
+											<th scope="col">지시번호</th>
+											<th scope="col">실적일자</th>
+											<th scope="col">라인명</th>
+											<th scope="col">품번</th>
+											<th scope="col">품명</th>
+											<th scope="col">단위</th>
+											<th scope="col">지시수량</th>
+											<th scope="col">양품</th>
+											<th scope="col">불량</th>
+											<th scope="col">불량사유</th>
+											<th scope="col">수주번호</th>
+											<th scope="col">업체</th>
+											<th scope="col" class="col-1">비고</th>
+											<th scope="col"></th>
 										</tr>
-										</tbody>
-									</table>
+									</thead>
+									<tbody>
+										<c:forEach var="performanceDTO"
+											items="${performanceCurrentInfo }">
+											<tr class="data-row" data-prod-cd="${performanceDTO.prod_cd}"
+												data-perf-cd="${performanceDTO.perf_cd}">
+												<td>${performanceDTO.perf_cd }</td>
+												<td>${performanceDTO.inst_cd }</td>
+												<td><fmt:formatDate value="${performanceDTO.perf_date}"
+														pattern="yyyy.MM.dd" /></td>
+												<td>${performanceDTO.line_nm }</td>
+												<td>${performanceDTO.prod_cd }</td>
+												<td>${performanceDTO.prod_nm }</td>
+												<td>${performanceDTO.prod_unit }</td>
+												<td>${performanceDTO.inst_count }</td>
+												<td>${performanceDTO.perf_good }</td>
+												<td>${performanceDTO.perf_err }</td>
+												<td>${performanceDTO.perf_cause }</td>
+												<td>${performanceDTO.ord_cd }</td>
+												<td>${performanceDTO.cli_nm }</td>
+												<td>${performanceDTO.perf_note }</td>
+												<td>
+													<div class="input-group">
+														<button id="editPerfBtn" class="btn btn-secondary"
+															value="${performanceDTO.perf_cd }">수정</button>
+													</div>
+												</td>
+											</tr>
+										</c:forEach>
+									</tbody>
+								</table>
 								<!-- 페이징 처리 -->
 								<div class="pageNum">
 									<c:if test="${pageDTO.startPage > pageDTO.pageBlock }">
@@ -296,6 +315,26 @@
 											다음]</a>
 									</c:if>
 								</div>
+
+								<br>
+								<br> <b>생산실적 현황</b>
+								<table id="result-table"
+									class="table table-striped table-bordered">
+									<thead class="thead-dark">
+										<tr>
+											<th scope="col" style="width: 25%;">품번</th>
+											<th scope="col" style="width: 25%;">품명</th>
+											<th scope="col">단위</th>
+											<th scope="col">투입량</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td colspan="4" style="text-align: center;">검색된 자료가
+												없습니다.</td>
+										</tr>
+									</tbody>
+								</table>
 							</div>
 						</div>
 					</div>
@@ -314,8 +353,8 @@
 	<!-- Right Panel -->
 
 	<!-- Scripts -->
-<script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
-<script type="text/javascript">
+	<script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+	<script type="text/javascript">
 		// 생산실적 현황 json 리스트
 		$(document).ready(function() {
 		  // 첫번째 표에서 데이터 클릭시 이벤트 리스너 추가
@@ -440,10 +479,13 @@
 		$(document).on("click", "#instListBtn", function(){
 			location.href='${pageContext.request.contextPath}/instruction/infoInst';
 		});
-</script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
+	</script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 </body>
 </html>
