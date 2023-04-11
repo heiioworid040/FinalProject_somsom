@@ -13,6 +13,7 @@ public interface ImatDAO {
 	public List<ImatDTO> getIomatList(PageDTO pageDTO);
 
 
+	public int getIomatCount(PageDTO pageDTO);
 	public int getImatCount(PageDTO pageDTO);
 
 	public ImatDTO getImat(String imat_cd);

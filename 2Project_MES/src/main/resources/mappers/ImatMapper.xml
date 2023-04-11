@@ -64,15 +64,20 @@
     limit #{startRow}, #{pageSize}
     </select>
     
-<!--      <select id="getImatprodList1" resultType="com.project.domain.ProductDTO"> -->
-<!--     select * from product -->
-<!--     limit #{startRow}, #{pageSize} -->
-<!--     </select> -->
     
     <select id="getIomatList" resultType="com.project.domain.ImatDTO">
-    select row_number() over(order by i.imat_cd asc) as imat_num,p.prod_cd,p.prod_nm,p.prod_mat,p.prod_unit,imat_count-omat_count as iomat_count
+    select distinct p.prod_cd,p.prod_nm,p.prod_mat,p.prod_unit,p.prod_count as iomat_count
 	from product p join in_material i on p.prod_cd=i.prod_cd
-	join out_material o on p.prod_cd=o.prod_cd
+	<if test="search != null">
+        	where p.prod_cd like CONCAT('%',#{search},'%')
+        </if>
+        <if test="search2 != null">
+        	and p.prod_nm like CONCAT('%',#{search2},'%')
+        </if>
+        <if test="search3 != null">
+        	and p.prod_mat like CONCAT('%',#{search3},'%')
+        </if>
+	limit #{startRow}, #{pageSize}
     </select>
     
     <select id="getImatCount" resultType="java.lang.Integer">
@@ -85,6 +90,20 @@
         </if>
         <if test="search3 != null">
         	and imat_stg like CONCAT('%',#{search3},'%')
+        </if>
+        
+    </select>
+    
+    <select id="getIomatCount" resultType="java.lang.Integer">
+    select count(*) from product
+    <if test="search != null">
+        	where prod_cd like CONCAT('%',#{search},'%')
+        </if>
+        <if test="search2 != null">
+        	and prod_nm like CONCAT('%',#{search2},'%')
+        </if>
+        <if test="search3 != null">
+        	and prod_mat like CONCAT('%',#{search3},'%')
         </if>
     </select>
     

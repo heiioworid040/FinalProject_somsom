@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+#inlineform{
+	display:inline;
+}
+
+tr #inser{
+	text-align:center;
+	background:#e8e9ef;
+	}

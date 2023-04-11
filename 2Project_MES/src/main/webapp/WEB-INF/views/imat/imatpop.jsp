@@ -48,11 +48,7 @@
     </head>
 
 <body>
-<%
-String searchprcd=(String)request.getAttribute("search"); 
-String searchprnm=(String)request.getAttribute("search2");
-String searchprmat=(String)request.getAttribute("search3");
-%>
+
 
 		<div class="content">
 		
@@ -73,7 +69,7 @@ String searchprmat=(String)request.getAttribute("search3");
 							<input type="text" name="search" class="input_box" placeholder="품번">
 							<input type="text" name="search2" class="input_box" placeholder="품명">
 							<input type="text" name="search3" class="input_box" placeholder="자재유형">
-							<input type="submit" value="search" class="btn btn-secondary btn-sm">
+							<input type="submit" value="검색" class="btn btn-secondary btn-sm">
 							</form>
 							</div>
 													
@@ -124,7 +120,21 @@ String searchprmat=(String)request.getAttribute("search3");
 							</c:forEach>
 						</tbody>
 					</table>
-							
+								<c:if test="${pageDTO.startPage > pageDTO.pageBlock }">
+											<a href="${pageContext.request.contextPath}/imat/imatpop?pageNum=${pageDTO.startPage - pageDTO.pageBlock}&search=${pageDTO.search}">[이전페이지]</a>
+																	
+										</c:if>
+
+										<c:forEach var="i" begin="${pageDTO.startPage }"
+											end="${pageDTO.endPage }" step="1">
+											<a
+												href="${pageContext.request.contextPath}/imat/imatpop?pageNum=${i}&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}">${i}</a>
+										</c:forEach>
+
+										<c:if test="${pageDTO.endPage < pageDTO.pageCount }">
+											<a
+								href="${pageContext.request.contextPath}/imat/imatpop?pageNum=${pageDTO.startPage + pageDTO.pageBlock}&search=${pageDTO.search}">[다음페이지]</a>
+										</c:if>
 							</div>
 						</div>
 					</div>
