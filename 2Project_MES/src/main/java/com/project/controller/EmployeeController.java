@@ -152,7 +152,6 @@ public class EmployeeController {
 		System.out.println("emp_cd="+emp_cd);
 
 		EmployeeDTO employeeDTO = employeeService.getEmployee(emp_cd);
-//		System.out.println(employeeDTO.getEmp_cd());
 
 		model.addAttribute("employeeDTO", employeeDTO);
 
@@ -166,7 +165,6 @@ public class EmployeeController {
 
 		employeeService.updateEmployee(employeeDTO);
 
-//		주소줄 변경하면서 이동
 		return "redirect:/employee/employeeList";
 	}
 
@@ -177,54 +175,6 @@ public class EmployeeController {
 		return "redirect:/employee/login";
 	}
 
-
-
-
-
-
-
-
-
-
-//	@RequestMapping(value = "/employee/insertEmployee", method = RequestMethod.GET)
-//	public String insertEmployee(HttpServletRequest request, Model model) {
-//		System.out.println("EmployeeController insertEmployee()");
-//
-//		int pageSize=10;
-//		String pageNum = request.getParameter("pageNum");
-//		if(pageNum==null) {
-//			pageNum="1";
-//		}
-//
-//		int currentPage=Integer.parseInt(pageNum);
-//
-//		PageDTO pageDTO = new PageDTO();
-//		pageDTO.setPageSize(pageSize);
-//		pageDTO.setPageNum(pageNum);
-//		pageDTO.setCurrentPage(currentPage);
-//
-//		List<EmployeeDTO> employeeList = employeeService.getEmployeeList(pageDTO);
-//
-//		int count = employeeService.getEmployeeCount();
-//		int pageBlock=10;
-//		int startPage=(currentPage-1)/pageBlock*pageBlock+1;
-//		int endPage=startPage+pageBlock-1;
-//		int pageCount=count/pageSize+(count%pageSize==0?0:1);
-//		if(endPage > pageCount){
-//			endPage = pageCount;
-//		}
-//
-//		pageDTO.setCount(count);
-//		pageDTO.setPageBlock(pageBlock);
-//		pageDTO.setStartPage(startPage);
-//		pageDTO.setEndPage(endPage);
-//		pageDTO.setPageCount(pageCount);
-//
-//		model.addAttribute("employeeList", employeeList);
-//		model.addAttribute("pageDTO", pageDTO);
-//
-//		return "employee/insertEmployee";
-//	}
 
 
 
