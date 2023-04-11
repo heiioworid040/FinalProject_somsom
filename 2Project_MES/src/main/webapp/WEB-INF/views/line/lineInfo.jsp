@@ -103,19 +103,77 @@
 					</div>
 				</div>
 			</div>
-	<div class="content py-1 px-4">
-		<div class="animated fadeIn">
-			<div class="row">
-				<div class="col">
-					<div class="btn-div float-right px-2">
-						<button type="button" class="btn btn-secondary">삭제</button>
-						<button type="button" class="btn btn-primary" id="editBtn">수정</button>
-						<button type="button" class="btn btn-primary">추가</button>
+			<div class="content pt-0">
+			<div class="animated fadeIn">
+				<div class="row">
+					<div class="col-lg">
+						<div class="card m-0">
+							<form action="${pageContext.request.contextPath}/instruction/insertInst" id="insertInstForm" method="post">
+								<div class="card-body card-block">
+									<table id="table" class="table table-striped table-bordered">
+										<thead class="thead-dark">
+											<tr>
+												<th scope="col">라인코드</th>
+												<th scope="col">라인명</th>
+												<th scope="col" class="col-1">공정</th>
+												<th scope="col">작업장</th>
+												<th scope="col">정렬순서</th>
+												<th scope="col" class="col-1">설비상태</th>
+												<th scope="col">비고</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td scope="row"><input type="text" id="insertLineCd" name="inst_cd" class="form-control"></td>
+												<td><input type="text" id="insertLineNm" class="form-control"></td>
+												<td>
+												<div>
+													<select name="inst_st" id="insertInstSt" class="form-control">
+                                                		<option value="재딘">재단</option>
+                                                		<option value="조립">조립</option>
+                                                		<option value="검수">검수</option>
+                                                	</select>                                            	
+												</div>
+												</td>
+												<td><input type="text" id="insertPlaceNm" class="form-control"></td>
+												<td><input type="text" id="insertLineNum" class="form-control"></td>
+												<td>
+													<div>
+														<select name="inst_st" id="insertInstSt" class="form-control">
+                                                			<option value="대기">대기</option>
+                                                			<option value="정상">정상</option>
+                                                			<option value="err">err</option>
+                                                		</select>                                            	
+													</div>
+												</td>
+												<td><input type="text" id="insertLinNt" class="form-control  bg-white"></td>
+											</tr>
+										</tbody>
+									</table>
+									<button type="submit" class="btn btn-primary col-2 float-right ml-3" id="insertInstBtn">추가</button>
+									<button type="submit" class="btn btn-primary col-1 float-right ml-3" id="updateInstBtn" disabled>수정</button>
+									<button type="button" class="btn btn-secondary col-1 float-right ml-3" id="deleteInstBtn" disabled>삭제</button>
+									<button type="reset"  class="btn btn-secondary col-1 float-right reset" id="resetInstBtn">취소</button>
+								</div>
+							</form>
+						</div> 	
 					</div>
 				</div>
 			</div>
-		</div>
-	</div>
+		</div> 
+<!-- 	<div class="content py-1 px-4"> -->
+<!-- 		<div class="animated fadeIn"> -->
+<!-- 			<div class="row"> -->
+<!-- 				<div class="col"> -->
+<!-- 					<div class="btn-div float-right px-2"> -->
+<!-- 						<button type="button" class="btn btn-secondary">삭제</button> -->
+<!-- 						<button type="button" class="btn btn-primary" id="editBtn">수정</button> -->
+<!-- 						<button type="button" class="btn btn-primary">추가</button> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+<!-- 	</div> -->
 		<!-- 리스트 -->
 		<div class="content pt-0">
 			<div class="animated fadeIn">
@@ -130,14 +188,16 @@
 								<table id="hover_tb" class="table table-hover table-striped table-bordered table-align-middle mb-0">
 									<thead class="thead-dark">
 										<tr>
-										<th scope="col"><div class="form-check-inline form-check mr-0 ml-1"><input type="checkbox" class="form-check-input" id="allCheck"></div></th>
-										<th scope="col">라인코드</th>
-										<th scope="col">라인명</th>
-										<th scope="col">공정</th>
-										<th scope="col">작업장</th>
-										<th scope="col">정렬순서</th>
-										<th scope="col">설비상태</th>
-										<th scope="col">비고</th>
+<!-- 										<th scope="col"><div class="form-check-inline form-check mr-0 ml-1"><input type="checkbox" class="form-check-input" id="allCheck"></div></th> -->
+											<th scope="col">라인코드</th>
+											<th scope="col">라인명</th>
+											<th scope="col">공정</th>
+											<th scope="col">작업장</th>
+											<th scope="col">정렬순서</th>
+											<th scope="col">설비상태</th>
+											<th scope="col">비고</th>
+											<th scope="col"> </th>
+										</tr>
 									</thead>
 									<tbody>
 										<c:forEach var="lineDTO" items="${lineList }">
@@ -147,7 +207,7 @@
 											<c:if test="${lineDTO.line_st ne 'err'}">
 											<tr id="infoLineTr" class="data-row">
 											</c:if>
-												<td><div class="form-check-inline form-check mr-0 ml-1"><input type="checkbox" class="form-check-input m-0"></div></td>
+<!-- 												<td><div class="form-check-inline form-check mr-0 ml-1"><input type="checkbox" class="form-check-input m-0"></div></td> -->
 												<td class="pr-0 pl-0"><input type="text" class="bg-transparent border-0 col-md" value="${lineDTO.line_cd }" readonly></td>
 												<td><input type="text" class="bg-transparent border-0 col-md" value="${lineDTO.line_nm }" readonly></td>
 												<td><input type="text" class="bg-transparent border-0 col-md" value="${lineDTO.line_process}" readonly></td>
@@ -155,6 +215,11 @@
 												<td><input type="text" class="bg-transparent border-0 col-md" value="${lineDTO.line_num}" readonly></td>
 												<td><input type="text" class="bg-transparent border-0 col-md" value="${lineDTO.line_st}" readonly></td>
 												<td><input type="text" class="bg-transparent border-0 col-md" value="${lineDTO.line_note}" readonly></td>
+											<td>
+												<div class="input-group">
+													<button id="editInstBtn" class="btn btn-secondary" value="${instructionDTO.inst_cd }">편집</button>
+												</div>
+											</td>
 											</tr>
 										</c:forEach>
 									</tbody>
@@ -225,30 +290,30 @@
 
 	<script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
 	<script type="text/javascript">
-	// 체크박스 제어
-	$(document).on("change", "#allCheck", function(){
-		if(jQuery("#allCheck").is(":checked")){
-		jQuery('input[type="checkbox"]').prop('checked', true);
-		}else{
-		jQuery('input[type="checkbox"]').prop('checked', false);
+// 	// 체크박스 제어
+// 	$(document).on("change", "#allCheck", function(){
+// 		if(jQuery("#allCheck").is(":checked")){
+// 		jQuery('input[type="checkbox"]').prop('checked', true);
+// 		}else{
+// 		jQuery('input[type="checkbox"]').prop('checked', false);
 			
-		}
-	});
-	// 수정 버튼 제어
-	$(document).on("click", "#editBtn", function(){
-		jQuery('#listForm tr td input[type="text"]').prop('readonly', false);
-		jQuery('#listForm').attr('action', '${pageContext.request.contextPath}/line/updateLine');
-		console.log(jQuery("#listForm").attr('action'));
-	});
-	// 엔터기 감지
-	$(document).on("keyup", function(event) {
-	    if (event.which === 13) {
-	        alert('Enter is pressed!');
-	    	if(jQuery("#listForm").attr('action')=='${pageContext.request.contextPath}/line/updateLine'){
-	    		jQuery("#listForm").submit();
-	    	}
-	    }
-	});
+// 		}
+// 	});
+// 	// 수정 버튼 제어
+// 	$(document).on("click", "#editBtn", function(){
+// 		jQuery('#listForm tr td input[type="text"]').prop('readonly', false);
+// 		jQuery('#listForm').attr('action', '${pageContext.request.contextPath}/line/updateLine');
+// 		console.log(jQuery("#listForm").attr('action'));
+// 	});
+// 	// 엔터키 감지
+// 	$(document).on("keyup", function(event) {
+// 	    if (event.which === 13) {
+// 	        alert('Enter is pressed!');
+// 	    	if(jQuery("#listForm").attr('action')=='${pageContext.request.contextPath}/line/updateLine'){
+// 	    		jQuery("#listForm").submit();
+// 	    	}
+// 	    }
+// 	});
 		
 // 		// 취소 버튼 (clear)
 // 		$(document).on("click",".reset", function(){
