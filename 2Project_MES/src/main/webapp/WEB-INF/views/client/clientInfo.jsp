@@ -136,11 +136,13 @@
 									method="get" class="form-inline">
 									<div class="form-group col-6 mb-1">
 										<label class="pr-1 form-control-label">거래처코드</label>&nbsp;&nbsp;<input
-											type="text" name="search" class="form-control " placeholder="Client Code">
+											type="text" name="search" class="form-control "
+											placeholder="Client Code">
 									</div>
 									<div class="form-group col-6 mb-1">
 										<label class="pr-1  form-control-label">거래처명</label>&nbsp;&nbsp;<input
-											type="text" name="search2" class="form-control " placeholder="Client Name">
+											type="text" name="search2" class="form-control "
+											placeholder="Client Name">
 									</div>
 									<div class="form-group col-6 mt-1">
 										<label class="pr-1  form-control-label">거래처구분</label>&nbsp;&nbsp;
@@ -154,10 +156,11 @@
 										</div>
 									</div>
 									<div class="col p-0">
-										<input type="submit" class="btn btn-primary float-right ml-3" value="검색">
-										<input type="reset" class="btn btn-secondary float-right reset" value="취소">
+										<input type="submit" class="btn btn-primary float-right ml-3"
+											value="검색"> <input type="reset"
+											class="btn btn-secondary float-right reset" value="취소">
 									</div>
-		</form>
+								</form>
 							</div>
 						</div>
 					</div>
@@ -165,7 +168,7 @@
 			</div>
 		</div>
 		<!-- 	검색창 -->
-		
+
 		<!-- 체크박스로 선택해 글 여러개 삭제가능  -->
 		<form name="chkDelete"
 			action="${pageContext.request.contextPath}/client/delete"
@@ -250,27 +253,58 @@
 											</c:forEach>
 										</tbody>
 									</table>
-									
-									<!-- 페이징 처리 -->
-									<div class="pageNum">
-										<c:if test="${pageDTO.startPage > pageDTO.pageBlock }">
-											<a
-												href="${pageContext.request.contextPath}/client/clientInfo?pageNum=${pageDTO.startPage - pageDTO.pageBlock }&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}">[10페이지
-												이전]</a>
-										</c:if>
-
-										<c:forEach var="i" begin="${pageDTO.startPage }"
-											end="${pageDTO.endPage }" step="1">
-											<a
-												href="${pageContext.request.contextPath}/client/clientInfo?pageNum=${i}&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}">${i}</a>
-										</c:forEach>
-
-										<c:if test="${pageDTO.endPage < pageDTO.pageCount }">
-											<a
-												href="${pageContext.request.contextPath}/client/clientInfo?pageNum=${pageDTO.startPage + pageDTO.pageBlock }&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}">[10페이지
-												다음]</a>
-										</c:if>
+									<!-- 페이징 -->
+									<div class="col p-0 mt-3">
+										<div
+											class="dataTables_paginate paging_simple_numbers float-right">
+											<ul class="pagination">
+												<!-- 이전 -->
+												<c:if test="${pageDTO.startPage <= pageDTO.pageBlock }">
+													<li class="paginate_button page-item previous disabled">
+														<a
+														href="${pageContext.request.contextPath}/client/clientInfo?pageNum=${pageDTO.startPage - pageDTO.pageBlock}&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}"
+														class="page-link">Previous</a>
+													</li>
+												</c:if>
+												<c:if test="${pageDTO.startPage > pageDTO.pageBlock }">
+													<li class="ppaginate_button page-item previous"><a
+														href="${pageContext.request.contextPath}/client/clientInfo?pageNum=${pageDTO.startPage - pageDTO.pageBlock}&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}"
+														class="page-link">Previous</a></li>
+												</c:if>
+												<!-- 이전 -->
+												<!-- 현재 -->
+												<c:forEach var="i" begin="${pageDTO.startPage }"
+													end="${pageDTO.endPage }" step="1">
+													<c:if test="${i==pageDTO.pageNum }">
+														<li class="paginate_button page-item active"><a
+															class="page-link" href="#">${i}</a></li>
+													</c:if>
+													<c:if test="${i!=pageDTO.pageNum }">
+														<li class="paginate_button page-item "><a
+															class="page-link"
+															href="${pageContext.request.contextPath}/client/clientInfo?pageNum=${i}&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}">${i}</a>
+														</li>
+													</c:if>
+												</c:forEach>
+												<!-- 현재 -->
+												<!-- 다음 -->
+												<c:if test="${pageDTO.endPage >= pageDTO.pageCount }">
+													<li class="paginate_button page-item next disabled"
+														id="bootstrap-data-table_next"><a
+														href="${pageContext.request.contextPath}/client/clientInfo?pageNum=${pageDTO.startPage + pageDTO.pageBlock}&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}"
+														class="page-link">Next</a></li>
+												</c:if>
+												<c:if test="${pageDTO.endPage < pageDTO.pageCount }">
+													<li class="paginate_button page-item next"
+														id="bootstrap-data-table_next"><a
+														href="${pageContext.request.contextPath}/client/clientInfo?pageNum=${pageDTO.startPage + pageDTO.pageBlock}&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}"
+														class="page-link">Next</a></li>
+												</c:if>
+												<!-- 다음 -->
+											</ul>
+										</div>
 									</div>
+									<!-- 페이징 -->
 								</div>
 							</div>
 						</div>

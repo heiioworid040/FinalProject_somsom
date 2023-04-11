@@ -7,45 +7,36 @@
 		resultType="com.project.domain.PerformanceDTO">
 		select pe.perf_cd, pe.perf_date, l.line_nm, p.prod_cd, p.prod_nm,
 		p.prod_unit, pe.perf_good, pe.perf_err, pe.perf_cause, pe.perf_note,
-		i.inst_cd, o.ord_cd, c.cli_nm            
+		i.inst_cd, o.ord_cd, c.cli_nm
 		from performance pe
 		join instruction i
-		on pe.inst_cd = i.inst_cd
+		on
+		pe.inst_cd = i.inst_cd
 		join line l
 		on i.line_cd = l.line_cd
 		join orders o
 		on i.ord_cd = o.ord_cd
-		join product p
+		join
+		product p
 		on o.prod_cd = p.prod_cd
-		join client c
+		join client
+		c
 		on o.cli_cd = c.cli_cd
 		where 1=1
-		<if test="search != null">
-			<if test='search != ""'>
-				and i.inst_cd = #{search}
-			</if>
+		<if test="search != null and search != ''">
+			and i.inst_cd = #{search}
 		</if>
-		<if test="search2 != null">
-			<if test='search2 != ""'>
-				and p.prod_cd = #{search2}
-			</if>
+		<if test="search2 != null and search2 != ''">
+			and p.prod_cd = #{search2}
 		</if>
-		<if test="search3 != null">
-			<if test='search3 != ""'>
-				and pe.perf_date &gt;= #{search3}
-			</if>
+		<if test="search3 != null and search3 != ''">
+			and date_format(pe.perf_date, '%Y-%m-%d') <![CDATA[>=]]> date_format(#{search3}, '%Y-%m-%d')
 		</if>
-		<if test="search4 != null">
-			<if test='search4 != ""'>
-				and pe.perf_date &lt;= #{search4}
-			</if>
+		<if test="search4 != null and search4 != ''">
+			and date_format(pe.perf_date, '%Y-%m-%d') <![CDATA[<=]]> date_format(#{search4}, '%Y-%m-%d')
 		</if>
-		<if test="search5 != null">
-			<if test='search5 != ""'>
-				<if test='search5 != "전체"'>
-					and l.line_cd = #{search5}
-				</if>
-			</if>
+		<if test="search5 != null and search5 != ''">
+			and l.line_cd = #{search5}
 		</if>
 		order by pe.perf_cd desc
 		limit #{startRow}, #{pageSize}
@@ -53,67 +44,62 @@
 
 	<select id="performanceCurrentCount"
 		resultType="java.lang.Integer">
-		select count(*)            
+		select count(*)
 		from performance pe
 		join instruction i
-		on pe.inst_cd = i.inst_cd
+		on pe.inst_cd =
+		i.inst_cd
 		join line l
 		on i.line_cd = l.line_cd
 		join orders o
-		on i.ord_cd = o.ord_cd
-		join product p
+		on i.ord_cd =
+		o.ord_cd
+		join
+		product p
 		on o.prod_cd = p.prod_cd
 		join client c
-		on o.cli_cd = c.cli_cd
+		on o.cli_cd
+		= c.cli_cd
 		where 1=1
-		<if test="search != null">
-			<if test='search != ""'>
-				and pe.perf_date &gt;= #{search}
-			</if>
+		<if test="search != null and search != ''">
+			and i.inst_cd = #{search}
 		</if>
-		<if test="search2 != null">
-			<if test='search2 != ""'>
-				and pe.perf_date &lt;= #{search2}
-			</if>
+		<if test="search2 != null and search2 != ''">
+			and p.prod_cd = #{search2}
 		</if>
-		<if test="search3 != null">
-			<if test='search3 != ""'>
-				and p.prod_cd = #{search3}
-			</if>
+		<if test="search3 != null and search3 != ''">
+			and date_format(pe.perf_date, '%Y-%m-%d') <![CDATA[>=]]> date_format(#{search3}, '%Y-%m-%d')
 		</if>
-		<if test="search4 != null">
-			<if test='search4 != ""'>
-				and i.inst_cd = #{search4}
-			</if>
+		<if test="search4 != null and search4 != ''">
+			and date_format(pe.perf_date, '%Y-%m-%d') <![CDATA[<=]]> date_format(#{search4}, '%Y-%m-%d')
 		</if>
-		<if test="search5 != null">
-			<if test='search5 != ""'>
-				<if test='search5 != "전체"'>
-					and l.line_cd = #{search5}
-				</if>
-			</if>
+		<if test="search5 != null and search5 != ''">
+			and l.line_cd = #{search5}
 		</if>
 	</select>
-	
+
 	<select id="perfCurrJsonList"
 		resultType="com.project.domain.PerformanceDTO">
-		select r.prod_cd as r_prod_cd, r.prod_nm as r_prod_nm, 
+		select r.prod_cd as r_prod_cd, r.prod_nm as r_prod_nm,
 		p2.prod_unit as r_prod_unit, r.req_req, pe.perf_good, pe.perf_err
-		from performance pe
+		from
+		performance pe
 		join instruction i
 		on pe.inst_cd = i.inst_cd
 		join orders o
 		on i.ord_cd = o.ord_cd
 		join product p
 		on o.prod_cd = p.prod_cd
-		join requirement r
+		join
+		requirement r
 		on p.prod_cd = r.prod_fcd
 		join product p2
-		on r.prod_cd = p2.prod_cd
+		on r.prod_cd =
+		p2.prod_cd
 		where r.prod_fcd = #{prod_cd} and pe.perf_cd = #{perf_cd}
 	</select>
-	
-		<select id="getProductInfo"
+
+	<select id="getProductInfo"
 		resultType="com.project.domain.ProductDTO">
 		select * from product
 		where 1=1
@@ -158,25 +144,32 @@
 			</if>
 		</if>
 	</select>
-	
+
 	<insert id="insertPerf">
-	insert into performance(perf_cd, inst_cd, perf_date, perf_good, perf_err, perf_cause, perf_note)
-	values(#{perf_cd}, #{inst_cd}, #{perf_date}, #{perf_good}, #{perf_err}, #{perf_cause}, #{perf_note})
+		insert into performance(perf_cd, inst_cd, perf_date,
+		perf_good, perf_err,
+		perf_cause, perf_note)
+		values(#{perf_cd},
+		#{inst_cd}, #{perf_date}, #{perf_good}, #{perf_err}, #{perf_cause},
+		#{perf_note})
 	</insert>
-	
+
 	<select id="getMaxPerf" resultType="java.lang.Integer">
-	SELECT MAX(REGEXP_REPLACE(perf_cd, '[a-z]', ''))+1
-	from performance
-    </select>
-	
+		SELECT
+		MAX(REGEXP_REPLACE(perf_cd, '[a-z]', ''))+1
+		from performance
+	</select>
+
 	<update id="updatePerf">
-	update performance
-	set perf_good=#{perf_good}, perf_err=#{perf_err}, perf_cause=#{perf_cause}, perf_note=#{perf_note}
-	where perf_cd = #{perf_cd}
+		update performance
+		set perf_good=#{perf_good},
+		perf_err=#{perf_err},
+		perf_cause=#{perf_cause}, perf_note=#{perf_note}
+		where perf_cd = #{perf_cd}
 	</update>
-	
+
 	<delete id="deletePerf">
-	delete from performance
-	where perf_cd=#{perf_cd}
+		delete from performance
+		where perf_cd=#{perf_cd}
 	</delete>
 </mapper>
