@@ -52,19 +52,18 @@ public class ImatDAOImpl implements ImatDAO{
 
 	}
 
-//	@Override
-//	public List<ProductDTO> getImatprodList1(PageDTO pageDTO) {
-//		System.out.println("ImatDAOImpl getImatprodList1()");
-//
-//		pageDTO.setStartRow(pageDTO.getStartRow()-1);
-//		return sqlSession.selectList(namespace+".getImatprodList1", pageDTO);
-//
-//	}
+
 
 	@Override
 	public int getImatCount(PageDTO pageDTO) {
 		System.out.println("ImatDAOImp getImatCount()");
 		return sqlSession.selectOne(namespace+".getImatCount",pageDTO);
+	}
+
+	@Override
+	public int getIomatCount(PageDTO pageDTO) {
+		System.out.println("ImatDAOImp getIomatCount()");
+		return sqlSession.selectOne(namespace+".getIomatCount",pageDTO);
 	}
 
 

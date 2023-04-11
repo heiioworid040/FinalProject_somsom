@@ -88,55 +88,7 @@ function openNewWindow(url) {
 	  openNewWindow('/popUpUrl');
 	});
 </script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js">
-	// $(document).ready(function(){
-	// $('#insert').submit(function(){
 
-	// 	if($('.id').val()==""){
-	// 		alert("아이디 입력하세요");
-	// 		$('.id').focus();
-	// 		return false;
-	// 	}
-	//     if($('.imat_code').val()==""){
-	//     	alert("비밀번호 입력하세요");
-	// 		$('.pass').focus();
-	// 		return false;
-	//     }
-
-	//     if($('.pass2').val()==""){
-	//     	alert("비밀번호2 입력하세요");
-	// 		$('.pass2').focus();
-	// 		return false;
-	//     }
-
-	//     if($('.name').val()==""){
-	//     	alert("이름 입력하세요");
-	// 		$('.name').focus();
-	// 		return false;
-	//     }
-
-	//     if($('.email').val()==""){
-	//     	alert("이메일 입력하세요");
-	// 		$('.email').focus();
-	// 		return false;
-	//     }
-
-	//     if($('.email2').val()==""){
-	//     	alert("이메일2 입력하세요");
-	// 		$('.email2').focus();
-	// 		return false;
-	//     }
-
-	//     if($('.email').val() != $('.email2').val()){
-	//     	alert("이메일 틀림");
-	// 		$('.email2').focus();
-	// 		return false;
-	//     }
-
-	// });
-	
-
-</script>
 <body>
 
 
@@ -157,15 +109,17 @@ function openNewWindow(url) {
 					<div class="col-sm-4">
 						<div class="page-header float-left">
 							<div class="page-title"></div>
+						<h1>자재 관리</h1>
 						</div>
 					</div>
 					<div class="col-sm-8">
 						<div class="page-header float-right">
+						
 							<div class="page-title">
 								<ol class="breadcrumb text-right">
-									<li><a href="#">Dashboard</a></li>
-									<li><a href="#">Table</a></li>
-									<li class="active">Basic table</li>
+									<li><a href="#">자재 입고</a></li>
+<!-- 									<li><a href="#">Table</a></li> -->
+<!-- 									<li class="active">Basic table</li> -->
 								</ol>
 							</div>
 						</div>
@@ -180,9 +134,6 @@ function openNewWindow(url) {
 			<div class="row">
 				<div class="col-lg">
 					<div class="card">
-						<div class="card-header">
-							<strong class="card-title">Table Head</strong>
-						</div>
 						<div class="card-body">
 							<form method="post" name="fr" action="${pageContext.request.contextPath}/imat/imatinsertPro" id="insertpro" onsubmit="prodchk(event);">
 						<table class="table">
@@ -199,7 +150,7 @@ function openNewWindow(url) {
 										</thead>
 										<tbody>
 												<tr>
-												<td><input type="button" value="조회" onclick="openPopUp()"></td>
+												<td><input type="button" value="조회" onclick="openPopUp()" class="btn btn-outline-link"></td>
 													<td><input type="text" name="imat_cd"
 										class="imat_cd" readonly></td>
 													<td><input
@@ -217,14 +168,16 @@ function openNewWindow(url) {
 
 
 									</table>
-									<div id="buttons">
-									<input type="submit" value="Submit" class="submitbut"> 
-									<input type="reset" value="Cancel" class="cancel">
+									<div class="btn-div float-right">
+									<input type="submit" value="추가"  class="btn btn-secondary"> 
+									<input type="button" class="btn btn-secondary" value="취소"
+											onclick="location.href='${pageContext.request.contextPath}/imat/imatbeList'">
 								</div>
 									</form>
 									</div>
 					</div>
 				</div>
+			</div>
 			</div>
 			</div>
 	<!-- .content -->
@@ -236,7 +189,6 @@ function openNewWindow(url) {
 	<jsp:include page="../inc/footer.jsp" />
 	<!-- 푸터 넣는 곳 -->
 	</div>
-	
 	<!-- /#right-panel -->
 
 	<!-- Right Panel -->

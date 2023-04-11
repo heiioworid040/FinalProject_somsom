@@ -145,7 +145,7 @@ public class ImatController {
 		System.out.println("ImatController iomatList()-2");
 		List<ImatDTO> iomatList = ImatService.getIomatList(pageDTO);
 		System.out.println("ImatController iomatList()-2-1");
-		int count = ImatService.getImatCount(pageDTO);
+		int count = ImatService.getIomatCount(pageDTO);
 		int pageBlock = 10;
 		int startPage = (currentPage - 1) / pageBlock * pageBlock + 1;
 		int endPage = startPage + pageBlock - 1;
@@ -182,7 +182,7 @@ public class ImatController {
 		pageDTO.setPageNum(pageNum);
 		pageDTO.setCurrentPage(currentPage);
 		List<ProductDTO> imatprodList = ImatService.getImatprodList(pageDTO);
-		int count = ImatService.getImatCount(pageDTO);
+		int count = ImatService.getIomatCount(pageDTO);
 		int pageBlock = 10;
 		int startPage = (currentPage - 1) / pageBlock * pageBlock + 1;
 		int endPage = startPage + pageBlock - 1;
@@ -241,7 +241,7 @@ public class ImatController {
 		
 		//페이징 처리
 		//검색어
-		int count = ImatService.getImatCount(pageDTO);
+		int count = ImatService.getIomatCount(pageDTO);
 		int pageBlock=10;
 		int startPage=(currentPage-1)/pageBlock*pageBlock+1;
 		int endPage=startPage+pageBlock-1;
@@ -298,7 +298,7 @@ public class ImatController {
 		
 		//페이징 처리
 		//검색어
-		int count = ImatService.getImatCount(pageDTO);
+		int count = ImatService.getIomatCount(pageDTO);
 		int pageBlock=10;
 		int startPage=(currentPage-1)/pageBlock*pageBlock+1;
 		int endPage=startPage+pageBlock-1;

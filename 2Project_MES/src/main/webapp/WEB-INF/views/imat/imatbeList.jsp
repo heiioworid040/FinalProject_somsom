@@ -41,11 +41,6 @@
 </head>
 
 <body>
-<%
-String searchimcd=(String)request.getAttribute("search"); 
-String searchprcd=(String)request.getAttribute("search2");
-String searchimst=(String)request.getAttribute("search3");
-%>
 
 
 
@@ -65,15 +60,17 @@ String searchimst=(String)request.getAttribute("search3");
 					<div class="col-sm-4">
 						<div class="page-header float-left">
 							<div class="page-title"></div>
+						<h1>자재 관리</h1>
 						</div>
 					</div>
 					<div class="col-sm-8">
 						<div class="page-header float-right">
+						
 							<div class="page-title">
 								<ol class="breadcrumb text-right">
-									<li><a href="#">Dashboard</a></li>
-									<li><a href="#">Table</a></li>
-									<li class="active">Basic table</li>
+									<li><a href="#">자재 입고</a></li>
+<!-- 									<li><a href="#">Table</a></li> -->
+<!-- 									<li class="active">Basic table</li> -->
 								</ol>
 							</div>
 						</div>
@@ -82,16 +79,12 @@ String searchimst=(String)request.getAttribute("search3");
 			</div>
 		</div>
 
-		
 <div class="content">
 
 <div class="animated fadeIn">
 				<div class="row">
 					<div class="col-lg">
 						<div class="card">
-							<div class="card-header">
-								<strong class="card-title">자재입고</strong>
-							</div>
 							<div class="card-body">
 													
 					<div id="table_search">
@@ -100,7 +93,7 @@ String searchimst=(String)request.getAttribute("search3");
 							<input type="text" name="search" class="input_box" placeholder="입고번호">
 							<input type="text" name="search2" class="input_box" placeholder="품번">
 							<input type="text" name="search3" class="input_box" placeholder="입고창고">
-							<input type="submit" value="search" class="btn">
+							<input type="submit" value="검색" class="btn">
 							</form>
 							</div>
 													

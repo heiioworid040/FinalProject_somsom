@@ -27,6 +27,11 @@ public class ImatServiceImpl implements ImatService{
 	}
 
 	@Override
+	public int getIomatCount(PageDTO pageDTO) {
+		System.out.println("ImatServiceImpl getIomatCount()");
+		return imatDAO.getIomatCount(pageDTO);
+	}
+	@Override
 	public ImatDTO getImat(String imat_cd) {
 		System.out.println("ImatServiceImpl getImat()");
 

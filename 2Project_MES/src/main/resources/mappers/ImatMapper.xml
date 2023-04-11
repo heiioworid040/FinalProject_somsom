@@ -64,10 +64,6 @@
     limit #{startRow}, #{pageSize}
     </select>
     
-<!--      <select id="getImatprodList1" resultType="com.project.domain.ProductDTO"> -->
-<!--     select * from product -->
-<!--     limit #{startRow}, #{pageSize} -->
-<!--     </select> -->
     
     <select id="getIomatList" resultType="com.project.domain.ImatDTO">
     select distinct p.prod_cd,p.prod_nm,p.prod_mat,p.prod_unit,p.prod_count as iomat_count
@@ -94,6 +90,20 @@
         </if>
         <if test="search3 != null">
         	and imat_stg like CONCAT('%',#{search3},'%')
+        </if>
+        
+    </select>
+    
+    <select id="getIomatCount" resultType="java.lang.Integer">
+    select count(*) from product
+    <if test="search != null">
+        	where prod_cd like CONCAT('%',#{search},'%')
+        </if>
+        <if test="search2 != null">
+        	and prod_nm like CONCAT('%',#{search2},'%')
+        </if>
+        <if test="search3 != null">
+        	and prod_mat like CONCAT('%',#{search3},'%')
         </if>
     </select>
     
