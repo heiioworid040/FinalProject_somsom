@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,6 +49,7 @@
                             <li><i class="menu-icon ti-themify-logo"></i><a href="${pageContext.request.contextPath}/ship/shipCurrentInfo">출하 현황</a></li>
                         </ul>
                     </li>
+                    <c:if test="${sessionScope.emp_position eq '관리자' }">
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-bar-chart"></i>시스템 관리</a>
                         <ul class="sub-menu children dropdown-menu">
@@ -54,6 +57,7 @@
                             <li><i class="menu-icon fa fa-area-chart"></i><a href="${pageContext.request.contextPath}/code/codeList">공통 코드 관리</a></li>
                         </ul>
                     </li>
+                    </c:if>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </nav>
