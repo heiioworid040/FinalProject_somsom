@@ -8,7 +8,7 @@ import com.project.domain.ProductDTO;
 
 public interface OmatService {
 	public List<ProductDTO> getOmatprodList(PageDTO pageDTO);
-	public int getOmatCount();
+	public int getOmatCount(PageDTO pageDTO);
 	public List<OmatDTO> getOmatbeList(PageDTO pageDTO);
 	public List<ProductDTO> getOmatprodList1(PageDTO pageDTO);
 	public void deleteList(String omat_cd);

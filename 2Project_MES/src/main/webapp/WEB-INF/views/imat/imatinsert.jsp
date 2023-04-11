@@ -38,13 +38,35 @@
 </head>
 
 <!-- <script type="text/javascript"> -->
-
-// function setChildValue(prod_cd,prod_mat){
-
-//     document.getElementById("prod_cd").value = prod_cd;
-
-// }
 <!-- </script> -->
+<script type="text/javascript">
+function prodchk(event) {
+	 var chkStyle = /\d/ ; 
+	if(document.getElementById( 'prod_cd' ).value== ""){
+		alert("품번 입력하세요");
+		//부모페이지로 이벤트전파방지
+		event.preventDefault();
+		}
+	
+	else if(document.getElementById( 'imat_count' ).value== ""){
+		alert("입고수량 입력하세요");
+		document.fr.imat_count.focus();
+		//부모페이지로 이벤트전파방지
+		
+		event.preventDefault();
+		}
+	else{
+		if(!chkStyle.test((document.getElementById( 'imat_count' ).value))){
+			alert("입고수량에는 숫자만 입력 가능합니다.");
+			document.fr.imat_count.focus();
+			//부모페이지로 이벤트전파방지
+			event.preventDefault();
+			}
+			
+	}
+		
+}
+</script>
 <script type="text/javascript">
 
 function openPopUp() {
@@ -153,7 +175,7 @@ function openNewWindow(url) {
 		</div>
 
 
-
+<div class="content">
 		<div class="animated fadeIn">
 			<div class="row">
 				<div class="col-lg">
@@ -162,8 +184,7 @@ function openNewWindow(url) {
 							<strong class="card-title">Table Head</strong>
 						</div>
 						<div class="card-body">
-<!-- 						<input type="button" value="조회" onclick="openPopUp()"><br> -->
-							<form method="post" action="${pageContext.request.contextPath}/imat/imatinsertPro">
+							<form method="post" name="fr" action="${pageContext.request.contextPath}/imat/imatinsertPro" id="insertpro" onsubmit="prodchk(event);">
 						<table class="table">
 										<thead class="thead-dark">
 
@@ -184,7 +205,7 @@ function openNewWindow(url) {
 													<td><input
 										type="text" name="prod_cd" class="prod_cd" id="prod_cd" readonly></td>
 													<td><input type="text" name="imat_stg" class="imat_stg" id="imat_stg" readonly></td>
-													<td><input type="text" name="imat_count"
+													<td><input type="text" name="imat_count" id="imat_count" 
 										class="imat_count"></td>
 													<td><input
 										type="text" name="imat_note" class="imat_note"></td>
@@ -196,38 +217,16 @@ function openNewWindow(url) {
 
 
 									</table>
-									<div id="buttons"> -->
-									<input type="submit" value="Submit" class="submit"> 
+									<div id="buttons">
+									<input type="submit" value="Submit" class="submitbut"> 
 									<input type="reset" value="Cancel" class="cancel">
 								</div>
 									</form>
-									
-<!-- 						<input type="button" value="조회" onclick="openPopUp()"><br> -->
-<!-- 							<form -->
-<%-- 								action="${pageContext.request.contextPath}/imat/imatinsertPro" --%>
-<!-- 								id="insert" method="post"> -->
-<!-- 								<fieldset> -->
-<!-- 									<label>입고번호</label> <input type="text" name="imat_cd" -->
-<!-- 										class="imat_cd" readonly><br> <label>품번</label> <input -->
-<%-- 										type="text" name="prod_cd" id="prod_cd" class="prod_cd" value="${prod_cd}" readonly><br> <label>입고창고</label> --%>
-<!-- 									<input type="text" name="imat_stg" id="imat_stg" class="imat_stg"><br> -->
-<!-- 									<label>입고수량</label><input type="text" name="imat_count" -->
-<!-- 										class="imat_count"><br> <label>비고</label><input -->
-<!-- 										type="text" name="imat_note" class="imat_note"><br> -->
-<!-- 								</fieldset> -->
-<!-- 								<div class="clear"></div> -->
-<!-- 								<div id="buttons"> -->
-<!-- 									<input type="submit" value="Submit" class="submit"> <input -->
-<!-- 										type="reset" value="Cancel" class="cancel"> -->
-<!-- 								</div> -->
-<!-- 							</form> -->
-							
-						</div>
+									</div>
 					</div>
 				</div>
 			</div>
-		</div>
-	</div>
+			</div>
 	<!-- .content -->
 
 	
@@ -237,6 +236,7 @@ function openNewWindow(url) {
 	<jsp:include page="../inc/footer.jsp" />
 	<!-- 푸터 넣는 곳 -->
 	</div>
+	
 	<!-- /#right-panel -->
 
 	<!-- Right Panel -->

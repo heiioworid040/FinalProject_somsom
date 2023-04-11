@@ -9,7 +9,8 @@ public class ImatDTO extends ProductDTO{
 	private String imat_cd;
 	private String prod_cd;
 	private int iomat_count;
-
+	private String prod_nm;
+	
 	private Timestamp imat_date;
 	private String imat_stg;
 	private int imat_count;
@@ -19,7 +20,14 @@ public class ImatDTO extends ProductDTO{
 	private String prod_unit;
 	private String prod_mat;
 
-
+	@Override
+	public String getProd_nm() {
+		return prod_nm;
+	}
+	@Override
+	public void setProd_nm(String prod_nm) {
+		this.prod_nm = prod_nm;
+	}
 	@Override
 	public String getProd_mat() {
 		return prod_mat;

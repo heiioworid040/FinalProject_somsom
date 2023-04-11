@@ -30,7 +30,6 @@
 	href="${pageContext.request.contextPath}/resources/css/cs-skin-elastic.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/style.css">
-
 <link
 	href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800'
 	rel='stylesheet' type='text/css'>
@@ -58,15 +57,23 @@
 			v.checked = false;
 		});
 	}
-
+	
 	function test(num) {
 		alert(num);
+	}
+	
+	function chkdelete(target) {
+		var checkArr=[];
 	}
 </script>
 </head>
 
 <body>
-
+<%
+String searchimcd=(String)request.getAttribute("search"); 
+String searchprcd=(String)request.getAttribute("search2");
+String searchimst=(String)request.getAttribute("search3");
+%>
 	<script type="text/javascript">
 		// function checkAll()  {
 		// 	console.log("checkAll");
@@ -135,24 +142,49 @@
 			</div>
 		</div>
 
+		
+<div class="content">
 
-
-
-		<div class="content">
-			<form>
-				<button type="submit"
-					formaction="${pageContext.request.contextPath}/imat/imatinsert">추가</button>
-			</form>
-			<div class="animated fadeIn">
+<div class="animated fadeIn">
 				<div class="row">
 					<div class="col-lg">
 						<div class="card">
 							<div class="card-header">
-								<strong class="card-title">Table Head</strong>
+								<strong class="card-title">자재입고</strong>
 							</div>
 							<div class="card-body">
+													
+					<div id="table_search">
+					
+							<form action="${pageContext.request.contextPath}/imat/imatsearch" method="get">
+							<input type="button" value="추가" class="btn btn-primary"
+														onclick="location.href='${pageContext.request.contextPath}/imat/imatinsert'">
+							<input type="text" name="search" class="input_box" placeholder="입고번호">
+							<input type="text" name="search2" class="input_box" placeholder="품번">
+							<input type="text" name="search3" class="input_box" placeholder="입고창고">
+							<input type="submit" value="search" class="btn">
+							</form>
+							</div>
+													
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
+
+		
+
+			<div class="animated fadeIn">
+				<div class="row">
+					<div class="col-lg">
+						<div class="card">
+							<div class="card-body">
+							
 								<form action="${pageContext.request.contextPath}/imat/delete"
-									id="delete" method="get">
+									id="chkdelete" method="post">
 									<table class="table">
 										<thead class="thead-dark">
 
@@ -170,6 +202,7 @@
 												<th scope="col">거래처번호</th>
 												<th scope="col">거래처명</th>
 												<th scope="col">비고</th>
+												<th></th>
 											</tr>
 										</thead>
 										<tbody>
@@ -192,27 +225,13 @@
 													<td>
 														<%-- 											<input type="hidden" name="imat_cd" value="${ImatDTO.imat_cd}"> --%>
 														<!--     											<button type="submit">삭제</button> -->
-														<input type="button" value="수정"
+														<input type="button" value="수정" class="btn btn-secondary"
 														onclick="location.href='${pageContext.request.contextPath}/imat/imatupdate?imat_cd=${ImatDTO.imat_cd}'">
-														<input type="button" value="삭제"
+														<input type="button" value="삭제" class="btn btn-danger"
 														onclick="location.href='${pageContext.request.contextPath}/imat/imatdelete?imat_cd=${ImatDTO.imat_cd}'">
 
 													</td>
 												</tr>
-
-												<!-- 										<tr> -->
-												<!-- 											<th scope="row">1</th> -->
-												<%--   											<td th:text="${imat_cd}"></td> --%>
-												<%-- 											<td th:text="${imat_date}"></td> --%>
-												<%-- 											<td th:text="${prod_cd}"></td> --%>
-												<%-- 											<td th:text="${imat_stg}"></td> --%>
-												<%-- 											<td th:text="${prod_unit}"></td> --%>
-												<%-- 											<td th:text="${imat_stg}"></td> --%>
-												<%-- 											<td th:text="${imat_count}"></td> --%>
-												<%-- 											<td th:text="${cli_cd}"></td> --%>
-												<%-- 											<td th:text="${cli_nm}"></td> --%>
-												<%-- 											<td th:text="${imat_note}"></td> --%>
-												<!-- 										</tr> -->
 											</c:forEach>
 
 
@@ -220,22 +239,23 @@
 
 
 									</table>
+									<c:if test="${pageDTO.startPage > pageDTO.pageBlock }">
+											<a href="${pageContext.request.contextPath}/imat/imatbeList?pageNum=${pageDTO.startPage - pageDTO.pageBlock}&search=${pageDTO.search}">[이전페이지]</a>
+																	
+										</c:if>
+
+										<c:forEach var="i" begin="${pageDTO.startPage }"
+											end="${pageDTO.endPage }" step="1">
+											<a
+												href="${pageContext.request.contextPath}/imat/imatbeList?pageNum=${i}&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}">${i}</a>
+										</c:forEach>
+
+										<c:if test="${pageDTO.endPage < pageDTO.pageCount }">
+											<a
+								href="${pageContext.request.contextPath}/imat/imatbeList?pageNum=${pageDTO.startPage + pageDTO.pageBlock}&search=${pageDTO.search}">>[다음페이지]</a>
+										</c:if>
 								</form>
-								<%-- 								<c:if test="${pageDTO.startPage > pageDTO.pageBlock }"> --%>
-								<!-- 										<a -->
-								<%-- 											href="${pageContext.request.contextPath}/imat/imatbeList?pageNum=${pageDTO.startPage - pageDTO.pageBlock }">[이전페이지]</a> --%>
-								<%-- 									</c:if> --%>
-
-								<%-- 									<c:forEach var="i" begin="${pageDTO.startPage }" --%>
-								<%-- 										end="${pageDTO.endPage }" step="1"> --%>
-								<!-- 										<a -->
-								<%-- 											href="${pageContext.request.contextPath}/imat/imatbeList?pageNum=${i}">${i}</a> --%>
-								<%-- 									</c:forEach> --%>
-
-								<%-- 									<c:if test="${pageDTO.endPage < pageDTO.pageCount }"> --%>
-								<!-- 										<a -->
-								<%-- 											href="${pageContext.request.contextPath}/imat/imatbeList?pageNum=${pageDTO.startPage + pageDTO.pageBlock }">[다음페이지]</a> --%>
-								<%-- 									</c:if> --%>
+																
 							</div>
 						</div>
 					</div>

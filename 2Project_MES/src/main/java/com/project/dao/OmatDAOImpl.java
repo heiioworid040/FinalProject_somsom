@@ -52,10 +52,9 @@ public class OmatDAOImpl implements OmatDAO{
 	}
 
 	@Override
-	public int getOmatCount() {
+	public int getOmatCount(PageDTO pageDTO) {
 		System.out.println("OmatDAOImp getOmatCount()");
-		System.out.println("OmatDAOImpl getOmatbeList()-2");
-		return sqlSession.selectOne(namespace+".getOmatCount");
+		return sqlSession.selectOne(namespace+".getOmatCount",pageDTO);
 	}
 
 
