@@ -30,7 +30,6 @@
 	href="${pageContext.request.contextPath}/resources/css/cs-skin-elastic.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/style.css">
-
 <link
 	href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800'
 	rel='stylesheet' type='text/css'>
@@ -150,17 +149,16 @@ String searchimst=(String)request.getAttribute("search3");
 				<div class="row">
 					<div class="col-lg">
 						<div class="card">
-<!-- 							<div class="card-header"> -->
-<!-- 								<strong class="card-title">Table Head</strong> -->
-<!-- 							</div> -->
+							<div class="card-header">
+								<strong class="card-title">자재입고</strong>
+							</div>
 							<div class="card-body">
 													
 					<div id="table_search">
-					<form>
-					<button type="submit" class="btn btn-primary"
-					formaction="${pageContext.request.contextPath}/imat/imatinsert">추가</button>
-					</form>
+					
 							<form action="${pageContext.request.contextPath}/imat/imatsearch" method="get">
+							<input type="button" value="추가" class="btn btn-primary"
+														onclick="location.href='${pageContext.request.contextPath}/imat/imatinsert'">
 							<input type="text" name="search" class="input_box" placeholder="입고번호">
 							<input type="text" name="search2" class="input_box" placeholder="품번">
 							<input type="text" name="search3" class="input_box" placeholder="입고창고">
@@ -183,9 +181,6 @@ String searchimst=(String)request.getAttribute("search3");
 				<div class="row">
 					<div class="col-lg">
 						<div class="card">
-							<div class="card-header">
-								<strong class="card-title">Table Head</strong>
-							</div>
 							<div class="card-body">
 							
 								<form action="${pageContext.request.contextPath}/imat/delete"
@@ -266,7 +261,7 @@ String searchimst=(String)request.getAttribute("search3");
 					</div>
 				</div>
 			</div>
-		
+		</div>
 		<!-- .content -->
 		<div class="clearfix"></div>
 		<!-- 푸터 넣는 곳 -->

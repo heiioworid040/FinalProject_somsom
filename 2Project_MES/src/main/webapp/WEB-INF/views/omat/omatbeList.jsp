@@ -30,7 +30,8 @@
 	href="${pageContext.request.contextPath}/resources/css/cs-skin-elastic.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/style.css">
-
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/material.css">
 <link
 	href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800'
 	rel='stylesheet' type='text/css'>
@@ -144,17 +145,17 @@
 				<div class="row">
 					<div class="col-lg">
 						<div class="card">
-<!-- 							<div class="card-header"> -->
-<!-- 								<strong class="card-title">Table Head</strong> -->
-<!-- 							</div> -->
+							<div class="card-header">
+								<strong class="card-title">자재출고</strong>
+							</div>
 							<div class="card-body">
 													
 					<div id="table_search">
-					<form class="form-inline">
+					<form id="searchform">
 					<button type="submit" class="btn btn-primary"
 					formaction="${pageContext.request.contextPath}/omat/omatinsert">추가</button>
 					</form>
-							<form action="${pageContext.request.contextPath}/omat/omatsearch" method="get">
+							<form action="${pageContext.request.contextPath}/omat/omatsearch" id="searchform" method="get">
 							<input type="text" name="search" class="input_box" placeholder="출고번호">
 							<input type="text" name="search2" class="input_box" placeholder="품번">
 							<input type="text" name="search3" class="input_box" placeholder="출고창고">
@@ -172,9 +173,7 @@
 				<div class="row">
 					<div class="col-lg">
 						<div class="card">
-							<div class="card-header">
-								<strong class="card-title">Table Head</strong>
-							</div>
+							
 							<div class="card-body">
 								<form action="${pageContext.request.contextPath}/omat/delete"
 									id="delete" method="get">
@@ -195,6 +194,7 @@
 												<th scope="col">거래처번호</th>
 												<th scope="col">거래처명</th>
 												<th scope="col">비고</th>
+												<th></th>
 											</tr>
 										</thead>
 										<tbody>
