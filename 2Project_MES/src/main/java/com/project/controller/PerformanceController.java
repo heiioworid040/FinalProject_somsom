@@ -39,7 +39,7 @@ public class PerformanceController {
 		String search5 = request.getParameter("searchLineCd");
 
 		// 한 화면에 보여줄 글 개수 설정
-		int pageSize = 20;
+		int pageSize = 10;
 		// 현페이지 번호 가져오기
 		String pageNum = request.getParameter("pageNum");
 		if (pageNum == null) {
