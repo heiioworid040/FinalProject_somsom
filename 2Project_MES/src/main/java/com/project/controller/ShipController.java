@@ -112,21 +112,19 @@ public class ShipController {
 		String ord_cd[]=request.getParameterValues("ord_cd");
 		String ship_ifcount[]=request.getParameterValues("ship_ifcount");
 		String ship_count[]=request.getParameterValues("ship_count");
-//		int ship_over=999;
-//		int ship_inven=111;
 		String ship_date[]=request.getParameterValues("ship_date");
-
+		
 		for(int i=0;i<ord_cd.length;i++) {
 			if(ship_count[i]!="") {
 				ShipDTO shipDTO=new ShipDTO();
 				shipDTO.setOrd_cd(ord_cd[i]);
 				shipDTO.setShip_ifcount(Integer.parseInt(ship_ifcount[i]));
 				shipDTO.setShip_count(Integer.parseInt(ship_count[i]));
-				shipDTO.setShip_over(999);
-				shipDTO.setShip_inven(111);
+				shipDTO.setShip_over(0);
+				shipDTO.setShip_inven(0);
 				shipDTO.setShip_date(Timestamp.valueOf(ship_date[i]+" 23:59:59"));
+				System.out.println(shipDTO.getOrd_cd()+" "+shipDTO.getShip_ifcount()+" "+shipDTO.getShip_count()+" "+shipDTO.getShip_date());
 				shipService.shipInfoPro(shipDTO);
-//				System.out.println(shipDTO.getOrd_cd()+" "+shipDTO.getShip_ifcount()+" "+shipDTO.getShip_count()+" "+shipDTO.getShip_date());
 			}
 		}
 

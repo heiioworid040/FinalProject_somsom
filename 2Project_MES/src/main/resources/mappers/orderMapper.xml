@@ -5,8 +5,11 @@
 	<select id="getSearchCli" resultType="com.project.domain.OrderDTO">
 		select cli_cd, cli_nm, cli_boss ,cli_type
 		from client
-		<if test="search!=null||search2!=null||search3!=null">
-			where cli_cd like CONCAT('%',#{search},'%') and cli_nm like CONCAT('%',#{search2},'%') and cli_type like CONCAT('%',#{search3},'%')
+		<if test="search!=null||search2!=null">
+			where cli_cd like CONCAT('%',#{search},'%') and cli_nm like CONCAT('%',#{search2},'%')
+		<if test="search3!='#'">
+			and cli_type like CONCAT('%',#{search3},'%')
+		</if>
 		</if>
 		 limit #{startRow} , #{pageSize}
 	</select>
@@ -38,16 +41,16 @@
 		select prod_cd, prod_nm, prod_mat, prod_unit, prod_text, prod_size
 		from product
 		 where prod_mat='완제품'
-		<if test="search!=null||search2!=null||search3!=null">
-			and prod_cd like CONCAT('%',#{search},'%') and prod_nm like CONCAT('%',#{search2},'%') and prod_mat like CONCAT('%',#{search3},'%')
+		<if test="search!=null||search2!=null">
+			and prod_cd like CONCAT('%',#{search},'%') and prod_nm like CONCAT('%',#{search2},'%')
 		</if>
 		 limit #{startRow} , #{pageSize}
 	</select>
 	
 	<select id="getSearchProdCount" resultType="java.lang.Integer">
 		select count(*) from product where prod_mat='완제품'
-		<if test="search!=null||search2!=null||search3!=null">
-			and prod_cd like CONCAT('%',#{search},'%') and prod_nm like CONCAT('%',#{search2},'%') and prod_mat like CONCAT('%',#{search3},'%')
+		<if test="search!=null||search2!=null">
+			and prod_cd like CONCAT('%',#{search},'%') and prod_nm like CONCAT('%',#{search2},'%')
 		</if>
 	</select>
 	
