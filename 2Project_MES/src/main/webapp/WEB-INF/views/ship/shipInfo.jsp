@@ -178,11 +178,10 @@
 													<td>${shipDTO.prod_cd }</td>
 													<td>${shipDTO.prod_nm }</td>
 													<td>${shipDTO.ord_count }</td>
-													<td><input type="hidden" id="ship_ifcount${status.count }" value="${shipDTO.ord_count }">${shipDTO.ord_count }</td>
-<!-- 													ord_count=ship_ifcount -->
+													<td><input type="hidden" id="ship_ifcount${status.count }" name="ship_ifcount" value="${shipDTO.ord_count }">${shipDTO.ord_count }</td>
+ 													<!-- ord_count=ship_ifcount -->
 													<td>${shipDTO.prod_count - shipDTO.ord_count }</td>
 													<td><input type="hidden" id="ship_inven${status.count }" value="${shipDTO.prod_count }">${shipDTO.prod_count }</td>
-<%-- 													<td><input type="hidden" name="ship_over" value="${shipDTO.ship_over }">${shipDTO.ship_over }</td> --%>
 													<td><input type="text" id="ship_count${status.count }" name="ship_count" class="ship_count"></td>
 													<td><input type="date" id="ship_date${status.count }" name="ship_date" class="ship_date"></td>
 													<td>${shipDTO.cli_nm }</td>
@@ -190,7 +189,6 @@
 										</c:forEach>
 									</tbody>
 								</table>
-
 							</div>
 						</div>
 					</div>
