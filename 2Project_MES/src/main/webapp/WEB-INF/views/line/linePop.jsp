@@ -33,9 +33,9 @@
 						<div class="form-group col-6 mb-1">
 							<div class="input-group modalP">
 								<input type="hidden" value="${pageDTO.search3 }" id="btnId">
-								<label for="modalLineCd" class="pr-1 form-control-label">라인 코드</label>
+								<label for="popLineCd" class="pr-1 form-control-label">라인 코드</label>
 								<input type="text" id="popLineCd" name="popLineCd" placeholder="Line Code" class="form-control bg-white mr-4">
-								<label for="modalLineNm" class="pr-1 form-control-label">라인명</label>
+								<label for="popLineNm" class="pr-1 form-control-label">라인명</label>
 								<input type="text" id="popLineNm" name="popLineNm" placeholder="Line Name" class="form-control bg-white">
 								<div class="input-group-btn">
 								<input type	="submit" class="btn btn-primary ml-2" id="lineSearchBtn" value="검색">

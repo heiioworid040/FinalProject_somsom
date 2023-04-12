@@ -193,7 +193,7 @@
 													<div class="input-group">
 														<input type="text" id="insertOrderCd" name="ord_cd" value="" placeholder="Order Code" class="form-control bg-white" readonly>
 														<div class="input-group-btn">
-															<input type="button" class="btn btn-primary" id="orderModalBtn" value="검색">
+															<input type="button" class="btn btn-primary" id="orderSearchPop" value="검색">
 														</div>
 													</div>
 												</td>
@@ -429,6 +429,13 @@
 			window.open(
 					"${pageContext.request.contextPath }/product/productSearchPop",
 					"productSearchPop", "width=800,height=650");
+			});
+		// 수주팝업
+		$(document).on("click", "#orderSearchPop", function(){
+			
+			window.open(
+					"${pageContext.request.contextPath }/order/orderPop",
+					"orderSearchPop", "width=800,height=650");
 			});
 		// 체크박스 제어
 // 		$("#searchInstSt1").change(function(){
