@@ -32,7 +32,7 @@
 					<form action='${pageContext.request.contextPath}/line/linePop' class="form-inline" method="get" id="lineSearchForm">
 						<div class="form-group col-6 mb-1">
 							<div class="input-group modalP">
-								<input type="hidden" value="${pageDTO.search }" id="btnId">
+								<input type="hidden" value="${pageDTO.search3 }" id="btnId">
 								<label for="modalLineCd" class="pr-1 form-control-label">라인 코드</label>
 								<input type="text" id="popLineCd" name="popLineCd" placeholder="Line Code" class="form-control bg-white mr-4">
 								<label for="modalLineNm" class="pr-1 form-control-label">라인명</label>
@@ -78,26 +78,25 @@
 					</c:forEach>
 				</tbody>
 			</table>
-		</div>
-	</div>
-</div>
-
-			
 			<div class="pageNum">
 				<c:if test="${pageDTO.startPage > pageDTO.pageBlock }">
-					<a href="${pageContext.request.contextPath}/line/linePop?pageNum=${pageDTO.startPage - pageDTO.pageBlock }&btnId=${pageDTO.search}&popLineCd=${pageDTO.search2}&popLineNm=${pageDTO.search3}">[10페이지 이전]</a>
+					<a href="${pageContext.request.contextPath}/line/linePop?pageNum=${pageDTO.startPage - pageDTO.pageBlock }&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}">[10페이지 이전]</a>
 				</c:if>
-
 				<c:forEach var="i" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1">
-					<a href="${pageContext.request.contextPath}/line/linePop?pageNum=${i}&btnId=${pageDTO.search}&popLineCd=${pageDTO.search2}&popLineNm=${pageDTO.search3}">${i}</a>
+					<a href="${pageContext.request.contextPath}/line/linePop?pageNum=${i}&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}">${i}</a>
 				</c:forEach>
 				<c:if test="${pageDTO.endPage < pageDTO.pageCount }">
-					<a href="${pageContext.request.contextPath}/line/linePop?pageNum=${pageDTO.startPage + pageDTO.pageBlock }&btnId=${pageDTO.search}&popLineCd=${pageDTO.search2}&popLineNm=${pageDTO.search3}">[10페이지 다음]</a>
+					<a href="${pageContext.request.contextPath}/line/linePop?pageNum=${pageDTO.startPage + pageDTO.pageBlock }&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}">[10페이지 다음]</a>
 				</c:if>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" id="cancel">닫기</button>
 			</div>
+		</div>
+	</div>
+</div>
+
+			
 <script
 	src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
 <script type="text/javascript">	

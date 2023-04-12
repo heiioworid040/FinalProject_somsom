@@ -18,13 +18,6 @@ public class LineDAOImpl implements LineDAO {
 	private static final String namespace="com.project.mappers.lineMapper";
 
 	@Override
-	public List<LineDTO> getSearchLine() {
-		System.out.println("LineDAOImpl getSearchLine()");
-
-		return sqlSession.selectList(namespace+".getSearchLine");
-	}
-
-	@Override
 	public List<LineDTO> getLineList(PageDTO pageDTO) {
 		System.out.println("LineDAOImpl getLineList()");
 		pageDTO.setStartRow(pageDTO.getStartRow()-1);
@@ -39,5 +32,33 @@ public class LineDAOImpl implements LineDAO {
 		return sqlSession.selectOne(namespace+".getLineCount", pageDTO);
 	}
 
+	@Override
+	public void inertLine(LineDTO lineDTO) {
+		System.out.println("LineDAOImpl insertLine()");
+		
+		sqlSession.insert(namespace+".insertLine", lineDTO);
+	}
+
+	@Override
+	public Integer getMaxLine() {
+		System.out.println("LineDAOImpl getMaxLine()");
+		return sqlSession.selectOne(namespace+".getMaxLine");
+	}
+
+	@Override
+	public void updateLine(LineDTO lineDTO) {
+		System.out.println("LineDAOImpl updateLine()");
+		sqlSession.update(namespace+".updateLine", lineDTO);
+	}
+
+	@Override
+	public void deleteLine(String line_cd) {
+		System.out.println("LineDAOImpl deleteLine()");
+		sqlSession.delete(namespace+".deleteLine", line_cd);
+	}
+	
+	
+	
+	
 
 }

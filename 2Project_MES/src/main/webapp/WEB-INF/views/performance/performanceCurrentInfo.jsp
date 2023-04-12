@@ -166,7 +166,7 @@
 										<tbody>
 											<tr>
 												<td scope="row"><input type="text" id="insertPerfCd"
-													name="perf_cd" class="form-control instCd" ></td>
+													name="perf_cd" class="form-control instCd" readonly></td>
 												<td>
 													<div class="input-group modalP" id="modalP2">
 														<input type="text" id="insertInstCd" name="inst_cd"
@@ -262,7 +262,9 @@
 											<th scope="col">수주번호</th>
 											<th scope="col">업체</th>
 											<th scope="col" class="col-1">비고</th>
+											<c:if test="${sessionScope.emp_position != '사원'}">
 											<th scope="col"></th>
+											</c:if>
 										</tr>
 									</thead>
 									<tbody>
@@ -285,12 +287,14 @@
 												<td>${performanceDTO.ord_cd }</td>
 												<td>${performanceDTO.cli_nm }</td>
 												<td>${performanceDTO.perf_note }</td>
+												<c:if test="${sessionScope.emp_position != '사원'}">
 												<td>
 													<div class="input-group">
 														<button id="editPerfBtn" class="btn btn-secondary"
 															value="${performanceDTO.perf_cd }">편집</button>
 													</div>
 												</td>
+												</c:if>
 											</tr>
 										</c:forEach>
 									</tbody>

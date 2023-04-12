@@ -16,12 +16,6 @@ public class LineServiceImpl implements LineService{
 	@Inject
 	private LineDAO lineDAO;
 
-	@Override
-	public List<LineDTO> getSearchLine() {
-		System.out.println("LineServiceImpl getSearchLine()");
-
-		return lineDAO.getSearchLine();
-	}
 
 	@Override
 	public List<LineDTO> getLineList(PageDTO pageDTO) {
@@ -41,6 +35,42 @@ public class LineServiceImpl implements LineService{
 		return lineDAO.getLineCount(pageDTO);
 	}
 
+	@Override
+	public void insertLine(LineDTO lineDTO) {
+		System.out.println("LineServiceImpl insertLine()");
+		if(lineDAO.getMaxLine() == null) {
+			lineDTO.setLine_cd("L001");
+		}else if(lineDAO.getMaxLine()<10){
+			lineDTO.setLine_cd("L"+"00"+lineDAO.getMaxLine());
+		}else if(lineDAO.getMaxLine()>9 && lineDAO.getMaxLine()<100){
+			lineDTO.setLine_cd("L"+"0"+lineDAO.getMaxLine());
+		}else {
+			lineDTO.setLine_cd("L"+lineDAO.getMaxLine());
+		}
+		
+		if(lineDTO.getLine_st() == null) {
+			lineDTO.setLine_st("대기");
+		}
+		lineDAO.inertLine(lineDTO);
+	}
+
+	@Override
+	public void updateLine(LineDTO lineDTO) {
+		System.out.println("LineServiceImpl updateLine()");
+		System.out.println(lineDTO);
+		lineDAO.updateLine(lineDTO);
+	}
+
+	@Override
+	public void deleteLine(String line_cd) {
+		System.out.println("LineServiceImpl deleteLine()");
+		lineDAO.deleteLine(line_cd);
+	}
+
+	
+	
+	
+	
 
 
 }
