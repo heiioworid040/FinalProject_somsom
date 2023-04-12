@@ -463,17 +463,7 @@
 				jQuery('#insertPerfCs').attr('disabled', true);
 			}
 		});
-		
-		//지시 번호 입력
-		$(document).on("focusin", ".instCd", function(){
-			console.log("됨");
-			jQuery('.instCd').on('keyup', function () {
-				jQuery(this).val(jQuery(this).val().replace(/[^0-9]/g, ""));
-			});
-			jQuery(document).on("focusout", ".instCd", function()
-				jQuery('.instCd').attr('value', 'WI');
-		});
-		
+			
 		// 실적 추가 버튼
 		$(document).on("click", "#insertPerfBtn", function(){
 			console.log(jQuery('#insertPerfCs option:selected').val());
