@@ -35,67 +35,44 @@
 	rel='stylesheet' type='text/css'>
 
 <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
-</head>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js">
-	$(document).ready(function() {
-		$('#largeModal').on('shown.bs.modal', function() {
-			$.ajax({
-				url : '/imat/ImatprodList',
-				type : 'GET',
-				success : function(data) {
-					// display data in the modal body
-					$('.modal-body').html(data);
-				}
-			});
-		});
-	});
-
-	// $(document).ready(function(){
-	// $('#insert').submit(function(){
-
-	// 	if($('.id').val()==""){
-	// 		alert("아이디 입력하세요");
-	// 		$('.id').focus();
-	// 		return false;
-	// 	}
-	//     if($('.imat_code').val()==""){
-	//     	alert("비밀번호 입력하세요");
-	// 		$('.pass').focus();
-	// 		return false;
-	//     }
-
-	//     if($('.pass2').val()==""){
-	//     	alert("비밀번호2 입력하세요");
-	// 		$('.pass2').focus();
-	// 		return false;
-	//     }
-
-	//     if($('.name').val()==""){
-	//     	alert("이름 입력하세요");
-	// 		$('.name').focus();
-	// 		return false;
-	//     }
-
-	//     if($('.email').val()==""){
-	//     	alert("이메일 입력하세요");
-	// 		$('.email').focus();
-	// 		return false;
-	//     }
-
-	//     if($('.email2').val()==""){
-	//     	alert("이메일2 입력하세요");
-	// 		$('.email2').focus();
-	// 		return false;
-	//     }
-
-	//     if($('.email').val() != $('.email2').val()){
-	//     	alert("이메일 틀림");
-	// 		$('.email2').focus();
-	// 		return false;
-	//     }
-
-	// });
+<script type="text/javascript">
+function prodchk(event) {
+// 	var imat_count = document.getElementById( 'imat_count' ).value;
+// 	 var prod_cd = document.getElementById( 'prod_cd' ).value;
+// 	if( prod_cd== ""){
+// 		alert("품번 입력하세요");
+// 		//부모페이지로 이벤트전파방지
+// 		event.preventDefault();
+// 		}
+	var chkStyle = /\d/ ; 
+	if(document.getElementById( 'imat_count' ).value== ""){
+		alert("입고수량 입력하세요");
+		document.fr.imat_count.focus();
+		//부모페이지로 이벤트전파방지
+		
+		event.preventDefault();
+		}
+	else{
+		if(!chkStyle.test((document.getElementById( 'imat_count' ).value))){
+			alert("입고수량에는 숫자만 입력 가능합니다.");
+			document.fr.imat_count.focus();
+			//부모페이지로 이벤트전파방지
+			event.preventDefault();
+			}
+			
+	}
+	
+// 	if(!chkStyle.test((document.getElementById( 'imat_count' ).value))){
+// 		alert("입고수량에는 숫자만 입력 가능합니다.");
+// // 		$(imat_count).val="";
+// 		//부모페이지로 이벤트전파방지
+// 		event.preventDefault();
+// 		}
+		
+}
 </script>
+</head>
+
 <body>
 
 
@@ -110,21 +87,24 @@
 		<jsp:include page="../inc/top.jsp" />
 		<!-- Header-->
 
+	
 		<div class="breadcrumbs">
 			<div class="breadcrumbs-inner">
 				<div class="row m-0">
 					<div class="col-sm-4">
 						<div class="page-header float-left">
 							<div class="page-title"></div>
+						<h1>자재 관리</h1>
 						</div>
 					</div>
 					<div class="col-sm-8">
 						<div class="page-header float-right">
+						
 							<div class="page-title">
 								<ol class="breadcrumb text-right">
-									<li><a href="#">Dashboard</a></li>
-									<li><a href="#">Table</a></li>
-									<li class="active">Basic table</li>
+									<li><a href="#">자재 입고</a></li>
+<!-- 									<li><a href="#">Table</a></li> -->
+<!-- 									<li class="active">Basic table</li> -->
 								</ol>
 							</div>
 						</div>
@@ -138,20 +118,18 @@
 				<div class="row">
 					<div class="col-lg">
 						<div class="card">
-							<div class="card-header">
-								<strong class="card-title">TEST</strong>
-							</div>
 							<div class="card-body">
 
-								<form
+								<form name="fr" 
 									action="${pageContext.request.contextPath}/imat/imatupdatePro"
-									method="post">
+									method="post"
+									onsubmit="prodchk(event);">
 									<table id="bootstrap-data-table"
 										class="table table-striped table-bordered">
 										<thead class="thead-dark">
 											<tr>
 												<th scope="col">입고번호</th>
-												<th scope="col">상품코드</th>
+												<th scope="col">품번</th>
 												<th scope="col">입고창고</th>
 												<th scope="col">입고수량</th>
 												<th scope="col">비고</th>
@@ -161,12 +139,12 @@
 											<tr>
 
 												<td><input type="text" name="imat_cd"
-													value="${imatDTO.imat_cd}"></td>
+													value="${imatDTO.imat_cd}" readonly></td>
 												<td><input type="text" name="prod_cd"
-													value="${imatDTO.prod_cd}"></td>
+													value="${imatDTO.prod_cd}" readonly></td>
 												<td><input type="text" name="imat_stg"
-													value="${imatDTO.imat_stg}"></td>
-												<td><input type="text" name="imat_count"
+													value="${imatDTO.imat_stg}" readonly></td>
+												<td><input type="text" name="imat_count" id="imat_count" 
 													value="${imatDTO.imat_count}"></td>
 												<td><input type="text" name="imat_note"
 													value="${imatDTO.imat_note}"></td>
@@ -187,7 +165,7 @@
 			</div>
 		</div>
 		<!-- .content -->
-		<!-- .content -->
+		
 
 
 		<div class="clearfix"></div>

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.project.domain.OmatDTO;
+import com.project.domain.OmatDTO;
 import com.project.domain.PageDTO;
 import com.project.domain.ProductDTO;
 import com.project.service.OmatService;
@@ -66,10 +67,10 @@ public class OmatController {
 		return "redirect:/omat/omatbeList";
 //		return "redirect:/omat/omatbeList";
 	}
-
+	
 	@RequestMapping(value = "/omat/omatpopPro", method = RequestMethod.GET)
 	public String omatpopPro(HttpServletRequest request, Model model) {
-		System.out.println("ImatController imatpopPro()");
+		System.out.println("OmatController omatpopPro()");
 		String prod_cd = request.getParameter("prod_cd");
 		ProductDTO product = OmatService.getProd(prod_cd);
 		model.addAttribute("prod_cd",product.getProd_cd());
@@ -78,10 +79,7 @@ public class OmatController {
 //		주소줄 변경하면서 이동 
 		return "omat/omatinsert";
 	}
-	
-	
 
-	// 가상주소 http://localhost:8080/SFunWeb/board/writePro
 	@RequestMapping(value = "/omat/omatinsertPro", method = RequestMethod.POST)
 	public String omatinsertPro(OmatDTO omatDTO) {
 		System.out.println("OmatController insertPro()");
@@ -113,7 +111,7 @@ public class OmatController {
 		System.out.println("OmatController OmatbeList()-2");
 		List<OmatDTO> omatbeList = OmatService.getOmatbeList(pageDTO);
 		System.out.println("OmatController OmatbeList()-2-1");
-		int count = OmatService.getOmatCount();
+		int count = OmatService.getOmatCount(pageDTO);
 		int pageBlock = 10;
 		int startPage = (currentPage - 1) / pageBlock * pageBlock + 1;
 		int endPage = startPage + pageBlock - 1;
@@ -192,7 +190,7 @@ public class OmatController {
 		pageDTO.setPageNum(pageNum);
 		pageDTO.setCurrentPage(currentPage);
 		List<ProductDTO> omatprodList = OmatService.getOmatprodList(pageDTO);
-		int count = OmatService.getOmatCount();
+		int count = OmatService.getOmatCount(pageDTO);
 		int pageBlock = 10;
 		int startPage = (currentPage - 1) / pageBlock * pageBlock + 1;
 		int endPage = startPage + pageBlock - 1;
@@ -219,5 +217,117 @@ public class OmatController {
 //		주소줄 변경하면서 이동
 		return "redirect:/omat/omatbeList";
 	}
+	
+	@RequestMapping(value = "/omat/omatsearch", method = RequestMethod.GET)
+	public String omatsearch(HttpServletRequest request, Model model) {
+		System.out.println("OmatController omatsearch()");
+		//검색어 가져오기
+		String search=request.getParameter("search");
+		String search2=request.getParameter("search2");
+		String search3=request.getParameter("search3");
+		
+		// 한 화면에 보여줄 글 개수 설정
+		int pageSize=15;
+		// 현페이지 번호 가져오기
+		String pageNum=request.getParameter("pageNum");
+		if(pageNum==null) {
+			//pageNum 없으면 1페이지 설정
+			pageNum="1";
+		}
+		// 페이지번호를 => 정수형 변경
+		int currentPage=Integer.parseInt(pageNum);
+		
+		PageDTO pageDTO=new PageDTO();
+		pageDTO.setPageSize(pageSize);
+		pageDTO.setPageNum(pageNum);
+		pageDTO.setCurrentPage(currentPage);
+		//검색어
+		pageDTO.setSearch(search);
+		pageDTO.setSearch2(search2);
+		pageDTO.setSearch3(search3);
+		
+		List<OmatDTO> omatbeList=OmatService.getOmatbeList(pageDTO);
+		
+		//페이징 처리
+		//검색어
+		int count = OmatService.getOmatCount(pageDTO);
+		int pageBlock=10;
+		int startPage=(currentPage-1)/pageBlock*pageBlock+1;
+		int endPage=startPage+pageBlock-1;
+		int pageCount=count/pageSize+(count%pageSize==0?0:1);
+		if(endPage > pageCount){
+			endPage = pageCount;
+		}
+				
+		pageDTO.setCount(count);
+		pageDTO.setPageBlock(pageBlock);
+		pageDTO.setStartPage(startPage);
+		pageDTO.setEndPage(endPage);
+		pageDTO.setPageCount(pageCount);
+		
+		
+		model.addAttribute("OmatbeList", omatbeList);
+		model.addAttribute("pageDTO", pageDTO);
+		
+//		주소줄 변경없이 이동
+//		/WEB-INF/views/파일이름.jsp
+//		/WEB-INF/views/fcenter/fnotice.jsp
+		return "omat/omatbeList";
+	}
 
+	@RequestMapping(value = "/omat/omatpopsear", method = RequestMethod.GET)
+	public String omatpopsear(HttpServletRequest request, Model model) {
+		System.out.println("OmatController omatpopsear()");
+		//검색어 가져오기
+		String search=request.getParameter("search");
+		String search2=request.getParameter("search2");
+		String search3=request.getParameter("search3");
+		
+		// 한 화면에 보여줄 글 개수 설정
+		int pageSize=15;
+		// 현페이지 번호 가져오기
+		String pageNum=request.getParameter("pageNum");
+		if(pageNum==null) {
+			//pageNum 없으면 1페이지 설정
+			pageNum="1";
+		}
+		// 페이지번호를 => 정수형 변경
+		int currentPage=Integer.parseInt(pageNum);
+		
+		PageDTO pageDTO=new PageDTO();
+		pageDTO.setPageSize(pageSize);
+		pageDTO.setPageNum(pageNum);
+		pageDTO.setCurrentPage(currentPage);
+		//검색어
+		pageDTO.setSearch(search);
+		pageDTO.setSearch2(search2);
+		pageDTO.setSearch3(search3);
+		List<ProductDTO> omatprodList = OmatService.getOmatprodList(pageDTO);
+		
+		//페이징 처리
+		//검색어
+		int count = OmatService.getOmatCount(pageDTO);
+		int pageBlock=10;
+		int startPage=(currentPage-1)/pageBlock*pageBlock+1;
+		int endPage=startPage+pageBlock-1;
+		int pageCount=count/pageSize+(count%pageSize==0?0:1);
+		if(endPage > pageCount){
+			endPage = pageCount;
+		}
+				
+		pageDTO.setCount(count);
+		pageDTO.setPageBlock(pageBlock);
+		pageDTO.setStartPage(startPage);
+		pageDTO.setEndPage(endPage);
+		pageDTO.setPageCount(pageCount);
+		
+		
+		model.addAttribute("OmatprodList", omatprodList);
+		model.addAttribute("pageDTO", pageDTO);
+		
+//		주소줄 변경없이 이동
+//		/WEB-INF/views/파일이름.jsp
+//		/WEB-INF/views/fcenter/fnotice.jsp
+		return "omat/omatpop";
+	}
 }

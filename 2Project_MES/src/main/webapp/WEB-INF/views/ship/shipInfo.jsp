@@ -33,20 +33,20 @@
 		$('#shipInfo').submit(function(){
 			last = $('.ship_count').length;
 			for(i=1;i<=last;i++) {
-				if($('#ship_count'+i).val()!=""&&$('#ship_date'+i).val()==""){
-					alert("출하일자를 입력하세요");
-					return false;
-				}else if($('#ship_count'+i).val()==""&&$('#ship_date'+i).val()!=""){
-					alert("출하량을 입력하세요");
-					return false;
-				}
-// 				else if($('#ship_count'+i).val()==""&&$('#ship_date'+i).val()==""){
-// 					alert("저장할 데이터가 없습니다");
+// 				if($('#ship_count'+i).val()==""&&$('#ship_date'+i).val()==""){
+// 					alert("저장할 데이터가 없습니다.");
 // 					return false;
 // 				}
+				if($('#ship_count'+i).val()!=""&&$('#ship_date'+i).val()==""){
+					alert("출하일자를 입력하세요.");
+					return false;
+				}else if($('#ship_count'+i).val()==""&&$('#ship_date'+i).val()!=""){
+					alert("출하량을 입력하세요.");
+					return false;
+				}
 				var num = /[0-9]/;
 				if(!num.test($('#ship_count'+i).val())&&$('#ship_date'+i).val()!=""){
-					alert("숫자만 입력");
+					alert("숫자만 입력하세요.");
 					return false;
 					}
 				if(parseInt($('#ship_count'+i).val()) > parseInt($('#ship_ifcount'+i).val())&&$('#ship_date'+i).val()!=""){
@@ -57,7 +57,7 @@
 					alert("재고 수량이 부족합니다.");
 					return false;
 					}
-				if($('#ord_date'+i).val()>$('#ship_date'+i).val()){
+				if($('#ship_count'+i).val()!=""&&$('#ord_date'+i).val()>$('#ship_date'+i).val()){
 					alert("출하일자를 바르게 입력하세요.");
 					return false;
 				}
@@ -117,13 +117,13 @@
 										<span class="search-cl">거래처</span><input type="text" id="cliS_cd" name="cli" placeholder="Client Code" readonly><input type="text" id="cliS_nm" placeholder="Client Name" readonly><button type="button" class="input-group-addon search-btn" style="cursor: pointer;" onclick="searchPop('cliS')"><i class="ti-search"></i></button>
 									</div>
 									<div class="search-div">
-										<span class="search-cl2">수주일자</span><input type="date" id="ordS_date" name="ord_date"><input type="date" id="ordS_date_end" name="ord_date_end">
+										<span class="search-cl2">수주일자</span><input type="date" id="ordS_date" name="ord_date"> ~ <input type="date" id="ordS_date_end" name="ord_date_end">
 									</div>
 									<div class="search-div">
 										<span class="search-cl2">품목</span><input type="text" id="prodS_cd" name="prod" placeholder="Prod Code" readonly><input type="text" id="prodS_nm" placeholder="Prod Name" readonly><button type="button" class="input-group-addon search-btn" style="cursor: pointer;" onclick="searchPop('prodS')"><i class="ti-search"></i></button>
 									</div>
 									<div class="search-div2">
-										<span class="search-cl">납품예정일</span><input type="date" id="ordS_d_date" name="ord_d_date"><input type="date" id="ordS_d_date_end" name="ord_d_date_end">
+										<span class="search-cl">납품예정일</span><input type="date" id="ordS_d_date" name="ord_d_date"> ~ <input type="date" id="ordS_d_date_end" name="ord_d_date_end">
 										<input type="submit" class="btn btn-primary float-right" style="margin-top: 6px" value="검색">
 									</div>
 								</form>

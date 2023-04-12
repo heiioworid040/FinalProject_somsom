@@ -8,7 +8,8 @@ import com.project.domain.ProductDTO;
 
 public interface ImatService {
 	public List<ProductDTO> getImatprodList(PageDTO pageDTO);
-	public int getImatCount();
+	public int getImatCount(PageDTO pageDTO);
+	public int getIomatCount(PageDTO pageDTO);
 	public List<ImatDTO> getImatbeList(PageDTO pageDTO);
 	public List<ImatDTO> getIomatList(PageDTO pageDTO);
 //	public List<ProductDTO> getImatxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxzzzzzzzzzzzxzxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZprodList1(PageDTO pageDTO);

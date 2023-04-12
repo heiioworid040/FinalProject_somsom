@@ -21,11 +21,16 @@ public class ImatServiceImpl implements ImatService{
 
 
 	@Override
-	public int getImatCount() {
+	public int getImatCount(PageDTO pageDTO) {
 		System.out.println("ImatServiceImpl getImatCount()");
-		return imatDAO.getImatCount();
+		return imatDAO.getImatCount(pageDTO);
 	}
 
+	@Override
+	public int getIomatCount(PageDTO pageDTO) {
+		System.out.println("ImatServiceImpl getIomatCount()");
+		return imatDAO.getIomatCount(pageDTO);
+	}
 	@Override
 	public ImatDTO getImat(String imat_cd) {
 		System.out.println("ImatServiceImpl getImat()");
@@ -57,7 +62,7 @@ public class ImatServiceImpl implements ImatService{
 		int endRow = startRow+pageDTO.getPageSize()-1;
 		pageDTO.setStartRow(startRow);
 		pageDTO.setEndRow(endRow);
-		System.out.println("ImatServiceImpl getImatCount()-1");
+		System.out.println("ImatServiceImpl getIomatList)-1");
 		return imatDAO.getIomatList(pageDTO);
 	}
 

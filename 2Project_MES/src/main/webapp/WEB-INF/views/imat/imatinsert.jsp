@@ -38,13 +38,35 @@
 </head>
 
 <!-- <script type="text/javascript"> -->
-
-// function setChildValue(prod_cd,prod_mat){
-
-//     document.getElementById("prod_cd").value = prod_cd;
-
-// }
 <!-- </script> -->
+<script type="text/javascript">
+function prodchk(event) {
+	 var chkStyle = /\d/ ; 
+	if(document.getElementById( 'prod_cd' ).value== ""){
+		alert("품번 입력하세요");
+		//부모페이지로 이벤트전파방지
+		event.preventDefault();
+		}
+	
+	else if(document.getElementById( 'imat_count' ).value== ""){
+		alert("입고수량 입력하세요");
+		document.fr.imat_count.focus();
+		//부모페이지로 이벤트전파방지
+		
+		event.preventDefault();
+		}
+	else{
+		if(!chkStyle.test((document.getElementById( 'imat_count' ).value))){
+			alert("입고수량에는 숫자만 입력 가능합니다.");
+			document.fr.imat_count.focus();
+			//부모페이지로 이벤트전파방지
+			event.preventDefault();
+			}
+			
+	}
+		
+}
+</script>
 <script type="text/javascript">
 
 function openPopUp() {
@@ -66,55 +88,7 @@ function openNewWindow(url) {
 	  openNewWindow('/popUpUrl');
 	});
 </script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js">
-	// $(document).ready(function(){
-	// $('#insert').submit(function(){
 
-	// 	if($('.id').val()==""){
-	// 		alert("아이디 입력하세요");
-	// 		$('.id').focus();
-	// 		return false;
-	// 	}
-	//     if($('.imat_code').val()==""){
-	//     	alert("비밀번호 입력하세요");
-	// 		$('.pass').focus();
-	// 		return false;
-	//     }
-
-	//     if($('.pass2').val()==""){
-	//     	alert("비밀번호2 입력하세요");
-	// 		$('.pass2').focus();
-	// 		return false;
-	//     }
-
-	//     if($('.name').val()==""){
-	//     	alert("이름 입력하세요");
-	// 		$('.name').focus();
-	// 		return false;
-	//     }
-
-	//     if($('.email').val()==""){
-	//     	alert("이메일 입력하세요");
-	// 		$('.email').focus();
-	// 		return false;
-	//     }
-
-	//     if($('.email2').val()==""){
-	//     	alert("이메일2 입력하세요");
-	// 		$('.email2').focus();
-	// 		return false;
-	//     }
-
-	//     if($('.email').val() != $('.email2').val()){
-	//     	alert("이메일 틀림");
-	// 		$('.email2').focus();
-	// 		return false;
-	//     }
-
-	// });
-	
-
-</script>
 <body>
 
 
@@ -135,15 +109,17 @@ function openNewWindow(url) {
 					<div class="col-sm-4">
 						<div class="page-header float-left">
 							<div class="page-title"></div>
+						<h1>자재 관리</h1>
 						</div>
 					</div>
 					<div class="col-sm-8">
 						<div class="page-header float-right">
+						
 							<div class="page-title">
 								<ol class="breadcrumb text-right">
-									<li><a href="#">Dashboard</a></li>
-									<li><a href="#">Table</a></li>
-									<li class="active">Basic table</li>
+									<li><a href="#">자재 입고</a></li>
+<!-- 									<li><a href="#">Table</a></li> -->
+<!-- 									<li class="active">Basic table</li> -->
 								</ol>
 							</div>
 						</div>
@@ -153,17 +129,13 @@ function openNewWindow(url) {
 		</div>
 
 
-
+<div class="content">
 		<div class="animated fadeIn">
 			<div class="row">
 				<div class="col-lg">
 					<div class="card">
-						<div class="card-header">
-							<strong class="card-title">Table Head</strong>
-						</div>
 						<div class="card-body">
-<!-- 						<input type="button" value="조회" onclick="openPopUp()"><br> -->
-							<form method="post" action="${pageContext.request.contextPath}/imat/imatinsertPro">
+							<form method="post" name="fr" action="${pageContext.request.contextPath}/imat/imatinsertPro" id="insertpro" onsubmit="prodchk(event);">
 						<table class="table">
 										<thead class="thead-dark">
 
@@ -178,13 +150,13 @@ function openNewWindow(url) {
 										</thead>
 										<tbody>
 												<tr>
-												<td><input type="button" value="조회" onclick="openPopUp()"></td>
+												<td><input type="button" value="조회" onclick="openPopUp()" class="btn btn-outline-link"></td>
 													<td><input type="text" name="imat_cd"
 										class="imat_cd" readonly></td>
 													<td><input
 										type="text" name="prod_cd" class="prod_cd" id="prod_cd" readonly></td>
 													<td><input type="text" name="imat_stg" class="imat_stg" id="imat_stg" readonly></td>
-													<td><input type="text" name="imat_count"
+													<td><input type="text" name="imat_count" id="imat_count" 
 										class="imat_count"></td>
 													<td><input
 										type="text" name="imat_note" class="imat_note"></td>
@@ -196,38 +168,18 @@ function openNewWindow(url) {
 
 
 									</table>
-									<div id="buttons"> -->
-									<input type="submit" value="Submit" class="submit"> 
-									<input type="reset" value="Cancel" class="cancel">
+									<div class="btn-div float-right">
+									<input type="submit" value="추가"  class="btn btn-secondary"> 
+									<input type="button" class="btn btn-secondary" value="취소"
+											onclick="location.href='${pageContext.request.contextPath}/imat/imatbeList'">
 								</div>
 									</form>
-									
-<!-- 						<input type="button" value="조회" onclick="openPopUp()"><br> -->
-<!-- 							<form -->
-<%-- 								action="${pageContext.request.contextPath}/imat/imatinsertPro" --%>
-<!-- 								id="insert" method="post"> -->
-<!-- 								<fieldset> -->
-<!-- 									<label>입고번호</label> <input type="text" name="imat_cd" -->
-<!-- 										class="imat_cd" readonly><br> <label>품번</label> <input -->
-<%-- 										type="text" name="prod_cd" id="prod_cd" class="prod_cd" value="${prod_cd}" readonly><br> <label>입고창고</label> --%>
-<!-- 									<input type="text" name="imat_stg" id="imat_stg" class="imat_stg"><br> -->
-<!-- 									<label>입고수량</label><input type="text" name="imat_count" -->
-<!-- 										class="imat_count"><br> <label>비고</label><input -->
-<!-- 										type="text" name="imat_note" class="imat_note"><br> -->
-<!-- 								</fieldset> -->
-<!-- 								<div class="clear"></div> -->
-<!-- 								<div id="buttons"> -->
-<!-- 									<input type="submit" value="Submit" class="submit"> <input -->
-<!-- 										type="reset" value="Cancel" class="cancel"> -->
-<!-- 								</div> -->
-<!-- 							</form> -->
-							
-						</div>
+									</div>
 					</div>
 				</div>
 			</div>
-		</div>
-	</div>
+			</div>
+			</div>
 	<!-- .content -->
 
 	
