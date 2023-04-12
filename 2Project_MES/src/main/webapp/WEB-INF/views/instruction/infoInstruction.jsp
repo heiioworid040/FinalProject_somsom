@@ -40,6 +40,9 @@
 	href="${pageContext.request.contextPath}/resources/css/performanceCurr.css">
 </head>
 <body>
+	<c:if test="${empty sessionScope.emp_cd }">
+		<c:redirect url="/employee/login"></c:redirect>
+	</c:if>
 	<!-- Left Panel1 -->
 	<jsp:include page="../inc/leftPanel.jsp" />
 	<!-- Left Panel1 -->
@@ -150,7 +153,7 @@
 				</div>
 			</div>
 		</div>
-
+		<c:if test="${sessionScope.emp_position != '사원'}">
 		<!-- 	편집창 insert(오브젝트)-->
 		<div class="content pt-0">
 			<div class="animated fadeIn">
@@ -227,6 +230,7 @@
 				</div>
 			</div>
 		</div>
+	</c:if>
 
 		<!-- 리스트 -->
 		<div class="content pt-0">
@@ -253,7 +257,9 @@
 											<th scope="col">생산량</th>
 											<th scope="col">지시날짜</th>
 											<th scope="col">업체</th>
+											<c:if test="${sessionScope.emp_position != '사원'}">
 											<th scope="col"> </th>
+											</c:if>
 									</thead>
 									<tbody>
 										<c:forEach var="instructionDTO" items="${instList }">
@@ -270,11 +276,13 @@
 												<td>${instructionDTO.inst_fcount }</td>
 												<td><fmt:formatDate value="${instructionDTO.inst_date }" pattern="yyyy.MM.dd HH:mm"/></td>
 												<td>${instructionDTO.cli_nm }</td>
+												<c:if test="${sessionScope.emp_position != '사원'}">
 												<td>
 												<div class="input-group">
 												<button id="editInstBtn" class="btn btn-secondary" value="${instructionDTO.inst_cd }">편집</button>
 												</div>
 												</td>
+												</c:if>
 											</tr>
 										</c:forEach>
 									</tbody>

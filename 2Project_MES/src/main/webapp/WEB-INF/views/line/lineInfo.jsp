@@ -41,6 +41,9 @@
 
 </head>
 <body>
+	<c:if test="${empty sessionScope.emp_cd }">
+		<c:redirect url="/employee/login"></c:redirect>
+	</c:if>
 	<!-- Left Panel1 -->
 	<jsp:include page="../inc/leftPanel.jsp" />
 	<!-- Left Panel1 -->
@@ -82,20 +85,18 @@
 								<div class="card-body card-block">
 									<form action="${pageContext.request.contextPath}/line/lineInfo" class="form-inline" method="get">
 										<div class="form-group col-6 mb-1">
-											<div class="input-group modalP" id="modalP1">
-												<label for="modalLineCd" class="pr-1 form-control-label">라인 코드</label>
-												<input type="text" id="modalLineCd" name="modalLineCd"
+											<div class="input-group">
+												<label for="searchLineCd" class="pr-1 form-control-label">라인 코드</label>
+												<input type="text" id="searchLineCd" name="searchLineCd"
 													placeholder="Line Code" class="form-control bg-white mr-4">
-												<label for="modalLineNm" class="pr-1 form-control-label">라인명</label>
-												<input type="text" id="modalLineNm" name="modalLineNm"
+												<label for="searchLineNm" class="pr-1 form-control-label">라인명</label>
+												<input type="text" id="searchLineNm" name="searchLineNm"
 													placeholder="Line Name" class="form-control bg-white">
-												<div class="input-group-btn">
-													<input type="submit" class="btn btn-primary ml-2"
-														id="lineSearchBtn" value="검색">
+												<div class="input-group">
 												</div>
 											</div>
 										</div>
-										<div class="col p-0"></div>	
+										<div class="col p-0"><input type="submit" class="btn btn-primary ml-2" value="조회"></div>
 									</form>
 								</div>
 							</div>
@@ -103,12 +104,14 @@
 					</div>
 				</div>
 			</div>
-			<div class="content pt-0">
+			<!-- 편집창 -->
+	<c:if test="${sessionScope.emp_position != '사원'}">
+		<div class="content pt-0">
 			<div class="animated fadeIn">
 				<div class="row">
 					<div class="col-lg">
 						<div class="card m-0">
-							<form action="${pageContext.request.contextPath}/instruction/insertInst" id="insertInstForm" method="post">
+							<form action="${pageContext.request.contextPath}/line/insertLine" id="insertForm" method="post">
 								<div class="card-body card-block">
 									<table id="table" class="table table-striped table-bordered">
 										<thead class="thead-dark">
@@ -124,36 +127,36 @@
 										</thead>
 										<tbody>
 											<tr>
-												<td scope="row"><input type="text" id="insertLineCd" name="inst_cd" class="form-control"></td>
-												<td><input type="text" id="insertLineNm" class="form-control"></td>
+												<td scope="row"><input type="text" id="insertLineCd" name="line_cd" class="form-control" readonly></td>
+												<td><input type="text" id="insertLineNm" name="line_nm" class="form-control"></td>
 												<td>
 												<div>
-													<select name="inst_st" id="insertInstSt" class="form-control">
-                                                		<option value="재딘">재단</option>
+													<select name="line_process" id="insertLineProcess" class="form-control">
+                                                		<option value="재단">재단</option>
                                                 		<option value="조립">조립</option>
                                                 		<option value="검수">검수</option>
                                                 	</select>                                            	
 												</div>
 												</td>
-												<td><input type="text" id="insertPlaceNm" class="form-control"></td>
-												<td><input type="text" id="insertLineNum" class="form-control"></td>
+												<td><input type="text" id="insertLinePlace" name="line_place" class="form-control"></td>
+												<td><input type="text" id="insertLineNum" name="line_num" class="form-control"></td>
 												<td>
 													<div>
-														<select name="inst_st" id="insertInstSt" class="form-control">
+														<select id="insertLineSt" name="line_st" class="form-control">
                                                 			<option value="대기">대기</option>
                                                 			<option value="정상">정상</option>
                                                 			<option value="err">err</option>
                                                 		</select>                                            	
 													</div>
 												</td>
-												<td><input type="text" id="insertLinNt" class="form-control  bg-white"></td>
+												<td><input type="text" id="insertLinNt" name="line_note" class="form-control  bg-white"></td>
 											</tr>
 										</tbody>
 									</table>
-									<button type="submit" class="btn btn-primary col-2 float-right ml-3" id="insertInstBtn">추가</button>
-									<button type="submit" class="btn btn-primary col-1 float-right ml-3" id="updateInstBtn" disabled>수정</button>
-									<button type="button" class="btn btn-secondary col-1 float-right ml-3" id="deleteInstBtn" disabled>삭제</button>
-									<button type="reset"  class="btn btn-secondary col-1 float-right reset" id="resetInstBtn">취소</button>
+									<button type="submit" class="btn btn-primary col-2 float-right ml-3" id="insertBtn">추가</button>
+									<button type="submit" class="btn btn-primary col-1 float-right ml-3" id="updateBtn" disabled>수정</button>
+									<button type="button" class="btn btn-secondary col-1 float-right ml-3" id="deleteBtn" disabled>삭제</button>
+									<button type="reset"  class="btn btn-secondary col-1 float-right reset" id="resetLineBtn">취소</button>
 								</div>
 							</form>
 						</div> 	
@@ -161,19 +164,9 @@
 				</div>
 			</div>
 		</div> 
-<!-- 	<div class="content py-1 px-4"> -->
-<!-- 		<div class="animated fadeIn"> -->
-<!-- 			<div class="row"> -->
-<!-- 				<div class="col"> -->
-<!-- 					<div class="btn-div float-right px-2"> -->
-<!-- 						<button type="button" class="btn btn-secondary">삭제</button> -->
-<!-- 						<button type="button" class="btn btn-primary" id="editBtn">수정</button> -->
-<!-- 						<button type="button" class="btn btn-primary">추가</button> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
-<!-- 	</div> -->
+	</c:if>
+		
+		<!-- 편집창 -->
 		<!-- 리스트 -->
 		<div class="content pt-0">
 			<div class="animated fadeIn">
@@ -196,7 +189,9 @@
 											<th scope="col">정렬순서</th>
 											<th scope="col">설비상태</th>
 											<th scope="col">비고</th>
+											<c:if test="${sessionScope.emp_position ne '사원'}">
 											<th scope="col"> </th>
+											</c:if>
 										</tr>
 									</thead>
 									<tbody>
@@ -208,18 +203,20 @@
 											<tr id="infoLineTr" class="data-row">
 											</c:if>
 <!-- 												<td><div class="form-check-inline form-check mr-0 ml-1"><input type="checkbox" class="form-check-input m-0"></div></td> -->
-												<td class="pr-0 pl-0"><input type="text" class="bg-transparent border-0 col-md" value="${lineDTO.line_cd }" readonly></td>
-												<td><input type="text" class="bg-transparent border-0 col-md" value="${lineDTO.line_nm }" readonly></td>
-												<td><input type="text" class="bg-transparent border-0 col-md" value="${lineDTO.line_process}" readonly></td>
-												<td><input type="text" class="bg-transparent border-0 col-md" value="${lineDTO.line_place}" readonly></td>
-												<td><input type="text" class="bg-transparent border-0 col-md" value="${lineDTO.line_num}" readonly></td>
-												<td><input type="text" class="bg-transparent border-0 col-md" value="${lineDTO.line_st}" readonly></td>
-												<td><input type="text" class="bg-transparent border-0 col-md" value="${lineDTO.line_note}" readonly></td>
-											<td>
-												<div class="input-group">
-													<button id="editInstBtn" class="btn btn-secondary" value="${instructionDTO.inst_cd }">편집</button>
-												</div>
-											</td>
+												<td>${lineDTO.line_cd }</td>
+												<td>${lineDTO.line_nm }</td>
+												<td>${lineDTO.line_process}</td>
+												<td>${lineDTO.line_place}</td>
+												<td>${lineDTO.line_num}</td>
+												<td>${lineDTO.line_st}</td>
+												<td>${lineDTO.line_note}</td>
+												<c:if test="${sessionScope.emp_position ne '사원'}">
+												<td>
+													<div class="input-group">
+														<button type="button" id="editBtn" class="btn btn-secondary" value="${instructionDTO.inst_cd }">편집</button>
+													</div>
+												</td>
+												</c:if>
 											</tr>
 										</c:forEach>
 									</tbody>
@@ -231,12 +228,12 @@
 										<ul class="pagination">
 										<c:if test="${pageDTO.startPage <= pageDTO.pageBlock }">
 											<li class="paginate_button page-item previous disabled">
-												<a href="${pageContext.request.contextPath}/instruction/infoInst?pageNum=${pageDTO.startPage - pageDTO.pageBlock}&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}&search4=${pageDTO.search4}&search5=${pageDTO.search5}&search6=${pageDTO.search6}&search7=${pageDTO.search7}"
+												<a href="${pageContext.request.contextPath}/line/lineInfo?pageNum=${pageDTO.startPage - pageDTO.pageBlock}&search=${pageDTO.search}&search2=${pageDTO.search2}"
 												class="page-link">Previous</a></li>
 										</c:if>
 										<c:if test="${pageDTO.startPage > pageDTO.pageBlock }">
 											<li class="ppaginate_button page-item previous" >
-												<a href="${pageContext.request.contextPath}/instruction/infoInst?pageNum=${pageDTO.startPage - pageDTO.pageBlock}&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}&search4=${pageDTO.search4}&search5=${pageDTO.search5}&search6=${pageDTO.search6}&search7=${pageDTO.search7}"
+												<a href="${pageContext.request.contextPath}/line/lineInfo?pageNum=${pageDTO.startPage - pageDTO.pageBlock}&search=${pageDTO.search}&search2=${pageDTO.search2}"
 												class="page-link">Previous</a>
 											</li>
 										</c:if>
@@ -250,19 +247,19 @@
 											</c:if>
 											<c:if test="${i!=pageDTO.currentPage }">
 												<li class="paginate_button page-item ">
-													<a class="page-link" href="${pageContext.request.contextPath}/instruction/infoInst?pageNum=${i}&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}&search4=${pageDTO.search4}&search5=${pageDTO.search5}&search6=${pageDTO.search6}&search7=${pageDTO.search7}">${i}</a>
+													<a class="page-link" href="${pageContext.request.contextPath}/line/lineInfo?pageNum=${i}&search=${pageDTO.search}&search2=${pageDTO.search2}">${i}</a>
 												</li>
 											</c:if>
 										</c:forEach>
 										
 										<c:if test="${pageDTO.endPage >= pageDTO.pageCount }">
 											<li class="paginate_button page-item next disabled" id="bootstrap-data-table_next">
-												<a href="${pageContext.request.contextPath}/instruction/infoInst?pageNum=${pageDTO.startPage + pageDTO.pageBlock}&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}&search4=${pageDTO.search4}&search5=${pageDTO.search5}&search6=${pageDTO.search6}&search7=${pageDTO.search7}" class="page-link">Next</a>
+												<a href="${pageContext.request.contextPath}/line/lineInfo?pageNum=${pageDTO.startPage + pageDTO.pageBlock}&search=${pageDTO.search}&search2=${pageDTO.search2}" class="page-link">Next</a>
 											</li>
 										</c:if>
 										<c:if test="${pageDTO.endPage < pageDTO.pageCount }">
 											<li class="paginate_button page-item next" id="bootstrap-data-table_next">
-												<a href="${pageContext.request.contextPath}/instruction/infoInst?pageNum=${pageDTO.startPage + pageDTO.pageBlock}&search=${pageDTO.search}&search2=${pageDTO.search2}&search3=${pageDTO.search3}&search4=${pageDTO.search4}&search5=${pageDTO.search5}&search6=${pageDTO.search6}&search7=${pageDTO.search7}" class="page-link">Next</a>
+												<a href="${pageContext.request.contextPath}/line/lineInfo?pageNum=${pageDTO.startPage + pageDTO.pageBlock}&search=${pageDTO.search}&search2=${pageDTO.search2}" class="page-link">Next</a>
 											</li>
 										</c:if>
 										</ul>
@@ -290,76 +287,40 @@
 
 	<script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
 	<script type="text/javascript">
-// 	// 체크박스 제어
-// 	$(document).on("change", "#allCheck", function(){
-// 		if(jQuery("#allCheck").is(":checked")){
-// 		jQuery('input[type="checkbox"]').prop('checked', true);
-// 		}else{
-// 		jQuery('input[type="checkbox"]').prop('checked', false);
-			
-// 		}
-// 	});
-// 	// 수정 버튼 제어
-// 	$(document).on("click", "#editBtn", function(){
-// 		jQuery('#listForm tr td input[type="text"]').prop('readonly', false);
-// 		jQuery('#listForm').attr('action', '${pageContext.request.contextPath}/line/updateLine');
-// 		console.log(jQuery("#listForm").attr('action'));
-// 	});
-// 	// 엔터키 감지
-// 	$(document).on("keyup", function(event) {
-// 	    if (event.which === 13) {
-// 	        alert('Enter is pressed!');
-// 	    	if(jQuery("#listForm").attr('action')=='${pageContext.request.contextPath}/line/updateLine'){
-// 	    		jQuery("#listForm").submit();
-// 	    	}
-// 	    }
-// 	});
-		
-// 		// 취소 버튼 (clear)
-// 		$(document).on("click",".reset", function(){
-// 			console.log($(this).closest('form').find('div input[type="text"]'));
-// 			console.log($(this).attr('id'));
-// 			$(this).closest('form').find('div input[type="text"]').attr('value', '');
-// 			$(this).closest('form').find('div input[type="date"]').attr('value', '');
-// 			if($(this).attr('id')=='resetInstBtn'){
-// 				$("#insertInstForm").attr('action', '${pageContext.request.contextPath}/instruction/insertInst');
-// 				$('#updateInstBtn').prop('disabled', true);
-// 				$('#deleteInstBtn').prop('disabled', true);
-// 				$('#insertInstBtn').prop('disabled', false);
-// 			}
-// 		});
-		
-// 		// 행 클릭시 이동
-// 		$(document).on("click","#infoInstTr td:not(:last-child)", function(){
-// 			location.href='${pageContext.request.contextPath}/performance/performanceCurrentInfo?pageNum=1&search='+$(this).closest('tr').children('td:eq(0)').text()+'&search2=&search3=&search4=&search5=';
-// 		});
+		// 취소 버튼 (clear)
+		$(document).on("click",".reset", function(){
+			console.log(jQuery(this).closest('form').find('div input[type="text"]'));
+			console.log(jQuery(this).attr('id'));
+			jQuery(this).closest('form').find('div input[type="text"]').attr('value', '');
+			jQuery(this).closest('form').find('div input[type="date"]').attr('value', '');
+			if(jQuery(this).attr('id')=='resetLineBtn'){
+				jQuery('#insertForm').attr('action', '${pageContext.request.contextPath}/line/insertLine');
+				jQuery('#updateBtn').prop('disabled', true);
+				jQuery('#deleteBtn').prop('disabled', true);
+				jQuery('#insertBtn').prop('disabled', false);
+			}
+		});
 
-// 		// 회색 수정 버튼
-// 		$(document).on("click", "#editInstBtn", function(){
-// 			console.log('['+$(this).closest('tr').children('td:eq(0)').text().trim()+']');
-// 			$('#insertInstCd').val($(this).closest('tr').children('td:eq(0)').text().trim());
-// 			$('#insertLineCd').val($(this).closest('tr').children('td:eq(1)').text());
-// 			$('#insertLineNm').val($(this).closest('tr').children('td:eq(2)').text());
-// 			$('#insertOrderCd').val($(this).closest('tr').children('td:eq(3)').text());
-// 			$('#insertProdCd').val($(this).closest('tr').children('td:eq(4)').text());
-// 			$('#insertProdNm').val($(this).closest('tr').children('td:eq(5)').text());
-// 			$('#insertProdUnit').val($(this).closest('tr').children('td:eq(6)').text());
-// 			$('#insertInstSt').val($(this).closest('tr').children('td:eq(7)').text()).prop('selected', true);
-// 			$('#insertProdCount').val($(this).closest('tr').children('td:eq(8)').text());
-// 			$('#insertInstFcount').val($(this).closest('tr').children('td:eq(9)').text());
-// 			$('#insertClientNm').val($(this).closest('tr').children('td:eq(11)').text());
-// 			$('#insertInstForm').attr('action', '${pageContext.request.contextPath}/instruction/updateInst');
-// 			$('#updateInstBtn').prop('disabled', false);
-// 			$('#deleteInstBtn').prop('disabled', false);
-// 			$('#insertInstBtn').prop('disabled', true);
-// 			$('#lineModalBtn').focus();
-// 		});
+		// 회색 수정 버튼
+		$(document).on("click", "#editBtn", function(){
+			jQuery('#insertLineCd').val(jQuery(this).closest('tr').children('td:eq(0)').text().trim());
+			jQuery('#insertLineNm').val(jQuery(this).closest('tr').children('td:eq(1)').text().trim());
+			jQuery('#insertlineProcesst').val(jQuery(this).closest('tr').children('td:eq(2)').text()).prop('selected', true);
+			jQuery('#insertLinePlace').val(jQuery(this).closest('tr').children('td:eq(3)').text().trim());
+			jQuery('#insertLineNum').val(jQuery(this).closest('tr').children('td:eq(4)').text().trim());
+			jQuery('#insertLineSt').val(jQuery(this).closest('tr').children('td:eq(5)').text().trim()).prop('selected', true);
+			jQuery('#insertLineNt').val(jQuery(this).closest('tr').children('td:eq(6)').text().trim());
+			jQuery('#insertForm').attr('action', '${pageContext.request.contextPath}/line/updateLine');
+			jQuery('#updateBtn').prop('disabled', false);
+			jQuery('#deleteBtn').prop('disabled', false);
+			jQuery('#insertBtn').prop('disabled', true);
+			jQuery('#insertLineNm').focus();
+		});
 		
-// 		// 삭제버튼 제어
-// 		$(document).on("click", "#deleteInstBtn", function(){
-// 			console.log($('#insertInstCd').val());
-// 			location.href='${pageContext.request.contextPath}/instruction/deleteInst?delInstCd='+$('#insertInstCd').val();
-// 		});
+		// 삭제버튼 제어
+		$(document).on("click", "#deleteBtn", function(){
+			location.href='${pageContext.request.contextPath}/line/deleteLine?delLineCd='+jQuery('#insertLineCd').val();
+		});
 		
 
 	</script>

@@ -7,11 +7,17 @@ import com.project.domain.PageDTO;
 
 public interface LineDAO {
 
-	List<LineDTO> getSearchLine();
+	public List<LineDTO> getLineList(PageDTO pageDTO);
 
-	List<LineDTO> getLineList(PageDTO pageDTO);
+	public int getLineCount(PageDTO pageDTO);
 
-	int getLineCount(PageDTO pageDTO);
+	public void inertLine(LineDTO lineDTO);
+
+	public Integer getMaxLine();
+
+	public void updateLine(LineDTO lineDTO);
+
+	public void deleteLine(String line_cd);
 
 
 

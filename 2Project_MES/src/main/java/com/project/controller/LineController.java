@@ -27,8 +27,8 @@ public class LineController {
 	public String getLineList(HttpServletRequest request, PageDTO pageDTO, Model model) {
 		System.out.println("LineController getLineInfo()");
 		
-		String searchLineCd=request.getParameter("modalLineCd");
-		String searchLineNm=request.getParameter("modalLineNm");
+		String searchLineCd=request.getParameter("searchLineCd");
+		String searchLineNm=request.getParameter("searchLineNm");
 		int pageSize=10;
 
 		String pageNum=request.getParameter("pageNum");
@@ -39,15 +39,15 @@ public class LineController {
 
 
 		pageDTO=new PageDTO();
-		pageDTO.setPageSize(10);
-		pageDTO.setPageNum("1");
-		pageDTO.setCurrentPage(1);
-		pageDTO.setSearch2(searchLineCd);
-		pageDTO.setSearch3(searchLineNm);
+		pageDTO.setPageSize(pageSize);
+		pageDTO.setPageNum(pageNum);
+		pageDTO.setCurrentPage(currentPage);
+		
+		pageDTO.setSearch(searchLineCd);
+		pageDTO.setSearch2(searchLineNm);
 		
 		List<LineDTO> lineList=lineService.getLineList(pageDTO);
-		System.out.println("라인리스트"+lineList.get(0).getLine_cd());
-
+		
 		int count = lineService.getLineCount(pageDTO);
 		int pageBlock=10;
 		int startPage=(currentPage-1)/pageBlock*pageBlock+1;
@@ -75,7 +75,7 @@ public class LineController {
 		String btnId=request.getParameter("btnId");
 		String searchLineCd=request.getParameter("popLineCd");
 		String searchLineNm=request.getParameter("popLineNm");
-		int pageSize=10;
+		int pageSize=5;
 
 		String pageNum=request.getParameter("pageNum");
 		if(pageNum==null) {
@@ -85,12 +85,12 @@ public class LineController {
 
 
 		pageDTO=new PageDTO();
-		pageDTO.setPageSize(10);
+		pageDTO.setPageSize(pageSize);
 		pageDTO.setPageNum("1");
-		pageDTO.setCurrentPage(1);
-		pageDTO.setSearch(btnId);
-		pageDTO.setSearch2(searchLineCd);
-		pageDTO.setSearch3(searchLineNm);
+		pageDTO.setCurrentPage(currentPage);
+		pageDTO.setSearch(searchLineCd);
+		pageDTO.setSearch2(searchLineNm);
+		pageDTO.setSearch3(btnId);
 		
 		List<LineDTO> lineList=lineService.getLineList(pageDTO);
 		System.out.println("라인리스트"+lineList.get(0).getLine_cd());
@@ -115,10 +115,28 @@ public class LineController {
 		return "line/linePop";
 	}
 	
+	@RequestMapping(value = "/line/insertLine", method = RequestMethod.POST)
+	public String insertLinePro(LineDTO lineDTO) {
+		System.out.println("lineController insertLinePro()");
+		lineService.insertLine(lineDTO);
+
+		return "redirect:/line/lineInfo";
+	}
+	
 	@RequestMapping(value = "/line/updateLine", method = RequestMethod.POST)
-	public String updateLine() {
-		System.out.println("성공적");
-		return "redirect:line/lineInfo";
+	public String updateLinePro(LineDTO lineDTO) {
+		System.out.println("lineController updateLinePro()");
+
+		lineService.updateLine(lineDTO);
+		return "redirect:/line/lineInfo";
+	}
+	
+	@RequestMapping(value = "/line/deleteLine", method = RequestMethod.GET)
+	public String deleteLinePro(HttpServletRequest request, String line_cd) {
+		System.out.println("lineController deleteLinePro()");
+		line_cd=request.getParameter("delLineCd");
+		lineService.deleteLine(line_cd);
+		return "redirect:/line/lineInfo";
 	}
 	
 	
