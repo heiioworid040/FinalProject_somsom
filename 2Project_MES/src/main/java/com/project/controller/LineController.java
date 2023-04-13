@@ -86,7 +86,7 @@ public class LineController {
 
 		pageDTO=new PageDTO();
 		pageDTO.setPageSize(pageSize);
-		pageDTO.setPageNum("1");
+		pageDTO.setPageNum(pageNum);
 		pageDTO.setCurrentPage(currentPage);
 		pageDTO.setSearch(searchLineCd);
 		pageDTO.setSearch2(searchLineNm);

@@ -199,18 +199,15 @@
 												<td class="col-1">
 													<div class="col p-0">
 														<select class="form-control" id="insertPerfCs"
-															name="perf_couse" disabled="disabled">
+															name="perf_cause" disabled="disabled">
 															<option value="">--</option>
 															<option value="기계이상">기계이상</option>
 															<option value="재고부족">재고부족</option>
 															<option value="기타">기타</option>
 														</select>
 													</div>
-												<td><input type="text" id="insertOrdCd"
-													value="${instructionDTO.ord_cd}" disabled
-													class="form-control"></td>
-												<td><input type="text" id="insertPerfNote"
-													class="form-control"></td>
+												<td><input type="text" id="insertOrdCd" value="${instructionDTO.ord_cd}" disabled class="form-control"></td>
+												<td><input type="text" id="insertPerfNote" name="perf_note" class="form-control"></td>
 											</tr>
 										</tbody>
 									</table>
@@ -508,6 +505,14 @@
 		// 목록(생산 지시 페이지로 이동)
 		$(document).on("click", "#instListBtn", function(){
 			location.href='${pageContext.request.contextPath}/instruction/infoInst';
+		});
+
+		// 불량사유 존재 x 알림
+		$(document).on("click", "#updatePerfBtn", function(){
+			if(jQuery('#insertPerfErr').val()>0 && jQuery('#insertPerfCs').val() == '' ){
+				alert("불량품이 있습니다. 불량사유 기재해주세요.");
+				return false;
+			}
 		});
 	</script>
 	<script

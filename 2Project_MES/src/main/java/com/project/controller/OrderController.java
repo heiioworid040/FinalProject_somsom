@@ -198,7 +198,7 @@ public class OrderController {
 		
 		@RequestMapping(value = "/order/orderPop", method = RequestMethod.GET)
 		public String getorderPop(HttpServletRequest request, Model model) {
-			System.out.println("orderController getorderModal");
+			System.out.println("orderController getOrderPop");
 			// 지시 ordpop
 			int pageSize=5;
 	
