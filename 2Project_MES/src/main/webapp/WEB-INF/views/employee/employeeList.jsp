@@ -159,13 +159,12 @@ function fun1(index) {
 	            if(ck[i].checked) { check = true; } }
 	      } if(!check) {
 	      alert("삭제할 사용자를 선택하세요");
-	  	    form.method='GET';
-     		 document.form.action='${pageContext.request.contextPath}/employee/employeeList';
+			return;
 	      } else {
-	         if(confirm("삭제처리 하시겠습니까?")==true) { document.form.action='${pageContext.request.contextPath}/employee/deletePro'}
+	         if(confirm("삭제처리 하시겠습니까?")==true) { document.form.action='${pageContext.request.contextPath}/employee/deletePro';
+	         										  document.form.submit();}
 	         else{
-	        	 form.method='GET';
-	        	 document.form.action='${pageContext.request.contextPath}/employee/employeeList';
+	        	return; 
 	         }
 	      }
 	    	  
@@ -247,7 +246,7 @@ function fun1(index) {
         <div class="content">
 		<form name="form" method="post">
 		<div style="width: 100%; height: 50px">
-		<input type="submit" name="ckDelete" value="삭제" onclick="fun1(1)" class="btn btn-secondary float-right btn3">
+		<input type="button" name="ckDelete" value="삭제" onclick="fun1(1)" class="btn btn-secondary float-right btn3">
 		<input type="submit" value="추가" name="add" onclick="fun1(3)" formmethod="get" class="btn btn-secondary float-right">			
 		</div>			
 			<div class="animated fadeIn">

@@ -32,11 +32,6 @@
 			and emp_nm like CONCAT('%',#{search2},'%')
 		</if>
 	</select>
-
-<!-- 	<insert id="insertEmployee"> -->
-<!-- 		insert into employee(emp_cd, emp_nm, emp_pass, emp_dept, emp_position, emp_email, emp_tel) -->
-<!-- 		values(concat(year(now()),#{emp_cd}), #{emp_nm}, #{emp_pass}, #{emp_dept}, #{emp_position}, #{emp_email}, #{emp_tel}) -->
-<!-- 	</insert> -->
 	
 	<insert id="insertEmployee">
 		insert into employee(emp_cd, emp_nm, emp_position, emp_email, emp_tel)

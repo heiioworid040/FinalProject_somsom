@@ -36,8 +36,6 @@ $(document).ready(function(){
 			url:'${pageContext.request.contextPath}/employee/emailCk',
 			data:{'emp_email':$('.emp_email').val()},
 			success:function(result){
-//					alert(result);
-				// result.trim() => 결과값 앞뒤로 공백 제거
 				if(result.trim()=="emailUp"){
 					result="이메일 중복";
 					$('.divresult_1').val("0");
@@ -59,8 +57,6 @@ $(document).ready(function(){
 			url:'${pageContext.request.contextPath}/employee/telCk',
 			data:{'emp_tel':$('.emp_tel').val()},
 			success:function(result){
-//					alert(result);
-				// result.trim() => 결과값 앞뒤로 공백 제거
 				if(result.trim()=="telUp"){
 					result="전화번호 중복";
 					$('.divresult_2').val("0");
@@ -78,7 +74,6 @@ $(document).ready(function(){
   
 $(document).ready(function(){	
 	var emailCheck = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]/);
-//   	var telCheck = RegExp((/^010)([0-9]{8})$/);
 	$(".cancel").on("click", function(){
       window.close();
     })
