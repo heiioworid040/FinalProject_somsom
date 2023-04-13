@@ -16,6 +16,7 @@ import com.project.domain.ClientDTO;
 import com.project.domain.PageDTO;
 import com.project.domain.ProductDTO;
 import com.project.service.ClientService;
+import com.project.service.PerformanceService;
 import com.project.service.ProductService;
 
 
@@ -32,6 +33,9 @@ public class ProductController {
 
 	@Inject
 	private ClientService clientService;
+	
+	@Inject
+	private PerformanceService performanceService;
 
 	@RequestMapping(value = "/product/productwrite", method = RequestMethod.GET)
 	public String write() {
@@ -198,6 +202,114 @@ public class ProductController {
 		model.addAttribute("pop", pop);
 		model.addAttribute("pageDTO", pageDTO);
 		return "product/productorderPop";
+	}
+	
+	// 품목 검색 팝업창
+	@RequestMapping(value = "/product/productSearchPop2", method = RequestMethod.GET)
+	public String productSearchPop(HttpServletRequest request, Model model) {
+		System.out.println("productSearchPop2()");
+		// 검색어 가져오기
+		String search = request.getParameter("search");
+		String search2 = request.getParameter("search2");
+		String search3 = request.getParameter("search3");
+		// 한 화면에 보여줄 글 개수 설정
+		int pageSize = 10;
+		// 현페이지 번호 가져오기
+		String pageNum = request.getParameter("pageNum");
+		if (pageNum == null) {
+			// pageNum 없으면 1페이지 설정
+			pageNum = "1";
+		}
+		// 페이지번호를 => 정수형 변경
+		int currentPage = Integer.parseInt(pageNum);
+
+		PageDTO pageDTO = new PageDTO();
+		pageDTO.setPageSize(pageSize);
+		pageDTO.setPageNum(pageNum);
+		pageDTO.setCurrentPage(currentPage);
+		// 검색어
+		pageDTO.setSearch(search);
+		pageDTO.setSearch2(search2);
+		pageDTO.setSearch3(search3);
+
+
+		List<ProductDTO> productInfo = performanceService.getProductInfo(pageDTO);
+
+		// 페이징 처리
+		// 검색어
+		int count = performanceService.getProductCount(pageDTO);
+		int pageBlock = 10;
+		int startPage = (currentPage - 1) / pageBlock * pageBlock + 1;
+		int endPage = startPage + pageBlock - 1;
+		int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
+		if (endPage > pageCount) {
+			endPage = pageCount;
+		}
+
+		pageDTO.setCount(count);
+		pageDTO.setPageBlock(pageBlock);
+		pageDTO.setStartPage(startPage);
+		pageDTO.setEndPage(endPage);
+		pageDTO.setPageCount(pageCount);
+
+		model.addAttribute("productInfo", productInfo);
+		model.addAttribute("pageDTO", pageDTO);
+		// 주소변경 없이 이동
+		return "product/productSearchPop2";
+	}
+	
+	// 품목 검색 팝업창2
+	@RequestMapping(value = "/product/productSearchPop3", method = RequestMethod.GET)
+	public String productSearchPop3(HttpServletRequest request, Model model) {
+		System.out.println("productSearchPop3()");
+		// 검색어 가져오기
+		String search = request.getParameter("search");
+		String search2 = request.getParameter("search2");
+		String search3 = request.getParameter("search3");
+		// 한 화면에 보여줄 글 개수 설정
+		int pageSize = 10;
+		// 현페이지 번호 가져오기
+		String pageNum = request.getParameter("pageNum");
+		if (pageNum == null) {
+			// pageNum 없으면 1페이지 설정
+			pageNum = "1";
+		}
+		// 페이지번호를 => 정수형 변경
+		int currentPage = Integer.parseInt(pageNum);
+
+		PageDTO pageDTO = new PageDTO();
+		pageDTO.setPageSize(pageSize);
+		pageDTO.setPageNum(pageNum);
+		pageDTO.setCurrentPage(currentPage);
+		// 검색어
+		pageDTO.setSearch(search);
+		pageDTO.setSearch2(search2);
+		pageDTO.setSearch3(search3);
+
+
+		List<ProductDTO> productInfo = performanceService.getProductInfo(pageDTO);
+
+		// 페이징 처리
+		// 검색어
+		int count = performanceService.getProductCount(pageDTO);
+		int pageBlock = 10;
+		int startPage = (currentPage - 1) / pageBlock * pageBlock + 1;
+		int endPage = startPage + pageBlock - 1;
+		int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
+		if (endPage > pageCount) {
+			endPage = pageCount;
+		}
+
+		pageDTO.setCount(count);
+		pageDTO.setPageBlock(pageBlock);
+		pageDTO.setStartPage(startPage);
+		pageDTO.setEndPage(endPage);
+		pageDTO.setPageCount(pageCount);
+
+		model.addAttribute("productInfo", productInfo);
+		model.addAttribute("pageDTO", pageDTO);
+		// 주소변경 없이 이동
+		return "product/productSearchPop3";
 	}
 
 

@@ -31,24 +31,25 @@
 	// 필수입력 제어	
 	function essential() {
 
+		
 		if (document.fr.prod_cd.value == "") {
 			alert("품목코드를 입력하세요.");
 			document.fr.prod_cd.focus();
 			return false;
 		}
-
+		
 		if (document.fr.prod_nm.value == "") {
 			alert("품명을 입력하세요.");
-			document.fr.cli_num.focus();
+			document.fr.prod_nm.focus();
 			return false;
 		}
-		if (document.fr.prod_mat.value == "") {
+		if (document.fr.prod_mat.value == "자재유형") {
 			alert("자재유형을 선택하세요.");
 			document.fr.prod_mat.focus();
 			return false;
 		}
 		if (document.fr.prod_unit.value == "단위") {
-			alert("재고단위을 선택하세요.");
+			alert("재고단위를 선택하세요.");
 			document.fr.prod_unit.focus();
 			return false;
 		}
@@ -159,9 +160,9 @@ th {
 							</tr>  
 							<tr><td>자재유형</td>
 							    <td><select name="prod_mat">
-							    	<option value="">자재유형</option>
+							    	<option value="자재유형">자재유형</option>
 							    	<option value="완제품" <c:if test="${productDTO.prod_mat == '완제품'}">selected</c:if>>완제품</option>
-							    	<option value="원자재" <c:if test="${productDTO.prod_mat == '원자재'}">selected</c:if>>부자재</option>
+							    	<option value="원자재" <c:if test="${productDTO.prod_mat == '원자재'}">selected</c:if>>원자재</option>
 							    	<option value="부자재" <c:if test="${productDTO.prod_mat == '부자재'}">selected</c:if>>부자재</option>
 							    	</select></td></tr>	
 							<tr><td>재고단위</td>
