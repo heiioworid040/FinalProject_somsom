@@ -166,7 +166,7 @@ public class PerformanceController {
 	public String insertPerfPro(PerformanceDTO performanceDTO) {
 		System.out.println("instructionController insertInstPro()");
 		performanceService.insertPerf(performanceDTO);
-		System.out.println(performanceDTO.getPerf_good());
+		System.out.println(performanceDTO.getPerf_cause());
 		return "redirect:/performance/performanceCurrentInfo";
 	}
 
@@ -175,6 +175,7 @@ public class PerformanceController {
 		System.out.println("instructionController updateInstPro()");
 		String inst_cd=request.getParameter("inst_cd");
 		performanceDTO.setInst_cd(inst_cd);
+		System.out.println(performanceDTO.getPerf_cause());
 
 		performanceService.updatePerf(performanceDTO);
 		return "redirect:/performance/performanceCurrentInfo";

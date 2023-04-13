@@ -193,7 +193,7 @@
 													<div class="input-group">
 														<input type="text" id="insertOrderCd" name="ord_cd" value="" placeholder="Order Code" class="form-control bg-white" readonly>
 														<div class="input-group-btn">
-															<input type="button" class="btn btn-primary" id="orderModalBtn" value="검색">
+															<input type="button" class="btn btn-primary" id="orderSearchPop" value="검색">
 														</div>
 													</div>
 												</td>
@@ -386,7 +386,7 @@
 		
 		// 행 클릭시 이동
 		$(document).on("click","#infoInstTr td:not(:last-child)", function(){
-			location.href='${pageContext.request.contextPath}/performance/performanceCurrentInfo?pageNum=1&search='+jQuery(this).closest('tr').children('td:eq(0)').text()+'&search2=&search3=&search4=&search5=';
+			location.href='${pageContext.request.contextPath}/performance/performanceCurrentInfo?pageNum=1&searchInstCd='+jQuery(this).closest('tr').children('td:eq(0)').text()+'&search2=&search3=&search4=&search5=';
 		});
 
 		// 회색 수정 버튼 
@@ -411,8 +411,8 @@
 		
 		// 삭제버튼 제어
 		$(document).on("click", "#deleteInstBtn", function(){
-			console.log($('#insertInstCd').val());
-			location.href='${pageContext.request.contextPath}/instruction/deleteInst?delInstCd='+$('#insertInstCd').val();
+			console.log(jQuery('#insertInstCd').val());
+			location.href='${pageContext.request.contextPath}/instruction/deleteInst?delInstCd='+jQuery('#insertInstCd').val();
 		});
 		
 		// 라인 팝업
@@ -420,7 +420,7 @@
 			console.log(jQuery(this).attr('id'));
 			window.open(
 					'${pageContext.request.contextPath}/line/linePop?btnId='+jQuery(this).attr('id'),
-					'LinePop', 'width=800,height=650');
+					'LinePop', 'width=800,height=550');
 		});
 		
 		// 품목 팝업
@@ -428,7 +428,14 @@
 			
 			window.open(
 					"${pageContext.request.contextPath }/product/productSearchPop",
-					"productSearchPop", "width=800,height=650");
+					"productSearchPop", "width=900,height=650");
+			});
+		// 수주팝업
+		$(document).on("click", "#orderSearchPop", function(){
+			
+			window.open(
+					"${pageContext.request.contextPath }/order/orderPop",
+					"orderSearchPop", "width=1100,height=650");
 			});
 		// 체크박스 제어
 // 		$("#searchInstSt1").change(function(){
