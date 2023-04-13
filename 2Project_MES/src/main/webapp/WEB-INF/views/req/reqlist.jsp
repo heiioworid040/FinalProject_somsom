@@ -140,8 +140,7 @@ if(search==null){
 								<table id="bootstrap-data-table"
 										class="table table-striped table-bordered">
 									<thead class="thead-dark">	
-										<tr>
-											<th scope="col" >#</th>														
+										<tr>												
 											<th scope="col" >상위품번</th>
 											<th scope="col" >상위품명</th>
 											<th scope="col" >하위품번</th>
@@ -157,12 +156,10 @@ if(search==null){
 									<tbody>
 										<c:forEach var="reqDTO" items="${reqList}"> 
 										<tr>
-											<th scope="row"><input type="checkbox" name="chk"
-											id="chk" value="${reqDTO.req_num}" style="zoom:1.8">
-											<td>${reqDTO.prod_cd}</td>
-											<td>${reqDTO.prod_nm}</td>
 											<td>${reqDTO.prod_fcd}</td>
 											<td>${reqDTO.prod_fnm}</td>
+											<td>${reqDTO.prod_cd}</td>
+											<td>${reqDTO.prod_nm}</td>
 											<td>${reqDTO.req_req}</td>
 											<td>${reqDTO.req_add_emp}</td>
 											<td><fmt:formatDate pattern="yyyy-MM-dd" value="${reqDTO.req_add_date}"/></td>

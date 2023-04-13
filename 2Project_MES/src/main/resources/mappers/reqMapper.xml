@@ -28,7 +28,7 @@
     
      <insert id="insertReq"> 
      	insert into requirement(req_num,prod_cd,prod_nm,prod_fcd,prod_fnm,req_req,req_add_emp,req_add_date,req_edit_emp,req_edit_date)  
-  		value(#{req_num},#{prod_cd},#{prod_nm},#{prod_fcd},#{prod_fnm},#{req_req},#{req_add_emp},#{req_add_date},#{req_edit_emp},#{req_edit_date})
+  		values(#{req_num},#{prod_cd},#{prod_nm},#{prod_fcd},#{prod_fnm},#{req_req},#{req_add_emp},#{req_add_date},#{req_edit_emp},#{req_edit_date})
    	</insert>
    	
    	    

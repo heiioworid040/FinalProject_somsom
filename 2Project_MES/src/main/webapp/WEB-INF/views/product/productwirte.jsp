@@ -30,29 +30,24 @@
 <script type="text/javascript">
 	// 필수입력 제어	
 	function essential() {
-// 		if (document.fr.prod_cd.value == "") {
-// 			alert("품목코드을 입력하세요.");
-// 			document.fr.prod_cd.focus();
-// 			return false;
-// 		}
 		
-		if (document.fr.prod_nm.value == "품명") {
-			alert("품명을 선택하세요.");
+		if (document.fr.prod_nm.value == "") {
+			alert("품명을 입력하세요.");
 			document.fr.prod_nm.focus();
 			return false;
 		}
-		if (document.fr.prod_mat.value == "") {
+		if (document.fr.prod_mat.value == "자재유형") {
 			alert("자재유형을 선택하세요.");
 			document.fr.prod_mat.focus();
 			return false;
 		}
 		if (document.fr.prod_unit.value == "단위") {
-			alert("재고단위을 선택하세요.");
+			alert("재고단위를 선택하세요.");
 			document.fr.prod_unit.focus();
 			return false;
 		}
-		if (document.fr.prod_text.value == "재질") {
-			alert("재질을 선택하세요.");
+		if (document.fr.prod_text.value == "") {
+			alert("재질을 입력하세요.");
 			document.fr.prod_text.focus();
 			return false;
 		}
@@ -166,7 +161,7 @@ th {
 							 	 <button type="button" id="pop" value="cli" onclick="orderPop(1)">돋보기</button></td></tr>
 							<tr><td>자재유형</td>
 							    <td><select name="prod_mat">
-							    	<option value="">자재유형</option>
+							    	<option value="자재유형">자재유형</option>
 							    	<option value="완제품">완제품</option>
 							    	<option value="원자재">원자재</option>
 							    	<option value="부자재">부자재</option>
@@ -189,11 +184,11 @@ th {
 							    	<option value="기타">기타</option>
 							    	</select></td></tr>    	
 							 <tr><td>매입단가<span style="color:red">*</span></td>
-							  <td><input type="text" name="prod_inprice" ></td></tr>
+							  <td><input type="text" name="prod_inprice" pattern="[0-9]+"></td></tr>
 							   <tr><td>매출단가<span style="color:red">*</span></td>
-							  <td><input type="text" name="prod_outprice" ></td></tr>
+							  <td><input type="text" name="prod_outprice" pattern="[0-9]+"></td></tr>
 							   <tr><td>현재고<span style="color:red">*</span></td>
-							  <td><input type="text" name="prod_count" ></td></tr>
+							  <td><input type="text" name="prod_count" pattern="[0-9]+"></td></tr>
 							   <tr><td>비고</td>
 							  <td><input type="text" name="prod_note"></td></tr>  	    				    	
 							<tr><td colspan="2"><input type="submit" value="데이터전송"></td></tr>    
