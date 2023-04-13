@@ -84,7 +84,7 @@
 							<div class="card m-0">
 								<div class="card-body card-block">
 									<form action="${pageContext.request.contextPath}/line/lineInfo" class="form-inline" method="get">
-										<div class="form-group col-6 mb-1">
+										<div class="form-group col mb-1">
 											<div class="input-group">
 												<label for="searchLineCd" class="pr-1 form-control-label">라인 코드</label>
 												<input type="text" id="searchLineCd" name="searchLineCd"
@@ -92,11 +92,11 @@
 												<label for="searchLineNm" class="pr-1 form-control-label">라인명</label>
 												<input type="text" id="searchLineNm" name="searchLineNm"
 													placeholder="Line Name" class="form-control bg-white">
-												<div class="input-group">
-												</div>
+											</div>
+											<div class="input-group">
+												<div class="col p-0"><input type="submit" class="btn btn-primary ml-2" value="조회"></div>
 											</div>
 										</div>
-										<div class="col p-0"><input type="submit" class="btn btn-primary ml-2" value="조회"></div>
 									</form>
 								</div>
 							</div>

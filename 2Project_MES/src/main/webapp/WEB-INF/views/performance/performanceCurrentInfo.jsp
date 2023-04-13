@@ -92,7 +92,7 @@
 									method="get" class="form-inline">
 									<div class="form-group col-6 mb-1">
 										<label class="pr-1 form-control-label mr-2">지시번호</label> <input
-											type="text" name="searchInstCd" class="form-control instCd" placeholder="Inst Code">
+											type="text" name="searchInstCd" value="${instructionDTO.inst_cd }"class="form-control instCd" placeholder="Inst Code">
 									</div>
 									<div class="form-group col-6 mb-1">
 										<label for="searchLine" class="pr-1 form-control-label mr-2">라인</label>
@@ -174,7 +174,7 @@
 															placeholder="Inst Code" class="form-control bg-white">
 														<div class="input-group-btn">
 															<input type="button" class="btn btn-primary"
-																id="instListBtn" value="검색">
+																id="instPopBtn" value="검색">
 														</div>
 													</div>
 												</td>
@@ -493,6 +493,11 @@
 			window.open(
 					'${pageContext.request.contextPath}/line/linePop', 'LinePop', 'width=800,height=650');
 		});
+		// 지시 팝업
+		$(document).on("click", "#instPopBtn", function(){
+			window.open(
+					'${pageContext.request.contextPath}/instruction/instructionPop', 'InstPop', 'width=1200,height=650');
+		});
 		
 		// 품목팝업
 		$(document).on("click", "#productSearchPop", function(){
@@ -500,11 +505,6 @@
 			window.open(
 				"${pageContext.request.contextPath }/product/productSearchPop",
 				"productSearchPop", "width=800,height=650");
-		});
-		
-		// 목록(생산 지시 페이지로 이동)
-		$(document).on("click", "#instListBtn", function(){
-			location.href='${pageContext.request.contextPath}/instruction/infoInst';
 		});
 
 		// 불량사유 존재 x 알림

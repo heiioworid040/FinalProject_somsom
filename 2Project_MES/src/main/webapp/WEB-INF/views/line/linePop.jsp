@@ -30,17 +30,17 @@
 			<div class="card">
 				<div class="card-body card-block">
 					<form action='${pageContext.request.contextPath}/line/linePop' class="form-inline" method="get" id="lineSearchForm">
-						<div class="form-group col-6 mb-1">
+						<div class="form-group col-10 mb-1">
 							<div class="input-group modalP">
 								<input type="hidden" value="${pageDTO.search3 }" id="btnId">
 								<label for="popLineCd" class="pr-1 form-control-label">라인 코드</label>
 								<input type="text" id="popLineCd" name="popLineCd" placeholder="Line Code" class="form-control bg-white mr-4">
 								<label for="popLineNm" class="pr-1 form-control-label">라인명</label>
 								<input type="text" id="popLineNm" name="popLineNm" placeholder="Line Name" class="form-control bg-white">
-								<div class="input-group-btn">
-								<input type	="submit" class="btn btn-primary ml-2" id="lineSearchBtn" value="검색">
-								</div>
 							</div>
+						</div>
+						<div class="input-group-btn col-2">
+							<input type	="submit" class="btn btn-primary ml-2" id="lineSearchBtn" value="검색">
 						</div>
 						<div class="col p-0"></div>
 					</form>

@@ -386,7 +386,10 @@
 		
 		// 행 클릭시 이동
 		$(document).on("click","#infoInstTr td:not(:last-child)", function(){
-			location.href='${pageContext.request.contextPath}/performance/performanceCurrentInfo?pageNum=1&searchInstCd='+jQuery(this).closest('tr').children('td:eq(0)').text()+'&search2=&search3=&search4=&search5=';
+			var tr1 = jQuery(this);
+			var td1 = tr1.children();
+// 			location.href='${pageContext.request.contextPath}/performance/performanceCurrentInfo?pageNum=1&searchInstCd='+jQuery(this).closest('tr').children('td:eq(0)').text()+'&search2=&search3=&search4=&search5=';
+			location.href='${pageContext.request.contextPath}/instruction/instClickTr?clickInstCd='+jQuery(this).closest('tr').children('td:eq(0)').text();
 		});
 
 		// 회색 수정 버튼 
@@ -437,30 +440,7 @@
 					"${pageContext.request.contextPath }/order/orderPop",
 					"orderSearchPop", "width=1100,height=650");
 			});
-		// 체크박스 제어
-// 		$("#searchInstSt1").change(function(){
-// 			if($("#searchInstSt1").is(":checked")){
-// 				$("#searchInstSt1").attr('value', '대기');
-// 			}else{
-// 				$("#searchInstSt1").attr('value', '');
-// 			}
-// 		});
-		
-// 		$("#searchInstSt2").change(function(){
-// 			if($("#searchInstSt2").is(":checked")){
-// 				$("#searchInstSt2").attr('value', '진행');				
-// 			}else{
-// 				$("#searchInstSt2").attr('value', '');
-// 			}
-// 		});
-			
-// 		$("#searchInstSt3").change(function(){
-// 			if($("#searchInstSt3").is(":checked")){
-// 				$("#searchInstSt3").attr('value', '완료');
-// 			}else{
-// 				$("#searchInstSt3").attr('value', '');
-// 			}
-// 		});
+
 	</script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
 	<script
