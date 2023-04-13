@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.project.domain.InstructionDTO;
+import com.project.domain.LineDTO;
 import com.project.domain.PageDTO;
 import com.project.service.InstructionService;
 
@@ -124,6 +125,80 @@ public class InstructionController {
 		instService.deleteInst(inst_cd);
 		
 		return "redirect:/instruction/infoInst";
+	}
+	
+	@RequestMapping(value = "/instruction/instructionPop", method = RequestMethod.GET)
+	public String getLinePop(HttpServletRequest request, PageDTO pageDTO, Model model) {
+		System.out.println("xinstructionController instructionPop()");
+		
+		String searchLineCd=request.getParameter("searchLineCd");
+		String searchOrdDate1 =request.getParameter("searchOrdDate1");
+		String searchOrdDate2 =request.getParameter("searchOrdDate2");
+		String searchProdCd =request.getParameter("searchProdCd");
+		String searchInstSt1;
+		String searchInstSt2;
+		String searchInstSt3;
+		if(searchLineCd==null) {
+			searchInstSt1 ="대기";
+			searchInstSt2 ="진행";
+			searchInstSt3 ="완료";
+		}else{
+			searchInstSt1 =request.getParameter("searchInstSt1");
+			searchInstSt2 =request.getParameter("searchInstSt2");
+			searchInstSt3 =request.getParameter("searchInstSt3");
+		}
+		int pageSize=5;
+
+		String pageNum=request.getParameter("pageNum");
+		if(pageNum==null) {
+			pageNum="1";
+		}
+		int currentPage=Integer.parseInt(pageNum);
+
+
+		pageDTO.setPageSize(pageSize);
+		pageDTO.setPageNum(pageNum);
+		pageDTO.setCurrentPage(currentPage);
+
+		pageDTO.setSearch(searchLineCd);
+		pageDTO.setSearch2(searchOrdDate1);
+		pageDTO.setSearch3(searchOrdDate2);
+		pageDTO.setSearch4(searchProdCd);
+		pageDTO.setSearch5(searchInstSt1);
+		pageDTO.setSearch6(searchInstSt2);
+		pageDTO.setSearch7(searchInstSt3);
+
+		List<InstructionDTO> instList=instService.getInstList(pageDTO);
+
+		int count = instService.getInstCount(pageDTO);
+		int pageBlock=10;
+		int startPage=(currentPage-1)/pageBlock*pageBlock+1;
+		int endPage=startPage+pageBlock-1;
+		int pageCount=(count/pageSize)+(count%pageSize==0?0:1);
+		if(endPage > pageCount) {
+			endPage = pageCount;
+		}
+		pageDTO.setCount(count);
+		pageDTO.setPageBlock(pageBlock);
+		pageDTO.setStartPage(startPage);
+		pageDTO.setEndPage(endPage);
+		pageDTO.setPageCount(pageCount);
+
+
+		model.addAttribute("instList", instList);
+		model.addAttribute("pageDTO", pageDTO);
+
+		return "instruction/instructionPop";
+	}
+	@RequestMapping(value = "/instruction/instClickTr", method = RequestMethod.GET)
+	public String instClickTr(HttpServletRequest request, InstructionDTO instructionDTO, Model model) {
+		System.out.println("instructionController instClickTr()");
+		System.out.println(request.getParameter("clickInstCd"));
+		String inst_cd=request.getParameter("clickInstCd");
+		instService.getInst(inst_cd);
+
+		model.addAttribute("instructionDTO", instructionDTO);
+		return "performance/performanceCurrentInfo";
 	}
 	
 	

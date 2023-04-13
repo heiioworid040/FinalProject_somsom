@@ -64,7 +64,7 @@
 		</div>
 	</div>
 	<!-- 	검색창 -->
-	<div class="content">
+	<div class="content pb-0">
 		<div class="animated fadeIn">
 			<div class="row">
 				<div class="col-lg">
@@ -78,11 +78,6 @@
 										type="text" name="search" class="form-control "
 										placeholder="Prod Code">
 								</div>
-								<div class="form-group col-6 mb-1">
-									<label class="pr-1  form-control-label">품명</label>&nbsp;&nbsp;<input
-										type="text" name="search2" class="form-control "
-										placeholder="Prod Name">
-								</div>
 								<div class="form-group col-6 mt-1">
 									<label class="pr-1  form-control-label">자재유형</label>&nbsp;&nbsp;
 									<div class="p-0 col">
@@ -93,6 +88,11 @@
 											<option value="완제품">완제품</option>
 										</select>
 									</div>
+								</div>
+								<div class="form-group col-6 mb-1">
+									<label class="pr-1  form-control-label">품명</label>&nbsp;&nbsp;<input
+										type="text" name="search2" class="form-control "
+										placeholder="Prod Name">
 								</div>
 								<div class="col p-0">
 									<input type="submit" class="btn btn-primary float-right ml-3"
@@ -114,7 +114,7 @@
 				<div class="col-lg">
 					<div class="card">
 						<div class="card-header">
-							<strong class="card-title">품목</strong>
+							<strong class="card-title m-0">품목</strong>
 						</div>
 						<div class="card-body">
 							<form name="productSearch">
@@ -145,8 +145,7 @@
 							</form>
 							<!-- 페이징 -->
 							<div class="col p-0 mt-3">
-								<div
-									class="dataTables_paginate paging_simple_numbers float-right">
+								<div class="dataTables_paginate paging_simple_numbers float-right">
 									<ul class="pagination">
 										<!-- 이전 -->
 										<c:if test="${pageDTO.startPage <= pageDTO.pageBlock }">

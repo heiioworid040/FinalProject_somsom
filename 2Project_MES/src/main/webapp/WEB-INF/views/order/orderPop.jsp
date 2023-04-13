@@ -33,15 +33,15 @@
 						<div class="form-group col">
 							<div class="input-group">
 								<label for="popCliNm" class="pr-1 form-control-label">수주 업체</label>
-								<input type="text" id="popLineNm" name="popCliNm" placeholder="Client Name" class="form-control bg-white">
+								<input type="text" id="popLineNm" name="popCliNm" placeholder="Client Name" class="form-control bg-white mr-4">
 								<label for="popProdCd" class="pr-1 form-control-label">품목명</label>
 								<input type="text" id="popProdCd" name="popProdCd" placeholder="Prod Code" class="form-control bg-white mr-4">
 								<label for="popProdDate1" class="pr-1 form-control-label">수주일자</label>
-								<input type="text" id="popProdDate1" name="popProdDate1" class="form-control">~
-								<input type="text" id="popProdDate2" name="popProdDate2" class="form-control">
-								<div class="input-group-btn">
+								<input type="date" id="popProdDate1" name="popProdDate1" class="form-control mr-2">~
+								<input type="date" id="popProdDate2" name="popProdDate2" class="form-control ml-2">
+							<div class="input-group-btn">
 								<input type	="submit" class="btn btn-primary ml-2" id="OrdSearchBtn" value="검색">
-								</div>
+							</div>
 							</div>
 						</div>
 						<div class="col p-0"></div>
