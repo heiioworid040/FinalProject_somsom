@@ -78,6 +78,19 @@
 				}
 			}
 		});
+		
+		$('#btnS_cel').click(function(){
+			$('input[id=cliS_cd]').removeAttr('value');
+			$('input[id=cliS_nm]').removeAttr('value');
+			$('input[id=empS_cd]').removeAttr('value');
+			$('input[id=empS_nm]').removeAttr('value');
+			$('input[id=prodS_cd]').removeAttr('value');
+			$('input[id=prodS_nm]').removeAttr('value');
+			$('input[id=ordS_date]').removeAttr('value');
+			$('input[id=ordS_date_end]').removeAttr('value');
+			$('input[id=ordS_d_date]').removeAttr('value');
+			$('input[id=ordS_d_date_end]').removeAttr('value');
+		});
 	});
 </script>
 <script>
@@ -110,7 +123,7 @@
 					<div class="col-sm-4">
 						<div class="page-header float-left">
 							<div class="page-title">
-								<h1>수주현황</h1>
+								<h1>영업관리</h1>
 							</div>
 						</div>
 					</div>
@@ -137,24 +150,25 @@
 							<div class="card-body card-block">
 								<form action="${pageContext.request.contextPath }/order/orderInfo" method="get" name="orderSearch" class="form-inline">
 									<div class="search-div">
-										<span class="search-cl">거래처</span><input type="text" id="cliS_cd" name="cli" placeholder="Client Code" readonly><input type="text" id="cliS_nm" placeholder="Client Name" readonly><button type="button" class="input-group-addon search-btn" style="cursor: pointer;" onclick="searchPop('cliS')"><i class="ti-search"></i></button>
+										<span class="search-cl">거래처</span><input type="text" id="cliS_cd" name="cli" value="${pageDTO.search }" placeholder="Client Code" readonly><input type="text" id="cliS_nm" name="cliS_nm" value="${searchDTO.cli_nm }" placeholder="Client Name" readonly><button type="button" class="input-group-addon search-btn" style="cursor: pointer;" onclick="searchPop('cliS')"><i class="ti-search"></i></button>
 									</div>
 									<div class="search-div">
-										<span class="search-cl2">수주일자</span><input type="date" id="ordS_date" name="ord"> ~ <input type="date" id="ordS_date_end" name="ord_end">
+										<span class="search-cl2">수주일자</span><input type="date" id="ordS_date" name="ord" value="${pageDTO.search3 }"> ~ <input type="date" id="ordS_date_end" name="ord_end" value="${pageDTO.search4 }">
 									</div>
 									<div class="search-div">
-										<span class="search-cl">담당자</span><input type="text" id="empS_cd" name="emp" placeholder="Emp Code" readonly><input type="text" id="empS_nm" placeholder="Emp Name" readonly><button type="button" class="input-group-addon search-btn" style="cursor: pointer;" onclick="searchPop('empS')"><i class="ti-search"></i></button>
+										<span class="search-cl">담당자</span><input type="text" id="empS_cd" name="emp" value="${pageDTO.search2 }" placeholder="Emp Code" readonly><input type="text" id="empS_nm" name="empS_nm" value="${searchDTO.emp_nm }" placeholder="Emp Name" readonly><button type="button" class="input-group-addon search-btn" style="cursor: pointer;" onclick="searchPop('empS')"><i class="ti-search"></i></button>
 									</div>
 									<div class="search-div">
-										<span class="search-cl">납품예정일</span><input type="date" id="ordS_d_date" name="ord_d"> ~ <input type="date" id="ordS_d_date_end" name="ord_d_end">
+										<span class="search-cl">납품예정일</span><input type="date" id="ordS_d_date" name="ord_d" value="${pageDTO.search5 }"> ~ <input type="date" id="ordS_d_date_end" name="ord_d_end" value="${pageDTO.search6 }">
 									</div>
 									<div class="search-div">
-										<span class="search-cl2">품목</span><input type="text" id="prodS_cd" name="prod" placeholder="Prod Code" readonly><input type="text" id="prodS_nm" placeholder="Prod Name" readonly><button type="button" class="input-group-addon search-btn" style="cursor: pointer;" onclick="searchPop('prodS')"><i class="ti-search"></i></button>
+										<span class="search-cl2">품목</span><input type="text" id="prodS_cd" value="${pageDTO.search7 }" name="prod" placeholder="Prod Code" readonly><input type="text" id="prodS_nm" name="prodS_nm" value="${searchDTO.prod_nm }" placeholder="Prod Name" readonly><button type="button" class="input-group-addon search-btn" style="cursor: pointer;" onclick="searchPop('prodS')"><i class="ti-search"></i></button>
 									</div>
 									<div class="search-div2 form-inline">
-										<span class="search-cl2">출하여부</span><div style="margin-top:5px"><input type="checkbox" name="ship" value="ship" ${pageDTO.search8 eq 'ship' ? "checked":"" }></div><span style="margin-left:4px">완료</span>
+										<span class="search-cl2">출하여부</span><div style="margin-top:5px"><input type="checkbox" id="shipC" name="ship" value="ship" ${pageDTO.search8 eq 'ship' ? "checked":"" }></div><span style="margin-left:4px">완료</span>
 										<div style="width: 74.7%">
 										<input type="submit" class="btn btn-primary float-right" value="검색">
+										<input type="reset" id="btnS_cel" class="btn btn-secondary float-right" style="margin-right: 5px" value="취소">
 										</div>
 									</div>
 								</form>
@@ -170,12 +184,17 @@
 		<form action="${pageContext.request.contextPath }/order/orderInfoPro" id="orderInfo" method="post">
 		<div class="content">
 			<div style="width: 100%; height: 50px">
-					<button type="reset" id="btn_cel" class="btn btn-secondary float-right"  style="margin: 2px">취소</button>
-					<button type="submit" id="btn_del" name="btn" value="del" class="btn btn-primary float-right"  style="margin: 2px">삭제</button>
-					<button type="submit" id="btn_ins" name="btn" value="ins" class="btn btn-primary float-right" style="margin: 2px">저장</button>
-					<c:if test="${pageDTO.search8 ne 'ship' }">
-					<button type="button" id="btn_add" name="btn" value="add" class="btn btn-primary float-right" style="margin: 2px">추가</button>
+				<c:if test="${!empty sessionScope.emp_cd }">
+					<c:if test="${sessionScope.emp_position ne '사원' }">
+						<button type="reset" id="btn_cel" class="btn btn-secondary float-right"  style="margin: 2px">취소</button>
+						<button type="submit" id="btn_del" name="btn" value="del" class="btn btn-primary float-right"  style="margin: 2px">삭제</button>
+						<button type="submit" id="btn_ins" name="btn" value="ins" class="btn btn-primary float-right" style="margin: 2px">저장</button>
+						<c:if test="${pageDTO.search8 ne 'ship' }">
+						<button type="button" id="btn_add" name="btn" value="add" class="btn btn-primary float-right" style="margin: 2px">추가</button>
+						</c:if>
 					</c:if>
+				</c:if>
+				<span class="orderInfoMent">※ 출하 완료 데이터는 출하 여부 체크 후 확인하세요.</span>
 			</div>
 			<div class="animated fadeIn">
 				<div class="row">

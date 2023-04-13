@@ -7,7 +7,7 @@
 		from client
 		<if test="search!=null||search2!=null">
 			where cli_cd like CONCAT('%',#{search},'%') and cli_nm like CONCAT('%',#{search2},'%')
-		<if test="search3!='#'">
+		<if test="search3!='전체'">
 			and cli_type like CONCAT('%',#{search3},'%')
 		</if>
 		</if>
