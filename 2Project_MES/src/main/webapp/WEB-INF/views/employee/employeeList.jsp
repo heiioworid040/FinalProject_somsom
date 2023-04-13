@@ -317,9 +317,7 @@ function fun1(index) {
 											<td>${employeeDTO.emp_email}</td>
 											<td>${employeeDTO.emp_tel}</td>
 											<td><a href="javascript:void(window.open('${pageContext.request.contextPath}/employee/updateEmployee?emp_cd=${employeeDTO.emp_cd}', '수정', 'width=500, height=900,left=500, top=200' ))">	
-											<input type="button" class="btn btn-secondary" value="수정" ></a></td>										
-<%-- 											<td><input type="button" value="수정" class="btn btn-secondary" onclick="location.href='${pageContext.request.contextPath}/employee/updateEmployee?emp_cd=${employeeDTO.emp_cd}'" ></td>													 --%>
-										
+											<input type="button" class="btn btn-secondary" value="수정" ></a></td>																				
 										</tr>
 										</c:forEach>
 										

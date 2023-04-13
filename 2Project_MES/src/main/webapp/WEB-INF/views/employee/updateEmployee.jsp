@@ -170,9 +170,9 @@ $(document).ready(function(){
 												<div class="divresult2"></div><input type="hidden" class="divresult_2">
 											직책 <select name="emp_position" class="emp_position form-control" id="emp_position">
 												<option value="">직책을 선택하세요</option>
-												<option value="관리자">관리자</option>
-												<option value="파트장">파트장</option>
-												<option value="사원">사원</option>
+												<option value="관리자" <c:if test="${employeeDTO.emp_position eq '관리자'}">selected</c:if>>관리자</option>
+												<option value="파트장" <c:if test="${employeeDTO.emp_position eq '파트장'}">selected</c:if>>파트장</option>
+												<option value="사원" <c:if test="${employeeDTO.emp_position eq '사원'}">selected</c:if>>사원</option>
 												</select></div>
 
 							</div>
