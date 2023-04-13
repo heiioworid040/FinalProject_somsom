@@ -25,7 +25,6 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/login.css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
-
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 </head>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.js"></script>
@@ -268,9 +267,7 @@ function fun1(index) {
 											<th scope="col">직책</th>
 											<th scope="col">E-MAIL</th>
 											<th scope="col">전화번호</th>
-											<th scope="col" style="width: 50px">확인</th>										
-
-											
+											<th scope="col" style="width: 50px">확인</th>																				
 										</tr>
 									</thead>
 									<tbody>
@@ -327,19 +324,66 @@ function fun1(index) {
 									</tbody>
 								</table>
 
-<div align="center">					
-<c:if test="${pageDTO.startPage > pageDTO.pageBlock }">
-<a href="${pageContext.request.contextPath}/employee/employeeList?pageNum=${pageDTO.startPage - pageDTO.pageBlock }&search=${pageDTO.search}&search2=${pageDTO.search2}">◁◁</a>
-</c:if>
+	<!-- 페이징 -->
+								<div class="col p-0 mt-3">
+									<div class="dataTables_paginate paging_simple_numbers float-right">
+										<ul class="pagination">
+										<!-- 이전 -->
+										<c:if test="${pageDTO.startPage <= pageDTO.pageBlock }">
+											<li class="paginate_button page-item previous disabled">
+												<a href="${pageContext.request.contextPath}/employee/employeeList?pageNum=${pageDTO.startPage - pageDTO.pageBlock}&search=${pageDTO.search}&search2=${pageDTO.search2}"
+												class="page-link">Previous</a></li>
+										</c:if>
+										<c:if test="${pageDTO.startPage > pageDTO.pageBlock }">
+											<li class="ppaginate_button page-item previous" >
+												<a href="${pageContext.request.contextPath}/employee/employeeList?pageNum=${pageDTO.startPage - pageDTO.pageBlock}&search=${pageDTO.search}&search2=${pageDTO.search2}"
+												class="page-link">Previous</a>
+											</li>
+										</c:if>
+										<!-- 이전 -->
+										<!-- 현재 -->										
+										<c:forEach var="i" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1">
+											<c:if test="${i==pageDTO.pageNum }">
+												<li class="paginate_button page-item active">
+													<a class="page-link" href="#">${i}</a>
+												</li>											
+											</c:if>
+											<c:if test="${i!=pageDTO.pageNum }">
+												<li class="paginate_button page-item ">
+													<a class="page-link" href="${pageContext.request.contextPath}/employee/employeeList?pageNum=${i}&search=${pageDTO.search}&search2=${pageDTO.search2}">${i}</a>
+												</li>
+											</c:if>
+										</c:forEach>
+										<!-- 현재 -->										
+										<!-- 다음 -->																				
+										<c:if test="${pageDTO.endPage >= pageDTO.pageCount }">
+											<li class="paginate_button page-item next disabled" id="bootstrap-data-table_next">
+												<a href="${pageContext.request.contextPath}/employee/employeeList?pageNum=${pageDTO.startPage + pageDTO.pageBlock}&search=${pageDTO.search}&search2=${pageDTO.search2}" class="page-link">Next</a>
+											</li>
+										</c:if>
+										<c:if test="${pageDTO.endPage < pageDTO.pageCount }">
+											<li class="paginate_button page-item next" id="bootstrap-data-table_next">
+												<a href="${pageContext.request.contextPath}/employee/employeeList?pageNum=${pageDTO.startPage + pageDTO.pageBlock}&search=${pageDTO.search}&search2=${pageDTO.search2}" class="page-link">Next</a>
+											</li>
+										</c:if>
+										<!-- 다음 -->																				
+										</ul>
+									</div>
+								</div>
+								<!-- 페이징 -->
+<!-- <div align="center">					 -->
+<%-- <c:if test="${pageDTO.startPage > pageDTO.pageBlock }"> --%>
+<%-- <a href="${pageContext.request.contextPath}/employee/employeeList?pageNum=${pageDTO.startPage - pageDTO.pageBlock }&search=${pageDTO.search}&search2=${pageDTO.search2}">◁◁</a> --%>
+<%-- </c:if> --%>
 
-<c:forEach var="i" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1">
-<a href="${pageContext.request.contextPath}/employee/employeeList?pageNum=${i}&search=${pageDTO.search}&search2=${pageDTO.search2}">${i}</a> 
-</c:forEach>
+<%-- <c:forEach var="i" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1"> --%>
+<%-- <a href="${pageContext.request.contextPath}/employee/employeeList?pageNum=${i}&search=${pageDTO.search}&search2=${pageDTO.search2}">${i}</a>  --%>
+<%-- </c:forEach> --%>
 
-<c:if test="${pageDTO.endPage < pageDTO.pageCount }">
-<a href="${pageContext.request.contextPath}/employee/employeeList?pageNum=${pageDTO.startPage + pageDTO.pageBlock }&search=${pageDTO.search}&search2=${pageDTO.search2}">▷▷</a>
-</c:if>
-</div>		
+<%-- <c:if test="${pageDTO.endPage < pageDTO.pageCount }"> --%>
+<%-- <a href="${pageContext.request.contextPath}/employee/employeeList?pageNum=${pageDTO.startPage + pageDTO.pageBlock }&search=${pageDTO.search}&search2=${pageDTO.search2}">▷▷</a> --%>
+<%-- </c:if> --%>
+<!-- </div>		 -->
 							</div>
 						</div>
 					</div>
