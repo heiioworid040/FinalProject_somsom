@@ -84,7 +84,7 @@
 												</div>
 												<div class="search-div3">
 													<span class="search-cl3">거래처구분</span><select class="select-search" id="cliS_nm" name="info">
-																					<option value="#">전체</option>
+																					<option value="전체">전체</option>
 																					<option value="자사" ${pageDTO.search3 eq '자사' ? "selected":"" }>자사</option>
 																					<option value="협력사" ${pageDTO.search3 eq '협력사' ? "selected":"" }>협력사</option>
 																					<option value="고객사" ${pageDTO.search3 eq '고객사' ? "selected":"" }>고객사</option>

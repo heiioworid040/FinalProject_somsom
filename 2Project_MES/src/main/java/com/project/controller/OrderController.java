@@ -87,8 +87,13 @@ public class OrderController {
 
 			int count=orderService.getOrderCount(pageDTO);
 			pageDTO.setCount(count);
-
+			
+			OrderDTO orderDTO=new OrderDTO();
+			orderDTO.setCli_nm(request.getParameter("cliS_nm"));
+			orderDTO.setEmp_nm(request.getParameter("empS_nm"));
+			
 			model.addAttribute("pageDTO", pageDTO);
+			model.addAttribute("searchDTO", orderDTO);
 			model.addAttribute("orderInsertList", orderInsertList);
 			return "order/orderInsert";
 		}
@@ -137,7 +142,14 @@ public class OrderController {
 
 			int count=orderService.getOrderCount(pageDTO);
 			pageDTO.setCount(count);
+			
+			OrderDTO orderDTO=new OrderDTO();
+			orderDTO.setCli_nm(request.getParameter("cliS_nm"));
+			orderDTO.setEmp_nm(request.getParameter("empS_nm"));
+			orderDTO.setProd_nm(request.getParameter("prodS_nm"));
+			
 			model.addAttribute("pageDTO", pageDTO);
+			model.addAttribute("searchDTO", orderDTO);
 			model.addAttribute("orderList", orderList);
 			return "order/orderInfo";
 		}
@@ -194,45 +206,5 @@ public class OrderController {
 					}
 			}
 			return "redirect:/order/orderInfo";
-		}
-		
-		@RequestMapping(value = "/order/orderPop", method = RequestMethod.GET)
-		public String getorderPop(HttpServletRequest request, Model model) {
-			System.out.println("orderController getOrderPop");
-			// 지시 ordpop
-			int pageSize=5;
-	
-			String pageNum=request.getParameter("pageNum");
-			if(pageNum==null) {
-				pageNum="1";
-			}
-			int currentPage=Integer.parseInt(pageNum);
-	
-			PageDTO pageDTO=new PageDTO();
-			pageDTO.setPageSize(5);
-			pageDTO.setPageNum("1");
-			pageDTO.setCurrentPage(1);
-	
-			// 디비 최근글 5개 가져오기
-			List<OrderDTO> orderList=orderService.getOrderList(pageDTO);
-	
-			int count = orderService.getOrderCount(pageDTO);
-			int pageBlock=10;
-			int startPage=(currentPage-1)/pageBlock*pageBlock+1;
-			int endPage=startPage+pageBlock-1;
-			int pageCount=count/pageSize+(count%pageSize==0?0:1);
-			if(endPage > pageCount) {
-				endPage = pageCount;
-			}
-			pageDTO.setCount(count);
-			pageDTO.setPageBlock(pageBlock);
-			pageDTO.setStartPage(startPage);
-			pageDTO.setEndPage(endPage);
-			pageDTO.setPageCount(pageCount);
-			
-			model.addAttribute("orderList", orderList);
-			model.addAttribute("pageDTO", pageDTO);
-			//출력 결과 ResponseEntity 저장 => 되돌아감
-			return "order/orderPop";
 		}
 }

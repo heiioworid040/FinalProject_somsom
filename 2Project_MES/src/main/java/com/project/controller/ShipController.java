@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.project.domain.OrderDTO;
 import com.project.domain.PageDTO;
 import com.project.domain.ShipDTO;
 import com.project.service.ShipService;
@@ -102,7 +103,13 @@ public class ShipController {
 		pageDTO.setSearch6(request.getParameter("ord_d_date_end"));
 
 		List<ShipDTO> shipInfo=shipService.shipInfo(pageDTO);
-
+		
+		OrderDTO orderDTO=new OrderDTO();
+		orderDTO.setCli_nm(request.getParameter("cliS_nm"));
+		orderDTO.setProd_nm(request.getParameter("prodS_nm"));
+		
+		model.addAttribute("pageDTO", pageDTO);
+		model.addAttribute("searchDTO", orderDTO);
 		model.addAttribute("shipInfo", shipInfo);
 		return "ship/shipInfo";
 	}

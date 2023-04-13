@@ -20,6 +20,9 @@
 .search-result-div {
 	height: 50px;
 }
+.search-result {
+	line-height: 4em;
+}
 .cli_cd, .cli_nm, .emp_cd, .emp_nm, .ord_date, .ord_d_date,
 #cliS_cd, #cliS_nm, #empS_cd, #empS_nm, #prodS_cd, #prodS_nm, #ordS_date, #ordS_d_date, #ordS_date_end, #ordS_d_date_end, #shipS_count {
 	padding: 0.375rem 0.75rem;
@@ -102,6 +105,11 @@
 }
 .pageNum {
 	text-align: center;
+}
+.orderInfoMent {
+	font-size: 12px;
+	color: #0054FF;
+	line-height: 6em;
 }
 #ck, #ckAll, #shipC {
 	accent-color: #007BFF;
