@@ -20,7 +20,3 @@ http://itwillbs20.cafe24.com/
 ID : 2023001
 <br>
 PW : 7894
-<br><br>
-🔗
-<br>
-https://github.com/heiioworid040/FinalProject_somsom
