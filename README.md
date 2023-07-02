@@ -12,11 +12,3 @@
 ![image](https://github.com/heiioworid040/FinalProject_somsom/assets/124132211/de0b42c4-6c3a-4a5a-8638-0bf70ab0d9b4)
 
 ![image](https://github.com/heiioworid040/FinalProject_somsom/assets/124132211/c5b9d927-3239-4540-95ac-3505b8235ec2)
-<br><br>
-🏠
-<br>
-http://itwillbs20.cafe24.com/
-<br>
-ID : 2023001
-<br>
-PW : 7894
